@@ -1,0 +1,43 @@
+{
+  "record_id": "OUTPUT_CONDITION_COUNTERFACTUAL",
+  "recorded": "2026-09-16",
+  "question": "how many Simon and Bernstein-Vazirani survivors become contract-equivalent when read at the algorithm's own output condition rather than at the declared endpoint-state contract",
+  "output_conditions": {
+    "simon_4": "input-register distribution uniform over {y : y.s = 0 mod 2}, s = 11; expected parameter {'00': 0.5, '11': 0.5}. Grounded in the frozen subject manifest (SSPEC_PROVENANCE.json).",
+    "bv_n": "the query register holds the hidden string s with certainty. The string is recorded nowhere, so it is read from the ORIGINAL program and the condition is a point mass on the same basis state. SSPEC_PROVENANCE labels this REFERENCE_DERIVED and it is reported as such."
+  },
+  "tolerance": "eps_num = 1e-9; the counterfactual is a contract reading and contracts are decided exactly",
+  "validation": {
+    "at_546": {
+      "population": "546",
+      "pool": 45,
+      "movers": 7,
+      "out": 0,
+      "movers_by_report": {
+        "CL3": 3,
+        "CL4": 4
+      },
+      "total_cl3": 25
+    },
+    "published_at_546": {
+      "pool": 45,
+      "movers": 7,
+      "out": 0,
+      "movers_cl3": 3,
+      "total_cl3": 25
+    },
+    "reproduces_published": true
+  },
+  "at_599": {
+    "population": "599",
+    "pool": 47,
+    "movers": 8,
+    "out": 0,
+    "movers_by_report": {
+      "CL3": 4,
+      "CL4": 4
+    },
+    "total_cl3": 35
+  },
+  "producer": "confirmatory/batch3_support/b3_output_condition.py"
+}

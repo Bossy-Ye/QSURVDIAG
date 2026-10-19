@@ -1,0 +1,9 @@
+QFT n=4: TV to uniform             mean 0.0172  p95 0.0229  per-run fail 0.0000  P(any of 12 fails) 0.0000
+QFT n=4: Hellinger to uniform      mean 0.0151  p95 0.0199  per-run fail 0.0000  P(any of 12 fails) 0.0000
+QFT n=5: TV to uniform             mean 0.0249  p95 0.0305  per-run fail 0.0000  P(any of 12 fails) 0.0000
+QFT n=5: Hellinger to uniform      mean 0.0218  p95 0.0265  per-run fail 0.0000  P(any of 12 fails) 0.0000
+QFT n=6: TV to uniform             mean 0.0354  p95 0.0410  per-run fail 0.0001  P(any of 12 fails) 0.0006
+QFT n=6: Hellinger to uniform      mean 0.0313  p95 0.0360  per-run fail 0.0000  P(any of 12 fails) 0.0000
+W n=4: TV to weight-one            mean 0.0077  p95 0.0136  per-run fail 0.0000  P(any of 12 fails) 0.0000
+Simon: |<Z0Z1> - 1|                mean 0.0000  p95 0.0000  per-run fail 0.0000  P(any of 12 fails) 0.0000
+Simon: |p1(q0) - 0.5|              mean 0.0045  p95 0.0110  per-run fail 0.0000  P(any of 12 fails) 0.0000

@@ -1,0 +1,89 @@
+{
+ "recovered_before_any_outcome": true,
+ "interfaces": {
+  "QUTest": {
+   "version": "0.1.0",
+   "provenance": "PyPI/Zenodo release, recovered venv",
+   "alpha_v": "joint computational-Z outcome distribution over ALL measured qubits (the test file declares m = measure q).  The declared output register selects which marginals the SUITE asserts, not what the interface observes.  The endpoint state vector is reachable only by the entangled predicate; the transpiled circuit only by gateset and depth",
+   "A_v": "12 built-in assertion families in a closed 13-member PragmaKind enum",
+   "Adm_v": "5 behavioural count-substrate families: marginal, observable (Z strings), probability, entropy, distribution",
+   "U_v": "closed and finite per program: |U_v(n)| = 2^(n+1) + n + 1",
+   "closure": "CLOSED_AT_TOOL_VERSION",
+   "closure_evidence": "parser surface == dispatch surface == 12; raise on unrecognised assertion, no fall-through; entry_points declares only console_scripts, no plugin group; no Assertion base class",
+   "extension_boundary": "fork only",
+   "decision_rule": "atol tolerance, unanimity over R repetitions",
+   "evidence_depth_possible": "FULL_CERTIFICATION",
+   "external_pair_execution": "SUPPORTED (a pair is an OpenQASM 3 test file)",
+   "source_hash": null
+  },
+  "QuCheck": {
+   "version": "0.0.2",
+   "provenance": "PyPI release, frozen venv",
+   "alpha_v": "measurement counts on tester-chosen qubits in a tester-chosen X, Y or Z basis; MeasurementConfiguration admits one arbitrary circuit per qubit, so the observation space is continuous",
+   "A_v": "six assertion constructors: assert_equal, assert_different, assert_probability, assert_entangled, assert_separable, assert_most_frequent",
+   "Adm_v": "the frozen profile's chosen subset; assert_equal in the arms used here",
+   "U_v": "OPEN at tool scope; CLOSED once a profile fixes basis, qubits and constructors",
+   "closure": "OPEN_AT_TOOL_SCOPE_CLOSED_AFTER_PROFILE_FREEZE",
+   "closure_evidence": "Property and Assertion are abc.ABC with abstract methods; input_generators are user-extensible",
+   "extension_boundary": "subclassing",
+   "decision_rule": "Fisher exact per (qubit, basis) with Holm-Bonferroni at family-wise alpha; NOT a theta tolerance",
+   "evidence_depth_possible": "FULL_CERTIFICATION only under a frozen profile",
+   "external_pair_execution": "SUPPORTED (circuits supplied to a Property)",
+   "source_hash": null
+  },
+  "Muskit": {
+   "version": "0.0.3",
+   "provenance": "PyPI sdist Muskit-0.0.3.tar.gz, publisher SHA256 verified; repository github.com/EnautMendi/QuantumMutationQiskit",
+   "profile_basis": "PyPI 0.0.3 sdist",
+   "alpha_v": "joint computational-Z counts over ALL qubits at a chosen basis-state input, i.e. the SAME observation as QUTest; the interfaces differ in A_v, not alpha_v. executeMutants appends .measure(q[i], c[i]) for every qubit regardless of any declared output register, then runs Aer qasm_simulator at numShots and writes the counts dict to results.txt",
+   "A_v": "EMPTY.  A source-wide search of all 8 modules for assert, expect, oracle, verdict, kill, survive, detect, compare, equal, passed, failed, threshold and tolerance returns nothing.  The tool records outputs; it does not judge them",
+   "Adm_v": "EMPTY",
+   "U_v": "EMPTY (no assertion language exists to enumerate)",
+   "closure": "NO_ASSERTION_SURFACE",
+   "closure_evidence": "functionalities.py has createMutants, executeMutants, add, replace, remove, getInfo, createInputs only; no comparison logic",
+   "extension_boundary": "not applicable; the user supplies inputs, not oracles",
+   "decision_rule": "NONE.  Muskit produces no kill/survive verdict",
+   "evidence_depth_possible": "RELATION_LEVEL (its counts decide R_O); it cannot support R_A or R_T, so no downstream negative certificate",
+   "external_pair_execution": "SUPPORTED with a representational adapter: getInfo is a line parser requiring QuantumRegister(, QuantumCircuit(, ClassicalRegister( and <circuit>.<gate>(...[q]) lines",
+   "structural_restriction": "Qiskit Python source in that textual shape; our pairs are gate lists, so a generic gate-list -> canonical .py adapter is required",
+   "source_hash": {
+    "sha256": "3895f8dff97bcf44d3397857a96e079c826c67190a5c1a70a48a7fbbb3ab6b57",
+    "files": 8
+   }
+  },
+  "QMutPy": {
+   "version": "branch all_gates, commit 13ab3845b26a18510bf3e0bddd529187f0b86b71 (2021-06-14)",
+   "provenance": "recovered exactly, not guessed: qmutpy-experiments commit 06cc1b29f7cd443c761d43afec48abea4a1055f6 -> tools/get-tools.sh:156-166 pins github.com/danielfobooss/mutpy branch all_gates at commit 13ab3845b26a18510bf3e0bddd529187f0b86b71; the same script pins qiskit-aqua stable/0.9 at 59d2fa05983e4279ff0ce9e344e9a071e661c7e6 and Python 3.7.0",
+   "provenance_confidence": "HIGH: the replication artifact pins an exact commit, so no revision had to be inferred from history",
+   "alpha_v": "NONE OF ITS OWN.  QMutPy is a MutPy fork: it mutates the target module's AST and delegates the verdict to the project's own unittest or pytest suite (mutpy/test_runners/{unittest,pytest}_runner.py).  Whatever the user test observes is the observation",
+   "A_v": "the host language: ordinary Python unittest/pytest assertions written by the user; QMutPy contributes quantum MUTATION operators (qgates.py QuantumGateDeletion/Insertion/Replacement, qmeasurements.py QuantumMeasurementDeletion/Insertion), not assertions",
+   "Adm_v": "unbounded; inherited from the user's Python test suite",
+   "U_v": "OPEN at tool scope",
+   "closure": "OPEN_AT_TOOL_SCOPE",
+   "closure_evidence": "controller.py loads a target module and mutates it; the verdict comes from UnittestMutationTestResult / pytest runner",
+   "extension_boundary": "unbounded (Python)",
+   "decision_rule": "a mutant is killed when the user's test suite fails or errors",
+   "evidence_depth_possible": "PROFILE_ONLY for this study: the architecture is a quantum mutation engine plus an open Python test suite, so it supplies no bounded assertion surface of its own",
+   "external_pair_execution": "EXTERNAL_PAIR_EXECUTION_NOT_SUPPORTED: controller.run() drives target_loader.load(...) -> mutate_module(...); there is no facility to accept an externally supplied mutant while preserving the QMutPy interface",
+   "source_hash": {
+    "sha256": "92c5370f0f074554148cebc3d95b51851cc56a8a89058258461a26df61f20fa6",
+    "files": 35
+   }
+  },
+  "pytest": {
+   "version": "7.4.4",
+   "provenance": "frozen profile record; BOUNDARY CONTROL, not a peer quantum testing framework",
+   "alpha_v": "the endpoint quantum state through the Python program object; any value reachable from it",
+   "A_v": "the assert statement over the general Python expression grammar",
+   "Adm_v": "unbounded",
+   "U_v": "OPEN at tool scope",
+   "closure": "OPEN_AT_TOOL_SCOPE",
+   "closure_evidence": "installed distribution declaring an entry point",
+   "extension_boundary": "unbounded (Python)",
+   "decision_rule": "the assert statement",
+   "evidence_depth_possible": "RELATION_LEVEL: constructive witness and state/observation comparison, but no exhaustive negative conclusion",
+   "external_pair_execution": "SUPPORTED",
+   "source_hash": null
+  }
+ }
+}

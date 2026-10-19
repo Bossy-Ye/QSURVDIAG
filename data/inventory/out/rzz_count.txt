@@ -1,0 +1,6 @@
+pairs 1537
+rzz in originals 5726
+rzz in mutants 5739
+rzz in originals and mutants 11465
+rzz in distinct files 6500 over 1700 files
+pairs with an rzz gate 188

@@ -1,0 +1,8 @@
+n | best convention for the circuit state (fidelity) | best convention for stored method-2 reference (Hellinger fidelity)
+2 circuit~exact 0.999549 at J=pi/2 odd_start=False | ref_m2 1.000000 at J=1 odd_start=True reversed_keys=True | circuit vs ref_m1 F_H 0.999987 circuit vs ref_m2 F_H 0.943796
+3 circuit~exact 0.995450 at J=pi/2 odd_start=False | ref_m2 1.000000 at J=1 odd_start=True reversed_keys=True | circuit vs ref_m1 F_H 0.999988 circuit vs ref_m2 F_H 0.029329
+4 circuit~exact 0.990904 at J=pi/2 odd_start=False | ref_m2 1.000000 at J=1 odd_start=True reversed_keys=True | circuit vs ref_m1 F_H 0.999946 circuit vs ref_m2 F_H 0.896978
+5 circuit~exact 0.989799 at J=pi/2 odd_start=False | ref_m2 1.000000 at J=1 odd_start=True reversed_keys=True | circuit vs ref_m1 F_H 0.999935 circuit vs ref_m2 F_H 0.077839
+6 circuit~exact 0.986700 at J=pi/2 odd_start=False | ref_m2 1.000000 at J=1 odd_start=True reversed_keys=True | circuit vs ref_m1 F_H 0.999846 circuit vs ref_m2 F_H 0.823891
+7 circuit~exact 0.985149 at J=pi/2 odd_start=False | ref_m2 1.000000 at J=1 odd_start=True reversed_keys=True | circuit vs ref_m1 F_H 0.999732 circuit vs ref_m2 F_H 0.049997
+8 circuit~exact 0.981808 at J=pi/2 odd_start=False | ref_m2 1.000000 at J=1 odd_start=True reversed_keys=True | circuit vs ref_m1 F_H 0.999331 circuit vs ref_m2 F_H 0.755043

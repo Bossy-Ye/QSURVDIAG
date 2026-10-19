@@ -1,0 +1,5 @@
+test,program,kills,unsupported,reps
+wrapped (H on q2),original,0,0,12
+wrapped (H on q2),mutant,12,0,12
+S_MIN (declared profile),original,0,0,12
+S_MIN (declared profile),mutant,0,0,12

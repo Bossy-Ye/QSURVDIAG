@@ -1,0 +1,44 @@
+{
+ "rg_mult_8": {
+  "operand_bits": 2,
+  "max_relative_phase_rad": 0.0,
+  "overlap_full_domain_with_ideal": 1.0,
+  "weight_per_basis_input": 0.0625,
+  "max_marginal_shift_one_wrong_product": 0.0625,
+  "theta": 0.05,
+  "one_wrong_product_exceeds_theta": true,
+  "two_state_input_marginals": [
+   1.0,
+   0.5,
+   1.0,
+   0.5,
+   1.0,
+   0.0,
+   0.0,
+   0.5
+  ]
+ },
+ "rg_mult_12": {
+  "operand_bits": 3,
+  "max_relative_phase_rad": 0.0,
+  "overlap_full_domain_with_ideal": 1.0,
+  "weight_per_basis_input": 0.015625,
+  "max_marginal_shift_one_wrong_product": 0.015625,
+  "theta": 0.05,
+  "one_wrong_product_exceeds_theta": false,
+  "two_state_input_marginals": [
+   1.0,
+   0.5,
+   0.5,
+   1.0,
+   0.5,
+   0.5,
+   1.0,
+   0.0,
+   0.0,
+   0.0,
+   0.5,
+   0.5
+  ]
+ }
+}

@@ -1,0 +1,86 @@
+{
+ "qwalk_4": {
+  "adapted_gates": 303,
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "seconds": [
+   1.66,
+   0.92,
+   0.9
+  ],
+  "detail": "1 passed in 0.17s (1 total)"
+ },
+ "qwalk_5": {
+  "adapted_gates": 723,
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "seconds": [
+   1.0,
+   1.01,
+   0.98
+  ],
+  "detail": "1 passed in 0.24s (1 total)"
+ },
+ "rg_mult_8": {
+  "adapted_gates": 232,
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "seconds": [
+   0.91,
+   0.9,
+   0.94
+  ],
+  "detail": "1 passed in 0.17s (1 total)"
+ },
+ "rg_mult_12": {
+  "adapted_gates": 750,
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "seconds": [
+   1.03,
+   0.98,
+   1.0
+  ],
+  "detail": "1 passed in 0.27s (1 total)"
+ },
+ "graphstate_d3_6": {
+  "adapted_gates": 15,
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "seconds": [
+   0.84,
+   0.83,
+   0.86
+  ],
+  "detail": "1 passed in 0.13s (1 total)"
+ },
+ "graphstate_d3_8": {
+  "adapted_gates": 20,
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "seconds": [
+   0.88,
+   0.85,
+   0.83
+  ],
+  "detail": "1 passed in 0.12s (1 total)"
+ }
+}

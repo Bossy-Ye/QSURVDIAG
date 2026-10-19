@@ -1,0 +1,122 @@
+{
+ "census": [
+  {
+   "subject": "qwalk_4",
+   "n": 4,
+   "eligible": true,
+   "reasons": "",
+   "legal_opportunities": 3453,
+   "ineligible_candidates": 0,
+   "deduplicated": 3442,
+   "allocated": 30,
+   "insertion": 6,
+   "replacement": 22,
+   "deletion": 2,
+   "strata_available": {
+    "gate_deletion/local_basis_amplitude": 40,
+    "gate_deletion/phase_parameterized": 132,
+    "gate_deletion/entangling_controlled": 120,
+    "gate_insertion/local_basis_amplitude": 288,
+    "gate_insertion/phase_parameterized": 240,
+    "gate_insertion/entangling_controlled": 240,
+    "gate_replacement/local_basis_amplitude": 1017,
+    "gate_replacement/phase_parameterized": 861,
+    "gate_replacement/entangling_controlled": 504
+   }
+  },
+  {
+   "subject": "qwalk_5",
+   "n": 5,
+   "eligible": true,
+   "reasons": "",
+   "legal_opportunities": 7395,
+   "ineligible_candidates": 0,
+   "deduplicated": 7331,
+   "allocated": 30,
+   "insertion": 3,
+   "replacement": 21,
+   "deletion": 6,
+   "strata_available": {
+    "gate_deletion/local_basis_amplitude": 154,
+    "gate_deletion/phase_parameterized": 228,
+    "gate_deletion/entangling_controlled": 282,
+    "gate_insertion/local_basis_amplitude": 360,
+    "gate_insertion/phase_parameterized": 300,
+    "gate_insertion/entangling_controlled": 300,
+    "gate_replacement/local_basis_amplitude": 2403,
+    "gate_replacement/phase_parameterized": 2103,
+    "gate_replacement/entangling_controlled": 1201
+   }
+  },
+  {
+   "subject": "rg_mult_8",
+   "n": 8,
+   "eligible": true,
+   "reasons": "",
+   "legal_opportunities": 3264,
+   "ineligible_candidates": 0,
+   "deduplicated": 3250,
+   "allocated": 30,
+   "insertion": 13,
+   "replacement": 12,
+   "deletion": 5,
+   "strata_available": {
+    "gate_deletion/local_basis_amplitude": 8,
+    "gate_deletion/phase_parameterized": 96,
+    "gate_deletion/entangling_controlled": 92,
+    "gate_insertion/local_basis_amplitude": 576,
+    "gate_insertion/phase_parameterized": 480,
+    "gate_insertion/entangling_controlled": 480,
+    "gate_replacement/local_basis_amplitude": 616,
+    "gate_replacement/phase_parameterized": 508,
+    "gate_replacement/entangling_controlled": 394
+   }
+  },
+  {
+   "subject": "rg_mult_12",
+   "n": 12,
+   "eligible": true,
+   "reasons": "",
+   "legal_opportunities": 7908,
+   "ineligible_candidates": 0,
+   "deduplicated": 7872,
+   "allocated": 30,
+   "insertion": 7,
+   "replacement": 21,
+   "deletion": 2,
+   "strata_available": {
+    "gate_deletion/local_basis_amplitude": 12,
+    "gate_deletion/phase_parameterized": 324,
+    "gate_deletion/entangling_controlled": 300,
+    "gate_insertion/local_basis_amplitude": 864,
+    "gate_insertion/phase_parameterized": 720,
+    "gate_insertion/entangling_controlled": 720,
+    "gate_replacement/local_basis_amplitude": 2004,
+    "gate_replacement/phase_parameterized": 1648,
+    "gate_replacement/entangling_controlled": 1280
+   }
+  }
+ ],
+ "allocator_fn_sha256": "9086b2b4bb347e78861deeb71b9ebbd24451d4f80a7af18f362e3fb44de3c63b",
+ "enumerator": "rq3_cohort (PD-1)",
+ "enumerator_qubit_limit": 14,
+ "enumerator_file_sha256": {
+  "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "mutants.py": "19b8741da4682f0f9f7cd49be44215f47994ae8f159972d164cba59c7326075c",
+  "gate_config.py": "24ceec760038bf763287f69837e007a80cdc27e77f4634188276c6ddea6a2c61",
+  "fragment.py": "cb0f0044caea7d0c7a9860c58aaceeb42305063cfd267c537659bb62d26f459a",
+  "representation.py": "bcdf56623a5b5ab607b024ab359a56e7fae65c50848ec6a6ec30475d8601a7fe"
+ },
+ "per_subject": 30,
+ "strata": [
+  "gate_deletion/local_basis_amplitude",
+  "gate_deletion/phase_parameterized",
+  "gate_deletion/entangling_controlled",
+  "gate_insertion/local_basis_amplitude",
+  "gate_insertion/phase_parameterized",
+  "gate_insertion/entangling_controlled",
+  "gate_replacement/local_basis_amplitude",
+  "gate_replacement/phase_parameterized",
+  "gate_replacement/entangling_controlled"
+ ]
+}

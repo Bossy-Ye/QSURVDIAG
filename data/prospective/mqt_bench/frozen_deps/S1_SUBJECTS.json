@@ -1,0 +1,1171 @@
+[
+ {
+  "subject": "simon_4",
+  "family": "simon",
+  "n": 4,
+  "contract_id": "C_FIXED_INPUT_STATE",
+  "output_register_qubits": [
+   0,
+   1
+  ],
+  "gate_count": 8,
+  "depth": 5,
+  "program_hash": "9803d0c386277b447f1482f42f7021cbadb1d2631f6076ec2050fda4854824eb",
+  "spec_relation": "input-register distribution uniform over {y : y.s=0 mod 2}, s=11",
+  "spec_verified": true,
+  "spec_detail": "{\"00\": 0.5, \"11\": 0.5}",
+  "base_gates": [
+   {
+    "gate": "h",
+    "q": [
+     0
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     1
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     3
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     0
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     3
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "subject": "wstate_4",
+  "family": "wstate",
+  "n": 4,
+  "contract_id": "C_FIXED_INPUT_STATE",
+  "output_register_qubits": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "gate_count": 16,
+  "depth": 13,
+  "program_hash": "59483dde185443b7f43b90e69e6a1fe0a9d1ad3721ab0b6842d74aad9965ee69",
+  "spec_relation": "endpoint state == W_4 up to global phase",
+  "spec_verified": true,
+  "spec_detail": "|<W|psi>|=1.000000000000",
+  "base_gates": [
+   {
+    "gate": "x",
+    "q": [
+     0
+    ]
+   },
+   {
+    "gate": "ry",
+    "q": [
+     1
+    ],
+    "angles": [
+     1.047197551197
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "ry",
+    "q": [
+     1
+    ],
+    "angles": [
+     -1.047197551197
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     0
+    ]
+   },
+   {
+    "gate": "ry",
+    "q": [
+     2
+    ],
+    "angles": [
+     0.955316618125
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     2
+    ]
+   },
+   {
+    "gate": "ry",
+    "q": [
+     2
+    ],
+    "angles": [
+     -0.955316618125
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     1
+    ]
+   },
+   {
+    "gate": "ry",
+    "q": [
+     3
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     3
+    ]
+   },
+   {
+    "gate": "ry",
+    "q": [
+     3
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     3,
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "subject": "swaptest_5",
+  "family": "swaptest",
+  "n": 5,
+  "contract_id": "C_ARBITRARY_INPUT_UNITARY",
+  "output_register_qubits": [
+   0
+  ],
+  "gate_count": 36,
+  "depth": 21,
+  "program_hash": "2e977ab57c23e44b5cca3237d565eafde165c15448c3b7350687a3139b5137d2",
+  "spec_relation": "P(anc=0) = (1+|<psi|phi>|^2)/2 for arbitrary register states",
+  "spec_verified": true,
+  "spec_detail": "unitary_ok=True max_spec_err=7.77e-16",
+  "base_gates": [
+   {
+    "gate": "h",
+    "q": [
+     0
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     3,
+     1
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     0
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     3,
+     1
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     4,
+     2
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     4
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     4
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     4
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     4
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     4
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     4
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     4
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     4
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     2
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     0
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     2
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     0
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     4
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     4
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     4,
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "subject": "cuccaro_adder_5",
+  "family": "cuccaro_adder",
+  "n": 5,
+  "contract_id": "C_ARBITRARY_INPUT_UNITARY",
+  "output_register_qubits": [
+   1,
+   3
+  ],
+  "gate_count": 36,
+  "depth": 26,
+  "program_hash": "34c42a0d5ee7d0395cc40d477568ff60ee2117229e45e54cc1f8f02a42ada38f",
+  "spec_relation": "|c=0>|a>|b> -> |0>|a>|a+b mod 4> on all 16 basis inputs",
+  "spec_verified": true,
+  "spec_detail": "violations=0",
+  "base_gates": [
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     1
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     0
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     2
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     2
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     2
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     0
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     4,
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     3
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     2
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     2
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     2
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     0
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     2
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     0
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "subject": "toffoli_barenco_5",
+  "family": "toffoli_decomposition",
+  "n": 5,
+  "contract_id": "C_ARBITRARY_INPUT_UNITARY",
+  "output_register_qubits": [
+   0,
+   1,
+   2,
+   4
+  ],
+  "gate_count": 45,
+  "depth": 31,
+  "program_hash": "bc488c0fc514d0f07dd83adc21c4c77482e8786ed2f2f5400eb1856d0c0e601b",
+  "spec_relation": "C^3X(q0,q1,q2 -> q4) on the ancilla=0 subspace",
+  "spec_verified": true,
+  "spec_detail": "unitary_ok=True violations=0",
+  "base_gates": [
+   {
+    "gate": "h",
+    "q": [
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     0
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     3
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     4
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     3,
+     4
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     4
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     4
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     4
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     3,
+     4
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     4
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     4
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     2
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     2,
+     3
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     1,
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     3
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     0
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     1
+    ],
+    "angles": [
+     -0.785398163397
+    ]
+   },
+   {
+    "gate": "cx",
+    "q": [
+     0,
+     1
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     3
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     3
+    ]
+   },
+   {
+    "gate": "rz",
+    "q": [
+     4
+    ],
+    "angles": [
+     0.785398163397
+    ]
+   },
+   {
+    "gate": "h",
+    "q": [
+     4
+    ]
+   }
+  ]
+ }
+]

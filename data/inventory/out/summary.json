@@ -1,0 +1,3385 @@
+{
+ "20 circuits (599)": {
+  "candidate": {
+   "CL1": 93,
+   "CL2": 87,
+   "CL3": 35,
+   "CL4": 81,
+   "CL5": 1
+  },
+  "contract": {
+   "C_ARBITRARY_INPUT_UNITARY": 90,
+   "C_FIXED_INPUT_STATE": 419,
+   "C_UNITARY": 90
+  },
+  "executed": 599,
+  "executed_inputs": {
+   "|0...0>": 599
+  },
+  "families": 11,
+  "families_list": {
+   "bernstein_vazirani": 90,
+   "cuccaro_adder": 30,
+   "deutsch_jozsa": 60,
+   "ghz": 90,
+   "grover": 60,
+   "qft": 90,
+   "qpe": 60,
+   "simon": 30,
+   "swaptest": 30,
+   "toffoli_decomposition": 30,
+   "wstate": 29
+  },
+  "first_gate": 182,
+  "gate_class": {
+   "entangling_controlled": 221,
+   "local_basis_amplitude": 231,
+   "phase_parameterized": 147
+  },
+  "operator": {
+   "delete": 134,
+   "insert": 282,
+   "replace": 183
+  },
+  "pairs": 599,
+  "programs": 20,
+  "report": {
+   "CL1": 93,
+   "CL2": 87,
+   "CL3": 35,
+   "CL4": 79,
+   "CL5": 1,
+   "NA_KILLED": 302,
+   "Unresolved": 2
+  },
+  "reported_outcomes": 295,
+  "sites_program_anchor": 223,
+  "sites_program_kind_anchor": 300,
+  "status": {
+   "killed": 302,
+   "split verdict": 2,
+   "stable survivor": 295
+  },
+  "survive_ge1_run": 297,
+  "third": {
+   "early": 310,
+   "late": 148,
+   "middle": 141
+  },
+  "unresolved_reasons": {
+   "split verdict (CL4 candidate)": 2
+  }
+ },
+ "20 circuits: additional (149)": {
+  "candidate": {
+   "CL1": 33,
+   "CL2": 48,
+   "CL4": 21
+  },
+  "contract": {
+   "C_ARBITRARY_INPUT_UNITARY": 90,
+   "C_FIXED_INPUT_STATE": 59
+  },
+  "executed": 149,
+  "executed_inputs": {
+   "|0...0>": 149
+  },
+  "families": 5,
+  "families_list": {
+   "cuccaro_adder": 30,
+   "simon": 30,
+   "swaptest": 30,
+   "toffoli_decomposition": 30,
+   "wstate": 29
+  },
+  "first_gate": 140,
+  "gate_class": {
+   "entangling_controlled": 41,
+   "local_basis_amplitude": 60,
+   "phase_parameterized": 48
+  },
+  "operator": {
+   "insert": 123,
+   "replace": 26
+  },
+  "pairs": 149,
+  "programs": 5,
+  "report": {
+   "CL1": 33,
+   "CL2": 48,
+   "CL4": 21,
+   "NA_KILLED": 47
+  },
+  "reported_outcomes": 102,
+  "sites_program_anchor": 9,
+  "sites_program_kind_anchor": 13,
+  "status": {
+   "killed": 47,
+   "stable survivor": 102
+  },
+  "survive_ge1_run": 102,
+  "third": {
+   "early": 143,
+   "middle": 6
+  },
+  "unresolved_reasons": {}
+ },
+ "20 circuits: development (450)": {
+  "candidate": {
+   "CL1": 60,
+   "CL2": 39,
+   "CL3": 35,
+   "CL4": 60,
+   "CL5": 1
+  },
+  "contract": {
+   "C_FIXED_INPUT_STATE": 360,
+   "C_UNITARY": 90
+  },
+  "executed": 450,
+  "executed_inputs": {
+   "|0...0>": 450
+  },
+  "families": 6,
+  "families_list": {
+   "bernstein_vazirani": 90,
+   "deutsch_jozsa": 60,
+   "ghz": 90,
+   "grover": 60,
+   "qft": 90,
+   "qpe": 60
+  },
+  "first_gate": 42,
+  "gate_class": {
+   "entangling_controlled": 180,
+   "local_basis_amplitude": 171,
+   "phase_parameterized": 99
+  },
+  "operator": {
+   "delete": 134,
+   "insert": 159,
+   "replace": 157
+  },
+  "pairs": 450,
+  "programs": 15,
+  "report": {
+   "CL1": 60,
+   "CL2": 39,
+   "CL3": 35,
+   "CL4": 58,
+   "CL5": 1,
+   "NA_KILLED": 255,
+   "Unresolved": 2
+  },
+  "reported_outcomes": 193,
+  "sites_program_anchor": 214,
+  "sites_program_kind_anchor": 287,
+  "status": {
+   "killed": 255,
+   "split verdict": 2,
+   "stable survivor": 193
+  },
+  "survive_ge1_run": 195,
+  "third": {
+   "early": 167,
+   "late": 148,
+   "middle": 135
+  },
+  "unresolved_reasons": {
+   "split verdict (CL4 candidate)": 2
+  }
+ },
+ "MQT Bench (120)": {
+  "candidate": {
+   "-": 2,
+   "CL1": 14,
+   "CL2": 10,
+   "CL3": 7,
+   "CL4": 23
+  },
+  "contract": {
+   "fixed": 60,
+   "unitary": 60
+  },
+  "executed": 120,
+  "executed_inputs": {
+   "(|a=1,b=1,out=0> + |a=3,b=3,out=0>)/sqrt2": 30,
+   "(|a=1,b=1,out=0> + |a=7,b=7,out=0>)/sqrt2": 30,
+   "|0...0>: walker at node 0, coin |0>": 60
+  },
+  "families": 2,
+  "families_list": {
+   "multiplication": 60,
+   "quantum_walk": 60
+  },
+  "first_gate": 68,
+  "gate_class": {
+   "entangling_controlled": 31,
+   "local_basis_amplitude": 43,
+   "phase_parameterized": 46
+  },
+  "operator": {
+   "delete": 15,
+   "insert": 29,
+   "replace": 76
+  },
+  "pairs": 120,
+  "programs": 4,
+  "report": {
+   "CL1": 14,
+   "CL2": 10,
+   "CL3": 7,
+   "CL4": 22,
+   "NA_KILLED": 64,
+   "Unresolved": 3
+  },
+  "reported_outcomes": 53,
+  "sites_program_anchor": 22,
+  "sites_program_kind_anchor": 26,
+  "status": {
+   "killed": 64,
+   "split verdict": 2,
+   "stable survivor": 54
+  },
+  "survive_ge1_run": 56,
+  "third": {
+   "early": 103,
+   "middle": 17
+  },
+  "unresolved_reasons": {
+   "CL4 candidate, unmet OB13": 1,
+   "split verdict (predicted kill)": 2
+  }
+ },
+ "beyond_first_gate": {
+  "20 circuits (599)|CL3": [
+   35,
+   34,
+   28
+  ],
+  "20 circuits (599)|CL4": [
+   79,
+   56,
+   40
+  ],
+  "20 circuits: additional (149)|CL3": [
+   0,
+   0,
+   0
+  ],
+  "20 circuits: additional (149)|CL4": [
+   21,
+   0,
+   0
+  ],
+  "20 circuits: development (450)|CL3": [
+   35,
+   34,
+   28
+  ],
+  "20 circuits: development (450)|CL4": [
+   58,
+   56,
+   40
+  ],
+  "MQT Bench (120)|CL3": [
+   7,
+   1,
+   1
+  ],
+  "MQT Bench (120)|CL4": [
+   22,
+   3,
+   3
+  ],
+  "corpus <=14 qubits (1537)|CL3": [
+   150,
+   141,
+   118
+  ],
+  "corpus <=14 qubits (1537)|CL4": [
+   143,
+   140,
+   92
+  ],
+  "external (270)|CL3": [
+   30,
+   0,
+   0
+  ],
+  "external (270)|CL4": [
+   5,
+   1,
+   0
+  ],
+  "width set (162 listed)|CL3": [
+   17,
+   17,
+   13
+  ],
+  "width set (162 listed)|CL4": [
+   6,
+   6,
+   6
+  ]
+ },
+ "bugs4q": {
+  "defects": 42,
+  "eligibility": {
+   "ELIGIBLE": 4,
+   "NO_DECLARED_OUTPUT": 2,
+   "NO_GROUNDED_CONTRACT": 19,
+   "NO_STATE_PRODUCING_PATH": 17
+  },
+  "evidence_depth": {
+   "FULL_CERTIFICATION": 2,
+   "NATIVE_REPRODUCTION_ONLY": 8,
+   "NOT_REPRODUCIBLE": 10,
+   "PROFILE_ONLY": 10,
+   "RELATION_LEVEL": 12
+  },
+  "final": [
+   [
+    "25",
+    "KILLED",
+    "",
+    "NA_KILLED",
+    "",
+    ""
+   ],
+   [
+    "26",
+    "SURVIVED",
+    "CL4",
+    "CL4",
+    "",
+    "zmask"
+   ],
+   [
+    "31",
+    "SURVIVED",
+    "CL2",
+    "CL2",
+    "",
+    ""
+   ],
+   [
+    "39",
+    "KILLED",
+    "",
+    "NA_KILLED",
+    "",
+    ""
+   ]
+  ]
+ },
+ "certification": {
+  "20 circuits (599)": {
+   "CL3_reported": 35,
+   "OB13_from_recorded_repair": 21,
+   "SO_certified": 79
+  },
+  "20 circuits: additional (149)": {
+   "CL3_reported": 0,
+   "OB13_from_recorded_repair": 21,
+   "SO_certified": 21
+  },
+  "20 circuits: development (450)": {
+   "CL3_reported": 35,
+   "OB13_from_recorded_repair": 0,
+   "SO_certified": 58
+  },
+  "MQT Bench (120)": {
+   "CL3_reported": 7,
+   "D2_rungs": {
+    "W1": 7
+   },
+   "OB13_from_recorded_repair": 0,
+   "SO_certified": 22,
+   "bound_kill_guard": {
+    "False/False": 4,
+    "True/False": 19
+   },
+   "fresh_seed_D1_by_report": {
+    "CL4:supported_repair": 22,
+    "Unresolved:kill_failure": 1
+   },
+   "fresh_seed_D1_repairs": {
+    "kill_failure": 1,
+    "supported_repair": 22
+   },
+   "fresh_seed_D2_observation": {
+    "consistent": 7
+   }
+  },
+  "corpus <=14 qubits (1537)": {
+   "CL3_reported": 150,
+   "OB13_from_recorded_repair": 0,
+   "SO_certified": 143
+  },
+  "external (270)": {
+   "CL3_reported": 30,
+   "OB13_from_recorded_repair": 0,
+   "SO_certified": 5
+  },
+  "width set (162 listed)": {
+   "CL3_reported": 17,
+   "OB13_from_recorded_repair": 0,
+   "SO_certified": 6
+  }
+ },
+ "checks": {
+  "external": {
+   "anchor_matches": 270,
+   "external_subjects_with_consistent_G": 9,
+   "third_matches": 270
+  },
+  "mqt": {
+   "anchor_matches": 120,
+   "report_agrees_pass3c": 120,
+   "third_matches": 120
+  },
+  "primary": {
+   "add_anchor_matches": 150,
+   "add_excluded_ids:wstate_4#h29": 1,
+   "add_not_in_final(excluded)": 1,
+   "add_third_matches": 150,
+   "dev_G_matches_manifest": 450,
+   "dev_location_reconstructs": 450,
+   "dev_rxx_rzz": 53,
+   "final_rows": 599
+  },
+  "qmutbench_files": {
+   "mut_hash_ok": 1537,
+   "orig_hash_ok": 1537,
+   "site_check_ok": 1302,
+   "site_check_ok_block": 221,
+   "site_check_ok_range": 14
+  },
+  "width": {
+   "corpus_keys_found_1": 162,
+   "path_matches_corpus_manifest": 130
+  }
+ },
+ "class_x_cause": {
+  "20 circuits (599)": {
+   "below-tolerance difference": {
+    "phase_parameterized": 1
+   },
+   "observation limitation": {
+    "entangling_controlled": 15,
+    "local_basis_amplitude": 4,
+    "phase_parameterized": 16
+   },
+   "suite omission": {
+    "entangling_controlled": 41,
+    "local_basis_amplitude": 33,
+    "phase_parameterized": 5
+   }
+  },
+  "20 circuits: additional (149)": {
+   "suite omission": {
+    "local_basis_amplitude": 16,
+    "phase_parameterized": 5
+   }
+  },
+  "20 circuits: development (450)": {
+   "below-tolerance difference": {
+    "phase_parameterized": 1
+   },
+   "observation limitation": {
+    "entangling_controlled": 15,
+    "local_basis_amplitude": 4,
+    "phase_parameterized": 16
+   },
+   "suite omission": {
+    "entangling_controlled": 41,
+    "local_basis_amplitude": 17
+   }
+  },
+  "MQT Bench (120)": {
+   "observation limitation": {
+    "entangling_controlled": 4,
+    "phase_parameterized": 3
+   },
+   "suite omission": {
+    "local_basis_amplitude": 10,
+    "phase_parameterized": 12
+   }
+  },
+  "corpus <=14 qubits (1537)": {
+   "below-tolerance difference": {
+    "entangling_controlled": 5,
+    "local_basis_amplitude": 6,
+    "phase_parameterized": 2
+   },
+   "observation limitation": {
+    "entangling_controlled": 54,
+    "local_basis_amplitude": 44,
+    "phase_parameterized": 52
+   },
+   "suite omission": {
+    "entangling_controlled": 50,
+    "identity": 2,
+    "local_basis_amplitude": 57,
+    "multi-gate block": 13,
+    "phase_parameterized": 21
+   }
+  },
+  "external (270)": {
+   "observation limitation": {
+    "entangling_controlled": 1,
+    "local_basis_amplitude": 3,
+    "phase_parameterized": 26
+   },
+   "suite omission": {
+    "entangling_controlled": 1,
+    "local_basis_amplitude": 4
+   }
+  },
+  "width set (162 listed)": {
+   "below-tolerance difference": {
+    "local_basis_amplitude": 1
+   },
+   "observation limitation": {
+    "local_basis_amplitude": 8,
+    "phase_parameterized": 9
+   },
+   "suite omission": {
+    "entangling_controlled": 1,
+    "local_basis_amplitude": 5
+   }
+  }
+ },
+ "combined_vs_repair_primary": {
+  "SO": 79,
+  "assertions_added_combined_median": 6,
+  "assertions_added_combined_total": 594,
+  "assertions_added_repair_total": 79,
+  "combined_outcome_on_SO": {
+   "KILLED": 79
+  },
+  "original_false_fails_B5_A1G_GUARD_analytic_N8000": {
+   "S_BOTH": 0,
+   "S_COVER": 0,
+   "S_FAMILY": 0,
+   "S_MIN": 0
+  },
+  "original_false_fails_SUITE_GUARD_LEDGER_sampled_ref_N2000": {
+   "S_BOTH": 24,
+   "S_COVER": 0,
+   "S_FAMILY": 15,
+   "S_MIN": 0
+  },
+  "subjects": 9
+ },
+ "corpus <=14 qubits (1537)": {
+  "candidate": {
+   "-": 29,
+   "CL1": 158,
+   "CL3": 150,
+   "CL4": 212,
+   "CL5": 13
+  },
+  "contract": {
+   "fixed": 1537
+  },
+  "executed": 1537,
+  "executed_inputs": {
+   "|0...0>": 1537
+  },
+  "families": 17,
+  "families_list": {
+   "ae": 116,
+   "dj": 128,
+   "ghz": 104,
+   "graphstate": 110,
+   "grover-noancilla": 68,
+   "portfolioqaoa": 69,
+   "portfoliovqe": 49,
+   "qaoa": 63,
+   "qft": 109,
+   "qftentangled": 116,
+   "qpeexact": 111,
+   "qpeinexact": 105,
+   "realamprandom": 54,
+   "su2random": 53,
+   "twolocalrandom": 53,
+   "vqe": 47,
+   "wstate": 182
+  },
+  "first_gate": 193,
+  "gate_class": {
+   "entangling_controlled": 495,
+   "identity": 61,
+   "local_basis_amplitude": 454,
+   "multi-gate block": 221,
+   "phase_parameterized": 306
+  },
+  "operator": {
+   "delete": 490,
+   "insert": 553,
+   "replace": 494
+  },
+  "pairs": 1537,
+  "programs": 167,
+  "report": {
+   "CL1": 158,
+   "CL3": 150,
+   "CL4": 143,
+   "CL5": 13,
+   "NA_KILLED": 975,
+   "Unresolved": 98
+  },
+  "reported_outcomes": 464,
+  "sites_program_anchor": 1031,
+  "sites_program_kind_anchor": 1142,
+  "status": {
+   "killed": 975,
+   "split verdict": 51,
+   "stable survivor": 511
+  },
+  "survive_ge1_run": 562,
+  "third": {
+   "early": 705,
+   "late": 471,
+   "middle": 361
+  },
+  "unresolved_reasons": {
+   "CL4 candidate, unmet OB02;OB13": 6,
+   "CL4 candidate, unmet OB02;OB13;OB15": 2,
+   "CL4 candidate, unmet OB02;OB15": 10,
+   "CL4 candidate, unmet OB13": 26,
+   "split verdict (CL4 candidate)": 25,
+   "split verdict (predicted kill)": 26,
+   "undecided margin R_C": 1,
+   "undecided margin R_O": 2
+  }
+ },
+ "corpus_CL3_programs": 58,
+ "corpus_CL4_programs": 48,
+ "corpus_cause_x_blockdelete": {
+  "CL3|block=False": 150,
+  "CL4|block=False": 130,
+  "CL4|block=True": 13
+ },
+ "corpus_distinct_content_pairs": 1537,
+ "corpus_ol_entailed_x_pos": {
+  "contingent": {
+   "early (not first)": 23,
+   "first gate": 9,
+   "late (not first)": 39,
+   "middle (not first)": 25
+  },
+  "entailed (sufficient condition)": {
+   "late (not first)": 54
+  }
+ },
+ "corpus_ol_terminal": {
+  "entailed=False|terminal=False": 88,
+  "entailed=False|terminal=True": 8,
+  "entailed=True|terminal=False": 2,
+  "entailed=True|terminal=True": 52
+ },
+ "corpus_so_margin_x_type": {
+  "Z-product w2 adjacent": {
+   ">=0.45": 86,
+   "[0.01,0.05)": 6,
+   "[0.05,0.10)": 11,
+   "[0.10,0.45)": 25
+  },
+  "Z-product w2 non-adjacent": {
+   ">=0.45": 1,
+   "[0.01,0.05)": 2,
+   "[0.05,0.10)": 3,
+   "[0.10,0.45)": 2
+  },
+  "Z-product w3": {
+   ">=0.45": 2,
+   "[0.01,0.05)": 1
+  },
+  "Z-product w9": {
+   "[0.01,0.05)": 1
+  },
+  "entropy": {
+   "[0.01,0.05)": 2
+  },
+  "hellinger": {
+   "(0,0.01)": 1
+  }
+ },
+ "corpus_so_terminal": {
+  "terminal=False": 113,
+  "terminal=True": 30
+ },
+ "corpus_so_type_x_pos": {
+  "Z-product w2 adjacent": {
+   "early (not first)": 48,
+   "first gate": 3,
+   "late (not first)": 51,
+   "middle (not first)": 26
+  },
+  "Z-product w2 non-adjacent": {
+   "late (not first)": 5,
+   "middle (not first)": 3
+  },
+  "Z-product w3": {
+   "late (not first)": 2,
+   "middle (not first)": 1
+  },
+  "Z-product w9": {
+   "middle (not first)": 1
+  },
+  "entropy": {
+   "late (not first)": 1,
+   "middle (not first)": 1
+  },
+  "hellinger": {
+   "late (not first)": 1
+  }
+ },
+ "corpus_stable_by_stratum": {
+  "False|False": 182,
+  "False|True": 58,
+  "True|False": 179,
+  "True|True": 92
+ },
+ "corpus_withheld_candidates": {
+  "SPLIT|OB03;OB13;OB15|(0,0.01)|not run|": 4,
+  "SPLIT|OB03;OB13;OB15|>=0.45|not run|": 5,
+  "SPLIT|OB03;OB13;OB15|[0.01,0.05)|not run|": 11,
+  "SPLIT|OB03;OB13;OB15|[0.05,0.10)|not run|": 2,
+  "SPLIT|OB03;OB13;OB15|[0.10,0.45)|not run|": 3,
+  "SURVIVED|OB02;OB13;OB15|[0.01,0.05)|12|1": 1,
+  "SURVIVED|OB02;OB13;OB15|[0.05,0.10)|11|0": 1,
+  "SURVIVED|OB02;OB13|(0,0.01)|12|3": 1,
+  "SURVIVED|OB02;OB13|[0.01,0.05)|10|1": 1,
+  "SURVIVED|OB02;OB13|[0.01,0.05)|12|3": 1,
+  "SURVIVED|OB02;OB13|[0.01,0.05)|5|3": 1,
+  "SURVIVED|OB02;OB13|[0.05,0.10)|12|1": 1,
+  "SURVIVED|OB02;OB13|[0.10,0.45)|12|1": 1,
+  "SURVIVED|OB02;OB15|>=0.45|12|0": 3,
+  "SURVIVED|OB02;OB15|[0.05,0.10)|12|0": 2,
+  "SURVIVED|OB02;OB15|[0.10,0.45)|12|0": 5,
+  "SURVIVED|OB13|(0,0.01)|10|0": 2,
+  "SURVIVED|OB13|(0,0.01)|5|0": 1,
+  "SURVIVED|OB13|(0,0.01)|6|0": 2,
+  "SURVIVED|OB13|(0,0.01)|7|0": 1,
+  "SURVIVED|OB13|(0,0.01)|8|0": 2,
+  "SURVIVED|OB13|(0,0.01)|9|0": 3,
+  "SURVIVED|OB13|[0.01,0.05)|10|0": 3,
+  "SURVIVED|OB13|[0.01,0.05)|11|0": 4,
+  "SURVIVED|OB13|[0.01,0.05)|7|0": 1,
+  "SURVIVED|OB13|[0.01,0.05)|8|0": 1,
+  "SURVIVED|OB13|[0.01,0.05)|9|0": 6
+ },
+ "designs": {
+  "20 circuits (599)": {
+   "SO_candidates": 81,
+   "SO_distinct_designs": 31,
+   "SO_families": {
+    "ghz": 54,
+    "grover": 1,
+    "qft": 2,
+    "qpe": 1,
+    "simon": 13,
+    "toffoli_decomposition": 8
+   },
+   "SO_programs": 9,
+   "SO_reported": 79,
+   "SO_sites": 23,
+   "assertion_type_designs": {
+    "Z-product w2 adjacent": 16,
+    "marginal": 15
+   },
+   "assertion_type_pairs": {
+    "Z-product w2 adjacent": 38,
+    "marginal": 41
+   },
+   "candidate_distinct_designs": 32,
+   "designs_with_1_pair": 13,
+   "largest_designs": [
+    [
+     [
+      "simon_4",
+      "",
+      "zmask",
+      "3"
+     ],
+     9
+    ],
+    [
+     [
+      "toffoli_barenco_5",
+      "",
+      "marginal",
+      "3"
+     ],
+     8
+    ],
+    [
+     [
+      "ghz_4",
+      "",
+      "zmask",
+      "3"
+     ],
+     6
+    ],
+    [
+     [
+      "ghz_5",
+      "",
+      "marginal",
+      "3"
+     ],
+     4
+    ],
+    [
+     [
+      "ghz_5",
+      "",
+      "zmask",
+      "3"
+     ],
+     4
+    ]
+   ]
+  },
+  "20 circuits: additional (149)": {
+   "SO_candidates": 21,
+   "SO_distinct_designs": 3,
+   "SO_families": {
+    "simon": 13,
+    "toffoli_decomposition": 8
+   },
+   "SO_programs": 2,
+   "SO_reported": 21,
+   "SO_sites": 2,
+   "assertion_type_designs": {
+    "Z-product w2 adjacent": 2,
+    "marginal": 1
+   },
+   "assertion_type_pairs": {
+    "Z-product w2 adjacent": 13,
+    "marginal": 8
+   },
+   "candidate_distinct_designs": 3,
+   "designs_with_1_pair": 0,
+   "largest_designs": [
+    [
+     [
+      "simon_4",
+      "",
+      "zmask",
+      "3"
+     ],
+     9
+    ],
+    [
+     [
+      "toffoli_barenco_5",
+      "",
+      "marginal",
+      "3"
+     ],
+     8
+    ],
+    [
+     [
+      "simon_4",
+      "",
+      "zmask",
+      "12"
+     ],
+     4
+    ]
+   ]
+  },
+  "20 circuits: development (450)": {
+   "SO_candidates": 60,
+   "SO_distinct_designs": 28,
+   "SO_families": {
+    "ghz": 54,
+    "grover": 1,
+    "qft": 2,
+    "qpe": 1
+   },
+   "SO_programs": 7,
+   "SO_reported": 58,
+   "SO_sites": 21,
+   "assertion_type_designs": {
+    "Z-product w2 adjacent": 14,
+    "marginal": 14
+   },
+   "assertion_type_pairs": {
+    "Z-product w2 adjacent": 25,
+    "marginal": 33
+   },
+   "candidate_distinct_designs": 29,
+   "designs_with_1_pair": 13,
+   "largest_designs": [
+    [
+     [
+      "ghz_4",
+      "",
+      "zmask",
+      "3"
+     ],
+     6
+    ],
+    [
+     [
+      "ghz_5",
+      "",
+      "marginal",
+      "3"
+     ],
+     4
+    ],
+    [
+     [
+      "ghz_5",
+      "",
+      "zmask",
+      "3"
+     ],
+     4
+    ],
+    [
+     [
+      "ghz_7",
+      "",
+      "marginal",
+      "4"
+     ],
+     4
+    ],
+    [
+     [
+      "ghz_7",
+      "",
+      "marginal",
+      "5"
+     ],
+     4
+    ]
+   ]
+  },
+  "MQT Bench (120)": {
+   "SO_candidates": 23,
+   "SO_distinct_designs": 4,
+   "SO_families": {
+    "multiplication": 21,
+    "quantum_walk": 1
+   },
+   "SO_programs": 3,
+   "SO_reported": 22,
+   "SO_sites": 6,
+   "assertion_type_designs": {
+    "Z-product w2 adjacent": 2,
+    "Z-product w2 non-adjacent": 2
+   },
+   "assertion_type_pairs": {
+    "Z-product w2 adjacent": 13,
+    "Z-product w2 non-adjacent": 9
+   },
+   "candidate_distinct_designs": 5,
+   "designs_with_1_pair": 1,
+   "largest_designs": [
+    [
+     [
+      "rg_mult_12",
+      "",
+      "zmask",
+      "3072"
+     ],
+     10
+    ],
+    [
+     [
+      "rg_mult_8",
+      "",
+      "zmask",
+      "136"
+     ],
+     8
+    ],
+    [
+     [
+      "rg_mult_8",
+      "",
+      "zmask",
+      "96"
+     ],
+     3
+    ],
+    [
+     [
+      "qwalk_4",
+      "",
+      "zmask",
+      "10"
+     ],
+     1
+    ]
+   ]
+  },
+  "corpus <=14 qubits (1537)": {
+   "SO_candidates": 212,
+   "SO_distinct_designs": 80,
+   "SO_families": {
+    "ae": 21,
+    "ghz": 19,
+    "graphstate": 3,
+    "portfolioqaoa": 14,
+    "portfoliovqe": 1,
+    "qaoa": 25,
+    "qftentangled": 45,
+    "qpeinexact": 3,
+    "realamprandom": 2,
+    "su2random": 2,
+    "twolocalrandom": 4,
+    "vqe": 2,
+    "wstate": 2
+   },
+   "SO_programs": 48,
+   "SO_reported": 143,
+   "SO_sites": 128,
+   "assertion_type_designs": {
+    "Z-product w2 adjacent": 65,
+    "Z-product w2 non-adjacent": 8,
+    "Z-product w3": 3,
+    "Z-product w9": 1,
+    "entropy": 2,
+    "hellinger": 1
+   },
+   "assertion_type_pairs": {
+    "Z-product w2 adjacent": 128,
+    "Z-product w2 non-adjacent": 8,
+    "Z-product w3": 3,
+    "Z-product w9": 1,
+    "entropy": 2,
+    "hellinger": 1
+   },
+   "candidate_distinct_designs": 126,
+   "designs_with_1_pair": 54,
+   "largest_designs": [
+    [
+     [
+      "qftentangled_10_qubits",
+      "",
+      "zmask",
+      "768"
+     ],
+     7
+    ],
+    [
+     [
+      "qftentangled_8_qubits",
+      "",
+      "zmask",
+      "192"
+     ],
+     7
+    ],
+    [
+     [
+      "qftentangled_7_qubits",
+      "",
+      "zmask",
+      "96"
+     ],
+     6
+    ],
+    [
+     [
+      "qaoa_4_qubits",
+      "",
+      "zmask",
+      "3"
+     ],
+     5
+    ],
+    [
+     [
+      "qftentangled_6_qubits",
+      "",
+      "zmask",
+      "48"
+     ],
+     5
+    ]
+   ]
+  },
+  "external (270)": {
+   "SO_candidates": 5,
+   "SO_distinct_designs": 1,
+   "SO_families": {
+    "LessThanPhase": 5
+   },
+   "SO_programs": 1,
+   "SO_reported": 5,
+   "SO_sites": 2,
+   "assertion_type_designs": {
+    "Z-product w2 non-adjacent": 1
+   },
+   "assertion_type_pairs": {
+    "Z-product w2 non-adjacent": 5
+   },
+   "candidate_distinct_designs": 1,
+   "designs_with_1_pair": 0,
+   "largest_designs": [
+    [
+     [
+      "LessThanPhase",
+      "",
+      "zmask",
+      "10"
+     ],
+     5
+    ]
+   ]
+  },
+  "width set (162 listed)": {
+   "SO_candidates": 8,
+   "SO_distinct_designs": 6,
+   "SO_families": {
+    "ghz": 5,
+    "realamprandom": 1
+   },
+   "SO_programs": 4,
+   "SO_reported": 6,
+   "SO_sites": 5,
+   "assertion_type_designs": {
+    "Z-product w2 adjacent": 5,
+    "marginal": 1
+   },
+   "assertion_type_pairs": {
+    "Z-product w2 adjacent": 5,
+    "marginal": 1
+   },
+   "candidate_distinct_designs": 8,
+   "designs_with_1_pair": 6,
+   "largest_designs": [
+    [
+     [
+      "ghz_10_qubits",
+      "[0]",
+      "zmask",
+      "24"
+     ],
+     1
+    ],
+    [
+     [
+      "ghz_9_qubits",
+      "[0]",
+      "zmask",
+      "24"
+     ],
+     1
+    ],
+    [
+     [
+      "ghz_10_qubits",
+      "[0]",
+      "zmask",
+      "96"
+     ],
+     1
+    ],
+    [
+     [
+      "ghz_10_qubits",
+      "[0]",
+      "zmask",
+      "3"
+     ],
+     1
+    ],
+    [
+     [
+      "ghz_8_qubits",
+      "[0]",
+      "marginal",
+      "3"
+     ],
+     1
+    ]
+   ]
+  }
+ },
+ "external (270)": {
+  "candidate": {
+   "-": 2,
+   "CL1": 28,
+   "CL2": 94,
+   "CL3": 30,
+   "CL4": 5
+  },
+  "contract": {
+   "fixed": 60,
+   "unitary": 210
+  },
+  "executed": 270,
+  "executed_inputs": {
+   "(|0> + |10>)/sqrt(2) on 5 qubits": 30,
+   "(|0> + |1>)/sqrt(2) on 10 qubits": 60,
+   "(|0> + |1>)/sqrt(2) on 3 qubits": 30,
+   "(|0> + |1>)/sqrt(2) on 6 qubits": 60,
+   "(|0> + |1>)/sqrt(2) on 7 qubits": 30,
+   "fixed input (original state preparation)": 60
+  },
+  "families": 9,
+  "families_list": {
+   "AdderHamiltonianMixture": 30,
+   "DiagonalZHamiltonian": 30,
+   "DraperAdder": 30,
+   "Is2PowerPhase": 30,
+   "IsingEvolution": 30,
+   "LessThanPhase": 30,
+   "ParityPhase": 30,
+   "deutsch_n2": 30,
+   "qft_n4": 30
+  },
+  "first_gate": 244,
+  "gate_class": {
+   "entangling_controlled": 65,
+   "local_basis_amplitude": 105,
+   "phase_parameterized": 100
+  },
+  "operator": {
+   "delete": 2,
+   "insert": 203,
+   "replace": 65
+  },
+  "pairs": 270,
+  "programs": 9,
+  "report": {
+   "CL1": 28,
+   "CL2": 94,
+   "CL3": 30,
+   "CL4": 5,
+   "NA_KILLED": 111,
+   "Unresolved": 2
+  },
+  "reported_outcomes": 157,
+  "sites_program_anchor": 16,
+  "sites_program_kind_anchor": 23,
+  "status": {
+   "killed": 111,
+   "split verdict": 2,
+   "stable survivor": 157
+  },
+  "survive_ge1_run": 159,
+  "third": {
+   "early": 251,
+   "late": 19
+  },
+  "unresolved_reasons": {
+   "split verdict (predicted kill)": 2
+  }
+ },
+ "family_x_outcome": {
+  "20 circuits (599)": {
+   "bernstein_vazirani": {
+    "contract equivalence": 13,
+    "killed": 73,
+    "observation limitation": 4
+   },
+   "cuccaro_adder": {
+    "executed-input equality": 16,
+    "killed": 14
+   },
+   "deutsch_jozsa": {
+    "contract equivalence": 10,
+    "killed": 48,
+    "observation limitation": 2
+   },
+   "ghz": {
+    "contract equivalence": 16,
+    "killed": 13,
+    "observation limitation": 7,
+    "suite omission": 54
+   },
+   "grover": {
+    "Unresolved": 2,
+    "below-tolerance difference": 1,
+    "contract equivalence": 3,
+    "killed": 51,
+    "observation limitation": 2,
+    "suite omission": 1
+   },
+   "qft": {
+    "executed-input equality": 39,
+    "killed": 29,
+    "observation limitation": 20,
+    "suite omission": 2
+   },
+   "qpe": {
+    "contract equivalence": 18,
+    "killed": 41,
+    "suite omission": 1
+   },
+   "simon": {
+    "contract equivalence": 17,
+    "suite omission": 13
+   },
+   "swaptest": {
+    "executed-input equality": 16,
+    "killed": 14
+   },
+   "toffoli_decomposition": {
+    "executed-input equality": 16,
+    "killed": 6,
+    "suite omission": 8
+   },
+   "wstate": {
+    "contract equivalence": 16,
+    "killed": 13
+   }
+  },
+  "MQT Bench (120)": {
+   "multiplication": {
+    "executed-input equality": 10,
+    "killed": 22,
+    "observation limitation": 7,
+    "suite omission": 21
+   },
+   "quantum_walk": {
+    "Unresolved": 3,
+    "contract equivalence": 14,
+    "killed": 42,
+    "suite omission": 1
+   }
+  },
+  "corpus <=14 qubits (1537)": {
+   "ae": {
+    "Unresolved": 11,
+    "below-tolerance difference": 1,
+    "contract equivalence": 5,
+    "killed": 68,
+    "observation limitation": 10,
+    "suite omission": 21
+   },
+   "dj": {
+    "contract equivalence": 19,
+    "killed": 95,
+    "observation limitation": 14
+   },
+   "ghz": {
+    "contract equivalence": 14,
+    "killed": 63,
+    "observation limitation": 8,
+    "suite omission": 19
+   },
+   "graphstate": {
+    "contract equivalence": 13,
+    "killed": 44,
+    "observation limitation": 50,
+    "suite omission": 3
+   },
+   "grover-noancilla": {
+    "Unresolved": 1,
+    "below-tolerance difference": 1,
+    "contract equivalence": 7,
+    "killed": 59
+   },
+   "portfolioqaoa": {
+    "Unresolved": 14,
+    "below-tolerance difference": 2,
+    "killed": 36,
+    "observation limitation": 3,
+    "suite omission": 14
+   },
+   "portfoliovqe": {
+    "Unresolved": 10,
+    "contract equivalence": 1,
+    "killed": 37,
+    "suite omission": 1
+   },
+   "qaoa": {
+    "Unresolved": 11,
+    "contract equivalence": 5,
+    "killed": 22,
+    "suite omission": 25
+   },
+   "qft": {
+    "contract equivalence": 37,
+    "killed": 51,
+    "observation limitation": 21
+   },
+   "qftentangled": {
+    "Unresolved": 16,
+    "contract equivalence": 11,
+    "killed": 35,
+    "observation limitation": 9,
+    "suite omission": 45
+   },
+   "qpeexact": {
+    "contract equivalence": 15,
+    "killed": 96
+   },
+   "qpeinexact": {
+    "below-tolerance difference": 1,
+    "contract equivalence": 5,
+    "killed": 77,
+    "observation limitation": 19,
+    "suite omission": 3
+   },
+   "realamprandom": {
+    "Unresolved": 13,
+    "below-tolerance difference": 2,
+    "contract equivalence": 1,
+    "killed": 36,
+    "suite omission": 2
+   },
+   "su2random": {
+    "Unresolved": 8,
+    "contract equivalence": 2,
+    "killed": 39,
+    "observation limitation": 2,
+    "suite omission": 2
+   },
+   "twolocalrandom": {
+    "Unresolved": 9,
+    "below-tolerance difference": 1,
+    "contract equivalence": 2,
+    "killed": 37,
+    "suite omission": 4
+   },
+   "vqe": {
+    "Unresolved": 5,
+    "below-tolerance difference": 5,
+    "contract equivalence": 1,
+    "killed": 32,
+    "observation limitation": 2,
+    "suite omission": 2
+   },
+   "wstate": {
+    "contract equivalence": 20,
+    "killed": 148,
+    "observation limitation": 12,
+    "suite omission": 2
+   }
+  },
+  "external (270)": {
+   "AdderHamiltonianMixture": {
+    "executed-input equality": 18,
+    "killed": 11,
+    "observation limitation": 1
+   },
+   "DiagonalZHamiltonian": {
+    "executed-input equality": 10,
+    "killed": 11,
+    "observation limitation": 9
+   },
+   "DraperAdder": {
+    "executed-input equality": 18,
+    "killed": 10,
+    "observation limitation": 2
+   },
+   "Is2PowerPhase": {
+    "executed-input equality": 7,
+    "killed": 17,
+    "observation limitation": 6
+   },
+   "IsingEvolution": {
+    "executed-input equality": 18,
+    "killed": 10,
+    "observation limitation": 2
+   },
+   "LessThanPhase": {
+    "executed-input equality": 10,
+    "killed": 13,
+    "observation limitation": 2,
+    "suite omission": 5
+   },
+   "ParityPhase": {
+    "executed-input equality": 13,
+    "killed": 12,
+    "observation limitation": 5
+   },
+   "deutsch_n2": {
+    "contract equivalence": 12,
+    "killed": 17,
+    "observation limitation": 1
+   },
+   "qft_n4": {
+    "Unresolved": 2,
+    "contract equivalence": 16,
+    "killed": 10,
+    "observation limitation": 2
+   }
+  },
+  "width set (162 listed)": {
+   "ghz": {
+    "contract equivalence": 5,
+    "killed": 17,
+    "not executed": 6,
+    "observation limitation": 2,
+    "suite omission": 5
+   },
+   "graphstate": {
+    "killed": 2,
+    "not executed": 1,
+    "observation limitation": 1
+   },
+   "portfolioqaoa": {
+    "not executed": 3
+   },
+   "portfoliovqe": {
+    "Unresolved": 1
+   },
+   "qft": {
+    "contract equivalence": 11,
+    "killed": 16,
+    "not executed": 3,
+    "observation limitation": 4
+   },
+   "qftentangled": {
+    "not executed": 1
+   },
+   "qpeexact": {
+    "contract equivalence": 1,
+    "killed": 24
+   },
+   "qpeinexact": {
+    "contract equivalence": 1,
+    "killed": 29,
+    "not executed": 2,
+    "observation limitation": 8
+   },
+   "realamprandom": {
+    "Unresolved": 2,
+    "killed": 2,
+    "suite omission": 1
+   },
+   "su2random": {
+    "killed": 3
+   },
+   "twolocalrandom": {
+    "killed": 2,
+    "not executed": 2
+   },
+   "vqe": {
+    "Unresolved": 1,
+    "below-tolerance difference": 1,
+    "killed": 1,
+    "observation limitation": 1
+   },
+   "wstate": {
+    "contract equivalence": 1,
+    "not executed": 1,
+    "observation limitation": 1
+   }
+  }
+ },
+ "margins": {
+  "20 circuits (599)|SO candidates (all)": {
+   "bins": {
+    ">=0.45": 78,
+    "[0.01,0.05)": 2,
+    "[0.05,0.10)": 1
+   },
+   "median": 0.4499999999999999,
+   "min": 0.027164570954844466,
+   "n": 81
+  },
+  "20 circuits (599)|below-tolerance (decisive = largest diff)": {
+   "bins": {
+    "<=0": 1
+   },
+   "median": -0.02055704503274587,
+   "min": -0.02055704503274587,
+   "n": 1
+  },
+  "20 circuits (599)|reported SO": {
+   "bins": {
+    ">=0.45": 78,
+    "[0.05,0.10)": 1
+   },
+   "median": 0.4499999999999999,
+   "min": 0.09843750000066974,
+   "n": 79
+  },
+  "20 circuits (599)|withheld SO candidates": {
+   "bins": {
+    "[0.01,0.05)": 2
+   },
+   "median": 0.03182864411678711,
+   "min": 0.027164570954844466,
+   "n": 2
+  },
+  "20 circuits: additional (149)|SO candidates (all)": {
+   "bins": {
+    ">=0.45": 21
+   },
+   "median": 0.9499999999999993,
+   "min": 0.4499999999999993,
+   "n": 21
+  },
+  "20 circuits: additional (149)|reported SO": {
+   "bins": {
+    ">=0.45": 21
+   },
+   "median": 0.9499999999999993,
+   "min": 0.4499999999999993,
+   "n": 21
+  },
+  "20 circuits: development (450)|SO candidates (all)": {
+   "bins": {
+    ">=0.45": 57,
+    "[0.01,0.05)": 2,
+    "[0.05,0.10)": 1
+   },
+   "median": 0.4499999999999999,
+   "min": 0.027164570954844466,
+   "n": 60
+  },
+  "20 circuits: development (450)|below-tolerance (decisive = largest diff)": {
+   "bins": {
+    "<=0": 1
+   },
+   "median": -0.02055704503274587,
+   "min": -0.02055704503274587,
+   "n": 1
+  },
+  "20 circuits: development (450)|reported SO": {
+   "bins": {
+    ">=0.45": 57,
+    "[0.05,0.10)": 1
+   },
+   "median": 0.4499999999999999,
+   "min": 0.09843750000066974,
+   "n": 58
+  },
+  "20 circuits: development (450)|withheld SO candidates": {
+   "bins": {
+    "[0.01,0.05)": 2
+   },
+   "median": 0.03182864411678711,
+   "min": 0.027164570954844466,
+   "n": 2
+  },
+  "MQT Bench (120)|SO candidates (all)": {
+   "bins": {
+    "(0,0.01)": 1,
+    ">=0.45": 19,
+    "[0.01,0.05)": 3
+   },
+   "median": 0.949999999999998,
+   "min": 0.007090350616695426,
+   "n": 23
+  },
+  "MQT Bench (120)|reported SO": {
+   "bins": {
+    ">=0.45": 19,
+    "[0.01,0.05)": 3
+   },
+   "median": 0.949999999999998,
+   "min": 0.026120467488739682,
+   "n": 22
+  },
+  "MQT Bench (120)|withheld SO candidates": {
+   "bins": {
+    "(0,0.01)": 1
+   },
+   "median": 0.007090350616695426,
+   "min": 0.007090350616695426,
+   "n": 1
+  },
+  "corpus <=14 qubits (1537)|SO candidates (all)": {
+   "bins": {
+    "(0,0.01)": 17,
+    ">=0.45": 97,
+    "[0.01,0.05)": 42,
+    "[0.05,0.10)": 20,
+    "[0.10,0.45)": 36
+   },
+   "median": 0.29089930034527256,
+   "min": 0.00044060488378637463,
+   "n": 212
+  },
+  "corpus <=14 qubits (1537)|below-tolerance (decisive = largest diff)": {
+   "bins": {
+    "<=0": 13
+   },
+   "median": -0.02761893551601586,
+   "min": -0.04988603940970613,
+   "n": 13
+  },
+  "corpus <=14 qubits (1537)|reported SO": {
+   "bins": {
+    "(0,0.01)": 1,
+    ">=0.45": 89,
+    "[0.01,0.05)": 12,
+    "[0.05,0.10)": 14,
+    "[0.10,0.45)": 27
+   },
+   "median": 0.5864919355013006,
+   "min": 0.008798761279482044,
+   "n": 143
+  },
+  "corpus <=14 qubits (1537)|withheld SO candidates": {
+   "bins": {
+    "(0,0.01)": 16,
+    ">=0.45": 8,
+    "[0.01,0.05)": 30,
+    "[0.05,0.10)": 6,
+    "[0.10,0.45)": 9
+   },
+   "median": 0.029471785599224268,
+   "min": 0.00044060488378637463,
+   "n": 69
+  },
+  "external (270)|SO candidates (all)": {
+   "bins": {
+    ">=0.45": 5
+   },
+   "median": 0.9499999999999991,
+   "min": 0.949999999999999,
+   "n": 5
+  },
+  "external (270)|reported SO": {
+   "bins": {
+    ">=0.45": 5
+   },
+   "median": 0.9499999999999991,
+   "min": 0.949999999999999,
+   "n": 5
+  },
+  "width set (162 listed)|SO candidates (all)": {
+   "bins": {
+    "(0,0.01)": 1,
+    ">=0.45": 5,
+    "[0.01,0.05)": 1,
+    "[0.10,0.45)": 1
+   },
+   "median": 0.6999999999999997,
+   "min": 0.008337006697202498,
+   "n": 8
+  },
+  "width set (162 listed)|below-tolerance (decisive = largest diff)": {
+   "bins": {
+    "<=0": 1
+   },
+   "median": -0.04813293188023239,
+   "min": -0.04813293188023239,
+   "n": 1
+  },
+  "width set (162 listed)|reported SO": {
+   "bins": {
+    ">=0.45": 5,
+    "[0.10,0.45)": 1
+   },
+   "median": 0.9499999999999997,
+   "min": 0.14394689879148065,
+   "n": 6
+  },
+  "width set (162 listed)|withheld SO candidates": {
+   "bins": {
+    "(0,0.01)": 1,
+    "[0.01,0.05)": 1
+   },
+   "median": 0.017856156051719835,
+   "min": 0.008337006697202498,
+   "n": 2
+  }
+ },
+ "near_threshold": [
+  [
+   "20 circuits",
+   "grover_5#e06",
+   "grover_5",
+   "grover",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0272,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "20 circuits",
+   "grover_5#e02",
+   "grover_5",
+   "grover",
+   "replace",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0365,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "MQT Bench",
+   "qwalk_5#m00",
+   "qwalk_5",
+   "quantum_walk",
+   "delete",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0071,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "MQT Bench",
+   "rg_mult_8#m00",
+   "rg_mult_8",
+   "multiplication",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0261,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "MQT Bench",
+   "rg_mult_8#m01",
+   "rg_mult_8",
+   "multiplication",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0261,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "MQT Bench",
+   "rg_mult_8#m04",
+   "rg_mult_8",
+   "multiplication",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0261,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_076",
+   "twolocalrandom_2_qubits",
+   "twolocalrandom",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0004,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_240",
+   "twolocalrandom_2_qubits",
+   "twolocalrandom",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0006,
+   "10",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_004",
+   "su2random_9_qubits",
+   "su2random",
+   "insert",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0008,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_271",
+   "ae_9_qubits",
+   "ae",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0023,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_296",
+   "vqe_9_qubits",
+   "vqe",
+   "replace",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0027,
+   "6",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_408",
+   "ae_8_qubits",
+   "ae",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0035,
+   "8",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_132",
+   "twolocalrandom_10_qubits",
+   "twolocalrandom",
+   "replace",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0036,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_008",
+   "su2random_10_qubits",
+   "su2random",
+   "insert",
+   "early",
+   false,
+   "Z-product w9",
+   0.0036,
+   "8",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_253",
+   "portfolioqaoa_9_qubits",
+   "portfolioqaoa",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0051,
+   "7",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_429",
+   "realamprandom_10_qubits",
+   "realamprandom",
+   "delete",
+   "early",
+   false,
+   "entropy",
+   0.0057,
+   "12",
+   "3",
+   "Unresolved",
+   "OB02;OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_242",
+   "ae_9_qubits",
+   "ae",
+   "replace",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0059,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_151",
+   "su2random_8_qubits",
+   "su2random",
+   "insert",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0062,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_399",
+   "portfolioqaoa_9_qubits",
+   "portfolioqaoa",
+   "replace",
+   "early",
+   false,
+   "Z-product w8",
+   0.0068,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_061",
+   "portfoliovqe_12_qubits",
+   "portfoliovqe",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0083,
+   "6",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_143",
+   "realamprandom_9_qubits",
+   "realamprandom",
+   "insert",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0087,
+   "10",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_513",
+   "qaoa_3_qubits",
+   "qaoa",
+   "delete",
+   "late",
+   false,
+   "hellinger",
+   0.0088,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_030",
+   "su2random_10_qubits",
+   "su2random",
+   "insert",
+   "middle",
+   false,
+   "Z-product w4",
+   0.0089,
+   "5",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_133",
+   "qaoa_9_qubits",
+   "qaoa",
+   "insert",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0102,
+   "7",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_331",
+   "twolocalrandom_7_qubits",
+   "twolocalrandom",
+   "delete",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0122,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_305",
+   "su2random_10_qubits",
+   "su2random",
+   "replace",
+   "early",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0128,
+   "10",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_405",
+   "qftentangled_8_qubits",
+   "qftentangled",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0139,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_156",
+   "vqe_9_qubits",
+   "vqe",
+   "insert",
+   "middle",
+   false,
+   "entropy",
+   0.0143,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_124",
+   "portfoliovqe_5_qubits",
+   "portfoliovqe",
+   "insert",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0145,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_405",
+   "twolocalrandom_5_qubits",
+   "twolocalrandom",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.015,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_390",
+   "realamprandom_6_qubits",
+   "realamprandom",
+   "delete",
+   "middle",
+   false,
+   "Z-product w3",
+   0.0173,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_048",
+   "realamprandom_9_qubits",
+   "realamprandom",
+   "insert",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0179,
+   "11",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_278",
+   "ae_10_qubits",
+   "ae",
+   "insert",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0186,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_116",
+   "portfolioqaoa_10_qubits",
+   "portfolioqaoa",
+   "insert",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0196,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_220",
+   "ae_9_qubits",
+   "ae",
+   "insert",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0205,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_306",
+   "su2random_9_qubits",
+   "su2random",
+   "replace",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0218,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_448",
+   "ae_3_qubits",
+   "ae",
+   "replace",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.022,
+   "8",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_406",
+   "realamprandom_4_qubits",
+   "realamprandom",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0221,
+   "9",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_248",
+   "su2random_8_qubits",
+   "su2random",
+   "replace",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0226,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_343",
+   "realamprandom_9_qubits",
+   "realamprandom",
+   "delete",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0232,
+   "10",
+   "1",
+   "Unresolved",
+   "OB02;OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_190",
+   "vqe_4_qubits",
+   "vqe",
+   "insert",
+   "late",
+   false,
+   "entropy",
+   0.0234,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_493",
+   "qaoa_8_qubits",
+   "qaoa",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0247,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_130",
+   "qaoa_8_qubits",
+   "qaoa",
+   "replace",
+   "late",
+   false,
+   "entropy",
+   0.0264,
+   "5",
+   "3",
+   "Unresolved",
+   "OB02;OB13"
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_081",
+   "realamprandom_11_qubits",
+   "realamprandom",
+   "delete",
+   "early",
+   false,
+   "hellinger",
+   0.0274,
+   "12",
+   "3",
+   "Unresolved",
+   "OB02;OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_451",
+   "realamprandom_10_qubits",
+   "realamprandom",
+   "delete",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0295,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_022",
+   "portfolioqaoa_6_qubits",
+   "portfolioqaoa",
+   "insert",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0298,
+   "10",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_380",
+   "realamprandom_8_qubits",
+   "realamprandom",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0314,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_007",
+   "portfolioqaoa_9_qubits",
+   "portfolioqaoa",
+   "insert",
+   "middle",
+   false,
+   "Z-product w9",
+   0.0315,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_490",
+   "qaoa_5_qubits",
+   "qaoa",
+   "delete",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0319,
+   "10",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_406",
+   "twolocalrandom_10_qubits",
+   "twolocalrandom",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.032,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_042",
+   "realamprandom_8_qubits",
+   "realamprandom",
+   "replace",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.033,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "preflight_cases/RT40_19",
+   "grover-noancilla_6_qubits",
+   "grover-noancilla",
+   "insert",
+   "middle",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0353,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_019",
+   "portfolioqaoa_10_qubits",
+   "portfolioqaoa",
+   "replace",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0355,
+   "11",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_304",
+   "portfolioqaoa_10_qubits",
+   "portfolioqaoa",
+   "replace",
+   "early",
+   false,
+   "Z-product w2 adjacent",
+   0.0371,
+   "11",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_290",
+   "portfolioqaoa_4_qubits",
+   "portfolioqaoa",
+   "replace",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0379,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_395",
+   "ae_8_qubits",
+   "ae",
+   "replace",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.042,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_391",
+   "ae_6_qubits",
+   "ae",
+   "replace",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0437,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "sbs_cases/SBS_118",
+   "twolocalrandom_5_qubits",
+   "twolocalrandom",
+   "delete",
+   "middle",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0439,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_380",
+   "ae_3_qubits",
+   "ae",
+   "insert",
+   "middle",
+   false,
+   "Z-product w2 adjacent",
+   0.0441,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_027",
+   "portfolioqaoa_6_qubits",
+   "portfolioqaoa",
+   "insert",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0445,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_355",
+   "qftentangled_9_qubits",
+   "qftentangled",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0454,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_050",
+   "portfoliovqe_8_qubits",
+   "portfoliovqe",
+   "insert",
+   "early",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0469,
+   "12",
+   "1",
+   "Unresolved",
+   "OB02;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_298",
+   "portfolioqaoa_8_qubits",
+   "portfolioqaoa",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0483,
+   "11",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "corpus",
+   "qra_cases/QRA_375",
+   "realamprandom_6_qubits",
+   "realamprandom",
+   "delete",
+   "late",
+   false,
+   "Z-product w2 adjacent",
+   0.0484,
+   "",
+   "",
+   "Unresolved",
+   "OB03;OB13;OB15"
+  ],
+  [
+   "corpus",
+   "qra_cases_v1_1/QRA_357",
+   "qaoa_3_qubits",
+   "qaoa",
+   "replace",
+   "middle",
+   false,
+   "entropy",
+   0.0493,
+   "12",
+   "0",
+   "CL4",
+   ""
+  ],
+  [
+   "width set",
+   "SBS_061",
+   "portfoliovqe_12_qubits",
+   "portfoliovqe",
+   "replace",
+   "late",
+   false,
+   "Z-product w2 non-adjacent",
+   0.0083,
+   "6",
+   "0",
+   "Unresolved",
+   "OB13"
+  ],
+  [
+   "width set",
+   "SBS_081",
+   "realamprandom_11_qubits",
+   "realamprandom",
+   "delete",
+   "early",
+   false,
+   "hellinger",
+   0.0274,
+   "12",
+   "3",
+   "Unresolved",
+   "OB02;OB13"
+  ]
+ ],
+ "ob13_by_margin": {
+  "(0,0.01)": {
+   "12/12": 2,
+   "<12": 13,
+   "runs": 15
+  },
+  ">=0.45": {
+   "12/12": 178,
+   "<12": 0,
+   "runs": 178
+  },
+  "[0.01,0.05)": {
+   "12/12": 18,
+   "<12": 17,
+   "runs": 35
+  },
+  "[0.05,0.10)": {
+   "12/12": 18,
+   "<12": 1,
+   "runs": 19
+  },
+  "[0.10,0.45)": {
+   "12/12": 34,
+   "<12": 0,
+   "runs": 34
+  }
+ },
+ "operator_x_outcome": {
+  "20 circuits (599)": {
+   "Unresolved": {
+    "delete": 1,
+    "replace": 1
+   },
+   "below-tolerance difference": {
+    "replace": 1
+   },
+   "contract equivalence": {
+    "delete": 9,
+    "insert": 74,
+    "replace": 10
+   },
+   "executed-input equality": {
+    "delete": 19,
+    "insert": 52,
+    "replace": 16
+   },
+   "killed": {
+    "delete": 92,
+    "insert": 99,
+    "replace": 111
+   },
+   "observation limitation": {
+    "insert": 25,
+    "replace": 10
+   },
+   "suite omission": {
+    "delete": 13,
+    "insert": 32,
+    "replace": 34
+   }
+  },
+  "20 circuits: additional (149)": {
+   "contract equivalence": {
+    "insert": 32,
+    "replace": 1
+   },
+   "executed-input equality": {
+    "insert": 44,
+    "replace": 4
+   },
+   "killed": {
+    "insert": 36,
+    "replace": 11
+   },
+   "suite omission": {
+    "insert": 11,
+    "replace": 10
+   }
+  },
+  "20 circuits: development (450)": {
+   "Unresolved": {
+    "delete": 1,
+    "replace": 1
+   },
+   "below-tolerance difference": {
+    "replace": 1
+   },
+   "contract equivalence": {
+    "delete": 9,
+    "insert": 42,
+    "replace": 9
+   },
+   "executed-input equality": {
+    "delete": 19,
+    "insert": 8,
+    "replace": 12
+   },
+   "killed": {
+    "delete": 92,
+    "insert": 63,
+    "replace": 100
+   },
+   "observation limitation": {
+    "insert": 25,
+    "replace": 10
+   },
+   "suite omission": {
+    "delete": 13,
+    "insert": 21,
+    "replace": 24
+   }
+  },
+  "MQT Bench (120)": {
+   "Unresolved": {
+    "delete": 1,
+    "replace": 2
+   },
+   "contract equivalence": {
+    "delete": 3,
+    "insert": 6,
+    "replace": 5
+   },
+   "executed-input equality": {
+    "delete": 2,
+    "insert": 6,
+    "replace": 2
+   },
+   "killed": {
+    "delete": 5,
+    "insert": 9,
+    "replace": 50
+   },
+   "observation limitation": {
+    "delete": 1,
+    "insert": 6
+   },
+   "suite omission": {
+    "delete": 3,
+    "insert": 2,
+    "replace": 17
+   }
+  },
+  "corpus <=14 qubits (1537)": {
+   "Unresolved": {
+    "delete": 31,
+    "insert": 30,
+    "replace": 37
+   },
+   "below-tolerance difference": {
+    "delete": 4,
+    "insert": 3,
+    "replace": 6
+   },
+   "contract equivalence": {
+    "delete": 13,
+    "insert": 136,
+    "replace": 9
+   },
+   "killed": {
+    "delete": 383,
+    "insert": 228,
+    "replace": 364
+   },
+   "observation limitation": {
+    "delete": 21,
+    "insert": 99,
+    "replace": 30
+   },
+   "suite omission": {
+    "delete": 38,
+    "insert": 57,
+    "replace": 48
+   }
+  },
+  "external (270)": {
+   "Unresolved": {
+    "insert": 2
+   },
+   "contract equivalence": {
+    "insert": 27,
+    "replace": 1
+   },
+   "executed-input equality": {
+    "delete": 2,
+    "insert": 81,
+    "replace": 11
+   },
+   "killed": {
+    "insert": 75,
+    "replace": 36
+   },
+   "observation limitation": {
+    "insert": 14,
+    "replace": 16
+   },
+   "suite omission": {
+    "insert": 4,
+    "replace": 1
+   }
+  },
+  "width set (162 listed)": {
+   "Unresolved": {
+    "delete": 2,
+    "replace": 2
+   },
+   "below-tolerance difference": {
+    "delete": 1
+   },
+   "contract equivalence": {
+    "delete": 4,
+    "insert": 15
+   },
+   "killed": {
+    "delete": 42,
+    "insert": 20,
+    "replace": 34
+   },
+   "not executed": {
+    "delete": 1,
+    "insert": 7,
+    "replace": 11
+   },
+   "observation limitation": {
+    "delete": 2,
+    "insert": 12,
+    "replace": 3
+   },
+   "suite omission": {
+    "insert": 4,
+    "replace": 2
+   }
+  }
+ },
+ "position_x_outcome": {
+  "20 circuits (599)": {
+   "Unresolved": {
+    "early (not first)": 1,
+    "middle (not first)": 1
+   },
+   "below-tolerance difference": {
+    "late (not first)": 1
+   },
+   "contract equivalence": {
+    "early (not first)": 14,
+    "first gate": 44,
+    "late (not first)": 15,
+    "middle (not first)": 20
+   },
+   "executed-input equality": {
+    "early (not first)": 17,
+    "first gate": 45,
+    "late (not first)": 9,
+    "middle (not first)": 16
+   },
+   "killed": {
+    "early (not first)": 74,
+    "first gate": 69,
+    "late (not first)": 81,
+    "middle (not first)": 78
+   },
+   "observation limitation": {
+    "early (not first)": 6,
+    "first gate": 1,
+    "late (not first)": 23,
+    "middle (not first)": 5
+   },
+   "suite omission": {
+    "early (not first)": 16,
+    "first gate": 23,
+    "late (not first)": 19,
+    "middle (not first)": 21
+   }
+  },
+  "20 circuits: additional (149)": {
+   "contract equivalence": {
+    "first gate": 33
+   },
+   "executed-input equality": {
+    "early (not first)": 3,
+    "first gate": 45
+   },
+   "killed": {
+    "first gate": 41,
+    "middle (not first)": 6
+   },
+   "suite omission": {
+    "first gate": 21
+   }
+  },
+  "20 circuits: development (450)": {
+   "Unresolved": {
+    "early (not first)": 1,
+    "middle (not first)": 1
+   },
+   "below-tolerance difference": {
+    "late (not first)": 1
+   },
+   "contract equivalence": {
+    "early (not first)": 14,
+    "first gate": 11,
+    "late (not first)": 15,
+    "middle (not first)": 20
+   },
+   "executed-input equality": {
+    "early (not first)": 14,
+    "late (not first)": 9,
+    "middle (not first)": 16
+   },
+   "killed": {
+    "early (not first)": 74,
+    "first gate": 28,
+    "late (not first)": 81,
+    "middle (not first)": 72
+   },
+   "observation limitation": {
+    "early (not first)": 6,
+    "first gate": 1,
+    "late (not first)": 23,
+    "middle (not first)": 5
+   },
+   "suite omission": {
+    "early (not first)": 16,
+    "first gate": 2,
+    "late (not first)": 19,
+    "middle (not first)": 21
+   }
+  },
+  "MQT Bench (120)": {
+   "Unresolved": {
+    "early (not first)": 3
+   },
+   "contract equivalence": {
+    "early (not first)": 4,
+    "first gate": 8,
+    "middle (not first)": 2
+   },
+   "executed-input equality": {
+    "early (not first)": 1,
+    "first gate": 8,
+    "middle (not first)": 1
+   },
+   "killed": {
+    "early (not first)": 27,
+    "first gate": 27,
+    "middle (not first)": 10
+   },
+   "observation limitation": {
+    "first gate": 6,
+    "middle (not first)": 1
+   },
+   "suite omission": {
+    "first gate": 19,
+    "middle (not first)": 3
+   }
+  },
+  "corpus <=14 qubits (1537)": {
+   "Unresolved": {
+    "early (not first)": 38,
+    "first gate": 4,
+    "late (not first)": 26,
+    "middle (not first)": 30
+   },
+   "below-tolerance difference": {
+    "early (not first)": 6,
+    "first gate": 1,
+    "late (not first)": 3,
+    "middle (not first)": 3
+   },
+   "contract equivalence": {
+    "early (not first)": 58,
+    "first gate": 17,
+    "late (not first)": 55,
+    "middle (not first)": 28
+   },
+   "killed": {
+    "early (not first)": 339,
+    "first gate": 159,
+    "late (not first)": 234,
+    "middle (not first)": 243
+   },
+   "observation limitation": {
+    "early (not first)": 23,
+    "first gate": 9,
+    "late (not first)": 93,
+    "middle (not first)": 25
+   },
+   "suite omission": {
+    "early (not first)": 48,
+    "first gate": 3,
+    "late (not first)": 60,
+    "middle (not first)": 32
+   }
+  },
+  "external (270)": {
+   "Unresolved": {
+    "first gate": 2
+   },
+   "contract equivalence": {
+    "first gate": 28
+   },
+   "executed-input equality": {
+    "early (not first)": 2,
+    "first gate": 87,
+    "late (not first)": 5
+   },
+   "killed": {
+    "early (not first)": 4,
+    "first gate": 93,
+    "late (not first)": 14
+   },
+   "observation limitation": {
+    "first gate": 30
+   },
+   "suite omission": {
+    "early (not first)": 1,
+    "first gate": 4
+   }
+  },
+  "width set (162 listed)": {
+   "Unresolved": {
+    "early (not first)": 2,
+    "late (not first)": 1,
+    "middle (not first)": 1
+   },
+   "below-tolerance difference": {
+    "early (not first)": 1
+   },
+   "contract equivalence": {
+    "early (not first)": 6,
+    "first gate": 3,
+    "late (not first)": 8,
+    "middle (not first)": 2
+   },
+   "killed": {
+    "early (not first)": 49,
+    "first gate": 9,
+    "late (not first)": 22,
+    "middle (not first)": 16
+   },
+   "not executed": {
+    "early (not first)": 7,
+    "first gate": 2,
+    "late (not first)": 7,
+    "middle (not first)": 3
+   },
+   "observation limitation": {
+    "early (not first)": 4,
+    "late (not first)": 11,
+    "middle (not first)": 2
+   },
+   "suite omission": {
+    "late (not first)": 5,
+    "middle (not first)": 1
+   }
+  }
+ },
+ "primary_ol_entailed_x_pos": {
+  "contingent": {
+   "early (not first)": 6,
+   "first gate": 1,
+   "late (not first)": 15,
+   "middle (not first)": 5
+  },
+  "entailed (sufficient condition)": {
+   "late (not first)": 8
+  }
+ },
+ "primary_ol_terminal": {
+  "not terminal": 26,
+  "terminal": 9
+ },
+ "theta": 0.05,
+ "width set (162 listed)": {
+  "candidate": {
+   "-": 2,
+   "CL1": 19,
+   "CL3": 17,
+   "CL4": 8,
+   "CL5": 1
+  },
+  "contract": {
+   "C_FIXED_INPUT_STATE": 162
+  },
+  "executed": 143,
+  "executed_inputs": {
+   "|0...0>": 162
+  },
+  "families": 13,
+  "families_list": {
+   "ghz": 35,
+   "graphstate": 4,
+   "portfolioqaoa": 3,
+   "portfoliovqe": 1,
+   "qft": 34,
+   "qftentangled": 1,
+   "qpeexact": 25,
+   "qpeinexact": 40,
+   "realamprandom": 5,
+   "su2random": 3,
+   "twolocalrandom": 4,
+   "vqe": 4,
+   "wstate": 3
+  },
+  "first_gate": 14,
+  "gate_class": {
+   "entangling_controlled": 47,
+   "identity": 10,
+   "local_basis_amplitude": 46,
+   "multi-gate block": 27,
+   "phase_parameterized": 32
+  },
+  "operator": {
+   "delete": 52,
+   "insert": 58,
+   "replace": 52
+  },
+  "pairs": 162,
+  "programs": 36,
+  "report": {
+   "CL1": 19,
+   "CL3": 17,
+   "CL4": 6,
+   "CL5": 1,
+   "NA_KILLED": 96,
+   "Unresolved": 4
+  },
+  "reported_outcomes": 43,
+  "sites_program_anchor": 119,
+  "sites_program_kind_anchor": 128,
+  "status": {
+   "killed": 96,
+   "not executed": 19,
+   "split verdict": 1,
+   "stable survivor": 46
+  },
+  "survive_ge1_run": 47,
+  "third": {
+   "early": 83,
+   "late": 54,
+   "middle": 25
+  },
+  "unresolved_reasons": {
+   "CL4 candidate, unmet OB02;OB13": 1,
+   "CL4 candidate, unmet OB13": 1,
+   "split verdict (predicted kill)": 1,
+   "undecided margin R_O": 1
+  }
+ },
+ "width_vs_corpus_reports": {
+  "CL1|CL1": 19,
+  "CL3|CL3": 17,
+  "CL4|CL4": 5,
+  "CL4|NA_KILLED": 1,
+  "CL5|CL5": 1,
+  "NA_KILLED|NA_KILLED": 96,
+  "Unresolved|Unresolved": 4,
+  "not executed|CL1": 4,
+  "not executed|CL3": 1,
+  "not executed|CL4": 1,
+  "not executed|NA_KILLED": 11,
+  "not executed|Unresolved": 2
+ },
+ "witness_in_combined": {
+  "20 circuits (599)": {
+   "yes": 79
+  },
+  "20 circuits: additional (149)": {
+   "yes": 21
+  },
+  "20 circuits: development (450)": {
+   "yes": 58
+  },
+  "MQT Bench (120)": {
+   "no/unknown": 9,
+   "yes": 13
+  },
+  "corpus <=14 qubits (1537)": {
+   "no/unknown": 15,
+   "yes": 128
+  },
+  "external (270)": {
+   "no/unknown": 5
+  },
+  "width set (162 listed)": {
+   "yes": 6
+  }
+ }
+}

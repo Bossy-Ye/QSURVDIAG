@@ -1,0 +1,271 @@
+{
+ "QUTest": {
+  "root": "${QSD_ROOT}/.venv-qutest-audit/lib/python3.12/site-packages/qutest",
+  "py_files": 25,
+  "sha256": "6a61d2bc941d469958ff5cafaf2689b66764290c05d6a4ea10773059ad0ad02b",
+  "negative_searches": {
+   "entry_points": 0,
+   "pkg_resources": 0,
+   "importlib\\.metadata": 0,
+   "\\bplugin\\b": 0,
+   "abstractmethod": 0,
+   "__init_subclass__": 0,
+   "\\beval\\(": 0,
+   "\\bexec\\(": 0
+  },
+  "pragma_kinds_total": 18,
+  "expect_kinds": [
+   "EXPECT_GATESET",
+   "EXPECT_DEPTH",
+   "EXPECT_OUTPUT",
+   "EXPECT_DISTRIBUTION",
+   "EXPECT_DISTRIBUTION_REF",
+   "EXPECT_MARGINAL",
+   "EXPECT_OBSERVABLE",
+   "EXPECT_ENTROPY",
+   "EXPECT_CORRELATION",
+   "EXPECT_PROBABILITY",
+   "EXPECT_FIDELITY",
+   "EXPECT_ENTANGLED",
+   "EXPECT_MOST_FREQUENT"
+  ],
+  "expect_kind_count": 13,
+  "dispatched_to_an_evaluator": [
+   "EXPECT_CORRELATION",
+   "EXPECT_DEPTH",
+   "EXPECT_DISTRIBUTION",
+   "EXPECT_DISTRIBUTION_REF",
+   "EXPECT_ENTANGLED",
+   "EXPECT_ENTROPY",
+   "EXPECT_FIDELITY",
+   "EXPECT_GATESET",
+   "EXPECT_MARGINAL",
+   "EXPECT_MOST_FREQUENT",
+   "EXPECT_OBSERVABLE",
+   "EXPECT_OUTPUT",
+   "EXPECT_PROBABILITY"
+  ],
+  "dispatched_count": 13,
+  "parsed_expect_kinds": [
+   "EXPECT_CORRELATION",
+   "EXPECT_DEPTH",
+   "EXPECT_DISTRIBUTION",
+   "EXPECT_DISTRIBUTION_REF",
+   "EXPECT_ENTANGLED",
+   "EXPECT_ENTROPY",
+   "EXPECT_FIDELITY",
+   "EXPECT_GATESET",
+   "EXPECT_MARGINAL",
+   "EXPECT_MOST_FREQUENT",
+   "EXPECT_OBSERVABLE",
+   "EXPECT_OUTPUT",
+   "EXPECT_PROBABILITY"
+  ],
+  "parsed_count": 13,
+  "unrecognized_raises": 2,
+  "entry_point_groups": [
+   "console_scripts"
+  ],
+  "assertion_modules": [
+   "__init__",
+   "base",
+   "correlation",
+   "distribution",
+   "entanglement",
+   "entropy",
+   "fidelity",
+   "marginal",
+   "most_frequent",
+   "observable",
+   "output",
+   "probability",
+   "structural"
+  ],
+  "evaluator_inputs": {
+   "EXPECT_CORRELATION": "pragma, counts)",
+   "EXPECT_DEPTH": "pragma, transpiled)",
+   "EXPECT_DISTRIBUTION": "pragma, counts, ref_distribution",
+   "EXPECT_DISTRIBUTION_REF": "?",
+   "EXPECT_ENTANGLED": "pragma, statevector, num_qubits",
+   "EXPECT_ENTROPY": "pragma, counts)",
+   "EXPECT_FIDELITY": "pragma, counts, ideal_counts)",
+   "EXPECT_GATESET": "pragma, transpiled)",
+   "EXPECT_MARGINAL": "pragma, counts)",
+   "EXPECT_MOST_FREQUENT": "pragma, counts)",
+   "EXPECT_OBSERVABLE": "pragma, counts)",
+   "EXPECT_OUTPUT": "pragma, counts)",
+   "EXPECT_PROBABILITY": "pragma, counts)"
+  },
+  "assertion_producing_kinds": [
+   "EXPECT_CORRELATION",
+   "EXPECT_DEPTH",
+   "EXPECT_DISTRIBUTION",
+   "EXPECT_ENTANGLED",
+   "EXPECT_ENTROPY",
+   "EXPECT_FIDELITY",
+   "EXPECT_GATESET",
+   "EXPECT_MARGINAL",
+   "EXPECT_MOST_FREQUENT",
+   "EXPECT_OBSERVABLE",
+   "EXPECT_OUTPUT",
+   "EXPECT_PROBABILITY"
+  ],
+  "counts_only_kinds": [
+   "EXPECT_CORRELATION",
+   "EXPECT_DISTRIBUTION",
+   "EXPECT_ENTROPY",
+   "EXPECT_MARGINAL",
+   "EXPECT_MOST_FREQUENT",
+   "EXPECT_OBSERVABLE",
+   "EXPECT_OUTPUT",
+   "EXPECT_PROBABILITY"
+  ],
+  "structural_kinds": [
+   "EXPECT_DEPTH",
+   "EXPECT_GATESET"
+  ],
+  "state_reading_kinds": [
+   "EXPECT_ENTANGLED"
+  ],
+  "second_execution_kinds": [
+   "EXPECT_FIDELITY"
+  ]
+ },
+ "QuCheck": {
+  "root": "${QSD_ROOT}/.venv-qucheck-002/lib/python3.12/site-packages/qucheck",
+  "py_files": 32,
+  "sha256": "069d2663382fd6dd6fa54ed8ca24c2aad60a69fb666ec945ebc4c1b469776ab5",
+  "negative_searches": {
+   "entry_points": 0,
+   "pkg_resources": 0,
+   "importlib\\.metadata": 0,
+   "\\bplugin\\b": 0,
+   "abstractmethod": 11,
+   "__init_subclass__": 0,
+   "\\beval\\(": 0,
+   "\\bexec\\(": 0
+  },
+  "assertion_constructors": [
+   "assert_different",
+   "assert_entangled",
+   "assert_equal",
+   "assert_most_frequent",
+   "assert_probability",
+   "assert_separable"
+  ],
+  "constructor_count": 6,
+  "abstract_base_classes": [
+   "Assertion(ABC)",
+   "Assertion",
+   "StatisticalAssertion",
+   "StandardAssertion"
+  ],
+  "property_is_abc": true,
+  "subclass_gate": true,
+  "default_bases": [
+   "[\"x\", \"y\", \"z\"]",
+   "[\"z\"]"
+  ],
+  "decision_rule": "holm_bonferroni_correction",
+  "family_wise_alpha_default": "0.05",
+  "n_measurements_default": "2000",
+  "per_qubit_basis_circuit": true,
+  "fisher_exact_used": 2
+ },
+ "Muskit": {
+  "root": "${QSD_ROOT}/e3_tools/muskit_src/Muskit-0.0.3/src/Muskit",
+  "py_files": 8,
+  "sha256": "e7291eae48b189bf7324534ebc927b9f82619ecb0cc8a0290bf7ecbfd32dbd98",
+  "negative_searches": {
+   "entry_points": 0,
+   "pkg_resources": 0,
+   "importlib\\.metadata": 0,
+   "\\bplugin\\b": 0,
+   "abstractmethod": 0,
+   "__init_subclass__": 0,
+   "\\beval\\(": 0,
+   "\\bexec\\(": 0
+  },
+  "modules": [
+   "ComandMain.py",
+   "QuantumGates.py",
+   "__init__.py",
+   "executorConfig.py",
+   "functionalities.py",
+   "generatorConfig.py",
+   "graphicMain.py",
+   "testCases.py"
+  ],
+  "top_level_functions": [
+   "createMutants",
+   "createInputs",
+   "executeMutants",
+   "add",
+   "replace",
+   "remove",
+   "getInfo"
+  ],
+  "oracle_negative_searches": {
+   "assert": 0,
+   "expect": 0,
+   "oracle": 0,
+   "verdict": 0,
+   "kill": 0,
+   "surviv": 0,
+   "detect": 0,
+   "compare": 0,
+   "equal": 0,
+   "passed": 0,
+   "failed": 0,
+   "threshold": 0,
+   "toleran": 0
+  },
+  "measures_every_qubit": true,
+  "writes_counts_to": "results.txt",
+  "backend": "qasm_simulator",
+  "getinfo_parser_tokens": [
+   "QuantumRegister(",
+   "QuantumCircuit(",
+   "ClassicalRegister("
+  ]
+ },
+ "QMutPy": {
+  "root": "${QSD_ROOT}/e3_tools/qmutpy_src/mutpy",
+  "py_files": 32,
+  "sha256": "2fa38a8b42d236e09e89a8a1f7058aeb040e8b9809be9c8d7bea690fe9e1f594",
+  "negative_searches": {
+   "entry_points": 0,
+   "pkg_resources": 0,
+   "importlib\\.metadata": 0,
+   "\\bplugin\\b": 0,
+   "abstractmethod": 7,
+   "__init_subclass__": 0,
+   "\\beval\\(": 1,
+   "\\bexec\\(": 3
+  },
+  "commit": "13ab3845b26a18510bf3e0bddd529187f0b86b71",
+  "quantum_operator_classes": [
+   "QuantumGateDeletion",
+   "QuantumGateInsertion",
+   "QuantumGateReplacement",
+   "QuantumMeasurementDeletion",
+   "QuantumMeasurementInsertion"
+  ],
+  "test_runners": [
+   "__init__.py",
+   "base.py",
+   "pytest_runner.py",
+   "unittest_runner.py"
+  ],
+  "verdict_predicate": "self.was_successful()",
+  "mutant_origin": "create_mutant_module(target_module, mutant_ast)",
+  "external_pair_api_hits": 0
+ },
+ "pytest": {
+  "root": "${QSD_ROOT}/.venv-qutest-audit/lib/python3.12/site-packages/_pytest",
+  "installed_version_in_audit_env": "9.1.1",
+  "assert_rewriting": true,
+  "plugin_entry_point_group": "pytest11",
+  "note": "boundary control; the recovered fields are properties of the Python expression grammar and of the object the test can reach, not of the pytest release"
+ }
+}

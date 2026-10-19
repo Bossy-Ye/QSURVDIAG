@@ -1,0 +1,88 @@
+{
+  "record_id": "EXTERNAL_COHORT_RUN_002",
+  "statement": "Clean execution and diagnosis of the frozen prospective external cohort. Run 001 was voided (VOID_RUN_001/) for a QUTest gate-vocabulary incompatibility and its case-level outputs were not consulted during Run 002.",
+  "freeze_references": {
+    "EXTERNAL_COHORT_FREEZE.json": "a9aac1084d70010c4a00feb5e46e0914e5a783297bef7c7fcd3ed62a5bc16562",
+    "EXTERNAL_COHORT_FREEZE_v2.json": "8a1dc4edff613c5dd7bd8f0637829b152723ba7e681e7e3a74f437acd5ba39f7",
+    "EXTERNAL_COHORT_FREEZE_v3.json": "9ead4c41e7ec51d0c82d58ac49bc6804a7747a4bd1c2c9e56e1d32fc870ef32c",
+    "EXTERNAL_COHORT_FREEZE_v4.json": "9ba8ff4c03b767be76a3b08105ed090d247d6a829d8aa8d90957d5fbbcf16f51"
+  },
+  "population_integrity": {
+    "mutants": 270,
+    "definition_sha256_reproduced_from_qasm_bytes": "270/270 via rq3_feasibility_gate.core.representation.canon_json",
+    "n_qubits_matches_manifest": "270/270",
+    "gate_count_matches_manifest": "270/270",
+    "git_tracked": 270,
+    "git_modified_since_materialization": 0,
+    "materialization_commit": "0090484"
+  },
+  "guards": {
+    "subjects": 9,
+    "valid": 9,
+    "false_fails": 0,
+    "unsupported_reps": 0,
+    "adapter_applied": [
+      "Is2PowerPhase",
+      "IsingEvolution"
+    ]
+  },
+  "native_census": {
+    "KILLED": 111,
+    "SURVIVED": 157,
+    "SPLIT": 2,
+    "UNSUPPORTED": 0,
+    "ERROR": 0,
+    "total": 270
+  },
+  "diagnosis": {
+    "NA_KILLED": 111,
+    "CL1": 28,
+    "CL2": 94,
+    "CL3": 30,
+    "CL4": 5,
+    "CL5": 0,
+    "Unresolved": 2
+  },
+  "consistency": {
+    "R_T_vs_native": "157 R_T=FALSE -> SURVIVED; 113 R_T=TRUE -> KILLED(111)+SPLIT(2); 0 disagreements",
+    "zero_endpoint_partition": "152 with max_universe_d_a <= 1e-9 = CL1(28)+CL2(94)+CL3(30); 118 above theta = KILLED(111)+CL4(5)+Unresolved(2)",
+    "diagnosed_denominator": "159 non-KILLED = sum of CL1..CL5 + Unresolved",
+    "regeneration": "diag re-run from the frozen L2 ledger reproduced L3/L4/L5 byte-identically",
+    "L2_unchanged_by_diagnosis": true,
+    "seed_reproducibility": "independent re-execution of the native stage into a separate directory reproduced all 270 native verdicts, all 270 kill counts, and all 3240 per-repetition seeds and verdicts exactly; outcome digest 3b44d68e7937b40a48ed07ea15bb9531e289333d3e243f7f11c1a4c89f13eee2 matches"
+  },
+  "technical_failures": [
+    {
+      "id": "R002-F1",
+      "stage": "diag / ledger serialization",
+      "description": "csv.DictWriter fieldnames were taken from the first row only. KILLED rows carry an empty evidence dict, so when a KILLED row led the evidence ledger the OB01-OB19 columns were absent and later rows raised ValueError. L4_EVIDENCE.csv was written truncated and L5_CERTIFICATES.csv was never written.",
+      "scope": "write-serialization only; no relation, evidence or certificate value was affected",
+      "fix": "fieldnames computed as the union of all row keys, restval=''",
+      "resolution": "diag re-run from the unchanged frozen L2 ledger; all three ledgers written at 270 rows and byte-identical across two successive runs",
+      "outcomes_inspected_before_fix": "none - the certificates ledger did not exist"
+    },
+    {
+      "id": "R002-F2",
+      "stage": "ledger serialization / version control",
+      "description": "The ledgers were first written with the csv module's default CRLF terminator. Under this repository's core.autocrlf=input the committed blobs are LF-normalized, so the recorded working-copy hashes would not reproduce from a fresh clone.",
+      "scope": "line terminators only; no field value was affected",
+      "fix": "runner writes lineterminator='\\n'; diag re-run from the unchanged frozen L2 ledger",
+      "resolution": "regenerated ledgers are byte-identical to the CRLF versions after line-ending normalization, and their recorded hashes now equal the committed blob hashes"
+    },
+    {
+      "id": "R002-F3",
+      "stage": "native execution ledger",
+      "description": "L2_NATIVE.jsonl stores QUTest's raw per-repetition output string, which embeds elapsed wall-clock time. The whole-file sha256 therefore does not reproduce across runs even though every outcome does.",
+      "scope": "the timing substring of the 'detail' field only; 2039 of 3240 repetition records differ in that substring and in nothing else",
+      "fix": "the executed ledger is left exactly as recorded; a timing-independent outcome digest over all outcome-bearing fields is recorded in L2_OUTCOME_DIGEST.txt",
+      "resolution": "outcome digest matches between two independent executions"
+    }
+  ],
+  "note_on_CL5": "CL5 requires eps_num < max_universe_d_a <= theta. The cohort's endpoint differences are bimodal: 152 cases at <= 2.554e-15 and 118 at >= 0.5, with no case in between. The CL5 band is empty by the structure of these circuits, not by a missing measurement.",
+  "runner": {
+    "file": "run002_runner.py",
+    "sha256": "9f79cccbef395a954480e4949a11b02db65fdc8362d4e3a67b79ec7366b539d8",
+    "invocation": "must be run with the study tree confirmatory/ as cwd and on PYTHONPATH; archived here, not left in the read-only study tree",
+    "note": "Ledgers are written with LF line terminators so the recorded hashes survive a git clone under core.autocrlf=input."
+  }
+}

@@ -1,0 +1,162 @@
+{
+ "v1_universe_rows_reproduced_mismatches": 0,
+ "v1_witness_surface": {
+  "covered": 7992,
+  "decisions": 10782
+ },
+ "kill_decision": {
+  "stable_cells": 4198,
+  "covered_c1": 3648,
+  "covered_c_ref": 3200,
+  "covered_c2": 3128,
+  "disagreements_inside_c1": 0,
+  "disagreements_inside_c_ref": 0,
+  "disagreements_outside_c1": 71,
+  "gained_at_500_c_ref_vs_c2": 79,
+  "lost_at_8000_c_ref_vs_c2": 7,
+  "lost_cells_disagreeing": 0
+ },
+ "witness_surface_v2": {
+  "pairs": 599,
+  "decisions": 10782,
+  "covered_c1": 8211,
+  "covered_c2": 7451,
+  "reference_schedule_c1": 503,
+  "reference_schedule_c2": 322,
+  "by_schedule_c1": {
+   "0.01|500": 322,
+   "0.01|2000": 355,
+   "0.01|8000": 373,
+   "0.025|500": 320,
+   "0.025|2000": 354,
+   "0.025|8000": 524,
+   "0.05|500": 320,
+   "0.05|2000": 503,
+   "0.05|8000": 541,
+   "0.1|500": 471,
+   "0.1|2000": 524,
+   "0.1|8000": 542,
+   "0.25|500": 502,
+   "0.25|2000": 515,
+   "0.25|8000": 547,
+   "0.5|500": 490,
+   "0.5|2000": 502,
+   "0.5|8000": 506
+  },
+  "by_schedule_c2": {
+   "0.01|500": 318,
+   "0.01|2000": 335,
+   "0.01|8000": 360,
+   "0.025|500": 313,
+   "0.025|2000": 328,
+   "0.025|8000": 357,
+   "0.05|500": 309,
+   "0.05|2000": 322,
+   "0.05|8000": 501,
+   "0.1|500": 314,
+   "0.1|2000": 482,
+   "0.1|8000": 509,
+   "0.25|500": 496,
+   "0.25|2000": 508,
+   "0.25|8000": 515,
+   "0.5|500": 487,
+   "0.5|2000": 496,
+   "0.5|8000": 501
+  },
+  "by_decisive_kind_c1": {
+   "zmask": {
+    "covered": 5056,
+    "decisions": 5571
+   },
+   "marginal": {
+    "covered": 2961,
+    "decisions": 3891
+   },
+   "hellinger": {
+    "covered": 0,
+    "decisions": 360
+   },
+   "entropy": {
+    "covered": 126,
+    "decisions": 729
+   },
+   "prob": {
+    "covered": 62,
+    "decisions": 183
+   },
+   "tvd": {
+    "covered": 6,
+    "decisions": 18
+   },
+   "kl": {
+    "covered": 0,
+    "decisions": 30
+   }
+  },
+  "decisive_kind_by_pair_theta": {
+   "zmask": 1857,
+   "marginal": 1297,
+   "hellinger": 120,
+   "entropy": 243,
+   "prob": 61,
+   "tvd": 6,
+   "kl": 10
+  },
+  "distribution_row_N2000": [
+   {
+    "pair": "dj_3#e18",
+    "n": 3,
+    "theta": 0.5,
+    "d": 0.9999999999999992,
+    "delta": 0.4999999999999992,
+    "covered": true,
+    "floor_N": 7.000000000000022
+   },
+   {
+    "pair": "grover_5#e00",
+    "n": 5,
+    "theta": 0.25,
+    "d": 0.3782804851251549,
+    "delta": 0.12828048512515489,
+    "covered": true,
+    "floor_N": 470.95619627800625
+   },
+   {
+    "pair": "grover_5#e14",
+    "n": 5,
+    "theta": 0.5,
+    "d": 0.5326804581392192,
+    "delta": 0.03268045813921916,
+    "covered": false,
+    "floor_N": 7256.470435164438
+   },
+   {
+    "pair": "grover_5#e17",
+    "n": 5,
+    "theta": 0.5,
+    "d": 0.5546874999990109,
+    "delta": 0.0546874999990109,
+    "covered": false,
+    "floor_N": 2591.346938869246
+   },
+   {
+    "pair": "grover_5#e18",
+    "n": 5,
+    "theta": 0.5,
+    "d": 0.5078124999986111,
+    "delta": 0.007812499998611111,
+    "covered": false,
+    "floor_N": 126976.00004514703
+   },
+   {
+    "pair": "grover_5#e21",
+    "n": 5,
+    "theta": 0.25,
+    "d": 0.27048429663577267,
+    "delta": 0.02048429663577267,
+    "covered": false,
+    "floor_N": 18469.68930886064
+   }
+  ]
+ }
+}

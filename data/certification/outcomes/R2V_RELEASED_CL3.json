@@ -1,0 +1,8 @@
+{
+ "state_margin": 0.061208719054814065,
+ "obs_margin": 5.551115123125783e-17,
+ "density_matrix_gap": 0.2397127693021014,
+ "worst_amplitude_difference": 0.24740395925452288,
+ "state_decision": "false",
+ "obs_decision": "true"
+}

@@ -1,0 +1,25 @@
+{
+ "cl3_cases": 25,
+ "suites": [
+  "S_FAMILY",
+  "S_BOTH",
+  "S_COVER"
+ ],
+ "N": 8000,
+ "R": 12,
+ "reference": "exact analytic",
+ "by_suite": {
+  "S_FAMILY": {
+   "evaluable": 25,
+   "killed": 0
+  },
+  "S_BOTH": {
+   "evaluable": 25,
+   "killed": 0
+  },
+  "S_COVER": {
+   "evaluable": 25,
+   "killed": 0
+  }
+ }
+}

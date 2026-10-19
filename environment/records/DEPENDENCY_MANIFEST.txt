@@ -1,0 +1,22 @@
+antlr4-python3-runtime==4.13.2
+click==8.4.2
+dill==0.4.1
+iniconfig==2.3.0
+numpy==2.5.1
+openqasm3==1.0.1
+packaging==26.2
+pluggy==1.6.0
+psutil==7.2.2
+Pygments==2.20.0
+pytest==9.1.1
+python-dateutil==2.9.0.post0
+PyYAML==6.0.3
+qiskit==2.5.0
+qiskit-aer==0.17.2
+qiskit-qasm3-import==0.6.0
+qutest @ qutest@0.1.0 (see env/README-equivalent entry in MANIFEST.csv)
+rustworkx==0.18.0
+scipy==1.18.0
+six==1.17.0
+stevedore==5.9.0
+typing_extensions==4.16.0

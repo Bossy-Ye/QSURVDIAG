@@ -1,0 +1,192 @@
+# QuCheck 0.0.2 certifiability profiles. Frozen at Phase 5A, AMENDED at Phase 5A.1.
+#
+# PHASE 5A.1 AMENDMENT (§2 assertion-instance closure):
+#   Phase 5A declared QC_0_0_2__BUILTIN_XYZ at universe_scope `builtin_wide` and claimed that every legal
+#   instance factors through (P_X, P_Y, P_Z). That claim inferred L2 assertion-instance closure from L1
+#   constructor-name evidence and is REJECTED. See ASSERTION_INSTANCE_CLOSURE_AUDIT.md. Fatal break: the
+#   constructors take their CIRCUITS as caller-supplied arguments, and the documented extension point
+#   Property.operations() may return arbitrary DERIVED circuits (composition, inversion, appended unitaries),
+#   whose endpoint distributions are not functions of the subject pair's own (P_X, P_Y, P_Z).
+#   Remedy applied, per the amendment instruction: the universe is DOWNGRADED from builtin_wide to
+#   frozen_profile, with the circuit-construction rule and every parameter domain frozen explicitly.
+#   The Phase 5A "the tools invert at builtin_wide scope" finding is WITHDRAWN.
+
+schema_version: "5A.1.1"
+tool: QuCheck
+tool_version: "0.0.2"
+citation: "Pontolillo, G.; Mousavi, M. R.; Grzesiuk, M. QuCheck: A Property-based Testing Framework for Quantum Programs in Qiskit. ACM TQC. DOI 10.1145/3815169; arXiv 2503.22641."
+configuration: {measurements: 2000, family_wise_alpha: 0.05, run_optimization: false}
+
+role_filter:
+  CL1_CONTRACT_EQUIVALENT: &behav [assert_equal, assert_different, assert_probability]
+  CL2_STATE_EQUIVALENT_UNDER_REALIZED_INPUT: *behav
+  CL3_PROFILE_INVISIBLE: *behav
+  CL4_REALIZED_SUITE_OMISSION: *behav
+  behavioral_but_not_reliability_qualified:
+    assert_entangled: "CONDITIONAL - returns False whenever the observed support size is not exactly 2, conflating 'not entangled' with 'more than two outcomes'; source comments concede the implementation is incomplete and 2-qubit-only"
+    assert_separable: "CONDITIONAL - inherits the same support-shape conflation"
+    assert_most_frequent: "CONDITIONAL - tolerance-free argmax"
+  irrelevant_to_all_functional_semantic_claims: {}
+  note: >
+    QuCheck ships NO structural, resource or nonfunctional assertion, so its role filter removes nothing on
+    role grounds - only on reliability grounds. That asymmetry against QUTest is itself a reportable
+    interface-architecture difference.
+
+profiles:
+
+  - profile_id: QC_0_0_2__TOOL_WIDE
+    universe_scope: tool_wide
+    closure:
+      L1_constructor_family:
+        status: OPEN
+        evidence:
+          - "stats/assertion.py - Assertion, StatisticalAssertion, StandardAssertion are abc.ABC with abstract methods; users may define new assertion classes"
+      L2_assertion_instance:
+        status: OPEN
+        evidence:
+          - "property.py:Property - abc.ABC with three @abstractmethod; operations() returns tuple[QuantumCircuit] and may build arbitrary derived circuits"
+          - "stats/statistical_analysis_coordinator.py:37-51 - circuit1/circuit2 are caller-supplied QuantumCircuit arguments"
+        circuit_construction_rule: "UNRESTRICTED - this is the fatal break for any tool-wide factorization claim"
+      L3_parameter_domain:
+        status: OPEN
+        continuous_parameters:
+          - "assert_probability probabilities: Sequence[float], validated only by a length assert"
+          - "stats/utils/common_measurements.py:ry_then_measure(theta) - continuous single-qubit rotation"
+        pinning_rule: none
+      L4_observation_configuration:
+        status: OPEN
+        in_scope_measurements: ["arbitrary QuantumCircuit per qubit via MeasurementConfiguration.add_measurement"]
+        out_of_scope_measurements: []
+      extension_model: abc_subclass
+      downgrade_applied: null
+    exclusion_basis:
+      per_claim_class: {}
+      factorization_failure_reason: >
+        L2 and L4 are OPEN. A user assertion may read any measurement circuit on any derived circuit, so no
+        finite substrate functional exists for this scope.
+    witness_search: {enumerable: UNBOUNDED, enumeration_rule: none, bound_parameter: none}
+    supported_certificate_modes: [positive_witness, configuration_relative, abstention]
+    scoped_exclusion_supported: false
+    scoped_exclusion_refusal_reason: "L1, L2, L3 and L4 all OPEN"
+    mandatory_abstention:
+      - "Any statement of the form 'no QuCheck property can detect this mutant'."
+      - "Any inference from QuCheck non-detection to semantic equivalence."
+
+  - profile_id: QC_0_0_2__FROZEN_XYZ
+    universe_scope: frozen_profile
+    supersedes: QC_0_0_2__BUILTIN_XYZ
+    downgrade_reason: "L2 assertion-instance closure REJECTED at builtin_wide; see ASSERTION_INSTANCE_CLOSURE_AUDIT.md Break 1"
+    closure:
+      L1_constructor_family:
+        status: CLOSED
+        evidence:
+          - "stats/statistical_analysis_coordinator.py:37,53,70,83,96,111 - exactly six public assert_* constructors"
+          - "no user-defined Assertion subclass is admitted by this profile"
+      L2_assertion_instance:
+        status: CLOSED
+        evidence:
+          - "the circuit-construction rule below removes the derived-circuit break"
+          - "conjunction-only composition; Property.preconditions pinned to True; classical_assertion_outcome unused"
+        circuit_construction_rule: >
+          FROZEN. Exactly two circuits per instance: the subject as generated and the mutant as generated. NO
+          derived, composed, inverted or appended circuits. Property.operations() returns only these two.
+          run_optimization = False so the executed circuit set is exactly the frozen one.
+      L3_parameter_domain:
+        status: CLOSED
+        continuous_parameters: []
+        pinning_rule: >
+          assert_probability expected values are pinned to the exact marginals of the ORIGINAL circuit
+          (reference-from-original), matching the QUTest enumeration convention. No free reals remain.
+      L4_observation_configuration:
+        status: CLOSED
+        in_scope_measurements: [measure_x, measure_y, measure_z]
+        out_of_scope_measurements: ["ry_then_measure(theta)", "any hand-built MeasurementConfiguration"]
+      extension_model: abc_subclass
+      downgrade_applied: "builtin_wide -> frozen_profile, forced by L2"
+    frozen_parameter_axes:
+      # The eight axes named by the Phase 5A.1 §2 instruction, plus the circuit-construction rule that
+      # closes Break 1. All are listed HERE so the freeze is auditable in one place.
+      circuit_construction: "exactly the subject as generated and the mutant as generated; no derived, composed, inverted or appended circuits; run_optimization = False"
+      constructors: [assert_equal, assert_different, assert_probability, assert_entangled, assert_separable, assert_most_frequent]
+      qubit_subsets: "the declared output register and its enumerated non-empty subsets"
+      basis: "non-empty subsets of {x, y, z}; 7 enumerated combinations"
+      expected_value_domain: "pinned to the original circuit's exact marginals"
+      states_domain: "enumerated bitstrings over the selected qubits"
+      thresholds: {family_wise_alpha: 0.05, measurements: 2000, entangled_support_rule: "support size exactly 2 (recorded, not varied)"}
+      predicates: "the shipped calculate_outcome implementations only"
+      measurement_configurations: [measure_x, measure_y, measure_z]
+      continuous_parameters: "NONE remain in scope: assert_probability expected values are pinned to the original's exact marginals, and ry_then_measure(theta) is out of scope"
+      composition_rules: "conjunction over the frozen instance set; Property.preconditions pinned to True; classical_assertion_outcome unused"
+    members:
+      - {family: assert_equal,         substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL,   admissible_under_declared_contract: TO_BE_MEASURED, may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: TO_BE_MEASURED, instance_space_cardinality: "qubit pairs x 7 basis subsets", reliability: RELIABLE, decision: fisher_exact}
+      - {family: assert_different,     substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL,   admissible_under_declared_contract: TO_BE_MEASURED, may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: TO_BE_MEASURED, instance_space_cardinality: "qubit pairs x 7 basis subsets", reliability: RELIABLE, decision: fisher_exact}
+      - {family: assert_probability,   substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL,   admissible_under_declared_contract: TO_BE_MEASURED, may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: TO_BE_MEASURED, instance_space_cardinality: "qubits x 7 basis subsets (reference pinned)", reliability: RELIABLE, decision: statistical}
+      - {family: assert_entangled,     substrate: measurement_counts, role: BEHAVIORAL_DETERMINISTIC, admissible_under_declared_contract: TO_BE_MEASURED, may_support_claim_classes: [], negative_control_violations: TO_BE_MEASURED, instance_space_cardinality: "qubit subsets x 7 basis subsets", reliability: CONDITIONAL, decision: support_shape}
+      - {family: assert_separable,     substrate: measurement_counts, role: BEHAVIORAL_DETERMINISTIC, admissible_under_declared_contract: TO_BE_MEASURED, may_support_claim_classes: [], negative_control_violations: TO_BE_MEASURED, instance_space_cardinality: "qubit subsets x 7 basis subsets", reliability: CONDITIONAL, decision: support_shape}
+      - {family: assert_most_frequent, substrate: measurement_counts, role: BEHAVIORAL_DETERMINISTIC, admissible_under_declared_contract: TO_BE_MEASURED, may_support_claim_classes: [], negative_control_violations: TO_BE_MEASURED, instance_space_cardinality: "2^|qubits| x 7 basis subsets", reliability: CONDITIONAL, decision: argmax}
+    measurement_note: >
+      TO_BE_MEASURED fields are the second admissibility instance the methodology needs. They are declared and
+      left empty on purpose; pre-filling them would breach the prospective validation protocol freeze.
+      IMPORTANT (§1 amendment): a result of zero violations across all six constructors is a VALID SUCCESSFUL
+      OUTCOME - it says the built-ins are all admissible - and does NOT trigger any narrowing.
+    exclusion_basis:
+      per_claim_class:
+        CL3:
+          relevant_families: [assert_equal, assert_different, assert_probability]
+          excluded_as_irrelevant: []
+          excluded_as_not_reliability_qualified: [assert_entangled, assert_separable, assert_most_frequent]
+          substrate_functional: "the tuple of uniform-basis joint outcome distributions (P_X, P_Y, P_Z) over the declared output register, for the two FROZEN circuits only"
+          factorization_verified: true
+          factorization_evidence:
+            - "assert_equal / assert_different / assert_probability read per-qubit single-bit marginals of the basis-b joint distribution"
+            - "the frozen circuit-construction rule removes the derived-circuit break that refuted the builtin_wide claim"
+            - "with expected values pinned to the original's marginals, no continuous parameter remains"
+          reliability_qualified: true
+    witness_search:
+      enumerable: FINITE_ENUMERABLE
+      enumeration_rule: "for each of the 7 basis subsets: all qubit pairs (equal/different), all qubits (probability), all qubit subsets (entangled/separable, sensitivity only), all bitstrings (most_frequent, sensitivity only)"
+      bound_parameter: "n <= 5 for the held-out cohort"
+    supported_certificate_modes: [positive_witness, scoped_exclusion, configuration_relative, abstention]
+    scoped_exclusion_supported: true
+    declared_limits:
+      - "Exclusion holds over the frozen profile ONLY: the three reliability-qualified constructors, basis in {x,y,z}, the two frozen circuits, pinned references. It does not extend to any user property, any derived circuit, any non-Pauli measurement, or ry_then_measure(theta)."
+      - "No entanglement conclusion may be drawn from assert_entangled or assert_separable; they are treated purely as support-shape functionals and are sensitivity-only."
+      - "OB17 (strict-Bonferroni sensitivity) is MANDATORY for every statistical verdict."
+    known_defects:
+      - {id: QC_DEF_1, location: "stats/utils/corrections.py:holm_bonferroni_correction", description: "thresholds appended in p-value-sorted order then zip()ped against original-order p-values in calculate_outcome", measured_effect: "realized Type-I error 0.0951 [0.0885, 0.1022] vs nominal 0.05"}
+      - {id: QC_DEF_2, location: "stats/utils/corrections.py:holm_bonferroni_correction", description: "no step-down stopping rule; every p-value gets an independent rank threshold, so the procedure is not Holm-Bonferroni", measured_effect: "independent of QC_DEF_1 and not fixed by correcting the ordering"}
+      - {id: QC_DEF_3, location: "assert_equal.py:22 and :53-62", description: "basis tokens are not validated; an unrecognised token receives a measurement_id with no registered measurement", measured_effect: "closure to {x,y,z} is effective-by-accident, not enforced"}
+      - {id: QC_DEF_4, location: "assert_probability.py:13 vs coordinator :96", description: "AssertProbability defaults to basis ['x','y','z'] while the coordinator passes ['z']", measured_effect: "instance identity depends on the entry point used"}
+
+  - profile_id: QC_0_0_2__DIFFERENTIAL_MARGINAL
+    universe_scope: frozen_profile
+    closure:
+      L1_constructor_family: {status: CLOSED, evidence: ["stats/single_qubit_distributions/assert_equal.py"]}
+      L2_assertion_instance: {status: CLOSED, evidence: ["frozen two-circuit rule"], circuit_construction_rule: "as QC_0_0_2__FROZEN_XYZ"}
+      L3_parameter_domain: {status: CLOSED, continuous_parameters: [], pinning_rule: "no expected-value parameter in this constructor"}
+      L4_observation_configuration: {status: CLOSED, in_scope_measurements: [measure_x, measure_y, measure_z], out_of_scope_measurements: ["ry_then_measure(theta)"]}
+      extension_model: abc_subclass
+      downgrade_applied: null
+    members:
+      - {family: assert_equal, substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL, admissible_under_declared_contract: TO_BE_MEASURED, may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: TO_BE_MEASURED, instance_space_cardinality: "qubit pairs x active basis set", reliability: RELIABLE, decision: fisher_exact}
+    rationale: "the profile actually exercised by the frozen cross-tool study arms A0/A0r/A1/A1r"
+    exclusion_basis:
+      per_claim_class:
+        CL3:
+          relevant_families: [assert_equal]
+          excluded_as_irrelevant: []
+          substrate_functional: "per-qubit single-qubit marginals in each basis of the active basis set, for the two frozen circuits"
+          factorization_verified: true
+          factorization_evidence: ["assert_equal reads only per-qubit marginals"]
+          reliability_qualified: true
+    witness_search: {enumerable: FINITE_ENUMERABLE, enumeration_rule: "qubit pairs x active basis set", bound_parameter: "n <= 5"}
+    supported_certificate_modes: [positive_witness, scoped_exclusion, configuration_relative, abstention]
+    scoped_exclusion_supported: true
+    declared_limits:
+      - "Single-qubit marginals only; says nothing about joint structure, which is why the CORRELATION_ONLY_INVISIBLE_TO_SINGLE_QUBIT_ORACLE witness class exists."
+
+transport_mode_final: POSITIVE_CERTIFICATION_PLUS_FROZEN_PROFILE_SCOPED_EXCLUSION
+transport_mode_history:
+  - {phase: "4.5", value: POSITIVE_CERTIFICATION_ONLY, status: superseded}
+  - {phase: "5A",  value: POSITIVE_CERTIFICATION_PLUS_BUILTIN_SCOPED_EXCLUSION, status: withdrawn, reason: "L2 closure rejected"}
+  - {phase: "5A.1", value: POSITIVE_CERTIFICATION_PLUS_FROZEN_PROFILE_SCOPED_EXCLUSION, status: current}

@@ -1,0 +1,3 @@
+guards {'qwalk_4': True, 'qwalk_5': True, 'rg_mult_8': True, 'rg_mult_12': True}
+reports Counter({'NA_KILLED': 64, 'CL4': 22, 'CL1': 14, 'CL2': 10, 'CL3': 7, 'Unresolved': 3})
+../.venv-qutest-audit/bin/python -u code/stage_c.py  5837.64s user 918.15s system 157% cpu 1:11:29.52 total

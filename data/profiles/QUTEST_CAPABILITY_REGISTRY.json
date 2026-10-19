@@ -1,0 +1,103 @@
+{
+ "environment": "CONFIRMATORY_QUTEST_ENV",
+ "adapter": {
+  "version": "1.0.0",
+  "hash": "352ad00daf0de71a2b1e8eeac6f9d1dce64e3d55c5d35cfd55ae6723a1eee254",
+  "map": {
+   "u": "u3"
+  }
+ },
+ "method": "each operation executed alone through the QUTest 0.1.0 CLI",
+ "supersedes": {
+  "e12_blocklist": [
+   "ccx",
+   "cswap",
+   "cu"
+  ],
+  "status": "historical record only; never used prospectively"
+ },
+ "registry": {
+  "cp": {
+   "class": "NATIVELY_ACCEPTED",
+   "native": true,
+   "mapping": null,
+   "occurrences_in_scale_population": 14,
+   "probe_detail": "1 passed in 0.11s (1 total)"
+  },
+  "cx": {
+   "class": "NATIVELY_ACCEPTED",
+   "native": true,
+   "mapping": null,
+   "occurrences_in_scale_population": 23,
+   "probe_detail": "1 passed in 0.11s (1 total)"
+  },
+  "cz": {
+   "class": "NATIVELY_ACCEPTED",
+   "native": true,
+   "mapping": null,
+   "occurrences_in_scale_population": 8,
+   "probe_detail": "1 passed in 0.11s (1 total)"
+  },
+  "h": {
+   "class": "NATIVELY_ACCEPTED",
+   "native": true,
+   "mapping": null,
+   "occurrences_in_scale_population": 21,
+   "probe_detail": "1 passed in 0.11s (1 total)"
+  },
+  "rx": {
+   "class": "NATIVELY_ACCEPTED",
+   "native": true,
+   "mapping": null,
+   "occurrences_in_scale_population": 3,
+   "probe_detail": "1 passed in 0.11s (1 total)"
+  },
+  "ry": {
+   "class": "NATIVELY_ACCEPTED",
+   "native": true,
+   "mapping": null,
+   "occurrences_in_scale_population": 17,
+   "probe_detail": "1 passed in 0.11s (1 total)"
+  },
+  "rzz": {
+   "class": "UNSUPPORTED",
+   "native": false,
+   "mapping": null,
+   "occurrences_in_scale_population": "appears in MUTANTS of the 11-14 band",
+   "probe_detail": "1 errors in 0.06s (1 total)"
+  },
+  "swap": {
+   "class": "NATIVELY_ACCEPTED",
+   "native": true,
+   "mapping": null,
+   "occurrences_in_scale_population": 14,
+   "probe_detail": "1 passed in 0.11s (1 total)"
+  },
+  "u": {
+   "class": "ACCEPTED_AFTER_MAPPING",
+   "native": false,
+   "mapping": "u -> u3",
+   "occurrences_in_scale_population": 6,
+   "probe_detail": "1 passed in 0.12s (1 total)"
+  },
+  "x": {
+   "class": "NATIVELY_ACCEPTED",
+   "native": true,
+   "mapping": null,
+   "occurrences_in_scale_population": 12,
+   "probe_detail": "1 passed in 0.11s (1 total)"
+  },
+  "rxx": {
+   "class": "UNSUPPORTED",
+   "native": false,
+   "mapping": null,
+   "occurrences_in_scale_population": "appears in MUTANTS of the 11-14 band",
+   "probe_detail": "1 errors in 0.07s (1 total)"
+  }
+ },
+ "summary": {
+  "NATIVELY_ACCEPTED": 8,
+  "UNSUPPORTED": 1,
+  "ACCEPTED_AFTER_MAPPING": 1
+ }
+}

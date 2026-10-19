@@ -1,0 +1,10 @@
+subject,group,n,legal_opportunities,deduplicated,allocated,insertion,replacement,deletion
+ParityPhase,MgcosA,6,738,732,30,26,4,0
+Is2PowerPhase,MgcosA,6,12792,12768,30,1,27,2
+LessThanPhase,MgcosA,5,1391,1387,30,23,7,0
+DiagonalZHamiltonian,MgcosA,3,228,228,30,23,7,0
+IsingEvolution,MgcosA,7,1806,1806,30,30,0,0
+DraperAdder,MgcosA,10,2300,2293,30,28,2,0
+AdderHamiltonianMixture,MgcosA,10,2360,2353,30,23,7,0
+qft_n4,QASMBench/Qiskit,4,2710,2704,30,28,2,0
+deutsch_n2,QASMBench/Qiskit,2,211,206,30,21,9,0

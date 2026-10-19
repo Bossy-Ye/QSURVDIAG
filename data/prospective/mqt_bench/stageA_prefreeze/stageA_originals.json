@@ -1,0 +1,635 @@
+{
+ "qwalk_4": {
+  "name": "qwalk_4",
+  "n": 4,
+  "gates": 303,
+  "depth": 219,
+  "ops": {
+   "h": 27,
+   "p": 108,
+   "cx": 126,
+   "t": 24,
+   "x": 18
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "7160b0e2b9d4e9f81f1d934e43c010ea8044f81d50b16687df1ee0ce955dde10",
+  "contract_check": {
+   "max_overlap_with_independent_walk": 1.0,
+   "coin1_shift": 1,
+   "node_bits_reversed": true
+  }
+ },
+ "qwalk_5": {
+  "name": "qwalk_5",
+  "n": 5,
+  "gates": 723,
+  "depth": 529,
+  "ops": {
+   "h": 183,
+   "cp": 54,
+   "t": 72,
+   "cx": 234,
+   "p": 156,
+   "x": 24
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "e96e1ec179fb2d27801e8597b466d88284952d0409a5b8f0f1906825f9d45f51",
+  "contract_check": {
+   "max_overlap_with_independent_walk": 1.0,
+   "coin1_shift": 1,
+   "node_bits_reversed": true
+  }
+ },
+ "qwalk_6": {
+  "name": "qwalk_6",
+  "n": 6,
+  "gates": 2097,
+  "depth": 1491,
+  "ops": {
+   "h": 255,
+   "p": 546,
+   "cx": 798,
+   "rz": 102,
+   "t": 336,
+   "rzz": 6,
+   "x": 54
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "214721f127af8ef1b4291ed24102ec2ab27dff5798965b355cbb902575d10cd9",
+  "contract_check": {
+   "max_overlap_with_independent_walk": 1.0,
+   "coin1_shift": 1,
+   "node_bits_reversed": true
+  }
+ },
+ "hrs_mult_5": {
+  "name": "hrs_mult_5",
+  "n": 5,
+  "gates": 297,
+  "depth": 207,
+  "ops": {
+   "h": 42,
+   "cx": 106,
+   "p": 59,
+   "t": 72,
+   "s": 4,
+   "cp": 14
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "74a1a4214b088ce603389a01d002288e22bd5fbe71586b79e51d50ba636a8505",
+  "regs": [
+   [
+    "a",
+    1
+   ],
+   [
+    "b",
+    1
+   ],
+   [
+    "out",
+    2
+   ],
+   [
+    "helper",
+    1
+   ]
+  ],
+  "operand_bits": 1,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 4
+  }
+ },
+ "hrs_mult_9": {
+  "name": "hrs_mult_9",
+  "n": 9,
+  "gates": 1158,
+  "depth": 810,
+  "ops": {
+   "h": 164,
+   "cx": 412,
+   "p": 230,
+   "t": 280,
+   "s": 16,
+   "cp": 56
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "91fcd6cf6fd9e9185a292555f4780a1c3a71dcbbc7d3dc42f7b6d2ca49e6d9d0",
+  "regs": [
+   [
+    "a",
+    2
+   ],
+   [
+    "b",
+    2
+   ],
+   [
+    "out",
+    4
+   ],
+   [
+    "helper",
+    1
+   ]
+  ],
+  "operand_bits": 2,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 16
+  }
+ },
+ "hrs_mult_13": {
+  "name": "hrs_mult_13",
+  "n": 13,
+  "gates": 2583,
+  "depth": 1822,
+  "ops": {
+   "h": 366,
+   "cx": 918,
+   "p": 513,
+   "t": 624,
+   "s": 36,
+   "cp": 126
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "1f0fc059273d68f9e1387458a274409893a9a97860157ca832ec5a7bd4174804",
+  "regs": [
+   [
+    "a",
+    3
+   ],
+   [
+    "b",
+    3
+   ],
+   [
+    "out",
+    6
+   ],
+   [
+    "helper",
+    1
+   ]
+  ],
+  "operand_bits": 3,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 64
+  }
+ },
+ "multiplier_4": {
+  "name": "multiplier_4",
+  "n": 4,
+  "gates": 46,
+  "depth": 35,
+  "ops": {
+   "p": 18,
+   "cx": 20,
+   "h": 4,
+   "t": 4
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "08dc3d7cac9575d592394145d1bf234109e704473b44208684ef6192a2c419b5",
+  "regs": [
+   [
+    "q",
+    4
+   ]
+  ],
+  "operand_bits": 1,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 4
+  }
+ },
+ "multiplier_8": {
+  "name": "multiplier_8",
+  "n": 8,
+  "gates": 290,
+  "depth": 197,
+  "ops": {
+   "h": 36,
+   "t": 48,
+   "cx": 122,
+   "p": 84
+  },
+  "min_state_fidelity": 0.488508631736,
+  "sha": "5b074aa57f3b5211b659c5112cc4d1cb60c8b549673031e0641d233cc0021081",
+  "regs": [
+   [
+    "q",
+    8
+   ]
+  ],
+  "operand_bits": 2,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 16
+  }
+ },
+ "multiplier_12": {
+  "name": "multiplier_12",
+  "n": 12,
+  "gates": 941,
+  "depth": 630,
+  "ops": {
+   "h": 130,
+   "t": 200,
+   "cx": 376,
+   "p": 235
+  },
+  "min_state_fidelity": 0.375705947861,
+  "sha": "e10d986f670f084506e8b5d40c3dce22afa556fb13773ff060a40df7cdc8551b",
+  "regs": [
+   [
+    "q",
+    12
+   ]
+  ],
+  "operand_bits": 3,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 64
+  }
+ },
+ "rg_mult_4": {
+  "name": "rg_mult_4",
+  "n": 4,
+  "gates": 28,
+  "depth": 23,
+  "ops": {
+   "h": 4,
+   "cp": 2,
+   "cx": 8,
+   "rz": 10,
+   "rzz": 2,
+   "p": 2
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "2d05cac15215e199f052f78a09dcabe04f9d50d4f7261d3db96a50fb53037c1f",
+  "regs": [
+   [
+    "a",
+    1
+   ],
+   [
+    "b",
+    1
+   ],
+   [
+    "out",
+    2
+   ]
+  ],
+  "operand_bits": 1,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 4
+  }
+ },
+ "rg_mult_8": {
+  "name": "rg_mult_8",
+  "n": 8,
+  "gates": 196,
+  "depth": 137,
+  "ops": {
+   "h": 8,
+   "cp": 12,
+   "cx": 64,
+   "rz": 80,
+   "rzz": 16,
+   "p": 16
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "b592f2a7025f26941f731aec32ec543f176c46ab202240f7a6b5030240b57a04",
+  "regs": [
+   [
+    "a",
+    2
+   ],
+   [
+    "b",
+    2
+   ],
+   [
+    "out",
+    4
+   ]
+  ],
+  "operand_bits": 2,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 16
+  }
+ },
+ "rg_mult_12": {
+  "name": "rg_mult_12",
+  "n": 12,
+  "gates": 636,
+  "depth": 451,
+  "ops": {
+   "h": 12,
+   "cp": 30,
+   "cx": 216,
+   "rz": 270,
+   "rzz": 54,
+   "p": 54
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "2b35b905c42868521a5f5698221472afea0da057debdc4177976ccf5c200c897",
+  "regs": [
+   [
+    "a",
+    3
+   ],
+   [
+    "b",
+    3
+   ],
+   [
+    "out",
+    6
+   ]
+  ],
+  "operand_bits": 3,
+  "contract_check": {
+   "wrong_products_on_full_domain": 0,
+   "domain": 64
+  }
+ },
+ "graphstate_d3_6_s1": {
+  "name": "graphstate_d3_6_s1",
+  "n": 6,
+  "gates": 15,
+  "depth": 6,
+  "ops": {
+   "h": 6,
+   "cz": 9
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "51ee7c9aadd7bd0ec9a8d503b3fd73328d0e19acd54bba84fee82e950a3a87ea",
+  "edges": [
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    3
+   ],
+   [
+    0,
+    4
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    1,
+    5
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    2,
+    4
+   ],
+   [
+    3,
+    5
+   ],
+   [
+    4,
+    5
+   ]
+  ],
+  "contract_check": {
+   "max_stabilizer_deviation": 0.0
+  }
+ },
+ "graphstate_d3_8_s1": {
+  "name": "graphstate_d3_8_s1",
+  "n": 8,
+  "gates": 20,
+  "depth": 9,
+  "ops": {
+   "h": 8,
+   "cz": 12
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "af6c69d53a088b95530496d5f866420bdf3aa4d984c34d9e89eaf34ca203c804",
+  "edges": [
+   [
+    0,
+    1
+   ],
+   [
+    0,
+    3
+   ],
+   [
+    0,
+    4
+   ],
+   [
+    1,
+    4
+   ],
+   [
+    1,
+    7
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    2,
+    5
+   ],
+   [
+    2,
+    6
+   ],
+   [
+    3,
+    7
+   ],
+   [
+    4,
+    6
+   ],
+   [
+    5,
+    6
+   ],
+   [
+    5,
+    7
+   ]
+  ],
+  "contract_check": {
+   "max_stabilizer_deviation": 0.0
+  }
+ },
+ "graphstate_d3_10_s1": {
+  "name": "graphstate_d3_10_s1",
+  "n": 10,
+  "gates": 25,
+  "depth": 8,
+  "ops": {
+   "h": 10,
+   "cz": 15
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "07a5234ab24c20c3fb6fc5240920a52a0df4756a3782ea59db81f2b5a96d1d1f",
+  "edges": [
+   [
+    0,
+    4
+   ],
+   [
+    0,
+    6
+   ],
+   [
+    0,
+    8
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    1,
+    6
+   ],
+   [
+    1,
+    7
+   ],
+   [
+    2,
+    6
+   ],
+   [
+    2,
+    8
+   ],
+   [
+    3,
+    4
+   ],
+   [
+    3,
+    5
+   ],
+   [
+    3,
+    9
+   ],
+   [
+    4,
+    8
+   ],
+   [
+    5,
+    7
+   ],
+   [
+    5,
+    9
+   ],
+   [
+    7,
+    9
+   ]
+  ],
+  "contract_check": {
+   "max_stabilizer_deviation": 0.0
+  }
+ },
+ "hhl_4": {
+  "name": "hhl_4",
+  "n": 4,
+  "gates": 29,
+  "depth": 24,
+  "ops": {
+   "x": 1,
+   "h": 8,
+   "cp": 6,
+   "cx": 10,
+   "ry": 4
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "6acb098fee88c3abb24790c0d30cc4af7ae107f20db10b7c21e25fd176b084a1",
+  "contract_check": {
+   "documented_solution_probs": [
+    0.5,
+    0.5
+   ],
+   "circuit_postselected_probs": [
+    0.0,
+    1.0
+   ],
+   "regs": [
+    [
+     "sys",
+     1
+    ],
+    [
+     "phase",
+     2
+    ],
+    [
+     "ancilla",
+     1
+    ]
+   ]
+  }
+ },
+ "hhl_5": {
+  "name": "hhl_5",
+  "n": 5,
+  "gates": 43,
+  "depth": 33,
+  "ops": {
+   "x": 1,
+   "h": 12,
+   "cp": 12,
+   "cx": 12,
+   "ry": 6
+  },
+  "min_state_fidelity": 1.0,
+  "sha": "ce751646fb5c794b841b750abebef416e7cf8989e6c18973f560bb3e5edbd2df",
+  "contract_check": {
+   "documented_solution_probs": [
+    0.5,
+    0.5
+   ],
+   "circuit_postselected_probs": [
+    0.0,
+    1.0
+   ],
+   "regs": [
+    [
+     "sys",
+     1
+    ],
+    [
+     "phase",
+     3
+    ],
+    [
+     "ancilla",
+     1
+    ]
+   ]
+  }
+ }
+}

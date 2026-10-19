@@ -1,0 +1,4 @@
+population,case,selection,v2,v3,v3_d
+corpus,qra_cases_v1_1/QRA_360,control,none,zmask 1,1.6653345369377348e-16
+defect,26,control,none,zmask 1,0.0
+qedc,natural n=2,X-basis statistic,none,zmask 1,0.09452941877945908

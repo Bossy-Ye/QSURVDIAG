@@ -1,0 +1,27 @@
+case,source,subject,qutest_witness,qucheck_witness,qucheck_max_d_a,outcome
+RS500_013,widths_8_10_scale,ghz_10,observable w2,,,NOT_EVALUABLE_widths_subject_outside_e1_manifest
+RS500_198,widths_8_10_scale,ghz_9,observable w2,,,NOT_EVALUABLE_widths_subject_outside_e1_manifest
+RS500_210,widths_8_10_scale,ghz_10,observable w2,,,NOT_EVALUABLE_widths_subject_outside_e1_manifest
+RS500_212,widths_8_10_scale,ghz_10,observable w2,,,NOT_EVALUABLE_widths_subject_outside_e1_manifest
+RS500_311,widths_8_10_scale,ghz_8,marginal w1,,,NOT_EVALUABLE_widths_subject_outside_e1_manifest
+simon_4#h00,prospective_reference,simon_4,observable w2,X0,1.0,WITNESS_EXISTS
+simon_4#h01,prospective_reference,simon_4,observable w2,X1,1.0,WITNESS_EXISTS
+simon_4#h02,prospective_reference,simon_4,observable w2,,0.0,NO_WITNESS_ABOVE_THETA
+simon_4#h03,prospective_reference,simon_4,observable w2,,0.0,NO_WITNESS_ABOVE_THETA
+simon_4#h04,prospective_reference,simon_4,observable w2,,0.0,NO_WITNESS_ABOVE_THETA
+simon_4#h05,prospective_reference,simon_4,observable w2,,0.0,NO_WITNESS_ABOVE_THETA
+simon_4#h06,prospective_reference,simon_4,observable w2,,0.0,NO_WITNESS_ABOVE_THETA
+simon_4#h07,prospective_reference,simon_4,observable w2,,0.0,NO_WITNESS_ABOVE_THETA
+simon_4#h08,prospective_reference,simon_4,observable w2,X0,1.0,WITNESS_EXISTS
+simon_4#h09,prospective_reference,simon_4,observable w2,X1,1.0,WITNESS_EXISTS
+simon_4#h26,prospective_reference,simon_4,observable w2,,0.0,NO_WITNESS_ABOVE_THETA
+simon_4#h28,prospective_reference,simon_4,observable w2,,0.0,NO_WITNESS_ABOVE_THETA
+simon_4#h29,prospective_reference,simon_4,observable w2,X0,1.0,WITNESS_EXISTS
+toffoli_barenco_5#h03,prospective_reference,toffoli_barenco_5,marginal w1,,0.0,NO_WITNESS_ABOVE_THETA
+toffoli_barenco_5#h19,prospective_reference,toffoli_barenco_5,marginal w1,,0.0,NO_WITNESS_ABOVE_THETA
+toffoli_barenco_5#h21,prospective_reference,toffoli_barenco_5,marginal w1,,0.0,NO_WITNESS_ABOVE_THETA
+toffoli_barenco_5#h22,prospective_reference,toffoli_barenco_5,marginal w1,,0.0,NO_WITNESS_ABOVE_THETA
+toffoli_barenco_5#h23,prospective_reference,toffoli_barenco_5,marginal w1,,0.0,NO_WITNESS_ABOVE_THETA
+toffoli_barenco_5#h24,prospective_reference,toffoli_barenco_5,marginal w1,,0.0,NO_WITNESS_ABOVE_THETA
+toffoli_barenco_5#h25,prospective_reference,toffoli_barenco_5,marginal w1,,0.0,NO_WITNESS_ABOVE_THETA
+toffoli_barenco_5#h26,prospective_reference,toffoli_barenco_5,marginal w1,,0.0,NO_WITNESS_ABOVE_THETA

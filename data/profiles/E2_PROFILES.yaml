@@ -1,0 +1,16 @@
+schema_version: "E2.1"
+note: >
+  Four observation profiles for the claim-migration stage. Closure levels L1, L2 and L4 are CLOSED
+  by construction because the observation is declared rather than discovered; L3 is inherited from
+  the audited QUTest profile and remains continuous and benign for exclusion.
+cardinality_rule: "|B|(|Q| + 2^|Q| - 1) + |B|^|Q| (2^|Q| + 2)"
+profiles:
+  - {profile_id: QT_E2__Z_SUBSET,   basis: [Z],       coverage: output_register, position: coarsest}
+  - {profile_id: QT_E2__Z_ALL,      basis: [Z],       coverage: all_qubits,      position: baseline}
+  - {profile_id: QT_E2__XYZ_SUBSET, basis: [X, Y, Z], coverage: output_register, position: incomparable}
+  - {profile_id: QT_E2__XYZ_ALL,    basis: [X, Y, Z], coverage: all_qubits,      position: finest}
+refinement_edges:
+  - [QT_E2__Z_SUBSET, QT_E2__Z_ALL]
+  - [QT_E2__Z_SUBSET, QT_E2__XYZ_SUBSET]
+  - [QT_E2__Z_ALL, QT_E2__XYZ_ALL]
+  - [QT_E2__XYZ_SUBSET, QT_E2__XYZ_ALL]

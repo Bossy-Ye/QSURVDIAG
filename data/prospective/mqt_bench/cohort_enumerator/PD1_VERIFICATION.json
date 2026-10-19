@@ -1,0 +1,83 @@
+{
+ "qwalk_4": {
+  "n": 4,
+  "historical_pool": 3453,
+  "historical_ineligible": 0,
+  "cohort_pool": 3453,
+  "cohort_ineligible": 0,
+  "pool_identical": true,
+  "cohort_distinct_candidates": 3442,
+  "cohort_strata_available": {
+   "gate_deletion/local_basis_amplitude": 40,
+   "gate_deletion/phase_parameterized": 132,
+   "gate_deletion/entangling_controlled": 120,
+   "gate_insertion/local_basis_amplitude": 288,
+   "gate_insertion/phase_parameterized": 240,
+   "gate_insertion/entangling_controlled": 240,
+   "gate_replacement/local_basis_amplitude": 1017,
+   "gate_replacement/phase_parameterized": 861,
+   "gate_replacement/entangling_controlled": 504
+  }
+ },
+ "qwalk_5": {
+  "n": 5,
+  "historical_pool": 7395,
+  "historical_ineligible": 0,
+  "cohort_pool": 7395,
+  "cohort_ineligible": 0,
+  "pool_identical": true,
+  "cohort_distinct_candidates": 7331,
+  "cohort_strata_available": {
+   "gate_deletion/local_basis_amplitude": 154,
+   "gate_deletion/phase_parameterized": 228,
+   "gate_deletion/entangling_controlled": 282,
+   "gate_insertion/local_basis_amplitude": 360,
+   "gate_insertion/phase_parameterized": 300,
+   "gate_insertion/entangling_controlled": 300,
+   "gate_replacement/local_basis_amplitude": 2403,
+   "gate_replacement/phase_parameterized": 2103,
+   "gate_replacement/entangling_controlled": 1201
+  }
+ },
+ "rg_mult_8": {
+  "n": 8,
+  "historical_pool": 3264,
+  "historical_ineligible": 0,
+  "cohort_pool": 3264,
+  "cohort_ineligible": 0,
+  "pool_identical": true,
+  "cohort_distinct_candidates": 3250,
+  "cohort_strata_available": {
+   "gate_deletion/local_basis_amplitude": 8,
+   "gate_deletion/phase_parameterized": 96,
+   "gate_deletion/entangling_controlled": 92,
+   "gate_insertion/local_basis_amplitude": 576,
+   "gate_insertion/phase_parameterized": 480,
+   "gate_insertion/entangling_controlled": 480,
+   "gate_replacement/local_basis_amplitude": 616,
+   "gate_replacement/phase_parameterized": 509,
+   "gate_replacement/entangling_controlled": 393
+  }
+ },
+ "rg_mult_12": {
+  "n": 12,
+  "historical_pool": 0,
+  "historical_ineligible": 7908,
+  "cohort_pool": 7908,
+  "cohort_ineligible": 0,
+  "pool_identical": false,
+  "cohort_distinct_candidates": 7872,
+  "cohort_strata_available": {
+   "gate_deletion/local_basis_amplitude": 12,
+   "gate_deletion/phase_parameterized": 324,
+   "gate_deletion/entangling_controlled": 300,
+   "gate_insertion/local_basis_amplitude": 864,
+   "gate_insertion/phase_parameterized": 720,
+   "gate_insertion/entangling_controlled": 720,
+   "gate_replacement/local_basis_amplitude": 2004,
+   "gate_replacement/phase_parameterized": 1649,
+   "gate_replacement/entangling_controlled": 1279
+  }
+ },
+ "PASS": true
+}

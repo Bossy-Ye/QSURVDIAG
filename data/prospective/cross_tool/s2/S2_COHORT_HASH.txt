@@ -1,0 +1,4 @@
+S2_COHORT_HASH sha256 = 6e752fda0bc43c87fc75d9cdde06a3078c02962c9c59aac28c37d9c98332a71e
+computed over the sha256 digests of all S2 CSV artifacts
+cohort: 150 selected, 149 native-eligible
+freeze commit basis: 35f0d5c (protocol), 8abe1e4 (S1)

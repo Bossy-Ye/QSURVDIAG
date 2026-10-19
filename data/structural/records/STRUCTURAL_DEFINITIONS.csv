@@ -1,0 +1,86 @@
+mutant_id,population,HIST_gatelist,HIST_depth,P5_gateset,P5_depth,QT_gateset_subset,QT_depth_le,QT_depth_eq,QT_allowed,QT_depth_original,QT_depth_mutant,recorded_gateset,recorded_depth
+dj_3#e04,construction,True,False,False,False,True,False,False,"[crz, cx, h, u2]",6,6,,
+dj_3#e05,construction,True,False,False,False,True,False,False,"[crz, cx, h, u2]",6,6,,
+dj_3#e16,construction,True,False,False,False,True,False,False,"[cp, cx, h, u2]",6,6,,
+grover_3#e12,construction,True,True,False,True,True,False,True,"[cx, h, rxx, rz, rzz, u2, u3]",22,20,,
+grover_3#e26,construction,True,False,False,False,True,False,False,"[cry, cx, h, rz, rzz, u1, u2, u3]",22,22,,
+bv_4#e01,construction,True,False,False,False,False,False,False,"[crz, cx, h, u2]",6,6,,
+bv_4#e04,construction,True,False,False,False,False,False,True,"[cp, cx, h, u2]",6,5,,
+bv_4#e16,construction,True,False,False,False,True,False,False,"[cp, cx, h, u2]",6,6,,
+dj_4#e01,construction,True,True,False,True,False,True,True,"[cp, cx, h, u2]",7,8,,
+dj_4#e04,construction,True,False,False,False,True,False,False,"[cp, cx, h, u2]",7,7,,
+dj_4#e08,construction,True,False,False,False,True,False,False,"[crz, cx, h, u2]",7,7,,
+dj_4#e10,construction,True,False,False,False,False,False,False,"[crz, cx, h, u2]",7,7,,
+dj_4#e16,construction,True,False,False,False,True,False,False,"[crz, cx, h, u2]",7,7,,
+dj_4#e19,construction,True,False,False,False,False,False,False,"[cp, cx, h, u2]",7,7,,
+ghz_4#e01,construction,True,True,False,True,True,False,True,"[cx, h]",5,4,,
+ghz_4#e25,construction,True,False,False,False,True,False,False,"[cx, h]",5,5,,
+ghz_4#e26,construction,True,True,False,True,True,True,True,"[cx, h]",5,6,,
+ghz_4#e28,construction,True,False,False,True,True,False,False,"[cx, h]",5,5,,
+bv_5#e07,construction,True,False,False,False,True,False,False,"[cp, cx, h, u2]",7,7,,
+bv_5#e10,construction,True,False,False,False,True,False,False,"[crz, cx, h, u2]",7,7,,
+bv_5#e16,construction,True,True,False,True,True,False,False,"[crz, cx, h, u2]",7,7,,
+bv_5#e19,construction,True,True,False,False,True,False,False,"[crz, cx, h, u2]",7,7,,
+bv_5#e25,construction,True,False,False,False,True,False,True,"[cp, cx, h, u2]",7,6,,
+ghz_5#e01,construction,True,False,False,False,True,False,False,"[cx, h]",6,6,,
+ghz_5#e13,construction,True,True,False,True,True,True,True,"[cx, h]",6,7,,
+ghz_5#e21,construction,True,False,False,False,False,False,False,"[cx, h]",6,6,,
+ghz_5#e25,construction,True,False,False,False,True,False,False,"[cx, h]",6,6,,
+qpe_5#e00,construction,True,False,False,False,False,False,False,"[cp, h, x]",11,11,,
+qpe_5#e12,construction,True,False,False,True,False,False,False,"[cp, h, x]",11,11,,
+qpe_5#e14,construction,True,False,False,True,True,False,False,"[cp, h, x]",11,11,,
+qpe_5#e19,construction,True,False,False,True,False,False,False,"[cp, h, x]",11,11,,
+qpe_5#e21,construction,True,True,False,True,False,False,False,"[cp, h, x]",11,11,,
+qpe_6#e01,construction,True,True,False,False,True,False,False,"[cp, h, x]",12,12,,
+qpe_6#e03,construction,True,False,False,False,False,False,False,"[cp, h, x]",12,12,,
+qpe_6#e04,construction,True,True,False,True,True,True,True,"[cp, h, x]",12,13,,
+qpe_6#e06,construction,True,True,False,True,False,False,False,"[cp, h, x]",12,12,,
+qpe_6#e10,construction,True,True,False,False,True,False,False,"[cp, h, x]",12,12,,
+qpe_6#e13,construction,True,True,False,False,True,False,False,"[cp, h, x]",12,12,,
+qpe_6#e15,construction,True,False,False,False,False,False,False,"[cp, h, x]",12,12,,
+qpe_6#e21,construction,True,False,False,True,False,False,True,"[cp, h, x]",12,11,,
+qpe_6#e25,construction,True,False,False,False,True,False,False,"[cp, h, x]",12,12,,
+qpe_6#e26,construction,True,False,False,True,True,False,False,"[cp, h, x]",12,12,,
+qpe_6#e27,construction,True,False,False,False,False,False,False,"[cp, h, x]",12,12,,
+bv_7#e04,construction,True,False,False,False,True,False,False,"[cp, cx, h, u2]",8,8,,
+bv_7#e14,construction,True,False,False,False,True,False,False,"[crz, cx, h, u2]",8,8,,
+bv_7#e25,construction,True,False,False,False,True,False,False,"[crz, cx, h, u2]",8,8,,
+bv_7#e29,construction,True,False,False,False,True,False,False,"[cp, cx, h, u2]",8,8,,
+ghz_7#e04,construction,True,False,False,False,True,False,False,"[cx, h]",8,8,,
+ghz_7#e16,construction,True,False,False,False,True,False,False,"[cx, h]",8,8,,
+ghz_7#e17,construction,True,False,False,False,True,False,False,"[cx, h]",8,8,,
+ghz_7#e23,construction,True,False,False,False,True,False,False,"[cx, h]",8,8,,
+ghz_7#e29,construction,True,False,False,False,True,False,False,"[cx, h]",8,8,,
+simon_4#h10,prospective,True,True,False,False,True,False,False,"[cx, h]",6,6,False,False
+simon_4#h11,prospective,True,False,False,False,True,False,False,"[cx, h]",6,6,False,False
+simon_4#h12,prospective,True,False,False,False,True,False,False,"[cx, h]",6,6,False,False
+simon_4#h13,prospective,True,False,False,False,True,False,False,"[cx, h]",6,6,False,False
+simon_4#h14,prospective,True,True,False,False,True,False,False,"[cx, h]",6,6,False,False
+simon_4#h15,prospective,True,False,False,False,True,False,False,"[cx, h]",6,6,False,False
+simon_4#h16,prospective,True,False,False,False,True,False,False,"[cx, h]",6,6,False,False
+simon_4#h17,prospective,True,False,False,False,True,False,False,"[cx, h]",6,6,False,False
+simon_4#h18,prospective,True,True,False,True,True,True,True,"[cx, h]",6,7,False,True
+simon_4#h19,prospective,True,True,False,True,True,True,True,"[cx, h]",6,7,False,True
+simon_4#h20,prospective,True,False,False,True,True,False,False,"[cx, h]",6,6,False,True
+simon_4#h21,prospective,True,False,False,True,True,False,False,"[cx, h]",6,6,False,True
+simon_4#h22,prospective,True,True,False,True,False,True,True,"[cx, h]",6,7,False,True
+simon_4#h23,prospective,True,True,False,True,False,True,True,"[cx, h]",6,7,False,True
+simon_4#h24,prospective,True,False,False,False,False,False,False,"[cx, h]",6,6,False,False
+simon_4#h25,prospective,True,False,False,False,False,False,False,"[cx, h]",6,6,False,False
+simon_4#h27,prospective,True,False,False,False,True,False,False,"[cx, h]",6,6,False,False
+wstate_4#h10,prospective,True,True,False,False,False,False,False,[unitary],4,4,False,False
+wstate_4#h11,prospective,True,True,False,False,False,False,False,[unitary],4,4,False,False
+wstate_4#h12,prospective,True,False,False,False,False,False,False,[unitary],4,4,False,False
+wstate_4#h13,prospective,True,False,False,False,False,False,False,[unitary],4,4,False,False
+wstate_4#h14,prospective,True,True,False,False,False,False,False,[unitary],4,4,False,False
+wstate_4#h15,prospective,True,True,False,False,False,False,False,[unitary],4,4,False,False
+wstate_4#h16,prospective,True,False,False,False,False,False,False,[unitary],4,4,False,False
+wstate_4#h17,prospective,True,False,False,False,False,False,False,[unitary],4,4,False,False
+wstate_4#h18,prospective,True,True,False,True,False,False,False,[unitary],4,4,False,True
+wstate_4#h19,prospective,True,True,False,True,True,True,True,[unitary],4,6,False,True
+wstate_4#h20,prospective,True,True,False,True,True,True,True,[unitary],4,6,False,True
+wstate_4#h21,prospective,True,False,False,False,True,True,True,[unitary],4,5,False,False
+wstate_4#h22,prospective,True,True,False,True,False,False,False,[unitary],4,4,False,True
+wstate_4#h23,prospective,True,True,False,False,True,True,True,[unitary],4,6,False,False
+wstate_4#h24,prospective,True,True,False,True,True,True,True,[unitary],4,6,False,True
+wstate_4#h25,prospective,True,False,False,False,True,True,True,[unitary],4,5,False,False

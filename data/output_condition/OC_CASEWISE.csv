@@ -1,0 +1,150 @@
+mutant_id,subject,baseline_report,witness,predicted_kill,native,agree
+qft_4#e00,qft_4,CL2,,False,SURVIVED,True
+qft_4#e01,qft_4,CL3,,False,SURVIVED,True
+qft_4#e02,qft_4,CL3,,False,SURVIVED,True
+qft_4#e03,qft_4,CL2,,False,SURVIVED,True
+qft_4#e04,qft_4,CL2,,False,SURVIVED,True
+qft_4#e05,qft_4,CL3,,False,SURVIVED,True
+qft_4#e06,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e07,qft_4,CL3,,False,SURVIVED,True
+qft_4#e08,qft_4,CL3,,False,SURVIVED,True
+qft_4#e09,qft_4,CL2,,False,SURVIVED,True
+qft_4#e10,qft_4,CL3,,False,SURVIVED,True
+qft_4#e11,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e12,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e13,qft_4,CL2,,False,SURVIVED,True
+qft_4#e14,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e15,qft_4,CL2,,False,SURVIVED,True
+qft_4#e16,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e17,qft_4,CL2,,False,SURVIVED,True
+qft_4#e18,qft_4,CL2,,False,SURVIVED,True
+qft_4#e19,qft_4,CL3,,False,SURVIVED,True
+qft_4#e20,qft_4,CL2,,False,SURVIVED,True
+qft_4#e21,qft_4,CL2,,False,SURVIVED,True
+qft_4#e22,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e23,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e24,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e25,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e26,qft_4,CL2,,False,SURVIVED,True
+qft_4#e27,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e28,qft_4,NA_KILLED,,True,KILLED,True
+qft_4#e29,qft_4,CL2,,False,SURVIVED,True
+qft_5#e00,qft_5,NA_KILLED,,True,KILLED,True
+qft_5#e01,qft_5,CL2,,False,SURVIVED,True
+qft_5#e02,qft_5,NA_KILLED,,True,KILLED,True
+qft_5#e03,qft_5,CL2,,False,SURVIVED,True
+qft_5#e04,qft_5,CL4,zmask 3,True,KILLED,True
+qft_5#e05,qft_5,CL3,,False,SURVIVED,True
+qft_5#e06,qft_5,CL2,,False,SURVIVED,True
+qft_5#e07,qft_5,NA_KILLED,,True,KILLED,True
+qft_5#e08,qft_5,CL2,,False,SURVIVED,True
+qft_5#e09,qft_5,NA_KILLED,,True,KILLED,True
+qft_5#e10,qft_5,CL2,,False,SURVIVED,True
+qft_5#e11,qft_5,NA_KILLED,,True,KILLED,True
+qft_5#e12,qft_5,CL2,,False,SURVIVED,True
+qft_5#e13,qft_5,CL2,,False,SURVIVED,True
+qft_5#e14,qft_5,CL2,,False,SURVIVED,True
+qft_5#e15,qft_5,CL2,,False,SURVIVED,True
+qft_5#e16,qft_5,CL3,,False,SURVIVED,True
+qft_5#e17,qft_5,NA_KILLED,,True,KILLED,True
+qft_5#e18,qft_5,CL2,,False,SURVIVED,True
+qft_5#e19,qft_5,CL3,,False,SURVIVED,True
+qft_5#e20,qft_5,NA_KILLED,,True,KILLED,True
+qft_5#e21,qft_5,NA_KILLED,,True,KILLED,True
+qft_5#e22,qft_5,CL3,,False,SURVIVED,True
+qft_5#e23,qft_5,CL2,,False,SURVIVED,True
+qft_5#e24,qft_5,CL2,,False,SURVIVED,True
+qft_5#e25,qft_5,CL3,,False,SURVIVED,True
+qft_5#e26,qft_5,CL3,,False,SURVIVED,True
+qft_5#e27,qft_5,CL2,,False,SURVIVED,True
+qft_5#e28,qft_5,CL2,,False,SURVIVED,True
+qft_5#e29,qft_5,CL2,,False,SURVIVED,True
+qft_6#e00,qft_6,CL2,,False,SURVIVED,True
+qft_6#e01,qft_6,CL3,,False,SURVIVED,True
+qft_6#e02,qft_6,CL2,,False,SURVIVED,True
+qft_6#e03,qft_6,CL2,,False,SURVIVED,True
+qft_6#e04,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e05,qft_6,CL3,,False,SURVIVED,True
+qft_6#e06,qft_6,CL2,,False,SURVIVED,True
+qft_6#e07,qft_6,CL3,,False,SURVIVED,True
+qft_6#e08,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e09,qft_6,CL2,,False,SURVIVED,True
+qft_6#e10,qft_6,CL2,,False,SURVIVED,True
+qft_6#e11,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e12,qft_6,CL2,,False,SURVIVED,True
+qft_6#e13,qft_6,CL4,zmask 6,True,KILLED,True
+qft_6#e14,qft_6,CL2,,False,SURVIVED,True
+qft_6#e15,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e16,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e17,qft_6,CL2,,False,SURVIVED,True
+qft_6#e18,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e19,qft_6,CL3,,False,SURVIVED,True
+qft_6#e20,qft_6,CL3,,False,SURVIVED,True
+qft_6#e21,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e22,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e23,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e24,qft_6,CL2,,False,SURVIVED,True
+qft_6#e25,qft_6,CL3,,False,SURVIVED,True
+qft_6#e26,qft_6,CL3,,False,SURVIVED,True
+qft_6#e27,qft_6,NA_KILLED,,True,KILLED,True
+qft_6#e28,qft_6,CL2,,False,SURVIVED,True
+qft_6#e29,qft_6,CL2,,False,SURVIVED,True
+simon_4#h00,simon_4,CL4,zmask 3,True,KILLED,True
+simon_4#h01,simon_4,CL4,zmask 3,True,KILLED,True
+simon_4#h02,simon_4,CL4,zmask 12,False,SURVIVED,True
+simon_4#h03,simon_4,CL4,zmask 12,False,SURVIVED,True
+simon_4#h04,simon_4,CL4,zmask 3,True,KILLED,True
+simon_4#h05,simon_4,CL4,zmask 3,True,KILLED,True
+simon_4#h06,simon_4,CL4,zmask 12,False,SURVIVED,True
+simon_4#h07,simon_4,CL4,zmask 12,False,SURVIVED,True
+simon_4#h08,simon_4,CL4,zmask 3,True,KILLED,True
+simon_4#h09,simon_4,CL4,zmask 3,True,KILLED,True
+simon_4#h10,simon_4,CL1,,False,SURVIVED,True
+simon_4#h11,simon_4,CL1,,False,SURVIVED,True
+simon_4#h12,simon_4,CL1,,False,SURVIVED,True
+simon_4#h13,simon_4,CL1,,False,SURVIVED,True
+simon_4#h14,simon_4,CL1,,False,SURVIVED,True
+simon_4#h15,simon_4,CL1,,False,SURVIVED,True
+simon_4#h16,simon_4,CL1,,False,SURVIVED,True
+simon_4#h17,simon_4,CL1,,False,SURVIVED,True
+simon_4#h18,simon_4,CL1,,False,SURVIVED,True
+simon_4#h19,simon_4,CL1,,False,SURVIVED,True
+simon_4#h20,simon_4,CL1,,False,SURVIVED,True
+simon_4#h21,simon_4,CL1,,False,SURVIVED,True
+simon_4#h22,simon_4,CL1,,False,SURVIVED,True
+simon_4#h23,simon_4,CL1,,False,SURVIVED,True
+simon_4#h24,simon_4,CL1,,False,SURVIVED,True
+simon_4#h25,simon_4,CL1,,False,SURVIVED,True
+simon_4#h26,simon_4,CL4,zmask 3,True,KILLED,True
+simon_4#h27,simon_4,CL1,,False,SURVIVED,True
+simon_4#h28,simon_4,CL4,zmask 3,True,KILLED,True
+simon_4#h29,simon_4,CL4,zmask 3,True,KILLED,True
+wstate_4#h00,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h01,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h02,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h03,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h04,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h05,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h06,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h07,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h08,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h09,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h10,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h11,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h12,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h13,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h14,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h15,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h16,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h17,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h18,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h19,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h20,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h21,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h22,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h23,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h24,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h25,wstate_4,CL1,,False,SURVIVED,True
+wstate_4#h26,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h27,wstate_4,NA_KILLED,,True,KILLED,True
+wstate_4#h28,wstate_4,NA_KILLED,,True,KILLED,True

@@ -1,0 +1,124 @@
+{
+ "P1_diagnosis": {
+  "subject": {
+   "qwalk_4": {
+    "mutants": 30,
+    "excluded_parse": 0,
+    "CL1": 7,
+    "NA_KILLED": 22,
+    "CL4": 1
+   },
+   "qwalk_5": {
+    "mutants": 30,
+    "excluded_parse": 0,
+    "Unresolved": 3,
+    "unresolved:OB13": 1,
+    "NA_KILLED": 20,
+    "CL1": 7,
+    "unresolved:relation R_T_inconsistent": 2
+   },
+   "rg_mult_8": {
+    "mutants": 30,
+    "excluded_parse": 0,
+    "CL4": 11,
+    "CL2": 5,
+    "CL3": 6,
+    "NA_KILLED": 8
+   },
+   "rg_mult_12": {
+    "mutants": 30,
+    "excluded_parse": 0,
+    "NA_KILLED": 14,
+    "CL2": 5,
+    "CL4": 10,
+    "CL3": 1
+   }
+  },
+  "family": {
+   "quantum_walk": {
+    "mutants": 60,
+    "excluded_parse": 0,
+    "CL1": 14,
+    "NA_KILLED": 42,
+    "CL4": 1,
+    "Unresolved": 3,
+    "unresolved:OB13": 1,
+    "unresolved:relation R_T_inconsistent": 2
+   },
+   "multiplication": {
+    "mutants": 60,
+    "excluded_parse": 0,
+    "CL4": 21,
+    "CL2": 10,
+    "CL3": 7,
+    "NA_KILLED": 22
+   }
+  },
+  "overall": {
+   "all": {
+    "mutants": 120,
+    "excluded_parse": 0,
+    "CL1": 14,
+    "NA_KILLED": 64,
+    "CL4": 22,
+    "Unresolved": 3,
+    "unresolved:OB13": 1,
+    "unresolved:relation R_T_inconsistent": 2,
+    "CL2": 10,
+    "CL3": 7
+   }
+  }
+ },
+ "P2_certification": {
+  "cl4_candidates": 23,
+  "certified": 22,
+  "withheld_by_unmet": {
+   "OB13": 1
+  }
+ },
+ "P3_B_Bprime_C": {
+  "B": {
+   "issued:supported_repair": 22,
+   "issued:kill_failure": 1
+  },
+  "Bprime_repair": {
+   "abstained:supported_repair": 22,
+   "abstained:kill_failure": 1
+  },
+  "Bprime_full": {
+   "abstained:supported_repair": 22,
+   "abstained:kill_failure": 1
+  },
+  "C": {
+   "issued:supported_repair": 22,
+   "abstained:kill_failure": 1
+  },
+  "bound_contradictions": []
+ },
+ "P4_observation": {
+  "consistent": 7
+ },
+ "R5_disagreements": {
+  "certified_not_supported": [],
+  "conservative_C_abstentions": []
+ },
+ "flags": {
+  "actionability_inconclusive": false,
+  "observation_validation_absent": false,
+  "d1_stability_insufficient": false,
+  "d2_stability_insufficient": false,
+  "unresolved_share_over_half": false,
+  "unresolved_share": [
+   3,
+   56,
+   [
+    0.0184,
+    0.1461
+   ]
+  ]
+ },
+ "D1_by_C_report": {
+  "CL4|supported_repair": 22,
+  "Unresolved|kill_failure": 1
+ }
+}

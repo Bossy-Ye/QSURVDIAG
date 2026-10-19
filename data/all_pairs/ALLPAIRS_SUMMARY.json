@@ -1,0 +1,49 @@
+{
+ "settings": {
+  "N": 8000,
+  "R": 12,
+  "theta": 0.05,
+  "val_mutant_seeds": [
+   11042,
+   11043,
+   11044,
+   11045,
+   11046,
+   11047,
+   11048,
+   11049,
+   11050,
+   11051,
+   11052,
+   11053
+  ],
+  "val_original_seeds": [
+   12042,
+   12043,
+   12044,
+   12045,
+   12046,
+   12047,
+   12048,
+   12049,
+   12050,
+   12051,
+   12052,
+   12053
+  ]
+ },
+ "population": {
+  "cases": 210,
+  "corpus": 187,
+  "mqt": 23
+ },
+ "reference_generation_seconds": 0.446,
+ "diagnosis_seconds_total": 10.53,
+ "native_wall_seconds": 4343.7,
+ "executions": 7200,
+ "shots": 57600000,
+ "distinct_histograms": 2859,
+ "histogram_identity_violations": [],
+ "workers": 4,
+ "machine": "Linux-6.18.44-fc-v139-x86_64-with-glibc2.39"
+}

@@ -1,0 +1,293 @@
+{
+ "manifest_id": "E5_CLOSURE_MANIFEST",
+ "execution_commit": "764eceb",
+ "execution_manifest": "E5_ARTIFACT_MANIFEST.json, preserved unchanged",
+ "raw_execution_ledgers_unchanged": [
+  "E5_NATIVE_RAW.jsonl",
+  "E5_RELATION_RAW.json",
+  "E5_QUTEST_EXECUTIONS.jsonl",
+  "E5_VERDICT_STABILITY.json"
+ ],
+ "status": "IMMUTABLE",
+ "artifacts": {
+  "E5_ACCOUNTING_NOTE.json": {
+   "sha256": "c29c31e5156259d35da079cd6c070330699bfcf96b198e3036ba9de5166e3231",
+   "bytes": 11847,
+   "changed_since_execution_commit": false,
+   "new_at_closure": true
+  },
+  "E5_ACCOUNTING_NOTE.sha256": {
+   "sha256": "813adb0458012530ca5a557e2590a0c1d5483a8ecefe2d799e858490dfc06048",
+   "bytes": 90,
+   "changed_since_execution_commit": false,
+   "new_at_closure": true
+  },
+  "E5_ACCOUNTING_TABLE.csv": {
+   "sha256": "0b52f6c6e0a01279aad08ae3d28f81b15553cc22f967f0a0cb00ae0bd4c0d0f5",
+   "bytes": 12257,
+   "changed_since_execution_commit": false,
+   "new_at_closure": true
+  },
+  "E5_ADAPTER_VALIDATION.csv": {
+   "sha256": "3f003d194cda720c4b9411fa1fc4829bf418281e87e0dccab5a559f06f613bb3",
+   "bytes": 1563,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_DEFECT_MANIFEST.csv": {
+   "sha256": "4f22394170fd3d72984921a4d438b1f177c11ec38b40ce8c403bedb7c6fa5fa4",
+   "bytes": 37525,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_E9_CONCORDANCE.json": {
+   "sha256": "5b35699333dcead816a81f3861a944d584070b5a103391bd5ddd00e2daee9909",
+   "bytes": 868,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_ENVIRONMENT_LOCK.json": {
+   "sha256": "feca768d109de456b4f49ab33154bf9f666a8fc1d2a0f4e76df6ab22c1993762",
+   "bytes": 3412,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_EVIDENCE_DEPTH.csv": {
+   "sha256": "1c36fd42a4a5139200cc0af1702ab25846eebd80eb92281faa7ce48d35e0479a",
+   "bytes": 2820,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_EXTERNAL_LABEL_COMPARISON.csv": {
+   "sha256": "bdb8683d0ead631089ee19b76fe80466b7fdf06a52907fd3b1ef17148b557d03",
+   "bytes": 7076,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_GLOBAL_PHASE_CASE.json": {
+   "sha256": "de07840bbd2007663397edab47d78597c56382d9c0adccaaaa2b215d4a532f0c",
+   "bytes": 1693,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_LABEL_SUMMARY.json": {
+   "sha256": "603f2b9a04da72ffd7673df6d455638c35fb8cb674afbd8ef4682e00fc39710d",
+   "bytes": 1667,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_NATIVE_DIAGNOSTIC_TABLE.csv": {
+   "sha256": "3c8de899d8036fbd1afc3debe7bce16e74271d12410764743aec339c2633b14d",
+   "bytes": 15201,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_NATIVE_RAW.jsonl": {
+   "sha256": "49ae43bf2cc9c98717a412aa9cd764f8f899386b3567208b02e80d466fec11f0",
+   "bytes": 148898,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_NATIVE_REPRODUCTION.csv": {
+   "sha256": "38dbc53928a1c913b65f21211b34f6d9e2fbef63baef338c27d710bdec352f4f",
+   "bytes": 11902,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_PROCEDURE_HASH.json": {
+   "sha256": "a70d6f9cec9cb62cad0b5fde23f91117551393f46c848bfad552d1da4ca92abb",
+   "bytes": 183,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_PROVENANCE_EVIDENCE.json": {
+   "sha256": "684a45022099a4fa44e0b7d17012d1031a2a7a39d60f71ff43c3abb9ce273204",
+   "bytes": 51894,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_QUTEST_DIAGNOSTICS.csv": {
+   "sha256": "a14d2348904ea3b407e09fc94e2011b6ba3e7c36e7f6fba1009290d3630c930c",
+   "bytes": 884,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_QUTEST_ELIGIBILITY.csv": {
+   "sha256": "12922de64b04c2f8e28e815fa1466f782f92e186f69e95317e4fd25685c9f839",
+   "bytes": 9157,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_QUTEST_EXECUTIONS.jsonl": {
+   "sha256": "c841caec7629eb6f5c6ac08edc7b444e2b21a53bc87b359da9e6d860fc5f7b79",
+   "bytes": 6710,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_QUTEST_GATE_PROBE.json": {
+   "sha256": "7eceadc8947897e586d898adc73d8a010086683a962e15d39c92b229e53b4f24",
+   "bytes": 1947,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_RELATION_RAW.json": {
+   "sha256": "2bfba984de72648b7e915e578418207551e6b9ca6b76841eee66a40da6949940",
+   "bytes": 106559,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_RELATION_TABLE.csv": {
+   "sha256": "65e13785815fe03f73855dc3e0fdc412efb2945ee01f850c06c958a4569838a6",
+   "bytes": 17273,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_RESULTS.md": {
+   "sha256": "01e9a1f929070fc82889789f02f86cd9d9f67b65dd44702655c68d2167f57eb2",
+   "bytes": 15859,
+   "changed_since_execution_commit": true,
+   "new_at_closure": false
+  },
+  "E5_TARGETED_CL3_CASE.json": {
+   "sha256": "b67b3d42e83c217a9642477c75ce392b7a13036841156017de70de1e42e4de87",
+   "bytes": 3298,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_TRANSLATION_RAW.json": {
+   "sha256": "7fb33e111ca4f2df0d30af0ead33acf93bf73e3a3ba4c3a0362b4842d78281a6",
+   "bytes": 73269,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "E5_VERDICT_STABILITY.json": {
+   "sha256": "8aa7869fc28e8eb0b621147f33ed91b7e9646be6b79e3cdc93fb657782cf9e71",
+   "bytes": 27713,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_01_environments.py": {
+   "sha256": "1f2a4ca50d2c5445b02c3ba256c1d87c4884bec4840b12e4689e8da3eb5eb4f0",
+   "bytes": 4345,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_02_native.py": {
+   "sha256": "3a607e15d6d70b5fc3db6b7c2cdb9ce568036a48a07a2473313d67966051d1c0",
+   "bytes": 6376,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_03_reproduction.py": {
+   "sha256": "c27172e8d5455cab138bf0d8c1617729e97b1f3135cbee3c30fb8f21517d4f5e",
+   "bytes": 6885,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_04_provenance.py": {
+   "sha256": "5beefa1273e5b3ea79f7c2b4f18d2a05cf6a0b53f0a87e663687c298dde3492a",
+   "bytes": 7320,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_05_relations.py": {
+   "sha256": "9151616d9946a0a23dd7320b7b38cee4c7c0a6337b07ba0e5c8f93d99f629711",
+   "bytes": 9444,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_06_stability.py": {
+   "sha256": "1112c93f134494c364602104fe312b84e0680585b8e126311562c050dac34b0d",
+   "bytes": 5423,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_07_qutest_eligibility.py": {
+   "sha256": "bd31f05d36fef56723d343c21fcc00cb9f6679cadb58c1c65e0fe9e21e0f4da4",
+   "bytes": 8816,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_08_native_diagnosis.py": {
+   "sha256": "e335163b59ee4a9e90f39fa600f559509f1c71ca80b72cdbbda7cc6701a926c1",
+   "bytes": 9832,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_09_manifest.py": {
+   "sha256": "ca605ad77b142014a6dd513cb4ca546fc8501dc335d4e77fbf069d31da3a3af6",
+   "bytes": 4998,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_10_global_phase.py": {
+   "sha256": "07f247af8e7b2aecaf83758fd3c657079453be23dec00fdaf026b95af1fc8a8a",
+   "bytes": 4863,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_11_qutest_exec.py": {
+   "sha256": "e7266dc0f49b537c62fcd92078e0622b801d4e2e5b50577ae0865c69b98cfc2c",
+   "bytes": 5517,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_12_qutest_diagnostics.py": {
+   "sha256": "22625320e1b6c9373d6f6fecf4dee0b62dd120e63a4ad479fc32fb15cbfb7215",
+   "bytes": 5858,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_13_targeted_cl3.py": {
+   "sha256": "2d80f6a99ac72e0cbcaef6d8592eb3fb7e9c7d91a1dbee6cba29994ec7221f78",
+   "bytes": 8617,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_14_labels.py": {
+   "sha256": "50cbbfa97b0590883c6049ece52b6730ed73d1432510113eda60c4ce960c1412",
+   "bytes": 5139,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_15_final.py": {
+   "sha256": "0db1120a29547bbcc803ee5cd4c05ea011f9de4868ec907e9003d9e97c033aec",
+   "bytes": 9093,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_16_accounting.py": {
+   "sha256": "f4aab4e20dff62ccef759b67557c27d11491b99e8083c94eea987d9ecb9f5242",
+   "bytes": 15448,
+   "changed_since_execution_commit": false,
+   "new_at_closure": true
+  },
+  "e5_17_closure.py": {
+   "sha256": "6a542183b1d272e719231139dffab7dbd7e282bcfb8b5d15346010d7165ef495",
+   "bytes": 2272,
+   "changed_since_execution_commit": false,
+   "new_at_closure": true
+  },
+  "e5_extract_worker.py": {
+   "sha256": "415c8b3507c2e8fb2cd5d8257ff2d6374252475ba69be35fa04fa8e341104ce3",
+   "bytes": 12308,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  },
+  "e5_translate_worker.py": {
+   "sha256": "a8f9a896762c9039f5285cd8b13a95cbc7666d6ce77d8095243b5a0483df676f",
+   "bytes": 4121,
+   "changed_since_execution_commit": false,
+   "new_at_closure": false
+  }
+ },
+ "changed_since_execution_commit": [
+  "E5_RESULTS.md"
+ ],
+ "raw_ledger_integrity": {
+  "E5_NATIVE_RAW.jsonl": true,
+  "E5_RELATION_RAW.json": true,
+  "E5_QUTEST_EXECUTIONS.jsonl": true,
+  "E5_VERDICT_STABILITY.json": true
+ }
+}

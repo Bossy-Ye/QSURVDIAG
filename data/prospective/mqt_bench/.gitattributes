@@ -1,0 +1,2 @@
+# byte-exact: every file in this package is checksummed in freeze/*.sha256
+* -text

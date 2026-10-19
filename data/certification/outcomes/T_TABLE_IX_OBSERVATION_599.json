@@ -1,0 +1,42 @@
+[
+  {
+    "edge": "Z: output -> all qubits",
+    "pairs": 193,
+    "clusters": 15,
+    "leave": 55,
+    "enter": 0,
+    "effect": 0.285,
+    "ci95": "[0.013, 0.481]",
+    "loco": "[0.217, 0.322]"
+  },
+  {
+    "edge": "output: Z -> XYZ",
+    "pairs": 193,
+    "clusters": 15,
+    "leave": 30,
+    "enter": 0,
+    "effect": 0.1554,
+    "ci95": "[0.073, 0.230]",
+    "loco": "[0.132, 0.174]"
+  },
+  {
+    "edge": "all qubits: Z -> XYZ",
+    "pairs": 193,
+    "clusters": 15,
+    "leave": 35,
+    "enter": 0,
+    "effect": 0.1813,
+    "ci95": "[0.106, 0.267]",
+    "loco": "[0.161, 0.199]"
+  },
+  {
+    "edge": "XYZ: output -> all qubits",
+    "pairs": 193,
+    "clusters": 15,
+    "leave": 60,
+    "enter": 0,
+    "effect": 0.3109,
+    "ci95": "[0.078, 0.502]",
+    "loco": "[0.246, 0.351]"
+  }
+]

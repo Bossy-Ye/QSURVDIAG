@@ -1,0 +1,22 @@
+{
+ "construction": {
+  "pairs": 52,
+  "always_separated": 28,
+  "never_separated": 10,
+  "sometimes_separated": 14,
+  "mean_separated_per_trial": 36.5,
+  "originals": 11,
+  "originals_with_varying_gate_set": 6,
+  "originals_failing_own_assertion_some_trial": 6
+ },
+ "prospective": {
+  "pairs": 33,
+  "always_separated": 19,
+  "never_separated": 14,
+  "sometimes_separated": 0,
+  "mean_separated_per_trial": 19.0,
+  "originals": 2,
+  "originals_with_varying_gate_set": 0,
+  "originals_failing_own_assertion_some_trial": 0
+ }
+}

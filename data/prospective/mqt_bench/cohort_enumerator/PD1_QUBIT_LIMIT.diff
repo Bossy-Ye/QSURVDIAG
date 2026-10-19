@@ -1,0 +1,11 @@
+--- rq3_feasibility_gate/core/gate_config.py	2026-07-24 09:30:17
++++ prospective_mqt/cohort_enumerator/rq3_cohort/core/gate_config.py	2026-10-09 08:25:37
+@@ -42,7 +42,7 @@
+     ("qaoa",      6, "qops_only", ("qops",)),
+ ]
+ N_INSTANCES = 11
+-QUBIT_LIMIT = 10                       # frozen fragment qubit cap
++QUBIT_LIMIT = 14                       # cohort-specific (Pass 3B PD-1): historical cap 10 raised to the certified envelope 14
+ 
+ # GHZ / graph-state stay OUT of the primary corpus (prior runs showed low pre-cert eligibility
+ # for the examined entangler mutations); they remain available only as qualification controls.

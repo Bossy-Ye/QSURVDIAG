@@ -1,0 +1,39 @@
+{
+  "cl3_rate_by_mutation_kind": {
+    "deletion": {
+      "cl3": 17,
+      "n": 49,
+      "rate": 0.3469
+    },
+    "insertion": {
+      "cl3": 63,
+      "n": 242,
+      "rate": 0.2603
+    },
+    "other": {
+      "cl3": 0,
+      "n": 137,
+      "rate": 0.0
+    },
+    "replacement_diagonal_to_diagonal": {
+      "cl3": 2,
+      "n": 6,
+      "rate": 0.3333
+    },
+    "replacement_diagonal_to_nondiagonal": {
+      "cl3": 5,
+      "n": 41,
+      "rate": 0.122
+    },
+    "replacement_nondiagonal_to_diagonal": {
+      "cl3": 5,
+      "n": 244,
+      "rate": 0.0205
+    }
+  },
+  "diagonal_stratum_cl3": 92,
+  "diagonal_stratum_size": 719,
+  "reading": "The variable is a structural proxy, not an entailment class. Inserting or removing a diagonal operator preserves every computational-basis probability only when no non-diagonal operator follows it, so the stratum certifies CL3 at 12.8 percent rather than at a near-certainty. This is why the stratum is presented as a construction-confirmation arm and not as an entailed class, and why the non-diagonal stratum remains the estimate.",
+  "record_id": "BATCH2_TASK_2A_STRATUM_MECHANISM",
+  "stratification_variable": "does the origin-to-mutant gate-list difference touch any of z, s, sdg, t, tdg, rz, p, u1, cp, cu1, cz, rzz, id"
+}

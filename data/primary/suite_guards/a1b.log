@@ -1,0 +1,84 @@
+subject          suite     assn  sampled-ref guard   exact-ref guard
+  bv_4             S_MIN        3  CLEAN       0/12   CLEAN       0/12
+  bv_4             S_COVER      4  CLEAN       0/12   CLEAN       0/12
+  bv_4             S_FAMILY     5  CLEAN       0/12   CLEAN       0/12
+  bv_4             S_BOTH       7  CLEAN       0/12   CLEAN       0/12
+  bv_5             S_MIN        4  CLEAN       0/12   CLEAN       0/12
+  bv_5             S_COVER      5  CLEAN       0/12   CLEAN       0/12
+  bv_5             S_FAMILY     7  CLEAN       0/12   CLEAN       0/12
+  bv_5             S_BOTH       9  FALSE_FAIL  8/12   CLEAN       0/12  <-- cleared
+  bv_7             S_MIN        6  CLEAN       0/12   CLEAN       0/12
+  bv_7             S_COVER      7  CLEAN       0/12   CLEAN       0/12
+  bv_7             S_FAMILY    11  CLEAN       0/12   CLEAN       0/12
+  bv_7             S_BOTH      13  CLEAN       0/12   CLEAN       0/12
+  cuccaro_adder_5  S_MIN        2  CLEAN       0/12   CLEAN       0/12
+  cuccaro_adder_5  S_COVER      5  CLEAN       0/12   CLEAN       0/12
+  cuccaro_adder_5  S_FAMILY     3  CLEAN       0/12   CLEAN       0/12
+  cuccaro_adder_5  S_BOTH       9  CLEAN       0/12   CLEAN       0/12
+  dj_3             S_MIN        2  CLEAN       0/12   CLEAN       0/12
+  dj_3             S_COVER      3  CLEAN       0/12   CLEAN       0/12
+  dj_3             S_FAMILY     3  CLEAN       0/12   CLEAN       0/12
+  dj_3             S_BOTH       5  CLEAN       0/12   CLEAN       0/12
+  dj_4             S_MIN        3  CLEAN       0/12   CLEAN       0/12
+  dj_4             S_COVER      4  CLEAN       0/12   CLEAN       0/12
+  dj_4             S_FAMILY     5  CLEAN       0/12   CLEAN       0/12
+  dj_4             S_BOTH       7  CLEAN       0/12   CLEAN       0/12
+  ghz_4            S_MIN        1  CLEAN       0/12   CLEAN       0/12
+  ghz_4            S_COVER      4  CLEAN       0/12   CLEAN       0/12
+  ghz_4            S_FAMILY     1  CLEAN       0/12   CLEAN       0/12
+  ghz_4            S_BOTH       7  CLEAN       0/12   CLEAN       0/12
+  ghz_5            S_MIN        1  CLEAN       0/12   CLEAN       0/12
+  ghz_5            S_COVER      5  CLEAN       0/12   CLEAN       0/12
+  ghz_5            S_FAMILY     1  CLEAN       0/12   CLEAN       0/12
+  ghz_5            S_BOTH       9  CLEAN       0/12   CLEAN       0/12
+  ghz_7            S_MIN        1  CLEAN       0/12   CLEAN       0/12
+  ghz_7            S_COVER      7  CLEAN       0/12   CLEAN       0/12
+  ghz_7            S_FAMILY     1  CLEAN       0/12   CLEAN       0/12
+  ghz_7            S_BOTH      13  CLEAN       0/12   CLEAN       0/12
+  grover_3         S_MIN        3  CLEAN       0/12   CLEAN       0/12
+  grover_3         S_COVER      3  CLEAN       0/12   CLEAN       0/12
+  grover_3         S_FAMILY     5  CLEAN       0/12   CLEAN       0/12
+  grover_3         S_BOTH       5  CLEAN       0/12   CLEAN       0/12
+  grover_5         S_MIN        5  CLEAN       0/12   CLEAN       0/12
+  grover_5         S_COVER      5  CLEAN       0/12   CLEAN       0/12
+  grover_5         S_FAMILY     9  CLEAN       0/12   FALSE_FAIL  1/12
+  grover_5         S_BOTH       9  CLEAN       0/12   FALSE_FAIL  1/12
+  qft_4            S_MIN        4  CLEAN       0/12   CLEAN       0/12
+  qft_4            S_COVER      4  CLEAN       0/12   CLEAN       0/12
+  qft_4            S_FAMILY     7  FALSE_FAIL  4/12   FALSE_FAIL  1/12
+  qft_4            S_BOTH       7  FALSE_FAIL  4/12   FALSE_FAIL  1/12
+  qft_5            S_MIN        5  CLEAN       0/12   CLEAN       0/12
+  qft_5            S_COVER      5  CLEAN       0/12   CLEAN       0/12
+  qft_5            S_FAMILY     9  FALSE_FAIL  4/12   FALSE_FAIL  1/12
+  qft_5            S_BOTH       9  FALSE_FAIL  4/12   FALSE_FAIL  1/12
+  qft_6            S_MIN        6  CLEAN       0/12   CLEAN       0/12
+  qft_6            S_COVER      6  CLEAN       0/12   CLEAN       0/12
+  qft_6            S_FAMILY    11  FALSE_FAIL  6/12   FALSE_FAIL  1/12
+  qft_6            S_BOTH      11  FALSE_FAIL  6/12   FALSE_FAIL  1/12
+  qpe_5            S_MIN        4  CLEAN       0/12   CLEAN       0/12
+  qpe_5            S_COVER      5  CLEAN       0/12   CLEAN       0/12
+  qpe_5            S_FAMILY     7  CLEAN       0/12   CLEAN       0/12
+  qpe_5            S_BOTH       9  CLEAN       0/12   CLEAN       0/12
+  qpe_6            S_MIN        5  CLEAN       0/12   CLEAN       0/12
+  qpe_6            S_COVER      6  CLEAN       0/12   CLEAN       0/12
+  qpe_6            S_FAMILY     9  CLEAN       0/12   CLEAN       0/12
+  qpe_6            S_BOTH      11  CLEAN       0/12   CLEAN       0/12
+  simon_4          S_MIN        2  CLEAN       0/12   CLEAN       0/12
+  simon_4          S_COVER      4  CLEAN       0/12   CLEAN       0/12
+  simon_4          S_FAMILY     3  CLEAN       0/12   CLEAN       0/12
+  simon_4          S_BOTH       7  FALSE_FAIL  1/12   FALSE_FAIL  1/12
+  swaptest_5       S_MIN        1  CLEAN       0/12   CLEAN       0/12
+  swaptest_5       S_COVER      5  CLEAN       0/12   CLEAN       0/12
+  swaptest_5       S_FAMILY     1  CLEAN       0/12   CLEAN       0/12
+  swaptest_5       S_BOTH       9  CLEAN       0/12   CLEAN       0/12
+  toffoli_barenco_5 S_MIN        4  CLEAN       0/12   CLEAN       0/12
+  toffoli_barenco_5 S_COVER      5  CLEAN       0/12   CLEAN       0/12
+  toffoli_barenco_5 S_FAMILY     7  CLEAN       0/12   CLEAN       0/12
+  toffoli_barenco_5 S_BOTH       9  CLEAN       0/12   CLEAN       0/12
+  wstate_4         S_MIN        4  CLEAN       0/12   CLEAN       0/12
+  wstate_4         S_COVER      4  CLEAN       0/12   CLEAN       0/12
+  wstate_4         S_FAMILY     7  FALSE_FAIL  1/12   CLEAN       0/12  <-- cleared
+  wstate_4         S_BOTH       7  FALSE_FAIL  1/12   CLEAN       0/12  <-- cleared
+
+guard-invalid cells: 10 with a sampled reference -> 9 with an exact reference
+elapsed 782s

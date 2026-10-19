@@ -1,0 +1,7 @@
+n=2 | circuit vs ref_m1 F_H 0.999999 | circuit vs ref_m2 F_H 0.999985 | J=1: state fid 0.995791, exact vs ref_m2 F_H 1.000000 | J=pi/2: state fid 0.999516, exact vs ref_m2 F_H 0.999983
+n=3 | circuit vs ref_m1 F_H 0.999962 | circuit vs ref_m2 F_H 0.999950 | J=1: state fid 0.993618, exact vs ref_m2 F_H 1.000000 | J=pi/2: state fid 0.999256, exact vs ref_m2 F_H 0.999942
+n=4 | circuit vs ref_m1 F_H 0.999977 | circuit vs ref_m2 F_H 0.999891 | J=1: state fid 0.989470, exact vs ref_m2 F_H 1.000000 | J=pi/2: state fid 0.998762, exact vs ref_m2 F_H 0.999876
+n=5 | circuit vs ref_m1 F_H 0.999928 | circuit vs ref_m2 F_H 0.999833 | J=1: state fid 0.985624, exact vs ref_m2 F_H 1.000000 | J=pi/2: state fid 0.998332, exact vs ref_m2 F_H 0.999809
+n=6 | circuit vs ref_m1 F_H 0.999843 | circuit vs ref_m2 F_H 0.999783 | J=1: state fid 0.981629, exact vs ref_m2 F_H 1.000000 | J=pi/2: state fid 0.997873, exact vs ref_m2 F_H 0.999752
+n=7 | circuit vs ref_m1 F_H 0.999577 | circuit vs ref_m2 F_H 0.999730 | J=1: state fid 0.977628, exact vs ref_m2 F_H 1.000000 | J=pi/2: state fid 0.997408, exact vs ref_m2 F_H 0.999692
+n=8 | circuit vs ref_m1 F_H 0.999026 | circuit vs ref_m2 F_H 0.999678 | J=1: state fid 0.973643, exact vs ref_m2 F_H 1.000000 | J=pi/2: state fid 0.996943, exact vs ref_m2 F_H 0.999632

@@ -1,0 +1,11 @@
+L2 outcome digest (sha256 over all outcome-bearing fields; excludes QUTest's
+wall-clock 'detail' string, which is not reproducible across runs).
+
+digest                 3b44d68e7937b40a48ed07ea15bb9531e289333d3e243f7f11c1a4c89f13eee2
+independent re-run     3b44d68e7937b40a48ed07ea15bb9531e289333d3e243f7f11c1a4c89f13eee2
+match                  true
+reps compared          3240 (270 mutants x 12)
+per-repetition verdicts identical: true
+per-repetition seeds identical: true
+native verdicts identical: 270/270
+kills_recorded identical: 270/270

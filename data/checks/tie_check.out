@@ -1,0 +1,4 @@
+(pair, theta) cells using the largest-difference fallback: 1324
+  of these, cells whose maximum is attained within 1e-12 by instances of more than one kind: 1273
+  tied kind sets: {('entropy', 'hellinger', 'kl', 'marginal', 'prob', 'tvd', 'zmask'): 1272, ('entropy', 'zmask'): 1}
+  examples: [('bv_4#e01', 0.01, 0.0, ['entropy', 'hellinger', 'kl', 'marginal', 'prob', 'tvd', 'zmask']), ('bv_4#e01', 0.025, 0.0, ['entropy', 'hellinger', 'kl', 'marginal', 'prob', 'tvd', 'zmask']), ('bv_4#e01', 0.05, 0.0, ['entropy', 'hellinger', 'kl', 'marginal', 'prob', 'tvd', 'zmask']), ('bv_4#e01', 0.1, 0.0, ['entropy', 'hellinger', 'kl', 'marginal', 'prob', 'tvd', 'zmask']), ('bv_4#e01', 0.25, 0.0, ['entropy', 'hellinger', 'kl', 'marginal', 'prob', 'tvd', 'zmask'])]

@@ -1,0 +1,139 @@
+{
+ "adapter_version": "1.0.0",
+ "adapter_hash": "352ad00daf0de71a2b1e8eeac6f9d1dce64e3d55c5d35cfd55ae6723a1eee254",
+ "mapping": {
+  "u": "u3"
+ },
+ "per_circuit_special_cases": 0,
+ "affected_originals": 6,
+ "validated": 3,
+ "still_blocked": 3,
+ "cases": [
+  {
+   "origin": "SBS_005_origin.qasm",
+   "n": 11,
+   "qiskit_names": [
+    "rx",
+    "rzz",
+    "u"
+   ],
+   "emitted_names": [
+    "rx",
+    "rzz",
+    "u3"
+   ],
+   "mapping_applied": "u -> u3",
+   "exact_state_equal": true,
+   "exact_tolerance": 1e-09,
+   "residual_unsupported": [
+    "rzz"
+   ],
+   "qutest_verdict": "UNSUPPORTED",
+   "qutest_detail": "1 errors in 0.11s (1 total)",
+   "adapter_accepts": false
+  },
+  {
+   "origin": "SBS_032_origin.qasm",
+   "n": 14,
+   "qiskit_names": [
+    "cx",
+    "u"
+   ],
+   "emitted_names": [
+    "cx",
+    "u3"
+   ],
+   "mapping_applied": "u -> u3",
+   "exact_state_equal": true,
+   "exact_tolerance": 1e-09,
+   "residual_unsupported": [],
+   "qutest_verdict": "SURVIVED",
+   "qutest_detail": "1 passed in 0.21s (1 total)",
+   "adapter_accepts": true
+  },
+  {
+   "origin": "SBS_033_origin.qasm",
+   "n": 11,
+   "qiskit_names": [
+    "rx",
+    "rzz",
+    "u"
+   ],
+   "emitted_names": [
+    "rx",
+    "rzz",
+    "u3"
+   ],
+   "mapping_applied": "u -> u3",
+   "exact_state_equal": true,
+   "exact_tolerance": 1e-09,
+   "residual_unsupported": [
+    "rzz"
+   ],
+   "qutest_verdict": "UNSUPPORTED",
+   "qutest_detail": "1 errors in 0.10s (1 total)",
+   "adapter_accepts": false
+  },
+  {
+   "origin": "SBS_048_origin.qasm",
+   "n": 12,
+   "qiskit_names": [
+    "cx",
+    "u"
+   ],
+   "emitted_names": [
+    "cx",
+    "u3"
+   ],
+   "mapping_applied": "u -> u3",
+   "exact_state_equal": true,
+   "exact_tolerance": 1e-09,
+   "residual_unsupported": [],
+   "qutest_verdict": "SURVIVED",
+   "qutest_detail": "1 passed in 0.18s (1 total)",
+   "adapter_accepts": true
+  },
+  {
+   "origin": "SBS_063_origin.qasm",
+   "n": 14,
+   "qiskit_names": [
+    "cx",
+    "u"
+   ],
+   "emitted_names": [
+    "cx",
+    "u3"
+   ],
+   "mapping_applied": "u -> u3",
+   "exact_state_equal": true,
+   "exact_tolerance": 1e-09,
+   "residual_unsupported": [],
+   "qutest_verdict": "SURVIVED",
+   "qutest_detail": "1 passed in 0.21s (1 total)",
+   "adapter_accepts": true
+  },
+  {
+   "origin": "SBS_093_origin.qasm",
+   "n": 11,
+   "qiskit_names": [
+    "rx",
+    "rzz",
+    "u"
+   ],
+   "emitted_names": [
+    "rx",
+    "rzz",
+    "u3"
+   ],
+   "mapping_applied": "u -> u3",
+   "exact_state_equal": true,
+   "exact_tolerance": 1e-09,
+   "residual_unsupported": [
+    "rzz"
+   ],
+   "qutest_verdict": "UNSUPPORTED",
+   "qutest_detail": "1 errors in 0.10s (1 total)",
+   "adapter_accepts": false
+  }
+ ]
+}

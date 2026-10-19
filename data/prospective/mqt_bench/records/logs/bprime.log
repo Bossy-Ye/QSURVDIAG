@@ -1,0 +1,2 @@
+CL4 candidates with stable survival: 23
+../.venv-qutest-audit/bin/python -u code/bprime.py  0.02s user 0.01s system 62% cpu 0.044 total

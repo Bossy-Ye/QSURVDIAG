@@ -1,0 +1,15 @@
+pair,n,candidate,U(P)_hellinger_d,T_E_original_fails_cert,T_E_counterpart_kills_cert,Tprime_original_fails_cert,Tprime_counterpart_kills_cert,Tprime_original_fails_val,Tprime_counterpart_kills_val,Tprime_original_hellinger_mean,T_E_original_hellinger_mean,baseline_valid,certify_raw,certify_unmet,reported,runner_raw_report_under_T,B_combined_original_fails_val,B_combined_counterpart_kills_val,X_original_guard,X_counterpart_cert,X_original_val,X_counterpart_val,X_supported
+natural,2,CL5,0.002809824448981882,0,0,0,0,0,0,0.013097916666666667,0.013110750000000003,True,CL5,,CL5,CL5,0/12,0/12,-,-,-,-,False
+natural,3,CL5,0.005174779092871763,0,0,0,0,0,0,0.019001166666666666,0.018999416666666668,True,CL5,,CL5,CL5,0/12,0/12,0/3,11/12,0/12,12/12,True
+natural,4,CL5,0.007594785624840251,0,0,0,0,0,0,0.029644,0.02964433333333334,True,CL5,,CL5,CL5,0/12,0/12,0/3,11/12,0/12,11/12,False
+natural,5,CL5,0.00940549857510304,10,9,10,9,9,9,0.05539483333333334,0.055391666666666665,False,Unresolved,OB03,not evaluable (original-validity check failed),Unresolved,9/12,9/12,0/3,10/12,0/12,11/12,False
+natural,6,CL4,0.010718800250858116,12,12,12,12,12,12,0.07355091666666666,0.07353341666666667,False,Unresolved,OB02;OB13,not evaluable (original-validity check failed),Unresolved,12/12,12/12,0/3,10/12,0/12,11/12,False
+natural,7,CL4,0.011951221956756646,12,12,12,12,12,12,0.08323875,0.083218,False,Unresolved,OB02;OB13,not evaluable (original-validity check failed),Unresolved,12/12,12/12,0/3,10/12,0/12,11/12,False
+natural,8,CL4,0.013057322164603195,12,12,12,12,12,12,0.09778775,0.09774925000000001,False,Unresolved,OB02;OB13,not evaluable (original-validity check failed),Unresolved,12/12,12/12,0/3,10/12,0/12,11/12,False
+constructed,2,CL3,0.0,0,0,0,0,0,0,0.013097916666666667,0.013110750000000003,True,CL3,,CL3,CL3,0/12,0/12,0/3,12/12,0/12,12/12,True
+constructed,3,CL3,0.0,0,0,0,0,0,0,0.019001166666666666,0.018999416666666668,True,CL3,,CL3,CL3,0/12,0/12,0/3,12/12,0/12,12/12,True
+constructed,4,CL3,0.0,0,0,0,0,0,0,0.029644,0.02964433333333334,True,CL3,,CL3,CL3,0/12,0/12,0/3,12/12,0/12,12/12,True
+constructed,5,CL3,0.0,10,10,10,10,9,8,0.05539483333333334,0.055391666666666665,False,Unresolved,OB03,not evaluable (original-validity check failed),Unresolved,9/12,8/12,0/3,12/12,0/12,12/12,True
+constructed,6,CL3,0.0,12,12,12,12,12,12,0.07355091666666666,0.07353341666666667,False,CL3,,not evaluable (original-validity check failed),CL3,12/12,12/12,0/3,12/12,0/12,12/12,True
+constructed,7,CL3,0.0,12,12,12,12,12,12,0.08323875,0.083218,False,CL3,,not evaluable (original-validity check failed),CL3,12/12,12/12,0/3,12/12,0/12,12/12,True
+constructed,8,CL3,0.0,12,12,12,12,12,12,0.09778775,0.09774925000000001,False,CL3,,not evaluable (original-validity check failed),CL3,12/12,12/12,0/3,12/12,0/12,12/12,True

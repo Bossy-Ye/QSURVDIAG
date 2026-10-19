@@ -1,0 +1,17 @@
+{
+ "package": "muskit",
+ "version": "0.0.3",
+ "filename": "Muskit-0.0.3.tar.gz",
+ "url": "https://files.pythonhosted.org/packages/09/66/b31a4bc3649fbaa241f96ff57260c3bf36064f7b6f9f7ce067e59f274f89/Muskit-0.0.3.tar.gz",
+ "size_bytes": 27874,
+ "packagetype": "sdist",
+ "publisher_sha256": "da80f7350a73cfcad64ff2ba08bf7bdfca71f47d0bae16c1339385fd84103128",
+ "expected_sha256": "da80f7350a73cfcad64ff2ba08bf7bdfca71f47d0bae16c1339385fd84103128",
+ "downloaded_sha256": "da80f7350a73cfcad64ff2ba08bf7bdfca71f47d0bae16c1339385fd84103128",
+ "verified": true,
+ "requires_python": ">=3.6",
+ "summary": "Quantum mutant generator framework",
+ "project_urls": {
+  "Homepage": "https://github.com/EnautMendi/QuantumMutationQiskit"
+ }
+}

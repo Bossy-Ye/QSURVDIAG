@@ -1,0 +1,345 @@
+{
+  "eligible": {
+    "diagonal": {
+      "cl3": 92,
+      "n": 719,
+      "rate": 0.127955,
+      "wilson95": [
+        0.105501,
+        0.154364
+      ]
+    },
+    "non_diagonal": {
+      "cl3": 58,
+      "n": 818,
+      "rate": 0.070905,
+      "wilson95": [
+        0.055248,
+        0.090572
+      ]
+    },
+    "per_width": {
+      "10": {
+        "diagonal": {
+          "cl3": 15,
+          "n": 122
+        },
+        "non_diagonal": {
+          "cl3": 5,
+          "n": 162
+        }
+      },
+      "11": {
+        "diagonal": {
+          "cl3": 1,
+          "n": 5
+        },
+        "non_diagonal": {
+          "cl3": 0,
+          "n": 5
+        }
+      },
+      "12": {
+        "diagonal": {
+          "cl3": 0,
+          "n": 5
+        },
+        "non_diagonal": {
+          "cl3": 0,
+          "n": 4
+        }
+      },
+      "13": {
+        "diagonal": {
+          "cl3": 1,
+          "n": 1
+        },
+        "non_diagonal": {
+          "cl3": 0,
+          "n": 3
+        }
+      },
+      "14": {
+        "diagonal": {
+          "cl3": 1,
+          "n": 3
+        },
+        "non_diagonal": {
+          "cl3": 1,
+          "n": 6
+        }
+      },
+      "2": {
+        "diagonal": {
+          "cl3": 12,
+          "n": 45
+        },
+        "non_diagonal": {
+          "cl3": 5,
+          "n": 62
+        }
+      },
+      "3": {
+        "diagonal": {
+          "cl3": 5,
+          "n": 59
+        },
+        "non_diagonal": {
+          "cl3": 3,
+          "n": 65
+        }
+      },
+      "4": {
+        "diagonal": {
+          "cl3": 6,
+          "n": 79
+        },
+        "non_diagonal": {
+          "cl3": 7,
+          "n": 71
+        }
+      },
+      "5": {
+        "diagonal": {
+          "cl3": 11,
+          "n": 90
+        },
+        "non_diagonal": {
+          "cl3": 4,
+          "n": 57
+        }
+      },
+      "6": {
+        "diagonal": {
+          "cl3": 8,
+          "n": 71
+        },
+        "non_diagonal": {
+          "cl3": 8,
+          "n": 87
+        }
+      },
+      "7": {
+        "diagonal": {
+          "cl3": 7,
+          "n": 59
+        },
+        "non_diagonal": {
+          "cl3": 2,
+          "n": 84
+        }
+      },
+      "8": {
+        "diagonal": {
+          "cl3": 11,
+          "n": 84
+        },
+        "non_diagonal": {
+          "cl3": 13,
+          "n": 99
+        }
+      },
+      "9": {
+        "diagonal": {
+          "cl3": 14,
+          "n": 96
+        },
+        "non_diagonal": {
+          "cl3": 10,
+          "n": 113
+        }
+      }
+    },
+    "pooled": {
+      "cl3": 150,
+      "n": 1537,
+      "rate": 0.097593,
+      "wilson95": [
+        0.083744,
+        0.113448
+      ]
+    }
+  },
+  "entering_diagnosis": {
+    "diagonal": {
+      "cl3": 92,
+      "n": 271,
+      "rate": 0.339483,
+      "wilson95": [
+        0.285699,
+        0.397755
+      ]
+    },
+    "non_diagonal": {
+      "cl3": 58,
+      "n": 240,
+      "rate": 0.241667,
+      "wilson95": [
+        0.191851,
+        0.299622
+      ]
+    },
+    "per_width": {
+      "10": {
+        "diagonal": {
+          "cl3": 15,
+          "n": 49
+        },
+        "non_diagonal": {
+          "cl3": 5,
+          "n": 39
+        }
+      },
+      "11": {
+        "diagonal": {
+          "cl3": 1,
+          "n": 1
+        },
+        "non_diagonal": {
+          "cl3": 0,
+          "n": 2
+        }
+      },
+      "12": {
+        "diagonal": {
+          "cl3": 0,
+          "n": 2
+        },
+        "non_diagonal": {
+          "cl3": 0,
+          "n": 1
+        }
+      },
+      "13": {
+        "diagonal": {
+          "cl3": 1,
+          "n": 1
+        },
+        "non_diagonal": {
+          "cl3": 0,
+          "n": 1
+        }
+      },
+      "14": {
+        "diagonal": {
+          "cl3": 1,
+          "n": 1
+        },
+        "non_diagonal": {
+          "cl3": 1,
+          "n": 3
+        }
+      },
+      "2": {
+        "diagonal": {
+          "cl3": 12,
+          "n": 20
+        },
+        "non_diagonal": {
+          "cl3": 5,
+          "n": 22
+        }
+      },
+      "3": {
+        "diagonal": {
+          "cl3": 5,
+          "n": 15
+        },
+        "non_diagonal": {
+          "cl3": 3,
+          "n": 18
+        }
+      },
+      "4": {
+        "diagonal": {
+          "cl3": 6,
+          "n": 25
+        },
+        "non_diagonal": {
+          "cl3": 7,
+          "n": 25
+        }
+      },
+      "5": {
+        "diagonal": {
+          "cl3": 11,
+          "n": 33
+        },
+        "non_diagonal": {
+          "cl3": 4,
+          "n": 17
+        }
+      },
+      "6": {
+        "diagonal": {
+          "cl3": 8,
+          "n": 28
+        },
+        "non_diagonal": {
+          "cl3": 8,
+          "n": 19
+        }
+      },
+      "7": {
+        "diagonal": {
+          "cl3": 7,
+          "n": 21
+        },
+        "non_diagonal": {
+          "cl3": 2,
+          "n": 26
+        }
+      },
+      "8": {
+        "diagonal": {
+          "cl3": 11,
+          "n": 38
+        },
+        "non_diagonal": {
+          "cl3": 13,
+          "n": 38
+        }
+      },
+      "9": {
+        "diagonal": {
+          "cl3": 14,
+          "n": 37
+        },
+        "non_diagonal": {
+          "cl3": 10,
+          "n": 29
+        }
+      }
+    },
+    "pooled": {
+      "cl3": 150,
+      "n": 511,
+      "rate": 0.293542,
+      "wilson95": [
+        0.255716,
+        0.334449
+      ]
+    }
+  },
+  "executed": 1537,
+  "failures": 0,
+  "integrity": {
+    "U_v_formula_agrees_on_all": true,
+    "guard_zero_false_fails_on_all": true
+  },
+  "native": {
+    "KILLED": 975,
+    "SPLIT": 51,
+    "SURVIVED": 511
+  },
+  "record_id": "BATCH2_TASK_2A_RESULTS",
+  "reference_condition": "exact analytic marginals of the original",
+  "reports": {
+    "CL1": 158,
+    "CL3": 150,
+    "CL4": 185,
+    "CL5": 18,
+    "NA_KILLED": 975,
+    "Unresolved": 51
+  }
+}

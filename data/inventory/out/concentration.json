@@ -1,0 +1,240 @@
+{
+ "20 circuits|CL3": {
+  "pairs": 35,
+  "programs": 10,
+  "sites": 27,
+  "max_pairs_per_program": 7,
+  "top3_program_share": 0.571,
+  "max_pairs_per_site": 3,
+  "families": 5,
+  "top_programs": [
+   [
+    "qft_4",
+    7
+   ],
+   [
+    "qft_6",
+    7
+   ],
+   [
+    "qft_5",
+    6
+   ]
+  ]
+ },
+ "20 circuits|CL4": {
+  "pairs": 79,
+  "programs": 9,
+  "sites": 23,
+  "max_pairs_per_program": 19,
+  "top3_program_share": 0.684,
+  "max_pairs_per_site": 13,
+  "families": 6,
+  "top_programs": [
+   [
+    "ghz_5",
+    19
+   ],
+   [
+    "ghz_7",
+    18
+   ],
+   [
+    "ghz_4",
+    17
+   ]
+  ],
+  "designs": 31,
+  "max_pairs_per_design": 9,
+  "top3_design_share": 0.291,
+  "singleton_designs": 13
+ },
+ "MQT Bench|CL3": {
+  "pairs": 7,
+  "programs": 2,
+  "sites": 3,
+  "max_pairs_per_program": 6,
+  "top3_program_share": 1.0,
+  "max_pairs_per_site": 5,
+  "families": 1,
+  "top_programs": [
+   [
+    "rg_mult_8",
+    6
+   ],
+   [
+    "rg_mult_12",
+    1
+   ]
+  ]
+ },
+ "MQT Bench|CL4": {
+  "pairs": 22,
+  "programs": 3,
+  "sites": 6,
+  "max_pairs_per_program": 11,
+  "top3_program_share": 1.0,
+  "max_pairs_per_site": 10,
+  "families": 2,
+  "top_programs": [
+   [
+    "rg_mult_8",
+    11
+   ],
+   [
+    "rg_mult_12",
+    10
+   ],
+   [
+    "qwalk_4",
+    1
+   ]
+  ],
+  "designs": 4,
+  "max_pairs_per_design": 10,
+  "top3_design_share": 0.955,
+  "singleton_designs": 1
+ },
+ "corpus|CL3": {
+  "pairs": 150,
+  "programs": 58,
+  "sites": 120,
+  "max_pairs_per_program": 13,
+  "top3_program_share": 0.24,
+  "max_pairs_per_site": 9,
+  "families": 11,
+  "top_programs": [
+   [
+    "dj_2_qubits",
+    13
+   ],
+   [
+    "graphstate_9_qubits",
+    12
+   ],
+   [
+    "graphstate_8_qubits",
+    11
+   ]
+  ]
+ },
+ "corpus|CL4": {
+  "pairs": 143,
+  "programs": 48,
+  "sites": 128,
+  "max_pairs_per_program": 9,
+  "top3_program_share": 0.182,
+  "max_pairs_per_site": 3,
+  "families": 13,
+  "top_programs": [
+   [
+    "qftentangled_10_qubits",
+    9
+   ],
+   [
+    "qftentangled_8_qubits",
+    9
+   ],
+   [
+    "qftentangled_9_qubits",
+    8
+   ]
+  ],
+  "designs": 80,
+  "max_pairs_per_design": 7,
+  "top3_design_share": 0.14,
+  "singleton_designs": 54
+ },
+ "external|CL3": {
+  "pairs": 30,
+  "programs": 9,
+  "sites": 9,
+  "max_pairs_per_program": 9,
+  "top3_program_share": 0.667,
+  "max_pairs_per_site": 9,
+  "families": 9,
+  "top_programs": [
+   [
+    "DiagonalZHamiltonian",
+    9
+   ],
+   [
+    "Is2PowerPhase",
+    6
+   ],
+   [
+    "ParityPhase",
+    5
+   ]
+  ]
+ },
+ "external|CL4": {
+  "pairs": 5,
+  "programs": 1,
+  "sites": 2,
+  "max_pairs_per_program": 5,
+  "top3_program_share": 1.0,
+  "max_pairs_per_site": 4,
+  "families": 1,
+  "top_programs": [
+   [
+    "LessThanPhase",
+    5
+   ]
+  ],
+  "designs": 1,
+  "max_pairs_per_design": 5,
+  "top3_design_share": 1.0,
+  "singleton_designs": 0
+ },
+ "width set|CL3": {
+  "pairs": 17,
+  "programs": 11,
+  "sites": 14,
+  "max_pairs_per_program": 4,
+  "top3_program_share": 0.529,
+  "max_pairs_per_site": 2,
+  "families": 6,
+  "top_programs": [
+   [
+    "qpeinexact_9_qubits",
+    4
+   ],
+   [
+    "qpeinexact_8_qubits",
+    3
+   ],
+   [
+    "qft_10_qubits",
+    2
+   ]
+  ]
+ },
+ "width set|CL4": {
+  "pairs": 6,
+  "programs": 4,
+  "sites": 5,
+  "max_pairs_per_program": 3,
+  "top3_program_share": 0.833,
+  "max_pairs_per_site": 2,
+  "families": 2,
+  "top_programs": [
+   [
+    "ghz_10_qubits",
+    3
+   ],
+   [
+    "ghz_9_qubits",
+    1
+   ],
+   [
+    "ghz_8_qubits",
+    1
+   ]
+  ],
+  "designs": 6,
+  "max_pairs_per_design": 1,
+  "top3_design_share": 0.5,
+  "singleton_designs": 6
+ }
+}

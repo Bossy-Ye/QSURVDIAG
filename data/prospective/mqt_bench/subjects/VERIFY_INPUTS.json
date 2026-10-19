@@ -1,0 +1,72 @@
+{
+ "qwalk_4": {
+  "mqt_overlap": 0.9999999999999986,
+  "converted_overlap": 0.999999999999996,
+  "converted_adapted_overlap": 0.999999999999996,
+  "pass": true
+ },
+ "qwalk_5": {
+  "mqt_overlap": 0.9999999999999798,
+  "converted_overlap": 0.9999999999999809,
+  "converted_adapted_overlap": 0.9999999999999809,
+  "pass": true
+ },
+ "rg_mult_8": {
+  "declared_input": "(|a=1,b=1,out=0> + |a=3,b=3,out=0>)/sqrt2",
+  "expected_outputs": [
+   21,
+   159
+  ],
+  "expected_amplitudes": "1/sqrt2 each, relative phase 0",
+  "mqt": {
+   "abs_a": 0.7071067811865466,
+   "abs_b": 0.7071067811865467,
+   "relative_phase_rad": -1.0877835748157032e-15,
+   "weight_outside_expected": 5.551115123125783e-17
+  },
+  "converted": {
+   "abs_a": 0.7071067811865468,
+   "abs_b": 0.7071067811865469,
+   "relative_phase_rad": -1.4710455076283334e-15,
+   "weight_outside_expected": -5.551115123125783e-17
+  },
+  "converted_adapted": {
+   "abs_a": 0.7071067811865468,
+   "abs_b": 0.7071067811865469,
+   "relative_phase_rad": -1.4710455076283334e-15,
+   "weight_outside_expected": -5.551115123125783e-17
+  },
+  "converted_vs_mqt_overlap": 0.9999999999999978,
+  "adapted_vs_mqt_overlap": 0.9999999999999978,
+  "pass": true
+ },
+ "rg_mult_12": {
+  "declared_input": "(|a=1,b=1,out=0> + |a=7,b=7,out=0>)/sqrt2",
+  "expected_outputs": [
+   73,
+   3199
+  ],
+  "expected_amplitudes": "1/sqrt2 each, relative phase 0",
+  "mqt": {
+   "abs_a": 0.7071067811865469,
+   "abs_b": 0.7071067811865468,
+   "relative_phase_rad": -6.057665869367985e-15,
+   "weight_outside_expected": -5.551115123125783e-17
+  },
+  "converted": {
+   "abs_a": 0.7071067811865487,
+   "abs_b": 0.7071067811865471,
+   "relative_phase_rad": -5.981272157589911e-15,
+   "weight_outside_expected": 0.0
+  },
+  "converted_adapted": {
+   "abs_a": 0.7071067811865487,
+   "abs_b": 0.7071067811865471,
+   "relative_phase_rad": -5.981272157589911e-15,
+   "weight_outside_expected": 0.0
+  },
+  "converted_vs_mqt_overlap": 0.9999999999999996,
+  "adapted_vs_mqt_overlap": 0.9999999999999996,
+  "pass": true
+ }
+}

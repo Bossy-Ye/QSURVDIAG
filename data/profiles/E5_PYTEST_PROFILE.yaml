@@ -1,0 +1,60 @@
+# E5 — certifiability profile for a classical unit-testing interface.
+# Audited to the same standard as the two quantum profiles: every verdict is
+# decided from the distributed source, with file and symbol references.
+profile_id: PYTEST_7_4_4__UNIT_ASSERTION
+tool: pytest
+tool_version: 7.4.4
+universe_scope: tool_wide
+audited_from: "site-packages/_pytest (distributed source, not documentation)"
+
+observation_abstraction:
+  alpha_v: "the values of Python objects reachable from the test function's scope"
+  injective_modulo_relevant_equivalence: true
+  evidence: >
+    _pytest/assertion/rewrite.py:902 visits assert_.test as an arbitrary expression, and the visitor
+    dispatches over the general Python AST (visit_Name 997, visit_BoolOp 1007, visit_UnaryOp 1058,
+    visit_BinOp 1064, visit_Call 1072, visit_Compare 1124). Any semantically reachable difference between
+    two program states is therefore expressible as a predicate over that state; no projection is applied
+    between the program state and the assertion.
+  note: >
+    Injectivity is claimed modulo the equivalence the analysis quotients, i.e. over semantically reachable
+    state. Differences that no Python expression can reach are outside the compared object for the same
+    reason a global phase is outside it in the quantum profiles.
+
+assertion_language:
+  members: "the Python expression grammar"
+  enumerable: false
+  evidence: "_pytest/assertion/rewrite.py:902 plus the generic visitor dispatch above."
+
+closure:
+  L1_constructor_family: OPEN
+  L2_assertion_instance: OPEN
+  L3_parameter_domain: OPEN
+  L4_observation_configuration: OPEN
+  extension_model: entry_point_plugin
+  evidence: >
+    _pytest/config/__init__.py:1305 loads third-party plugins through the "pytest11" setuptools entry
+    point at runtime, so the assertion surface can be enlarged without modifying or forking the
+    distribution. This is strictly more open than QuCheck's abc_subclass and than QUTest's
+    none_fork_only.
+  false_friend: >
+    hookspec.py:696 pytest_assertrepr_compare looks like an assertion extension point and is not: it
+    returns explanation strings for a failing comparison and cannot introduce a new assertion kind.
+
+derived_consequences:
+  observation_projection_limitation_reachable: false
+  basis: >
+    Proposition (injectivity empties the observation-limitation class). alpha_v is injective modulo the
+    relevant equivalence, so R_O implies R_S and the substrate condition of CL3 is unsatisfiable. The class
+    is empty for every cohort, every operator set and every suite under this profile.
+  scoped_negative_claim_supported: false
+  basis_2: >
+    All four closure levels are OPEN with a runtime extension point, so an unsuccessful assertion search
+    excludes nothing: the surface at search time is not the surface a user may later install.
+
+position_on_the_two_axes:
+  observation: non_restricting
+  universe: open
+  contrast: >
+    QUTest 0.1.0 is restricting/closed, QuCheck 0.0.2 is restricting/open-at-tool-scope, pytest 7.4.4 is
+    non-restricting/open. The three tools occupy three of the four cells.

@@ -1,0 +1,91 @@
+{
+ "method": "each gate executed alone through the QUTest 0.1.0 CLI, as in Experiment 4",
+ "environment": ".venv-qutest-audit",
+ "probe": {
+  "ccx": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.15s (1 total)"
+  },
+  "cx": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.12s (1 total)"
+  },
+  "cz": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)"
+  },
+  "h": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.12s (1 total)"
+  },
+  "id": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.12s (1 total)"
+  },
+  "reset": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.12s (1 total)"
+  },
+  "rx": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)"
+  },
+  "ry": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)"
+  },
+  "rz": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)"
+  },
+  "s": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)"
+  },
+  "sdg": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.12s (1 total)"
+  },
+  "swap": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.12s (1 total)"
+  },
+  "t": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)"
+  },
+  "u1": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.12s (1 total)"
+  },
+  "u3": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)"
+  },
+  "x": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.12s (1 total)"
+  },
+  "z": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)"
+  }
+ }
+}

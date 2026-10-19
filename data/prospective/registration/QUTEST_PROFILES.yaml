@@ -1,0 +1,183 @@
+# QUTest 0.1.0 certifiability profiles. Frozen at Phase 5A, AMENDED at Phase 5A.1.
+#
+# PHASE 5A.1 AMENDMENT (§3 claim-relative exclusion):
+#   Phase 5A used a `vacuity` device: because QUTest's built-ins span three substrates, it declared
+#   QT_0_1_0__TOOL_WIDE "VACUOUS_FOR_MUTANTS" and refused exclusion there. That reasoning was wrong. A
+#   structural or resource assertion is IRRELEVANT to a functional-semantic claim; it must not count as a
+#   semantic witness, must not block semantic exclusion, and must not make the exclusion condition vacuous.
+#   Exclusion is therefore CLAIM-RELATIVE, quantified over
+#       A^relevant_{Pi,q} = { a in A_Pi : role(a) may support claim q }.
+#   Corrected statement, replacing the withdrawn one:
+#     "QUTest does not support one undifferentiated semantic exclusion over all built-ins. Any exclusion must
+#      name a role-filtered, substrate-bounded, reliability-qualified assertion universe."
+#   The `vacuity` field is retired. The 52/52 gateset and 13/52 depth figures are retained as a measured
+#   role-mismatch magnitude and are the empirical justification for the role filter.
+
+schema_version: "5A.1.1"
+tool: QUTest
+tool_version: "0.1.0"
+backend: ideal
+citation: "Campos, J. QUTest: A Native Testing Framework for Quantum Programs. ASE 2026. Artifact Zenodo 10.5281/zenodo.21168567."
+
+shared_closure: &closure
+  L1_constructor_family:
+    status: CLOSED
+    evidence:
+      - "models.py:PragmaKind - closed enum.Enum, 13 members, 12 assertion kinds"
+      - "parser/pragma.py:289 - raise ValueError on unrecognized expect assertion; no fall-through"
+      - "runner.py:61-118 - closed if/elif dispatch; parser surface == dispatch surface == 12"
+      - "qutest-0.1.0.dist-info/entry_points.txt - only [console_scripts]; no plugin group"
+      - "assertions/base.py - no Assertion base class, no abstract method, no registry"
+  L2_assertion_instance:
+    status: CLOSED
+    evidence:
+      - "the circuit under test IS the .qasm test file; the pragma grammar has no argument for a second or derived circuit"
+      - "no composition, inversion or appended-unitary construct exists in the grammar"
+      - "runner.py:120-127 - multiple pragmas compose by conjunction only"
+    circuit_construction_rule: >
+      An instance applies to exactly the circuit defined in its own test function. The grammar cannot express
+      a derived circuit, so there is no analogue of the QuCheck circuit-argument break.
+  L3_parameter_domain:
+    status: CONTINUOUS_BENIGN_FOR_EXCLUSION
+    continuous_parameters:
+      - "distribution ref {json} - arbitrary real probabilities"
+      - "atol tolerances and comparison thresholds - reals"
+    pinning_rule: >
+      For witness enumeration, references are pinned to the original program's exact values
+      (reference-from-original) and thresholds to the frozen atol = 0.05. For exclusion the continuum is
+      benign: every parameter value yields the same verdict when the substrate values are equal.
+  L4_observation_configuration:
+    status: CLOSED
+    in_scope_measurements: ["the declared `m = measure q` Z-basis measurement of the test file"]
+    out_of_scope_measurements: ["any non-Z Pauli term - assertions/observable.py returns make_error", "mid-circuit or checkpoint observation - no hook exists"]
+  extension_model: none_fork_only
+  downgrade_applied: null
+
+# ---------------------------------------------------------------- role filter (the A^relevant definition)
+role_filter:
+  CL1_CONTRACT_EQUIVALENT: &behav [marginal, observable_Z, probability, entropy, distribution]
+  CL2_STATE_EQUIVALENT_UNDER_REALIZED_INPUT: *behav
+  CL3_PROFILE_INVISIBLE: *behav
+  CL4_REALIZED_SUITE_OMISSION: *behav
+  irrelevant_to_all_functional_semantic_claims:
+    gateset:  "STRUCTURAL - transpiled-circuit substrate; documented as a hardware/resource-budget check"
+    depth:    "STRUCTURAL - transpiled-circuit substrate; additionally transpiler-relative"
+    fidelity: "NONFUNCTIONAL - compares a program to itself; errors under backend ideal"
+  behavioral_but_not_reliability_qualified:
+    correlation:    "CONDITIONAL - discontinuous Pearson fallback at sd < 1e-12; enumerated under a guard, never certifies"
+    most_frequent:  "CONDITIONAL - tolerance-free argmax; documented by the tool as a sanity check"
+    output:         "INAPPLICABLE - requires a single-support distribution"
+    entangled:      "CONDITIONAL by the FROZEN Phase 0 inclusion criteria; see ENTANGLED_SENSITIVITY_PROTOCOL.md"
+
+profiles:
+
+  - profile_id: QT_0_1_0__COUNT_SUBSTRATE
+    universe_scope: frozen_profile
+    closure: *closure
+    members:
+      - {family: marginal,     substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL, admissible_under_declared_contract: "yes", may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: "0/52", instance_space_cardinality: "n", reliability: RELIABLE}
+      - {family: observable_Z, substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL, admissible_under_declared_contract: "yes", may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: "0/52", instance_space_cardinality: "2^n - 1", reliability: RELIABLE}
+      - {family: probability,  substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL, admissible_under_declared_contract: "yes", may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: "0/52", instance_space_cardinality: "2^n", reliability: RELIABLE}
+      - {family: entropy,      substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL, admissible_under_declared_contract: "yes", may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: "0/52", instance_space_cardinality: "1", reliability: RELIABLE}
+      - {family: distribution, substrate: measurement_counts, role: BEHAVIORAL_STATISTICAL, admissible_under_declared_contract: "yes", may_support_claim_classes: [CL1, CL2, CL3, CL4], negative_control_violations: "0/52", instance_space_cardinality: "4 metrics x pinned reference", reliability: RELIABLE}
+    exclusion_basis:
+      per_claim_class:
+        CL3:
+          relevant_families: [marginal, observable_Z, probability, entropy, distribution]
+          excluded_as_irrelevant: [gateset, depth, fidelity]
+          substrate_functional: "joint Z-outcome distribution of the measured register under the declared contract input"
+          factorization_verified: true
+          factorization_evidence:
+            - "assertions/observable.py - non-Z Pauli terms return make_error, so observable is Z-only by construction"
+            - "every relevant family's evaluator takes only the counts dict (runner.py:94-117)"
+            - "parameter cardinality is irrelevant to exclusion: a distribution reference is a continuum but the verdict is a function of the measured distribution alone"
+          reliability_qualified: true
+    witness_search:
+      enumerable: FINITE_ENUMERABLE
+      enumeration_rule: "marginal n + observable 2^n-1 + probability 2^n + entropy 1 + distribution 1 (TVD, reference pinned to the original)"
+      bound_parameter: "n <= 7"
+    supported_certificate_modes: [positive_witness, scoped_exclusion, configuration_relative, abstention]
+    scoped_exclusion_supported: true
+    declared_limits:
+      - "Exclusion is over the count substrate and the role-filtered relevant universe only."
+      - "Never phrase as 'no QUTest assertion' or 'no contract-admissible endpoint oracle'."
+      - "`correlation` is enumerated under a non-degeneracy guard and is not reliability-qualified, so it is outside this profile."
+
+  - profile_id: QT_0_1_0__STATE_SUBSTRATE
+    universe_scope: frozen_profile
+    closure: *closure
+    members_note: "QT_0_1_0__COUNT_SUBSTRATE, whose members are all functions of the endpoint state; the substrate is strengthened, the member list is unchanged"
+    exclusion_basis:
+      per_claim_class:
+        CL1:
+          relevant_families: [marginal, observable_Z, probability, entropy, distribution]
+          excluded_as_irrelevant: [gateset, depth, fidelity]
+          substrate_functional: "endpoint statevector under the declared contract input, quotiented by a single global phase"
+          factorization_verified: true
+          factorization_evidence: ["counts are a function of the endpoint state; no relevant family reads the transpiled circuit"]
+          reliability_qualified: true
+        CL2:
+          relevant_families: [marginal, observable_Z, probability, entropy, distribution]
+          excluded_as_irrelevant: [gateset, depth, fidelity]
+          substrate_functional: "endpoint statevector under the declared contract input, quotiented by a single global phase"
+          factorization_verified: true
+          factorization_evidence: ["as CL1"]
+          reliability_qualified: true
+    witness_search: {enumerable: FINITE_ENUMERABLE, enumeration_rule: "as the count profile", bound_parameter: "n <= 7"}
+    supported_certificate_modes: [positive_witness, scoped_exclusion, configuration_relative, abstention]
+    scoped_exclusion_supported: true
+    strictly_stronger_than: QT_0_1_0__COUNT_SUBSTRATE
+    relation_note: >
+      Equality of the state substrate implies equality of the count substrate, so STATE-exclusion implies
+      COUNT-exclusion but not conversely. This containment is a property of THESE two profiles and is not a
+      general tomographic-completeness claim.
+    declared_limits:
+      - "Holds for assertions that are functions of the endpoint state within the role-filtered relevant universe."
+      - "Says nothing about mid-circuit or trajectory oracles, for which QUTest has no hook."
+
+  - profile_id: QT_0_1_0__EXPANDED_STATE_SENSITIVITY
+    universe_scope: frozen_profile
+    status: POST_FREEZE_SENSITIVITY_ONLY
+    closure: *closure
+    members_note: "QT_0_1_0__STATE_SUBSTRATE plus `entangled`. NOT a primary profile; see ENTANGLED_SENSITIVITY_PROTOCOL.md"
+    added_members:
+      - {family: entangled, substrate: endpoint_statevector, role: BEHAVIORAL_STATE_STRUCTURAL, admissible_under_declared_contract: "yes", may_support_claim_classes: [CL3, CL4], negative_control_violations: "0/52 expected (the 52 have identical endpoint states)", instance_space_cardinality: "bipartitions of subsets of the n qubits", reliability: CONDITIONAL}
+    inclusion_criteria_note: >
+      `entangled` was classified CONDITIONAL — explicitly outside the reliable-certifying set — by the FROZEN
+      Phase 0 criteria (PROTOCOL_MANIFEST.yaml assertion_universe: conditional: [correlation, most_frequent,
+      entangled]), on the recorded grounds that it is a tolerance-free binary witness at a hard 1e-6 eigenvalue
+      threshold requiring an author-chosen bipartition. Its absence from the Phase 3 enumeration was therefore
+      CRITERIA-CONSISTENT, not an implementation omission.
+    supported_certificate_modes: [positive_witness, abstention]
+    scoped_exclusion_supported: false
+    scoped_exclusion_refusal_reason: "not reliability-qualified under the frozen inclusion criteria; sensitivity analysis only"
+    declared_limits:
+      - "Results from this profile are reported as EXPANDED-PROFILE SENSITIVITY beside the primary partition, never merged into it."
+      - "No Phase 3 count may be revised on the basis of this profile."
+
+  - profile_id: QT_0_1_0__STRUCTURAL_ROLE_AUDIT
+    universe_scope: frozen_profile
+    status: ROLE_AUDIT_ONLY
+    closure: *closure
+    members:
+      - {family: gateset, substrate: transpiled_circuit, role: STRUCTURAL, admissible_under_declared_contract: "no", may_support_claim_classes: [], negative_control_violations: "52/52", instance_space_cardinality: "2^|gate alphabet|", reliability: RELIABLE}
+      - {family: depth,   substrate: transpiled_circuit, role: STRUCTURAL, admissible_under_declared_contract: "no", may_support_claim_classes: [], negative_control_violations: "13/52", instance_space_cardinality: "depth+1 distinguishable thresholds", reliability: RELIABLE}
+    role_statement: >
+      Both are documented by QUTest as Structural Asserts checked on the TRANSPILED circuit for hardware
+      constraints and resource budgets. Neither was ever claimed as a behavioral semantic oracle. They are
+      correct and useful in that role. Their `may_support_claim_classes` list is EMPTY, which is the formal
+      expression of their irrelevance to functional-semantic claims: they neither witness nor block.
+    supported_certificate_modes: [positive_witness, abstention]
+    scoped_exclusion_supported: false
+    scoped_exclusion_refusal_reason: "no claim class lists these families as relevant, so there is no semantic exclusion to state"
+    declared_limits:
+      - "Declared so that the role, the measured violation profile and the role filter are on the record."
+      - "May never contribute evidence to CL1-CL4 (obligation OB18)."
+      - "`depth` is transpiler-relative: its value depends on optimisation level and target basis, not on the source program."
+
+corrected_statement: >
+  QUTest does not support one undifferentiated semantic exclusion over all built-ins. Any exclusion must name a
+  role-filtered, substrate-bounded, reliability-qualified assertion universe.
+withdrawn_statement: >
+  "QUTest cannot support builtin-wide exclusion because its built-ins span multiple substrates, so its
+  exclusion condition is VACUOUS_FOR_MUTANTS."

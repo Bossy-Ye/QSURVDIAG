@@ -1,0 +1,6 @@
+tfim n=2: upstream gates ['barrier', 'cx', 'r', 'rz', 'u']; |<upstream|shipped transcription>|^2 = 1.000000000000; measured qubits 2; depth 23
+   kernel with K+1 differs from K: True
+tfim n=4: upstream gates ['barrier', 'cx', 'r', 'rz', 'u']; |<upstream|shipped transcription>|^2 = 1.000000000000; measured qubits 4; depth 40
+   kernel with K+1 differs from K: True
+tfim n=6: upstream gates ['barrier', 'cx', 'r', 'rz', 'u']; |<upstream|shipped transcription>|^2 = 1.000000000000; measured qubits 6; depth 42
+   kernel with K+1 differs from K: True

@@ -1,0 +1,20 @@
+Z basis: output register -> all qubits: 55 of 90 change; circuits contributing 4 of 15
+output register: Z -> X, Y, Z bases: 30 of 90 change; circuits contributing 7 of 15
+all qubits: Z -> X, Y, Z bases: 35 of 35 change; circuits contributing 10 of 15
+X, Y, Z bases: output register -> all qubits: 60 of 60 change; circuits contributing 7 of 15
+baseline -> adjacent-pair, suite omissions: 12 of 79 change; circuits contributing 4 of 20
+baseline -> all-qubit, suite omissions: 41 of 79 change; circuits contributing 5 of 20
+baseline -> combined, suite omissions: 79 of 79 change; circuits contributing 9 of 20
+baseline -> adjacent-pair, observation limitations: 0 of 35 change; circuits contributing 0 of 20
+baseline -> all-qubit, observation limitations: 0 of 35 change; circuits contributing 0 of 20
+baseline -> combined, observation limitations: 0 of 35 change; circuits contributing 0 of 20
+baseline -> adjacent-pair: other newly killed 2 (Unresolved, Unresolved); lost 0
+baseline -> all-qubit: other newly killed 0 (-); lost 0
+baseline -> combined: other newly killed 2 (Unresolved, Unresolved); lost 0
+baseline -> output-condition (239 pairs; gained 65, lost 0), suite omissions: 65 of 69 change; circuits contributing 6 of 8; sign test over circuits: 6 up, 0 down, p = 0.0312
+QUTest -> QuCheck (gained 28, lost 25), observation limitations: 28 of 35 change; circuits contributing 11 of 20; sign test over circuits: 7 up, 4 down, p = 0.5488
+QUTest -> pytest (gained 35, lost 0), observation limitations: 35 of 35 change; circuits contributing 10 of 20; sign test over circuits: 10 up, 0 down, p = 0.0020
+N: 500 -> 8,000 (1623 configurations; resolved 236, created 3): 239 of 1623 change; circuits contributing 10 of 20; sign test over circuits: 10 up, 0 down, p = 0.0020
+Holm-adjusted p, baseline -> output-condition: 0.0625
+Holm-adjusted p, QUTest -> QuCheck: 0.5488
+Holm-adjusted p, N: 500 -> 8,000: 0.0059

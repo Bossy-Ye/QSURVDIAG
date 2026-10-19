@@ -1,0 +1,26 @@
+{
+  "cl3_total": 150,
+  "conditions": "first divergence index k; every gate from k onward diagonal in BOTH lists; and not R_S. Diagonal unitaries commute, so the mutant state is a diagonal unitary applied to the origin state and every computational-basis probability is preserved.",
+  "entailed": {
+    "R_O_holds": 54,
+    "cl3": 54,
+    "n": 54
+  },
+  "not_entailed": {
+    "R_O_holds": 254,
+    "cl3": 96,
+    "n": 1483
+  },
+  "population": "all 1,537 pairs of the pre-registered frame",
+  "reading": "The entailment is exact and the stratum is a superset of it. Every entailed pair lies in the diagonal stratum and none lies outside it, so the non-diagonal stratum's observation-limited cases are contingent without exception.",
+  "record_id": "BATCH3_TASK_3_1_ENTAILED_VS_CONTINGENT",
+  "stratum_vs_entailment": {
+    "cl3_in_non_diagonal_stratum": 58,
+    "contingent_cl3_in_diagonal_stratum": 38,
+    "diagonal_stratum_n": 719,
+    "entailed_in_diagonal_stratum": 54,
+    "entailed_in_non_diagonal_stratum": 0,
+    "non_diagonal_stratum_n": 818,
+    "non_entailed_in_diagonal_stratum": 665
+  }
+}

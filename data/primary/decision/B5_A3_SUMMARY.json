@@ -1,0 +1,8 @@
+{
+ "pairs": 85,
+ "configurations": 36,
+ "certified_min": 1,
+ "certified_max": 3,
+ "recall_min_pct": 1.2,
+ "recall_max_pct": 3.5
+}

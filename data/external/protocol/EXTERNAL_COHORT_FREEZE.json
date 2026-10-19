@@ -1,0 +1,321 @@
+{
+ "record_id": "EXTERNAL_COHORT_FREEZE_v1",
+ "status": "PROSPECTIVELY FROZEN BEFORE MUTATION GENERATION AND DIAGNOSTIC EXECUTION",
+ "not_preregistered": "This record is archived in the replication package. It is not deposited in a time-stamped immutable archive, so it is not described as preregistered.",
+ "frozen_utc": "2026-09-06T13:08:16.483838+00:00",
+ "manuscript_repo_commit": "d414f96dec4ee6dc7b241af2782012110c3fc441",
+ "environment": {
+  "python": "3.12.4",
+  "qiskit": "2.5.0",
+  "platform": "macOS-14.3-arm64-arm-64bit",
+  "machine": "arm64",
+  "note": "sympy 1.14.0 supplied on a scratch path for instantiation only; the pinned study venv was not modified"
+ },
+ "sources": [
+  {
+   "group": "MgcosA",
+   "role": "primary upstream (Q# originals + canonical evaluation parameters)",
+   "repo": "github.com/MgcosA/Code_of_Testing_Oracle_Quantum_Program_Article",
+   "commit": "2bf129cda2c2674a79fac278080b9e4388044fbc",
+   "paper": "arXiv:2505.07243"
+  },
+  {
+   "group": "MgcosA",
+   "role": "pinned Qiskit translation carrier",
+   "artifact": "qolumbina-infrastructure-main.zip",
+   "zenodo_version_doi": "10.5281/zenodo.20987327",
+   "zenodo_concept_doi": "10.5281/zenodo.20987326",
+   "md5": "e0614735e5ebd02823c0cfe9f53c123a",
+   "md5_verified": true,
+   "paper": "arXiv:2607.02029"
+  },
+  {
+   "group": "QASMBench",
+   "role": "fixed released circuits",
+   "repo": "github.com/pnnl/QASMBench",
+   "commit": "357b942396d5c2b7cbc1c229c585a6ef5ccaebac",
+   "paper": "ACM TQC 4(2) 2023, DOI 10.1145/3550488",
+   "license": "BSD"
+  }
+ ],
+ "instance_selection_rule": "Fixed released circuits are used directly. For scalable generators, the concrete instance is the canonical evaluation parameterization already designated by the primary upstream artifact before this study. No instance is selected from mutation or diagnostic outcomes.",
+ "subjects": [
+  {
+   "group": "MgcosA",
+   "subject": "ParityPhase",
+   "upstream_designation": "Parity_Nqs()=6",
+   "parameters": {
+    "input_qubits": 6
+   },
+   "n_qubits": 6,
+   "decomposed_size": 6,
+   "decomposed_depth": 1,
+   "circuit_sha256": "0bbdb684720d88b0866ce4929c71af8ff50d177dfcbac35d57427352997ca386",
+   "semantic_contract": "phase oracle diag((-1)^parity(x))",
+   "realized_input": "|0...0> per shipped convention",
+   "output_scope": "all 6",
+   "C1": "Yes (arXiv:2505.07243 + upstream classical reference function)",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes (0.0013s, peak 0.071 GiB across cohort; policy 600s / 27.2 GiB)",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "Preserved; see TRANSLATION_CONFORMANCE_AUDIT.md",
+   "feasibility_seconds": 0.0013
+  },
+  {
+   "group": "MgcosA",
+   "subject": "Is2PowerPhase",
+   "upstream_designation": "Is2Power_Nqs()=6",
+   "parameters": {
+    "input_qubits": 6
+   },
+   "n_qubits": 6,
+   "decomposed_size": 1290,
+   "decomposed_depth": 892,
+   "circuit_sha256": "9773fad291b7102ac79d3f65772c435055629eb52498dbac92c436b9e6640449",
+   "semantic_contract": "phase oracle diag((-1)^[popcount(x)==1])",
+   "realized_input": "|0...0>",
+   "output_scope": "all 6",
+   "C1": "Yes (arXiv:2505.07243 + upstream classical reference function)",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes (0.0198s, peak 0.071 GiB across cohort; policy 600s / 27.2 GiB)",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "Preserved; see TRANSLATION_CONFORMANCE_AUDIT.md",
+   "feasibility_seconds": 0.0198
+  },
+  {
+   "group": "MgcosA",
+   "subject": "LessThanPhase",
+   "upstream_designation": "LessThan_N()=5, LessThan_m()=10",
+   "parameters": {
+    "input_qubits": 5,
+    "integer": 10
+   },
+   "n_qubits": 5,
+   "decomposed_size": 46,
+   "decomposed_depth": 34,
+   "circuit_sha256": "3e3e378b99c136011d55f9769599663044e1b45f856f03acfe108321cc523e16",
+   "semantic_contract": "phase oracle diag((-1)^[x<10])",
+   "realized_input": "|0...0>",
+   "output_scope": "all 5",
+   "C1": "Yes (arXiv:2505.07243 + upstream classical reference function)",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes (0.0008s, peak 0.071 GiB across cohort; policy 600s / 27.2 GiB)",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "Preserved; see TRANSLATION_CONFORMANCE_AUDIT.md",
+   "feasibility_seconds": 0.0008
+  },
+  {
+   "group": "MgcosA",
+   "subject": "DiagonalZHamiltonian",
+   "upstream_designation": "HamiltonX_Nqs()=3, HamiltonX_t()=0.2",
+   "parameters": {
+    "input_qubits": 3,
+    "t": 0.2
+   },
+   "n_qubits": 3,
+   "decomposed_size": 3,
+   "decomposed_depth": 1,
+   "circuit_sha256": "ff51f35832f43c040ab587dc5b85812bd969504ceba471e0ab1e057355431451",
+   "semantic_contract": "diagonal evolution prod_i Rz(t*2^i)",
+   "realized_input": "|0...0>",
+   "output_scope": "all 3",
+   "C1": "Yes (arXiv:2505.07243 + upstream classical reference function)",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes (0.0002s, peak 0.071 GiB across cohort; policy 600s / 27.2 GiB)",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "Preserved; see TRANSLATION_CONFORMANCE_AUDIT.md",
+   "feasibility_seconds": 0.0002
+  },
+  {
+   "group": "MgcosA",
+   "subject": "IsingEvolution",
+   "upstream_designation": "Ising_Nqs()=7, J()=1.0, B()=1.0, t()=0.2",
+   "parameters": {
+    "input_qubits": 7,
+    "J": 1.0,
+    "B": 1.0,
+    "t": 0.2
+   },
+   "n_qubits": 7,
+   "decomposed_size": 14,
+   "decomposed_depth": 8,
+   "circuit_sha256": "f73de4725117a42e1b81a07bddf0dd06b08607514439f3d26f4a7d6e5106bb2c",
+   "semantic_contract": "Rzz ring + Rz field evolution",
+   "realized_input": "|0...0>",
+   "output_scope": "all 7",
+   "C1": "Yes (arXiv:2505.07243 + upstream classical reference function)",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes (0.0004s, peak 0.071 GiB across cohort; policy 600s / 27.2 GiB)",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "Preserved; see TRANSLATION_CONFORMANCE_AUDIT.md",
+   "feasibility_seconds": 0.0004
+  },
+  {
+   "group": "MgcosA",
+   "subject": "DraperAdder",
+   "upstream_designation": "QAdder_N()=5",
+   "parameters": {
+    "input_qubits": 5
+   },
+   "n_qubits": 10,
+   "decomposed_size": 49,
+   "decomposed_depth": 25,
+   "circuit_sha256": "0e3f6c97f83a29aa3a84802be4ef76e5ae45e688a622a60c544e2073bd4a1fbf",
+   "semantic_contract": "|x>|y> -> |x>|(x+y) mod 2^5>",
+   "realized_input": "computational-basis operands",
+   "output_scope": "y register, qubits 5..9",
+   "C1": "Yes (arXiv:2505.07243 + upstream classical reference function)",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes (0.0014s, peak 0.071 GiB across cohort; policy 600s / 27.2 GiB)",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "Preserved; see TRANSLATION_CONFORMANCE_AUDIT.md",
+   "feasibility_seconds": 0.0014
+  },
+  {
+   "group": "MgcosA",
+   "subject": "AdderHamiltonianMixture",
+   "upstream_designation": "QAdder_N()=5, HamiltonX_t()=0.2",
+   "parameters": {
+    "input_qubits": 5,
+    "t": 0.2
+   },
+   "n_qubits": 10,
+   "decomposed_size": 54,
+   "decomposed_depth": 26,
+   "circuit_sha256": "d838a31f6f37bc75d962d9e42d62fd9dcbb89294bf91b42b4e94db874fa9da11",
+   "semantic_contract": "HamiltonX(t,qy) then QAdder(qx,qy)",
+   "realized_input": "computational-basis operands",
+   "output_scope": "y register, qubits 5..9",
+   "C1": "Yes (arXiv:2505.07243 + upstream classical reference function)",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes (0.0014s, peak 0.071 GiB across cohort; policy 600s / 27.2 GiB)",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "Preserved; see TRANSLATION_CONFORMANCE_AUDIT.md",
+   "feasibility_seconds": 0.0014
+  },
+  {
+   "group": "QASMBench/Qiskit",
+   "subject": "qft_n4",
+   "upstream_designation": "fixed released circuit; no parameterization required",
+   "parameters": null,
+   "n_qubits": 4,
+   "decomposed_size": 12,
+   "decomposed_depth": null,
+   "circuit_sha256_16": "43de2b53e976d4ac",
+   "semantic_contract": "QFT on 4 qubits with x-prefixed fixed input",
+   "realized_input": "x q[0]; x q[2] prefix",
+   "output_scope": "all 4",
+   "C1": "Yes",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "not applicable (no translation)"
+  },
+  {
+   "group": "QASMBench/Qiskit",
+   "subject": "deutsch_n2",
+   "upstream_designation": "fixed released circuit; no parameterization required",
+   "parameters": null,
+   "n_qubits": 2,
+   "decomposed_size": 5,
+   "decomposed_depth": null,
+   "circuit_sha256_16": "56a7b3389495fb49",
+   "semantic_contract": "Deutsch for f(x)=x",
+   "realized_input": "|0>",
+   "output_scope": "q0",
+   "C1": "Yes",
+   "C2": "Yes",
+   "C3": "Yes",
+   "C4": "Yes",
+   "C5": "Yes",
+   "C6": "Yes (specification-based)",
+   "translation_conformance": "not applicable (no translation)"
+  }
+ ],
+ "mutation_configuration": {
+  "operators": [
+   "gate_insertion",
+   "gate_replacement",
+   "gate_deletion"
+  ],
+  "gate_classes": [
+   "entangling_controlled",
+   "local_basis_amplitude",
+   "phase_parameterized"
+  ],
+  "enumeration": "legal insertion, replacement and deletion mutations over the original circuit",
+  "deduplication": "remove duplicates before allocation",
+  "allocation": "30 per subject by the rule fixed before any outcome is observed; where the deduplicated legal set is smaller than 30, allocate the whole set and report the actual census",
+  "allocated_total": 270,
+  "repetition_seed_schedule": "prospective convention seed(case,rep)=42+rep, rep in 0..11 (e1_seed_schedule.py)",
+  "assertion_reference_seed": 42,
+  "special_operators_for_external_cohort": "none; no phase-specific operator is introduced",
+  "outcome_blindness": "no endpoint state, observation vector or relation value is computed before allocation completes"
+ },
+ "diagnostic_configuration": {
+  "interface": "QUTest 0.1.0",
+  "profile": "recovered certifiability profile, unchanged",
+  "observation": "joint computational-Z outcome distribution of the measured register",
+  "admissible_families": [
+   "marginal probability",
+   "Z-product expectation",
+   "basis-state probability",
+   "entropy",
+   "full distribution"
+  ],
+  "assertion_universe_cardinality": "2^(n+1)+n+1",
+  "baseline_suite": "S_MIN",
+  "N": 2000,
+  "R": 12,
+  "theta": 0.05,
+  "eps_num": 1e-09,
+  "stage2_relations": [
+   "R_C",
+   "R_S",
+   "R_O",
+   "R_A_theta",
+   "R_T_theta"
+  ],
+  "stage3": "existing evidence requirements, unchanged",
+  "reports": [
+   "CL1",
+   "CL2",
+   "CL3",
+   "CL4",
+   "CL5",
+   "Unresolved"
+  ],
+  "tuned_for_external_cohort": "nothing"
+ },
+ "reporting_units": [
+  "mutant",
+  "subject/program",
+  "provenance group",
+  "distinct endpoint-state effect where the artifact schema supports it"
+ ],
+ "reporting_caveat": "Raw mutant count is not presented as independent replication; the replication unit is the subject.",
+ "interpretation_frozen": {
+  "if_cl3_observed": "The observation-limitation mechanism also arose prospectively in external programs that were not used to construct or calibrate QSurvDiag.",
+  "if_no_cl3": "No supported CL3 case occurred in the prospective external cohort; independent prospective evidence for the mechanism therefore remains limited.",
+  "in_either_case": "The cohort is mechanism-oriented and does not estimate CL3 prevalence in quantum software.",
+  "amendment_rule": "These sentences are not rewritten after the outcome is known; actual counts are inserted into them."
+ },
+ "provenance_qualification": "The MgcosA program artifact shares one author with BUGS4Q, but the underlying program artifacts are distinct and have no program-level overlap with BUGS4Q, QMutBench or MQT Bench; the MgcosA programs were not used to construct or calibrate QSurvDiag.",
+ "amendment_policy": "No subject may be added, replaced or removed after this freeze except for a predefined technical failure. A technical failure is recorded as an exclusion with its reason and is not substituted."
+}

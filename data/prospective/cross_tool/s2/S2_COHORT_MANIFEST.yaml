@@ -1,0 +1,71 @@
+stage: "S2"
+protocol_freeze_commit: "35f0d5c"
+s1_commit: "8abe1e4"
+boundary: "prospective validation execution boundary (NOT a preregistration)"
+seeds:
+  BASE_SEED: 20260730
+  consumed_by_draw: false
+  note: "the frozen draw is a deterministic sort by (location, sha256(definition)); no RNG is consumed. BASE_SEED is recorded as provenance only."
+frozen_sampling_rule: "enumerate all sites; largest-remainder allocation of 30 per subject proportional to per-stratum availability; within a stratum sort by (location, sha256(definition)) ascending and take the first k; dedup by mutated_hash; redistribute any shortfall by the same rule"
+populations:
+  opportunities_enumerated: 9760
+  statically_eligible: 9760
+  statically_ineligible: 0
+  exact_duplicate_sites: 37
+  generated_selected: 150
+  native_eligible: 149
+  excluded_native_invalid: 1
+per_subject_selected:
+  simon_4: 30
+  wstate_4: 30
+  swaptest_5: 30
+  cuccaro_adder_5: 30
+  toffoli_barenco_5: 30
+per_subject_native_eligible:
+  simon_4: 30
+  wstate_4: 29
+  swaptest_5: 30
+  cuccaro_adder_5: 30
+  toffoli_barenco_5: 30
+per_operator_selected:
+  gate_insertion: 123
+  gate_replacement: 27
+per_stratum_selected:
+  gate_insertion/local_basis_amplitude: 47
+  gate_insertion/phase_parameterized: 38
+  gate_insertion/entangling_controlled: 38
+  gate_replacement/local_basis_amplitude: 13
+  gate_replacement/entangling_controlled: 4
+  gate_replacement/phase_parameterized: 10
+empty_strata:
+  - "gate_deletion/local_basis_amplitude"
+  - "gate_deletion/phase_parameterized"
+  - "gate_deletion/entangling_controlled"
+contract_association:
+  C_FIXED_INPUT_STATE:
+    - "simon_4"
+    - "wstate_4"
+  C_ARBITRARY_INPUT_UNITARY:
+    - "cuccaro_adder_5"
+    - "swaptest_5"
+    - "toffoli_barenco_5"
+profile_association:
+  qutest:
+    - "QT_0_1_0__COUNT_SUBSTRATE"
+    - "QT_0_1_0__STATE_SUBSTRATE"
+    - "QT_0_1_0__STRUCTURAL_ROLE_AUDIT"
+    - "QT_0_1_0__EXPANDED_STATE_SENSITIVITY"
+  qucheck:
+    - "QC_0_0_2__FROZEN_XYZ"
+    - "QC_0_0_2__DIFFERENTIAL_MARGINAL"
+cross_tool_shared_cases: 149
+preflight_method: "INGESTION ONLY: qutest lint plus an assertion-free qutest run. No //% expect pragma is present, so no kill/survive verdict exists to inspect."
+survivor_categories_computed_in_S2: 0
+artifact_hashes:
+  S2_CROSS_TOOL_CASE_MAP.csv: "f23abedda9052c6069d43464faa6fe25a7ac8a80fae0edb9f402223050512d11"
+  S2_EFFECT_SIGNATURE_INPUTS.csv: "cb9ba7f85c5b0c1c66ece58c99d392e6edaa235a21db6efaf1dcf00a65fcba19"
+  S2_ELIGIBILITY_EXCLUSIONS.csv: "fe0e0a568923c99bc313248498e7f883c6fa7b88baeb4f23518a2100cd263561"
+  S2_GENERATED_MUTANTS.csv: "114df32b5e88044684301f1abb2885e6cfb49ce0a932caebd799890c9ca5cb75"
+  S2_MUTATION_OPPORTUNITIES.csv: "f43bf582b84208996af208ea12e8082b934fad7c2ef1ca3ebf5383e2ed954c74"
+  S2_NATIVE_PREFLIGHT.csv: "a7ead447da1ae7f681024a279170013c93917d16d3dd0b6684450daac88fcefb"
+  S2_SAMPLED_MUTANTS.csv: "114df32b5e88044684301f1abb2885e6cfb49ce0a932caebd799890c9ca5cb75"

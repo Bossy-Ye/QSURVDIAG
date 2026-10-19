@@ -1,0 +1,13 @@
+n,population,cases_at_this_width,marginal,observable,probability,entropy,distribution,enumerated_total,closed_form_2^(n+1)+n+1,implementation_recorded,match
+3,primary,57,3,7,8,1,1,20,20,n/a: no per-case enumeration is recorded for the primary population,YES
+4,primary,166,4,15,16,1,1,37,37,n/a: no per-case enumeration is recorded for the primary population,YES
+5,primary,220,5,31,32,1,1,70,70,n/a: no per-case enumeration is recorded for the primary population,YES
+6,primary,50,6,63,64,1,1,135,135,n/a: no per-case enumeration is recorded for the primary population,YES
+7,primary,53,7,127,128,1,1,264,264,n/a: no per-case enumeration is recorded for the primary population,YES
+8,scale,31,8,255,256,1,1,521,521,impl=521 formula=521 agree=True,YES
+9,scale,35,9,511,512,1,1,1034,1034,impl=1034 formula=1034 agree=True,YES
+10,scale,55,10,1023,1024,1,1,2059,2059,impl=2059 formula=2059 agree=True,YES
+11,scale,7,11,2047,2048,1,1,4108,4108,impl=4108 formula=4108 agree=True,YES
+12,scale,6,12,4095,4096,1,1,8205,8205,impl=8205 formula=8205 agree=True,YES
+13,scale,2,13,8191,8192,1,1,16398,16398,impl=16398 formula=16398 agree=True,YES
+14,scale,7,14,16383,16384,1,1,32783,32783,impl=32783 formula=32783 agree=True,YES

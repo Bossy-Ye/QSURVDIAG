@@ -1,0 +1,408 @@
+check_id,engine,label,expected,printed_in_manuscript,evidence_level,inputs
+M001,manuscript_checks,primary pairs killed by the baseline suite,302,no,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
+M002,manuscript_checks,primary pairs entering diagnosis,297,yes,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/primary/records/599_B5_A1G_POPULATION.csv
+M003,manuscript_checks,exact-reference killed,302,no,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M004,manuscript_checks,suite guard cells clean = 88 of 88,88,yes,per-case records,data/primary/decision/B5_A1G_GUARD.csv
+M005,manuscript_checks,suite revived kills = 0,0,no,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
+M006,manuscript_checks,S_FAMILY added kills = 14,14,no,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
+M007,manuscript_checks,all-qubit suite kills of the 79 suite omissions,41,yes,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
+M008,manuscript_checks,S_BOTH added kills,81,no,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
+M009,manuscript_checks,full-string GHZ register: GHZ suite omissions killed,32,yes,per-case records,data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
+M010,manuscript_checks,suite omissions under the full-string GHZ register,47,yes,per-case records,data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
+M011,manuscript_checks,observation limitations unchanged by the GHZ register,35,yes,per-case records,data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
+M014,manuscript_checks,CL3 persisting under QuCheck = 7,7,no,per-case records,data/primary/decision/B5_A4_INTERFACE_CORRECTED.csv
+M015,manuscript_checks,named repair transfers for 8 of 21,8,yes,per-case records,data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv
+M016,manuscript_checks,some QuCheck repair for 15 of 21,15,yes,per-case records,data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv
+M017,manuscript_checks,no separating assertion for 6 of 21,6,yes,per-case records,data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv
+M018,manuscript_checks,mutants allocated per circuit = 30,30,yes,per-case records,data/primary/manifests/B1_PRIMARY_POPULATION.csv
+M019,manuscript_checks,generated cases = 600,600,no,per-case records,
+M020,manuscript_checks,allocation ledger rows = 600,600,no,per-case records,data/primary/manifests/B1_PRIMARY_POPULATION.csv
+M021,manuscript_checks,executable primary mutants = 599,599,yes,per-case records,data/primary/records/599_B1_FROZEN_CONSTRUCTION_MEMBERSHIP.csv
+M022,manuscript_checks,construction cohort = 450,450,yes,per-case records,data/primary/records/599_B1_FROZEN_CONSTRUCTION_MEMBERSHIP.csv
+M023,manuscript_checks,construction mutants excluded from the population = 53,53,no,per-case records,data/primary/manifests/B1_UNRECOVERED_CONSTRUCTION_EXCLUSIONS.csv
+M024,manuscript_checks,prospective eligible = 149,149,yes,per-case records,data/primary/manifests/B1_PROSPECTIVE_ELIGIBLE.csv
+M025,manuscript_checks,450 + 149 = 599,599,yes,per-case records,data/primary/records/599_B1_FROZEN_CONSTRUCTION_MEMBERSHIP.csv
+M026,manuscript_checks,non-killed diagnostic cases,297,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M027,manuscript_checks,construction cases,195,no,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M028,manuscript_checks,prospective cases = 102,102,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M029,manuscript_checks,contract equivalences,93,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M030,manuscript_checks,CL2,87,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M031,manuscript_checks,observation limitations,35,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M032,manuscript_checks,CL4,79,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M033,manuscript_checks,CL5 = 1,1,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M034,manuscript_checks,Unresolved = 2,2,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M035,manuscript_checks,certificate-bearing survivors,295,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M036,manuscript_checks,semantic relations: equivalent on all legal inputs,4,yes,per-case records,data/primary/records/599_B1_CONTRACT_RERUN.csv; data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M037,manuscript_checks,semantic relations: same final state on the executed input,176,yes,per-case records,data/primary/records/599_B1_CONTRACT_RERUN.csv; data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M038,manuscript_checks,semantic relations: different final state on the executed input,115,yes,per-case records,data/primary/records/599_B1_CONTRACT_RERUN.csv; data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M039,manuscript_checks,semantic relations: contract equivalences under the declared contracts,93,yes,per-case records,data/primary/records/599_B1_CONTRACT_RERUN.csv; data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M040,manuscript_checks,fixed-input contract equivalences that differ on another input,89,yes,per-case records,data/primary/records/599_B1_CONTRACT_RERUN.csv; data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M041,manuscript_checks,"declared share, %",31.5,no,per-case records,data/primary/records/599_B1_CONTRACT_RERUN.csv; data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M042,manuscript_checks,"uniform share, %",1.4,no,per-case records,data/primary/records/599_B1_CONTRACT_RERUN.csv; data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M043,manuscript_checks,"Fig. 4(a) observation limitations at Z, output register",90,yes,per-case records,data/primary/records/599_B1_OBSERVATION_RERUN.csv
+M044,manuscript_checks,"Fig. 4(a) observation limitations at Z, all qubits",35,yes,per-case records,data/primary/records/599_B1_OBSERVATION_RERUN.csv
+M045,manuscript_checks,"Fig. 4(a) observation limitations at XYZ, output register",60,yes,per-case records,data/primary/records/599_B1_OBSERVATION_RERUN.csv
+M046,manuscript_checks,"Fig. 4(a) observation limitations at XYZ, all qubits",0,yes,per-case records,data/primary/records/599_B1_OBSERVATION_RERUN.csv
+M047,manuscript_checks,lattice denominator = 193 construction pairs,193,yes,per-case records,data/primary/records/599_B1_OBSERVATION_RERUN.csv
+M048,manuscript_checks,"matched changes: four observation refinements, pairs leaving observation limitation",55/30/35/60,yes,per-case records,data/primary/records/599_B1_OBSERVATION_RERUN.csv
+M049,manuscript_checks,S_FAMILY kills of CL3,0/35,yes,per-case records,
+M050,manuscript_checks,S_FAMILY kills of CL4,12/79,yes,per-case records,
+M051,manuscript_checks,S_COVER kills of CL3,0/35,yes,per-case records,
+M052,manuscript_checks,S_COVER kills of CL4,41/79,yes,per-case records,
+M053,manuscript_checks,declared-register CL4 partition,41/12/26,partly (41 and 12 printed),per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M054,manuscript_checks,declared-register CL4 partition total,79,yes,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv
+M055,manuscript_checks,whole-string CL4 partition,9/34/4,no,per-case records,
+M056,manuscript_checks,whole-string CL4 partition total,47,yes,per-case records,
+M057,manuscript_checks,"frame executed = 1,537",1537,yes,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M058,manuscript_checks,execution failures = 0,0,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M059,manuscript_checks,registered corpus record: |U_v| matches the registered universe 2^(n+1)+n+1 (before the two added distances) on all,True,n.a. (logical check),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M060,manuscript_checks,guard 0 false-fails on all,True,n.a. (logical check),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M061,manuscript_checks,reference condition exact analytic,exact_analytic,n.a. (non-numeric),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M062,manuscript_checks,killed by S_MIN = 975,975,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M063,manuscript_checks,survivors under S_MIN = 511,511,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M064,manuscript_checks,split verdicts = 51 and all Unresolved,51/51,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M065,manuscript_checks,initial analysis: reports 158 CL1 / 150 CL3 / 185 CL4 / 18 CL5,158/150/185/18,partly (CL3 count printed),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M066,manuscript_checks,CL2 empty under a fixed-input contract,0,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M067,manuscript_checks,substrate and certificate coincide at 150,150/150,yes,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M068,manuscript_checks,strata sizes 818 non-diagonal / 719 diagonal,818/719,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M069,manuscript_checks,non-diagonal CL3 = 58 of 818,58/818,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M070,manuscript_checks,diagonal CL3 = 92 of 719,92/719,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M071,manuscript_checks,non-diagonal CL3 among survivors = 58 of 240,58/240,partly (240 and the 24.2 % share printed),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M072,manuscript_checks,per-width CL3 reproduces the per-width table,17/8/13/15/16/9/24/24/20/1/0/1/2,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M073,manuscript_checks,150 in frame + 1 at n=19 = 151,151,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M074,manuscript_checks,construction CL4/CL5 saturating = 57 of 64,57/64,no,archived aggregate record,data/scalability/corpus/T2A_CL5_MECHANISM.json
+M075,manuscript_checks,construction smallest separation = 0.0294,0.0294,no,archived aggregate record,data/scalability/corpus/T2A_CL5_MECHANISM.json
+M076,manuscript_checks,construction share at or below theta = 1.6%,0.0156,no,archived aggregate record,data/scalability/corpus/T2A_CL5_MECHANISM.json
+M077,manuscript_checks,corpus CL4/CL5 saturating = 21 of 203,21/203,no,archived aggregate record,data/scalability/corpus/T2A_CL5_MECHANISM.json
+M078,manuscript_checks,corpus share at or below theta = 8.9%,0.0887,no,archived aggregate record,data/scalability/corpus/T2A_CL5_MECHANISM.json
+M079,manuscript_checks,diagonal stratum CL3 rate 12.8% (92 of 719),92/719,no,archived aggregate record,data/scalability/corpus/T2A_STRATUM_MECHANISM.json
+M080,manuscript_checks,diagonal-insertion CL3 rate = 26.0%,0.2603,no,archived aggregate record,data/scalability/corpus/T2A_STRATUM_MECHANISM.json
+M081,manuscript_checks,diagonal-stratum 'other' mutations CL3 = 0,0,no,archived aggregate record,data/scalability/corpus/T2A_STRATUM_MECHANISM.json
+M082,manuscript_checks,"non-diagonal Wilson 95% = [5.5, 9.1]","(5.5, 9.1)",no,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M083,manuscript_checks,"diagonal Wilson 95% = [10.6, 15.4]","(10.6, 15.4)",no,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M084,manuscript_checks,"survivor non-diagonal Wilson = [19.2, 30.0]","(19.2, 30.0)",yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M085,manuscript_checks,"survivor diagonal Wilson = [28.6, 39.8]","(28.6, 39.8)",yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M086,manuscript_checks,intervals do not overlap (9.1 < 10.6),True,n.a. (logical check),per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv; data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M087,manuscript_checks,output-condition pool = 47,47,yes,archived aggregate record,data/primary/records/599_OUTPUT_CONDITION.json
+M088,manuscript_checks,output-condition movers = 8,8,yes,archived aggregate record,data/primary/records/599_OUTPUT_CONDITION.json
+M089,manuscript_checks,output-condition movers out = 0,0,no,archived aggregate record,data/primary/records/599_OUTPUT_CONDITION.json
+M090,manuscript_checks,output-condition CL3 movers = 4 of 35,4/35,yes,archived aggregate record,data/primary/records/599_OUTPUT_CONDITION.json
+M091,manuscript_checks,output-condition predicate reproduces 546,True,n.a. (logical check),archived aggregate record,data/primary/records/599_OUTPUT_CONDITION.json
+M092,manuscript_checks,corpus sufficient condition: entailed pairs = 54,54,yes,archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M093,manuscript_checks,corpus sufficient condition: R_O holds on all 54 entailed,54/54,yes,archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M094,manuscript_checks,corpus sufficient condition: all 54 entailed certify CL3,54/54,yes,archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M095,manuscript_checks,corpus sufficient condition: contingent CL3 = 96,96,no,archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M096,manuscript_checks,corpus sufficient condition: 54 entailed + 96 contingent = 150,150,partly (54 and 150 printed),archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M097,manuscript_checks,corpus sufficient condition: all entailed lie in the diagonal stratum,54,no,archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M098,manuscript_checks,corpus sufficient condition: diagonal stratum holds 38 contingent CL3,38,no,archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M099,manuscript_checks,corpus sufficient condition: no entailed pair in the non-diagonal stratum,0,no,archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M100,manuscript_checks,corpus sufficient condition: proxy covers 54 entailed + 665 others,665,no,archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+M101,manuscript_checks,width set: native suite execution share = 98.4%,0.984,no,archived aggregate record,data/scalability/corpus/T2C_TIMING_SUMMARY.json
+M102,manuscript_checks,width set: assertion-space share at n=14 = 12.5%,0.125,no,archived aggregate record,data/scalability/corpus/T2C_TIMING_SUMMARY.json
+M103,manuscript_checks,width set: assertion-space share at n=10 < 0.2%,True,n.a. (logical check),archived aggregate record,data/scalability/corpus/T2C_TIMING_SUMMARY.json
+M104,manuscript_checks,width set: growth per added qubit at n=14 = 3.8x,3.81,no,archived aggregate record,data/scalability/corpus/T2C_TIMING_SUMMARY.json
+M105,manuscript_checks,width set: crossover near n=16,15.8,no,archived aggregate record,data/scalability/corpus/T2C_TIMING_SUMMARY.json
+M106,manuscript_checks,width set: 600 s budget exhausted near n=19,True,n.a. (logical check),archived aggregate record,data/scalability/corpus/T2C_TIMING_SUMMARY.json
+M107,manuscript_checks,largest CL5 separation = 0.0496,0.0496,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M108,manuscript_checks,smallest CL4 separation = 0.0504,0.0504,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M109,manuscript_checks,no case between them,True,n.a. (logical check),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M110,manuscript_checks,diagonal CL3 among survivors = 92 of 271,92/271,partly (271 and the 33.9 % share printed),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M111,manuscript_checks,GHZ CL4 cases remaining under the whole-string reading,22,no,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
+M112,manuscript_checks,GHZ CL4 cases needing both axes at the declared register,22,no,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
+M113,manuscript_checks,S_BOTH kills of CL4,79/79,yes,per-case records,
+M119,manuscript_checks,register-restricted QuCheck: observation limitations persisting = 12,12,no,per-case records,data/primary/decision/B5_A4_INTERFACE_CORRECTED.csv
+M120,manuscript_checks,natively executed decision cells,4869,no,per-case records,data/primary/records/599_B2_SHOT_FRESH.csv
+M121,manuscript_checks,N moves a Stage-2 relation in 0 cells,0,yes,per-case records,data/primary/records/599_B2_SHOT_FRESH.csv
+M122,manuscript_checks,cells covered by the finite-shot bound,3648/4198,"partly (4,198 printed)",per-case records,data/primary/records/599_B2_SHOT_FRESH.csv
+M123,manuscript_checks,no disagreement in covered cells,0,yes,per-case records,data/primary/records/599_B2_SHOT_FRESH.csv
+M124,manuscript_checks,disagreements among the cells outside the bound,71/550,partly (71 printed),per-case records,data/primary/records/599_B2_SHOT_FRESH.csv
+M125,manuscript_checks,witness coverage over pairs,541/599,no,per-case records,data/primary/records/599_B2_BOUND_FRESH.csv
+M126,manuscript_checks,witness coverage over cells,7992/10782,no,per-case records,data/primary/records/599_B2_BOUND_FRESH.csv
+M127,manuscript_checks,"witness coverage, %",74.1,no,per-case records,data/primary/records/599_B2_BOUND_FRESH.csv
+M128,manuscript_checks,ablations,21040,no,per-case records,data/primary/records/599_B2_EVIDENCE_ABLATION_FRESH.csv
+M129,manuscript_checks,supported certificates,1178,no,per-case records,data/primary/records/599_B2_EVIDENCE_ABLATION_FRESH.csv
+M130,manuscript_checks,"requirement items, half the ablations",10520,no,per-case records,data/primary/records/599_B2_EVIDENCE_ABLATION_FRESH.csv
+M131,manuscript_checks,mean requirements per certificate,8.93,no,per-case records,data/primary/records/599_B2_EVIDENCE_ABLATION_FRESH.csv
+M132,manuscript_checks,tolerance cells,3594,no,per-case records,data/primary/records/599_B2_TOLERANCE_FRESH.csv
+M133,manuscript_checks,"candidate CL5 sweep 0,0,1,1,4,23","0,0,1,1,4,23",no,per-case records,data/primary/records/599_B2_TOLERANCE_FRESH.csv
+M134,manuscript_checks,"supported CL5 sweep 0,0,1,1,2,2","0,0,1,1,2,2",no,per-case records,data/primary/records/599_B2_TOLERANCE_FRESH.csv
+M135,manuscript_checks,scale manifest pairs = 162,162,yes,per-case records,data/scalability/E4_SCALE_MANIFEST.csv
+M136,manuscript_checks,executed scale pairs = 143,143,yes,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M137,manuscript_checks,scale native kills = 96,96,no,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M138,manuscript_checks,scale CL1 = 19,19,no,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M139,manuscript_checks,scale CL3 = 17,17,no,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M140,manuscript_checks,scale CL4 = 7,7,no,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M141,manuscript_checks,scale CL5 = 3,3,no,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M142,manuscript_checks,scale Unresolved = 1,1,no,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M143,manuscript_checks,universe 521 at n=8,521,no,per-case records,
+M144,manuscript_checks,"universe 32,783 at n=14",32783,no,per-case records,
+M145,manuscript_checks,assertion-space factor 715,715,yes,per-case records,
+M146,manuscript_checks,assertion-space median 5.8 ms at n=8,5.8,no,per-case records,
+M147,manuscript_checks,assertion-space median 4.15 s at n=14,4.15,no,per-case records,
+M148,manuscript_checks,total-per-case medians 37.7 to 43.7 s,37.7/43.7,no,per-case records,
+M149,manuscript_checks,largest total 59.3 s,59.3,yes,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M150,manuscript_checks,largest resident set 0.092 GiB,0.092,yes,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M151,manuscript_checks,no resource censoring,0,no,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
+M152,manuscript_checks,"corpus distinct pairs = 1,569",1569,yes,archived aggregate record,data/scalability/B2_CORPUS_FRESH.json
+M153,manuscript_checks,corpus CL3 substrate 9.4 % at n<=7,9.4,yes,archived aggregate record,data/scalability/B2_CORPUS_FRESH.json
+M154,manuscript_checks,corpus CL3 substrate 9.9 % at n>=8,9.9,yes,archived aggregate record,data/scalability/B2_CORPUS_FRESH.json
+M155,manuscript_checks,released defects = 42,42,yes,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+M156,manuscript_checks,depth NOT_REPRODUCIBLE = 10,10,no,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+M157,manuscript_checks,depth NATIVE_REPRODUCTION_ONLY = 8,8,no,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+M158,manuscript_checks,depth PROFILE_ONLY = 10,10,no,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+M159,manuscript_checks,depth RELATION_LEVEL = 12,12,no,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+M160,manuscript_checks,depth FULL_CERTIFICATION = 2,2,yes,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+M161,manuscript_checks,closed-profile eligible = 4,4,yes,per-case records,data/external/defects/B3_QUTEST_ELIGIBILITY_FRESH.csv
+M169,manuscript_checks,QuCheck resolves 28 of the 599 pairs,28,yes,per-case records,data/primary/records/T1_4_INTERFACE_599.csv
+M170,manuscript_checks,QuCheck loses 25 of the 599 pairs,25,yes,per-case records,data/primary/records/T1_4_INTERFACE_599.csv
+M171,manuscript_checks,witness separates 5 of 35 primary CL3,5/35,yes,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M172,manuscript_checks,witness-separated primary CL3 all QFT,5,yes,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M173,manuscript_checks,witness separates 4 of 150 corpus CL3,4/150,yes,per-case records,data/certification/outcomes/R2_CORPUS_WIDTH_PAIRS.csv
+M174,manuscript_checks,witness separates 0 of 17 width-set CL3,0/17,no,per-case records,data/certification/outcomes/R2_CORPUS_WIDTH_PAIRS.csv
+M175,manuscript_checks,witness separates 0 of 30 external CL3,0/30,no,per-case records,data/certification/outcomes/R2_EXTERNAL_CL3.csv
+M176,manuscript_checks,"external rebuild reproduces R_O, 30 of 30",30/30,no,per-case records,data/certification/outcomes/R2_EXTERNAL_CL3.csv
+M177,manuscript_checks,low-order witness for 79 of 79 CL4,79/79,yes,per-case records,data/certification/outcomes/R2_CHEAP_BASELINE.csv
+M178,manuscript_checks,low-order baseline escalates 1 primary case,1,no,per-case records,data/certification/outcomes/R2_CHEAP_BASELINE.csv
+M179,manuscript_checks,corpus CL4 with only higher-order witnesses = 11,11,no,per-case records,data/certification/outcomes/R2_CHEAP_BASELINE.csv
+M180,manuscript_checks,corpus CL4 total = 185,185,no,per-case records,data/certification/outcomes/R2_CHEAP_BASELINE.csv
+M181,manuscript_checks,low-order median 0.15 ms,0.15,no,per-case records,data/certification/outcomes/R2_CHEAP_BASELINE.csv
+M182,manuscript_checks,full-universe median 0.51 ms,0.51,no,per-case records,data/certification/outcomes/R2_CHEAP_BASELINE.csv
+M183,manuscript_checks,width low-order median 1.2 ms,1.2,no,per-case records,data/certification/outcomes/R2_CHEAP_BASELINE.csv
+M184,manuscript_checks,width full-universe median 79 ms,79,no,per-case records,data/certification/outcomes/R2_CHEAP_BASELINE.csv
+M185,manuscript_checks,rerun CL5 sweep over the six tolerances,"0,0,1,1,4,18",partly (the counts at theta = 0.01 and 0.50 printed),per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M186,manuscript_checks,rerun CL5 at theta 0.50 = 18,18,yes,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M187,manuscript_checks,recorded CL5 at theta 0.50 = 23,23,no,per-case records,data/primary/records/599_B2_TOLERANCE_FRESH.csv
+M188,manuscript_checks,recorded sweep reproduced from rerun U5,"0,0,1,1,4,23",no,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M189,manuscript_checks,KL separates five recorded CL5 at 0.50,5,no,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M190,manuscript_checks,full family settles two undecided at 0.50,2,no,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M191,manuscript_checks,rerun resolution-limited at 0.50 = 3,3,no,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M192,manuscript_checks,recorded resolution-limited at 0.50 = 5,5,no,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M193,manuscript_checks,excluded kinds lower theta 0.50 count to 16,16,no,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M194,manuscript_checks,excluded kinds leave smaller sweep unchanged,"0,0,1,1,4",no,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M195,manuscript_checks,supported CL5 unchanged under full family,"0,0,1,1,2,2",no,per-case records,data/primary/records/599_B2_TOLERANCE_FRESH.csv; data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M196,manuscript_checks,reference CL5 stays CL5 under every universe,1,no,per-case records,data/certification/outcomes/R2_PRIMARY_PAIRS.csv
+M202,manuscript_checks,width rerun withdraws two of three CL5,2,no,per-case records,data/certification/outcomes/R2_CORPUS_WIDTH_PAIRS.csv; data/certification/outcomes/R2_MARGINS.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M203,manuscript_checks,SBS_055 observation margin 5.1e-9,5.1,no,per-case records,data/certification/outcomes/R2_MARGINS.csv
+M204,manuscript_checks,corpus rerun withdraws five of 18 CL5,5/18,no,per-case records,data/certification/outcomes/R2_CORPUS_WIDTH_PAIRS.csv; data/certification/outcomes/R2_MARGINS.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M205,manuscript_checks,corpus CL5 in the rerun = 13,13,yes,per-case records,data/certification/outcomes/R2_CORPUS_WIDTH_PAIRS.csv; data/certification/outcomes/R2_MARGINS.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M206,manuscript_checks,full family separates QRA_513 and SBS_081,2,no,per-case records,data/certification/outcomes/R2_CORPUS_WIDTH_PAIRS.csv
+M207,manuscript_checks,three corpus CL5 inside the guard band,3,no,per-case records,data/certification/outcomes/R2_MARGINS.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M208,manuscript_checks,excluded kinds separate 9 of 16 corpus CL5,9/16,no,per-case records,data/certification/outcomes/R2_CONDITIONAL_SEPARATIONS.csv
+M209,manuscript_checks,five only through rare-bit correlations,5,no,per-case records,data/certification/outcomes/R2_CONDITIONAL_SEPARATIONS.csv
+M210,manuscript_checks,two through a changed most-frequent outcome,2,no,per-case records,data/certification/outcomes/R2_CONDITIONAL_SEPARATIONS.csv
+M211,manuscript_checks,QRA_174 rare bit set with probability 5.6e-8,5.6,no,per-case records,data/certification/outcomes/R2_CONDITIONAL_SEPARATIONS.csv
+M212,manuscript_checks,QRA_174 correlation moves by 0.39,0.39,no,per-case records,data/certification/outcomes/R2_CONDITIONAL_SEPARATIONS.csv
+M213,manuscript_checks,QRA_174 largest admitted difference 2.0e-7,2.0,no,per-case records,data/certification/outcomes/R2_CONDITIONAL_SEPARATIONS.csv
+M214,manuscript_checks,every margin decided equal is below 7e-12,7,no,per-case records,
+M215,manuscript_checks,"primary, interface and external margins decided different are above 4e-3",4,no,per-case records,
+M216,manuscript_checks,corpus and width-set differences reach down to 4.8e-9,4.8,yes,per-case records,
+M217,manuscript_checks,three more corpus pairs lie between 1e-8 and 1e-6,3,no,per-case records,data/certification/outcomes/R2_MARGINS.csv; data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M218,manuscript_checks,dj_3#e19 state margin 0.293,0.293,yes,per-case records,data/certification/outcomes/R2_MARGINS.csv
+M219,manuscript_checks,dj_3#e19 observation margin 0,0,yes,per-case records,data/certification/outcomes/R2_MARGINS.csv
+M220,manuscript_checks,dj_3#e19 per-assertion bound 9.1e-5,9.1,no,per-case records,data/primary/records/599_B2_BOUND_FRESH.csv
+M221,manuscript_checks,dj_3#e19 unanimity bound 1.1e-3,1.1,no,per-case records,data/primary/records/599_B2_BOUND_FRESH.csv
+M222,manuscript_checks,dj_3#e19 no kill in 12 repetitions,0/12,yes,per-case records,data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv
+M223,manuscript_checks,v2 specification unchanged since its hash,6829f1ba,no,per-case records,data/prospective/mqt_bench/frozen_deps/V2_SPECIFICATION.md
+M224,manuscript_checks,"v2 native checks 537 in 8,055 QUTest runs",537/8055,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M225,manuscript_checks,outcome records differing between the initial analysis and the final rules,51,yes,per-case records,data/certification/outcomes/R2V_RULE_CHANGES.csv; data/certification/witness_order/IMPACT.csv
+M226,manuscript_checks,50 of the 51 become Unresolved,50,yes,per-case records,data/certification/outcomes/R2V_RULE_CHANGES.csv; data/certification/witness_order/IMPACT.csv
+M227,manuscript_checks,no primary or external report changes,0,no,per-case records,data/certification/outcomes/R2V_RULE_CHANGES.csv
+M228,manuscript_checks,no CL3 report changes,0,no,per-case records,data/certification/outcomes/R2V_RULE_CHANGES.csv
+M229,manuscript_checks,native table 280/21/259/278,280/21/259/278,no,archived aggregate record,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/outcomes/R2V_FINAL_DEFECT.csv; data/certification/outcomes/R2V_FINAL_EXTERNAL.csv; data/certification/outcomes/R2V_FINAL_PRIMARY.csv; data/certification/outcomes/R2V_FINAL_WIDTH.csv; data/certification/outcomes/R2V_NATIVE.csv; data/certification/outcomes/R2V_NATIVE_DEFECTS.csv; data/certification/outcomes/R2V_NUMBERS.json
+M230,manuscript_checks,"native outcomes 234 confirmed, 27 split, 19 guard, 0 no control",234/27/19/0,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json; data/certification/outcomes/R2V_FINAL_DEFECT.csv; data/certification/witness_order/IMPACT.csv; data/certification/witness_order/NATIVE_RUNS.csv
+M231,manuscript_checks,v2 primary reference 93/87/35/79/1/2,93/87/35/79/1/2,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+M232,manuscript_checks,v2 construction 60/39/35/58/1/2,60/39/35/58/1/2,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+M233,manuscript_checks,v2 prospective 33/48/0/21/0/0,33/48/0/21/0/0,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+M234,manuscript_checks,primary CL4 natively confirmed 79 of 79,79/79,yes,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M235,manuscript_checks,primary witnesses reused from 21 recorded repairs,21,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M236,manuscript_checks,CL3 endpoint states 29 of 35,29/35,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M237,manuscript_checks,construction CL2 collapse onto 4 of 39,4/39,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M238,manuscript_checks,"smallest primary witness 0.148, next at least 0.500",0.148/0.500,no,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+M239,manuscript_checks,"state groups 27/4/29/45/1/2, total 108",27/4/29/45/1/2/108,no,per-case records,data/primary/figures/R_fig2b_compression.csv
+M240,manuscript_checks,observation groups total 51,51,no,per-case records,data/primary/figures/R_fig2b_compression.csv
+M241,manuscript_checks,matched changes: Z output->all qubits,"55/0/28.5/[1.3, 48.1]/[21.7, 32.2]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M242,manuscript_checks,matched changes: output Z->XYZ,"30/0/15.5/[7.3, 23.0]/[13.2, 17.4]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M243,manuscript_checks,matched changes: all qubits Z->XYZ,"35/0/18.1/[10.6, 26.7]/[16.1, 19.9]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M244,manuscript_checks,matched changes: XYZ output->all,"60/0/31.1/[7.8, 50.2]/[24.6, 35.1]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M245,manuscript_checks,matched changes: S_MIN->S_FAMILY,"14/0/2.3/[0.2, 5.7]/[0.9, 2.5]",no,archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M246,manuscript_checks,matched changes: S_MIN->S_COVER,"41/0/6.8/[1.5, 13.2]/[4.9, 7.2]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M247,manuscript_checks,matched changes: S_MIN->S_BOTH,"81/0/13.5/[4.5, 23.7]/[10.9, 14.2]",no,archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M250,manuscript_checks,matched changes: QUTest->QuCheck,"28/25/0.5/[-5.3, 6.2]/[-0.7, 1.9]","partly (gained, lost, effect and interval printed; leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M251,manuscript_checks,matched changes: QuCheck p 0.784,0.784,no,archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M252,manuscript_checks,matched changes: QUTest->pytest,"35/0/5.8/[2.7, 9.5]/[4.9, 6.2]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M253,manuscript_checks,"matched changes: budget 236 resolved, 3 created, +14.4",236/3/14.4,yes,archived aggregate record,data/certification/outcomes/R2V_STATISTICS.json
+M254,manuscript_checks,"matched changes: budget p 5.2e-66, CI, LOO","5.2e-66/[6.2, 24.6]/[12.0, 15.4]",partly (interval printed; p-value and leave-one-out range not printed),archived aggregate record,data/certification/outcomes/R2V_STATISTICS.json
+M255,manuscript_checks,matched changes: non-budget rows equal the v1 record,True,n.a. (logical check),archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M256,manuscript_checks,matched changes: no lattice or interface margin in the band,0,no,archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+M257,manuscript_checks,decision grid killed 784/785/793,784/785/793,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M258,manuscript_checks,decision-supported 480/623/704,480/623/704,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M259,manuscript_checks,Unresolved cells 359/215/126,359/215/126,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M260,manuscript_checks,N moves no Stage-2 relation under v2,True,n.a. (logical check),archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M261,manuscript_checks,"tolerance CL5 candidates 0,0,1,1,4,18","0,0,1,1,4,18",partly (the counts at theta = 0.01 and 0.50 printed),archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M262,manuscript_checks,"decision-supported CL5 0,0,1,1,2,2","0,0,1,1,2,2",no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M263,manuscript_checks,resolution-limited at theta 0.50 = 3,3,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M264,manuscript_checks,theta-invariant relations 93/180/215,93/180/215,yes,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M265,manuscript_checks,"ablation 959 certificates, 18,882 ablations",959/18882,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M266,manuscript_checks,mean 9.84 requirements per certificate,9.84,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M267,manuscript_checks,"every ablation withdraws, names, keeps candidate",True,n.a. (logical check),archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M268,manuscript_checks,by gate 16 of 90 against 110 of 740,16/90/110/740,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M269,manuscript_checks,"by-gate CL3 enrichment 10 of 33, 25 of 420",10/33/25/420,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M273,manuscript_checks,external 28/94/30/5/0/2,28/94/30/5/0/2,"partly (OL, SO and Unresolved counts printed)",per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
+M274,manuscript_checks,external CL4 confirmed 5 of 5,5/5,yes,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M275,manuscript_checks,width set 19/0/17/6/1/4,19/0/17/6/1/4,partly (Unresolved count printed),per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
+M276,manuscript_checks,"width universe 523 to 32,785",523/32785,no,per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
+M277,manuscript_checks,width and corpus universe sizes equal 2^(n+1)+n+3,True,n.a. (logical check),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/outcomes/R2V_FINAL_WIDTH.csv
+M278,manuscript_checks,"SBS_061 witness 0.008 above theta, kills 6 of 12",0.008/6,no,per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv; data/certification/outcomes/R2V_NATIVE.csv; data/certification/outcomes/R2V_NATIVE_DEFECTS.csv
+M279,manuscript_checks,SBS_081 original fails its witness in 3 of 3 guard runs,3/3,no,per-case records,data/certification/outcomes/R2V_NATIVE.csv; data/certification/outcomes/R2V_NATIVE_DEFECTS.csv
+M280,manuscript_checks,SBS_055 observation margin 5.1e-9 in the band,5.1/R_O,no,per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
+M281,manuscript_checks,"added distances 0.008 ms at 8, 0.11 ms at 14",0.008/0.11,partly (0.11 ms at fourteen qubits printed),archived aggregate record,data/certification/outcomes/R2V_DISTANCE_TIMING.json
+M282,manuscript_checks,corpus 158/0/150/143/13/98,158/0/150/143/13/98,"partly (OL, SO, below-tolerance and Unresolved counts printed)",per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/IMPACT.csv; data/certification/witness_order/NATIVE_RUNS.csv
+M283,manuscript_checks,corpus CL4 candidates 187,187,yes,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
+M284,manuscript_checks,"corpus 26 splits, 18 guard failures, 0 without control",26/18/0,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json; data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/NATIVE_RUNS.csv
+M285,manuscript_checks,corpus split witnesses within 0.05 of theta,26/26,yes,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
+M286,manuscript_checks,corpus split witnesses kill 5 to 11 of 12,5/11,no,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/outcomes/R2V_NATIVE.csv; data/certification/outcomes/R2V_NATIVE_DEFECTS.csv
+M287,manuscript_checks,corpus guard failures on the control alone 11,11,no,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/outcomes/R2V_NATIVE.csv; data/certification/outcomes/R2V_NATIVE_DEFECTS.csv
+M288,manuscript_checks,QRA_360 control from the closed witness order,2/control,no,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/NATIVE_RUNS.csv
+M289,manuscript_checks,v1 reported 43 of the 44 failures as CL4,43/44,no,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/IMPACT.csv
+M290,manuscript_checks,"QRA_513 confirmed CL4, SBS_081 Unresolved",CL4/Unresolved,no,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
+M291,manuscript_checks,"largest difference >= 1: 76 of 80, 52 of 155",76/80/52/155,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M292,manuscript_checks,corpus separations down to 1.3e-7,1.3,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M293,manuscript_checks,"largest CL5 0.0324, QRA_513 0.0487",0.0324/0.0487,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M294,manuscript_checks,"excluded kinds 7 of 13, 3 rare-bit, 2 most-frequent",7/13/3/2,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M295,manuscript_checks,"QRA_174 observation margin 9.9e-9, undecided",9.9/Unresolved,no,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
+M296,manuscript_checks,corpus CL4 without low-order witness 7 of 143,7/143,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json; data/certification/witness_order/IMPACT.csv
+M297,manuscript_checks,relation-level CL3 substrate 151 under v2,151,no,archived aggregate record,data/certification/outcomes/R2V_RELATION_CORPUS.json
+M298,manuscript_checks,relation shares 78/829 and 73/740,78/829/73/740,no,archived aggregate record,data/certification/outcomes/R2V_RELATION_CORPUS.json
+M299,manuscript_checks,relation-level undecided pairs 3,3,no,archived aggregate record,data/certification/outcomes/R2V_RELATION_CORPUS.json
+M300,manuscript_checks,defect CL4 candidate confirmed with its closed-order control,CL4/,yes,per-case records,data/certification/outcomes/R2V_FINAL_DEFECT.csv; data/certification/witness_order/NATIVE_RUNS.csv
+M301,manuscript_checks,defect CL2 over a 22-member universe,CL2/22,partly (CL2 printed; universe size not printed),per-case records,data/certification/outcomes/R2V_FINAL_DEFECT.csv
+M302,manuscript_checks,"kill decision: 4,198 stable, 71 outside, 0 inside",4198/71/0,yes,archived aggregate record,data/certification/outcomes/R2V_BOUND.json
+M303,manuscript_checks,"kill decision 3,648 / 3,200 / 3,128; 79 gained, 7 lost",3648/3200/3128/79/7,no,archived aggregate record,data/certification/outcomes/R2V_BOUND.json
+M304,manuscript_checks,"witness surface 8,211 of 10,782; 503 at reference",8211/10782/503,no,archived aggregate record,data/certification/outcomes/R2V_BOUND.json
+M305,manuscript_checks,"witness surface at c = 2: 7,451; 322",7451/322,no,archived aggregate record,data/certification/outcomes/R2V_BOUND.json
+M306,manuscript_checks,frozen bound reproduces recorded v1 statuses,0,no,archived aggregate record,data/certification/outcomes/R2V_BOUND.json
+M307,manuscript_checks,"corpus margins decided equal are below 7e-12 (1,569 pairs)",True,n.a. (logical check),archived aggregate record,data/certification/outcomes/R2V_RELATION_CORPUS.json
+M308,manuscript_checks,the three corpus pairs between 1e-8 and 1e-6: outcomes,CL3/CL5/CL5,no,archived aggregate record,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/outcomes/R2V_RELATION_CORPUS.json
+M309,manuscript_checks,QUTest 0.1.0 documentation: 15 complete example tests,15,yes,per-case records,
+M310,manuscript_checks,every example measures directly after the program,True,n.a. (logical check),per-case records,
+M311,manuscript_checks,Muskit records counts of every qubit (profile record),True,n.a. (logical check),archived aggregate record,data/profiles/E3_PROFILE_MATRIX.json
+M312,manuscript_checks,"one prospective exclusion: W-state cx -> rxx, preflight",wstate_4#h29/rep@10:cx->rxx/UNSUPPORTED_INGESTION,yes,per-case records,data/prospective/cross_tool/s2/S2_ELIGIBILITY_EXCLUSIONS.csv
+M313,manuscript_checks,three locked Qiskit releases,0.45.3/1.1.1/2.5.0,no,archived aggregate record,data/profiles/E5_ENVIRONMENT_LOCK.json
+M314,manuscript_checks,"Qiskit 16164 state margin 0.061, observation 5.6e-17",0.061/5.6,yes,archived aggregate record,data/certification/outcomes/R2V_RELEASED_CL3.json
+M315,manuscript_checks,corpus 511 stable survivors of 562 diagnosed,511/562,partly (562 printed),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
+M316,manuscript_checks,non-diagonal 58 of 818 and 58 of 240,58/818/58/240,partly (240 and the 24.2 % share printed),archived aggregate record,data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json
+M317,manuscript_checks,diagonal 92 of 719 (12.8) and 92 of 271 (33.9),92/719/12.8/92/271/33.9,partly (271 and the 33.9 % share printed),archived aggregate record,data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json
+M318,manuscript_checks,"strata partition the 1,537 pairs 818/719 and the 511 stable survivors 240/271",1537=818+719/511=240+271,"partly (1,537, 240 and 271 printed)",per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M319,manuscript_checks,transpiler agreement identifies 1 to 3 of 85 across 36 configurations,1/3/85/36,no,archived aggregate record,data/primary/decision/B5_A3_SUMMARY.json
+M320,manuscript_checks,"smallest primary distinguishing assertion 0.148, a Z product",0.148/zmask,no,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+M321,manuscript_checks,"revised outcomes: 51 records of 48 distinct pairs, 48 corpus and 3 width-set records",51/48/48/3,yes,per-case records,data/certification/outcomes/R2V_RULE_CHANGES.csv; data/certification/witness_order/IMPACT.csv
+M322,manuscript_checks,"closed witness order: witnesses and controls of every candidate, v3 controls formed",330/330/2,no,per-case records,data/certification/witness_order/IMPACT.csv
+L-P01,ledger_checks,primary: executable primary pairs,599,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P02,ledger_checks,primary: construction / prospective split,450/149,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P03,ledger_checks,primary: killed at baseline,302,no,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P04,ledger_checks,primary: entering diagnosis (construction+prospective),297 (195+102),partly (297 and 102 printed),per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P05,ledger_checks,primary: CE/EIE/OL/SO/BTD/Unresolved,93/87/35/79/1/2,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P06,ledger_checks,primary: issued outcomes,295,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P07,ledger_checks,primary: split native verdicts,2,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P08,ledger_checks,primary: analytic prediction agrees with native verdict (stable pairs),597 of 597,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P09,ledger_checks,primary: prospective set has no observation limitation,0,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P10,ledger_checks,primary: construction subjects with an observation limitation,10 of 15,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P11,ledger_checks,primary: construction subjects with a suite omission,7,no,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-P12,ledger_checks,primary: suite omissions that are GHZ mutants,54,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-C01,ledger_checks,contract: contract-equivalent under declared vs unitary contract,93 vs 4,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv; data/certification/outcomes/R2_MARGINS_EXT.csv
+L-C02,ledger_checks,"contract: contract-dependent survivors (same executed-input state, different unitary)",89,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv; data/certification/outcomes/R2_MARGINS_EXT.csv
+L-C03,ledger_checks,contract: R_S true among diagnosed (CE+EIE),180,yes,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
+L-I01,ledger_checks,interface: QuCheck gains / loses vs QUTest,28/25,yes,per-case records,data/primary/records/T1_4_INTERFACE_599.csv
+L-I02,ledger_checks,interface: Muskit keeps all OL; pytest admits none,35/0,yes,per-case records,data/primary/records/T1_4_INTERFACE_599.csv
+L-S01,ledger_checks,suite: SO killed by correlator / all-qubit / combined suites,12/41/79,yes,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
+L-S02,ledger_checks,suite: OL killed by any systematic suite,0,yes,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
+L-O01,ledger_checks,observation: OL under Z-output -> Z-all,90 -> 35,yes,archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+L-O02,ledger_checks,observation: OL count Z-output / Z-all / XYZ-output / XYZ-all (rows of R2V_TABLE_X_DECISIONS),90/35/60/0,yes,per-case records,data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv
+L-O03,ledger_checks,observation: pairs entering OL along a refinement (Z-output -> Z-all),0,yes,per-case records,data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv
+L-D01,ledger_checks,decision: decision cells,"4,869",no,per-case records,data/certification/outcomes/R2V_DECISION_GRID.csv
+L-D02,ledger_checks,decision: executed cells with a stable native verdict,"4,198",yes,per-case records,data/certification/outcomes/R2V_DECISION_GRID.csv
+L-D03,ledger_checks,tolerance and budget: stable cells disagreeing with the ideal prediction / of which covered by the bound,71 / 0,yes,per-case records,data/primary/records/599_B2_SHOT_FRESH.csv
+L-D04,ledger_checks,decision: Unresolved cells fall as N grows (500/2000/8000),359/215/126 (falls),no,per-case records,data/certification/outcomes/R2V_DECISION_GRID.csv
+L-D05,ledger_checks,decision: N 500->8000 resolved / created,236 / 3,yes,archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
+L-D06,ledger_checks,"decision: ablations withdraw outcome, name item, keep candidate",18882 of 18882,no,per-case records,data/certification/outcomes/R2V_ABLATION.csv
+L-H07,ledger_checks,rq4: QuCheck transfer same / another / none (analytic),8/7/6,yes,per-case records,data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv
+L-H08,ledger_checks,"rq4: finite-shot QuCheck equality check (output register, 30 July) detected",5 of 21,no,per-case records,data/prospective/cross_tool/s3/S3_QUCHECK_RESULTS.csv
+L-H09,ledger_checks,rq4: analytic transfer over output register only (2 Sept): witness exists,5 of 21,no,per-case records,data/interventions/transfer/B5_A2_QUCHECK_REPAIR.csv
+L-N01,ledger_checks,certification: SO candidates primary/width/corpus/external/defect,79/8/187/5/1,partly (width-set count not printed),per-case records,data/certification/outcomes/R2V_FINAL_*.csv
+L-N02,ledger_checks,certification: confirmed (issued CL4),79/6/143/5/1,partly (width-set count not printed),per-case records,data/certification/outcomes/R2V_FINAL_*.csv; data/certification/witness_order/NATIVE_RUNS.csv
+L-N03,ledger_checks,certification: total candidates / withdrawn,280 / 46,no,per-case records,data/certification/outcomes/R2V_FINAL_*.csv; data/certification/witness_order/NATIVE_RUNS.csv
+L-N04,ledger_checks,certification: pair outcomes differing v1->final / to Unresolved / to CL4,51 / 50 / 1,yes,per-case records,data/certification/outcomes/R2V_RULE_CHANGES.csv; data/certification/witness_order/NATIVE_RUNS.csv
+L-N05,ledger_checks,certification: native confirmation + control checks,537,no,per-case records,data/certification/outcomes/R2V_NATIVE.csv; data/certification/outcomes/R2V_NATIVE_DEFECTS.csv
+L-N06,ledger_checks,certification: QUTest runs in native evidence,"8,055",no,per-case records,data/certification/outcomes/R2V_NATIVE.csv
+L-N07,ledger_checks,certification: v3 native checks / QUTest runs / controls satisfied,4 / 60 / 2,no,per-case records,data/certification/witness_order/NATIVE_RUNS.csv
+L-E01,ledger_checks,external: mutants / killed / diagnosed,270/111/159,partly (270 and 159 printed),per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
+L-E02,ledger_checks,external: CE/EIE/OL/SO/BTD/Unresolved,28/94/30/5/0/2,"partly (OL, SO and Unresolved counts printed)",per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
+L-E03,ledger_checks,external: analytic and executed verdict agree (stable),268,no,per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
+L-E04,ledger_checks,"external: first-gate mutants / distinct (program, site)",244 / 16,no,per-case records,data/external/cohort/EXTERNAL_ALLOCATION.csv
+L-E05,ledger_checks,external: OL at the first gate / programs with OL,30 / 9,partly (30 and 9 printed; first-gate position not printed),per-case records,data/external/cohort/EXTERNAL_ALLOCATION.csv; data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
+L-W01,ledger_checks,width: executed / diagnosed / issued / Unresolved,143/47/43/4,yes,per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
+L-K01,ledger_checks,corpus: pairs <=14 qubits / killed / diagnosed,"1,537/975/562","partly (1,537 and 562 printed)",per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
+L-K02,ledger_checks,corpus: CE/OL/SO/BTD/Unresolved,158/150/143/13/98,"partly (OL, SO, below-tolerance and Unresolved counts printed)",per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/NATIVE_RUNS.csv
+L-K03,ledger_checks,corpus: Unresolved: split / undecided margin / failed SO candidates,51/3/44,partly (44 printed),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/NATIVE_RUNS.csv
+L-K04,ledger_checks,corpus: certified OL share,"150/1,537 = 9.8%",yes,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/NATIVE_RUNS.csv
+L-F01,ledger_checks,defects: eligible for the QUTest profile / killed / CE-EIE / SO / Unresolved,4/2/1/1/0,yes,per-case records,data/certification/outcomes/R2V_FINAL_DEFECT.csv; data/certification/witness_order/NATIVE_RUNS.csv
+L-P13,ledger_checks,primary: GHZ SO killed under full-string register (79 -> 47),32,yes,per-case records,data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
+L-K05,ledger_checks,corpus: OL among stable survivors: non-diagonal / diagonal stratum,58/240 ; 92/271,"partly (240, 271 and the shares printed)",per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/scalability/corpus/T2A_ELIGIBILITY.csv
+L-K06,ledger_checks,corpus: OL meeting the diagonal sufficient condition / not,54 / 96,partly (54 printed),archived aggregate record,data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json
+L-K07,ledger_checks,corpus: relation-level OL share n<=7 / n>=8,9.4% / 9.9%,yes,archived aggregate record,data/certification/outcomes/R2V_RELATION_CORPUS.json
+L-F02,ledger_checks,defects: defects / reproduced in a locked release,42 / 32,partly (42 printed),per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+L-F03,ledger_checks,defects: evidence depth: not repr. / tool / profile / relation / issued,10/8/10/12/2,partly (full-evaluation count printed),per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+L-C04,ledger_checks,contract: movers between declared and unitary contract (cross-check),89,yes,archived aggregate record,data/primary/records/T1_4_RQ2.json
+L-Z01,ledger_checks,sites: additional-circuit first-gate / mutants / distinct sites,140/150/9,partly (140 and 150 printed),per-case records,data/prospective/mqt_bench/frozen_deps/S2_GENERATED_MUTANTS.csv
+L-Z02,ledger_checks,"sites: construction distinct (program, site)",214,no,per-case records,data/prospective/mqt_bench/frozen_deps/MUTANT_POPULATION.csv
+L-Z03,ledger_checks,sites: MQT first-gate / distinct sites,68/22,no,per-case records,data/prospective/mqt_bench/population/MUTANT_MANIFEST.csv
+L-M01,ledger_checks,mqt: mutants / killed / diagnosed,120/64/56,partly (120 and 56 printed),per-case records,data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M02,ledger_checks,mqt: CE/EIE/OL/SO/BTD/Unresolved,14/10/7/22/0/3,partly (OL and SO counts printed),per-case records,data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M03,ledger_checks,mqt: SO candidates / certified / withheld,23/22/1,yes,per-case records,data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M04,ledger_checks,mqt: certified repairs killing 12/12 at fresh seeds,22,yes,per-case records,data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M05,ledger_checks,mqt: distinct repaired suites among certified,4,yes,per-case records,data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M06,ledger_checks,mqt: original false failures across D1 (sum),1,yes,per-case records,data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M07,ledger_checks,mqt: withheld: confirmation / control / validation kills,9/4/11,partly (11 validation kills printed),per-case records,data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M08,ledger_checks,mqt: OL rerun consistent,7/7,yes,per-case records,data/prospective/mqt_bench/records/stage_d/D2_OBSERVATION.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M09,ledger_checks,mqt: bound covers SO kill / guard,19/0,no,per-case records,data/prospective/mqt_bench/records/stage_d/D2_OBSERVATION.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-G01,ledger_checks,guards: suite cells failing the guard: sampled ref (any fail / >1 of 12) ; exact ref (any fail / >1 of 12),10/7 ; 9/0,no,per-case records,data/primary/suite_guards/B5_A1B_GUARD_EXACT.csv
+V06,protocol_checks,gate-list difference and fixed-basis gate-set difference: construction / prospective,52/0/33/0,partly (52 and 33 printed),archived structural records (recomputed in analytic tier A01),
+V07,protocol_checks,registered audit: CE controls / gate set / depth / other mutants / gate set among them,33/0/11/116/5,partly (33 printed),per-case records,
+V08,protocol_checks,QUTest check flags: prospective every/some trials; construction every/none/some; categories equal at 20 and 40 trials,19/0/28/10/14/True,partly (19 printed),per-case records,
+V09,protocol_checks,consistently guard-valid construction flags / stable programs / unstable always / unstable some / unstable programs / prospective self-failing originals,19/5/9/14/6/0,yes,per-case records,
+V10,protocol_checks,contract-equivalent among the 546: construction + prospective,52+33=85,yes,per-case records,
+V11,protocol_checks,registered predictions / last registry commit precedes cohort commit,12/True,yes,recorded git history,
+V12,protocol_checks,prospective survivors / CL1 / % / CL4 / % / Unresolved / below-tolerance / OL,102/33/32.4/21/20.6/0/0/0,"partly (102, 33, 21 and the 0 observation limitations printed)",per-case records,
+V13,protocol_checks,frozen statuses of V08 (P10) and V07 (P8),CONTRADICTED/UNEVALUABLE,n.a. (logical check),frozen decision record,
+V14,protocol_checks,P7: survivors whose permitted report differs / survivors,16/102,no,per-case records,
+V15,protocol_checks,SO candidates / withdrawn / corpus candidates / corpus withdrawn,280/46/187/44,partly (corpus candidates and withdrawn printed),per-case records,data/certification/outcomes/R2V_FINAL_*.csv; data/certification/witness_order/NATIVE_RUNS.csv
+V16,protocol_checks,suite-cell guards: sampled any / sampled >1 of 12 / analytic any / max analytic failures,10/7/9/1,no,per-case records,
+V17,protocol_checks,registered N / guard-only extension before mutant run (recorded file times) / mutant-run N,2000/True/8000,"partly (2,000 and 8,000 printed)",protocol record + recorded file times,
+V18,protocol_checks,external v3 input change before execution / v4 adapter after aggregate statuses / no comparison computed,True/True/True,n.a. (logical check),protocol record,
+X01,extra_checks,width set: listed / unique / originals / executable / executed = executable,162/162/44/143/143,"partly (162 and 143 printed; the article counts 36 programs by content, data/inventory)",per-case records,
+X02,extra_checks,"universe evaluation time growth from 8 to 14 qubits, ratio of medians",715,yes,per-case records,
+X03,extra_checks,"Simon and BV survivors (pool, per case) / contract-equivalent under output conditions (archived aggregate)",47/8,yes,pool per-case; movers archived aggregate (recomputed in analytic tier A03),
+X04,extra_checks,MQT Bench: frozen analyze.py and case_table.py rerun on stage records reproduce ANALYSIS.json / PASS3C_CASES.csv,True/True,n.a. (logical check),rerun of frozen analysis code on stage records,
+X05,extra_checks,transpiler agreement: min / max certified pairs / pairs / configurations,1/3/85/36,no,per-case records,
+X06,extra_checks,"width set: universe share of the median total time at 14 qubits, % / share at 10 qubits below 0.2 %",10.2/True,no,per-case records,
+X07,extra_checks,corpus: split witness verdicts / candidates withdrawn for a split verdict / their largest |d_a - theta| / split witness with |d_a - theta| >= 0.05 (withdrawal reason) / witnesses within 0.05 of theta killing 12 of 12,29/26/0.0483/QRA_474:0.0575:guard failure/16,partly (26 printed),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/outcomes/R2V_NATIVE.csv
+X08,extra_checks,corpus suite omissions: pairs / distinct suites / sites / families; inventory outcomes equal the final records,143/80/128/13/True,yes,per-case records,data/inventory/out/cases_all.csv; data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/IMPACT.csv
+X09,extra_checks,repairs of the five other circuits / their sites; MQT Bench repairs / distinct suites; Q# and QASMBench observation limitations / at the first gate,21/2; 22/4; 30/30,yes,per-case records,data/inventory/out/cases_all.csv
+A01,reproduce_analytic,analytic tier: historical gate-list and registered fixed-basis comparisons recomputed per case,52/0/33/0/True,partly (52 and 33 printed),analytic recomputation (Qiskit),
+A02,reproduce_analytic,analytic tier: one fresh trial of QUTest's own gate-set check against the archived trial categories of the stable programs,19/True,yes,"analytic recomputation (QUTest, one trial)",
+A03,reproduce_analytic,analytic tier: output-condition counterfactual (8 of 47) recomputed from final states,47/8/0,yes,analytic recomputation (statevector),
+A04,reproduce_analytic,"analytic tier: QUTest 0.1.0 documentation checks (resolves M309, M310)",15/True,yes,installed QUTest 0.1.0 documentation,
+A05,reproduce_analytic,analytic tier: rerun of archived producer r2v_stats.py on package inputs,PASS,n.a. (byte comparison),rerun of archived producer r2v_stats.py (R2V_STATISTICS.json),
+A06,reproduce_analytic,"analytic tier: rerun of archived producer r2v_bound.py on package inputs, equal outside the unprinted witness-surface counts",PASS,n.a. (comparison with the archived file),"rerun of archived producer r2v_bound.py (R2V_BOUND.json without witness_surface_v2, whose counts depend on the order of ties; data/checks/tie_check.py)",
+A07,reproduce_analytic,"analytic tier: rerun of archived producer r2v_table_x.py on package inputs, decisions equal and margins within 1e-12",PASS/PASS,n.a. (comparison with the archived files),rerun of archived producer r2v_table_x.py (R2V_TABLE_X.json / R2V_TABLE_X_DECISIONS.csv),
+A08,reproduce_analytic,analytic tier: rerun of archived producer r2v_numbers.py on package inputs,PASS,n.a. (byte comparison),rerun of archived producer r2v_numbers.py (R2V_NUMBERS.json),
+N01,records_checks,decision-diagram check: cases / decided / no information / all-input equivalences,295/292/3/4,yes,per-case records,data/certification/equivalence/T2B_QCEC_LEDGER_599.csv
+N02,records_checks,decision-diagram ledger: unique ids / equal to the issued primary outcomes / 16-hex input-hash prefix present for every case,295/True/True,n.a. (logical check),per-case records,data/certification/equivalence/T2B_QCEC_LEDGER_599.csv; data/primary/records/T1_4_INTERFACE_599.csv
+N03,records_checks,"decision-diagram check: pinned versions mqt-qcec / mqt-core, single run",3.9.0/3.9.2/True,no,frozen run record,data/certification/equivalence/T2B_QCEC_REGISTRY_599.json
+N04,records_checks,"developer tests: occurrences / structure, resources or set-up / full state or unitary / computational basis",51/30/16/5,partly (51 and 5 printed),per-occurrence records,data/external/developer_tests/occurrence_classification.csv
+N05,records_checks,developer tests: repositories / pinned commits / every occurrence located by file and line,3/3/True,n.a. (logical check),per-occurrence records,data/external/developer_tests/occurrence_classification.csv
+N06,records_checks,"released defects: manifest rows / depth-record ids matched / every row identified by repository, issue and hash",42/42/True,n.a. (logical check),per-defect records,data/external/defects/E5_DEFECT_MANIFEST.csv; data/external/defects/B3_REAL_DEFECTS_FRESH.csv
+N07,records_checks,Listing 1 run: basis-change test kills original / mutant / repetitions; baseline suite kills original / mutant,0/12/12/0/0,yes,per-run record,data/certification/outcomes/R2V_WRAPPED_DEMO.csv
+N08,records_checks,"Listing 1: repetition seeds (r2v_lib) / file shows seed 42, the Hadamard on q2 and the mutation (I, Listing 1 caption)",42-53/True,partly (Listing 1 content printed; seeds not printed),archived code and test file,data/prospective/mqt_bench/frozen_deps/r2v_lib.py; data/certification/outcomes/R2V_WRAPPED_DEMO_test.qasm
+N09,records_checks,QUTest observation limitations / still observation-limited under the declared QuCheck profile,35/7,partly (35 printed),per-case records,data/primary/records/T1_4_INTERFACE_599.csv
+N10,records_checks,"released-defect environments: pip freezes equal to their locked hashes (Q045, Q11, Q25)",3/3,n.a. (logical check),file hashes,data/profiles/E5_ENVIRONMENT_LOCK.json; environment/records/Q*_pip_freeze.txt

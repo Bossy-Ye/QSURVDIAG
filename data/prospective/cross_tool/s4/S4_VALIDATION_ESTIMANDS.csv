@@ -1,0 +1,18 @@
+estimand,name,unit,denominator,value,prediction,status,note
+V01,abstention rate,certificate,102,0/102,P1: 0,SUPPORTED,non-empty abstention is compatible with success
+V02,rule-amendment count,rule,,0,P2: 0,SUPPORTED,no formal rule changed in S1-S4
+V03,claim distribution,certificate,102,"{""CL4_REALIZED_SUITE_OMISSION"": 21, ""CL1_CONTRACT_EQUIVALENT"": 33, ""CL2_STATE_EQUIVALENT_UNDER_REALIZED_INPUT"": 48}","P3: CL1 share in [10%,30%]; P4: CL4 share > 26.6%",SEE_NOTE,"CL1 33/102, CL4 21/102"
+V04,gateset negative-control violation rate,assertion instance,33,0.0,P5: > 0.8,SEE_NOTE,0/33
+V05,depth negative-control violation rate,assertion instance,33,0.3333,P6: strictly between 0 and V04,SEE_NOTE,11/33
+V06t,method transport,profile,1,TBD,P7: TRANSPORTED,SEE_NOTE,decided in the branch table
+V06r,QuCheck negative-control violation rate,assertion instance,33,0.0,none - descriptive only,DESCRIPTIVE,0/33; all-zero is a valid successful result and gates nothing
+V07,cross-tool detection agreement,certificate,0,NA,P8: 1.0,UNEVALUABLE,0/0 count-excluded-but-state-different cases with X/Y marginal difference detected by QuCheck
+V08,count-vs-state profile gap,certificate,102,0,P10: non-zero,CONTRADICTED,cases QT_COUNT-excluded but not QT_STATE-excluded
+V09,ingestion-exclusion rate,mutant,150,1/150,descriptive,DESCRIPTIVE,OB01 failures
+V10,native kill rate,mutant,149,47/149,descriptive,DESCRIPTIVE,
+V11,verdict-stability rate,mutant,149,149/149,descriptive,DESCRIPTIVE,unstable: 0
+V12,effect-class compression,effect class,102,raw 102 | state 30 | observation 8,descriptive,DESCRIPTIVE,never claimed statistically independent
+V13,entangled separation rate (expanded-profile sensitivity),certificate,25,3/25 legacy; 7/102 held-out,some but not all,SEE_NOTE,sensitivity only; no primary claim revised
+V14,CL5 share,certificate,102,0.0,P9: < 5%,SUPPORTED,
+V15,tolerance-sensitivity flip rate,certificate,102,0/102,descriptive,DESCRIPTIVE,exact grid evaluation
+V16,strict-Bonferroni flip rate,QuCheck verdict,149,0/149,descriptive,DESCRIPTIVE,primary = corrected Holm; sensitivity = strict Bonferroni

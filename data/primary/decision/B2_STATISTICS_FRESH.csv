@@ -1,0 +1,4 @@
+contrast,pairs,clusters,status,discordant_pos,discordant_neg,effect,exact_mcnemar_p,cluster_ci95,loco_range,holm_adjusted_p
+S_MIN -> S_SPEC,210,8,contingent,38,0,0.181,7.275957614183426e-12,"[0.0000, 0.3819]","[0.1297, 0.2111]",1.4551915228366852e-11
+QUTest -> QuCheck,546,20,contingent,50,13,0.0678,3.015952084642337e-06,"[-0.0056, 0.1495]","[0.0461, 0.0809]",3.015952084642337e-06
+N: 500 -> 8000,1511,20,contingent,200,0,0.1324,1.2446030555722283e-60,"[0.0537, 0.2344]","[0.1060, 0.1426]",3.733809166716685e-60

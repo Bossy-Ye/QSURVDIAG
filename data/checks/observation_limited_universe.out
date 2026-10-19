@@ -1,0 +1,4 @@
+observation-limitation reports among the 599 primary pairs: 35
+largest difference of any of the 2^(n+1)+n+3 instances over these pairs: 1.03e-13 (qft_5#e05, marginal)
+instances above theta = 0.05: 0
+five largest: [('1.03e-13', 'qft_5#e05', 'marginal', 'max|dp| 3.2e-15', 'recorded margin_obs 3.236994006172722e-15'), ('4.44e-15', 'qft_6#e26', 'entropy', 'max|dp| 6.9e-18', 'recorded margin_obs 6.938893903907228e-18'), ('4.44e-15', 'qft_6#e20', 'entropy', 'max|dp| 6.9e-18', 'recorded margin_obs 6.938893903907228e-18'), ('8.88e-16', 'qft_4#e08', 'entropy', 'max|dp| 1.4e-17', 'recorded margin_obs 1.3877787807814457e-17'), ('8.88e-16', 'qft_4#e05', 'entropy', 'max|dp| 1.4e-17', 'recorded margin_obs 1.3877787807814457e-17')]

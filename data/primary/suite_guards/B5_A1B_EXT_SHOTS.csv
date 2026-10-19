@@ -1,0 +1,10 @@
+subject,suite,n_assertions,reps,false_fails_N2000,false_fails_N8000,false_fails_N32000
+grover_5,S_FAMILY,9,12,1,0,0
+grover_5,S_BOTH,9,12,1,0,0
+qft_4,S_FAMILY,7,12,1,0,0
+qft_4,S_BOTH,7,12,1,0,0
+qft_5,S_FAMILY,9,12,1,0,0
+qft_5,S_BOTH,9,12,1,0,0
+qft_6,S_FAMILY,11,12,1,0,0
+qft_6,S_BOTH,11,12,1,0,0
+simon_4,S_BOTH,7,12,1,0,0

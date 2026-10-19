@@ -1,0 +1,86 @@
+[
+  {
+    "contrast": "S_MIN -> S_FAMILY",
+    "pairs": 599,
+    "clusters": 20,
+    "status": "structural",
+    "pos": 14,
+    "neg": 0,
+    "effect": 0.0234,
+    "p": null,
+    "ci95": "[0.002, 0.057]",
+    "loco": "[0.009, 0.025]"
+  },
+  {
+    "contrast": "S_MIN -> S_COVER",
+    "pairs": 599,
+    "clusters": 20,
+    "status": "structural",
+    "pos": 41,
+    "neg": 0,
+    "effect": 0.0684,
+    "p": null,
+    "ci95": "[0.015, 0.132]",
+    "loco": "[0.049, 0.072]"
+  },
+  {
+    "contrast": "S_MIN -> S_BOTH",
+    "pairs": 599,
+    "clusters": 20,
+    "status": "structural",
+    "pos": 81,
+    "neg": 0,
+    "effect": 0.1352,
+    "p": null,
+    "ci95": "[0.045, 0.237]",
+    "loco": "[0.109, 0.142]"
+  },
+  {
+    "contrast": "S_MIN -> S_SPEC",
+    "pairs": 239,
+    "clusters": 8,
+    "status": "contingent",
+    "pos": 54,
+    "neg": 0,
+    "effect": 0.2259,
+    "p": 1.1102230246251565e-16,
+    "ci95": "[0.000, 0.450]",
+    "loco": "[0.167, 0.258]"
+  },
+  {
+    "contrast": "QUTest -> QuCheck",
+    "pairs": 599,
+    "clusters": 20,
+    "status": "contingent",
+    "pos": 28,
+    "neg": 25,
+    "effect": 0.005,
+    "p": 0.7838463022094988,
+    "ci95": "[-0.053, 0.062]",
+    "loco": "[-0.007, 0.019]"
+  },
+  {
+    "contrast": "QUTest -> pytest",
+    "pairs": 599,
+    "clusters": 20,
+    "status": "structural",
+    "pos": 35,
+    "neg": 0,
+    "effect": 0.0584,
+    "p": null,
+    "ci95": "[0.027, 0.095]",
+    "loco": "[0.049, 0.062]"
+  },
+  {
+    "contrast": "N: 500 -> 8000",
+    "pairs": 1623,
+    "clusters": 20,
+    "status": "contingent",
+    "pos": 230,
+    "neg": 2,
+    "effect": 0.1405,
+    "p": 7.832510394291431e-66,
+    "ci95": "[0.059, 0.244]",
+    "loco": "[0.117, 0.151]"
+  }
+]

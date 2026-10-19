@@ -1,0 +1,23 @@
+{
+  "execution_failures": 0,
+  "ground_truth_columns": [
+    "equivalent_on_all_legal_inputs",
+    "same_endpoint_state_on_executed_input"
+  ],
+  "negative_case": {
+    "construction": "dj_3 original + z(0) + t(0)",
+    "identity_verdict": "equivalent",
+    "verdict": "not_equivalent"
+  },
+  "pinned": true,
+  "population": "295 certificate-bearing survivors at the 599 population",
+  "question_qcec_decides": "unitary equivalence of original and mutant",
+  "record_id": "BATCH2_TASK_2B_QCEC_BASELINE",
+  "tool": "MQT QCEC",
+  "versions": {
+    "mqt-core": "3.9.2",
+    "mqt-qcec": "3.9.0",
+    "numpy": "2.5.3",
+    "qiskit": "2.5.0"
+  }
+}

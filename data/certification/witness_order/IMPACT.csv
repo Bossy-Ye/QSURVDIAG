@@ -1,0 +1,7 @@
+population,candidates,v2_witnesses,v2_controls,v3_controls_formed,v2_reported,v3_reported,changed
+primary,81,81,81,0,79,79,
+width,8,8,8,0,6,6,
+corpus,212,212,211,1,142,143,qra_cases_v1_1/QRA_360
+external,5,5,5,0,5,5,
+defect,1,1,0,1,0,1,26
+mqt,23,23,23,0,22,22,

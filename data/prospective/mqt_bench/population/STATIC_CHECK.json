@@ -1,0 +1,26 @@
+{
+ "supported_set": [
+  "ccx",
+  "cp",
+  "cswap",
+  "cu",
+  "cx",
+  "cz",
+  "h",
+  "id",
+  "p",
+  "rx",
+  "ry",
+  "rz",
+  "s",
+  "swap",
+  "sx",
+  "t",
+  "x",
+  "y",
+  "z"
+ ],
+ "violations": [],
+ "pass": true,
+ "mutants_checked": 120
+}

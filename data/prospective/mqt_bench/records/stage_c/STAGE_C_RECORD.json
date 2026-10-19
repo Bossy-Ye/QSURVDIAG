@@ -1,0 +1,10 @@
+{
+ "dry_run": false,
+ "hashes": {
+  "C1_GUARDS.csv": "ff369446f37077831778d28d80b08237aa9d44d3afc3506f45aa2e9858f6b7a0",
+  "C1_BASELINE.csv": "30489bcedd75f4ae01f300b84c037f17dec74ed90b6b75701596ebff8b5d5ccf",
+  "C2_NATIVE.csv": "21cfca64bf2e7e5b14b07cca644145cafe6d51a8eea3823eccce7b0465fa0eef",
+  "C3_REPORTS.csv": "96787574f6981bfe38ae801ea8999655bb1dfe28d0378b0708b6483785373e4b"
+ },
+ "spec_sha": "6829f1bad8203b434ddf27a4336e514b15a7e8d72a371c3eef4ebff499deb1d3"
+}

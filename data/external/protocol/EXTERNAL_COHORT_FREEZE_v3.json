@@ -1,0 +1,239 @@
+{
+ "record_id": "EXTERNAL_COHORT_FREEZE_v3",
+ "amendment_type": "pre-execution prospective amendment",
+ "not_preregistration": "Archived in the replication package; not deposited in a time-stamped immutable archive. Not described as preregistration.",
+ "supersedes": {
+  "v2_sha256": "8a1dc4edff613c5dd7bd8f0637829b152723ba7e681e7e3a74f437acd5ba39f7",
+  "v1_sha256": "a9aac1084d70010c4a00feb5e46e0914e5a783297bef7c7fcd3ed62a5bc16562",
+  "both_preserved_byte_identical": true
+ },
+ "amendment_timestamp_utc": "2026-09-06T13:50:40.224924+00:00",
+ "precedence_attestation": "At the time of this amendment no external mutant had been natively executed, no endpoint state compared, no observation distribution computed, and no QSurvDiag diagnosis performed. No mutant outcome existed.",
+ "defect_corrected": {
+  "what": "v1 and v2 recorded the realized input for seven MgcosA subjects as |0...0> (or zero-valued operands) and attributed it to 'the shipped convention'.",
+  "why_wrong": "That value was introduced during cohort construction, not obtained from the upstream artifact. On it the seven originals produce a single basis state up to one global phase, so the C6 mechanism the cohort exists to study is not exercised.",
+  "affected_subjects": 7,
+  "unaffected_subjects": [
+   "qft_n4",
+   "deutsch_n2"
+  ]
+ },
+ "provenance_statement": "The upstream MgcosA tests define a two-value-superposition evaluation scheme (CreateKetBits1PlusEIPhiKetBits2 over equivalence classes), but do not uniquely fix the concrete pair: some equivalence-class members are drawn by DrawRandomInt with no recorded seed, and the pairing index Ipair is free. The realized input adopted here is therefore a PROSPECTIVELY FIXED STUDY INSTANTIATION OF THE UPSTREAM EVALUATION SCHEME, and is not described as the upstream-designated input.",
+ "contrast_pair_rule": "For each arbitrary-input MgcosA subject, enumerate the computational-basis inputs under its frozen canonical parameterization and use the upstream classical reference / semantic mapping to identify inputs with distinct specified semantic effects. Order the basis inputs lexicographically. Select the lexicographically first pair (x_a, x_b) for which the specified operation acts differently on the two basis inputs in a way not reducible to one common global phase. Prepare |psi_in> = (|x_a> + |x_b>)/sqrt(2), a normalized zero-relative-phase superposition.",
+ "distinction_criterion_by_contract": {
+  "boolean_phase_oracle": "f(x_a) != f(x_b)  [ParityPhase, Is2PowerPhase, LessThanPhase]",
+  "diagonal_evolution": "specified eigenphases differ modulo 2*pi beyond eps_num  [DiagonalZHamiltonian, IsingEvolution]",
+  "arithmetic_mixed": "specified semantic outputs of the complete basis-input assignments differ  [DraperAdder, AdderHamiltonianMixture]"
+ },
+ "selection_inputs_forbidden": [
+  "mutant states",
+  "mutant observations",
+  "mutant test results",
+  "CL labels",
+  "expected CL3 yield"
+ ],
+ "selection_source": "upstream specification / classical reference functions only; the implemented Qiskit circuit was not used to choose any pair",
+ "realized_inputs": [
+  {
+   "subject": "ParityPhase",
+   "contract": "arbitrary-input",
+   "kind": "boolean",
+   "x_a": 0,
+   "x_b": 1,
+   "spec_on_x_a": false,
+   "spec_on_x_b": true,
+   "prepared_state": "(|0> + |1>)/sqrt(2) on 6 qubits",
+   "endpoint_support_under_original": 2,
+   "global_phase_only": false,
+   "mechanism_exercised": true
+  },
+  {
+   "subject": "Is2PowerPhase",
+   "contract": "arbitrary-input",
+   "kind": "boolean",
+   "x_a": 0,
+   "x_b": 1,
+   "spec_on_x_a": false,
+   "spec_on_x_b": true,
+   "prepared_state": "(|0> + |1>)/sqrt(2) on 6 qubits",
+   "endpoint_support_under_original": 2,
+   "global_phase_only": false,
+   "mechanism_exercised": true
+  },
+  {
+   "subject": "LessThanPhase",
+   "contract": "arbitrary-input",
+   "kind": "boolean",
+   "x_a": 0,
+   "x_b": 10,
+   "spec_on_x_a": true,
+   "spec_on_x_b": false,
+   "prepared_state": "(|0> + |10>)/sqrt(2) on 5 qubits",
+   "endpoint_support_under_original": 2,
+   "global_phase_only": false,
+   "mechanism_exercised": true
+  },
+  {
+   "subject": "DiagonalZHamiltonian",
+   "contract": "arbitrary-input",
+   "kind": "phase",
+   "x_a": 0,
+   "x_b": 1,
+   "spec_on_x_a": -0.7000000000000001,
+   "spec_on_x_b": -0.5,
+   "prepared_state": "(|0> + |1>)/sqrt(2) on 3 qubits",
+   "endpoint_support_under_original": 2,
+   "global_phase_only": false,
+   "mechanism_exercised": true
+  },
+  {
+   "subject": "IsingEvolution",
+   "contract": "arbitrary-input",
+   "kind": "phase",
+   "x_a": 0,
+   "x_b": 1,
+   "spec_on_x_a": 2.8000000000000003,
+   "spec_on_x_b": 1.6,
+   "prepared_state": "(|0> + |1>)/sqrt(2) on 7 qubits",
+   "endpoint_support_under_original": 2,
+   "global_phase_only": false,
+   "mechanism_exercised": true
+  },
+  {
+   "subject": "DraperAdder",
+   "contract": "arbitrary-input",
+   "kind": "arith",
+   "x_a": 0,
+   "x_b": 1,
+   "spec_on_x_a": 0,
+   "spec_on_x_b": 33,
+   "prepared_state": "(|0> + |1>)/sqrt(2) on 10 qubits",
+   "endpoint_support_under_original": 2,
+   "global_phase_only": false,
+   "mechanism_exercised": true
+  },
+  {
+   "subject": "AdderHamiltonianMixture",
+   "contract": "arbitrary-input",
+   "kind": "arith",
+   "x_a": 0,
+   "x_b": 1,
+   "spec_on_x_a": 0,
+   "spec_on_x_b": 33,
+   "prepared_state": "(|0> + |1>)/sqrt(2) on 10 qubits",
+   "endpoint_support_under_original": 2,
+   "global_phase_only": false,
+   "mechanism_exercised": true
+  }
+ ],
+ "fixed_input_subjects": [
+  {
+   "subject": "qft_n4",
+   "contract": "fixed-input",
+   "realized_input": "x q[0]; x q[2] prefix inside the released circuit",
+   "unchanged": true
+  },
+  {
+   "subject": "deutsch_n2",
+   "contract": "fixed-input",
+   "realized_input": "|0> inside the released circuit",
+   "unchanged": true
+  }
+ ],
+ "harness_side_preparation_rule": "For arbitrary-input external subjects the realized input is part of the diagnostic context and is prepared by the execution harness before applying the frozen program P. Input-preparation gates are NOT part of P, are NOT mutation targets, and do NOT alter the frozen program or mutant definitions. This matches the diagnostic decomposition in which x and P are separate components of Gamma.",
+ "consequences": {
+  "mutation_pools_recomputed": false,
+  "mutants_rematerialized": false,
+  "program_hashes_unchanged": true,
+  "mutant_tree_sha256": "7f08fd4ff4e54780ed6c250f9bae8e188dff3284f1e2cb6901350b8b001e02ee",
+  "mutant_tree_verified_identical_after_amendment": true,
+  "allocation_manifest_sha256": "9b443a7bc742f199386bdfe813cc2b4830dd0c8b679b72ee6825e693e3199773",
+  "opportunity_pool_sha256": "efad74b9f5a9348a64d89e0814220251da09a866061b165a52220ac77be66353",
+  "allocation_rule_unchanged": true
+ },
+ "unchanged_from_v2": {
+  "cohort": "9 subjects, unchanged",
+  "instance_selection_rule": "Fixed released circuits are used directly. For scalable generators, the concrete instance is the canonical evaluation parameterization already designated by the primary upstream artifact before this study. No instance is selected from mutation or diagnostic outcomes.",
+  "mutation_allocation": {
+   "inherited_convention": "prospective (S2)",
+   "why": "The external cohort is a prospective cohort; the prospective convention is the one packaged, runnable and deterministic. The construction convention's within-stratum ordering is not recoverable.",
+   "source_of_truth": "research_repair/phase5_validation/s2_cohort/s2_cohort.py",
+   "enumerator": "rq3_feasibility_gate.core.mutants.complete_pool(gates, n, circuit_id)",
+   "operators": [
+    "gate_deletion",
+    "gate_insertion",
+    "gate_replacement"
+   ],
+   "gate_classes": [
+    "local_basis_amplitude",
+    "phase_parameterized",
+    "entangling_controlled"
+   ],
+   "strata": "9 = 3 operators x 3 gate classes",
+   "deduplication": "by mutant_key / mutated_hash within the enumerated pool",
+   "within_stratum_order": "ascending (location spec, sha256(canon_json(mutated_gates)))",
+   "apportionment": "largest_remainder over available deduplicated sites; remainders by largest fraction then stratum order; shortfall redistributed by the same rule over remaining capacity",
+   "per_subject": 30,
+   "allocated_total": 270,
+   "rng": "none consumed; selection is deterministic",
+   "implementation": "impl/external_allocation.py",
+   "implementation_sha256": "7f3778dd6d765fbcd95d377de3e43b6e53e5b2e162ca6c7de5bf445c824ce783"
+  },
+  "diagnostic_configuration": {
+   "interface": "QUTest 0.1.0",
+   "profile": "recovered certifiability profile, unchanged",
+   "observation": "joint computational-Z outcome distribution of the measured register",
+   "admissible_families": [
+    "marginal probability",
+    "Z-product expectation",
+    "basis-state probability",
+    "entropy",
+    "full distribution"
+   ],
+   "assertion_universe_cardinality": "2^(n+1)+n+1",
+   "baseline_suite": "S_MIN",
+   "N": 2000,
+   "R": 12,
+   "theta": 0.05,
+   "eps_num": 1e-09,
+   "stage2_relations": [
+    "R_C",
+    "R_S",
+    "R_O",
+    "R_A_theta",
+    "R_T_theta"
+   ],
+   "stage3": "existing evidence requirements, unchanged",
+   "reports": [
+    "CL1",
+    "CL2",
+    "CL3",
+    "CL4",
+    "CL5",
+    "Unresolved"
+   ],
+   "tuned_for_external_cohort": "nothing"
+  },
+  "interpretation_frozen": {
+   "if_cl3_observed": "The observation-limitation mechanism also arose prospectively in external programs that were not used to construct or calibrate QSurvDiag.",
+   "if_no_cl3": "No supported CL3 case occurred in the prospective external cohort; independent prospective evidence for the mechanism therefore remains limited.",
+   "in_either_case": "The cohort is mechanism-oriented and does not estimate CL3 prevalence in quantum software.",
+   "amendment_rule": "These sentences are not rewritten after the outcome is known; actual counts are inserted into them."
+  },
+  "reporting_units": [
+   "mutant",
+   "subject/program",
+   "provenance group",
+   "distinct endpoint-state effect where the artifact schema supports it"
+  ],
+  "provenance_qualification": "The MgcosA program artifact shares one author with BUGS4Q, but the underlying program artifacts are distinct and have no program-level overlap with BUGS4Q, QMutBench or MQT Bench; the MgcosA programs were not used to construct or calibrate QSurvDiag.",
+  "C1_to_C6_definitions": "unchanged; this amendment corrects the C3 realization only, not C6, which remains specification-grounded"
+ },
+ "environment": {
+  "python": "3.12.4",
+  "qiskit": "2.5.0",
+  "platform": "macOS-14.3-arm64-arm-64bit"
+ },
+ "manuscript_repo_commit": "0090484f9f5934a9e030893d205b76f2d68f5143",
+ "manuscript_modified": false
+}

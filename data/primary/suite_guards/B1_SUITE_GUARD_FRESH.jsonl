@@ -1,0 +1,80 @@
+{"subject": "bv_4", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "bv_4", "suite": "S_FAMILY", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "bv_5", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "bv_4", "suite": "S_COVER", "n_assertions": 4, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "bv_4", "suite": "S_BOTH", "n_assertions": 7, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "bv_5", "suite": "S_BOTH", "n_assertions": 9, "false_fails": 8, "reps": 12, "false_fail_rate": 0.6667, "OB02": "failed", "cell_status": "INVALID_ORIGINAL_GUARD"}
+{"subject": "bv_7", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "bv_5", "suite": "S_FAMILY", "n_assertions": 7, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "bv_5", "suite": "S_COVER", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "bv_7", "suite": "S_FAMILY", "n_assertions": 11, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "cuccaro_adder_5", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "bv_7", "suite": "S_BOTH", "n_assertions": 13, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "bv_7", "suite": "S_COVER", "n_assertions": 7, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "cuccaro_adder_5", "suite": "S_COVER", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "dj_3", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "cuccaro_adder_5", "suite": "S_BOTH", "n_assertions": 9, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "cuccaro_adder_5", "suite": "S_FAMILY", "n_assertions": 3, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "dj_3", "suite": "S_FAMILY", "n_assertions": 3, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "dj_4", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "dj_3", "suite": "S_COVER", "n_assertions": 3, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "dj_3", "suite": "S_BOTH", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "dj_4", "suite": "S_FAMILY", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "dj_4", "suite": "S_COVER", "n_assertions": 4, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "dj_4", "suite": "S_BOTH", "n_assertions": 7, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_4", "suite": "S_FAMILY", "n_assertions": 1, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_4", "suite": "S_COVER", "n_assertions": 4, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_4", "suite": "S_BOTH", "n_assertions": 7, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_4", "suite": "S_SPEC", "n_assertions": 2, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_5", "suite": "S_COVER", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_5", "suite": "S_FAMILY", "n_assertions": 1, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_5", "suite": "S_SPEC", "n_assertions": 2, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_5", "suite": "S_BOTH", "n_assertions": 9, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_7", "suite": "S_FAMILY", "n_assertions": 1, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_7", "suite": "S_COVER", "n_assertions": 7, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "grover_3", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "ghz_7", "suite": "S_BOTH", "n_assertions": 13, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "ghz_7", "suite": "S_SPEC", "n_assertions": 2, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "grover_3", "suite": "S_FAMILY", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "grover_5", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "grover_3", "suite": "S_COVER", "n_assertions": 3, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "grover_3", "suite": "S_BOTH", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "grover_5", "suite": "S_FAMILY", "n_assertions": 9, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "grover_5", "suite": "S_COVER", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "grover_5", "suite": "S_BOTH", "n_assertions": 9, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qft_4", "suite": "S_FAMILY", "n_assertions": 7, "false_fails": 4, "reps": 12, "false_fail_rate": 0.3333, "OB02": "failed", "cell_status": "INVALID_ORIGINAL_GUARD"}
+{"subject": "qft_4", "suite": "S_BOTH", "n_assertions": 7, "false_fails": 4, "reps": 12, "false_fail_rate": 0.3333, "OB02": "failed", "cell_status": "INVALID_ORIGINAL_GUARD"}
+{"subject": "qft_4", "suite": "S_COVER", "n_assertions": 4, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qft_4", "suite": "S_SPEC", "n_assertions": 4, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qft_5", "suite": "S_FAMILY", "n_assertions": 9, "false_fails": 4, "reps": 12, "false_fail_rate": 0.3333, "OB02": "failed", "cell_status": "INVALID_ORIGINAL_GUARD"}
+{"subject": "qft_5", "suite": "S_COVER", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qft_5", "suite": "S_BOTH", "n_assertions": 9, "false_fails": 4, "reps": 12, "false_fail_rate": 0.3333, "OB02": "failed", "cell_status": "INVALID_ORIGINAL_GUARD"}
+{"subject": "qft_6", "suite": "S_FAMILY", "n_assertions": 11, "false_fails": 6, "reps": 12, "false_fail_rate": 0.5, "OB02": "failed", "cell_status": "INVALID_ORIGINAL_GUARD"}
+{"subject": "qft_5", "suite": "S_SPEC", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qft_6", "suite": "S_COVER", "n_assertions": 6, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qpe_5", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "qft_6", "suite": "S_SPEC", "n_assertions": 6, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qft_6", "suite": "S_BOTH", "n_assertions": 11, "false_fails": 6, "reps": 12, "false_fail_rate": 0.5, "OB02": "failed", "cell_status": "INVALID_ORIGINAL_GUARD"}
+{"subject": "qpe_5", "suite": "S_FAMILY", "n_assertions": 7, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qpe_6", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "qpe_5", "suite": "S_BOTH", "n_assertions": 9, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qpe_6", "suite": "S_FAMILY", "n_assertions": 9, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qpe_5", "suite": "S_COVER", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qpe_6", "suite": "S_BOTH", "n_assertions": 11, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "qpe_6", "suite": "S_COVER", "n_assertions": 6, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "simon_4", "suite": "S_FAMILY", "n_assertions": 3, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "simon_4", "suite": "S_COVER", "n_assertions": 4, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "swaptest_5", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "simon_4", "suite": "S_BOTH", "n_assertions": 7, "false_fails": 1, "reps": 12, "false_fail_rate": 0.0833, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "simon_4", "suite": "S_SPEC", "n_assertions": 2, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "swaptest_5", "suite": "S_FAMILY", "n_assertions": 1, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "toffoli_barenco_5", "suite": "S_SPEC", "cell_status": "S_SPEC_NOT_GROUNDED", "false_fails": null, "reps": 12, "OB02": "NA"}
+{"subject": "swaptest_5", "suite": "S_COVER", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "toffoli_barenco_5", "suite": "S_FAMILY", "n_assertions": 7, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "swaptest_5", "suite": "S_BOTH", "n_assertions": 9, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "toffoli_barenco_5", "suite": "S_BOTH", "n_assertions": 9, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "toffoli_barenco_5", "suite": "S_COVER", "n_assertions": 5, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "wstate_4", "suite": "S_COVER", "n_assertions": 4, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "wstate_4", "suite": "S_FAMILY", "n_assertions": 7, "false_fails": 1, "reps": 12, "false_fail_rate": 0.0833, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "wstate_4", "suite": "S_BOTH", "n_assertions": 7, "false_fails": 1, "reps": 12, "false_fail_rate": 0.0833, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}
+{"subject": "wstate_4", "suite": "S_SPEC", "n_assertions": 4, "false_fails": 0, "reps": 12, "false_fail_rate": 0.0, "OB02": "satisfied", "cell_status": "ORIGINAL_GUARD_VALID"}

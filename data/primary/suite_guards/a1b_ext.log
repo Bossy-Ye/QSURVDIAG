@@ -1,0 +1,17 @@
+residual guard-invalid cells at exact references: 9
+
+subject     suite      assn   N=2000    N=8000    N=32000   
+  grover_5    S_FAMILY      9   1/12      0/12      0/12      
+  grover_5    S_BOTH        9   1/12      0/12      0/12      
+  qft_4       S_FAMILY      7   1/12      0/12      0/12      
+  qft_4       S_BOTH        7   1/12      0/12      0/12      
+  qft_5       S_FAMILY      9   1/12      0/12      0/12      
+  qft_5       S_BOTH        9   1/12      0/12      0/12      
+  qft_6       S_FAMILY     11   1/12      0/12      0/12      
+  qft_6       S_BOTH       11   1/12      0/12      0/12      
+  simon_4     S_BOTH        7   1/12      0/12      0/12      
+
+  N = 2000   cells clean: 0 of 9
+  N = 8000   cells clean: 9 of 9
+  N = 32000  cells clean: 9 of 9
+elapsed 258s

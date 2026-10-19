@@ -1,0 +1,8 @@
+{
+ "cells": 80,
+ "false_fail_sampled_reference": 10,
+ "false_fail_exact_reference": 9,
+ "N": 2000,
+ "R": 12,
+ "atol": 0.05
+}

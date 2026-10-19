@@ -1,0 +1,9 @@
+n=2 | Z basis: max d 0.0071 (entropy None), first above 0.05: none | X basis: max d 0.0473 (prob 0), first above 0.05: none
+n=3 | Z basis: max d 0.0095 (entropy None), first above 0.05: none | X basis: max d 0.0835 (zmask 5), first above 0.05: zmask 5 d=0.0835
+n=4 | Z basis: max d 0.0316 (entropy None), first above 0.05: none | X basis: max d 0.0725 (zmask 13), first above 0.05: zmask 11 d=0.0725
+n=5 | Z basis: max d 0.0444 (entropy None), first above 0.05: none | X basis: max d 0.0831 (entropy None), first above 0.05: zmask 23 d=0.0722
+n=6 | Z basis: max d 0.0579 (entropy None), first above 0.05: entropy None d=0.0579 | X basis: max d 0.1056 (entropy None), first above 0.05: zmask 47 d=0.0722
+n=7 | Z basis: max d 0.0708 (entropy None), first above 0.05: entropy None d=0.0708 | X basis: max d 0.1281 (entropy None), first above 0.05: zmask 95 d=0.0722
+n=8 | Z basis: max d 0.0837 (entropy None), first above 0.05: entropy None d=0.0837 | X basis: max d 0.1505 (entropy None), first above 0.05: zmask 191 d=0.0722
+n=9 | Z basis: max d 0.0965 (entropy None), first above 0.05: entropy None d=0.0965 | X basis: max d 0.1730 (entropy None), first above 0.05: zmask 383 d=0.0722
+n=10 | Z basis: max d 0.1093 (entropy None), first above 0.05: entropy None d=0.1093 | X basis: max d 0.1955 (entropy None), first above 0.05: zmask 767 d=0.0722

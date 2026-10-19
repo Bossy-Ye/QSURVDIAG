@@ -1,0 +1,13 @@
+ghz_4 {('CL1', False, False): 4, ('CL3', False, False): 3, ('CL4', True, True): 17, ('NA_KILLED', True, True): 6}
+ghz_5 {('CL1', False, False): 6, ('CL3', False, False): 2, ('CL4', True, True): 19, ('NA_KILLED', True, True): 3}
+ghz_7 {('CL1', False, False): 6, ('CL3', False, False): 2, ('CL4', True, True): 18, ('NA_KILLED', True, True): 4}
+qft_4 {('CL2', False, False): 12, ('CL3', False, False): 7, ('NA_KILLED', True, True): 11}
+qft_5 {('CL2', False, False): 15, ('CL3', False, False): 6, ('CL4', False, True): 1, ('NA_KILLED', True, True): 8}
+qft_6 {('CL2', False, False): 12, ('CL3', False, False): 7, ('CL4', False, True): 1, ('NA_KILLED', True, True): 10}
+simon_4 {('CL1', False, False): 17, ('CL4', False, False): 4, ('CL4', False, True): 9}
+wstate_4 {('CL1', False, False): 16, ('NA_KILLED', True, True): 13}
+
+all 239 (v2_report, recorded-suite kill, full-condition kill): {('CL1', False, False): 49, ('CL2', False, False): 39, ('CL3', False, False): 27, ('CL4', False, False): 4, ('CL4', False, True): 11, ('CL4', True, True): 54, ('NA_KILLED', True, True): 55}
+CL3 recorded kills 0 full-condition kills 0
+CL4 recorded kills 54 full-condition kills 65
+NA_KILLED pairs newly killed only by the full condition: 0

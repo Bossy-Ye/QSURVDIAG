@@ -1,0 +1,9 @@
+2026-10-09 08:48:15 +0300 START stage_c: QSD_ROOT=/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot ../.venv-qutest-audit/bin/python code/stage_c.py (WORKERS default 6)
+2026-10-09 09:59:45 +0300 END stage_c exit=0
+2026-10-09 09:59:55 +0300 START bprime: ../.venv-qutest-audit/bin/python code/bprime.py
+2026-10-09 09:59:55 +0300 END bprime exit=0
+2026-10-09 10:00:16 +0300 START stage_d: QSD_ROOT=/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot ../.venv-qutest-audit/bin/python code/stage_d.py (after Stage C commit c5ac307)
+2026-10-09 10:06:00 +0300 END stage_d exit=0
+2026-10-09 10:06:13 +0300 START analyze: python3 code/analyze.py (after Stage D commit 9f3eee9)
+2026-10-09 10:06:13 +0300 END analyze exit=0
+2026-10-09 10:09:05 +0300 RUN case_table: python3 records/analysis/case_table.py (reporting join only)

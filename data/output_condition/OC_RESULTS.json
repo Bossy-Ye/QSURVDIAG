@@ -1,0 +1,108 @@
+{
+ "guards": {
+  "qft_4": {
+   "fails": 0,
+   "unsupported": 0,
+   "runs": 12
+  },
+  "qft_5": {
+   "fails": 0,
+   "unsupported": 0,
+   "runs": 12
+  },
+  "qft_6": {
+   "fails": 0,
+   "unsupported": 0,
+   "runs": 12
+  },
+  "simon_4": {
+   "fails": 0,
+   "unsupported": 0,
+   "runs": 12
+  },
+  "wstate_4": {
+   "fails": 0,
+   "unsupported": 0,
+   "runs": 12
+  }
+ },
+ "recorded": {
+  "table5_row": {
+   "pairs": 239,
+   "clusters": 8,
+   "newly_killed": 54,
+   "lost_kills": 0,
+   "effect_pp": 22.6,
+   "exact_mcnemar_p": 1.1102230246251565e-16,
+   "cluster_ci95_pp": [
+    0.0,
+    45.0
+   ],
+   "loco_range_pp": [
+    16.7,
+    25.8
+   ]
+  },
+  "by_report_baseline_suite": {
+   "CL1|SURVIVED|SURVIVED": 49,
+   "CL2|SURVIVED|SURVIVED": 39,
+   "CL3|SURVIVED|SURVIVED": 27,
+   "CL4|SURVIVED|KILLED": 54,
+   "CL4|SURVIVED|SURVIVED": 15,
+   "NA_KILLED|KILLED|KILLED": 55
+  },
+  "figure_4b_cases": {
+   "CL3|ghz|SURVIVED": 7,
+   "CL3|qft|SURVIVED": 20,
+   "CL4|ghz|KILLED": 54,
+   "CL4|qft|SURVIVED": 2,
+   "CL4|simon|SURVIVED": 13
+  },
+  "figure_4b_totals": {
+   "suite_omissions": 69,
+   "suite_omissions_killed": 54,
+   "observation_limitations": 27,
+   "observation_limitations_killed": 0
+  }
+ },
+ "corrected": {
+  "table5_row": {
+   "pairs": 239,
+   "clusters": 8,
+   "newly_killed": 65,
+   "lost_kills": 0,
+   "effect_pp": 27.2,
+   "exact_mcnemar_p": 5.421010862427522e-20,
+   "cluster_ci95_pp": [
+    8.8,
+    46.2
+   ],
+   "loco_range_pp": [
+    22.0,
+    31.1
+   ]
+  },
+  "by_report_baseline_suite": {
+   "CL1|SURVIVED|SURVIVED": 49,
+   "CL2|SURVIVED|SURVIVED": 39,
+   "CL3|SURVIVED|SURVIVED": 27,
+   "CL4|SURVIVED|KILLED": 65,
+   "CL4|SURVIVED|SURVIVED": 4,
+   "NA_KILLED|KILLED|KILLED": 55
+  },
+  "figure_4b_cases": {
+   "CL3|ghz|SURVIVED": 7,
+   "CL3|qft|SURVIVED": 20,
+   "CL4|ghz|KILLED": 54,
+   "CL4|qft|KILLED": 2,
+   "CL4|simon|KILLED": 9,
+   "CL4|simon|SURVIVED": 4
+  },
+  "figure_4b_totals": {
+   "suite_omissions": 69,
+   "suite_omissions_killed": 65,
+   "observation_limitations": 27,
+   "observation_limitations_killed": 0
+  }
+ }
+}

@@ -1,0 +1,9 @@
+effective settings: {'K': 5, 't': 0.2, 'h': 1.0, 'J_spec': 1.0, 'stored k,t': (5, 0.2)}
+n=2: preparation once True; operator equal to upstream True; cx order equal on every wire True (global order identical True; 11 cx); P vs M only ZZ angle True (5 rz); C = P + z(0) True; measure qubit i -> bit i True
+n=3: preparation once True; operator equal to upstream True; cx order equal on every wire True (global order identical True; 22 cx); P vs M only ZZ angle True (10 rz); C = P + z(0) True; measure qubit i -> bit i True
+n=4: preparation once True; operator equal to upstream True; cx order equal on every wire True (global order identical True; 33 cx); P vs M only ZZ angle True (15 rz); C = P + z(0) True; measure qubit i -> bit i True
+n=5: preparation once True; operator equal to upstream True; cx order equal on every wire True (global order identical True; 44 cx); P vs M only ZZ angle True (20 rz); C = P + z(0) True; measure qubit i -> bit i True
+n=6: preparation once True; operator equal to upstream True; cx order equal on every wire True (global order identical False; 55 cx); P vs M only ZZ angle True (25 rz); C = P + z(0) True; measure qubit i -> bit i True
+n=7: preparation once True; operator equal to upstream True; cx order equal on every wire True (global order identical False; 66 cx); P vs M only ZZ angle True (30 rz); C = P + z(0) True; measure qubit i -> bit i True
+n=8: preparation once True; operator equal to upstream True; cx order equal on every wire True (global order identical False; 77 cx); P vs M only ZZ angle True (35 rz); C = P + z(0) True; measure qubit i -> bit i True
+ALL CHECKS PASS

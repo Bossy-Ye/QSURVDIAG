@@ -1,0 +1,35 @@
+{
+ "record_id": "QUTEST_0.1.0_PARSER_SUPPORT_MATRIX",
+ "measurement_type": "direct interface-compatibility probe",
+ "not_inferred": "This matrix is a direct gate-level probe of the QUTest 0.1.0 OpenQASM 3 front end. It is not a screen inferred from outcome counts.",
+ "method": "For each gate, a minimal assertion-free test containing that gate alone was emitted through the packaged qutest_adapter.make_test and run through the unchanged QUTest 0.1.0 CLI. A parse failure is reported by the adapter as UNSUPPORTED.",
+ "interface": "QUTest 0.1.0",
+ "preamble": "OPENQASM 3; include \"stdgates.inc\";",
+ "probed": {
+  "rzz":  {"arity": 2, "angled": true,  "status": "UNSUPPORTED"},
+  "rxx":  {"arity": 2, "angled": true,  "status": "UNSUPPORTED"},
+  "cp":   {"arity": 2, "angled": true,  "status": "SUPPORTED"},
+  "cz":   {"arity": 2, "angled": false, "status": "SUPPORTED"},
+  "cx":   {"arity": 2, "angled": false, "status": "SUPPORTED"},
+  "swap": {"arity": 2, "angled": false, "status": "SUPPORTED"},
+  "rz":   {"arity": 1, "angled": true,  "status": "SUPPORTED"},
+  "rx":   {"arity": 1, "angled": true,  "status": "SUPPORTED"},
+  "ry":   {"arity": 1, "angled": true,  "status": "SUPPORTED"},
+  "p":    {"arity": 1, "angled": true,  "status": "SUPPORTED"},
+  "t":    {"arity": 1, "angled": false, "status": "SUPPORTED"},
+  "s":    {"arity": 1, "angled": false, "status": "SUPPORTED"},
+  "sx":   {"arity": 1, "angled": false, "status": "SUPPORTED"},
+  "h":    {"arity": 1, "angled": false, "status": "SUPPORTED"},
+  "x":    {"arity": 1, "angled": false, "status": "SUPPORTED"},
+  "y":    {"arity": 1, "angled": false, "status": "SUPPORTED"},
+  "z":    {"arity": 1, "angled": false, "status": "SUPPORTED"}
+ },
+ "summary": {
+  "probed_count": 17,
+  "supported": 15,
+  "unsupported": ["rzz", "rxx"],
+  "statement": "Across the seventeen gates probed, which cover the packaged mutation vocabulary rq3_feasibility_gate.core.mutants.ARITY plus swap, rzz and rxx are the only two QUTest 0.1.0 cannot parse. Both are absent from OpenQASM 3 stdgates.inc.",
+  "scope_caveat": "The probe covers the relevant vocabulary, not every gate QUTest might accept. It establishes unsupportedness for rzz and rxx and supportedness for the other fifteen; it makes no claim about gates outside this set."
+ },
+ "consequence": "Parser unsupportedness is a serialization limitation, not a statement that an rzz or rxx mutation is semantically invalid. It is addressed by the execution adapter, not by removing mutations."
+}

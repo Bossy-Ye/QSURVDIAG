@@ -1,0 +1,32 @@
+{
+  "construction_set": {
+    "at_or_below_theta": 1,
+    "exactly_one": 57,
+    "median": 1.0,
+    "minimum": 0.0294,
+    "n": 64,
+    "population": "CL4 and CL5 at the declared baseline (B5_A1E_REFERENCE_EXACT)",
+    "separation_source": "E1_DIAGNOSTIC_TABLE.csv max_universe_d_a, an analytic quantity independent of the reference convention",
+    "share_at_or_below_theta": 0.0156,
+    "share_exactly_one": 0.8906
+  },
+  "corpus_frame": {
+    "at_or_below_theta": 18,
+    "exactly_one": 21,
+    "median": 0.6366,
+    "minimum": 1.277816381595187e-07,
+    "n": 203,
+    "population": "CL4 and CL5 over the 1537 frame",
+    "share_at_or_below_theta": 0.0887,
+    "share_exactly_one": 0.1034
+  },
+  "measured_quantity": "max separation over the enumerated assertion universe, the quantity that decides R_A",
+  "question": "why the corpus yields 18 CL5 cases where the construction set yields 1",
+  "reading": "The construction operators mostly saturate: 57 of 64 separate by exactly 1, and only one case falls at or below theta, which is the construction set's single CL5. The corpus mutates far more gently: 21 of 203 saturate and 18 fall at or below theta. The share of near-threshold cases is 1.6 percent in the construction set against 8.9 percent in the corpus, so CL5 is commoner in the corpus because the corpus seeds partial faults, not because theta is set differently.",
+  "record_id": "BATCH2_TASK_2A_CL5_MECHANISM",
+  "retracted": [
+    "An earlier reading attributed the difference to circuit depth and to how broadly the outcome difference spreads. That contrast was computed over the first 18 CL4 cases and does not survive the full population: over all 185, CL4 differences touch 99.9 percent of outcomes against CL5's 65.6 percent, the opposite of the claimed direction. It also measured max|pa-pb| rather than the universe-wide separation the decision actually uses.",
+    "A second reading gave the construction population as 63 with minimum separation 0.1484 and no case near theta. That took the population from E1_DIAGNOSTIC_TABLE.csv, which labels the single CL5 case Unresolved and so excluded it. At the declared baseline the population is 64 and the minimum is 0.0294, which is that CL5 case. The construction set does reach theta; it reaches it once."
+  ],
+  "theta": 0.05
+}

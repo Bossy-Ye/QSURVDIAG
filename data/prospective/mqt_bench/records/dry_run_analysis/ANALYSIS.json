@@ -1,0 +1,80 @@
+{
+ "P1_diagnosis": {
+  "subject": {
+   "qwalk_4": {
+    "mutants": 1,
+    "excluded_parse": 0,
+    "CL1": 1
+   },
+   "qwalk_5": {
+    "mutants": 1,
+    "excluded_parse": 0,
+    "CL1": 1
+   },
+   "rg_mult_8": {
+    "mutants": 1,
+    "excluded_parse": 0,
+    "CL1": 1
+   },
+   "rg_mult_12": {
+    "mutants": 1,
+    "excluded_parse": 0,
+    "CL1": 1
+   }
+  },
+  "family": {
+   "quantum_walk": {
+    "mutants": 2,
+    "excluded_parse": 0,
+    "CL1": 2
+   },
+   "multiplication": {
+    "mutants": 2,
+    "excluded_parse": 0,
+    "CL1": 2
+   }
+  },
+  "overall": {
+   "all": {
+    "mutants": 4,
+    "excluded_parse": 0,
+    "CL1": 4
+   }
+  }
+ },
+ "P2_certification": {
+  "cl4_candidates": 0,
+  "certified": 0,
+  "withheld_by_unmet": {}
+ },
+ "P3_B_Bprime_C": {
+  "B": {},
+  "Bprime_repair": {},
+  "Bprime_full": {},
+  "C": {},
+  "bound_contradictions": []
+ },
+ "P4_observation": {
+  "consistent": 4
+ },
+ "R5_disagreements": {
+  "certified_not_supported": [],
+  "conservative_C_abstentions": []
+ },
+ "flags": {
+  "actionability_inconclusive": true,
+  "observation_validation_absent": false,
+  "d1_stability_insufficient": false,
+  "d2_stability_insufficient": false,
+  "unresolved_share_over_half": false,
+  "unresolved_share": [
+   0,
+   4,
+   [
+    0.0,
+    0.4899
+   ]
+  ]
+ },
+ "D1_by_C_report": {}
+}

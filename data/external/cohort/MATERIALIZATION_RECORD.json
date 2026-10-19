@@ -1,0 +1,308 @@
+{
+ "record_id": "EXTERNAL_COHORT_MATERIALIZATION_v1",
+ "statement": "The mutant population was fully materialized before native testing, endpoint-state analysis, observation analysis, or QSurvDiag diagnosis.",
+ "timestamp_utc": "2026-09-06T13:36:21.368342+00:00",
+ "freeze_reference": {
+  "record": "EXTERNAL_COHORT_FREEZE_v2",
+  "sha256": "8a1dc4edff613c5dd7bd8f0637829b152723ba7e681e7e3a74f437acd5ba39f7",
+  "v1_sha256": "a9aac1084d70010c4a00feb5e46e0914e5a783297bef7c7fcd3ed62a5bc16562",
+  "subjects_unchanged": true
+ },
+ "allocator": {
+  "wrapper": "impl/external_allocation.py",
+  "wrapper_sha256": "7f3778dd6d765fbcd95d377de3e43b6e53e5b2e162ca6c7de5bf445c824ce783",
+  "apportionment_source": "research_repair/phase5_validation/s2_cohort/s2_cohort.py::largest_remainder",
+  "apportionment_fn_sha256": "9086b2b4bb347e78861deeb71b9ebbd24451d4f80a7af18f362e3fb44de3c63b",
+  "invocation": "function source extracted by AST and executed; the module was not imported, because it is top-level script code that would re-run S2 against the read-only study tree",
+  "enumerator": "rq3_feasibility_gate.core.mutants.complete_pool",
+  "rng_consumed": false,
+  "mutation_selection_seed": null,
+  "execution_seeds_consumed": false,
+  "transpiler_seed_consumed": false
+ },
+ "environment": {
+  "python": "3.12.4",
+  "qiskit": "2.5.0",
+  "platform": "macOS-14.3-arm64-arm-64bit",
+  "machine": "arm64"
+ },
+ "manuscript_repo_commit": "03e7a7e52019024b9f593349b986d58b1479612b",
+ "subject_hash_verification": {
+  "all_match": true,
+  "detail": [
+   {
+    "subject": "ParityPhase",
+    "group": "MgcosA",
+    "frozen": "0bbdb684720d88b0866ce4929c71af8ff50d177dfcbac35d57427352997ca386",
+    "recomputed": "0bbdb684720d88b0866ce4929c71af8ff50d177dfcbac35d57427352997ca386",
+    "match": true
+   },
+   {
+    "subject": "Is2PowerPhase",
+    "group": "MgcosA",
+    "frozen": "9773fad291b7102ac79d3f65772c435055629eb52498dbac92c436b9e6640449",
+    "recomputed": "9773fad291b7102ac79d3f65772c435055629eb52498dbac92c436b9e6640449",
+    "match": true
+   },
+   {
+    "subject": "LessThanPhase",
+    "group": "MgcosA",
+    "frozen": "3e3e378b99c136011d55f9769599663044e1b45f856f03acfe108321cc523e16",
+    "recomputed": "3e3e378b99c136011d55f9769599663044e1b45f856f03acfe108321cc523e16",
+    "match": true
+   },
+   {
+    "subject": "DiagonalZHamiltonian",
+    "group": "MgcosA",
+    "frozen": "ff51f35832f43c040ab587dc5b85812bd969504ceba471e0ab1e057355431451",
+    "recomputed": "ff51f35832f43c040ab587dc5b85812bd969504ceba471e0ab1e057355431451",
+    "match": true
+   },
+   {
+    "subject": "IsingEvolution",
+    "group": "MgcosA",
+    "frozen": "f73de4725117a42e1b81a07bddf0dd06b08607514439f3d26f4a7d6e5106bb2c",
+    "recomputed": "f73de4725117a42e1b81a07bddf0dd06b08607514439f3d26f4a7d6e5106bb2c",
+    "match": true
+   },
+   {
+    "subject": "DraperAdder",
+    "group": "MgcosA",
+    "frozen": "0e3f6c97f83a29aa3a84802be4ef76e5ae45e688a622a60c544e2073bd4a1fbf",
+    "recomputed": "0e3f6c97f83a29aa3a84802be4ef76e5ae45e688a622a60c544e2073bd4a1fbf",
+    "match": true
+   },
+   {
+    "subject": "AdderHamiltonianMixture",
+    "group": "MgcosA",
+    "frozen": "d838a31f6f37bc75d962d9e42d62fd9dcbb89294bf91b42b4e94db874fa9da11",
+    "recomputed": "d838a31f6f37bc75d962d9e42d62fd9dcbb89294bf91b42b4e94db874fa9da11",
+    "match": true
+   },
+   {
+    "subject": "qft_n4",
+    "group": "QASMBench/Qiskit",
+    "frozen": "43de2b53e976d4ac",
+    "recomputed": "43de2b53e976d4ac",
+    "match": true
+   },
+   {
+    "subject": "deutsch_n2",
+    "group": "QASMBench/Qiskit",
+    "frozen": "56a7b3389495fb49",
+    "recomputed": "56a7b3389495fb49",
+    "match": true
+   }
+  ]
+ },
+ "circuit_eligibility": {
+  "all_eligible": true,
+  "detail": [
+   {
+    "subject": "ParityPhase",
+    "eligible": true,
+    "reasons": ""
+   },
+   {
+    "subject": "Is2PowerPhase",
+    "eligible": true,
+    "reasons": ""
+   },
+   {
+    "subject": "LessThanPhase",
+    "eligible": true,
+    "reasons": ""
+   },
+   {
+    "subject": "DiagonalZHamiltonian",
+    "eligible": true,
+    "reasons": ""
+   },
+   {
+    "subject": "IsingEvolution",
+    "eligible": true,
+    "reasons": ""
+   },
+   {
+    "subject": "DraperAdder",
+    "eligible": true,
+    "reasons": ""
+   },
+   {
+    "subject": "AdderHamiltonianMixture",
+    "eligible": true,
+    "reasons": ""
+   },
+   {
+    "subject": "qft_n4",
+    "eligible": true,
+    "reasons": ""
+   },
+   {
+    "subject": "deutsch_n2",
+    "eligible": true,
+    "reasons": ""
+   }
+  ]
+ },
+ "artifacts": {
+  "opportunity_pool": {
+   "file": "EXTERNAL_OPPORTUNITY_POOL.csv",
+   "sha256": "efad74b9f5a9348a64d89e0814220251da09a866061b165a52220ac77be66353",
+   "rows": 24477
+  },
+  "allocation_manifest": {
+   "file": "EXTERNAL_ALLOCATION.csv",
+   "sha256": "9b443a7bc742f199386bdfe813cc2b4830dd0c8b679b72ee6825e693e3199773",
+   "rows": 270
+  },
+  "census": {
+   "file": "EXTERNAL_CENSUS.csv",
+   "sha256": "6c9d08043ed2a46e6f35db802dc5000eb7912adaf725c86fbc94c270c1191ceb"
+  },
+  "mutant_tree": {
+   "dir": "mutants/",
+   "files": 270,
+   "tree_sha256": "7f08fd4ff4e54780ed6c250f9bae8e188dff3284f1e2cb6901350b8b001e02ee"
+  }
+ },
+ "totals": {
+  "legal_opportunities_raw": 24536,
+  "legal_opportunities_deduplicated": 24477,
+  "allocated": 270,
+  "operator_mix_emergent": {
+   "insertion": 203,
+   "replacement": 65,
+   "deletion": 2
+  },
+  "note": "The operator mix is an outcome of the frozen legal spaces and the packaged apportionment. No ratio was targeted."
+ },
+ "per_subject": [
+  {
+   "subject": "ParityPhase",
+   "group": "MgcosA",
+   "n": "6",
+   "legal_opportunities": "738",
+   "deduplicated": "732",
+   "allocated": "30",
+   "insertion": "26",
+   "replacement": "4",
+   "deletion": "0"
+  },
+  {
+   "subject": "Is2PowerPhase",
+   "group": "MgcosA",
+   "n": "6",
+   "legal_opportunities": "12792",
+   "deduplicated": "12768",
+   "allocated": "30",
+   "insertion": "1",
+   "replacement": "27",
+   "deletion": "2"
+  },
+  {
+   "subject": "LessThanPhase",
+   "group": "MgcosA",
+   "n": "5",
+   "legal_opportunities": "1391",
+   "deduplicated": "1387",
+   "allocated": "30",
+   "insertion": "23",
+   "replacement": "7",
+   "deletion": "0"
+  },
+  {
+   "subject": "DiagonalZHamiltonian",
+   "group": "MgcosA",
+   "n": "3",
+   "legal_opportunities": "228",
+   "deduplicated": "228",
+   "allocated": "30",
+   "insertion": "23",
+   "replacement": "7",
+   "deletion": "0"
+  },
+  {
+   "subject": "IsingEvolution",
+   "group": "MgcosA",
+   "n": "7",
+   "legal_opportunities": "1806",
+   "deduplicated": "1806",
+   "allocated": "30",
+   "insertion": "30",
+   "replacement": "0",
+   "deletion": "0"
+  },
+  {
+   "subject": "DraperAdder",
+   "group": "MgcosA",
+   "n": "10",
+   "legal_opportunities": "2300",
+   "deduplicated": "2293",
+   "allocated": "30",
+   "insertion": "28",
+   "replacement": "2",
+   "deletion": "0"
+  },
+  {
+   "subject": "AdderHamiltonianMixture",
+   "group": "MgcosA",
+   "n": "10",
+   "legal_opportunities": "2360",
+   "deduplicated": "2353",
+   "allocated": "30",
+   "insertion": "23",
+   "replacement": "7",
+   "deletion": "0"
+  },
+  {
+   "subject": "qft_n4",
+   "group": "QASMBench/Qiskit",
+   "n": "4",
+   "legal_opportunities": "2710",
+   "deduplicated": "2704",
+   "allocated": "30",
+   "insertion": "28",
+   "replacement": "2",
+   "deletion": "0"
+  },
+  {
+   "subject": "deutsch_n2",
+   "group": "QASMBench/Qiskit",
+   "n": "2",
+   "legal_opportunities": "211",
+   "deduplicated": "206",
+   "allocated": "30",
+   "insertion": "21",
+   "replacement": "9",
+   "deletion": "0"
+  }
+ ],
+ "structural_validation": {
+  "allocated_rows": 270,
+  "parses": 270,
+  "width_matches_manifest": 270,
+  "gate_count_matches_manifest": 270,
+  "operator_matches_location": 270,
+  "in_enumerated_legal_pool": 270,
+  "duplicate_normalized_hashes": 0,
+  "subjects_at_30": 9,
+  "failures": 0
+ },
+ "determinism": {
+  "reruns": 1,
+  "opportunity_pool_identical": true,
+  "allocation_manifest_identical": true,
+  "census_identical": true,
+  "mutant_tree_identical": true,
+  "method": "full re-run into a separate directory; sha256 comparison, no manual outcome inspection"
+ },
+ "outcome_blindness": {
+  "native_tests_run": false,
+  "endpoint_states_computed": false,
+  "observation_distributions_computed": false,
+  "qsurvdiag_run": false,
+  "cl_classification_performed": false,
+  "note": "Circuits were constructed for structural validation only; no semantic execution was performed."
+ }
+}

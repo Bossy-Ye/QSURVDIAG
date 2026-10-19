@@ -1,0 +1,29 @@
+{
+ "construction": {
+  "n": 52,
+  "HIST_gatelist": 52,
+  "HIST_depth": 13,
+  "P5_gateset": 0,
+  "P5_depth": 15,
+  "QT_gateset_subset": 37,
+  "QT_depth_le": 4,
+  "QT_depth_eq": 9
+ },
+ "prospective": {
+  "n": 33,
+  "HIST_gatelist": 33,
+  "HIST_depth": 16,
+  "P5_gateset": 0,
+  "P5_depth": 11,
+  "QT_gateset_subset": 19,
+  "QT_depth_le": 10,
+  "QT_depth_eq": 10,
+  "P5_matches_recorded_gateset_per_case": true,
+  "P5_matches_recorded_depth_per_case": true
+ },
+ "versions": {
+  "qiskit": "2.5.0",
+  "qutest": "0.1.0",
+  "python": "3.12.4"
+ }
+}

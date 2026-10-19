@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this replication package, please cite the article and the package."
+type: software
+title: "QSurvDiag replication package"
+abstract: "Records and verification scripts for the article 'Why Quantum Mutants Survive: Separating Observation Limitations from Suite Omissions'."
+version: "1.0.0"
+date-released: "2026-10-19"
+license:
+  - MIT
+  - CC-BY-4.0
+  - GPL-3.0-only
+  - Apache-2.0
+repository-code: "https://github.com/Bossy-Ye/QSURVDIAG"
+keywords:
+  - quantum software engineering
+  - mutation testing
+  - test oracle
+  - replication package
+authors:
+  - family-names: "Ye"
+    given-names: "Boshuai"
+    affiliation: "Software Engineering and Information Systems (SEIS), Faculty of Information Technology and Electrical Engineering, University of Oulu"
+    email: "boshuai.ye@oulu.fi"
+  - family-names: "Liang"
+    given-names: "Peng"
+    affiliation: "School of Computer Science, Wuhan University"
+    email: "liangp@whu.edu.cn"
+  - family-names: "Khan"
+    given-names: "Arif Ali"
+    affiliation: "Software Engineering and Information Systems (SEIS), Faculty of Information Technology and Electrical Engineering, University of Oulu"
+    email: "arif.khan@oulu.fi"

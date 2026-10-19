@@ -1,0 +1,18 @@
+qwalk_4 4 303 219 1.0 {'max_overlap_with_independent_walk': np.float64(1.0), 'coin1_shift': 1, 'node_bits_reversed': True}
+qwalk_5 5 723 529 1.0 {'max_overlap_with_independent_walk': np.float64(1.0), 'coin1_shift': 1, 'node_bits_reversed': True}
+qwalk_6 6 2097 1491 1.0 {'max_overlap_with_independent_walk': np.float64(1.0), 'coin1_shift': 1, 'node_bits_reversed': True}
+hrs_mult_5 5 297 207 1.0 {'wrong_products_on_full_domain': 0, 'domain': 4}
+hrs_mult_9 9 1158 810 1.0 {'wrong_products_on_full_domain': 0, 'domain': 16}
+hrs_mult_13 13 2583 1822 1.0 {'wrong_products_on_full_domain': 0, 'domain': 64}
+multiplier_4 4 46 35 1.0 {'wrong_products_on_full_domain': 0, 'domain': 4}
+multiplier_8 8 290 197 0.488508631736 {'wrong_products_on_full_domain': 0, 'domain': 16}
+multiplier_12 12 941 630 0.375705947861 {'wrong_products_on_full_domain': 0, 'domain': 64}
+rg_mult_4 4 28 23 1.0 {'wrong_products_on_full_domain': 0, 'domain': 4}
+rg_mult_8 8 196 137 1.0 {'wrong_products_on_full_domain': 0, 'domain': 16}
+rg_mult_12 12 636 451 1.0 {'wrong_products_on_full_domain': 0, 'domain': 64}
+graphstate_d3_6_s1 6 15 6 1.0 {'max_stabilizer_deviation': 0.0}
+graphstate_d3_8_s1 8 20 9 1.0 {'max_stabilizer_deviation': 0.0}
+graphstate_d3_10_s1 10 25 8 1.0 {'max_stabilizer_deviation': 0.0}
+hhl_4 4 29 24 1.0 {'documented_solution_probs': [0.5, 0.5], 'circuit_postselected_probs': [0.0, 1.0], 'regs': [('sys', 1), ('phase', 2), ('ancilla', 1)]}
+hhl_5 5 43 33 1.0 {'documented_solution_probs': [0.5, 0.5], 'circuit_postselected_probs': [0.0, 1.0], 'regs': [('sys', 1), ('phase', 3), ('ancilla', 1)]}
+done

@@ -1,0 +1,690 @@
+package_path,license,basis
+.gitattributes,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+.github/workflows/verify.yml,MIT,study-authored code (LICENSE)
+.gitignore,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+CITATION.cff,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+LICENSE,license or notice text,license text or third-party notice
+LICENSE-DATA,license or notice text,license text or third-party notice
+LICENSES/Apache-2.0.txt,license or notice text,license text or third-party notice
+LICENSES/GPL-3.0.txt,license or notice text,license text or third-party notice
+LICENSES/MIT-MQT-Bench-2.3.0.txt,license or notice text,license text or third-party notice
+LICENSES/NOTICE.txt,license or notice text,license text or third-party notice
+README.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/ALLPAIRS_CASES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/ALLPAIRS_HISTOGRAMS.jsonl.gz,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/ALLPAIRS_NATIVE_RUNS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/ALLPAIRS_RESULTS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/ALLPAIRS_SEMANTIC.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/ALLPAIRS_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/PLAN.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/allpairs_analyze.py,MIT,study-authored code (LICENSE)
+data/all_pairs/allpairs_bound.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/all_pairs/allpairs_bound.py,MIT,study-authored code (LICENSE)
+data/all_pairs/allpairs_run.py,MIT,study-authored code (LICENSE)
+data/all_pairs/qutest_capture.py,MIT,study-authored code (LICENSE)
+data/certification/equivalence/T2B_QCEC_LEDGER_599.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/equivalence/T2B_QCEC_REGISTRY_599.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_ABLATION.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_ANALYSES.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_BOUND.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_DECISION_GRID.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_DISTANCE_TIMING.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_FINAL_CORPUS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_FINAL_DEFECT.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_FINAL_EXTERNAL.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_FINAL_PRIMARY.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_FINAL_WIDTH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_NATIVE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_NATIVE_DEFECTS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_NATIVE_JOBS_ARMS.jsonl,GPL-3.0-only,"whole file under GPL-3.0-only: contains gate lists of QMutBench programs (GPL v3, commit 01f5e770) and of Qolumbina programs (CC BY 4.0, Zenodo 10.5281/zenodo.20987327); LICENSES/NOTICE.txt"
+data/certification/outcomes/R2V_NUMBERS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_RELATION_CORPUS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_RELEASED_CL3.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_RULE_CHANGES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_STATISTICS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_TABLE_X.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_WRAPPED_DEMO.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2V_WRAPPED_DEMO_test.qasm,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2_CHEAP_BASELINE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2_CONDITIONAL_SEPARATIONS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2_CORPUS_WIDTH_PAIRS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2_EXTERNAL_CL3.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2_MARGINS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2_MARGINS_EXT.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/R2_PRIMARY_PAIRS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/SHA256SUMS.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/T_TABLE_IX_599.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/T_TABLE_IX_OBSERVATION_599.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/V2_SPECIFICATION.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/outcomes/r2_cheap.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2_conditional.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2_corpus_width.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2_margins.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2_margins_ext.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_analyses.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_bound.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_defects.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_distance_timing.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_figure_data.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_native.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_numbers.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_primary.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_relation_corpus.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_released_margin.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_stats.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_table_x.py,MIT,study-authored code (LICENSE)
+data/certification/outcomes/r2v_wrapped_demo.py,MIT,study-authored code (LICENSE)
+data/certification/witness_order/AMENDMENT.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/witness_order/CHANGES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/witness_order/IMPACT.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/witness_order/NATIVE_RUNS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/witness_order/QEDC_X_RUNS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/certification/witness_order/audit.py,MIT,study-authored code (LICENSE)
+data/certification/witness_order/native.py,MIT,study-authored code (LICENSE)
+data/checks/circuit_level.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/checks/circuit_level.py,MIT,study-authored code (LICENSE)
+data/checks/observation_limited_universe.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/checks/observation_limited_universe.py,MIT,study-authored code (LICENSE)
+data/checks/output_condition_suites.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/checks/output_condition_suites.py,MIT,study-authored code (LICENSE)
+data/checks/parameter_and_distance.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/checks/parameter_and_distance.py,MIT,study-authored code (LICENSE)
+data/checks/tie_check.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/checks/tie_check.py,MIT,study-authored code (LICENSE)
+data/combined_suite/CMP_CASES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/combined_suite/CMP_NATIVE_RUNS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/combined_suite/CMP_RESULTS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/combined_suite/CMP_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/combined_suite/PLAN.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/combined_suite/cmp_analyze.py,MIT,study-authored code (LICENSE)
+data/combined_suite/cmp_run.py,MIT,study-authored code (LICENSE)
+data/external/cohort/EXTERNAL_ALLOCATION.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/EXTERNAL_CENSUS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/EXTERNAL_OPPORTUNITY_POOL.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/MATERIALIZATION_RECORD.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/MATERIALIZATION_RECORD.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/L1_ORIGINAL_GUARD.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/L2_NATIVE.jsonl,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/L2_NATIVE.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/L2_OUTCOME_DIGEST.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/L3_STAGE2_RELATIONS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/L4_EVIDENCE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/L5_CERTIFICATES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/LEDGER_HASHES.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/RUN_RECORD.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/cohort/RUN_002/run002_runner.py,MIT,study-authored code (LICENSE)
+data/external/cohort/materialize.py,MIT,study-authored code (LICENSE)
+data/external/defects/B3_QUTEST_ELIGIBILITY_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/defects/B3_REAL_DEFECTS_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/defects/B3_RELATION_TABLE_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/defects/E5_DEFECT_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/developer_tests/classify_occurrences.py,MIT,study-authored code (LICENSE)
+data/external/developer_tests/occurrence_classification.csv,CC-BY-4.0 AND Apache-2.0,"study-authored record (CC BY 4.0), derived for this release (provenance/DERIVED_FILES.csv), except the code field of the 38 Qibo and Qualtran rows, which quotes Apache-2.0 source and stays under Apache-2.0 (LICENSES/Apache-2.0.txt; attribution in LICENSES/NOTICE.txt section 7); the 13 Mitiq rows quote nothing"
+data/external/developer_tests/repository_candidates.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/developer_tests/search_log.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/ADAPTER_CONFORMANCE.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/EXTERNAL_COHORT_FREEZE.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/EXTERNAL_COHORT_FREEZE.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/EXTERNAL_COHORT_FREEZE_v2.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/EXTERNAL_COHORT_FREEZE_v2.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/EXTERNAL_COHORT_FREEZE_v3.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/EXTERNAL_COHORT_FREEZE_v3.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/EXTERNAL_COHORT_FREEZE_v4.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/EXTERNAL_COHORT_FREEZE_v4.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/QUTEST_PARSER_SUPPORT_MATRIX.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/TRANSLATION_RULE_FROZEN.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/impl/external_allocation.py,MIT,study-authored code (LICENSE)
+data/external/protocol/impl/external_allocation.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/impl/guard_integrity.py,MIT,study-authored code (LICENSE)
+data/external/protocol/impl/guard_integrity.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/external/protocol/impl/qutest_execution_adapter.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/implementation/qsurvdiag/e1_07_diagnose.py,MIT,study-authored code (LICENSE)
+data/implementation/qsurvdiag/e2_partA_grid.py,MIT,study-authored code (LICENSE)
+data/implementation/tests/acceptance_tests.py,MIT,study-authored code (LICENSE)
+data/implementation/tests/test_conformance_789.py,MIT,study-authored code (LICENSE)
+data/implementation/tests/test_decision_bound.py,MIT,study-authored code (LICENSE)
+data/implementation/tests/test_minimal_conformance.py,MIT,study-authored code (LICENSE)
+data/implementation/tests/test_qutest_adapter.py,MIT,study-authored code (LICENSE)
+data/interventions/transfer/B5_A2_QUCHECK_REPAIR.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/interventions/width_register/DESIGN_FREEZE.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/inventory/POSITION_CROSSTAB.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/inventory/concentration.py,MIT,study-authored code (LICENSE)
+data/inventory/corpus_files.py,MIT,study-authored code (LICENSE)
+data/inventory/fetch_corpus.sh,MIT,study-authored code (LICENSE)
+data/inventory/inventory.py,MIT,study-authored code (LICENSE)
+data/inventory/out/cases_all.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/inventory/out/concentration.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/inventory/out/corpus_files.tsv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/inventory/out/inventory_tables.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/inventory/out/rzz_count.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/inventory/out/summary.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/inventory/position_crosstab.py,MIT,study-authored code (LICENSE)
+data/inventory/run_all.sh,MIT,study-authored code (LICENSE)
+data/inventory/rzz_count.py,MIT,study-authored code (LICENSE)
+data/output_condition/AFFECTED_PAIRS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/OC_CASEWISE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/OC_CASEWISE.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/OC_RECORDED_REPRODUCTION.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/OC_RESULTS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/OC_RUNS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/OC_RUN_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/OC_SIMON_MOVERS.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/PLAN.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/calibrate_original_only.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/output_condition/calibrate_original_only.py,MIT,study-authored code (LICENSE)
+data/output_condition/oc_analyze.py,MIT,study-authored code (LICENSE)
+data/output_condition/oc_casewise.py,MIT,study-authored code (LICENSE)
+data/output_condition/oc_rerun.py,MIT,study-authored code (LICENSE)
+data/output_condition/oc_simon_movers.py,MIT,study-authored code (LICENSE)
+data/primary/decision/B2_STATISTICS_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/decision/B5_A1G_GUARD.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/decision/B5_A3_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/decision/B5_A3_TRANSPILER_SWEEP.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/decision/B5_A4_INTERFACE_CORRECTED.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/decision/b5_a3_transpiler.py,MIT,study-authored code (LICENSE)
+data/primary/figures/R_fig2b_compression.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/implementation/e1_seed_schedule.py,MIT,study-authored code (LICENSE)
+data/primary/manifests/B1_PRIMARY_POPULATION.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/manifests/B1_PROSPECTIVE_ELIGIBLE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/manifests/B1_UNRECOVERED_CONSTRUCTION_EXCLUSIONS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B1_CONTRACT_RERUN.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B1_FROZEN_CONSTRUCTION_MEMBERSHIP.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B1_OBSERVATION_RERUN.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B1_SUITE_COMMON_EVALUABLE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B1_SUITE_RERUN.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B2_BOUND_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B2_EVIDENCE_ABLATION_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B2_SHOT_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B2_TOLERANCE_FRESH.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B5_A1G_POPULATION.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/599_OUTPUT_CONDITION.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/B1_INTERFACE_RERUN.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/T1_3_REFERENCE_599.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/T1_4_INTERFACE_599.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/T1_4_RQ2.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/T1_4_SSPEC_599.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/records/b3_output_condition.py,MIT,study-authored code (LICENSE)
+data/primary/suite_guards/B1_SUITE_GUARD_FRESH.jsonl,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/B5_A1B_EXT_SHOTS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/B5_A1B_EXT_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/B5_A1B_GUARD_EXACT.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/B5_A1B_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/B5_A1C_CL3_RECOVERED.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/B5_A1C_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/FRESH_OUTPUTS.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/PLAN_B5.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/SUITE_GUARD_PLAN.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/a1b.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/a1b_ext.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/a1c.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/primary/suite_guards/b5_a1b_ext_shots.py,MIT,study-authored code (LICENSE)
+data/primary/suite_guards/b5_a1b_guard.py,MIT,study-authored code (LICENSE)
+data/primary/suite_guards/b5_a1c_cl3.py,MIT,study-authored code (LICENSE)
+data/primary/suites/SUITE_GUARD_LEDGER.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/ADAPTER_VALIDATION.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/E2_PROFILES.yaml,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/E3_PROFILE_MATRIX.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/E5_CLOSURE_MANIFEST.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/E5_ENVIRONMENT_LOCK.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/E5_PYTEST_PROFILE.yaml,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/E5_QUTEST_GATE_PROBE.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/FINAL_PROFILE_CLOSURE_AUDIT.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/FINAL_PROFILE_SOURCE_EVIDENCE.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/FINAL_QUTEST_CLOSURE_CHECK.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/GATE_FRAGMENT_PROBE.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/MUSKIT_DOWNLOAD.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/profiles/QUTEST_CAPABILITY_REGISTRY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/cross_tool/s2/S2_COHORT_HASH.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/cross_tool/s2/S2_COHORT_MANIFEST.yaml,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/cross_tool/s2/S2_ELIGIBILITY_EXCLUSIONS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/cross_tool/s3/S3_CROSS_TOOL_RESULTS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/cross_tool/s3/S3_QUCHECK_RESULTS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/cross_tool/s3/S3_QUTEST_ADMISSIBILITY.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/cross_tool/s3/s3_engine.py,MIT,study-authored code (LICENSE)
+data/prospective/cross_tool/s4/S4_VALIDATION_ESTIMANDS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/.gitattributes,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/PROTOCOL.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/code/analyze.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/code/bprime.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/code/deps.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/code/gen_subjects.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/code/independence.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/code/materialize.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/code/stage_c.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/code/stage_d.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/code/verify_inputs.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/cohort_enumerator/PD1_QUBIT_LIMIT.diff,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/cohort_enumerator/PD1_VERIFICATION.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/cohort_enumerator/rq3_cohort/__init__.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/cohort_enumerator/rq3_cohort/core/__init__.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/cohort_enumerator/rq3_cohort/core/fragment.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/cohort_enumerator/rq3_cohort/core/gate_config.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/cohort_enumerator/rq3_cohort/core/mutants.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/cohort_enumerator/rq3_cohort/core/representation.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/cohort_enumerator/verify_enumerator.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/env/requirements-mqt.lock,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/env/requirements-qutest.lock,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/freeze/DEVIATIONS.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/freeze/FREEZE_A.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/freeze/FREEZE_A.tsq,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/freeze/FREEZE_A.tsr,LicenseRef-FreeTSA,issued or published by Free TSA (freetsa.org); included unchanged for verification
+data/prospective/mqt_bench/freeze/FREEZE_B.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/freeze/FREEZE_B.tsq,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/freeze/FREEZE_B.tsr,LicenseRef-FreeTSA,issued or published by Free TSA (freetsa.org); included unchanged for verification
+data/prospective/mqt_bench/freeze/FREEZE_LOG.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/freeze/tsa/freetsa_cacert.pem,LicenseRef-FreeTSA,issued or published by Free TSA (freetsa.org); included unchanged for verification
+data/prospective/mqt_bench/freeze/tsa/freetsa_tsa.crt,LicenseRef-FreeTSA,issued or published by Free TSA (freetsa.org); included unchanged for verification
+data/prospective/mqt_bench/frozen_deps/DEPS.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/frozen_deps/MUTANT_POPULATION.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/frozen_deps/PROGRAM_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/frozen_deps/S1_SUBJECTS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/frozen_deps/S2_GENERATED_MUTANTS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/frozen_deps/SSPEC_PROVENANCE.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/frozen_deps/V2_SPECIFICATION.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/frozen_deps/b3_actionability_exec.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/decision_bound.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/e1_lib.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/e1_relations.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/fragment.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/gate_config.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/mutants.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/qsurvdiag_confirmatory.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/qutest_adapter.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/qutest_execution_adapter.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/r2_external.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/r2_primary.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/r2v_arms.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/r2v_finalize.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/r2v_lib.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/representation.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/s2_cohort.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/frozen_deps/serialization_adapter.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/population/CENSUS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/population/INDEPENDENCE.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/population/MUTANT_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/population/MUTATION_POOL.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/population/STATIC_CHECK.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m00.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m00.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m01.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m01.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m02.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m02.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m03.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m03.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m04.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m04.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m05.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m05.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m06.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m06.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m07.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m07.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m08.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m08.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m09.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m09.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m10.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m10.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m11.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m11.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m12.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m12.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m13.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m13.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m14.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m14.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m15.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m15.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m16.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m16.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m17.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m17.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m18.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m18.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m19.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m19.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m20.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m20.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m21.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m21.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m22.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m22.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m23.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m23.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m24.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m24.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m25.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m25.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m26.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m26.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m27.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m27.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m28.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m28.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m29.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_4/qwalk_4_m29.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m00.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m00.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m01.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m01.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m02.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m02.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m03.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m03.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m04.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m04.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m05.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m05.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m06.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m06.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m07.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m07.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m08.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m08.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m09.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m09.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m10.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m10.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m11.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m11.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m12.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m12.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m13.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m13.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m14.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m14.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m15.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m15.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m16.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m16.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m17.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m17.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m18.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m18.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m19.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m19.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m20.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m20.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m21.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m21.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m22.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m22.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m23.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m23.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m24.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m24.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m25.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m25.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m26.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m26.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m27.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m27.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m28.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m28.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m29.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/qwalk_5/qwalk_5_m29.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m00.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m00.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m01.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m01.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m02.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m02.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m03.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m03.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m04.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m04.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m05.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m05.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m06.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m06.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m07.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m07.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m08.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m08.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m09.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m09.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m10.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m10.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m11.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m11.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m12.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m12.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m13.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m13.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m14.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m14.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m15.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m15.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m16.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m16.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m17.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m17.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m18.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m18.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m19.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m19.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m20.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m20.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m21.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m21.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m22.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m22.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m23.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m23.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m24.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m24.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m25.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m25.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m26.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m26.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m27.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m27.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m28.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m28.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m29.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_12/rg_mult_12_m29.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m00.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m00.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m01.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m01.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m02.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m02.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m03.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m03.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m04.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m04.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m05.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m05.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m06.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m06.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m07.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m07.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m08.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m08.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m09.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m09.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m10.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m10.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m11.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m11.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m12.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m12.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m13.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m13.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m14.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m14.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m15.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m15.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m16.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m16.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m17.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m17.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m18.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m18.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m19.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m19.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m20.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m20.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m21.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m21.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m22.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m22.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m23.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m23.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m24.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m24.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m25.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m25.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m26.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m26.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m27.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m27.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m28.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m28.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m29.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/population/mutants/rg_mult_8/rg_mult_8_m29.qasm,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/records/ANALYSIS.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/STAGE_C.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/STAGE_D.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/analysis/ANALYSIS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/analysis/case_table.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/records/dry_run_analysis/ANALYSIS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/dry_run_stage_c/C1_BASELINE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/dry_run_stage_c/C1_GUARDS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/dry_run_stage_c/C3_REPORTS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/dry_run_stage_c/STAGE_C_RECORD.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/dry_run_stage_d/D1_REPAIR.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/dry_run_stage_d/D2_OBSERVATION.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/dry_run_stage_d/STAGE_D_RECORD.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/logs/COMMANDS.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/logs/analyze.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/logs/bprime.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/logs/stage_c.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/logs/stage_d.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_c/B_BPRIME.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_c/C1_BASELINE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_c/C1_GUARDS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_c/C2_NATIVE.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_c/C3_REPORTS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_c/STAGE_C_RECORD.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_d/D2_OBSERVATION.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/records/stage_d/STAGE_D_RECORD.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/stageA_prefreeze/SHA256SUMS.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/stageA_prefreeze/candidate_subjects.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/stageA_prefreeze/coherent.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/stageA_prefreeze/coherent_check.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/stageA_prefreeze/export.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/stageA_prefreeze/gen.log,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/stageA_prefreeze/gen.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/stageA_prefreeze/mqt_env_freeze.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/stageA_prefreeze/orig_guard.py,MIT,study-authored code (LICENSE)
+data/prospective/mqt_bench/stageA_prefreeze/original_guard.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/stageA_prefreeze/stageA_originals.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/subjects/SUBJECTS.json,MIT AND CC-BY-4.0,circuits generated by MQT Bench 2.3.0 (MIT; LICENSES/MIT-MQT-Bench-2.3.0.txt); study content CC-BY-4.0
+data/prospective/mqt_bench/subjects/SUBJECT_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/mqt_bench/subjects/VERIFY_INPUTS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/registration/CLAIM_DECISION_BASELINE.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/registration/EVIDENCE_OBLIGATION_REGISTRY.yaml,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/registration/QUCHECK_PROFILES.yaml,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/prospective/registration/QUTEST_PROFILES.yaml,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/CASE_RESULTS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/NATIVE_RUNS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/PLAN.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/QEDC_METRICS.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/REANALYSIS_RUNS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/REANALYSIS_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/REPORT.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/SCREENING.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/adapter_check_all_widths.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/adapter_check_all_widths.py,MIT,study-authored code (LICENSE)
+data/qedc/case_run.py,MIT,study-authored code (LICENSE)
+data/qedc/convention_scan.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/convention_scan.py,MIT,study-authored code (LICENSE)
+data/qedc/convention_scan_tfim.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/convention_scan_tfim.py,MIT,study-authored code (LICENSE)
+data/qedc/kernel_equivalence_check.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/kernel_equivalence_check.py,MIT,study-authored code (LICENSE)
+data/qedc/parity_check.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/parity_check.py,MIT,study-authored code (LICENSE)
+data/qedc/qedc_metrics_pinned.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/qedc_metrics_pinned.py,MIT,study-authored code (LICENSE)
+data/qedc/reanalysis.py,MIT,study-authored code (LICENSE)
+data/qedc/report.py,MIT,study-authored code (LICENSE)
+data/qedc/tfim_pair.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/tfim_pair.py,MIT,study-authored code (LICENSE)
+data/qedc/tfim_pair_universe.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/tfim_pair_universe.py,MIT,study-authored code (LICENSE)
+data/qedc/x_selection_check.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/qedc/x_selection_check.py,MIT,study-authored code (LICENSE)
+data/scalability/B2_CORPUS_FRESH.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/B2_SCALE_CELLS_FRESH.jsonl,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/E4_SCALE_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/T2A_CL5_MECHANISM.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/T2A_ELIGIBILITY.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/T2A_STRATUM_MECHANISM.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/T2C_TIMING_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/case_manifests/QUCHECK_REPLICATION_600_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/case_manifests/QUCHECK_REPLICATION_600_MANIFEST_V1_1.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/case_manifests/REAL_STUDY_500_CASE_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/case_manifests/REAL_TRANSFER_40_CASE_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/scalability/corpus/case_manifests/SCALABILITY_STRESS_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/CANONICAL_RESULT_LEDGER.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/records/DEPTH_HISTORICAL.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/records/QUTEST_GATESET_VARIABILITY.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/records/QUTEST_GATESET_VARIABILITY_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/records/QUTEST_GATESET_VARIABILITY_T40.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/records/QUTEST_GATESET_VARIABILITY_T40_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/records/STRUCTURAL_DEFINITIONS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/records/STRUCTURAL_DEFINITIONS_SUMMARY.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+data/structural/records/depth_historical.py,MIT,study-authored code (LICENSE)
+data/structural/records/qutest_transpile_variability.py,MIT,study-authored code (LICENSE)
+data/structural/records/qutest_transpile_variability_t40.py,MIT,study-authored code (LICENSE)
+data/structural/records/structural_definitions.py,MIT,study-authored code (LICENSE)
+data/structural/records/transpile_seed_check.py,MIT,study-authored code (LICENSE)
+docs/history.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+docs/protocols.md,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+environment/qiskit_settings.conf,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+environment/records/DEPENDENCY_MANIFEST.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+environment/records/Q045_pip_freeze.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+environment/records/Q11_pip_freeze.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+environment/records/Q25_pip_freeze.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+environment/records/QUTEST_SOURCE_MANIFEST.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+environment/requirements-analytic.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+environment/setup.sh,MIT,study-authored code (LICENSE)
+expected/analytic_coverage.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+expected/expected_results.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+expected/experiments_expected.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+provenance/DERIVED_FILES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+provenance/LICENSE_MAP.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+provenance/REDACTIONS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+provenance/checksums.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+provenance/git_commit_records.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+provenance/source_manifest.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+scripts/analytic/output_condition.py,MIT,study-authored code (LICENSE)
+scripts/analytic/r2v_inputs.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+scripts/analytic/r2v_lib.py,MIT,study-authored code (LICENSE)
+scripts/analytic/structural_definitions.py,MIT,study-authored code (LICENSE)
+scripts/checks/extra_checks.py,MIT,study-authored code (LICENSE)
+scripts/checks/ledger_checks.py,MIT,study-authored code (LICENSE)
+scripts/checks/manuscript_checks.py,MIT,study-authored code (LICENSE)
+scripts/checks/protocol_checks.py,MIT,study-authored code (LICENSE)
+scripts/checks/records_checks.py,MIT,study-authored code (LICENSE)
+scripts/lib/paths.py,MIT,study-authored code (LICENSE)
+scripts/lib/witness_order.py,MIT,study-authored code (LICENSE)
+scripts/reproduce.py,MIT,study-authored code (LICENSE)
+scripts/reproduce_analytic.py,MIT,study-authored code (LICENSE)
+scripts/reproduce_experiments.py,MIT,study-authored code (LICENSE)
+scripts/run_conformance_tests.py,MIT,study-authored code (LICENSE)
+scripts/verify_integrity.py,MIT,study-authored code (LICENSE)

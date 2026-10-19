@@ -1,0 +1,68 @@
+QSurvDiag replication package -- third-party notices
+
+Per-file licenses: provenance/LICENSE_MAP.csv. LICENSE (MIT) and LICENSE-DATA (CC BY 4.0) cover only
+study-authored material. Upstream licences verified 2026-10-13 at the pinned versions.
+
+1. QMutBench -- GPL-3.0-only
+   File     data/certification/outcomes/R2V_NATIVE_JOBS_ARMS.jsonl
+   Source   https://github.com/EnautMendi/QMutBench @ 01f5e7700c051fe715fc368b307deaa7e6869ba8
+            LICENSE: GNU GPL v3, identical to LICENSES/GPL-3.0.txt (sha256 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986).
+            No separate data terms, no copyright line; copyright remains with the QMutBench authors.
+            Upstream originals derive from MQT Bench (see 3).
+   Content  gate lists of 59 original programs and 188 mutants (orig_gates/mut_gates of 389 jobs). Every gate list
+            equals the conversion below applied to the upstream file; upstream files are identified per case,
+            with SHA-256, in data/scalability/corpus/case_manifests/.
+   Modified OpenQASM 2 -> JSON gate list (Qiskit qasm2 loader, legacy custom instructions; measure and barrier
+            dropped; qasm_gates in data/prospective/mqt_bench/frozen_deps/r2v_arms.py), combined with study fields.
+            Content date: 2026-09-28.
+   License  the file as a whole: GPL-3.0-only, without warranty (GPL v3 sections 15-16).
+            The file is data. The rest of the repository is an aggregate
+            (GPL v3 section 5) and keeps the licenses in provenance/LICENSE_MAP.csv.
+
+2. Infrastructure of Qolumbina -- CC BY 4.0
+   Files    data/certification/outcomes/R2V_NATIVE_JOBS_ARMS.jsonl (10 jobs, 5 external programs)
+   Source   "Infrastructure of Qolumbina", Anonymous Authors, Zenodo 10.5281/zenodo.20987327 (CC BY 4.0).
+            The Q# originals (github.com/MgcosA/Code_of_Testing_Oracle_Quantum_Program_Article @ 2bf129cd)
+            carry no licence file and are not redistributed.
+
+3. MQT Bench 2.3.0 -- MIT
+   Files    data/prospective/mqt_bench/population/mutants/ (240 files: 120 mutants as gate list and OpenQASM)
+            data/prospective/mqt_bench/subjects/SUBJECTS.json
+            data/prospective/mqt_bench/stageA_prefreeze/candidate_subjects.json, stageA_originals.json
+   Source   mqt.bench==2.3.0 (github.com/munich-quantum-toolkit/bench); licence from the official wheel.
+            Copyright (c) 2023-2026 Chair for Design Automation, TUM
+            Copyright (c) 2025-2026 Munich Quantum Software Company GmbH
+            Full notice: LICENSES/MIT-MQT-Bench-2.3.0.txt
+   Cite     Quetschlich, Burgholzer, Wille. MQT Bench. Quantum 7, 1062 (2023). doi:10.22331/q-2023-07-20-1062
+
+4. Free TSA
+   Files    data/prospective/mqt_bench/freeze/tsa/freetsa_cacert.pem, freetsa_tsa.crt,
+            data/prospective/mqt_bench/freeze/FREEZE_A.tsr, FREEZE_B.tsr
+   Source   issued or published by freetsa.org; included unchanged, only to verify the receipts.
+
+5. Not redistributed (retrieval and hashes: environment/records/ and docs/protocols.md section 9)
+   QUTest 0.1.0 (Apache-2.0) | QuCheck 0.0.2 (MIT) | Muskit 0.0.3 (AGPL-3.0) | QMutPy/MutPy (Apache-2.0) |
+   pytest 9.1.1 (MIT) | QMutBench program files (GPL-3.0) | QASMBench (BSD) | external-cohort program files |
+   Qiskit, Qiskit Aer, NumPy, SciPy, rustworkx, openqasm3 (pinned versions only).
+
+6. Bugs4Q -- identifiers only
+   Files    data/external/defects/E5_DEFECT_MANIFEST.csv (and the defect records in data/external/defects/)
+   Source   Bugs4Q v1.0.0 (Qiskit): defect identifiers, upstream issue URLs and revision hashes only; no Bugs4Q
+            or Qiskit source file is redistributed.
+   Cite     Zhao et al. Bugs4Q: A benchmark of existing bugs to enable controlled testing and debugging studies
+            for quantum programs. Journal of Systems and Software 205, 111805 (2023). doi:10.1016/j.jss.2023.111805
+
+7. Developer-written tests -- one-line quotations
+   File     data/external/developer_tests/occurrence_classification.csv, column `code`
+   Source   one line per assertion occurrence, quoted unmodified to document its classification:
+            16 lines from qiboteam/qibo @ 7c422b3a3deb346cf38922feaaaf54a2c1a7ff9e, tests/test_models_*.py
+              Copyright 2020 The QIBO team (LICENSE at that commit); Apache License 2.0
+            22 lines from quantumlib/Qualtran @ d5faa99db850001d440d0cc4e05b7b20b249a652, qualtran/bloqs/qft/*_test.py
+              Copyright 2023 Google LLC (file headers); Apache License 2.0
+            These excerpts remain under the Apache License 2.0 (LICENSES/Apache-2.0.txt); the CC BY 4.0 license of
+            the record does not apply to them. Neither project has a NOTICE file at the pinned commit. Each row
+            gives the file and line of its excerpt. No test file is redistributed.
+   Mitiq    the 13 occurrences from unitaryfoundation/mitiq @ 1a892a9783ddfe8c39d3d035613d6f3d168df9af (GPL-3.0)
+            are not quoted. In this release their `code` field holds a description written for this package and
+            a link to the pinned source line; provenance/DERIVED_FILES.csv records each replaced field with the
+            SHA-256 of the omitted line, so the original can be checked against the pinned upstream file.

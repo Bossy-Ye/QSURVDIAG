@@ -1,0 +1,175 @@
+{
+ "environment": "CONFIRMATORY_QUTEST_ENV",
+ "method": "each distinct gate executed alone through the QUTest 0.1.0 CLI",
+ "gate_probe": {
+  "cp": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)",
+   "occurrences": 5
+  },
+  "cx": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)",
+   "occurrences": 20
+  },
+  "cz": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)",
+   "occurrences": 8
+  },
+  "h": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.10s (1 total)",
+   "occurrences": 9
+  },
+  "rx": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)",
+   "occurrences": 3
+  },
+  "ry": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)",
+   "occurrences": 17
+  },
+  "rzz": {
+   "supported": false,
+   "verdict": "UNSUPPORTED",
+   "detail": "1 errors in 0.06s (1 total)",
+   "occurrences": 3
+  },
+  "swap": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)",
+   "occurrences": 5
+  },
+  "u": {
+   "supported": false,
+   "verdict": "UNSUPPORTED",
+   "detail": "1 errors in 0.07s (1 total)",
+   "occurrences": 6
+  },
+  "x": {
+   "supported": true,
+   "verdict": "SURVIVED",
+   "detail": "1 passed in 0.11s (1 total)",
+   "occurrences": 6
+  }
+ },
+ "supported_gates": [
+  "cp",
+  "cx",
+  "cz",
+  "h",
+  "rx",
+  "ry",
+  "swap",
+  "x"
+ ],
+ "unsupported_gates": [
+  "rzz",
+  "u"
+ ],
+ "e12_blocklist_used_previously": [
+  "ccx",
+  "cswap",
+  "cu"
+ ],
+ "e12_blocklist_errors": {
+  "wrongly_excluded": [],
+  "wrongly_included": [
+   "rzz",
+   "u"
+  ]
+ },
+ "band_cases": 32,
+ "empirically_eligible": 26,
+ "empirically_ineligible": [
+  {
+   "origin": "SBS_005_origin.qasm",
+   "n": 11,
+   "gates": [
+    "rx",
+    "rzz",
+    "u"
+   ],
+   "unsupported": [
+    "rzz",
+    "u"
+   ]
+  },
+  {
+   "origin": "SBS_032_origin.qasm",
+   "n": 14,
+   "gates": [
+    "cx",
+    "u"
+   ],
+   "unsupported": [
+    "u"
+   ]
+  },
+  {
+   "origin": "SBS_033_origin.qasm",
+   "n": 11,
+   "gates": [
+    "rx",
+    "rzz",
+    "u"
+   ],
+   "unsupported": [
+    "rzz",
+    "u"
+   ]
+  },
+  {
+   "origin": "SBS_048_origin.qasm",
+   "n": 12,
+   "gates": [
+    "cx",
+    "u"
+   ],
+   "unsupported": [
+    "u"
+   ]
+  },
+  {
+   "origin": "SBS_063_origin.qasm",
+   "n": 14,
+   "gates": [
+    "cx",
+    "u"
+   ],
+   "unsupported": [
+    "u"
+   ]
+  },
+  {
+   "origin": "SBS_093_origin.qasm",
+   "n": 11,
+   "gates": [
+    "rx",
+    "rzz",
+    "u"
+   ],
+   "unsupported": [
+    "rzz",
+    "u"
+   ]
+  }
+ ],
+ "e12_declared_eligible": 31,
+ "by_width_eligible": {
+  "11": 7,
+  "12": 8,
+  "13": 4,
+  "14": 7
+ }
+}

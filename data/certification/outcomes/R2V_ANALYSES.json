@@ -1,0 +1,163 @@
+{
+ "primary_reference": {
+  "CL1": 93,
+  "CL3": 35,
+  "CL2": 87,
+  "CL4": 79,
+  "Unresolved": 2,
+  "CL5": 1
+ },
+ "primary_reference_by_population": {
+  "construction": {
+   "CL1": 60,
+   "CL3": 35,
+   "CL4": 58,
+   "Unresolved": 2,
+   "CL5": 1,
+   "CL2": 39
+  },
+  "prospective": {
+   "CL2": 48,
+   "CL4": 21,
+   "CL1": 33
+  }
+ },
+ "tolerance_cl5_candidates": [
+  0,
+  0,
+  1,
+  1,
+  4,
+  18
+ ],
+ "tolerance_cl5_resolution_limited": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  3
+ ],
+ "tolerance_cl5_decision_supported": [
+  0,
+  0,
+  1,
+  1,
+  2,
+  2
+ ],
+ "tolerance_theta_invariant_relations": {
+  "R_C_true": 93,
+  "R_S_true": 180,
+  "R_O_true": 215
+ },
+ "decision_grid_by_N": {
+  "500": {
+   "killed": 784,
+   "decision_supported": 480,
+   "unresolved": 359
+  },
+  "2000": {
+   "killed": 785,
+   "decision_supported": 623,
+   "unresolved": 215
+  },
+  "8000": {
+   "killed": 793,
+   "decision_supported": 704,
+   "unresolved": 126
+  }
+ },
+ "decision_grid_split_by_N": {
+  "500": 350,
+  "2000": 206,
+  "8000": 115
+ },
+ "decision_grid_R_T_unchanged": true,
+ "decision_grid_cells": 4869,
+ "ablation": {
+  "certificates": 959,
+  "ablations": 18882,
+  "all_withdrawn": true,
+  "all_named": true,
+  "all_candidate_unchanged": true
+ },
+ "rq4": {
+  "v1_census": 40,
+  "v2_census": 40,
+  "retained": 40,
+  "retained_by_arm": {
+   "CL4": 26,
+   "CL3": 14
+  },
+  "failures": []
+ },
+ "suite_arm": {
+  "S_FAMILY": {
+   "CL3_killed": 0,
+   "CL3": 35,
+   "CL4_killed": 12,
+   "CL4": 79
+  },
+  "S_COVER": {
+   "CL3_killed": 0,
+   "CL3": 35,
+   "CL4_killed": 41,
+   "CL4": 79
+  },
+  "S_BOTH": {
+   "CL3_killed": 0,
+   "CL3": 35,
+   "CL4_killed": 79,
+   "CL4": 79
+  }
+ },
+ "sspec_arm": {
+  "CL4_killed": 54,
+  "CL4": 69,
+  "CL3_killed": 0,
+  "CL3": 27
+ },
+ "interface_matrix": {
+  "CL3_same": 7,
+  "CL3_different": 28,
+  "CL4_same": 25,
+  "CL4_different": 54,
+  "CL3_muskit_same": 35,
+  "CL3_pytest_same": 0
+ },
+ "semantic_relations": {
+  "R_S_true_among_diagnosed": 180,
+  "R_C_true_declared": 93
+ },
+ "uniform_unitary_CL1": 4,
+ "width_reports": {
+  "CL4": 6,
+  "CL3": 17,
+  "CL1": 19,
+  "NA_KILLED": 96,
+  "Unresolved": 4,
+  "CL5": 1
+ },
+ "corpus_reports": {
+  "CL1": 158,
+  "NA_KILLED": 975,
+  "CL3": 150,
+  "CL4": 142,
+  "CL5": 13,
+  "Unresolved": 99
+ },
+ "external_reports": {
+  "NA_KILLED": 111,
+  "CL2": 94,
+  "CL3": 30,
+  "CL4": 5,
+  "Unresolved": 2,
+  "CL1": 28
+ },
+ "defect_reports": {
+  "NA_KILLED": 2,
+  "Unresolved": 1,
+  "CL2": 1
+ }
+}

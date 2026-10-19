@@ -1,0 +1,12 @@
+{
+ "earlier_programs_hashed": 2626,
+ "original_matches": {
+  "qwalk_4": false,
+  "qwalk_5": false,
+  "rg_mult_8": false,
+  "rg_mult_12": false
+ },
+ "mutant_matches": [],
+ "pair_duplicates": [],
+ "pass": true
+}

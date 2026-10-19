@@ -1,0 +1,159 @@
+{
+  "by_width": {
+    "10": {
+      "max_peak_rss_gib": 0.0726,
+      "median_A": 20.436,
+      "median_B": 0.0235,
+      "median_C": 0.00012,
+      "median_total_seconds": 20.65,
+      "pairs": 5
+    },
+    "11": {
+      "max_peak_rss_gib": 0.0734,
+      "median_A": 22.033,
+      "median_B": 0.0621,
+      "median_C": 0.00014,
+      "median_total_seconds": 22.275,
+      "pairs": 5
+    },
+    "12": {
+      "max_peak_rss_gib": 0.0748,
+      "median_A": 21.21,
+      "median_B": 0.2029,
+      "median_C": 0.00017,
+      "median_total_seconds": 21.607,
+      "pairs": 5
+    },
+    "13": {
+      "max_peak_rss_gib": 0.0747,
+      "median_A": 21.286,
+      "median_B": 0.7279,
+      "median_C": 0.00023,
+      "median_total_seconds": 22.209,
+      "pairs": 4
+    },
+    "14": {
+      "max_peak_rss_gib": 0.077,
+      "median_A": 19.229,
+      "median_B": 2.7765,
+      "median_C": 0.00016,
+      "median_total_seconds": 22.146,
+      "pairs": 5
+    },
+    "2": {
+      "max_peak_rss_gib": 0.073,
+      "median_A": 18.907,
+      "median_B": 0.0003,
+      "median_C": 9e-05,
+      "median_total_seconds": 19.068,
+      "pairs": 5
+    },
+    "3": {
+      "max_peak_rss_gib": 0.0729,
+      "median_A": 20.244,
+      "median_B": 0.0005,
+      "median_C": 0.00011,
+      "median_total_seconds": 20.437,
+      "pairs": 5
+    },
+    "4": {
+      "max_peak_rss_gib": 0.0724,
+      "median_A": 20.658,
+      "median_B": 0.0006,
+      "median_C": 0.00011,
+      "median_total_seconds": 20.833,
+      "pairs": 5
+    },
+    "5": {
+      "max_peak_rss_gib": 0.0734,
+      "median_A": 20.737,
+      "median_B": 0.0008,
+      "median_C": 0.00014,
+      "median_total_seconds": 20.928,
+      "pairs": 5
+    },
+    "6": {
+      "max_peak_rss_gib": 0.0728,
+      "median_A": 23.132,
+      "median_B": 0.0011,
+      "median_C": 0.00013,
+      "median_total_seconds": 23.304,
+      "pairs": 5
+    },
+    "7": {
+      "max_peak_rss_gib": 0.0725,
+      "median_A": 20.36,
+      "median_B": 0.0021,
+      "median_C": 0.00014,
+      "median_total_seconds": 20.536,
+      "pairs": 5
+    },
+    "8": {
+      "max_peak_rss_gib": 0.0728,
+      "median_A": 20.405,
+      "median_B": 0.004,
+      "median_C": 0.00014,
+      "median_total_seconds": 20.61,
+      "pairs": 5
+    },
+    "9": {
+      "max_peak_rss_gib": 0.0728,
+      "median_A": 20.292,
+      "median_B": 0.0096,
+      "median_C": 0.00012,
+      "median_total_seconds": 20.49,
+      "pairs": 5
+    }
+  },
+  "extrapolation": {
+    "asymptotic_expectation": "4x, from the n*4^n cost of enumerating 2^n Z-product observables over 2^n outcomes",
+    "budget": 600,
+    "caveat": "A is held at its measured median, which understates the true total: evidence acquisition also grows with n because the shot simulation does. The projected budget ceiling is therefore an upper bound on the width the route reaches, not an estimate of it.",
+    "crossover_n_where_enumeration_overtakes_suite_execution": 15.8,
+    "fit": "log2(median B) = 1.732 * n + -22.925, over n = 10..14",
+    "growth_per_added_qubit": 3.322,
+    "observed_ratio_at_n14": 3.81,
+    "projected_total_seconds_holding_A_at_its_median": {
+      "15": 28.9,
+      "16": 48.2,
+      "17": 112.2,
+      "18": 325.1,
+      "19": 1032.3,
+      "20": 3381.6
+    }
+  },
+  "failures": 0,
+  "integrity": {
+    "U_v_formula_agrees": true,
+    "replay_identical": true
+  },
+  "max_peak_rss_gib": 0.077,
+  "max_total_seconds": 24.756,
+  "median_component_seconds": {
+    "A1_circuit_load": 0.0012,
+    "A2_state_acquisition": 0.0019,
+    "A3_reference_computation": 0.0001,
+    "A4_native_suite_execution": 20.5508,
+    "B1_universe_construction": 0.0003,
+    "B2_assertion_enumeration": 0.0035,
+    "B3_assertion_evaluation": 0.0001,
+    "B4_witness_search": 0.0,
+    "C1_relation_evaluation": 0.0001,
+    "C2_candidate_and_requirements": 0.0001,
+    "C3_certificate_generation": 0.0,
+    "C4_schema_validation": 0.0,
+    "C5_replay": 0.0
+  },
+  "median_peak_rss_gib": 0.0726,
+  "median_phase_seconds": {
+    "A_evidence_acquisition": 20.5535,
+    "B_assertion_space": 0.0039,
+    "C_certification": 0.0001
+  },
+  "median_total_seconds": 20.889,
+  "pairs": 64,
+  "protocol": "one pair per process, executed sequentially; component decomposition is e4_worker.py's",
+  "record_id": "BATCH2_TASK_2C_TIMING",
+  "sample": "first five pairs at each width of the 2A frame, deterministic and outcome-blind",
+  "scope": "automated cost only; analyst time is not measured here"
+}

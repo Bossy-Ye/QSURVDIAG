@@ -1,0 +1,155 @@
+# Evidence obligations. Frozen at Phase 5A. O = O_satisfied U O_failed U O_unknown.
+# "unknown" is a first-class outcome and forces abstention on any claim it gates.
+# No obligation may be waived during Phase 5. Any change is a rule amendment and a reportable outcome.
+
+schema_version: "5A.1"
+
+obligations:
+
+  OB01_native_eligibility:
+    statement: The mutant ingests and executes under the pinned runtime without an UNSUPPORTED outcome.
+    satisfied_iff: ingestion preflight returns EXECUTABLE and the run completes
+    failed_iff: any of the six ingestion failure classes fires
+    unknown_iff: the preflight itself errors for a reason outside the six classes
+    gates: [CL1, CL2, CL3, CL4, CL5]
+    note: decided BEFORE any kill/survive verdict; a failure removes the mutant from every denominator
+
+  OB02_baseline_health:
+    statement: The original program's false-failure rate under the realized suite is <= 0.10.
+    satisfied_iff: measured original false-fail <= 0.10
+    failed_iff: measured original false-fail > 0.10
+    unknown_iff: original false-fail not recorded for this mutant's configuration
+    gates: [CL4]
+    note: predefined threshold; the Phase 3 worst case among omissions was 0.0833
+
+  OB03_verdict_stability:
+    statement: The native verdict is 0/R or R/R over R frozen repetitions.
+    satisfied_iff: kills == 0 or kills == R
+    failed_iff: 0 < kills < R
+    unknown_iff: fewer than R repetitions completed
+    gates: [CL1, CL2, CL3, CL4]
+    note: R = 12, frozen. A failure routes to CL5 with limiting_parameter = repetitions.
+
+  OB04_contract_grounded:
+    statement: The analysis contract is fixed by a cited external source authored independently of this study and prior to it.
+    satisfied_iff: EXTERNAL_CONTRACT_LEDGER.csv row has grounding == EXTERNAL with a verified identifier
+    failed_iff: no external source exists for the subject
+    unknown_iff: a source is cited but its determinacy for the required behaviour is not established
+    gates: [CL1, CL2]
+    note: NEW IN PHASE 5. The 15 original subjects are STUDY_DECLARED; held-out subjects must be EXTERNAL.
+
+  OB05_contract_equivalence_decided:
+    statement: The contract relation between original and mutant is computed exactly, quotienting a single global phase.
+    satisfied_iff: sound_equivalence.certify returns a definite EQUIVALENT/NOT_EQUIVALENT under the declared contract
+    failed_iff: the relation is NOT_EQUIVALENT
+    unknown_iff: numerical conditioning prevents an exact decision
+    gates: [CL1]
+
+  OB06_substrate_value_computed:
+    statement: The profile's declared substrate functional is computed for both original and mutant.
+    satisfied_iff: both values recorded with their precision
+    failed_iff: computation not possible for this profile/subject
+    unknown_iff: computed at insufficient precision to decide equality
+    gates: [CL2, CL3]
+
+  OB07_substrate_equality_decided:
+    statement: s(P) = s(Q) is decided at the declared precision.
+    satisfied_iff: equality decided true
+    failed_iff: equality decided false
+    unknown_iff: within numerical ambiguity of the precision bound
+    gates: [CL2, CL3]
+
+  OB08_profile_membership_closed:
+    statement: Membership of the profile is verified from tool source, not from documentation.
+    satisfied_iff: closure_evidence lists file:symbol references and closure.status == CLOSED
+    failed_iff: closure.status == OPEN at the claimed universe scope
+    unknown_iff: closure.status == UNKNOWN
+    gates: [CL3]
+
+  OB09_profile_factorization_verified:
+    statement: Every member of the profile is a function of the declared substrate functional.
+    satisfied_iff: factorization_verified == true with per-family evidence
+    failed_iff: any member reads a substrate outside the declared one
+    unknown_iff: a member's substrate is not determined
+    gates: [CL3]
+    note: this is the obligation that Phase 4 silently failed for `entangled`
+
+  OB10_instance_enumeration_complete:
+    statement: The profile's finite instance space is enumerated exhaustively for this subject.
+    satisfied_iff: enumeration count equals the closed-form cardinality for this n
+    failed_iff: enumeration truncated
+    unknown_iff: cardinality not finite at this n
+    gates: [CL4]
+
+  OB11_witness_above_tolerance:
+    statement: The candidate witness's exact difference exceeds the configured tolerance.
+    satisfied_iff: exact_difference > atol
+    failed_iff: exact_difference <= atol
+    unknown_iff: difference computable only within a band straddling atol
+    gates: [CL4]
+    note: a failure routes to CL5 with limiting_parameter = tolerance
+
+  OB12_witness_reliability:
+    statement: The witness family is reliability-qualified — tolerance-defined and free of discontinuous fallbacks.
+    satisfied_iff: family reliability == RELIABLE in the active profile
+    failed_iff: family reliability in {CONDITIONAL, DEFECTIVE}
+    unknown_iff: reliability not assessed for this family
+    gates: [CL4]
+
+  OB13_witness_native_confirmation:
+    statement: Adding the witness assertion to the suite kills the mutant natively under the pinned tool.
+    satisfied_iff: native run with the added assertion yields R/R kills
+    failed_iff: native run does not kill
+    unknown_iff: native run not performed or errored
+    gates: [CL4]
+
+  OB14_suite_membership_checked:
+    statement: Whether the witness is present in the realized suite is determined.
+    satisfied_iff: determined, and the witness is ABSENT from the realized suite
+    failed_iff: the witness is PRESENT in the realized suite (then the case is not an omission)
+    unknown_iff: realized suite not recoverable
+    gates: [CL4]
+
+  OB15_matched_cost_control:
+    statement: Adding an equal number of non-witness admissible assertions does not kill the mutant.
+    satisfied_iff: matched-cost control run does not kill
+    failed_iff: matched-cost control also kills
+    unknown_iff: control run not performed
+    gates: [CL4]
+    note: without this, a detection gain is attributable to assertion COUNT rather than to the omitted oracle
+
+  OB16_tolerance_sensitivity_checked:
+    statement: The verdict is stable across the frozen tolerance grid.
+    satisfied_iff: verdict unchanged at every grid point
+    failed_iff: verdict changes at some grid point
+    unknown_iff: grid not run
+    gates: [CL3, CL4, CL5]
+
+  OB17_multiplicity_sensitivity_checked:
+    statement: For tools applying a multiplicity correction, the verdict is stable under strict Bonferroni.
+    satisfied_iff: verdict unchanged under strict Bonferroni
+    failed_iff: verdict changes
+    unknown_iff: not run
+    gates: [CL4]
+    note: mandatory for QuCheck because its native correction has two confirmed defects
+
+  OB18_no_structural_evidence:
+    statement: No structural-substrate assertion contributed to the conclusion.
+    satisfied_iff: every family used has substrate != transpiled_circuit
+    failed_iff: any structural family contributed
+    unknown_iff: contributing families not recorded
+    gates: [CL1, CL2, CL3, CL4]
+
+  OB19_rule_unchanged:
+    statement: No frozen rule, priority order or obligation was modified to resolve this case.
+    satisfied_iff: provenance.rule_amendment_applied is null
+    failed_iff: any amendment was applied
+    unknown_iff: amendment log incomplete
+    gates: [CL1, CL2, CL3, CL4, CL5]
+    note: PRIMARY REPORTED OUTCOME. Target zero failures across the held-out cohort.
+
+partition_rule: >
+  For a candidate claim, the gating set is the set of obligations whose `gates` list contains that claim.
+  O_satisfied, O_failed and O_unknown must partition exactly that gating set. If any gating obligation is
+  unknown, the claim is not licensed and the certificate mode becomes abstention. If any gating obligation
+  has failed, the claim is not licensed and the decision function proceeds to the next claim in priority order.
