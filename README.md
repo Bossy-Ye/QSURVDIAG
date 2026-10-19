@@ -4,6 +4,8 @@ Records and verification scripts for *Why Quantum Mutants Survive: Separating Ob
 Omissions*. Native QUTest executions are archived, not rerun; the scripts recompute every checked value from the
 archived records.
 
+Archived version 1.0.0: [doi:10.5281/zenodo.23480917](https://doi.org/10.5281/zenodo.23480917).
+
 ## Verify
 
 Python 3.9+, standard library only; `--tsr` needs `openssl`.
