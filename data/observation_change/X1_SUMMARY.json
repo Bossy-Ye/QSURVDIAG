@@ -1,0 +1,26 @@
+{
+ "pairs": 35,
+ "supported": 35,
+ "not_supported": [],
+ "original_failures_total": 0,
+ "control_kills_total": 0,
+ "executions": 1260,
+ "by_rotated_qubits": {
+  "1": 28,
+  "4": 3,
+  "5": 2,
+  "7": 2
+ },
+ "distinct_settings_per_program": {
+  "bv_4": 1,
+  "bv_7": 1,
+  "dj_3": 1,
+  "ghz_4": 1,
+  "ghz_5": 1,
+  "ghz_7": 1,
+  "grover_3": 2,
+  "qft_4": 4,
+  "qft_5": 3,
+  "qft_6": 4
+ }
+}

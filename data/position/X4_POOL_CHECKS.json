@@ -1,0 +1,92 @@
+{
+ "simon_4": {
+  "pool": 634,
+  "archived_pool_match": "no archived pool",
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "wstate_4": {
+  "pool": 1209,
+  "archived_pool_match": "no archived pool",
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "swaptest_5": {
+  "pool": 3264,
+  "archived_pool_match": "no archived pool",
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "cuccaro_adder_5": {
+  "pool": 3248,
+  "archived_pool_match": "no archived pool",
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "toffoli_barenco_5": {
+  "pool": 1368,
+  "archived_pool_match": "no archived pool",
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "qwalk_4": {
+  "pool": 3442,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "qwalk_5": {
+  "pool": 7331,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "rg_mult_8": {
+  "pool": 3250,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "rg_mult_12": {
+  "pool": 7872,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "ParityPhase": {
+  "pool": 732,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "Is2PowerPhase": {
+  "pool": 12768,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "LessThanPhase": {
+  "pool": 1387,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "DiagonalZHamiltonian": {
+  "pool": 228,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "IsingEvolution": {
+  "pool": 1806,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "DraperAdder": {
+  "pool": 2293,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "AdderHamiltonianMixture": {
+  "pool": 2353,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "qft_n4": {
+  "pool": 2704,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ },
+ "deutsch_n2": {
+  "pool": 206,
+  "archived_pool_match": true,
+  "first_rule_mutations_in_pool": "30/30"
+ }
+}

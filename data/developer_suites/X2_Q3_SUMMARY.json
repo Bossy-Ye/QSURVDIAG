@@ -1,0 +1,53 @@
+{
+ "only_qucheck": {
+  "pairs": 28,
+  "predicted_detected": true,
+  "detected_12_of_12": 28,
+  "detected_0_of_12": 0,
+  "split": 0,
+  "as_predicted": 28,
+  "holm_detected_12_of_12": 28,
+  "holm_detected_0_of_12": 0
+ },
+ "only_qutest": {
+  "pairs": 25,
+  "predicted_detected": false,
+  "detected_12_of_12": 0,
+  "detected_0_of_12": 9,
+  "split": 16,
+  "as_predicted": 9,
+  "holm_detected_12_of_12": 0,
+  "holm_detected_0_of_12": 12
+ },
+ "transfer_WITNESS_EXISTS": {
+  "pairs": 15,
+  "predicted_detected": true,
+  "detected_12_of_12": 15,
+  "detected_0_of_12": 0,
+  "split": 0,
+  "as_predicted": 15,
+  "holm_detected_12_of_12": 15,
+  "holm_detected_0_of_12": 0
+ },
+ "transfer_NO_WITNESS_ABOVE_THETA": {
+  "pairs": 6,
+  "predicted_detected": false,
+  "detected_12_of_12": 0,
+  "detected_0_of_12": 5,
+  "split": 1,
+  "as_predicted": 5,
+  "holm_detected_12_of_12": 0,
+  "holm_detected_0_of_12": 5
+ },
+ "controls": {
+  "runs": 816,
+  "false_detections": 175,
+  "false_detections_holm": 2
+ },
+ "not_distinguished_runs": {
+  "pairs": 25,
+  "runs": 300,
+  "detections": 36,
+  "detections_holm": 14
+ }
+}

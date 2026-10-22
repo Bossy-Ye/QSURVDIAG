@@ -1,0 +1,464 @@
+{
+ "AdderHamiltonianMixture": {
+  "refs": {
+   "5": 0.494,
+   "6": 0.0,
+   "7": 0.0,
+   "8": 0.0,
+   "9": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "DiagonalZHamiltonian": {
+  "refs": {
+   "0": 0.494,
+   "1": 0.0,
+   "2": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "DraperAdder": {
+  "refs": {
+   "5": 0.494,
+   "6": 0.0,
+   "7": 0.0,
+   "8": 0.0,
+   "9": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "Is2PowerPhase": {
+  "refs": {
+   "0": 0.494,
+   "1": 0.0,
+   "2": 0.0,
+   "3": 0.0,
+   "4": 0.0,
+   "5": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "IsingEvolution": {
+  "refs": {
+   "0": 0.494,
+   "1": 0.0,
+   "2": 0.0,
+   "3": 0.0,
+   "4": 0.0,
+   "5": 0.0,
+   "6": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "LessThanPhase": {
+  "refs": {
+   "0": 0.0,
+   "1": 0.494,
+   "2": 0.0,
+   "3": 0.494,
+   "4": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "ParityPhase": {
+  "refs": {
+   "0": 0.5125,
+   "1": 0.0,
+   "2": 0.0,
+   "3": 0.0,
+   "4": 0.0,
+   "5": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "cuccaro_adder_5": {
+  "refs": {
+   "1": 0.0,
+   "3": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "deutsch_n2": {
+  "refs": {
+   "0": 1.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "qft_n4": {
+  "refs": {
+   "0": 0.514,
+   "1": 0.5115,
+   "2": 0.4955,
+   "3": 0.494
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "qwalk_4": {
+  "refs": {
+   "0": 0.75,
+   "1": 0.75,
+   "2": 1.0,
+   "3": 0.25
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "qwalk_5": {
+  "refs": {
+   "0": 0.75,
+   "1": 0.75,
+   "2": 0.75,
+   "3": 1.0,
+   "4": 0.25
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "rg_mult_12": {
+  "refs": {
+   "0": 1.0,
+   "1": 0.5,
+   "2": 0.5,
+   "3": 1.0,
+   "4": 0.5,
+   "5": 0.5,
+   "6": 1.0,
+   "7": 0.0,
+   "8": 0.0,
+   "9": 0.0,
+   "10": 0.5,
+   "11": 0.5
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "rg_mult_8": {
+  "refs": {
+   "0": 1.0,
+   "1": 0.5,
+   "2": 1.0,
+   "3": 0.5,
+   "4": 1.0,
+   "5": 0.0,
+   "6": 0.0,
+   "7": 0.5
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "simon_4": {
+  "refs": {
+   "0": 0.5,
+   "1": 0.5
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "swaptest_5": {
+  "refs": {
+   "0": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "toffoli_barenco_5": {
+  "refs": {
+   "0": 0.0,
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ },
+ "wstate_4": {
+  "refs": {
+   "0": 0.25,
+   "1": 0.25,
+   "2": 0.25,
+   "3": 0.25
+  },
+  "verdicts": [
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED",
+   "SURVIVED"
+  ],
+  "fails": 0,
+  "unsupported": 0,
+  "guard_ok": true
+ }
+}

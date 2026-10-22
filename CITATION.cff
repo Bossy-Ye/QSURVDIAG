@@ -3,9 +3,8 @@ message: "If you use this replication package, please cite the article and the p
 type: software
 title: "QSurvDiag replication package"
 abstract: "Records and verification scripts for the article 'Why Quantum Mutants Survive: Separating Observation Limitations from Suite Omissions'."
-version: "1.0.0"
-date-released: "2026-10-19"
-doi: "10.5281/zenodo.23480917"
+version: "1.1.0"
+date-released: "2026-10-22"
 license:
   - MIT
   - CC-BY-4.0

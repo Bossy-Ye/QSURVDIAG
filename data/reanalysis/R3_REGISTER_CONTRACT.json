@@ -1,0 +1,1454 @@
+{
+ "summary": {
+  "pairs": 115,
+  "output_register_full": 26,
+  "by_report": {
+   "CL3": {
+    "equivalent_on_register": 13,
+    "different_on_register": 22
+   },
+   "CL4": {
+    "equivalent_on_register": 59,
+    "different_on_register": 20
+   },
+   "CL5": {
+    "equivalent_on_register": 0,
+    "different_on_register": 1
+   }
+  },
+  "equivalent_by_program": {
+   "bv_4": 3,
+   "bv_7": 1,
+   "dj_3": 2,
+   "ghz_4": 17,
+   "ghz_5": 17,
+   "ghz_7": 19,
+   "qpe_6": 1,
+   "simon_4": 4,
+   "toffoli_barenco_5": 8
+  },
+  "smallest_nonzero_diff": 0.022097086912079587
+ },
+ "pairs": [
+  {
+   "pair": "bv_4#e07",
+   "program": "bv_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 6.734631938767808e-18,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "bv_4#e19",
+   "program": "bv_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 1.1102230246251565e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "bv_4#e25",
+   "program": "bv_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 1.1102230246251565e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "bv_7#e10",
+   "program": "bv_7",
+   "n": 7,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "dj_3#e19",
+   "program": "dj_3",
+   "n": 3,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 1.1102230246251565e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "dj_3#e22",
+   "program": "dj_3",
+   "n": 3,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e00",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.4999999999999999,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "ghz_4#e04",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e06",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e07",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.612601152237886e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e09",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e10",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e11",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e12",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 1.1102230246251565e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e14",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e15",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e16",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.612601152237886e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e17",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.49999999999999994,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "ghz_4#e18",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e19",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e20",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 1.2721852641231556e-30,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e21",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e22",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e23",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.4999999999999999,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "ghz_4#e24",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_4#e29",
+   "program": "ghz_4",
+   "n": 4,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e00",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e02",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e03",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e04",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 1.1102230246251565e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e05",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.49999999999999994,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "ghz_5#e06",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.4999999999999999,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "ghz_5#e07",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e08",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e11",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e12",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e14",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e15",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e16",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e17",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e19",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e20",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e24",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.49999999999999994,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "ghz_5#e26",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e27",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.49999999999999994,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "ghz_5#e28",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_5#e29",
+   "program": "ghz_5",
+   "n": 5,
+   "output_register": [
+    0
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 1.2721852641231556e-30,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e00",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e01",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e03",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e05",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e06",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.4999999999999999,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "ghz_7#e07",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e08",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e09",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e10",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e11",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e12",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e18",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e20",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e21",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e22",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 1.1102230246251565e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e24",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.0,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e25",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 1.2721852641231556e-30,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e26",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e27",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "ghz_7#e28",
+   "program": "ghz_7",
+   "n": 7,
+   "output_register": [
+    0
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "grover_3#e04",
+   "program": "grover_3",
+   "n": 3,
+   "output_register": [
+    0,
+    1,
+    2
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.3124999999999999,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "grover_3#e20",
+   "program": "grover_3",
+   "n": 3,
+   "output_register": [
+    0,
+    1,
+    2
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.3124999999999999,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "grover_5#e08",
+   "program": "grover_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL5",
+   "reduced_max_diff": 0.027674432515501342,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "grover_5#e13",
+   "program": "grover_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.08789634692489345,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_4#e01",
+   "program": "qft_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.08838834764832296,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_4#e02",
+   "program": "qft_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.08838834764832296,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_4#e05",
+   "program": "qft_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.08838834764832297,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_4#e07",
+   "program": "qft_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.08838834764831839,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_4#e08",
+   "program": "qft_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.08838834764831839,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_4#e10",
+   "program": "qft_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.08838834764832296,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_4#e19",
+   "program": "qft_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.04783542904563619,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_5#e04",
+   "program": "qft_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.04419417382415918,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_5#e05",
+   "program": "qft_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.04419417382415919,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_5#e16",
+   "program": "qft_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.02391771452281809,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_5#e19",
+   "program": "qft_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.044194173824161465,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_5#e22",
+   "program": "qft_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.044194173824161465,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_5#e25",
+   "program": "qft_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.044194173824161465,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_5#e26",
+   "program": "qft_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.044194173824161465,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_6#e01",
+   "program": "qft_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.022097086912080732,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_6#e05",
+   "program": "qft_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.022097086912080732,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_6#e07",
+   "program": "qft_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.031249999999999972,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_6#e13",
+   "program": "qft_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.022097086912079587,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_6#e19",
+   "program": "qft_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.031249999999999972,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_6#e20",
+   "program": "qft_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.022097086912080743,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_6#e25",
+   "program": "qft_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.031249999999999972,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qft_6#e26",
+   "program": "qft_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "report": "CL3",
+   "reduced_max_diff": 0.022097086912080743,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "qpe_6#e19",
+   "program": "qpe_6",
+   "n": 6,
+   "output_register": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 1.1102230246251565e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "simon_4#h00",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.24999999999999986,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "simon_4#h01",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.24999999999999986,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "simon_4#h02",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "simon_4#h03",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 5.551115123125783e-17,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "simon_4#h04",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.25000000000002587,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "simon_4#h05",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.25000000000002587,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "simon_4#h06",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 1.6653345369377348e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "simon_4#h07",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 1.6653345369377348e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "simon_4#h08",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.25000000000002576,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "simon_4#h09",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.25000000000002576,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "simon_4#h26",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.24999999999999994,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "simon_4#h28",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.2499999999999999,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "simon_4#h29",
+   "program": "simon_4",
+   "n": 4,
+   "output_register": [
+    0,
+    1
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 0.2499999999999999,
+   "register_contract_equivalent": false
+  },
+  {
+   "pair": "toffoli_barenco_5#h03",
+   "program": "toffoli_barenco_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 1.4432899320127035e-15,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "toffoli_barenco_5#h19",
+   "program": "toffoli_barenco_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 2.220446049250313e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "toffoli_barenco_5#h21",
+   "program": "toffoli_barenco_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 6.661338147750939e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "toffoli_barenco_5#h22",
+   "program": "toffoli_barenco_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 8.881784197001252e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "toffoli_barenco_5#h23",
+   "program": "toffoli_barenco_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 6.661338147750939e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "toffoli_barenco_5#h24",
+   "program": "toffoli_barenco_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 8.881784197001252e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "toffoli_barenco_5#h25",
+   "program": "toffoli_barenco_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 8.881784197001252e-16,
+   "register_contract_equivalent": true
+  },
+  {
+   "pair": "toffoli_barenco_5#h26",
+   "program": "toffoli_barenco_5",
+   "n": 5,
+   "output_register": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "report": "CL4",
+   "reduced_max_diff": 8.881784197001252e-16,
+   "register_contract_equivalent": true
+  }
+ ]
+}

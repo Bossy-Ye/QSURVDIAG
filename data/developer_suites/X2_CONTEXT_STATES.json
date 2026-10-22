@@ -1,0 +1,102 @@
+{
+ "A|deutsch_jozsa|m12": {
+  "contexts": 156,
+  "equal_state_contexts": 156,
+  "all_equal": true
+ },
+ "A|deutsch_jozsa|m16": {
+  "contexts": 156,
+  "equal_state_contexts": 156,
+  "all_equal": true
+ },
+ "A|deutsch_jozsa|m2": {
+  "contexts": 156,
+  "equal_state_contexts": 156,
+  "all_equal": true
+ },
+ "B|deutsch_jozsa|m12": {
+  "contexts": 1308,
+  "equal_state_contexts": 1308,
+  "all_equal": true
+ },
+ "B|deutsch_jozsa|m16": {
+  "contexts": 1308,
+  "equal_state_contexts": 1308,
+  "all_equal": true
+ },
+ "B|deutsch_jozsa|m2": {
+  "contexts": 1308,
+  "equal_state_contexts": 1308,
+  "all_equal": true
+ },
+ "A|grovers_algorithm|m10": {
+  "contexts": 49,
+  "equal_state_contexts": 49,
+  "all_equal": true
+ },
+ "A|quantum_teleportation|m10": {
+  "contexts": 336,
+  "equal_state_contexts": 336,
+  "all_equal": true
+ },
+ "A|quantum_teleportation|m11": {
+  "contexts": 336,
+  "equal_state_contexts": 0,
+  "all_equal": false
+ },
+ "A|quantum_teleportation|m12": {
+  "contexts": 336,
+  "equal_state_contexts": 336,
+  "all_equal": true
+ },
+ "A|quantum_teleportation|m13": {
+  "contexts": 336,
+  "equal_state_contexts": 0,
+  "all_equal": false
+ },
+ "A|quantum_teleportation|m14": {
+  "contexts": 336,
+  "equal_state_contexts": 0,
+  "all_equal": false
+ },
+ "A|quantum_teleportation|m2": {
+  "contexts": 336,
+  "equal_state_contexts": 0,
+  "all_equal": false
+ },
+ "A|quantum_teleportation|m3": {
+  "contexts": 336,
+  "equal_state_contexts": 0,
+  "all_equal": false
+ },
+ "A|quantum_teleportation|m4": {
+  "contexts": 336,
+  "equal_state_contexts": 336,
+  "all_equal": true
+ },
+ "A|quantum_teleportation|m8": {
+  "contexts": 336,
+  "equal_state_contexts": 336,
+  "all_equal": true
+ },
+ "A|quantum_teleportation|m9": {
+  "contexts": 336,
+  "equal_state_contexts": 0,
+  "all_equal": false
+ },
+ "B|grovers_algorithm|m10": {
+  "contexts": 987,
+  "equal_state_contexts": 987,
+  "all_equal": true
+ },
+ "B|superdense_coding|m14": {
+  "contexts": 288,
+  "equal_state_contexts": 288,
+  "all_equal": true
+ },
+ "B|superdense_coding|m19": {
+  "contexts": 288,
+  "equal_state_contexts": 288,
+  "all_equal": true
+ }
+}

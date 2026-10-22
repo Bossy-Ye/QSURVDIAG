@@ -1,7 +1,8 @@
 """Verify the package against provenance/checksums.sha256 and the archived content against source_manifest.csv.
 
 Usage:  python3 scripts/verify_integrity.py
-Optional (needs OpenSSL): also verifies the RFC 3161 receipts of the MQT Bench freeze with --tsr.
+Optional (needs OpenSSL): also verifies the RFC 3161 receipts of the MQT Bench freeze (A, B) and of the designs of the
+separating-setting, developer-suite and later-position experiments (C) with --tsr.
 
 Archived files that this release redacts are listed in provenance/REDACTIONS.csv, and the archived file whose
 third-party quotations it replaces is listed in provenance/DERIVED_FILES.csv. They are reported separately: their
@@ -68,4 +69,15 @@ if "--tsr" in sys.argv:
             else: miss.append(rel)
         print(f"MQT Bench Freeze {k} manifest: {len(lines)} entries, {match} matching, {len(red)} redacted"
               + (" (original SHA-256 in provenance/REDACTIONS.csv equals the timestamped hash)" if red else "") + f", {len(miss)} other")
+    pv = ROOT / "provenance"; fz = ROOT / "data/prospective/mqt_bench/freeze"
+    r = subprocess.run(["openssl", "ts", "-verify", "-in", str(pv / "FREEZE_C.tsr"), "-data", str(pv / "FREEZE_C.sha256"),
+                        "-CAfile", str(fz / "tsa/freetsa_cacert.pem"), "-untrusted", str(fz / "tsa/freetsa_tsa.crt")], capture_output=True, text=True)
+    verdict = [l for l in (r.stdout + r.stderr).splitlines() if l.startswith("Verification")]
+    print(f"RFC 3161 Freeze C: {verdict[0] if verdict else (r.stdout + r.stderr).strip()[-200:]}")
+    PLAN = {"X1_OBSERVATION_CHANGE.md": "data/observation_change/PLAN.md", "X2_DEVELOPER_SUITES.md": "data/developer_suites/PLAN.md",
+            "X4_POSITION.md": "data/position/PLAN.md"}
+    lines = [l.split("  ", 1) for l in (pv / "FREEZE_C.sha256").read_text().splitlines() if l.strip()]
+    match = sum(sha(ROOT / PLAN[n]) == h for h, n in lines)
+    print(f"Freeze C manifest: {len(lines)} entries, {match} matching " + ", ".join(PLAN[n] for _, n in lines))
+    if match != len(lines): bad.append("Freeze C manifest does not match the plans")
 sys.exit(1 if bad or extra else 0)

@@ -1,12 +1,14 @@
-"""Recompute the results of the output-condition, combined-suite, all-pairs and QED-C experiments, and the
-circuit-level view of the matched changes, from their per-run records and compare them with expected/experiments_expected.csv. No native execution.
+"""Recompute the results of the output-condition, combined-suite, all-pairs, QED-C, separating-setting, later-position
+and developer-suite experiments, and the circuit-level view of the matched changes, from their per-run records and
+compare them with expected/experiments_expected.csv. No native execution.
 
 Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY QUTEST_TREE QEDC_REF]
 
---analytic also reruns data/qedc/report.py and x_selection_check.py with the interpreter of environment/setup.sh.
+--analytic also reruns data/qedc/report.py, x_selection_check.py and the re-analyses with the interpreter of
+environment/setup.sh.
 Exits non-zero on any mismatch.
 """
-import argparse, collections, csv, filecmp, json, shutil, subprocess, sys
+import argparse, collections, csv, filecmp, gzip, json, os, shutil, subprocess, sys
 from pathlib import Path
 
 sys.dont_write_bytecode = True
@@ -107,7 +109,6 @@ got["R-E209"] = ",".join(str(n) for n in W if xs(n, "X_mut_val") == "12" and xs(
 got["R-E210"] = " ".join(str(K("natural", n, "A_mut_cert", Tp)) for n in range(5, 9))
 
 # ---------------------------------------------------------------- all-pairs comparison
-import gzip
 AP = ROOT / "data/all_pairs"
 py(AP / "allpairs_analyze.py", AP, OUT / "ALLPAIRS_RESULTS.json")
 got["R-AP00"] = str(same_json(OUT / "ALLPAIRS_RESULTS.json", AP / "ALLPAIRS_RESULTS.json"))
@@ -142,6 +143,83 @@ got["R-V302"] = " ".join(f"{x['job_id']}:{x['guard_fails']}/{x['kills']}/{x['sta
 got["R-V303"] = " ".join(f"{t}:{sum(v == 'KILLED' for k, v in xv3.items() if k[2] == t)}/{sum(1 for k in xv3 if k[2] == t)}"
                          for t in ("X_mut_cert", "X_orig_guard", "X_orig_val", "X_mut_val"))
 
+# ---------------------------------------------------------------- separating settings (observation change)
+os.environ["QSD_OUT"] = str(OUT)
+OB = ROOT / "data/observation_change"
+py(OB / "x1_analyze.py")
+got["R-X100"] = f"{same_json(OUT / 'observation_change/X1_SUMMARY.json', OB / 'X1_SUMMARY.json')}/{filecmp.cmp(OUT / 'observation_change/X1_NATIVE_RUNS.csv', OB / 'X1_NATIVE_RUNS.csv', shallow=False)}/{json.load(open(OUT / 'observation_change/X1_QEDC_BY_WIDTH.json')) == json.load(open(OB / 'X1_QEDC_SUMMARY.json'))['by_width']}"
+x1 = json.load(open(OUT / "observation_change/X1_SUMMARY.json")); x1r = rows(OUT / "observation_change/X1_NATIVE_RUNS.csv")
+got["R-X101"] = f"{x1['supported']}/{x1['pairs']}; original failures {x1['original_failures_total']} of {12 * x1['pairs']}; control kills {x1['control_kills_total']} of {12 * x1['pairs']}; {x1['executions']} executions"
+got["R-X102"] = " ".join(f"{k}:{v}" for k, v in sorted(x1["by_rotated_qubits"].items(), key=lambda t: int(t[0]))) + "; " + \
+                " ".join(f"{k}:{sum(r['witness_kind'] == k for r in x1r)}" for k in ("marginal", "zmask"))
+nprog = {r["program"]: int(r["n"]) for r in x1r}
+got["R-X103"] = f"{sum(x1['distinct_settings_per_program'].values())} settings over {len(nprog)} circuits; {sum(3 ** n - 1 for n in nprog.values())} other than all-Z; smallest witness difference {min(float(r['witness_d']) for r in x1r):.3f}"
+qw = json.load(open(OUT / "observation_change/X1_QEDC_BY_WIDTH.json"))
+got["R-X104"] = " ".join(f"{n}:{v['mutant_kills']}/{v['original_failures']}/{v['control_kills']}" for n, v in sorted(qw.items(), key=lambda t: int(t[0])))
+
+# ---------------------------------------------------------------- later positions
+PO = ROOT / "data/position"
+py(PO / "x4_analyze.py")
+got["R-X400"] = f"{filecmp.cmp(OUT / 'position/X4_FINAL.csv', PO / 'X4_FINAL.csv', shallow=False)}/{filecmp.cmp(OUT / 'position/X4_NATIVE_RUNS.csv', PO / 'X4_NATIVE_RUNS.csv', shallow=False)}/{same_json(OUT / 'position/X4_SUMMARY.json', PO / 'X4_SUMMARY.json')}"
+x4 = rows(OUT / "position/X4_FINAL.csv")
+cnt = lambda P, rep: sum(r["report"] == rep for r in P)
+surv = [r for r in x4 if r["native_verdict"] != "KILLED"]
+got["R-X401"] = f"{len(x4)} pairs, {len(surv)} survivors; OL {cnt(x4, 'CL3')}, SO {cnt(x4, 'CL4')}, unresolved {cnt(x4, 'Unresolved')}; OL sites {len({(r['subject'], r['anchor_index']) for r in x4 if r['report'] == 'CL3'})}, SO sites {len({(r['subject'], r['anchor_index']) for r in x4 if r['report'] == 'CL4'})}"
+oth = [r for r in x4 if r["population"] == "other"]
+got["R-X402"] = f"OL {cnt(oth, 'CL3')} in {','.join(sorted({r['subject'] for r in oth if r['report'] == 'CL3'}))} ({sum(r['report'] == 'CL3' and r['third'] == 'middle' for r in oth)} middle, {sum(r['report'] == 'CL3' and r['third'] == 'last' for r in oth)} last); SO {cnt(oth, 'CL4')} at {len({(r['subject'], r['anchor_index']) for r in oth if r['report'] == 'CL4'})} sites"
+ext = [r for r in x4 if r["population"] == "external"]; mq = [r for r in x4 if r["population"] == "mqt"]
+got["R-X403"] = f"external OL {cnt(ext, 'CL3')} in {len({r['subject'] for r in ext if r['report'] == 'CL3'})} programs, qft_n4 {sum(r['report'] == 'CL3' and r['subject'] == 'qft_n4' for r in ext)}; MQT OL {cnt(mq, 'CL3')} in {','.join(sorted({r['subject'] for r in mq if r['report'] == 'CL3'}))}"
+gd = json.load(open(PO / "X4_GUARDS.json"))
+got["R-X404"] = f"{len(gd)} programs; guards clean {sum(g['guard_ok'] for g in gd.values())}; original failures {sum(g['fails'] for g in gd.values())} in {sum(len(g['verdicts']) for g in gd.values())} runs"
+
+# ---------------------------------------------------------------- developer-written suites (QuCheck case studies)
+DS = ROOT / "data/developer_suites"
+py(DS / "x2_analyze.py"); py(DS / "x2_q3_analyze.py")
+got["R-X200"] = "/".join(str(filecmp.cmp(OUT / "developer_suites" / f, DS / f, shallow=False)) for f in ("X2_DIAGNOSIS.csv", "X2_QUCHECK_20.csv")) + \
+                "/" + "/".join(str(same_json(OUT / "developer_suites" / f, DS / f)) for f in ("X2_SUMMARY.json", "X2_Q3_SUMMARY.json"))
+x2 = rows(OUT / "developer_suites/X2_DIAGNOSIS.csv")
+def x2_suite(s):
+    R = [r for r in x2 if r["suite"] == s]; sv = [r for r in R if r["outcome"] != "killed"]
+    n = lambda o: sum(r["outcome"] == o for r in R)
+    return (f"{len(R)} mutants, {len(sv)} survivors; CE {n('contract equivalence')}, EIE {n('executed-input equality')}, "
+            f"OL {n('observation limitation')}, SO {n('suite omission')}, unresolved {sum(r['outcome'].startswith('unresolved') for r in R)}")
+got["R-X201"] = x2_suite("A") + "; OL in " + ",".join(sorted({r["program"] for r in x2 if r["outcome"] == "observation limitation"}))
+got["R-X202"] = x2_suite("B")
+xs = json.load(open(OUT / "developer_suites/X2_SUMMARY.json"))
+un = [r for r in x2 if r["outcome"].startswith("unresolved")]
+emsplit = {(r["suite"], r["program"]) for r in un if r["label"] == "em" and r["outcome"] == "unresolved: split verdict"}
+got["R-X203"] = (f"unresolved {len(un)}, split {sum(r['outcome'] == 'unresolved: split verdict' for r in un)}, em {sum(r['label'] == 'em' for r in un)}; "
+                 f"suites with em splits {len(emsplit)}, of which failing the original in guard runs {sum(xs['guard_failures'][f'{s}:{p}'] > 0 for s, p in emsplit)}")
+ol = {(r["program"], r["mutant"]) for r in x2 if r["outcome"] == "observation limitation"}
+killed_b = sum(r["suite"] == "B" and (r["program"], r["mutant"]) in ol and r["outcome"] == "killed" for r in x2)
+ce = collections.Counter((r["program"], r["mutant"], r["label"], r["contract_equivalent_F"]) for r in x2)
+lab = {(p, m): (l, e) for p, m, l, e in ce}
+got["R-X204"] = (f"property tests kill {killed_b} of {len(ol)} observation limitations; labels agree "
+                 f"{sum((l == 'em') == (e == 'True') for l, e in lab.values())}/{len(lab)}; exception "
+                 + ",".join(f"{p}:{m}" for (p, m), (l, e) in sorted(lab.items()) if (l == 'em') != (e == 'True')))
+got["R-X205"] = f"{sum(r['outcome'] == 'executed-input equality' for r in x2)} executed-input equalities"
+q3 = json.load(open(OUT / "developer_suites/X2_Q3_SUMMARY.json"))
+qc, qt, ct = q3["only_qucheck"], q3["only_qutest"], q3["controls"]
+got["R-X206"] = (f"only QuCheck {qc['detected_12_of_12']}/{qc['pairs']} detected in 12 of 12 (Holm {qc['holm_detected_12_of_12']}); "
+                 f"only QUTest {qt['detected_12_of_12']}/{qt['pairs']} (never {qt['detected_0_of_12']}); "
+                 f"controls {ct['false_detections']} and {ct['false_detections_holm']} with Holm of {ct['runs']}")
+tw, tn = q3["transfer_WITNESS_EXISTS"], q3["transfer_NO_WITNESS_ABOVE_THETA"]
+got["R-X207"] = f"transfer with witness {tw['detected_12_of_12']}/{tw['pairs']}; without {tn['detected_0_of_12']} never, {tn['split']} split of {tn['pairs']}"
+
+# ---------------------------------------------------------------- re-analyses (archived outputs; rerun in the analytic tier)
+RA = ROOT / "data/reanalysis"
+r156 = json.load(open(RA / "R156_SUMMARY.json")); r1, r5, r6 = r156["R1"], r156["R5"]["corpus"], r156["R6"]
+got["R-X500"] = (f"{r1['candidates']} candidates, {r1['issued']} issued, precision {r1['precision']}, recall {r1['recall']}, withheld {r1['withheld']}, "
+                 f"unsupported withheld {r1['candidates'] - r1['witness_suite_reliable'] - (r1['issued'] - r1['issued_and_reliable'])} of {r1['candidates'] - r1['witness_suite_reliable']}")
+got["R-X501"] = "corpus score " + " ".join(f"{100 * r5[k][2]:.1f}" for k in ("raw", "without_equivalents", "without_equivalents_and_observation_limitations")) + \
+                "; " + " ".join(f"{k}:{r6[k]['distinct_final_states']}/{r6[k]['distinct_sites']}" for k in ("CL3", "CL4"))
+r3 = json.load(open(RA / "R3_REGISTER_CONTRACT.json"))["summary"]["by_report"]
+r4 = json.load(open(RA / "R4_NOISE.json"))["summary"]
+got["R-X502"] = (f"register contract: CL3 {r3['CL3']['equivalent_on_register']}/35, CL4 {r3['CL4']['equivalent_on_register']}/79; noise: SO witness above theta "
+                 f"{r4['suite_omissions']['witness_still_above_theta']}/{r4['suite_omissions']['pairs']} (median ratio {r4['suite_omissions']['witness_ratio_median']:.2f}), "
+                 f"OL below {r4['observation_limitations']['pairs'] - r4['observation_limitations']['separated_under_noise']}/{r4['observation_limitations']['pairs']}, "
+                 f"largest OL difference {r4['observation_limitations']['largest_noisy_difference']:.4f}")
+
 # ---------------------------------------------------------------- analytic tier (optional)
 if a.analytic:
     PY, TREE, REFP = a.analytic
@@ -151,6 +229,10 @@ if a.analytic:
     got["R-A01"] = str(r1.returncode == 0 and filecmp.cmp(tmp / "REPORT.csv", E / "REPORT.csv", shallow=False))
     r2 = subprocess.run([PY, "-I", "-B", str(E / "x_selection_check.py"), str(ROOT), TREE, REFP, str(tmp)], capture_output=True, text=True)
     got["R-A02"] = str(r2.returncode == 0 and r2.stdout == (E / "x_selection_check.out").read_text())
+    env = {**os.environ, "QSD_OUT": str(OUT / "analytic")}
+    for k, f, j in (("R-A10", "r156.py", "R156_SUMMARY.json"), ("R-A11", "r3_register_contract.py", "R3_REGISTER_CONTRACT.json"), ("R-A12", "r4_noise.py", "R4_NOISE.json")):
+        r = subprocess.run([PY, "-I", "-B", str(RA / f)], capture_output=True, text=True, env=env)
+        got[k] = str(r.returncode == 0 and same_json(OUT / "analytic/reanalysis" / j, RA / j))
 
 # ---------------------------------------------------------------- compare
 out, cnt = [], collections.Counter()

@@ -1,0 +1,64 @@
+{
+ "setting": "X on qubit 0, Z elsewhere",
+ "witness": "marginal q0",
+ "N": 8000,
+ "by_width": {
+  "2": {
+   "mutant_kills": 12,
+   "original_failures": 0,
+   "control_kills": 0,
+   "unsupported": 0,
+   "cli_equals_inproc": true,
+   "supported": true
+  },
+  "3": {
+   "mutant_kills": 12,
+   "original_failures": 0,
+   "control_kills": 0,
+   "unsupported": 0,
+   "cli_equals_inproc": true,
+   "supported": true
+  },
+  "4": {
+   "mutant_kills": 12,
+   "original_failures": 0,
+   "control_kills": 0,
+   "unsupported": 0,
+   "cli_equals_inproc": true,
+   "supported": true
+  },
+  "5": {
+   "mutant_kills": 12,
+   "original_failures": 0,
+   "control_kills": 0,
+   "unsupported": 0,
+   "cli_equals_inproc": true,
+   "supported": true
+  },
+  "6": {
+   "mutant_kills": 12,
+   "original_failures": 0,
+   "control_kills": 0,
+   "unsupported": 0,
+   "cli_equals_inproc": true,
+   "supported": true
+  },
+  "7": {
+   "mutant_kills": 12,
+   "original_failures": 0,
+   "control_kills": 0,
+   "unsupported": 0,
+   "cli_equals_inproc": true,
+   "supported": true
+  },
+  "8": {
+   "mutant_kills": 12,
+   "original_failures": 0,
+   "control_kills": 0,
+   "unsupported": 0,
+   "cli_equals_inproc": true,
+   "supported": true
+  }
+ },
+ "seconds": 360.5
+}

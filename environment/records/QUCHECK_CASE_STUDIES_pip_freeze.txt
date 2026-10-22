@@ -1,0 +1,16 @@
+# Python 3.12.3; environment of data/developer_suites (QuCheck case studies and native QuCheck on the 20 circuits)
+dill==0.4.1
+mpmath==1.3.0
+numpy==1.26.4
+psutil==7.2.2
+python-dateutil==2.9.0.post0
+qiskit==1.1.1
+qiskit-aer==0.17.2
+qucheck==0.0.2  # the audited release (data/profiles/FINAL_PROFILE_SOURCE_EVIDENCE.json)
+rustworkx==0.18.1
+scipy==1.17.1
+six==1.17.0
+stevedore==5.9.1
+symengine==0.14.1
+sympy==1.14.0
+typing_extensions==4.16.0

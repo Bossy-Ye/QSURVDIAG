@@ -12,6 +12,10 @@ Detail behind Sections 4 and 5 of the article. Section, table and figure numbers
 | MQT Bench validation | 2,000 | ideal | fails at most 1 of 12 runs |
 | Repair comparison | 8,000 | ideal | fails at most 1 of 12 runs |
 | QED-C workflow | 2,000 | P's ideal distribution | fails at most 1 of 12 runs |
+| Separating settings | 8,000 | ideal, rounded to 4 decimals | fails at most 1 of 12 runs |
+| Later positions | 2,000 | as the first sample of each population | as the first sample (`data/position/OPERATIONAL.md`) |
+| QuCheck case studies | as each test is written; property tests 2,500 with 20 inputs | the tests' own | 12 guard runs, recorded |
+| Native QuCheck on the 20 circuits | 2,000, alpha 0.05 | QuCheck's two-sample tests | control: the original against itself |
 
 Every experiment runs the suite 12 times on each mutant and uses theta = 0.05, except the tolerance and budget
 experiment, which varies theta in {0.01, 0.025, 0.05, 0.10, 0.25, 0.50} and N. Guard runs check the original before
@@ -48,6 +52,10 @@ bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolerance and b
 
 None of the decision-diagram checker's recorded decisions contradicted the simulator-based comparison.
 
+Output-register contracts (`data/reanalysis/r3_register_contract.py`) require equal reduced states on the declared
+output register. They make 13 observation limitations (GHZ 7, Bernstein-Vazirani and Deutsch-Jozsa 6) and 59 suite
+omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tolerance difference stays.
+
 ## 4. Causes of survival (RQ3)
 
 - **Predictions about the five other circuits.** Twelve were committed before their mutants were sampled; five
@@ -56,6 +64,18 @@ None of the decision-diagram checker's recorded decisions contradicted the simul
   the 193 pairs. XYZ on the output register and Z on every qubit are incomparable: each distinguishes pairs the
   other does not.
 - **Output-condition suite by family.** Of its 65 suite-omission kills, 54 are GHZ, 9 Simon and 2 QFT.
+- **Separating settings** (`data/observation_change/`). Settings are enumerated by the number of qubits outside Z,
+  then by qubit subset, then with X before Y; the first setting with an instance above theta gives the setting and
+  its witness. Each pair ran the witness alone under its setting, 12 runs on the mutant (seeds 13042-13053) and 12
+  on the original (14042-14053); the control is the same instance without the setting's gates. The QED-C
+  constructed pair used seeds 19042-19053 and 20042-20053.
+- **Native QuCheck** (`data/developer_suites/x2_qucheck20.py`). One property per pair asserts equal distributions of
+  every qubit in the x, y and z bases; controls compare the original with itself (seeds 15542-15553 and
+  16542-16553). QuCheck 0.0.2's Holm correction does not stop at the first retained hypothesis; the step-down
+  procedure, applied to the recorded p-values, rejects exactly when the smallest p-value is at most alpha/m.
+- **Device noise** (`data/reanalysis/r4_noise.py`). Median errors of the IBM Torino calibration in
+  qiskit-ibm-runtime 0.40.1 as depolarizing gate errors and a symmetric readout error, each circuit transpiled to a
+  line of qubits and simulated as a density matrix; suite-omission witnesses keep a median 0.90 of their difference.
 - **Tolerance and budget experiment.** The sampling bound covers decisions most often for Z products and marginals,
   least often for the entropy and the total-variation distance, and never for the Hellinger and Kullback-Leibler
   distances (`data/certification/outcomes/R2V_BOUND.json`).
@@ -80,6 +100,8 @@ None of the decision-diagram checker's recorded decisions contradicted the simul
   deletions in the eight-qubit multiplier with difference 0.076, certified although the sampling bound does not cover
   their kill. The bound covers the mutant's kill for 19 of the 23 candidates and the original's guard runs for none. For
   all seven observation limitations, the largest suite in the sequence that their original passes is the baseline suite.
+- **Evidence requirements as a classifier** (`data/reanalysis/r156.py`). Of the 165 issued repairs, 164 are supported
+  by the all-pairs runs of their witness suite; of the 23 unsupported, 22 were withheld.
 - **Transfer.** Every difference by which an admissible QuCheck assertion distinguishes a transferred pair exceeds
   theta by at least 0.45. An earlier exercise with QuCheck-style tests is described in `history.md`, section 3.
 
@@ -116,6 +138,15 @@ theta^2)^2 = 0.99500625. Records: `data/qedc/`.
   give every contract equivalence and every unresolved case; the multipliers give every executed-input equality
   and observation limitation and 21 of the 22 suite omissions. The selection rule placed 68 of the 120 mutants at
   the first gate.
+- **Later positions** (`data/position/`). For each of the 18 programs, 10 mutations from the middle and 10 from the
+  last third of the gates, under the strata of the first sample. `x4_select.py` regenerates the selection from the
+  pinned sources (Qolumbina archive, QASMBench commit `357b9423`) and writes the runner inputs, which hold
+  third-party gate lists and are not archived; the selection and pool checks it writes equal the archived files.
+- **QuCheck case studies** (`data/developer_suites/`). QuCheck repository at commit `74c27570`; the harness needs
+  `X2_SRC` set to that checkout and the environment of `environment/records/QUCHECK_CASE_STUDIES_pip_freeze.txt`.
+  Each run of the original and a mutant at one seed generates the same inputs; every circuit submitted to the
+  simulator is a context, paired in submission order. `X2_NATIVE_RUNS.jsonl.gz` keeps one record per suite, program,
+  version and seed; the witness circuit is kept where native confirmation replays it.
 - **Width set.** The four unresolved cases are a split verdict, an undecided margin and two suite-omission
   candidates that fail native confirmation. The runtimes of Fig. 5 were measured under the initial analysis. At
   fourteen qubits the median universe-evaluation time grows by a factor of 3.8 per added qubit; the extrapolated

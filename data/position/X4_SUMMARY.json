@@ -1,0 +1,119 @@
+{
+ "pairs": 360,
+ "not_executed": [],
+ "by_population": {
+  "other": {
+   "first_rule_archived": {
+    "contract equivalence": 33,
+    "executed-input equality": 48,
+    "suite omission": 21,
+    "killed": 47
+   },
+   "middle": {
+    "contract equivalence": 1,
+    "executed-input equality": 13,
+    "observation limitation": 6,
+    "suite omission": 7,
+    "killed": 23
+   },
+   "last": {
+    "contract equivalence": 1,
+    "executed-input equality": 12,
+    "observation limitation": 11,
+    "suite omission": 8,
+    "killed": 18
+   },
+   "observation_limitation_programs": [
+    "simon_4",
+    "wstate_4"
+   ],
+   "suite_omission_distinct_sites": 11,
+   "suite_omission_distinct_witnesses": 4
+  },
+  "external": {
+   "first_rule_archived": {
+    "contract equivalence": 28,
+    "executed-input equality": 94,
+    "observation limitation": 30,
+    "suite omission": 5,
+    "killed": 111,
+    "unresolved": 2
+   },
+   "middle": {
+    "contract equivalence": 3,
+    "executed-input equality": 26,
+    "observation limitation": 13,
+    "suite omission": 4,
+    "killed": 42,
+    "unresolved": 2
+   },
+   "last": {
+    "contract equivalence": 3,
+    "executed-input equality": 25,
+    "observation limitation": 25,
+    "suite omission": 6,
+    "killed": 29,
+    "unresolved": 2
+   },
+   "observation_limitation_programs": [
+    "AdderHamiltonianMixture",
+    "DiagonalZHamiltonian",
+    "DraperAdder",
+    "Is2PowerPhase",
+    "IsingEvolution",
+    "ParityPhase",
+    "deutsch_n2",
+    "qft_n4"
+   ],
+   "suite_omission_distinct_sites": 10,
+   "suite_omission_distinct_witnesses": 2
+  },
+  "mqt": {
+   "first_rule_archived": {
+    "contract equivalence": 14,
+    "executed-input equality": 10,
+    "observation limitation": 7,
+    "suite omission": 22,
+    "killed": 64,
+    "unresolved": 3
+   },
+   "middle": {
+    "contract equivalence": 1,
+    "executed-input equality": 1,
+    "observation limitation": 5,
+    "killed": 30,
+    "unresolved": 3
+   },
+   "last": {
+    "executed-input equality": 1,
+    "observation limitation": 5,
+    "killed": 30,
+    "unresolved": 4
+   },
+   "observation_limitation_programs": [
+    "rg_mult_12",
+    "rg_mult_8"
+   ],
+   "suite_omission_distinct_sites": 0,
+   "suite_omission_distinct_witnesses": 0
+  }
+ },
+ "external_without_qft_n4": {
+  "middle": {
+   "contract equivalence": 3,
+   "executed-input equality": 26,
+   "observation limitation": 4,
+   "suite omission": 4,
+   "killed": 41,
+   "unresolved": 2
+  },
+  "last": {
+   "contract equivalence": 3,
+   "executed-input equality": 25,
+   "observation limitation": 17,
+   "suite omission": 6,
+   "killed": 27,
+   "unresolved": 2
+  }
+ }
+}

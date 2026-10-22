@@ -1,0 +1,14 @@
+{
+ "B|grovers_algorithm|m11": {
+  "witness": {
+   "context": 6,
+   "kind": "marginal",
+   "key": 2,
+   "d": 0.14644660940672616,
+   "ref": 3.6219832017824975e-34
+  },
+  "mutant_kills": 12,
+  "original_failures": 0,
+  "supported": true
+ }
+}

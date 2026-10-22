@@ -1,0 +1,162 @@
+{
+ "R1": {
+  "candidates": 210,
+  "issued": 165,
+  "witness_suite_reliable": 187,
+  "issued_and_reliable": 164,
+  "issued_not_reliable": [
+   [
+    "qra_cases/QRA_390",
+    "mutant killed in 11 of 12"
+   ]
+  ],
+  "precision": "164/165",
+  "recall": "164/187",
+  "withheld": 45,
+  "withheld_by_unmet": {
+   "OB02;OB13": 6,
+   "OB02;OB15": 10,
+   "OB13": 27,
+   "OB02;OB13;OB15": 2
+  },
+  "withheld_reliable_by_unmet": {
+   "OB02;OB13": 3,
+   "OB02;OB15": 10,
+   "OB02;OB13;OB15": 2,
+   "OB13": 8
+  },
+  "withheld_not_reliable_kills": {
+   "mutant killed in 9 of 12": 4,
+   "mutant killed in 7 of 12": 1,
+   "mutant killed in 11 of 12": 6,
+   "mutant killed in 8 of 12": 3,
+   "mutant killed in 10 of 12": 3,
+   "original fails 12 of 12": 2,
+   "mutant killed in 4 of 12": 2,
+   "mutant killed in 5 of 12": 1
+  }
+ },
+ "R5": {
+  "twenty_circuits": {
+   "pairs": 599,
+   "killed": 302,
+   "outcomes": {
+    "NA_KILLED": 302,
+    "CL1": 93,
+    "CL3": 35,
+    "CL2": 87,
+    "CL4": 79,
+    "Unresolved": 2,
+    "CL5": 1
+   },
+   "raw": [
+    302,
+    599,
+    0.5042
+   ],
+   "without_equivalents": [
+    302,
+    506,
+    0.5968
+   ],
+   "without_equivalents_and_observation_limitations": [
+    302,
+    471,
+    0.6412
+   ]
+  },
+  "twenty_circuits_with_executed_input_equality": {
+   "pairs": 599,
+   "killed": 302,
+   "outcomes": {
+    "NA_KILLED": 302,
+    "CL1": 93,
+    "CL3": 35,
+    "CL2": 87,
+    "CL4": 79,
+    "Unresolved": 2,
+    "CL5": 1
+   },
+   "raw": [
+    302,
+    599,
+    0.5042
+   ],
+   "without_equivalents": [
+    302,
+    419,
+    0.7208
+   ],
+   "without_equivalents_and_observation_limitations": [
+    302,
+    384,
+    0.7865
+   ]
+  },
+  "corpus": {
+   "pairs": 1537,
+   "killed": 975,
+   "outcomes": {
+    "CL1": 158,
+    "NA_KILLED": 975,
+    "CL3": 150,
+    "CL4": 143,
+    "CL5": 13,
+    "Unresolved": 98
+   },
+   "raw": [
+    975,
+    1537,
+    0.6344
+   ],
+   "without_equivalents": [
+    975,
+    1379,
+    0.707
+   ],
+   "without_equivalents_and_observation_limitations": [
+    975,
+    1229,
+    0.7933
+   ]
+  }
+ },
+ "R6": {
+  "CL1": {
+   "pairs": 93,
+   "programs": 14,
+   "distinct_final_states": 14,
+   "distinct_sites": 51
+  },
+  "CL2": {
+   "pairs": 87,
+   "programs": 6,
+   "distinct_final_states": 6,
+   "distinct_sites": 33
+  },
+  "CL3": {
+   "pairs": 35,
+   "programs": 10,
+   "distinct_final_states": 28,
+   "distinct_sites": 27
+  },
+  "CL4": {
+   "pairs": 79,
+   "programs": 9,
+   "distinct_final_states": 56,
+   "distinct_sites": 23
+  },
+  "CL5": {
+   "pairs": 1,
+   "programs": 1,
+   "distinct_final_states": 1,
+   "distinct_sites": 1
+  },
+  "Unresolved": {
+   "pairs": 2,
+   "programs": 1,
+   "distinct_final_states": 2,
+   "distinct_sites": 2
+  }
+ }
+}

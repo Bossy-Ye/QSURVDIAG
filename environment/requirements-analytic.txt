@@ -10,5 +10,7 @@ openqasm3==1.0.1
 antlr4-python3-runtime==4.13.2
 click==8.4.2
 stevedore==5.9.0
+qiskit-ibm-runtime==0.40.1
 # click and stevedore are QUTest dependencies, pinned to the versions of the study environment.
+# qiskit-ibm-runtime provides the IBM Torino calibration of data/reanalysis/r4_noise.py.
 # QUTest 0.1.0 is installed from source (not on PyPI): tag 0.1.0, commit c56e5a83f3b600a893e0d897ed86c705d25eb104; see README, Analytic tier.

@@ -1,0 +1,146 @@
+{
+ "guard_failures": {
+  "A:deutsch_jozsa": 0,
+  "B:deutsch_jozsa": 0,
+  "A:grovers_algorithm": 0,
+  "B:grovers_algorithm": 0,
+  "A:quantum_fourier_transform": 3,
+  "B:quantum_fourier_transform": 1,
+  "B:quantum_phase_estimation": 0,
+  "A:quantum_teleportation": 0,
+  "B:quantum_teleportation": 1,
+  "B:superdense_coding": 0
+ },
+ "outcomes": {
+  "A": {
+   "contract equivalence": 30,
+   "killed": 55,
+   "executed-input equality": 8,
+   "unresolved: split verdict": 20,
+   "unresolved: alignment": 1,
+   "observation limitation": 6
+  },
+  "B": {
+   "contract equivalence": 31,
+   "killed": 103,
+   "executed-input equality": 6,
+   "unresolved: split verdict": 39,
+   "suite omission": 1
+  }
+ },
+ "contract_equivalence_vs_labels": {
+  "em/equivalent": 60,
+  "m/not equivalent": 119,
+  "m/equivalent": 1
+ },
+ "survive_one_suite_killed_by_other": [
+  {
+   "survives": "A",
+   "program": "grovers_algorithm",
+   "mutant": "m18",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  },
+  {
+   "survives": "A",
+   "program": "grovers_algorithm",
+   "mutant": "m19",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  },
+  {
+   "survives": "A",
+   "program": "grovers_algorithm",
+   "mutant": "m5",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  },
+  {
+   "survives": "A",
+   "program": "grovers_algorithm",
+   "mutant": "m8",
+   "outcome_under_surviving_suite": "unresolved: alignment"
+  },
+  {
+   "survives": "A",
+   "program": "grovers_algorithm",
+   "mutant": "m9",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_fourier_transform",
+   "mutant": "m15",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_fourier_transform",
+   "mutant": "m2",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_fourier_transform",
+   "mutant": "m4",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_teleportation",
+   "mutant": "m10",
+   "outcome_under_surviving_suite": "executed-input equality"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_teleportation",
+   "mutant": "m11",
+   "outcome_under_surviving_suite": "observation limitation"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_teleportation",
+   "mutant": "m12",
+   "outcome_under_surviving_suite": "executed-input equality"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_teleportation",
+   "mutant": "m14",
+   "outcome_under_surviving_suite": "observation limitation"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_teleportation",
+   "mutant": "m2",
+   "outcome_under_surviving_suite": "observation limitation"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_teleportation",
+   "mutant": "m3",
+   "outcome_under_surviving_suite": "observation limitation"
+  },
+  {
+   "survives": "A",
+   "program": "quantum_teleportation",
+   "mutant": "m4",
+   "outcome_under_surviving_suite": "executed-input equality"
+  },
+  {
+   "survives": "B",
+   "program": "grovers_algorithm",
+   "mutant": "m1",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  },
+  {
+   "survives": "B",
+   "program": "grovers_algorithm",
+   "mutant": "m11",
+   "outcome_under_surviving_suite": "suite omission"
+  },
+  {
+   "survives": "B",
+   "program": "grovers_algorithm",
+   "mutant": "m14",
+   "outcome_under_surviving_suite": "unresolved: split verdict"
+  }
+ ]
+}
