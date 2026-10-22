@@ -26,21 +26,18 @@ bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolerance and b
 ## 2. Testing tools (RQ1)
 
 - **Structural-assertion trials.** Of the 546 mutants executed before the R_xx and R_zz rewriting, 85 are
-  contract-equivalent to their original (52 development, 33 from the other circuits). QUTest's gate-set check,
-  with the original's gate names as the allowed set, flags 19 of the 33 and 19 of the 52 in every recorded trial,
-  from five programs whose original always passes; in six other development circuits the transpilation varies and
-  the original sometimes fails the check, so their 23 flags are not reliable. The trials ran at Qiskit optimization
-  level 3, identified retrospectively from the local configuration. A recorded prediction that the gate-set
-  assertion would separate more than 80 % of the contract-equivalent mutants of the five other circuits, and the
-  depth assertion fewer, failed: after transpiling both programs to the same basis-gate set, the audit separated
-  none of the 33 by gate set and 11 by depth. Checking whether two programs transpile to the same circuit
-  identifies 1 to 3 of the 85 contract-equivalent pairs across 36 transpiler configurations.
+  contract-equivalent to their original (52 development, 33 from the other circuits). QUTest's gate-set check, with
+  the original's gate names as the allowed set, flags 19 of the 33 and 19 of the 52 in every recorded trial, from five
+  programs whose original always passes; in six other development circuits the transpilation varies and the original
+  sometimes fails the check, so their 23 flags are not reliable (optimization level: section 9). A recorded prediction
+  that the gate-set assertion would separate more than 80 % of the contract-equivalent mutants of the five other
+  circuits, and the depth assertion fewer, failed: after transpiling both programs to the same basis-gate set, the
+  audit separated none of the 33 by gate set and 11 by depth. Checking whether two programs transpile to the same
+  circuit identifies 1 to 3 of the 85 contract-equivalent pairs across 36 transpiler configurations.
 - **Developer-written tests.** In Qibo, Mitiq and Qualtran, tests run through pytest and may read the full state
   vector (Qibo, Mitiq) or the full unitary (Qualtran). Of 51 assertion occurrences, 30 check circuit structure,
   resources or set-up, 16 compare full state vectors or unitaries, and five read only computational-basis
   quantities. The check mutates nothing and estimates no prevalence (`data/external/developer_tests/`).
-- **Versions.** QMutPy was audited at the `all_gates` branch, commit `13ab3845`; the pytest profile was recorded
-  at 7.4.4 and its cases ran at 9.1.1.
 
 ## 3. Semantic contracts (RQ2)
 
@@ -122,7 +119,8 @@ theta; every instance before it differs by at most 0.0473 (`data/certification/w
 are not admitted, the entropy difference on the Z counts exceeds theta. P failed the supplementary statistics in none of
 its runs. On the 672 recorded histograms, the stored-reference acceptance rule and the diagnostic baseline referenced to
 P gave the same verdict on every one, with measured distances differing by at most 1.8e-4. At the benchmark's default of
-100 shots, the upstream score of either program ranges over about 0.1 across 12 noiseless runs. The ideal upstream
+100 shots, the upstream score of either program ranges over about 0.1 across 12 noiseless runs
+(`data/qedc/QEDC_METRICS.json`). The ideal upstream
 scores of P and P_ship differ by at most 3.6e-4 and their computational-basis probabilities by at most 7.1e-3. The
 acceptance rule passes a run when the Hellinger distance is at most theta, a Hellinger fidelity of at least (1 -
 theta^2)^2 = 0.99500625. Records: `data/qedc/`.
@@ -142,11 +140,15 @@ theta^2)^2 = 0.99500625. Records: `data/qedc/`.
   last third of the gates, under the strata of the first sample. `x4_select.py` regenerates the selection from the
   pinned sources (Qolumbina archive, QASMBench commit `357b9423`) and writes the runner inputs, which hold
   third-party gate lists and are not archived; the selection and pool checks it writes equal the archived files.
+  `x4_replay_check.py` reruns Stage 2 of the run driver on the 419 archived first-sample pairs of the five other
+  circuits and the Q# and QASMBench programs; every relation and candidate agrees (`x4_replay_check.out`).
 - **QuCheck case studies** (`data/developer_suites/`). QuCheck repository at commit `74c27570`; the harness needs
   `X2_SRC` set to that checkout and the environment of `environment/records/QUCHECK_CASE_STUDIES_pip_freeze.txt`.
   Each run of the original and a mutant at one seed generates the same inputs; every circuit submitted to the
   simulator is a context, paired in submission order. `X2_NATIVE_RUNS.jsonl.gz` keeps one record per suite, program,
-  version and seed; the witness circuit is kept where native confirmation replays it.
+  version and seed, with the arguments of every program call (the generated inputs) as the keys of `program_equal`;
+  the witness circuit is kept where native confirmation replays it. `X2_NATIVE_RUNS.csv` is its flat view. The runtime
+  check of the plan is recorded in `OPERATIONAL.md` (X2_RUNTIME_DECISION).
 - **Width set.** The four unresolved cases are a split verdict, an undecided margin and two suite-omission
   candidates that fail native confirmation. The runtimes of Fig. 5 were measured under the initial analysis. At
   fourteen qubits the median universe-evaluation time grows by a factor of 3.8 per added qubit; the extrapolated
@@ -194,16 +196,16 @@ holds only to that margin, and its record states the margin. The margins of ever
   they import are archived with the records that use them. `scripts/run_conformance_tests.py` runs three tests; the
   others execute QUTest.
 - **Embedded paths**: archived files name the study's working folders (for example `revision2/`, the folder of the
-  revised analysis of `V2_SPECIFICATION.md`, whose producers label their steps "Revision 2, step ...") and some hold the
-  study's absolute paths as recorded text. The package stores these files under `data/`;
-  `scripts/analytic/r2v_inputs.csv` rebuilds the folder layout that the archived producers read.
-- **Not redistributed**: QMutBench programs (GPL-3.0; per-case names and SHA-256 in
-  `data/scalability/corpus/case_manifests/`; `data/inventory/fetch_corpus.sh` fetches them from the URLs, pinned to
-  commit `01f5e770`, in `data/inventory/out/corpus_files.tsv`, and `inventory.py` checks every hash); the Q# and
-  QASMBench program files (regenerated by `data/external/cohort/materialize.py` from the sources pinned in
-  `data/external/protocol/EXTERNAL_COHORT_FREEZE.json`); tool sources: QUTest 0.1.0 (per-file SHA-256 in
-  `environment/records/QUTEST_SOURCE_MANIFEST.json`), QuCheck 0.0.2 (GabrielPontolillo/qucheck; tree SHA-256 in
-  `data/profiles/FINAL_PROFILE_SOURCE_EVIDENCE.json`), Muskit 0.0.3 (sdist SHA-256 in
+  revised analysis of `V2_SPECIFICATION.md`) and some hold the study's absolute paths as recorded text. The package
+  stores these files under `data/`; `scripts/analytic/r2v_inputs.csv` rebuilds the folder layout that the archived
+  producers read.
+- **Not redistributed**: QMutBench program files (GPL-3.0; their gate lists are in `R2V_NATIVE_JOBS_ARMS.jsonl`;
+  per-case names and SHA-256 in `data/scalability/corpus/case_manifests/`; `data/inventory/fetch_corpus.sh` fetches
+  them from the URLs, pinned to commit `01f5e770`, in `data/inventory/out/corpus_files.tsv`, and `inventory.py` checks
+  every hash); the Q# and QASMBench program files (regenerated by `data/external/cohort/materialize.py` from the
+  sources pinned in `data/external/protocol/EXTERNAL_COHORT_FREEZE.json`); tool sources: QUTest 0.1.0 (per-file
+  SHA-256 in `environment/records/QUTEST_SOURCE_MANIFEST.json`), QuCheck 0.0.2 (GabrielPontolillo/qucheck; tree
+  SHA-256 in `data/profiles/FINAL_PROFILE_SOURCE_EVIDENCE.json`), Muskit 0.0.3 (sdist SHA-256 in
   `data/profiles/MUSKIT_DOWNLOAD.json`), QMutPy (qmutpy-experiments `06cc1b29`, mutpy branch `all_gates` `13ab3845`).
   `DEPENDENCY_MANIFEST.txt` names its directory `env/`; it is `environment/records/`.
 - Values that `expected/` does not list are not checked.

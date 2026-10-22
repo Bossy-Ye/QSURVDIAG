@@ -2,7 +2,7 @@
 and developer-suite experiments, and the circuit-level view of the matched changes, from their per-run records and
 compare them with expected/experiments_expected.csv. No native execution.
 
-Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY QUTEST_TREE QEDC_REF]
+Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY R2V_TREE QEDC_REF]
 
 --analytic also reruns data/qedc/report.py, x_selection_check.py and the re-analyses with the interpreter of
 environment/setup.sh.
@@ -15,7 +15,7 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 OC, CMP = ROOT / "data/output_condition", ROOT / "data/combined_suite"
 ap = argparse.ArgumentParser(); ap.add_argument("--out", default=str(ROOT / "output" / "experiments"))
-ap.add_argument("--analytic", nargs=3, metavar=("PY", "TREE", "QEDC_REF")); a = ap.parse_args()
+ap.add_argument("--analytic", nargs=3, metavar=("PY", "R2V_TREE", "QEDC_REF")); a = ap.parse_args()
 OUT = Path(a.out).resolve(); OUT.mkdir(parents=True, exist_ok=True)
 if ROOT / "data" in OUT.parents:
     sys.exit("refusing to write inside data/")
@@ -175,7 +175,7 @@ got["R-X404"] = f"{len(gd)} programs; guards clean {sum(g['guard_ok'] for g in g
 # ---------------------------------------------------------------- developer-written suites (QuCheck case studies)
 DS = ROOT / "data/developer_suites"
 py(DS / "x2_analyze.py"); py(DS / "x2_q3_analyze.py")
-got["R-X200"] = "/".join(str(filecmp.cmp(OUT / "developer_suites" / f, DS / f, shallow=False)) for f in ("X2_DIAGNOSIS.csv", "X2_QUCHECK_20.csv")) + \
+got["R-X200"] = "/".join(str(filecmp.cmp(OUT / "developer_suites" / f, DS / f, shallow=False)) for f in ("X2_DIAGNOSIS.csv", "X2_NATIVE_RUNS.csv", "X2_QUCHECK_20.csv")) + \
                 "/" + "/".join(str(same_json(OUT / "developer_suites" / f, DS / f)) for f in ("X2_SUMMARY.json", "X2_Q3_SUMMARY.json"))
 x2 = rows(OUT / "developer_suites/X2_DIAGNOSIS.csv")
 def x2_suite(s):
@@ -204,6 +204,9 @@ got["R-X206"] = (f"only QuCheck {qc['detected_12_of_12']}/{qc['pairs']} detected
                  f"only QUTest {qt['detected_12_of_12']}/{qt['pairs']} (never {qt['detected_0_of_12']}); "
                  f"controls {ct['false_detections']} and {ct['false_detections_holm']} with Holm of {ct['runs']}")
 tw, tn = q3["transfer_WITNESS_EXISTS"], q3["transfer_NO_WITNESS_ABOVE_THETA"]
+xc = json.load(open(DS / "X2_CONTROL.json"))
+got["R-X208"] = " ".join(f"{k}: control {v['control']['kind']}:{v['control']['key']}@{v['control']['context']}, mutant kills {v['mutant_kills']}, "
+                         f"original failures {v['original_failures']}" for k, v in sorted(xc.items()))
 got["R-X207"] = f"transfer with witness {tw['detected_12_of_12']}/{tw['pairs']}; without {tn['detected_0_of_12']} never, {tn['split']} split of {tn['pairs']}"
 
 # ---------------------------------------------------------------- re-analyses (archived outputs; rerun in the analytic tier)
@@ -233,6 +236,11 @@ if a.analytic:
     for k, f, j in (("R-A10", "r156.py", "R156_SUMMARY.json"), ("R-A11", "r3_register_contract.py", "R3_REGISTER_CONTRACT.json"), ("R-A12", "r4_noise.py", "R4_NOISE.json")):
         r = subprocess.run([PY, "-I", "-B", str(RA / f)], capture_output=True, text=True, env=env)
         got[k] = str(r.returncode == 0 and same_json(OUT / "analytic/reanalysis" / j, RA / j))
+    OB = ROOT / "data/observation_change"
+    r = subprocess.run([PY, "-I", "-B", str(OB / "x1_settings.py")], capture_output=True, text=True, env=env)
+    got["R-A13"] = str(r.returncode == 0 and filecmp.cmp(OUT / "analytic/observation_change/X1_SETTINGS.csv", OB / "X1_SETTINGS.csv", shallow=False))
+    r = subprocess.run([PY, "-I", "-B", str(OB / "x1_qedc_setting.py")], capture_output=True, text=True, env=env)
+    got["R-A14"] = " ".join(f"{l.split()[0]}:{l.split()[1]}/{l.split()[3]} {l.split()[4]}/{l.split()[5]}" for l in r.stdout.splitlines() if l[:1].isdigit())
 
 # ---------------------------------------------------------------- compare
 out, cnt = [], collections.Counter()

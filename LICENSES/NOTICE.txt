@@ -44,6 +44,7 @@ study-authored material. Upstream licences verified 2026-10-13 at the pinned ver
    QUTest 0.1.0 (Apache-2.0) | QuCheck 0.0.2 (MIT) | Muskit 0.0.3 (AGPL-3.0) | QMutPy/MutPy (Apache-2.0) |
    pytest 9.1.1 (MIT) | QMutBench program files (GPL-3.0) | QASMBench (BSD) | external-cohort program files |
    QuCheck repository @ 74c275709c59749870d885889bf9994cfdd46786 (case studies; see 8) |
+   QED-C Application-Oriented Benchmarks v2.0.8 (Apache-2.0; reference file of the analytic tier) |
    Qiskit, Qiskit Aer, NumPy, SciPy, rustworkx, openqasm3 (pinned versions only).
 
 6. Bugs4Q -- identifiers only
@@ -69,10 +70,10 @@ study-authored material. Upstream licences verified 2026-10-13 at the pinned ver
             SHA-256 of the omitted line, so the original can be checked against the pinned upstream file.
 
 8. QuCheck case studies -- MIT; MITRE unit tests -- Apache-2.0
-   File     data/developer_suites/X2_NATIVE_RUNS.jsonl.gz
+   Files    data/developer_suites/X2_NATIVE_RUNS.jsonl.gz, X2_CONTROL.json
    Source   github.com/GabrielPontolillo/qucheck @ 74c275709c59749870d885889bf9994cfdd46786
             Copyright (c) 2024 GabrielPontolillo and Marek Grzesiuk (mgrzesiuk); MIT, LICENSES/MIT-QuCheck.txt.
             case_studies/MITRE_unit_test_baseline: Copyright (C) 2019 The MITRE Corporation, modified by
             Gabriel Pontolillo, 2025; Apache License 2.0 (LICENSES/Apache-2.0.txt).
    Content  the arguments with which the tests called each program (circuits built by the tests, generated inputs)
-            and one witness circuit (QPY) submitted by a property test. No source file is redistributed.
+            and three circuits (QPY) submitted by a property test. No source file is redistributed.

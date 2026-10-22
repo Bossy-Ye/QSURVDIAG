@@ -1,6 +1,7 @@
-"""PLAN.md, sections 4 and 6: outcomes per suite, contract equivalence against the authors' labels, cross-suite survivors.
+"""PLAN.md, sections 4 and 6: outcomes per suite, contract equivalence against the authors' labels, cross-suite survivors,
+and one row per run (X2_NATIVE_RUNS.csv).
 
-Reads the archived X2_NATIVE_RUNS.jsonl.gz, X2_CONFIRM.json and X2_CONTEXT_STATES.json. Outcome rules: OPERATIONAL.md
+Reads the archived X2_NATIVE_RUNS.jsonl.gz, X2_CONFIRM.json, X2_CONTROL.json and X2_CONTEXT_STATES.json. Outcome rules: OPERATIONAL.md
 (X2_OPERATIONAL, X2_STATE_RELATION).
 """
 import collections, csv, gzip, json, os
@@ -10,6 +11,7 @@ HERE = Path(__file__).resolve().parent
 OUT = Path(os.environ.get("QSD_OUT", HERE.parents[1] / "output")) / "developer_suites"; OUT.mkdir(parents=True, exist_ok=True)
 runs = [json.loads(l) for l in gzip.open(HERE / "X2_NATIVE_RUNS.jsonl.gz", "rt")]
 conf = json.load(open(HERE / "X2_CONFIRM.json"))
+ctrl = json.load(open(HERE / "X2_CONTROL.json"))
 cstates = json.load(open(HERE / "X2_CONTEXT_STATES.json"))
 guards = collections.defaultdict(list); pairs = collections.defaultdict(list)
 for r in runs:
@@ -44,12 +46,26 @@ for (s, p, v), rs in sorted(pairs.items()):
         else:
             row.update({"witness": f"{w['kind']}:{w['key']}@{w['context']}", "witness_d": round(w["d"], 6)})
             c = conf.get(f"{s}|{p}|{v}")
-            row["outcome"] = ("suite omission" if c and c["supported"] else
+            ok = c and c["supported"] and ctrl.get(f"{s}|{p}|{v}", {}).get("supported", False)
+            row["outcome"] = ("suite omission" if ok else
                               "unresolved: confirmation" if c else "suite omission candidate")
     rows.append(row)
 fields = ["suite", "program", "mutant", "label", "kills", "outcome", "contract_equivalent_F", "inputs_F", "inputs_S", "witness", "witness_d"]
 with open(OUT / "X2_DIAGNOSIS.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore"); w.writeheader(); w.writerows(rows)
+
+with open(OUT / "X2_NATIVE_RUNS.csv", "w", newline="") as f:                   # one row per run
+    w = csv.writer(f)
+    w.writerow(["kind", "suite", "program", "version", "seed", "passed", "failed", "calls", "calls_equal", "contexts",
+                "aligned", "observation_equal", "max_context_diff", "witness", "witness_d"])
+    for r in runs:
+        d = r.get("detail") if r["kind"] == "pair" else (r.get("tests") or r.get("failed_properties"))
+        failed = ";".join(k for k, v in d.items() if v is not True) if isinstance(d, dict) else ";".join(d or [])
+        pe, wt = r.get("program_equal", {}), r.get("witness")
+        w.writerow([r["kind"], r["suite"], r["program"], r["version"], r["seed"], r["passed"], failed,
+                    len(pe) if pe else "", sum(pe.values()) if pe else "", r.get("contexts", ""), r.get("aligned", ""),
+                    r.get("observation_equal", ""), r.get("max_context_diff", ""),
+                    f"{wt['kind']}:{wt['key']}@{wt['context']}" if wt else "", round(wt["d"], 6) if wt else ""])
 
 by = {(r["suite"], r["program"], r["mutant"]): r for r in rows}
 labels = collections.Counter()

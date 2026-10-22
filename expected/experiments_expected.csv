@@ -62,7 +62,7 @@ R-X401,"Later positions: pairs, survivors; observation limitations, suite omissi
 R-X402,"Later positions, five other circuits: observation limitations by program and third; suite omissions and sites","OL 17 in simon_4,wstate_4 (6 middle, 11 last); SO 15 at 11 sites",yes,per-run records,5.3.1; 5.6
 R-X403,"Later positions, Q# and QASMBench and MQT Bench: observation limitations","external OL 38 in 8 programs, qft_n4 17; MQT OL 10 in rg_mult_12,rg_mult_8",yes,per-run records,5.6
 R-X404,Later positions: original guards,18 programs; guards clean 18; original failures 0 in 216 runs,no,per-run records,Data Availability
-R-X200,x2_analyze.py and x2_q3_analyze.py rerun equal the archived diagnosis / QuCheck table / summaries,True/True/True/True,n.a. (logical check),per-run records,Data Availability
+R-X200,x2_analyze.py and x2_q3_analyze.py rerun equal the archived diagnosis / per-run table / QuCheck table / summaries,True/True/True/True/True,n.a. (logical check),per-run records,Data Availability
 R-X201,"QuCheck case studies, unit tests: mutants, survivors; outcomes; programs with observation limitations","120 mutants, 65 survivors; CE 30, EIE 8, OL 6, SO 0, unresolved 21; OL in quantum_teleportation",yes,per-run records,Table 3; 5.6
 R-X202,"QuCheck case studies, property tests: mutants, survivors; outcomes","180 mutants, 77 survivors; CE 31, EIE 6, OL 0, SO 1, unresolved 39",yes,per-run records,Table 3; 5.6
 R-X203,"QuCheck case studies: unresolved, split, semantics-preserving; suites with such splits and with guard failures","unresolved 60, split 59, em 40; suites with em splits 4, of which failing the original in guard runs 3",partly (60 not printed),per-run records,5.6
@@ -70,9 +70,12 @@ R-X204,QuCheck case studies: property tests on the unit-test observation limitat
 R-X205,QuCheck case studies: executed-input equalities over both suites,14 executed-input equalities,yes,per-run records,5.6
 R-X206,Native QuCheck on the 20 circuits: detections in 12 of 12 runs; controls with the shipped correction and with step-down Holm,only QuCheck 28/28 detected in 12 of 12 (Holm 28); only QUTest 0/25 (never 9); controls 175 and 2 with Holm of 816,yes (as 21% and 0.25%; never 9 not printed),per-run records,5.3.3
 R-X207,Native QuCheck on the transfer cases with and without a witness above theta,"transfer with witness 15/15; without 5 never, 1 split of 6",partly (15/15 and 6 printed),per-run records,5.4
+R-X208,QuCheck case studies: negative control of the suite omission,"B|grovers_algorithm|m11: control marginal:0@0, mutant kills 0, original failures 0",no,archived control runs,data/developer_suites/OPERATIONAL.md
 R-X500,"Evidence requirements as a classifier of reliable repairs: candidates, issued, precision, recall, withheld, unsupported withheld","210 candidates, 165 issued, precision 164/165, recall 164/187, withheld 45, unsupported withheld 22 of 23",yes,archived re-analysis output (rerun: R-A10),4.3; 5.4
 R-X501,Corpus mutation score raw / without contract equivalences / also without observation limitations; distinct final states / sites of OL and SO,corpus score 63.4 70.7 79.3; CL3:28/27 CL4:56/23,yes,archived re-analysis output (rerun: R-A10),5.3.1; 6
 R-X502,Output-register contract; IBM Torino median noise,"register contract: CL3 13/35, CL4 59/79; noise: SO witness above theta 79/79 (median ratio 0.90), OL below 34/35, largest OL difference 0.0508",partly (median ratio not printed; 0.051 printed),"archived re-analysis output (rerun: R-A11, R-A12)",5.2; 7.2; 7.3
 R-A10,r156.py rerun equals R156_SUMMARY.json,True,n.a. (logical check),per-case records,Data Availability
 R-A11,r3_register_contract.py rerun equals R3_REGISTER_CONTRACT.json,True,n.a. (logical check),ideal states,Data Availability
 R-A12,r4_noise.py rerun equals R4_NOISE.json,True,n.a. (logical check),simulated noisy distributions,Data Availability
+R-A13,x1_settings.py rerun equals X1_SETTINGS.csv (separating settings from ideal states),True,n.a. (logical check),ideal states,Data Availability
+R-A14,QED-C constructed pair: separating setting / witness / difference per width (x1_qedc_setting.py),2:XZ/marginal 0/0.1771 3:XZZ/marginal 0/0.09 4:XZZZ/marginal 0/0.0887 5:XZZZZ/marginal 0/0.0886 6:XZZZZZ/marginal 0/0.0886 7:XZZZZZZ/marginal 0/0.0886 8:XZZZZZZZ/marginal 0/0.0886,partly (X on qubit 0 and 0.089 printed),ideal states,5.5

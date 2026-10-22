@@ -1,5 +1,0 @@
-cases 149, agreeing 149
-surviving Simon suite omission: {'mutant_id': 'simon_4#h02', 'subject': 'simon_4', 'baseline_report': 'CL4', 'witness': 'zmask 12', 'predicted_kill': False, 'native': 'SURVIVED', 'agree': True}
-surviving Simon suite omission: {'mutant_id': 'simon_4#h03', 'subject': 'simon_4', 'baseline_report': 'CL4', 'witness': 'zmask 12', 'predicted_kill': False, 'native': 'SURVIVED', 'agree': True}
-surviving Simon suite omission: {'mutant_id': 'simon_4#h06', 'subject': 'simon_4', 'baseline_report': 'CL4', 'witness': 'zmask 12', 'predicted_kill': False, 'native': 'SURVIVED', 'agree': True}
-surviving Simon suite omission: {'mutant_id': 'simon_4#h07', 'subject': 'simon_4', 'baseline_report': 'CL4', 'witness': 'zmask 12', 'predicted_kill': False, 'native': 'SURVIVED', 'agree': True}

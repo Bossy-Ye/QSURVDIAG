@@ -54,13 +54,19 @@ Set or changed after earlier outcomes were known:
   (`data/all_pairs/PLAN.md`).
 - the closed witness order (v3), after the v2 outcomes and the QED-C runs were known
   (`data/certification/witness_order/AMENDMENT.md`).
+- the development circuits, chosen after a pilot had tested 33 of their 450 mutants; the pilot's runs are not among
+  the released records;
+- the one-qubit GHZ output register of the 20 circuits, kept after an earlier analysis had shown that the GHZ
+  circuits supply most suite omissions (`data/interventions/width_register/DESIGN_FREEZE.md`, E13c, 16 August 2026);
 - the designs of the separating-setting, later-position and developer-suite experiments, after all earlier outcomes
   and after pilots on some of their pairs (section 0 of each `PLAN.md`), but before any of their runs;
 - in the developer-suite experiment, the comparison of final states on the executed contexts, placed ahead of the
   comparison of observations before any of its outcomes was reported (`data/developer_suites/OPERATIONAL.md`,
   X2_STATE_RELATION);
 - the separating setting of the QED-C constructed pair, after the QED-C study was complete
-  (`data/observation_change/QEDC_EXTENSION.md`).
+  (`data/observation_change/QEDC_EXTENSION.md`);
+- in the developer-suite experiment, the negative control of its one suite omission, run after its outcomes were
+  known (`data/developer_suites/OPERATIONAL.md`, X2_NEGATIVE_CONTROL).
 
 Strength of the timing records:
 - The rules and predictions of the evaluation on the five circuits of other algorithm families were committed to
@@ -88,7 +94,7 @@ Strength of the timing records:
 | Current rules (v2) fixed before the v2 outcomes | `V2_SPECIFICATION.sha256`; file times: specification 15:12, first `R2V_*` output 15:23, 28 September 2026 | |
 | Protocol of the Q# and QASMBench programs, v1 to v4 | each JSON with its `.sha256`; file times 16:08, 16:21, 16:50, 18:04, 6 September 2026 | V18 |
 | MQT Bench protocol and mutants fixed before any mutant ran | RFC 3161 receipts of Freeze A (05:33:09 UTC) and Freeze B (05:35:54 UTC), 9 October 2026, before Stage C | `verify_integrity.py --tsr` |
-| Designs of the separating-setting, developer-suite and later-position experiments | RFC 3161 receipt of Freeze C, 08:31:41 UTC, 20 October 2026; first runs after it | `verify_integrity.py --tsr` |
+| Designs of the separating-setting, developer-suite and later-position experiments | RFC 3161 receipt of Freeze C, 08:31:41 UTC, 20 October 2026, over `X1_OBSERVATION_CHANGE.md`, `X2_DEVELOPER_SUITES.md` and `X4_POSITION.md`, released as the `PLAN.md` of `data/observation_change/`, `data/developer_suites/` and `data/position/`; first runs after it by the study's file times | `verify_integrity.py --tsr` |
 | Later operational records | `data/position/OPERATIONAL.md` 12:37 UTC, 20 October; `data/observation_change/QEDC_EXTENSION.md` 07:25 UTC, 21 October; `data/developer_suites/OPERATIONAL.md`, time per section | |
 
 Times are local (UTC+3) unless marked UTC. The `provenance` column of `provenance/source_manifest.csv` gives, per file:
@@ -101,7 +107,8 @@ checksum file that is not released; no external time) or `file only` (modificati
 An experiment with 2,000 shots on the output register, made before the every-qubit QuCheck profile was declared,
 detected 5 of the 21 transfer cases. It used separately constructed contingency tables and Fisher tests in QuCheck's
 pinned environment and did not call QuCheck's analysis routine, so these detections are not native QuCheck verdicts.
-The article's transfer result is computed from simulated final states under the declared profile.
+The article's transfer result is computed from simulated final states under the declared profile. Records:
+`data/prospective/cross_tool/s3/S3_QUCHECK_RESULTS.csv`.
 
 ## 4. Predictions about the five other circuits
 

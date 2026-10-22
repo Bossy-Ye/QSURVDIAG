@@ -1,6 +1,7 @@
 # X2: records made after the plan was timestamped
 
-Each section is one record, in the order recorded; the time is that of its last change (UTC). The plan is `PLAN.md`.
+Each section is one record, in the order recorded, with the time of its last change (UTC); execution details are
+summarized. The plan is `PLAN.md`.
 
 ## X2_CLARIFICATIONS: clarifications recorded before any X2 execution
 
@@ -113,15 +114,11 @@ any mutant runs.
 
 Recorded 2026-10-20 16:34:37 UTC.
 
-Item 6 of X2_OPERATIONAL computes each context's exact distribution with qiskit.quantum_info. On suite B of the
-QFT this takes about 15 minutes per run: the contexts begin with `initialize`, which quantum_info evaluates by
-synthesising a state-preparation circuit. The exact distributions are therefore computed with Aer's statevector
-method (`save_probabilities` on the measured qubits, double precision, `initialize` executed natively), called
-outside the seeded and captured simulator path, so the native runs are unchanged.
-
-Check on recorded original captures before the change (suite B QFT seed 15045, suite B Deutsch-Jozsa seed 15042,
-suite A Grover seed 15042; 467 contexts): largest absolute difference between the two methods 3.2e-14, below the
-equality margin 1e-9. Original captures already computed are kept.
+Exact distributions of the contexts (X2_OPERATIONAL item 6) are computed with Aer's statevector method
+(`save_probabilities` on the measured qubits, double precision, `initialize` executed natively) outside the seeded and
+captured simulator path, instead of qiskit.quantum_info, which is too slow for contexts that begin with `initialize`.
+Native runs are unchanged. On 467 recorded contexts the two methods differ by at most 3.2e-14, below the equality
+margin 1e-9.
 
 ## X2_STATE_RELATION: state equality on the executed contexts (amendment recorded before any X2 outcome is reported)
 
@@ -142,42 +139,35 @@ some executed argument is compared on the final states of every executed context
 measurements, Aer statevector, equality up to global phase at 1e-9), at all 12 seeds. If every context state agrees,
 the outcome is executed-input equality; otherwise it is observation limitation. No other rule changes.
 
-## X2_EQUALITY_METHOD: computation of program equality (execution detail; definitions unchanged)
+## X2_EQUALITY_METHOD: computation of program equality and execution details (definitions unchanged)
 
 Recorded 2026-10-21 09:42:46 UTC.
 
-Program equality (X2_OPERATIONAL, item 2) compares the two programs' circuits for each recorded call with
-Operator.equiv (global phase, atol 1e-9). Building each operator gate by gate took about 45 s per suite-A pair. From
-17:05 UTC, the operators of circuits with at most 12 qubits and without initialize, state preparation, reset or
-measurement are computed with Aer's unitary method (double precision, outside the seeded path) and compared with the
-same Operator.equiv; other circuits keep the previous computation. From 17:10 UTC, each equality is computed once per program, mutant
-and call signature, and reused at every seed, since it does not depend on the seed.
+Program equality (X2_OPERATIONAL item 2) compares the circuits of each recorded call with Operator.equiv (global
+phase, atol 1e-9). From 17:05 UTC on 20 October, operators of circuits with at most 12 qubits and no initialize, state
+preparation, reset or measurement come from Aer's unitary method, and each equality is computed once per program,
+mutant and call and reused at every seed; calls wider than 14 qubits compare final states from |0...0> taken from Aer's
+statevector method, and their exact distributions and the original's final state are stored by circuit content and
+reused. Checks against the previous computation (Deutsch-Jozsa m3, m7, m12, em0 under suite A; QFT m3, em0 under suite
+B; the 19-qubit Grover call; the suite-A Grover contexts) gave identical results, with amplitudes within 1.6e-13. The
+first 23 suite-A Deutsch-Jozsa pair runs used the previous computation.
 
-Check against the previous computation (all recorded calls of the original capture at seed 15042): suite A
-Deutsch-Jozsa m3, m7, m12, em0 (13 calls each) and suite B QFT m3, em0 (100 calls each): identical results.
-The first 23 suite-A Deutsch-Jozsa pair runs, before 17:05, used the previous computation; all
-later runs use this one. Rows are not individually time-stamped; the 23 are the pair rows with more than 30 s.
+From 07:33 UTC on 21 October, a suite-A run stops at its first failing test, since its verdict is then decided;
+passing runs execute every test. The 132 suite-A Grover pair runs and all suite-A Deutsch-Jozsa runs made before then
+list every test.
 
-From 17:27 UTC, calls wider than 14 qubits (suite A Grover: 19 and 23 qubits), whose operators do not fit in memory
-and which the previous computation therefore compared as final states from |0...0> with Statevector.equiv, take
-those final states from Aer's statevector method and compare them with the same Statevector.equiv. Check on the
-19-qubit call of the original: largest absolute amplitude difference 1.6e-13 (1.8 s against 641 s). No suite-A
-Grover pair had run before this change.
+Native QuCheck on the 20 circuits (PLAN.md, section 5): a first execution, finished at 09:41 UTC on 21 October, named
+every generated property file prop_pair.py. QuCheck imports property files by module name, so within a worker process
+later runs reused an earlier run's property, and every control was reported as detected (816 of 816). Those runs are
+invalid and are not used. The runs were repeated at the same seeds with one module name per run, each recording its
+own p-values.
 
-From 19:41 UTC, for circuits wider than 14 qubits, each exact distribution and the original's final state are stored
-under a key of the circuit's full content (gates, full-precision parameters, qubits, clbits) and reused for an
-identical circuit, since they do not depend on the seed. Check on the four contexts of the suite-A Grover original
-capture at seed 15042: stored and recomputed distributions identical to the recorded ones. 20 suite-A Grover pair
-runs had completed before this change.
+## X2_NEGATIVE_CONTROL: negative control of the suite omission (recorded after the X2 outcomes were known)
 
-From 07:33 UTC on 21 October, a suite-A run stops at its first failing test: the suite has then failed, so its verdict
-is decided, and the remaining tests of a killed run are not executed. Passing runs execute every test as before. The
-MITRE Grover test retries a failing search up to ten times, so a killed run otherwise executed its 19- and 23-qubit
-circuits up to thirty times (about 1,500 s per run). 132 suite-A Grover pair runs and all suite-A Deutsch-Jozsa runs
-had completed before this change; their per-test records list every test.
+Recorded 2026-10-22 15:45:16 UTC.
 
-Native QuCheck on the 20 circuits (PLAN.md, section 5): the first execution, finished at 09:41 UTC on
-21 October, named every generated property file prop_pair.py. QuCheck imports property files by module name, so
-within a worker process later runs reused an earlier run's property, and every control was reported as detected
-(816 of 816). The runs are invalid and are not used. From 09:42 UTC each run writes its property under its own module
-name and records its own p-values; the runs were repeated at the same seeds.
+X2_OPERATIONAL item 5 left out the study's negative control. It is added for the one natively confirmed suite
+omission, B grovers_algorithm m11, so that the outcome meets every evidence requirement of the article: the first
+instance of the suite-B universe decided below theta in the witness run (seed 15042), the marginal of bit 0 of context
+0, runs alone at 2,000 shots on the mutant at seeds 15042-15053 and on the original at 16042-16044. It kills the mutant
+in none of the 12 runs, and the original passes all three (`x2_control.py`, `X2_CONTROL.json`). No outcome changes.

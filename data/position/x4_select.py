@@ -4,7 +4,8 @@ X4_SUBJECTS.json (sha256 ac1dc89e...) and X4_MUTANT_GATES.json (sha256 7753081c.
 and are not archived.
 
 Programs: the five other circuits (S1_SUBJECTS.json), the four MQT Bench programs (SUBJECTS.json, prep kept apart),
-the seven Qolumbina programs (archive checked by MD5 and circuit hashes) and two QASMBench circuits (pinned commit,
+the seven Qolumbina programs (circuit hashes of data/external/protocol/EXTERNAL_COHORT_FREEZE.json, which also records
+the archive MD5) and two QASMBench circuits (pinned commit,
 LF line endings). Original gate lists follow the populations' rule: transpile to the enumerator basis at level 0.
 """
 import ast, collections, csv, hashlib, importlib, json, os, sys

@@ -1,4 +1,5 @@
-"""Verify the package against provenance/checksums.sha256 and the archived content against source_manifest.csv.
+"""Verify the package against provenance/checksums.sha256, the archived content against source_manifest.csv, and
+that provenance/LICENSE_MAP.csv covers every file.
 
 Usage:  python3 scripts/verify_integrity.py
 Optional (needs OpenSSL): also verifies the RFC 3161 receipts of the MQT Bench freeze (A, B) and of the designs of the
@@ -44,11 +45,15 @@ for r in csv.DictReader(open(ROOT / "provenance/source_manifest.csv")):
         elif r["package_path"] not in derived: derived.append(r["package_path"])
         continue
     if not p.is_file() or sha(p) != r["sha256"]: bad.append(f"archived file differs from its source hash: {r['package_path']}")
+lic = {r["package_path"] for r in csv.DictReader(open(ROOT / "provenance/LICENSE_MAP.csv"))}
+bad += [f"no license-map row: {k}" for k in sorted(present - lic - {"provenance/checksums.sha256"})]
+bad += [f"license-map row without a file: {k}" for k in sorted(lic - present)]
 bad += [f"redaction record without a source-manifest row: {k}" for k in RED if k not in archived]
 bad += [f"derived-file record without a source-manifest row: {k}" for k in DER if k not in archived]
 print(f"checksums: {len(listed)} files listed (every file except provenance/checksums.sha256 itself), {len(bad)} problems, {len(extra)} unlisted files")
 print(f"archived files: {len(archived) - len(redacted) - len(derived)} identical to their source hash, {len(redacted)} redacted"
       + (" (original SHA-256 and the hash of each removed text in provenance/REDACTIONS.csv)" if redacted else ""))
+print(f"license map: {len(lic)} files")
 if DER: print(f"derived files: {len(derived)} with third-party quotations replaced (original SHA-256 and the hash of each omitted text in provenance/DERIVED_FILES.csv)")
 for b in bad[:20]: print("  ", b)
 for x in extra[:20]: print("   unlisted:", x)
@@ -59,6 +64,7 @@ if "--tsr" in sys.argv:
                             "-CAfile", "tsa/freetsa_cacert.pem", "-untrusted", "tsa/freetsa_tsa.crt"], cwd=fz, capture_output=True, text=True)
         verdict = [l for l in (r.stdout + r.stderr).splitlines() if l.startswith("Verification")]
         print(f"RFC 3161 Freeze {k}: {verdict[0] if verdict else (r.stdout + r.stderr).strip()[-200:]}")
+        if verdict != ["Verification: OK"]: bad.append(f"RFC 3161 receipt of Freeze {k} does not verify")
     for k in ("A", "B"):
         lines = [l.split("  ", 1) for l in (fz / f"FREEZE_{k}.sha256").read_text().splitlines() if l.strip() and not l.startswith("#")]
         match, red, miss = 0, [], []
@@ -69,11 +75,13 @@ if "--tsr" in sys.argv:
             else: miss.append(rel)
         print(f"MQT Bench Freeze {k} manifest: {len(lines)} entries, {match} matching, {len(red)} redacted"
               + (" (original SHA-256 in provenance/REDACTIONS.csv equals the timestamped hash)" if red else "") + f", {len(miss)} other")
+        if miss: bad.append(f"MQT Bench Freeze {k} manifest: {len(miss)} entries match neither the file nor a redaction record")
     pv = ROOT / "provenance"; fz = ROOT / "data/prospective/mqt_bench/freeze"
     r = subprocess.run(["openssl", "ts", "-verify", "-in", str(pv / "FREEZE_C.tsr"), "-data", str(pv / "FREEZE_C.sha256"),
                         "-CAfile", str(fz / "tsa/freetsa_cacert.pem"), "-untrusted", str(fz / "tsa/freetsa_tsa.crt")], capture_output=True, text=True)
     verdict = [l for l in (r.stdout + r.stderr).splitlines() if l.startswith("Verification")]
     print(f"RFC 3161 Freeze C: {verdict[0] if verdict else (r.stdout + r.stderr).strip()[-200:]}")
+    if verdict != ["Verification: OK"]: bad.append("RFC 3161 receipt of Freeze C does not verify")
     PLAN = {"X1_OBSERVATION_CHANGE.md": "data/observation_change/PLAN.md", "X2_DEVELOPER_SUITES.md": "data/developer_suites/PLAN.md",
             "X4_POSITION.md": "data/position/PLAN.md"}
     lines = [l.split("  ", 1) for l in (pv / "FREEZE_C.sha256").read_text().splitlines() if l.strip()]
