@@ -65,7 +65,9 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
   then by qubit subset, then with X before Y; the first setting with an instance above theta gives the setting and
   its witness. Each pair ran the witness alone under its setting, 12 runs on the mutant (seeds 13042-13053) and 12
   on the original (14042-14053); the control is the same instance without the setting's gates. The QED-C
-  constructed pair used seeds 19042-19053 and 20042-20053.
+  constructed pair used seeds 19042-19053 and 20042-20053, and the 65 later-position observation limitations seeds
+  21042-21053 and 22042-22053, with final states from the executed inputs written by `x4_select.py`
+  (`x1_position.py`).
 - **Native QuCheck** (`data/developer_suites/x2_qucheck20.py`). One property per pair asserts equal distributions of
   every qubit in the x, y and z bases; controls compare the original with itself (seeds 15542-15553 and
   16542-16553). QuCheck 0.0.2's Holm correction does not stop at the first retained hypothesis; the step-down

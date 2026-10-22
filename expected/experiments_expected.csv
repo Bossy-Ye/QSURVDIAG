@@ -46,7 +46,7 @@ R-AP07,Mutant 12 of 12 D/A; original fails >1 D/A; tool errors,189/192; original
 R-AP08,Witness difference below theta + 0.01: cases / D / A supported,14/2/6,yes,per-run records,5.4
 R-AP09,Adjacent-pair suite derived from A's per-assertion results: supported,165,no (package only),per-run records,docs/protocols.md section 5
 R-AP10,Corpus D/A of 187; MQT Bench D/A of 23,165/170 of 187; 22/22 of 23,no,per-run records,data/all_pairs/ALLPAIRS_RESULTS.json
-R-AP11,Assertions in D / A over 210 cases; largest A suite,1762/7174; max 91,partly (max 91 printed),per-case records,4.3; docs/protocols.md section 5
+R-AP11,Assertions in D / A over 210 cases; largest A suite,1762/7174; max 91,yes,per-case records,4.3; 6; docs/protocols.md section 5
 R-AP12,Histograms needed (mutant + original); native executions D/A; assertion evaluation D/A,2520+756; executions 3924/3276; eval 4/33 s,no (package only),per-run records,docs/protocols.md section 5
 R-AP13,"Histogram archive: referenced ids missing; histograms not of 8,000 shots; archived",0 missing; 0 not 8000 shots; 2859 archived,n.a. (logical check),per-run records,Data Availability
 R-V301,audit.py rerun equals IMPACT.csv (witnesses and controls per population),True,n.a. (logical check),per-case records,3.2; 5.6; 7.1
@@ -57,6 +57,8 @@ R-X101,Separating settings: supported / pairs; original failures; control kills;
 R-X102,Separating settings by rotated qubits; witness kinds,1:28 4:3 5:2 7:2; marginal:28 zmask:7,partly (28 and 7 printed),per-run records,5.3.2
 R-X103,Distinct settings over the circuits; settings other than all-Z; smallest witness difference,19 settings over 10 circuits; 5876 other than all-Z; smallest witness difference 0.146,partly (smallest difference not printed),per-run records,5.3.2
 R-X104,"QED-C constructed pair, X on qubit 0: mutant kills / original failures / control kills per width",2:12/0/0 3:12/0/0 4:12/0/0 5:12/0/0 6:12/0/0 7:12/0/0 8:12/0/0,yes,per-run records,5.5
+R-X105,Separating settings at later positions: rerun equals the archived summary / per-pair table; supported by population; original failures; control kills,True/True; 65/65 supported (external:38/38 mqt:10/10 other:17/17); original failures 0 of 780; control kills 0,yes (65 and 780 printed),per-run records,Abstract; 5.3.2; 9
+R-X106,"Separating-setting search: settings evaluated per pair (20 circuits, later positions); rotated qubits at later positions","settings evaluated: 20 circuits median 7, max 2059; later positions median 7, max 69361; rotated qubits 1:34 2:21 3:2 6:8","partly (7, 2,059, 69,361 and six rotated qubits printed)",per-case records,5.3.2
 R-X400,x4_analyze.py rerun equals the archived final table / per-pair runs / summary,True/True/True,n.a. (logical check),per-run records,Data Availability
 R-X401,"Later positions: pairs, survivors; observation limitations, suite omissions, unresolved; sites","360 pairs, 188 survivors; OL 65, SO 25, unresolved 11; OL sites 50, SO sites 21",yes,per-run records,Table 3; 5.6; 7.3
 R-X402,"Later positions, five other circuits: observation limitations by program and third; suite omissions and sites","OL 17 in simon_4,wstate_4 (6 middle, 11 last); SO 15 at 11 sites",yes,per-run records,5.3.1; 5.6
@@ -66,7 +68,7 @@ R-X200,x2_analyze.py and x2_q3_analyze.py rerun equal the archived diagnosis / p
 R-X201,"QuCheck case studies, unit tests: mutants, survivors; outcomes; programs with observation limitations","120 mutants, 65 survivors; CE 30, EIE 8, OL 6, SO 0, unresolved 21; OL in quantum_teleportation",yes,per-run records,Table 3; 5.6
 R-X202,"QuCheck case studies, property tests: mutants, survivors; outcomes","180 mutants, 77 survivors; CE 31, EIE 6, OL 0, SO 1, unresolved 39",yes,per-run records,Table 3; 5.6
 R-X203,"QuCheck case studies: unresolved, split, semantics-preserving; suites with such splits and with guard failures","unresolved 60, split 59, em 40; suites with em splits 4, of which failing the original in guard runs 3",partly (60 not printed),per-run records,5.6
-R-X204,QuCheck case studies: property tests on the unit-test observation limitations; contract equivalence against the authors' labels,property tests kill 4 of 6 observation limitations; labels agree 179/180; exception superdense_coding:m6,yes,per-run records,Abstract; 5.6; 9
+R-X204,QuCheck case studies: property tests on the unit-test observation limitations; contract equivalence against the authors' labels,property tests kill 4 of 6 observation limitations; labels agree 179/180; exception superdense_coding:m6,yes,per-run records,Abstract; 5.6; 6; 9
 R-X205,QuCheck case studies: executed-input equalities over both suites,14 executed-input equalities,yes,per-run records,5.6
 R-X206,Native QuCheck on the 20 circuits: detections in 12 of 12 runs; controls with the shipped correction and with step-down Holm,only QuCheck 28/28 detected in 12 of 12 (Holm 28); only QUTest 0/25 (never 9); controls 175 and 2 with Holm of 816,yes (as 21% and 0.25%; never 9 not printed),per-run records,5.3.3
 R-X207,Native QuCheck on the transfer cases with and without a witness above theta,"transfer with witness 15/15; without 5 never, 1 split of 6",partly (15/15 and 6 printed),per-run records,5.4

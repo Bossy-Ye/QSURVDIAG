@@ -37,7 +37,7 @@ study-authored material. Upstream licences verified 2026-10-13 at the pinned ver
 
 4. Free TSA
    Files    data/prospective/mqt_bench/freeze/tsa/freetsa_cacert.pem, freetsa_tsa.crt,
-            data/prospective/mqt_bench/freeze/FREEZE_A.tsr, FREEZE_B.tsr, provenance/FREEZE_C.tsr
+            data/prospective/mqt_bench/freeze/FREEZE_A.tsr, FREEZE_B.tsr, provenance/FREEZE_C.tsr, FREEZE_D.tsr
    Source   issued or published by freetsa.org; included unchanged, only to verify the receipts.
 
 5. Not redistributed (retrieval and hashes: environment/records/ and docs/protocols.md section 9)

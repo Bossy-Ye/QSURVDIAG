@@ -3,7 +3,8 @@ that provenance/LICENSE_MAP.csv covers every file.
 
 Usage:  python3 scripts/verify_integrity.py
 Optional (needs OpenSSL): also verifies the RFC 3161 receipts of the MQT Bench freeze (A, B) and of the designs of the
-separating-setting, developer-suite and later-position experiments (C) with --tsr.
+separating-setting, developer-suite and later-position experiments (C) and of the extension of separating settings to
+the later positions (D) with --tsr.
 
 Archived files that this release redacts are listed in provenance/REDACTIONS.csv, and the archived file whose
 third-party quotations it replaces is listed in provenance/DERIVED_FILES.csv. They are reported separately: their
@@ -88,4 +89,13 @@ if "--tsr" in sys.argv:
     match = sum(sha(ROOT / PLAN[n]) == h for h, n in lines)
     print(f"Freeze C manifest: {len(lines)} entries, {match} matching " + ", ".join(PLAN[n] for _, n in lines))
     if match != len(lines): bad.append("Freeze C manifest does not match the plans")
+    r = subprocess.run(["openssl", "ts", "-verify", "-in", str(pv / "FREEZE_D.tsr"), "-data", str(pv / "FREEZE_D.sha256"),
+                        "-CAfile", str(fz / "tsa/freetsa_cacert.pem"), "-untrusted", str(fz / "tsa/freetsa_tsa.crt")], capture_output=True, text=True)
+    verdict = [l for l in (r.stdout + r.stderr).splitlines() if l.startswith("Verification")]
+    print(f"RFC 3161 Freeze D: {verdict[0] if verdict else (r.stdout + r.stderr).strip()[-200:]}")
+    if verdict != ["Verification: OK"]: bad.append("RFC 3161 receipt of Freeze D does not verify")
+    (h, n), = [l.split("  ", 1) for l in (pv / "FREEZE_D.sha256").read_text().splitlines() if l.strip()]
+    ok = n == "X1_POSITION_EXTENSION.md" and sha(ROOT / "data/observation_change/POSITION_EXTENSION.md") == h
+    print(f"Freeze D manifest: 1 entry, {int(ok)} matching data/observation_change/POSITION_EXTENSION.md")
+    if not ok: bad.append("Freeze D manifest does not match the plan")
 sys.exit(1 if bad or extra else 0)

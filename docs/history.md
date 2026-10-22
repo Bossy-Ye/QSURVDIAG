@@ -83,7 +83,8 @@ Strength of the timing records:
   `data/output_condition/`, `data/combined_suite/`, `data/all_pairs/` and `data/qedc/`). The released files differ
   from the committed ones only in file paths and cross-references.
 - The designs of the separating-setting, developer-suite and later-position experiments were timestamped together
-  by an RFC 3161 authority before any of their runs (Freeze C). Records made after that carry their recorded times
+  by an RFC 3161 authority before any of their runs (Freeze C), and the extension of separating settings to the later
+  positions before its settings were computed (Freeze D). Records made after that carry their recorded times
   only.
 - No rule was deposited in a public registry.
 
@@ -95,6 +96,7 @@ Strength of the timing records:
 | Protocol of the Q# and QASMBench programs, v1 to v4 | each JSON with its `.sha256`; file times 16:08, 16:21, 16:50, 18:04, 6 September 2026 | V18 |
 | MQT Bench protocol and mutants fixed before any mutant ran | RFC 3161 receipts of Freeze A (05:33:09 UTC) and Freeze B (05:35:54 UTC), 9 October 2026, before Stage C | `verify_integrity.py --tsr` |
 | Designs of the separating-setting, developer-suite and later-position experiments | RFC 3161 receipt of Freeze C, 08:31:41 UTC, 20 October 2026, over `X1_OBSERVATION_CHANGE.md`, `X2_DEVELOPER_SUITES.md` and `X4_POSITION.md`, released as the `PLAN.md` of `data/observation_change/`, `data/developer_suites/` and `data/position/`; first runs after it by the study's file times | `verify_integrity.py --tsr` |
+| Separating settings at the later positions | RFC 3161 receipt of Freeze D, 18:42:20 UTC, 22 October 2026, over `X1_POSITION_EXTENSION.md`, released as `data/observation_change/POSITION_EXTENSION.md`; settings computed and runs made after it | `verify_integrity.py --tsr` |
 | Later operational records | `data/position/OPERATIONAL.md` 12:37 UTC, 20 October; `data/observation_change/QEDC_EXTENSION.md` 07:25 UTC, 21 October; `data/developer_suites/OPERATIONAL.md`, time per section | |
 
 Times are local (UTC+3) unless marked UTC. The `provenance` column of `provenance/source_manifest.csv` gives, per file:

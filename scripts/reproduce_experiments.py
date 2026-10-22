@@ -155,6 +155,21 @@ got["R-X102"] = " ".join(f"{k}:{v}" for k, v in sorted(x1["by_rotated_qubits"].i
 nprog = {r["program"]: int(r["n"]) for r in x1r}
 got["R-X103"] = f"{sum(x1['distinct_settings_per_program'].values())} settings over {len(nprog)} circuits; {sum(3 ** n - 1 for n in nprog.values())} other than all-Z; smallest witness difference {min(float(r['witness_d']) for r in x1r):.3f}"
 qw = json.load(open(OUT / "observation_change/X1_QEDC_BY_WIDTH.json"))
+xp = json.load(open(OUT / "observation_change/X1_POSITION_SUMMARY.json"))
+got["R-X105"] = (f"{same_json(OUT / 'observation_change/X1_POSITION_SUMMARY.json', OB / 'X1_POSITION_SUMMARY.json')}/"
+                 f"{filecmp.cmp(OUT / 'observation_change/X1_POSITION_NATIVE_RUNS.csv', OB / 'X1_POSITION_NATIVE_RUNS.csv', shallow=False)}; "
+                 f"{xp['supported']}/{xp['pairs']} supported (" + " ".join(f"{k}:{v}" for k, v in xp["supported_by_population"].items()) +
+                 f"); original failures {xp['original_failures_total']} of {12 * xp['pairs']}; control kills {xp['control_kills_total']}")
+def _evaluated(s):                                     # position of a setting in the search order of x1_settings.py
+    import itertools, math
+    n = len(s); S = tuple(i for i, c in enumerate(s) if c != "Z"); k = len(S)
+    return (sum(math.comb(n, j) * 2 ** j for j in range(1, k)) + list(itertools.combinations(range(n), k)).index(S) * 2 ** k
+            + list(itertools.product("XY", repeat=k)).index(tuple(s[i] for i in S)) + 1)
+ev20 = sorted(_evaluated(r["setting_q0_first"]) for r in x1r)
+evp = sorted(int(r["settings_evaluated"]) for r in rows(OB / "X1_POSITION_SETTINGS.csv"))
+assert all(_evaluated(r["setting_q0_first"]) == int(r["settings_evaluated"]) for r in rows(OB / "X1_POSITION_SETTINGS.csv"))
+got["R-X106"] = (f"settings evaluated: 20 circuits median {ev20[len(ev20) // 2]}, max {ev20[-1]}; later positions median {evp[len(evp) // 2]}, "
+                 f"max {evp[-1]}; rotated qubits " + " ".join(f"{k}:{v}" for k, v in xp["by_rotated_qubits"].items()))
 got["R-X104"] = " ".join(f"{n}:{v['mutant_kills']}/{v['original_failures']}/{v['control_kills']}" for n, v in sorted(qw.items(), key=lambda t: int(t[0])))
 
 # ---------------------------------------------------------------- later positions
