@@ -56,7 +56,7 @@ witness-surface counts, which depend on the order of ties (`data/checks/tie_chec
 | 3.1, Table 4, 5.1 | `data/profiles/`, `data/structural/`, `data/external/developer_tests/`; `data/checks/parameter_and_distance.py`, `observation_limited_universe.py` |
 | 3.2 | `data/certification/witness_order/`; `data/certification/outcomes/R2V_FINAL_PRIMARY.csv`, `R2_MARGINS*.csv` |
 | 3.4 | `data/certification/outcomes/R2V_BOUND.json`, `r2v_bound.py`; `data/implementation/tests/` |
-| 4.2, Tables 2 and 3 | `data/primary/`, `data/external/`, `data/prospective/`, `data/scalability/`, `data/inventory/out/` |
+| 4.2, Table 2; Table 3 | `data/primary/`, `data/external/`, `data/prospective/`, `data/scalability/`, `data/inventory/out/`; outcomes: `data/certification/outcomes/R2V_FINAL_*.csv`, `data/position/X4_FINAL.csv`, `data/developer_suites/X2_DIAGNOSIS.csv` |
 | 4.3 | `docs/protocols.md`; the plan of each experiment |
 | 5.2 | `data/certification/equivalence/`; `data/output_condition/OC_SIMON_MOVERS.out`; `data/reanalysis/` (register contracts) |
 | 5.3, Figs. 3 and 4, Table 5 | `data/certification/outcomes/` (`R2V_FINAL_*.csv`, `R2V_TABLE_X.json`, `R2V_DECISION_GRID.csv`, `r2v_stats.py`), `data/output_condition/`, `data/checks/circuit_level.py`; `data/reanalysis/` (distinct states and sites) |

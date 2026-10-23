@@ -247,9 +247,9 @@ M266,manuscript_checks,mean 9.84 requirements per certificate,9.84,no,archived a
 M267,manuscript_checks,"every ablation withdraws, names, keeps candidate",True,n.a. (logical check),archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
 M268,manuscript_checks,by gate 16 of 90 against 110 of 740,16/90/110/740,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
 M269,manuscript_checks,"by-gate CL3 enrichment 10 of 33, 25 of 420",10/33/25/420,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
-M273,manuscript_checks,external 28/94/30/5/0/2,28/94/30/5/0/2,"partly (OL, SO and Unresolved counts printed)",per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
+M273,manuscript_checks,external 28/94/30/5/0/2,28/94/30/5/0/2,yes (Table 3),per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
 M274,manuscript_checks,external CL4 confirmed 5 of 5,5/5,yes,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
-M275,manuscript_checks,width set 19/0/17/6/1/4,19/0/17/6/1/4,no (Unresolved count implied as 47 - 43),per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
+M275,manuscript_checks,width set 19/0/17/6/1/4,19/0/17/6/1/4,yes (Table 3),per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
 M276,manuscript_checks,"width universe 523 to 32,785",523/32785,no,per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
 M277,manuscript_checks,width and corpus universe sizes equal 2^(n+1)+n+3,True,n.a. (logical check),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/outcomes/R2V_FINAL_WIDTH.csv
 M278,manuscript_checks,"SBS_061 witness 0.008 above theta, kills 6 of 12",0.008/6,no,per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv; data/certification/outcomes/R2V_NATIVE.csv; data/certification/outcomes/R2V_NATIVE_DEFECTS.csv
@@ -336,11 +336,11 @@ L-N05,ledger_checks,certification: native confirmation + control checks,537,no,p
 L-N06,ledger_checks,certification: QUTest runs in native evidence,"8,055",no,per-case records,data/certification/outcomes/R2V_NATIVE.csv
 L-N07,ledger_checks,certification: v3 native checks / QUTest runs / controls satisfied,4 / 60 / 2,no,per-case records,data/certification/witness_order/NATIVE_RUNS.csv
 L-E01,ledger_checks,external: mutants / killed / diagnosed,270/111/159,partly (270 and 159 printed),per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
-L-E02,ledger_checks,external: CE/EIE/OL/SO/BTD/Unresolved,28/94/30/5/0/2,"partly (OL, SO and Unresolved counts printed)",per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
+L-E02,ledger_checks,external: CE/EIE/OL/SO/BTD/Unresolved,28/94/30/5/0/2,yes (Table 3),per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
 L-E03,ledger_checks,external: analytic and executed verdict agree (stable),268,no,per-case records,data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
 L-E04,ledger_checks,"external: first-gate mutants / distinct (program, site)",244 / 16,no,per-case records,data/external/cohort/EXTERNAL_ALLOCATION.csv
 L-E05,ledger_checks,external: OL at the first gate / programs with OL,30 / 9,yes,per-case records,data/external/cohort/EXTERNAL_ALLOCATION.csv; data/certification/outcomes/R2V_FINAL_EXTERNAL.csv
-L-W01,ledger_checks,width: executed / diagnosed / issued / Unresolved,143/47/43/4,"partly (143, 47 and 43 printed)",per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
+L-W01,ledger_checks,width: executed / diagnosed / issued / Unresolved,143/47/43/4,"partly (143, 47 and 4 printed)",per-case records,data/certification/outcomes/R2V_FINAL_WIDTH.csv
 L-K01,ledger_checks,corpus: pairs <=14 qubits / killed / diagnosed,"1,537/975/562","partly (1,537 and 562 printed)",per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
 L-K02,ledger_checks,corpus: CE/OL/SO/BTD/Unresolved,158/150/143/13/98,yes,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/NATIVE_RUNS.csv
 L-K03,ledger_checks,corpus: Unresolved: split / undecided margin / failed SO candidates,51/3/44,partly (3 and 44 printed),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/NATIVE_RUNS.csv
@@ -357,7 +357,7 @@ L-Z01,ledger_checks,sites: additional-circuit first-gate / mutants / distinct si
 L-Z02,ledger_checks,"sites: construction distinct (program, site)",214,no,per-case records,data/prospective/mqt_bench/frozen_deps/MUTANT_POPULATION.csv
 L-Z03,ledger_checks,sites: MQT first-gate / distinct sites,68/22,no,per-case records,data/prospective/mqt_bench/population/MUTANT_MANIFEST.csv
 L-M01,ledger_checks,mqt: mutants / killed / diagnosed,120/64/56,partly (120 and 56 printed),per-case records,data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
-L-M02,ledger_checks,mqt: CE/EIE/OL/SO/BTD/Unresolved,14/10/7/22/0/3,partly (OL and SO counts printed),per-case records,data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
+L-M02,ledger_checks,mqt: CE/EIE/OL/SO/BTD/Unresolved,14/10/7/22/0/3,yes (Table 3),per-case records,data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
 L-M03,ledger_checks,mqt: SO candidates / certified / withheld,23/22/1,yes,per-case records,data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
 L-M04,ledger_checks,mqt: certified repairs killing 12/12 at fresh seeds,22,yes,per-case records,data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
 L-M05,ledger_checks,mqt: distinct repaired suites among certified,4,yes,per-case records,data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv
