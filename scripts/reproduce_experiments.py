@@ -262,6 +262,10 @@ if a.analytic:
     OB = ROOT / "data/observation_change"
     r = subprocess.run([PY, "-I", "-B", str(OB / "x1_settings.py")], capture_output=True, text=True, env=env)
     got["R-A13"] = str(r.returncode == 0 and filecmp.cmp(OUT / "analytic/observation_change/X1_SETTINGS.csv", OB / "X1_SETTINGS.csv", shallow=False))
+    r = subprocess.run([PY, "-I", "-B", str(OB / "x1_transition.py"), "stage2", "primary"], capture_output=True, text=True, env=env)
+    nos = lambda P: [{k: v for k, v in x.items() if k != "search_seconds"} for x in P]
+    got["R-A15"] = str(r.returncode == 0 and nos(rows(OUT / "analytic/observation_change/X1_TRANSITION_STAGE2.csv"))
+                       == nos(x for x in rows(OB / "X1_TRANSITION_STAGE2.csv") if x["arm"] == "primary"))
     r = subprocess.run([PY, "-I", "-B", str(OB / "x1_qedc_setting.py")], capture_output=True, text=True, env=env)
     got["R-A14"] = " ".join(f"{l.split()[0]}:{l.split()[1]}/{l.split()[3]} {l.split()[4]}/{l.split()[5]}" for l in r.stdout.splitlines() if l[:1].isdigit())
 

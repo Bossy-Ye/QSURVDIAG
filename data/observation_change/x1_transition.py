@@ -4,15 +4,16 @@ Rotated profile: the declared QUTest types on the joint distribution of every qu
 settings; the all-Z setting is the declared profile and holds the baseline suite (output-register marginals).
 Witness order: all-Z, then the settings in the X1 search order, the closed witness order (v3) within each.
 
-stage2:  candidate (packaged rule; R_C, R_S, R_T as recorded), first witness outside the suite, undecided instances
-         up to it, and the negative control (first instance outside the suite decided below theta);
-         writes X1_TRANSITION_STAGE2.csv.
+stage2:  candidate (packaged rule; R_C, R_S as recorded, R_O, R_A, R_T over the rotated universe and the suite), first
+         witness outside the suite, undecided instances up to it, and the negative control (first instance outside
+         the suite decided below theta); writes X1_TRANSITION_STAGE2.csv. "stage2 primary": the 35 pairs of the 20
+         circuits only, which need no x4_select.py inputs.
 run:     the control alone at N = 8,000 on the mutant at the witness seeds (13042-13053; later positions
          21042-21053) and on the original at 14042-14044 (22042-22044); writes X1_TRANSITION_RUNS.jsonl.gz.
 analyze: Stage 3 from the archived stage2 and run records and the recorded witness runs; writes X1_TRANSITION.csv
          and X1_TRANSITION_SUMMARY.json. Standard library only.
 
-Usage: QSD_OUT=<dir with position/ from x4_select.py> <analytic python> -B x1_transition.py stage2|run|analyze
+Usage: QSD_OUT=<dir with position/ from x4_select.py> <analytic python> -B x1_transition.py stage2 [primary]|run|analyze
 """
 import os, csv, gzip, json, collections, sys, time
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -24,7 +25,7 @@ N = 8000
 SEEDS = {"primary": (list(range(13042, 13054)), list(range(14042, 14045))),
          "position": (list(range(21042, 21054)), list(range(22042, 22045)))}
 if sys.argv[1:2] != ["analyze"]:
-    sys.path.insert(0, str(DIR.parents[1] / "scripts/lib"))
+    sys.path[:0] = [str(DIR), str(DIR.parents[1] / "scripts/lib")]
     import numpy as np
     import counts as C
     import x1_position as XP
@@ -32,7 +33,7 @@ if sys.argv[1:2] != ["analyze"]:
     below = lambda d: d < C.THETA - C.RES
 
 
-def population():
+def population(primary_only=False):
     orig, nq, outreg, mut = C.load_population()
     R = {r["mutant_id"]: r for r in csv.DictReader(open(C.OUTC / "R2V_FINAL_PRIMARY.csv"))}
     out = []
@@ -42,6 +43,8 @@ def population():
         out.append({"pair": r["pair"], "arm": "primary", "population": "20 circuits", "program": p, "n": n,
                     "og": orig[p], "mg": mut[r["pair"]]["gates"], "suite": [int(q) for q in outreg[p]],
                     "R_C": x["R_C"], "R_S": x["R_S"], "R_T": x["R_T"], "rec": r})
+    if primary_only:
+        return out
     S = json.load(open(XP.ROOT / "position/X4_SUBJECTS.json"))
     D = {}
     for l in gzip.open(DIR.parent / "position/X4_NATIVE_RUNS.jsonl.gz", "rt"):
@@ -69,9 +72,10 @@ def stage2(a):
     import qsurvdiag_confirmatory as Q
     n, suite = a["n"], a["suite"]
     po, pmu = C.sv(a["og"], n), C.sv(a["mg"], n)
-    t0 = time.perf_counter(); und = []; w = None; evaluated = 0
+    t0 = time.perf_counter(); und = []; w = None; evaluated = 0; sd = []
     for kind, key, d, ref in C.ordered(np.abs(po) ** 2, np.abs(pmu) ** 2, n):        # all-Z: the declared profile
-        if kind == "marginal" and key in suite: continue
+        if kind == "marginal" and key in suite:
+            sd.append(d); continue
         assert not C.separates(d), (a["pair"], kind, key)
         if undecided(d): und.append(("Z" * n, kind, key, d))
     for s, k in XP.settings(n):
@@ -84,7 +88,9 @@ def stage2(a):
         if w: break
     sec = time.perf_counter() - t0
     tri = {"true": Q.T, "false": Q.F, "undecided": Q.U}
-    rel = {"R_C": tri[a["R_C"]], "R_S": tri[a["R_S"]], "R_T": tri[a["R_T"]],
+    r_t = Q.T if any(C.separates(d) for d in sd) else (Q.U if any(undecided(d) for d in sd) else Q.F)
+    assert r_t is tri[a["R_T"]], (a["pair"], r_t)                                    # the suite is unchanged
+    rel = {"R_C": tri[a["R_C"]], "R_S": tri[a["R_S"]], "R_T": r_t,
            "R_O": (Q.F if w[5] > 1e-8 else Q.U) if w else Q.U, "R_A": Q.T if w else Q.F}
     cand, _, und_rel = Q.candidate(rel)
     c = control(po, pmu, n, suite)
@@ -124,7 +130,7 @@ def resumable(name, jobs, fn, key):
 
 
 if __name__ == "__main__" and sys.argv[1] == "stage2":
-    pop = population()
+    pop = population(sys.argv[2:3] == ["primary"])
     done = resumable("X1_TRANSITION_STAGE2", pop, stage2, lambda x: x["pair"])
     rows = [done[a["pair"]] for a in pop]
     with open(OUT / "X1_TRANSITION_STAGE2.csv", "w", newline="") as f:

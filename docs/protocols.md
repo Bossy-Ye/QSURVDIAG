@@ -70,10 +70,11 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
   (`x1_position.py`).
 - **Rotated profile** (`data/observation_change/x1_transition.py`). The XYZ setting on every qubit (3^n settings),
   with the baseline suite in the all-Z setting; witness order all-Z, then the search order, v3 within each setting.
-  Stage 2 takes R_C, R_S and R_T from the declared diagnosis and evaluates R_O and R_A over the rotated universe. The
-  negative control, the first instance outside the suite decided below theta, ran alone at N = 8,000 on the mutant
-  at the witness seeds and on the original at the first three original seeds. Stage 2 takes about 4 CPU hours,
-  almost all of it for the twelve-qubit multipliers.
+  Stage 2 takes R_C and R_S from the declared diagnosis and evaluates R_O, R_A and R_T over the rotated universe and
+  the suite. The negative control, the first instance outside the suite decided below theta, ran alone at N = 8,000
+  on the mutant at the witness seeds and on the original at the first three original seeds. Stage 2 takes about
+  4 CPU hours, almost all of it for the twelve-qubit multipliers; the analytic tier reruns it on the 35 pairs of the
+  20 circuits.
 - **Native QuCheck** (`data/developer_suites/x2_qucheck20.py`). One property per pair asserts equal distributions of
   every qubit in the x, y and z bases; controls compare the original with itself (seeds 15542-15553 and
   16542-16553). QuCheck 0.0.2's Holm correction does not stop at the first retained hypothesis; the step-down

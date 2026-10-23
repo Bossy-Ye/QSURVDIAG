@@ -82,3 +82,4 @@ R-A11,r3_register_contract.py rerun equals R3_REGISTER_CONTRACT.json,True,n.a. (
 R-A12,r4_noise.py rerun equals R4_NOISE.json,True,n.a. (logical check),simulated noisy distributions,Data Availability
 R-A13,x1_settings.py rerun equals X1_SETTINGS.csv (separating settings from ideal states),True,n.a. (logical check),ideal states,Data Availability
 R-A14,QED-C constructed pair: separating setting / witness / difference per width (x1_qedc_setting.py),2:XZ/marginal 0/0.1771 3:XZZ/marginal 0/0.09 4:XZZZ/marginal 0/0.0887 5:XZZZZ/marginal 0/0.0886 6:XZZZZZ/marginal 0/0.0886 7:XZZZZZZ/marginal 0/0.0886 8:XZZZZZZZ/marginal 0/0.0886,partly (X on qubit 0 and 0.089 printed),ideal states,5.5
+R-A15,x1_transition.py stage2 rerun on the 35 observation limitations of the 20 circuits equals X1_TRANSITION_STAGE2.csv (search time excepted),True,n.a. (logical check),ideal states,Data Availability

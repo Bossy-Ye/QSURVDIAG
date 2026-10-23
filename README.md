@@ -21,7 +21,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments
 verify_integrity        0 problems; RFC 3161 Freeze A to D OK; Freeze A 69 of 70 matching, 1 redacted
 reproduce               399 checks   MATCH 297   PARTIAL 100   analytic tier 2
 conformance             3 of 3 pass
-reproduce_experiments    83 checks   MATCH 70    PARTIAL 6     analytic tier 7
+reproduce_experiments    84 checks   MATCH 70    PARTIAL 6     analytic tier 8
 ```
 
 MATCH: recomputed from per-case or per-run records. PARTIAL: equal to an archived aggregate, protocol record or git
@@ -43,7 +43,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments --analytic ../
 ```
 
 The QED-C reference file is checked by its SHA-256. All checks match; merged with the record tier, 407 checks: MATCH
-342, PARTIAL 65. With `--analytic`, the 83 experiment checks give MATCH 77, PARTIAL 6, including reruns of the
+342, PARTIAL 65. With `--analytic`, the 84 experiment checks give MATCH 78, PARTIAL 6, including reruns of the
 separating settings and the three re-analyses. A02 is one fresh trial of QUTest's gate-set check, compared on the
 programs whose flags the article treats as reliable. A06 compares `R2V_BOUND.json` without its unprinted
 witness-surface counts, which depend on the order of ties (`data/checks/tie_check.py`); A07 compares margins to 1e-12.
