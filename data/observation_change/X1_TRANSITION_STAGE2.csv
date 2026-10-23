@@ -1,0 +1,101 @@
+pair,arm,population,program,n,suite,R_C,R_S,R_T,R_O,R_A,candidate,undecided_relation,setting_q0_first,witness_kind,witness_key,witness_d,witness_is_named,settings_evaluated,undecided_instances,undecided_list,control_kind,control_key,control_d,control_ref,search_seconds
+bv_4#e07,primary,20 circuits,bv_4,4,0;1;2,false,false,false,false,true,CL4,,ZZZX,marginal,3,0.500000,True,7,0,,marginal,3,0.000000,0.500000,0.003
+bv_4#e19,primary,20 circuits,bv_4,4,0;1;2,false,false,false,false,true,CL4,,ZZZX,marginal,3,0.500000,True,7,0,,marginal,3,0.000000,0.500000,0.005
+bv_4#e25,primary,20 circuits,bv_4,4,0;1;2,false,false,false,false,true,CL4,,ZZZX,marginal,3,0.500000,True,7,0,,marginal,3,0.000000,0.500000,0.004
+bv_7#e10,primary,20 circuits,bv_7,7,0;1;2;3;4;5,false,false,false,false,true,CL4,,ZZZZZZX,marginal,6,0.500000,True,13,0,,marginal,6,0.000000,0.500000,0.017
+dj_3#e19,primary,20 circuits,dj_3,3,0;1,false,false,false,false,true,CL4,,ZZX,marginal,2,0.500000,True,5,0,,marginal,2,0.000000,0.500000,0.001
+dj_3#e22,primary,20 circuits,dj_3,3,0;1,false,false,false,false,true,CL4,,ZZX,marginal,2,1.000000,True,5,0,,marginal,2,0.000000,0.500000,0.002
+ghz_4#e14,primary,20 circuits,ghz_4,4,0,false,false,false,false,true,CL4,,XXXX,zmask,15,2.000000,True,65,0,,marginal,1,0.000000,0.500000,0.016
+ghz_4#e20,primary,20 circuits,ghz_4,4,0,false,false,false,false,true,CL4,,XXXX,zmask,15,1.000000,True,65,0,,marginal,1,0.000000,0.500000,0.022
+ghz_4#e22,primary,20 circuits,ghz_4,4,0,false,false,false,false,true,CL4,,XXXX,zmask,15,2.000000,True,65,0,,marginal,1,0.000000,0.500000,0.018
+ghz_5#e19,primary,20 circuits,ghz_5,5,0,false,false,false,false,true,CL4,,XXXXX,zmask,31,1.000000,True,211,0,,marginal,1,0.000000,0.500000,0.101
+ghz_5#e29,primary,20 circuits,ghz_5,5,0,false,false,false,false,true,CL4,,XXXXX,zmask,31,1.000000,True,211,0,,marginal,1,0.000000,0.500000,0.090
+ghz_7#e22,primary,20 circuits,ghz_7,7,0,false,false,false,false,true,CL4,,XXXXXXX,zmask,127,1.000000,True,2059,0,,marginal,1,0.000000,0.500000,1.750
+ghz_7#e25,primary,20 circuits,ghz_7,7,0,false,false,false,false,true,CL4,,XXXXXXX,zmask,127,1.000000,True,2059,0,,marginal,1,0.000000,0.500000,1.940
+grover_3#e04,primary,20 circuits,grover_3,3,0;1;2,false,false,false,false,true,CL4,,XZZ,marginal,0,0.500000,True,1,0,,zmask,3,0.000000,0.750000,0.000
+grover_3#e20,primary,20 circuits,grover_3,3,0;1;2,false,false,false,false,true,CL4,,ZZX,marginal,2,0.500000,True,5,0,,zmask,3,0.000000,0.750000,0.001
+qft_4#e01,primary,20 circuits,qft_4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZZX,marginal,3,0.500000,True,7,0,,zmask,3,0.000000,0.000000,0.002
+qft_4#e02,primary,20 circuits,qft_4,4,0;1;2;3,false,false,false,false,true,CL4,,ZXZZ,marginal,1,0.500000,True,3,0,,zmask,3,0.000000,0.000000,0.001
+qft_4#e05,primary,20 circuits,qft_4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZZX,marginal,3,0.500000,True,7,0,,zmask,3,0.000000,0.000000,0.002
+qft_4#e07,primary,20 circuits,qft_4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZXZ,marginal,2,0.500000,True,5,0,,zmask,3,0.000000,0.000000,0.001
+qft_4#e08,primary,20 circuits,qft_4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.500000,True,1,0,,zmask,3,0.000000,0.000000,0.000
+qft_4#e10,primary,20 circuits,qft_4,4,0;1;2;3,false,false,false,false,true,CL4,,ZXZZ,marginal,1,0.250000,True,3,0,,zmask,3,0.000000,0.000000,0.001
+qft_4#e19,primary,20 circuits,qft_4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZZX,marginal,3,0.146447,True,7,0,,zmask,3,0.000000,0.000000,0.002
+qft_5#e05,primary,20 circuits,qft_5,5,0;1;2;3;4,false,false,false,false,true,CL4,,ZZXZZ,marginal,2,0.500000,True,5,0,,zmask,3,0.000000,0.000000,0.002
+qft_5#e16,primary,20 circuits,qft_5,5,0;1;2;3;4,false,false,false,false,true,CL4,,XZZZZ,marginal,0,0.146447,True,1,0,,zmask,3,0.000000,0.000000,0.001
+qft_5#e19,primary,20 circuits,qft_5,5,0;1;2;3;4,false,false,false,false,true,CL4,,ZZZZX,marginal,4,0.500000,True,9,0,,zmask,3,0.000000,0.000000,0.003
+qft_5#e22,primary,20 circuits,qft_5,5,0;1;2;3;4,false,false,false,false,true,CL4,,ZZZZX,marginal,4,0.500000,True,9,0,,zmask,3,0.000000,0.000000,0.003
+qft_5#e25,primary,20 circuits,qft_5,5,0;1;2;3;4,false,false,false,false,true,CL4,,ZZXZZ,marginal,2,0.250000,True,5,0,,zmask,3,0.000000,0.000000,0.002
+qft_5#e26,primary,20 circuits,qft_5,5,0;1;2;3;4,false,false,false,false,true,CL4,,XZZZZ,marginal,0,0.500000,True,1,0,,zmask,3,0.000000,0.000000,0.001
+qft_6#e01,primary,20 circuits,qft_6,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,ZZZZZX,marginal,5,0.500000,True,11,0,,zmask,3,0.000000,0.000000,0.006
+qft_6#e05,primary,20 circuits,qft_6,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,ZZXZZZ,marginal,2,0.500000,True,5,0,,zmask,3,0.000000,0.000000,0.003
+qft_6#e07,primary,20 circuits,qft_6,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,ZZZZZX,marginal,5,1.000000,True,11,0,,zmask,3,0.000000,0.000000,0.005
+qft_6#e19,primary,20 circuits,qft_6,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,ZZXZZZ,marginal,2,0.500000,True,5,0,,zmask,3,0.000000,0.000000,0.003
+qft_6#e20,primary,20 circuits,qft_6,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,ZZZZZX,marginal,5,0.500000,True,11,0,,zmask,3,0.000000,0.000000,0.006
+qft_6#e25,primary,20 circuits,qft_6,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,ZXZZZZ,marginal,1,1.000000,True,3,0,,zmask,3,0.000000,0.000000,0.002
+qft_6#e26,primary,20 circuits,qft_6,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,ZZZZXZ,marginal,4,0.500000,True,9,0,,zmask,3,0.000000,0.000000,0.004
+simon_4#pM02,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,XXZZ,zmask,7,1.000000,True,9,0,,marginal,2,0.000000,0.500000,0.002
+simon_4#pM05,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,ZZXX,zmask,13,1.000000,True,29,0,,marginal,2,0.000000,0.500000,0.007
+simon_4#pM06,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,ZZXX,zmask,13,1.000000,True,29,0,,marginal,2,0.000000,0.500000,0.006
+simon_4#pM07,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,ZZXX,zmask,13,0.292893,True,29,0,,marginal,2,0.000000,0.500000,0.006
+simon_4#pL03,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,ZZXX,zmask,13,1.000000,True,29,0,,marginal,2,0.000000,0.500000,0.006
+simon_4#pL04,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,ZZXX,zmask,13,2.000000,True,29,0,,marginal,2,0.000000,0.500000,0.006
+simon_4#pL05,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,ZZXX,zmask,13,1.000000,True,29,0,,marginal,2,0.000000,0.500000,0.007
+simon_4#pL06,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,ZZXX,zmask,13,1.000000,True,29,0,,marginal,2,0.000000,0.500000,0.006
+simon_4#pL07,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,ZZXX,zmask,13,0.292893,True,29,0,,marginal,2,0.000000,0.500000,0.007
+simon_4#pL08,position,other,simon_4,4,0;1,false,false,false,false,true,CL4,,XXZZ,zmask,7,1.000000,True,9,0,,marginal,2,0.000000,0.500000,0.002
+wstate_4#pM06,position,other,wstate_4,4,0;1;2;3,false,false,false,false,true,CL4,,XXZZ,zmask,3,0.500000,True,9,0,,zmask,3,0.000000,0.000000,0.002
+wstate_4#pM07,position,other,wstate_4,4,0;1;2;3,false,false,false,false,true,CL4,,XZXZ,zmask,5,0.500000,True,13,0,,zmask,3,0.000000,0.000000,0.010
+wstate_4#pL03,position,other,wstate_4,4,0;1;2;3,false,false,false,false,true,CL4,,XXZZ,zmask,3,0.146447,True,9,0,,zmask,3,0.000000,0.000000,0.002
+wstate_4#pL04,position,other,wstate_4,4,0;1;2;3,false,false,false,false,true,CL4,,XXZZ,zmask,3,1.000000,True,9,0,,zmask,3,0.000000,0.000000,0.002
+wstate_4#pL05,position,other,wstate_4,4,0;1;2;3,false,false,false,false,true,CL4,,XXZZ,zmask,3,0.500000,True,9,0,,zmask,3,0.000000,0.000000,0.002
+wstate_4#pL06,position,other,wstate_4,4,0;1;2;3,false,false,false,false,true,CL4,,XXZZ,zmask,3,0.500000,True,9,0,,zmask,3,0.000000,0.000000,0.002
+wstate_4#pL07,position,other,wstate_4,4,0;1;2;3,false,false,false,false,true,CL4,,XXZZ,zmask,3,0.500000,True,9,0,,zmask,3,0.000000,0.000000,0.002
+rg_mult_8#pM05,position,mqt,rg_mult_8,8,0;1;2;3;4;5;6;7,false,false,false,false,true,CL4,,ZXZXZZZX,zmask,138,1.000000,True,361,0,,zmask,3,0.000000,0.000000,0.516
+rg_mult_8#pL02,position,mqt,rg_mult_8,8,0;1;2;3;4;5;6;7,false,false,false,false,true,CL4,,ZXZXZZZX,zmask,138,1.000000,True,361,0,,zmask,3,0.000000,0.000000,0.544
+rg_mult_12#pM01,position,mqt,rg_mult_12,12,0;1;2;3;4;5;6;7;8;9;10;11,false,false,false,false,true,CL4,,ZXXZXXZZZZXX,zmask,3126,1.000000,True,69361,0,,zmask,3,0.000000,-0.000000,1845.271
+rg_mult_12#pM02,position,mqt,rg_mult_12,12,0;1;2;3;4;5;6;7;8;9;10;11,false,false,false,false,true,CL4,,ZXXZXXZZZZXX,zmask,3126,1.000000,True,69361,0,,zmask,3,0.000000,-0.000000,1844.991
+rg_mult_12#pM03,position,mqt,rg_mult_12,12,0;1;2;3;4;5;6;7;8;9;10;11,false,false,false,false,true,CL4,,ZXXZXXZZZZXX,zmask,3126,1.000000,True,69361,0,,zmask,3,0.000000,-0.000000,1857.432
+rg_mult_12#pM04,position,mqt,rg_mult_12,12,0;1;2;3;4;5;6;7;8;9;10;11,false,false,false,false,true,CL4,,ZXXZXXZZZZXX,zmask,3126,1.000000,True,69361,0,,zmask,3,0.000000,-0.000000,1849.558
+rg_mult_12#pL01,position,mqt,rg_mult_12,12,0;1;2;3;4;5;6;7;8;9;10;11,false,false,false,false,true,CL4,,ZXXZXXZZZZXX,zmask,3126,1.000000,True,69361,0,,zmask,3,0.000000,-0.000000,1855.639
+rg_mult_12#pL02,position,mqt,rg_mult_12,12,0;1;2;3;4;5;6;7;8;9;10;11,false,false,false,false,true,CL4,,ZXXZXXZZZZXX,zmask,3126,1.000000,True,69361,0,,zmask,3,0.000000,-0.000000,1852.500
+rg_mult_12#pL03,position,mqt,rg_mult_12,12,0;1;2;3;4;5;6;7;8;9;10;11,false,false,false,false,true,CL4,,ZXXZXXZZZZXX,zmask,3126,1.000000,True,69361,0,,zmask,3,0.000000,-0.000000,1849.158
+rg_mult_12#pL04,position,mqt,rg_mult_12,12,0;1;2;3;4;5;6;7;8;9;10;11,false,false,false,false,true,CL4,,ZXXZXXZZZZXX,zmask,3126,1.000000,True,69361,0,,zmask,3,0.000000,-0.000000,1847.209
+ParityPhase#pM09,position,external,ParityPhase,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,XZZZZZ,marginal,0,0.500000,True,1,0,,zmask,3,0.000000,0.000000,0.001
+Is2PowerPhase#pL04,position,external,Is2PowerPhase,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,XZZZZZ,marginal,0,0.853553,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+Is2PowerPhase#pL05,position,external,Is2PowerPhase,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,XZZZZZ,marginal,0,0.500000,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+Is2PowerPhase#pL08,position,external,Is2PowerPhase,6,0;1;2;3;4;5,false,false,false,false,true,CL4,,XZZZZZ,marginal,0,0.549009,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+DiagonalZHamiltonian#pM02,position,external,DiagonalZHamiltonian,3,0;1;2,false,false,false,false,true,CL4,,XZZ,marginal,0,0.980067,True,1,0,,zmask,3,0.000000,0.000000,0.000
+DiagonalZHamiltonian#pM03,position,external,DiagonalZHamiltonian,3,0;1;2,false,false,false,false,true,CL4,,XZZ,marginal,0,0.589368,True,1,0,,zmask,3,0.000000,0.000000,0.000
+DiagonalZHamiltonian#pL02,position,external,DiagonalZHamiltonian,3,0;1;2,false,false,false,false,true,CL4,,YZZ,marginal,0,0.198669,True,2,0,,zmask,3,0.000000,0.000000,0.001
+DiagonalZHamiltonian#pL03,position,external,DiagonalZHamiltonian,3,0;1;2,false,false,false,false,true,CL4,,XZZ,marginal,0,0.589368,True,1,0,,zmask,3,0.000000,0.000000,0.000
+DiagonalZHamiltonian#pL04,position,external,DiagonalZHamiltonian,3,0;1;2,false,false,false,false,true,CL4,,XZZ,marginal,0,0.213768,True,1,0,,zmask,3,0.000000,0.000000,0.000
+DiagonalZHamiltonian#pL05,position,external,DiagonalZHamiltonian,3,0;1;2,false,false,false,false,true,CL4,,XZZ,marginal,0,0.589368,True,1,0,,zmask,3,0.000000,0.000000,0.000
+DiagonalZHamiltonian#pL06,position,external,DiagonalZHamiltonian,3,0;1;2,false,false,false,false,true,CL4,,XZZ,marginal,0,0.589368,True,1,0,,zmask,3,0.000000,0.000000,0.000
+DiagonalZHamiltonian#pL07,position,external,DiagonalZHamiltonian,3,0;1;2,false,false,false,false,true,CL4,,XZZ,marginal,0,0.980067,True,1,0,,zmask,3,0.000000,0.000000,0.000
+IsingEvolution#pM00,position,external,IsingEvolution,7,0;1;2;3;4;5;6,false,false,false,false,true,CL4,,XZZZZZZ,marginal,0,0.641709,True,1,0,,zmask,3,0.000000,-0.000000,0.002
+IsingEvolution#pL00,position,external,IsingEvolution,7,0;1;2;3;4;5;6,false,false,false,false,true,CL4,,XZZZZZZ,marginal,0,0.641709,True,1,0,,zmask,3,0.000000,-0.000000,0.003
+DraperAdder#pL03,position,external,DraperAdder,10,5;6;7;8;9,false,false,false,false,true,CL4,,XZZZZXZZZZ,zmask,33,1.000000,True,37,0,,marginal,0,0.000000,0.500000,0.219
+DraperAdder#pL04,position,external,DraperAdder,10,5;6;7;8;9,false,false,false,false,true,CL4,,XZZZZXZZZZ,zmask,33,1.000000,True,37,0,,marginal,0,0.000000,0.500000,0.228
+AdderHamiltonianMixture#pL03,position,external,AdderHamiltonianMixture,10,5;6;7;8;9,false,false,false,false,true,CL4,,XZZZZXZZZZ,zmask,33,1.000000,True,37,0,,marginal,0,0.000000,0.500000,0.235
+AdderHamiltonianMixture#pL04,position,external,AdderHamiltonianMixture,10,5;6;7;8;9,false,false,false,false,true,CL4,,XZZZZXZZZZ,zmask,33,1.000000,True,37,0,,marginal,0,0.000000,0.500000,0.211
+qft_n4#pM00,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.162212,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pM01,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.162212,True,1,0,,zmask,3,0.000000,-0.000000,0.000
+qft_n4#pM03,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.707107,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pM04,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.353553,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pM05,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.707107,True,1,0,,zmask,3,0.000000,-0.000000,0.000
+qft_n4#pM06,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.707107,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pM07,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.707107,True,1,0,,zmask,3,0.000000,-0.000000,0.000
+qft_n4#pM08,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.353553,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pM09,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.353553,True,1,0,,zmask,3,0.000000,-0.000000,0.000
+qft_n4#pL02,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZZX,marginal,3,1.000000,True,7,0,,zmask,3,0.000000,-0.000000,0.002
+qft_n4#pL03,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZXZ,marginal,2,0.500000,True,5,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pL04,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZXZ,marginal,2,1.000000,True,5,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pL05,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZXZ,marginal,2,0.500000,True,5,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pL06,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZXZ,marginal,2,0.500000,True,5,0,,zmask,3,0.000000,-0.000000,0.002
+qft_n4#pL07,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZXZ,marginal,2,0.146447,True,5,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pL08,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,XZZZ,marginal,0,0.353553,True,1,0,,zmask,3,0.000000,-0.000000,0.001
+qft_n4#pL09,position,external,qft_n4,4,0;1;2;3,false,false,false,false,true,CL4,,ZZZX,marginal,3,0.500000,True,7,0,,zmask,3,0.000000,-0.000000,0.001
+deutsch_n2#pL01,position,external,deutsch_n2,2,0,false,false,false,false,true,CL4,,ZX,marginal,1,1.000000,True,3,0,,marginal,1,0.000000,0.500000,0.000
+deutsch_n2#pL03,position,external,deutsch_n2,2,0,false,false,false,false,true,CL4,,ZX,marginal,1,0.500000,True,3,0,,marginal,1,0.000000,0.500000,0.000
+deutsch_n2#pL06,position,external,deutsch_n2,2,0,false,false,false,false,true,CL4,,ZX,marginal,1,0.500000,True,3,0,,marginal,1,0.000000,0.500000,0.000

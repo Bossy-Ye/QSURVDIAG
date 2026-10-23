@@ -1,0 +1,26 @@
+{
+ "pairs": 100,
+ "candidates": {
+  "CL4": 100
+ },
+ "witness_is_named": 100,
+ "undecided_instances_total": 0,
+ "controls_all_z": 100,
+ "control_kinds": {
+  "marginal": 30,
+  "zmask": 70
+ },
+ "control_d_max": 0.0,
+ "control_kills_total": 0,
+ "control_kills_max": 0,
+ "guard_failures_total": 0,
+ "controls_replaying_recorded": "15/15",
+ "certified": 100,
+ "certified_by_population": {
+  "20 circuits": "35/35",
+  "external": "38/38",
+  "mqt": "10/10",
+  "other": "17/17"
+ },
+ "executions": 1500
+}

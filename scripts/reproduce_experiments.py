@@ -170,6 +170,14 @@ evp = sorted(int(r["settings_evaluated"]) for r in rows(OB / "X1_POSITION_SETTIN
 assert all(_evaluated(r["setting_q0_first"]) == int(r["settings_evaluated"]) for r in rows(OB / "X1_POSITION_SETTINGS.csv"))
 got["R-X106"] = (f"settings evaluated: 20 circuits median {ev20[len(ev20) // 2]}, max {ev20[-1]}; later positions median {evp[len(evp) // 2]}, "
                  f"max {evp[-1]}; rotated qubits " + " ".join(f"{k}:{v}" for k, v in xp["by_rotated_qubits"].items()))
+py(OB / "x1_transition.py", "analyze")
+xt = json.load(open(OUT / "observation_change/X1_TRANSITION_SUMMARY.json"))
+got["R-X107"] = (f"{same_json(OUT / 'observation_change/X1_TRANSITION_SUMMARY.json', OB / 'X1_TRANSITION_SUMMARY.json')}/"
+                 f"{filecmp.cmp(OUT / 'observation_change/X1_TRANSITION.csv', OB / 'X1_TRANSITION.csv', shallow=False)}; "
+                 f"candidates " + " ".join(f"{k}:{v}" for k, v in sorted(xt["candidates"].items())) +
+                 f"; named witness {xt['witness_is_named']}; undecided {xt['undecided_instances_total']}; control kills "
+                 f"{xt['control_kills_total']} of {12 * xt['pairs']}; guard failures {xt['guard_failures_total']}; "
+                 f"certified {xt['certified']}/{xt['pairs']}")
 got["R-X104"] = " ".join(f"{n}:{v['mutant_kills']}/{v['original_failures']}/{v['control_kills']}" for n, v in sorted(qw.items(), key=lambda t: int(t[0])))
 
 # ---------------------------------------------------------------- later positions

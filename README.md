@@ -4,7 +4,7 @@ Records and verification scripts for *Why Quantum Mutants Survive: Separating Ob
 Omissions*. Native QUTest and QuCheck executions are archived, not rerun; the scripts recompute every checked value
 from the archived records.
 
-Version 1.2.0: [doi:10.5281/zenodo.23588010](https://doi.org/10.5281/zenodo.23588010).
+Version 1.3.0. Version 1.2.0: [doi:10.5281/zenodo.23588010](https://doi.org/10.5281/zenodo.23588010).
 
 ## Verify
 
@@ -21,7 +21,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments
 verify_integrity        0 problems; RFC 3161 Freeze A to D OK; Freeze A 69 of 70 matching, 1 redacted
 reproduce               399 checks   MATCH 297   PARTIAL 100   analytic tier 2
 conformance             3 of 3 pass
-reproduce_experiments    82 checks   MATCH 69    PARTIAL 6     analytic tier 7
+reproduce_experiments    83 checks   MATCH 70    PARTIAL 6     analytic tier 7
 ```
 
 MATCH: recomputed from per-case or per-run records. PARTIAL: equal to an archived aggregate, protocol record or git
@@ -43,7 +43,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments --analytic ../
 ```
 
 The QED-C reference file is checked by its SHA-256. All checks match; merged with the record tier, 407 checks: MATCH
-342, PARTIAL 65. With `--analytic`, the 82 experiment checks give MATCH 76, PARTIAL 6, including reruns of the
+342, PARTIAL 65. With `--analytic`, the 83 experiment checks give MATCH 77, PARTIAL 6, including reruns of the
 separating settings and the three re-analyses. A02 is one fresh trial of QUTest's gate-set check, compared on the
 programs whose flags the article treats as reliable. A06 compares `R2V_BOUND.json` without its unprinted
 witness-surface counts, which depend on the order of ties (`data/checks/tie_check.py`); A07 compares margins to 1e-12.
@@ -60,7 +60,7 @@ witness-surface counts, which depend on the order of ties (`data/checks/tie_chec
 | 4.3 | `docs/protocols.md`; the plan of each experiment |
 | 5.2 | `data/certification/equivalence/`; `data/output_condition/OC_SIMON_MOVERS.out`; `data/reanalysis/` (register contracts) |
 | 5.3, Figs. 3 and 4, Table 5 | `data/certification/outcomes/` (`R2V_FINAL_*.csv`, `R2V_TABLE_X.json`, `R2V_DECISION_GRID.csv`, `r2v_stats.py`), `data/output_condition/`, `data/checks/circuit_level.py`; `data/reanalysis/` (distinct states and sites) |
-| 5.3.2, 5.5: separating settings | `data/observation_change/` |
+| 5.3.2, 5.5, 7.2: separating settings, rotated profile | `data/observation_change/` |
 | 5.3.3, 5.4, 5.6, Table 3: native QuCheck and the QuCheck case studies | `data/developer_suites/` |
 | 5.4, Table 6 | `data/all_pairs/`; `data/combined_suite/`; `data/prospective/mqt_bench/`; `data/interventions/transfer/`; `data/reanalysis/` (evidence requirements) |
 | 5.5, Table 7 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
