@@ -4,7 +4,7 @@ Records and verification scripts for *Why Quantum Mutants Survive: Separating Ob
 Omissions*. Native QUTest and QuCheck executions are archived, not rerun; the scripts recompute every checked value
 from the archived records.
 
-Version 1.3.0. Version 1.2.0: [doi:10.5281/zenodo.23588010](https://doi.org/10.5281/zenodo.23588010).
+Version 1.3.0: [doi:10.5281/zenodo.23595707](https://doi.org/10.5281/zenodo.23595707).
 
 ## Verify
 
