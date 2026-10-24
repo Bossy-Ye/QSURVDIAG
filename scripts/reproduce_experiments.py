@@ -246,6 +246,15 @@ got["R-X502"] = (f"register contract: CL3 {r3['CL3']['equivalent_on_register']}/
                  f"OL below {r4['observation_limitations']['pairs'] - r4['observation_limitations']['separated_under_noise']}/{r4['observation_limitations']['pairs']}, "
                  f"largest OL difference {r4['observation_limitations']['largest_noisy_difference']:.4f}")
 
+# ---------------------------------------------------------------- negative controls of the reported suite omissions
+CO = ROOT / "data/certification/outcomes"
+cd = [float(r["c_d"]) for p in ("PRIMARY", "EXTERNAL", "CORPUS", "WIDTH", "DEFECT")
+      for r in rows(CO / f"R2V_FINAL_{p}.csv") if r["v2_report"] == "CL4"]
+cd += [float(r["v3_d"]) for r in rows(ROOT / "data/certification/witness_order/CHANGES.csv")
+       if r["selection"] == "control" and r["population"] in ("corpus", "defect")]
+pos = [d for d in cd if d >= 1e-9]
+got["R-NC01"] = f"{len(cd) - len(pos)}/{len(cd)} controls with difference 0; {len(pos)} positive, largest {max(pos):.4f}"
+
 # ---------------------------------------------------------------- analytic tier (optional)
 if a.analytic:
     PY, TREE, REFP = a.analytic

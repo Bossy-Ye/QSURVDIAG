@@ -125,7 +125,7 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
 
 At n = 2 the X statistic is the X expectation of qubit 0, the first X-basis instance of the closed witness order above
 theta; every instance before it differs by at most 0.0473 (`data/certification/witness_order/`). At n = 6 to 8, which
-are not admitted, the entropy difference on the Z counts exceeds theta. P failed the supplementary statistics in none of
+are not diagnosed, the entropy difference on the Z counts exceeds theta. P failed the supplementary statistics in none of
 its runs. On the 672 recorded histograms, the stored-reference acceptance rule and the diagnostic baseline referenced to
 P gave the same verdict on every one, with measured distances differing by at most 1.8e-4. At the benchmark's default of
 100 shots, the upstream score of either program ranges over about 0.1 across 12 noiseless runs

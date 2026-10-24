@@ -4,7 +4,7 @@ Records and verification scripts for *Why Quantum Mutants Survive: Separating Ob
 Omissions*. Native QUTest and QuCheck executions are archived, not rerun; the scripts recompute every checked value
 from the archived records.
 
-Version 1.3.0: [doi:10.5281/zenodo.23595707](https://doi.org/10.5281/zenodo.23595707).
+Version 1.3.1. Version 1.3.0: [doi:10.5281/zenodo.23595707](https://doi.org/10.5281/zenodo.23595707).
 
 ## Verify
 
@@ -21,7 +21,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments
 verify_integrity        0 problems; RFC 3161 Freeze A to D OK; Freeze A 69 of 70 matching, 1 redacted
 reproduce               399 checks   MATCH 297   PARTIAL 100   analytic tier 2
 conformance             3 of 3 pass
-reproduce_experiments    84 checks   MATCH 70    PARTIAL 6     analytic tier 8
+reproduce_experiments    85 checks   MATCH 71    PARTIAL 6     analytic tier 8
 ```
 
 MATCH: recomputed from per-case or per-run records. PARTIAL: equal to an archived aggregate, protocol record or git
@@ -43,7 +43,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments --analytic ../
 ```
 
 The QED-C reference file is checked by its SHA-256. All checks match; merged with the record tier, 407 checks: MATCH
-342, PARTIAL 65. With `--analytic`, the 84 experiment checks give MATCH 78, PARTIAL 6, including reruns of the
+342, PARTIAL 65. With `--analytic`, the 85 experiment checks give MATCH 79, PARTIAL 6, including reruns of the
 separating settings and the three re-analyses. A02 is one fresh trial of QUTest's gate-set check, compared on the
 programs whose flags the article treats as reliable. A06 compares `R2V_BOUND.json` without its unprinted
 witness-surface counts, which depend on the order of ties (`data/checks/tie_check.py`); A07 compares margins to 1e-12.
@@ -66,19 +66,21 @@ witness-surface counts, which depend on the order of ties (`data/checks/tie_chec
 | 5.5, Table 7 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
 | 5.6, Fig. 5, Table 3 | `R2V_FINAL_*.csv` with `data/certification/witness_order/`; `data/scalability/`, `data/external/defects/`, `data/inventory/out/`; `data/position/` (later positions) |
 | 6 | `data/reanalysis/` (mutation scores) |
-| 7 | `docs/history.md`; `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/reanalysis/` (noise); `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
+| 7 | `docs/history.md`; `R2V_FINAL_*.csv` and `data/certification/witness_order/CHANGES.csv` (negative controls); `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/reanalysis/` (noise); `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
 
 ## Codes
 
 Records and `expected/` use the study's codes. Outcomes: CL1 contract equivalence, CL2 executed-input equality, CL3
 observation limitation, CL4 suite omission, CL5 below-tolerance difference. Suites: S_MIN baseline, S_FAMILY
-adjacent-pair, S_COVER all-qubit, S_BOTH combined, S_SPEC output-condition. Populations: construction = the 15
-development circuits, prospective = the five other circuits. OB01-OB19: evidence requirements (Table 1). v1, v2, v3:
-initial rules, revised rules (`V2_SPECIFICATION.md`), witness-order amendment (`docs/history.md`). X1, X2, X4:
-separating-setting, developer-suite and later-position experiments; in X2, suite A is the unit tests, suite B the
-property tests, and `em` mutants are those labeled semantics-preserving. R1, R3-R6: re-analyses of existing records.
-In `expected/`, D, S and A are the witness, combined and all-pairs suites. QED-C records: M and C are P_ship and P_Z,
-the natural pair is the shipped-coupling pair, and T and T' are the stored-reference rule and the diagnostic baseline.
+adjacent-pair, S_COVER all-qubit, S_BOTH combined (a marginal on every qubit and the Z products of all neighboring
+qubits), S_SPEC output-condition. Populations: construction = the 15 development circuits, prospective = the five
+other circuits. OB01-OB19: evidence requirements (Table 1). v1, v2, v3: initial rules, revised rules
+(`V2_SPECIFICATION.md`), witness-order amendment (`docs/history.md`). X1, X2, X4: separating-setting, developer-suite
+and later-position experiments; in X2, suite A is the unit tests, suite B the property tests, and `em` mutants are
+those labeled semantics-preserving. R1, R3-R6: re-analyses of existing records. In `expected/` and `docs/`, a witness
+suite (D) is the article's repair, and S and A are the combined and all-pairs suites. QED-C records: M and C are
+P_ship and P_Z, the natural pair is the shipped-coupling pair, T and T' are the stored-reference rule and the
+diagnostic baseline, and the upstream score is the benchmark's normalized Hellinger fidelity.
 
 ## Layout
 
