@@ -32,14 +32,14 @@ Fixed before the outcomes they concern (initial analysis):
 - the profiles, evidence requirements and reporting rules, before any outcome of the five circuits of other
   algorithm families, the width set or the Q# and QASMBench programs;
 - the mutant selections for the five circuits of other algorithm families and the Q# and QASMBench programs;
-- the systematic and output-condition suites, before any outcome;
+- the generic and output-condition suites, before any outcome;
 - the defect eligibility conditions, before any defect ran.
 
 Set or changed after earlier outcomes were known:
 - the QuCheck observation on every qubit, declared after the output-register evaluation of transfer was known;
 - the ideal references and N = 8,000 of the suite experiment. These followed guard runs in which originals failed
   suites with correlators at sampled references and N = 2,000. A recorded plan switched to ideal references, and
-  after further guard runs to N = 8,000, before any mutant ran at that budget.
+  after further guard runs to N = 8,000, before any mutant ran at that budget;
 - the current evidence requirements (section 1);
 - the width-set GHZ register, reduced to q0 after a first run at eight to ten qubits (amendment E13c of
   16 August 2026, `data/interventions/width_register/DESIGN_FREEZE.md`);
@@ -48,12 +48,12 @@ Set or changed after earlier outcomes were known:
 - the corpus eligibility conditions and stratification variable, fixed after semantic comparisons but before the native
   corpus tests;
 - the output-condition suites, corrected to express their conditions completely after the first outcomes. The
-  correction and its plan were committed before the corrected suites ran (`data/output_condition/`).
+  correction and its plan were committed before the corrected suites ran (`data/output_condition/`);
 - the all-pairs comparator of the repair comparison, chosen after the outcomes of the earlier comparison with the
   combined suite were known, from the composition of its witnesses. Its plan was committed before its runs
-  (`data/all_pairs/PLAN.md`).
+  (`data/all_pairs/PLAN.md`);
 - the closed witness order (v3), after the v2 outcomes and the QED-C runs were known
-  (`data/certification/witness_order/AMENDMENT.md`).
+  (`data/certification/witness_order/AMENDMENT.md`);
 - the development circuits, chosen after a pilot had tested 33 of their 450 mutants; the pilot's runs are not among
   the released records;
 - the one-qubit GHZ output register of the 20 circuits, kept after an earlier analysis had shown that the GHZ
@@ -129,7 +129,7 @@ survivors; rates of the 33 contract-equivalent mutants.
 | P8. QuCheck detects every observation limitation with an X or Y difference | no case | not evaluable |
 | P9. Below-tolerance differences are under 5 % | 0 | confirmed |
 | P10. At least one observation limitation | 0 | contradicted |
-| P11. Both profiles express the shared outcomes; only QUTest's the two equalities | 3 of 6 outcomes occurred | partly exercised |
+| P11. Both profiles express the shared outcomes; only QUTest's, the two equalities | 3 of 6 outcomes occurred | partly exercised |
 | P12. The two tools need the admissibility filter for different reasons | as predicted | confirmed |
 
 P5 and P6 were derived from untranspiled gate lists; the audit transpiles both programs to one basis-gate set.
@@ -146,10 +146,10 @@ applied in the reporting code. The raw outputs of the first analysis are kept (`
 
 ## 6. Earlier repair comparison at N = 2,000
 
-Before the all-pairs comparison, the same 210 candidates were compared with the combined suite (marginals on every
-qubit plus adjacent two-qubit Z products). The witness suites were supported on 174 candidates and the combined suite
-on 133. Among the 173 candidates whose witness the combined suite contained, the 27 supported only by the witness
-suite all failed for the combined suite on original validity, not on detection; 24 of the 37 witnesses outside the
+Before the all-pairs comparison, the same 210 candidates were compared with the combined suite (a marginal on every
+qubit and the Z products of all neighboring qubits). The repairs reliably killed 174 candidates and the combined suite
+133. Among the 173 candidates whose witness the combined suite contained, the 27 that only the repair reliably killed
+all failed for the combined suite on the original's guard runs, not on detection; 24 of the 37 witnesses outside the
 combined suite were non-adjacent two-qubit Z products. At that budget a union bound over a suite of this size is
-vacuous. The all-pairs suite and the 8,000-shot budget were chosen after this comparison and planned before their
-runs (`data/combined_suite/`, `data/all_pairs/PLAN.md`).
+vacuous. The all-pairs suite and the 8,000-shot budget were chosen after this comparison and planned before their runs
+(`data/combined_suite/`, `data/all_pairs/PLAN.md`).

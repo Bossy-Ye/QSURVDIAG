@@ -1,10 +1,10 @@
 """Verify the package against provenance/checksums.sha256, the archived content against source_manifest.csv, and
 that provenance/LICENSE_MAP.csv covers every file.
 
-Usage:  python3 scripts/verify_integrity.py
-Optional (needs OpenSSL): also verifies the RFC 3161 receipts of the MQT Bench freeze (A, B) and of the designs of the
-separating-setting, developer-suite and later-position experiments (C) and of the extension of separating settings to
-the later positions (D) with --tsr.
+Usage:  python3 scripts/verify_integrity.py [--tsr]
+With --tsr (needs OpenSSL), also verifies the RFC 3161 receipts of Freezes A to D: the MQT Bench freeze (A, B), the
+designs of the separating-setting, developer-suite and later-position experiments (C) and the extension of separating
+settings to the later positions (D).
 
 Archived files that this release redacts are listed in provenance/REDACTIONS.csv, and the archived file whose
 third-party quotations it replaces is listed in provenance/DERIVED_FILES.csv. They are reported separately: their

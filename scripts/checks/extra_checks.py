@@ -1,5 +1,5 @@
-"""Remaining record-level checks: width listing, scale growth, output-condition pool, and a rerun of the frozen
-MQT Bench analysis on a copy of its stage records (the archived tree is never written), and the concentration of the
+"""Remaining record-level checks: width listing, scale growth, output-condition pool, a rerun of the frozen MQT
+Bench analysis on a copy of its stage records (the archived tree is never written) and the concentration of the
 reported causes over mutation sites."""
 import csv, json, os, shutil, statistics, subprocess, sys
 sys.dont_write_bytecode = True

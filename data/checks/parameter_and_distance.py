@@ -23,7 +23,7 @@ def counts_1q(p1, total=10000):
 
 print("parameter policy, marginal on one qubit; theta = 0.05")
 orig, mut = counts_1q(0.50), counts_1q(0.52)
-for ref, label in ((0.50, "original-centred reference (the study's universe)"), (0.46, "off-centre reference admitted by the QUTest grammar")):
+for ref, label in ((0.50, "original-centered reference (the study's universe)"), (0.46, "off-center reference admitted by the QUTest grammar")):
     pr = Pragma(kind=PragmaKind.EXPECT_MARGINAL, raw="", params={"register": "m", "index": 0, "outcome": 1, "value": ref, "atol": 0.05})
     vo, vm = (evaluate_marginal(pr, orig).status.value == "pass"), (evaluate_marginal(pr, mut).status.value == "pass")
     print(f"  ref {ref:.2f} ({label}): original {'passes' if vo else 'fails'}, mutant {'passes' if vm else 'fails'}")
@@ -44,4 +44,4 @@ for name, (pp, pm) in cases.items():
     print(f"  {name}: TV {ns['tvd'](pm, pp):.3g}, Hellinger {ns['hellinger'](pm, pp):.3g}, KL(M||P) {ns['kl'](pm, pp):.3g}, "
           f"|dH| {abs(ns['shannon_bits'](pp) - ns['shannon_bits'](pm)):.3g}  (QUTest and study agree)")
 print("  KL direction: QUTest computes D(measured || reference); the study computes D(p_M || p_P), the same direction.")
-print("  A KL instance is not symmetric: D(p_P || p_M) would differ, but no admitted instance uses that direction.")
+print("  A KL instance is not symmetric: D(p_P || p_M) would differ, but no admissible instance uses that direction.")

@@ -1,7 +1,7 @@
 QSurvDiag replication package -- third-party notices
 
 Per-file licenses: provenance/LICENSE_MAP.csv. LICENSE (MIT) and LICENSE-DATA (CC BY 4.0) cover only
-study-authored material. Upstream licences verified 2026-10-13 at the pinned versions.
+study-authored material. Upstream licenses verified 2026-10-13 at the pinned versions.
 
 1. QMutBench -- GPL-3.0-only
    File     data/certification/outcomes/R2V_NATIVE_JOBS_ARMS.jsonl
@@ -23,13 +23,13 @@ study-authored material. Upstream licences verified 2026-10-13 at the pinned ver
    Files    data/certification/outcomes/R2V_NATIVE_JOBS_ARMS.jsonl (10 jobs, 5 external programs)
    Source   "Infrastructure of Qolumbina", Anonymous Authors, Zenodo 10.5281/zenodo.20987327 (CC BY 4.0).
             The Q# originals (github.com/MgcosA/Code_of_Testing_Oracle_Quantum_Program_Article @ 2bf129cd)
-            carry no licence file and are not redistributed.
+            carry no license file and are not redistributed.
 
 3. MQT Bench 2.3.0 -- MIT
    Files    data/prospective/mqt_bench/population/mutants/ (240 files: 120 mutants as gate list and OpenQASM)
             data/prospective/mqt_bench/subjects/SUBJECTS.json
             data/prospective/mqt_bench/stageA_prefreeze/candidate_subjects.json, stageA_originals.json
-   Source   mqt.bench==2.3.0 (github.com/munich-quantum-toolkit/bench); licence from the official wheel.
+   Source   mqt.bench==2.3.0 (github.com/munich-quantum-toolkit/bench); license from the official wheel.
             Copyright (c) 2023-2026 Chair for Design Automation, TUM
             Copyright (c) 2025-2026 Munich Quantum Software Company GmbH
             Full notice: LICENSES/MIT-MQT-Bench-2.3.0.txt

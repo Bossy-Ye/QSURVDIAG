@@ -1,11 +1,12 @@
 """Recompute the results of the output-condition, combined-suite, all-pairs, QED-C, separating-setting, later-position
-and developer-suite experiments, and the circuit-level view of the matched changes, from their per-run records and
-compare them with expected/experiments_expected.csv. No native execution.
+and developer-suite experiments, the circuit-level view of the matched changes and the negative controls of the
+reported suite omissions from their per-run records, and compare them with expected/experiments_expected.csv. No native
+execution.
 
 Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY R2V_TREE QEDC_REF]
 
---analytic also reruns data/qedc/report.py, x_selection_check.py and the re-analyses with the interpreter of
-environment/setup.sh.
+--analytic also reruns data/qedc/report.py and x_selection_check.py, the three re-analyses and the separating-setting
+searches (x1_settings.py, x1_transition.py stage 2, x1_qedc_setting.py) with the interpreter of environment/setup.sh.
 Exits non-zero on any mismatch.
 """
 import argparse, collections, csv, filecmp, gzip, json, os, shutil, subprocess, sys
@@ -175,7 +176,7 @@ xt = json.load(open(OUT / "observation_change/X1_TRANSITION_SUMMARY.json"))
 got["R-X107"] = (f"{same_json(OUT / 'observation_change/X1_TRANSITION_SUMMARY.json', OB / 'X1_TRANSITION_SUMMARY.json')}/"
                  f"{filecmp.cmp(OUT / 'observation_change/X1_TRANSITION.csv', OB / 'X1_TRANSITION.csv', shallow=False)}; "
                  f"candidates " + " ".join(f"{k}:{v}" for k, v in sorted(xt["candidates"].items())) +
-                 f"; named witness {xt['witness_is_named']}; undecided {xt['undecided_instances_total']}; control kills "
+                 f"; separating-setting witness {xt['witness_is_named']}; undecided {xt['undecided_instances_total']}; control kills "
                  f"{xt['control_kills_total']} of {12 * xt['pairs']}; guard failures {xt['guard_failures_total']}; "
                  f"certified {xt['certified']}/{xt['pairs']}")
 got["R-X104"] = " ".join(f"{n}:{v['mutant_kills']}/{v['original_failures']}/{v['control_kills']}" for n, v in sorted(qw.items(), key=lambda t: int(t[0])))

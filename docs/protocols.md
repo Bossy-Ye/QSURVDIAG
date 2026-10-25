@@ -19,7 +19,7 @@ Detail behind Sections 4 and 5 of the article. Section, table and figure numbers
 
 Every experiment runs the suite 12 times on each mutant and uses theta = 0.05, except the tolerance and budget
 experiment, which varies theta in {0.01, 0.025, 0.05, 0.10, 0.25, 0.50} and N. Guard runs check the original before
-mutant verdicts are read; in the last three rows the 12 runs of the original count toward a supported repair. Ideal
+mutant verdicts are read; in the rows that allow one failure, the 12 runs of the original decide support. Ideal
 references are the original's simulated probabilities; with 2,000-shot references, the factor 1 + N/N_0 of the sampling
 bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolerance and budget experiment.
 
@@ -76,7 +76,7 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
   the first three original seeds. Stage 2 takes about 4 CPU hours, almost all for the twelve-qubit multipliers; the
   analytic tier reruns it on the 35 pairs of the 20 circuits.
 - **Native QuCheck** (`data/developer_suites/x2_qucheck20.py`). One property per pair asserts equal distributions of
-  every qubit in the x, y and z bases; controls compare the original with itself (seeds 15542-15553 and
+  every qubit in the X, Y and Z bases; controls compare the original with itself (seeds 15542-15553 and
   16542-16553). QuCheck 0.0.2's Holm correction does not stop at the first retained hypothesis; the step-down
   procedure, applied to the recorded p-values, rejects exactly when the smallest p-value is at most alpha/m.
 - **Device noise** (`data/reanalysis/r4_noise.py`). Median errors of the IBM Torino calibration in
@@ -90,15 +90,15 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
 
 - **All-pairs comparison by witness location.** The all-pairs suite contains the witness for 197 of the 210
   candidates. The 13 witnesses outside it are Z products of weight three (3), four (1) and nine (2), five entropies
-  and two Hellinger distances; the witness suites support two weight-three and one weight-nine Z product, two
+  and two Hellinger distances; the repairs support two weight-three and one weight-nine Z product, two
   entropies and one Hellinger distance. Where the all-pairs suite contains the witness, every run in which the
-  witness suite killed the mutant was also an all-pairs kill on the same histogram.
-- **Derived adjacent-pair suite.** Read from the all-pairs runs, the marginals and adjacent pairs alone are
-  supported on 165 candidates, so the non-adjacent pairs add 27.
+  repair killed the mutant was also an all-pairs kill on the same histogram.
+- **Derived adjacent-pair suite.** Read from the all-pairs runs, the marginals and adjacent pairs alone
+  reliably kill 165 candidates, so the non-adjacent pairs add 27.
 - **Execution accounting.** Both suites need the same 3,276 histograms of 8,000 shots (2,520 mutant, 756 original).
-  The implementation ran 3,924 command-line executions for the witness suites and 3,276 for the all-pairs suites,
+  The implementation ran 3,924 command-line executions for the repairs and 3,276 for the all-pairs suites,
   7,200 executions and 57.6 million shots; an in-process verification added 7,200 executions and 57.6 million
-  simulator shots. The witness suites hold 1,762 assertions and the all-pairs suites 7,174; assertion evaluation
+  simulator shots. The repairs hold 1,762 assertions and the all-pairs suites 7,174; assertion evaluation
   took 4 s and 33 s, and diagnosis 10 s for the 210 candidates.
 - **MQT Bench validation.** The withheld candidate is a walk mutant whose witness killed it in 9 of 12 confirmation runs
   and 11 of 12 validation runs. In 18 of the 22 certified cases the mutation replaces the first gate of a multiplier, a
@@ -107,13 +107,13 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
   their kill. The bound covers the mutant's kill for 19 of the 23 candidates and the original's guard runs for none. For
   all seven observation limitations, the largest suite in the sequence that their original passes is the baseline suite.
 - **Evidence requirements as a classifier** (`data/reanalysis/r156.py`). Of the 165 issued repairs, 164 are supported
-  by the all-pairs runs of their witness suite; of the 23 unsupported, 22 were withheld.
+  in the repair comparison; of the 23 unsupported repairs, 22 were withheld.
 - **Transfer.** Every difference by which an admissible QuCheck assertion distinguishes a transferred pair exceeds
   theta by at least 0.45. An earlier exercise with QuCheck-style tests is described in `history.md`, section 3.
 
 ## 6. The QED-C case (RQ5)
 
-| n | Fidelity of P to the exact evolution | of P_ship | Largest Z difference (shipped-coupling pair) | X statistic | Kills of P_ship (cert., valid.) | P fails baseline (cert., valid.) | Admitted | Shipped-coupling pair | Constructed pair | Parity kills of P_Z |
+| n | Fidelity of P to the exact evolution | of P_ship | Largest Z difference (shipped-coupling pair) | X statistic | Kills of P_ship (cert., valid.) | P fails baseline (cert., valid.) | Diagnosed | Shipped-coupling pair | Constructed pair | Parity kills of P_Z |
 |---:|---:|---:|---:|---:|---|---|---|---|---|---:|
 | 2 | 0.9998 | 0.9958 | 0.0071 | 0.0945 | 12, 12 | 0, 0 | yes | below tolerance | observation limitation | 12 |
 | 3 | 0.9997 | 0.9936 | 0.0095 | 0.0835 | 11, 12 | 0, 0 | yes | below tolerance | observation limitation | 12 |
@@ -125,14 +125,13 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
 
 At n = 2 the X statistic is the X expectation of qubit 0, the first X-basis instance of the closed witness order above
 theta; every instance before it differs by at most 0.0473 (`data/certification/witness_order/`). At n = 6 to 8, which
-are not diagnosed, the entropy difference on the Z counts exceeds theta. P failed the supplementary statistics in none of
-its runs. On the 672 recorded histograms, the stored-reference acceptance rule and the diagnostic baseline referenced to
-P gave the same verdict on every one, with measured distances differing by at most 1.8e-4. At the benchmark's default of
-100 shots, the upstream score of either program ranges over about 0.1 across 12 noiseless runs
-(`data/qedc/QEDC_METRICS.json`). The ideal upstream
-scores of P and P_ship differ by at most 3.6e-4 and their computational-basis probabilities by at most 7.1e-3. The
-acceptance rule passes a run when the Hellinger distance is at most theta, a Hellinger fidelity of at least (1 -
-theta^2)^2 = 0.99500625. Records: `data/qedc/`.
+are not diagnosed, the entropy difference on the Z counts exceeds theta. P failed the supplementary statistics in none
+of its runs. On the 672 recorded histograms, the stored-reference acceptance rule and the diagnostic baseline referenced
+to P gave the same verdict on every one, with measured distances differing by at most 1.8e-4. At the benchmark's default
+of 100 shots, the benchmark's normalized Hellinger fidelity of either program ranges over about 0.1 across 12 noiseless
+runs (`data/qedc/QEDC_METRICS.json`). The ideal fidelities of P and P_ship differ by at most 3.6e-4 and their
+computational-basis probabilities by at most 7.1e-3. The acceptance rule passes a run when the Hellinger distance is at
+most theta, a Hellinger fidelity of at least (1 - theta^2)^2 = 0.99500625. Records: `data/qedc/`.
 
 ## 7. Other programs (RQ6)
 
@@ -166,15 +165,17 @@ theta^2)^2 = 0.99500625. Records: `data/qedc/`.
   3 undecided margins and 44 suite-omission candidates. All ten widths with at least ten of the 1,569 pairs contain
   observation-limited pairs, at 9.4 % for n <= 7 and 9.9 % for n >= 8 (semantic comparisons). The 151st pair found
   by the comparisons has nineteen qubits and was not tested natively.
-- **Released defects.** Each Bugs4Q defect was reproduced in three locked Qiskit versions (0.45.3, 1.1.1, 2.5.0)
-  and assigned the deepest of five evidence levels: 10 not reproducible, 8 reproduced in the tool, 10 with the
-  testing profile also known, 12 with semantic comparisons computed and 2 with full evaluation completed; 32
-  reproduce in at least one version. The software-output comparison is decided for 12 defects. Under the declared
-  QUTest profile the suite kills two of the 4 eligible defects; one survivor is an executed-input equality that
-  differs only in the classical output mapping, and the other a suite omission, natively confirmed with the negative
-  control of the closed witness order (`data/certification/witness_order/`). The six eligibility conditions are: a
-  run that reaches a final state, a contract with a recorded source, a declared output register, a supported
-  circuit representation, a translation that preserves the final state, and an original that passes the suite.
+- **Released defects.** Each Bugs4Q defect was reproduced in three locked Qiskit versions (0.45.3, 1.1.1, 2.5.0) and
+  assigned the deepest of five evidence levels: 10 not reproducible, 8 reproduced in the tool, 10 with the testing
+  profile also known, 12 with semantic comparisons computed and 2 with full evaluation completed; 32 reproduce in at
+  least one version. The software-output comparison is decided for 12 defects. Under the declared QUTest profile the
+  suite kills two of the four eligible defects; one survivor is an executed-input equality that differs only in the
+  classical output mapping, and the other a suite omission, natively confirmed with the negative control of the closed
+  witness order (`data/certification/witness_order/`). The six eligibility conditions are: a run that reaches a final
+  state, a contract with a recorded source, a declared output register, a supported circuit representation, a
+  translation that preserves the final state, and an original that passes the suite. Qiskit issue 16164, found by the
+  screening of external workflows (`data/qedc/SCREENING.md`), is compared on the uniform superposition of its recorded
+  reproduction (`R2V_RELEASED_CL3.json`); it has no suite and no native runs.
 
 ## 8. Numerical policy
 

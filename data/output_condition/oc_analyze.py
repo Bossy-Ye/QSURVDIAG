@@ -1,7 +1,7 @@
 """Matched analysis of the output-condition suites, recorded and corrected (plan: PLAN.md).
 
 Usage: python3 -I oc_analyze.py <package root> <OC_RUNS.csv or -> <out json>
-With '-' only the recorded suites are analysed (reproduces the archived matched-changes row).
+With '-' only the recorded suites are analyzed (reproduces the archived matched-changes row).
 mcnemar(), boot() and loco() are copied verbatim from data/certification/outcomes/r2v_stats.py.
 """
 import csv, json, math, random, collections, sys
@@ -60,7 +60,7 @@ if RUNS != "-":
 
 def suite_outcome(mid):
     if mid in new: return new[mid]
-    return rec[mid]["outcome"]          # GHZ, and every pair when only the recorded suites are analysed
+    return rec[mid]["outcome"]          # GHZ, and every pair when only the recorded suites are analyzed
 
 out = {"guards": guards}
 for label, use_new in (("recorded", False), ("corrected", True)):

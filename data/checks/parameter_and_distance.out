@@ -1,6 +1,6 @@
 parameter policy, marginal on one qubit; theta = 0.05
-  ref 0.50 (original-centred reference (the study's universe)): original passes, mutant passes
-  ref 0.46 (off-centre reference admitted by the QUTest grammar): original passes, mutant fails
+  ref 0.50 (original-centered reference (the study's universe)): original passes, mutant passes
+  ref 0.46 (off-center reference admitted by the QUTest grammar): original passes, mutant fails
   study difference d = 0.02 <= theta, so the study's universe holds no distinguishing instance
 
 distance conventions at support-zero and small-probability boundaries
@@ -8,4 +8,4 @@ distance conventions at support-zero and small-probability boundaries
   original has support where the mutant has none: TV 0.01, Hellinger 0.0709, KL(M||P) 0.0101, |dH| 0.0707  (QUTest and study agree)
   difference at the 1e-10 equality margin: TV 1e-10, Hellinger 7.07e-06, KL(M||P) 9.54e-11, |dH| 3.37e-09  (QUTest and study agree)
   KL direction: QUTest computes D(measured || reference); the study computes D(p_M || p_P), the same direction.
-  A KL instance is not symmetric: D(p_P || p_M) would differ, but no admitted instance uses that direction.
+  A KL instance is not symmetric: D(p_P || p_M) would differ, but no admissible instance uses that direction.

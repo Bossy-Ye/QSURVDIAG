@@ -4,7 +4,7 @@ Records and verification scripts for *Why Quantum Mutants Survive: Separating Ob
 Omissions*. Native QUTest and QuCheck executions are archived, not rerun; the scripts recompute every checked value
 from the archived records.
 
-Version 1.3.1. Version 1.3.0: [doi:10.5281/zenodo.23595707](https://doi.org/10.5281/zenodo.23595707).
+Version 1.3.1.
 
 ## Verify
 
@@ -77,10 +77,10 @@ qubits), S_SPEC output-condition. Populations: construction = the 15 development
 other circuits. OB01-OB19: evidence requirements (Table 1). v1, v2, v3: initial rules, revised rules
 (`V2_SPECIFICATION.md`), witness-order amendment (`docs/history.md`). X1, X2, X4: separating-setting, developer-suite
 and later-position experiments; in X2, suite A is the unit tests, suite B the property tests, and `em` mutants are
-those labeled semantics-preserving. R1, R3-R6: re-analyses of existing records. In `expected/` and `docs/`, a witness
-suite (D) is the article's repair, and S and A are the combined and all-pairs suites. QED-C records: M and C are
-P_ship and P_Z, the natural pair is the shipped-coupling pair, T and T' are the stored-reference rule and the
-diagnostic baseline, and the upstream score is the benchmark's normalized Hellinger fidelity.
+those labeled semantics-preserving. R1, R3-R6: re-analyses of existing records. In `expected/`, a witness suite (D) is
+the article's repair, S and A are the combined and all-pairs suites, and a certificate is a reported outcome. QED-C
+records: M and C are P_ship and P_Z, the natural pair is the shipped-coupling pair, T and T' are the stored-reference
+rule and the diagnostic baseline, and the upstream score is the benchmark's normalized Hellinger fidelity.
 
 ## Layout
 
