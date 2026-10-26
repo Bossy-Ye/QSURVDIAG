@@ -1,8 +1,8 @@
 # QSurvDiag replication package
 
-Records and verification scripts for *Why Quantum Mutants Survive: Separating Observation Limitations from Suite
-Omissions*. Native QUTest and QuCheck executions are archived, not rerun; the scripts recompute every checked value
-from the archived records.
+Records and verification scripts for *Measure Differently or Assert More? Diagnosing Surviving Quantum Mutants*.
+Native QUTest and QuCheck executions are archived, not rerun; the scripts recompute every checked value from the
+archived records.
 
 Version 1.3.1.
 
