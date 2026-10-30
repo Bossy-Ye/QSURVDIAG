@@ -49,6 +49,7 @@ R-AP10,Corpus D/A of 187; MQT Bench D/A of 23,165/170 of 187; 22/22 of 23,no,per
 R-AP11,Assertions in D / A over 210 cases; largest A suite,1762/7174; max 91,yes,per-case records,4.3; 6; docs/protocols.md section 5
 R-AP12,Histograms needed (mutant + original); native executions D/A; assertion evaluation D/A,2520+756; executions 3924/3276; eval 4/33 s,no (package only),per-run records,docs/protocols.md section 5
 R-AP13,"Histogram archive: referenced ids missing; histograms not of 8,000 shots; archived",0 missing; 0 not 8000 shots; 2859 archived,n.a. (logical check),per-run records,Data Availability
+R-AP14,Originals with an issued repair / originals whose issued repairs are all supported,51/50,yes,per-case records,5.4
 R-V301,audit.py rerun equals IMPACT.csv (witnesses and controls per population),True,n.a. (logical check),per-case records,3.2; 5.6; 7.1
 R-V302,v3 native checks: guard fails / kills / status (OB13 repeats the recorded witness check),corpus|qra_cases_v1_1/QRA_360|OB13:0/12/satisfied corpus|qra_cases_v1_1/QRA_360|OB15:0/0/satisfied defect|26|OB13:0/12/satisfied defect|26|OB15:0/2/satisfied,no,per-run records,5.6; 7.1
 R-V303,"Shipped-coupling pair at n=2, X expectation of qubit 0: kills / runs per stream",X_mut_cert:12/12 X_orig_guard:0/3 X_orig_val:0/12 X_mut_val:12/12,partly (reliable kill at n = 2 printed),per-run records,5.5; Table 7

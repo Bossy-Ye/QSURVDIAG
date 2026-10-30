@@ -134,6 +134,11 @@ with gzip.open(AP / "ALLPAIRS_HISTOGRAMS.jsonl.gz", "rt") as f:
     for line in f: x = json.loads(line); hist[x["hist_id"]] = sum(x["counts"].values())
 ref_ids = {x["hist_id"] for x in rows(AP / "ALLPAIRS_NATIVE_RUNS.csv")}
 got["R-AP13"] = f"{len(ref_ids - set(hist))} missing; {sum(v != 8000 for v in hist.values())} not 8000 shots; {len(hist)} archived"
+v3 = {(r["population"], k) for r in rows(ROOT / "data/certification/witness_order/IMPACT.csv") for k in r["changed"].split(";") if k}
+by_orig = collections.defaultdict(list)
+for r in rows(AP / "ALLPAIRS_CASES.csv"):
+    if r["issued"] == "True" or (r["arm"], r["case"]) in v3: by_orig[(r["arm"], r["program"])].append(r["D_supported"] == "True")
+got["R-AP14"] = f"{len(by_orig)}/{sum(all(v) for v in by_orig.values())}"
 
 # ---------------------------------------------------------------- closed witness order (v3)
 WO = ROOT / "data/certification/witness_order"
