@@ -268,7 +268,7 @@ M290,manuscript_checks,"QRA_513 confirmed CL4, SBS_081 Unresolved",CL4/Unresolve
 M291,manuscript_checks,"largest difference >= 1: 76 of 80, 52 of 155",76/80/52/155,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
 M292,manuscript_checks,corpus separations down to 1.3e-7,1.3,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
 M293,manuscript_checks,"largest CL5 0.0324, QRA_513 0.0487",0.0324/0.0487,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
-M294,manuscript_checks,"excluded kinds 7 of 13, 3 rare-bit, 2 most-frequent",7/13/3/2,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
+M294,manuscript_checks,"excluded kinds 7 of 13, 3 rare-bit, 2 most-frequent",7/13/3/2,yes (7 of 13; 3 printed),archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
 M295,manuscript_checks,"QRA_174 observation margin 9.9e-9, undecided",9.9/Unresolved,no,per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
 M296,manuscript_checks,corpus CL4 without low-order witness 7 of 143,7/143,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json; data/certification/witness_order/IMPACT.csv
 M297,manuscript_checks,relation-level CL3 substrate 151 under v2,151,no,archived aggregate record,data/certification/outcomes/R2V_RELATION_CORPUS.json
