@@ -79,7 +79,7 @@ other circuits. OB01-OB19: evidence requirements (Table 1). v1, v2, v3: initial 
 and later-position experiments; in X2, suite A is the unit tests, suite B the property tests, and `em` mutants are
 those labeled semantics-preserving. R1, R3-R6: re-analyses of existing records. In `expected/`, a witness suite (D) is
 the article's repair, S and A are the combined and all-pairs suites, and a certificate is a reported outcome. QED-C
-records: M and C are P_ship and P_Z, the natural pair is the shipped-coupling pair, T and T' are the stored-reference
+records: M and C are P_ship (the article's P_bench) and P_Z, the natural pair is the article's benchmark-coupling pair, T and T' are the stored-reference
 rule and the diagnostic baseline, and the upstream score is the benchmark's normalized Hellinger fidelity.
 
 ## Layout
