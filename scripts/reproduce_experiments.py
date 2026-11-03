@@ -140,6 +140,18 @@ for r in rows(AP / "ALLPAIRS_CASES.csv"):
     if r["issued"] == "True" or (r["arm"], r["case"]) in v3: by_orig[(r["arm"], r["program"])].append(r["D_supported"] == "True")
 got["R-AP14"] = f"{len(by_orig)}/{sum(all(v) for v in by_orig.values())}"
 
+# reported suite omissions under the declared QUTest profile whose witness is a single-qubit expectation
+R2V_OUT = ROOT / "data/certification/outcomes"
+wits = [(r["w_kind"], r["w_key"]) for p in ("PRIMARY", "CORPUS", "WIDTH", "EXTERNAL")
+        for r in rows(R2V_OUT / f"R2V_FINAL_{p}.csv") if r["v2_report"] == "CL4"]
+wits += [(r["w_kind"], r["w_key"]) for r in rows(ROOT / "data/position/X4_FINAL.csv") if r["report"] == "CL4"]
+wits += [(r["witness_kind"], r["witness_key"])
+         for r in rows(ROOT / "data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv") if r["v2_report"] == "CL4"]
+wits += [(r["w_kind"], r["w_key"]) for r in rows(R2V_OUT / "R2V_FINAL_CORPUS.csv")
+         if r["case_key"] == "qra_cases_v1_1/QRA_360"]  # reported under the closed witness order (IMPACT.csv)
+single = sum(1 for k, key in wits if k == "zmask" and bin(int(key.split()[-1])).count("1") == 1)
+got["R-WX01"] = f"{len(wits)}/{single}"
+
 # ---------------------------------------------------------------- closed witness order (v3)
 WO = ROOT / "data/certification/witness_order"
 py(WO / "audit.py", ROOT, OUT / "IMPACT.csv")
