@@ -140,16 +140,20 @@ for r in rows(AP / "ALLPAIRS_CASES.csv"):
     if r["issued"] == "True" or (r["arm"], r["case"]) in v3: by_orig[(r["arm"], r["program"])].append(r["D_supported"] == "True")
 got["R-AP14"] = f"{len(by_orig)}/{sum(all(v) for v in by_orig.values())}"
 
-# reported suite omissions under the declared QUTest profile whose witness is a single-qubit expectation
+# reported suite omissions under the declared QUTest profile (the rows of the article's population table)
+# and those whose witness is a single-qubit expectation; width-set records repeat corpus pairs and are
+# checked for their witness but not counted
 R2V_OUT = ROOT / "data/certification/outcomes"
-wits = [(r["w_kind"], r["w_key"]) for p in ("PRIMARY", "CORPUS", "WIDTH", "EXTERNAL")
-        for r in rows(R2V_OUT / f"R2V_FINAL_{p}.csv") if r["v2_report"] == "CL4"]
+closed = {(r["population"], k) for r in rows(ROOT / "data/certification/witness_order/IMPACT.csv")
+          for k in r["changed"].split(";") if k}  # reported under the closed witness order
+def reported(pop):
+    return [(r["w_kind"], r["w_key"]) for r in rows(R2V_OUT / f"R2V_FINAL_{pop.upper()}.csv")
+            if r["v2_report"] == "CL4" or (pop, r["case_key"]) in closed]
+wits = [w for pop in ("primary", "corpus", "external", "defect") for w in reported(pop)]
 wits += [(r["w_kind"], r["w_key"]) for r in rows(ROOT / "data/position/X4_FINAL.csv") if r["report"] == "CL4"]
 wits += [(r["witness_kind"], r["witness_key"])
          for r in rows(ROOT / "data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv") if r["v2_report"] == "CL4"]
-wits += [(r["w_kind"], r["w_key"]) for r in rows(R2V_OUT / "R2V_FINAL_CORPUS.csv")
-         if r["case_key"] == "qra_cases_v1_1/QRA_360"]  # reported under the closed witness order (IMPACT.csv)
-single = sum(1 for k, key in wits if k == "zmask" and bin(int(key.split()[-1])).count("1") == 1)
+single = sum(1 for k, key in wits + reported("width") if k == "zmask" and bin(int(key.split()[-1])).count("1") == 1)
 got["R-WX01"] = f"{len(wits)}/{single}"
 
 # ---------------------------------------------------------------- closed witness order (v3)
