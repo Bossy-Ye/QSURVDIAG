@@ -1,4 +1,5 @@
-"""Count-profile helpers shared by the observation-change, position and re-analysis experiments.
+"""Count-profile helpers shared by the separating-setting and later-position experiments and the analyses of
+data/reanalysis/.
 
 Gate lists of the 20 circuits and their mutants, statevectors, measurement-basis rotations, the
 2^(n+1)+n+3 instances of the declared QUTest universe in the closed witness order, and QUTest test files run

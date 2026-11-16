@@ -1,14 +1,14 @@
 # QSurvDiag replication package
 
-Records and verification scripts for *Measure Differently or Assert More? Diagnosing Surviving Quantum Mutants*.
-Native QUTest and QuCheck executions are archived, not rerun; the scripts recompute every checked value from the
-archived records.
+This package holds the records and verification scripts of *Measure Differently or Assert More? Diagnosing Surviving
+Quantum Mutants*. The native QUTest and QuCheck executions are archived and are not rerun. The scripts recompute every
+checked value from the archived records.
 
 Version 1.3.1.
 
 ## Verify
 
-Python 3.9+, standard library only; `--tsr` needs `openssl`.
+The record tier needs Python 3.9 or later and the standard library; `--tsr` also needs `openssl`.
 
 ```sh
 python3 scripts/verify_integrity.py --tsr
@@ -24,13 +24,14 @@ conformance             3 of 3 pass
 reproduce_experiments    90 checks   MATCH 74    PARTIAL 7     analytic tier 9
 ```
 
-MATCH: recomputed from per-case or per-run records. PARTIAL: equal to an archived aggregate, protocol record or git
-record. Any mismatch exits non-zero. `expected/` lists every checked value, its inputs or article location, and
-whether the article prints it.
+MATCH means the value is recomputed from per-case or per-run records. PARTIAL means it equals an archived aggregate,
+protocol record or git record. Any mismatch gives a non-zero exit status. `expected/` lists every checked value with
+its inputs or article location and whether the article prints it.
 
 ## Analytic tier
 
-Recomputes the transpilation- and statevector-based values. Python 3.12 and QUTest 0.1.0:
+The analytic tier recomputes the values that depend on transpilation and statevector simulation. It needs Python 3.12
+and QUTest 0.1.0:
 
 ```sh
 git clone https://github.com/QBugs/qutest.git ../qutest-0.1.0
@@ -42,11 +43,16 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments --analytic ../
   ../out/analytic/r2v_root ../qedc/qedcbench/hamiltonian_simulation/_common/precalculated_data.json
 ```
 
-The QED-C reference file is checked by its SHA-256. All checks match; merged with the record tier, 407 checks: MATCH
-342, PARTIAL 65. With `--analytic`, the 90 experiment checks give MATCH 83, PARTIAL 7, including reruns of the
-separating settings and the three re-analyses. A02 is one fresh trial of QUTest's gate-set check, compared on the
-programs whose flags the article treats as reliable. A06 compares `R2V_BOUND.json` without its unprinted
-witness-surface counts, which depend on the order of ties (`data/checks/tie_check.py`); A07 compares margins to 1e-12.
+```text
+reproduce_analytic      merged with the record tier: 407 checks   MATCH 342   PARTIAL 65
+reproduce_experiments   with --analytic: 90 checks   MATCH 83    PARTIAL 7
+```
+
+The scripts check the QED-C reference file by its SHA-256. All analytic checks match. With `--analytic`, the
+experiment checks also rerun the separating-setting searches and the three analyses of `data/reanalysis/`. A02 is one
+fresh trial of QUTest's gate-set check, compared on the programs whose flags the article treats as reliable. A06
+compares `R2V_BOUND.json` without its unprinted witness-surface counts, which depend on the order of ties
+(`data/checks/tie_check.py`). A07 compares margins to 1e-12.
 
 ## Article to records
 
@@ -57,31 +63,37 @@ witness-surface counts, which depend on the order of ties (`data/checks/tie_chec
 | 3.2 | `data/certification/witness_order/`; `data/certification/outcomes/R2V_FINAL_PRIMARY.csv`, `R2_MARGINS*.csv` |
 | 3.4 | `data/certification/outcomes/R2V_BOUND.json`, `r2v_bound.py`; `data/implementation/tests/` |
 | 4.2, Table 2; Table 3 | `data/primary/`, `data/external/`, `data/prospective/`, `data/scalability/`, `data/inventory/out/`; outcomes: `data/certification/outcomes/R2V_FINAL_*.csv`, `data/position/outcomes.csv`, `data/developer_suites/diagnosis.csv` |
-| 4.3 | `docs/protocols.md`; the plan of each experiment |
-| 5.2 | `data/certification/equivalence/`; `data/output_condition/OC_SIMON_MOVERS.out`; `data/reanalysis/` (register contracts) |
-| 5.3, Figs. 3 and 4, Table 5 | `data/certification/outcomes/` (`R2V_FINAL_*.csv`, `R2V_TABLE_X.json`, `R2V_DECISION_GRID.csv`, `r2v_stats.py`), `data/output_condition/`, `data/checks/circuit_level.py`; `data/reanalysis/` (distinct states and sites) |
-| 5.3.2, 5.5, 7.2: separating settings, rotated profile | `data/observation_change/` |
+| 4.3 | `docs/protocols.md`; the `PLAN.md` of each experiment |
+| 5.2 | `data/certification/equivalence/`; `data/output_condition/OC_SIMON_MOVERS.out`; `data/reanalysis/register_contracts.json` |
+| 5.3, Figs. 3 and 4, Table 5 | `data/certification/outcomes/` (`R2V_FINAL_*.csv`, `R2V_TABLE_X.json`, `R2V_DECISION_GRID.csv`, `r2v_stats.py`), `data/output_condition/`, `data/checks/circuit_level.py`; `data/reanalysis/requirements_scores_states.json` (distinct states and sites) |
+| 5.3.2, 5.5, 7.2: separating settings, rotated profile | `data/observation_change/` (`separating_settings.csv`, `later_positions_settings.csv`, `two_basis_states.csv`, `rotated_profile.csv`) |
 | 5.3.3, 5.4, 5.6, Table 3: native QuCheck and the QuCheck case studies | `data/developer_suites/` |
-| 5.4, Table 6 | `data/all_pairs/`; `data/combined_suite/`; `data/prospective/mqt_bench/`; `data/interventions/transfer/`; `data/reanalysis/` (evidence requirements) |
+| 5.4, Table 6 | `data/all_pairs/`; `data/combined_suite/`; `data/prospective/mqt_bench/`; `data/interventions/transfer/`; `data/reanalysis/requirements_scores_states.json` (evidence requirements) |
 | 5.5, Table 7 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
 | 5.6, Fig. 5, Table 3 | `R2V_FINAL_*.csv` with `data/certification/witness_order/`; `data/scalability/`, `data/external/defects/`, `data/inventory/out/`; `data/position/` (later positions) |
-| 6 | `data/reanalysis/` (mutation scores) |
+| 6 | `data/reanalysis/requirements_scores_states.json` (mutation scores) |
+| 7 | `docs/history.md`; `R2V_FINAL_*.csv` and `data/certification/witness_order/CHANGES.csv` (negative controls); `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/reanalysis/noise.json`; `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
 | 8 | `data/certification/outcomes/R2V_FINAL_PRIMARY.csv` (state margins of the inverse test) |
-| 7 | `docs/history.md`; `R2V_FINAL_*.csv` and `data/certification/witness_order/CHANGES.csv` (negative controls); `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/reanalysis/` (noise); `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
 
 ## Codes
 
-Records and `expected/` use the study's codes. Outcomes: CL1 contract equivalence, CL2 executed-input equality, CL3
-observation limitation, CL4 suite omission, CL5 below-tolerance difference. Suites: S_MIN baseline, S_FAMILY
-adjacent-pair, S_COVER all-qubit, S_BOTH combined (a marginal on every qubit and the Z products of all neighboring
-qubits), S_SPEC output-condition. Populations: construction = the 15 development circuits, prospective = the five
-other circuits. OB01-OB19: evidence requirements (Table 1). v1, v2, v3: initial rules, revised rules
-(`V2_SPECIFICATION.md`), witness-order amendment (`docs/history.md`). X1, X2, X4: separating-setting, developer-suite
-and later-position experiments; in X2, suite A is the unit tests, suite B the property tests, and `em` mutants are
-those labeled semantics-preserving. R1, R3-R6: re-analyses of existing records. In `expected/`, a witness suite (D) is
-the article's repair, S and A are the combined and all-pairs suites, and a certificate is a reported outcome. QED-C
-records: M and C are P_ship (the article's P_bench) and P_Z, the natural pair is the article's benchmark-coupling pair, T and T' are the stored-reference
-rule and the diagnostic baseline, and the upstream score is the benchmark's normalized Hellinger fidelity.
+The records and `expected/` use the study's codes.
+
+| Code | Meaning |
+|---|---|
+| CL1 to CL5 | outcomes: contract equivalence, executed-input equality, observation limitation, suite omission, below-tolerance difference; NA_KILLED is a killed mutant |
+| S_MIN, S_FAMILY, S_COVER, S_BOTH, S_SPEC | suites: baseline, adjacent-pair, all-qubit, combined (a marginal on every qubit and the Z products of all neighboring qubits), output-condition |
+| construction, prospective | populations: the 15 development circuits and the five other circuits |
+| OB01 to OB19 | evidence requirements (Table 1) |
+| v1, v2, v3 | rule sets: the first rules, the revised rules (`V2_SPECIFICATION.md`), and the revised rules with the closed witness order (`data/certification/witness_order/`; `docs/history.md`) |
+| X1, X2, X4 | the separating-setting, developer-suite and later-position experiments, as named in their plans and operational records (arm `x4` in the later-position records); `docs/protocols.md`, section 10, maps the file names the plans use |
+| suite A, suite B, `em` | in the developer-suite experiment: the unit tests, the property tests, and the mutants their authors label semantics-preserving |
+| R1, R5, R6 | keys of `data/reanalysis/requirements_scores_states.json`: evidence requirements as a classifier, adjusted mutation scores, distinct final states and sites |
+| D, S, A | in `expected/`: the witness suite (the article's repair), the combined suite and the all-pairs suite; a certificate is a reported outcome |
+| M, C | QED-C records: P_ship (the article's P_bench) and P_Z |
+| natural pair | QED-C records: the article's benchmark-coupling pair |
+| T, T' | QED-C records: the stored-reference rule and the diagnostic baseline |
+| upstream score | QED-C records: the benchmark's normalized Hellinger fidelity |
 
 ## Layout
 
@@ -90,14 +102,15 @@ rule and the diagnostic baseline, and the upstream score is the benchmark's norm
 | `data/` | records, plans, runners and analysis code of each experiment |
 | `expected/` | expected value of every check |
 | `scripts/` | verification |
-| `docs/` | `protocols.md` settings, protocols and record limits; `history.md` when each rule was fixed |
+| `docs/` | `protocols.md`: settings, protocols, record limits and the file names used in the plans; `history.md`: when each rule was fixed |
 | `provenance/` | checksums, source manifest, commit records, redactions, license map |
 | `environment/` | pinned environment of the analytic tier; records of the study environments |
 
-Files listed in `provenance/source_manifest.csv` are byte-identical to their sources, except four redacted files
-(`provenance/REDACTIONS.csv`) and replaced quotations (`provenance/DERIVED_FILES.csv`). QMutBench and external program
-files (gate lists only, in `R2V_NATIVE_JOBS_ARMS.jsonl`), the gate lists of the later-position programs and tool
-sources are not redistributed (`docs/protocols.md`, sections 7 and 9).
+Files listed in `provenance/source_manifest.csv` are byte-identical to their sources. The exceptions are four redacted
+files (`provenance/REDACTIONS.csv`) and one file whose quotations are replaced (`provenance/DERIVED_FILES.csv`). The
+package does not redistribute the QMutBench and external program files, whose gate lists are in
+`R2V_NATIVE_JOBS_ARMS.jsonl`, the gate lists of the later-position programs, or the tool sources (`docs/protocols.md`,
+sections 7 and 9).
 
 ## License
 

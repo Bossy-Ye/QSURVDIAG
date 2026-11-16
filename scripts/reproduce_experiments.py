@@ -5,9 +5,9 @@ execution.
 
 Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY R2V_TREE QEDC_REF]
 
---analytic also reruns data/qedc/report.py and x_selection_check.py, the three re-analyses and the separating-setting
-searches (find_settings.py, rotated_profile.py stage 2, qedc_setting.py, two_basis_states.py on the 20 circuits) with the
-interpreter of environment/setup.sh.
+--analytic also reruns data/qedc/report.py and x_selection_check.py, the three analyses of data/reanalysis/ and the
+separating-setting searches (find_settings.py, rotated_profile.py stage 2, qedc_setting.py, two_basis_states.py on the
+20 circuits) with the interpreter of environment/setup.sh.
 Exits non-zero on any mismatch.
 """
 import argparse, collections, csv, filecmp, gzip, json, os, shutil, subprocess, sys
@@ -279,7 +279,7 @@ got["R-X208"] = " ".join(f"{k}: control {v['control']['kind']}:{v['control']['ke
                          f"original failures {v['original_failures']}" for k, v in sorted(xc.items()))
 got["R-X207"] = f"transfer with witness {tw['detected_12_of_12']}/{tw['pairs']}; without {tn['detected_0_of_12']} never, {tn['split']} split of {tn['pairs']}"
 
-# ---------------------------------------------------------------- re-analyses (archived outputs; rerun in the analytic tier)
+# ---------------------------------------------------------------- analyses of data/reanalysis/ (archived outputs; rerun in the analytic tier)
 RA = ROOT / "data/reanalysis"
 req = json.load(open(RA / "requirements_scores_states.json")); r1, r5, r6 = req["R1"], req["R5"]["corpus"], req["R6"]
 got["R-X500"] = (f"{r1['candidates']} candidates, {r1['issued']} issued, precision {r1['precision']}, recall {r1['recall']}, withheld {r1['withheld']}, "
