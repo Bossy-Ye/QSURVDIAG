@@ -68,6 +68,9 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
   constructed pair used seeds 19042-19053 and 20042-20053, and the 65 later-position observation limitations seeds
   21042-21053 and 22042-22053, with final states from the executed inputs written by `x4_select.py`
   (`x1_position.py`).
+- **Settings read off the original** (`data/observation_change/x1_two_state.py`). For each of the 100 observation
+  limitations, the number of basis states in the original's final state on the executed input and the setting with X
+  on every qubit in superposition there, compared with the named setting and evaluated on the declared universe.
 - **Rotated profile** (`data/observation_change/x1_transition.py`). The XYZ setting on every qubit (3^n settings),
   with the baseline suite in the all-Z setting; witness order all-Z, then the search order, v3 within each setting.
   Stage 2 takes R_C and R_S from the declared diagnosis and evaluates R_O, R_A and R_T over the rotated universe and

@@ -6,7 +6,8 @@ execution.
 Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY R2V_TREE QEDC_REF]
 
 --analytic also reruns data/qedc/report.py and x_selection_check.py, the three re-analyses and the separating-setting
-searches (x1_settings.py, x1_transition.py stage 2, x1_qedc_setting.py) with the interpreter of environment/setup.sh.
+searches (x1_settings.py, x1_transition.py stage 2, x1_qedc_setting.py, x1_two_state.py on the 20 circuits) with the
+interpreter of environment/setup.sh.
 Exits non-zero on any mismatch.
 """
 import argparse, collections, csv, filecmp, gzip, json, os, shutil, subprocess, sys
@@ -192,6 +193,30 @@ evp = sorted(int(r["settings_evaluated"]) for r in rows(OB / "X1_POSITION_SETTIN
 assert all(_evaluated(r["setting_q0_first"]) == int(r["settings_evaluated"]) for r in rows(OB / "X1_POSITION_SETTINGS.csv"))
 got["R-X106"] = (f"settings evaluated: 20 circuits median {ev20[len(ev20) // 2]}, max {ev20[-1]}; later positions median {evp[len(evp) // 2]}, "
                  f"max {evp[-1]}; rotated qubits " + " ".join(f"{k}:{v}" for k, v in xp["by_rotated_qubits"].items()))
+tw2 = rows(OB / "X1_TWO_STATE.csv")
+named = {r["pair"]: r["setting_q0_first"] for r in x1r} | {r["pair"]: r["setting_q0_first"] for r in rows(OB / "X1_POSITION_SETTINGS.csv")}
+assert len(tw2) == 100 and all(named[r["pair"]] == r["named_setting"] for r in tw2)
+two = [r for r in tw2 if r["basis_states"] == "2"]; more = [r for r in tw2 if r["basis_states"] != "2"]
+rot = lambda s: {i for i, c in enumerate(s) if c != "Z"}
+sep = lambda R: sum(r["separates"] == "True" for r in R)
+got["R-X108"] = (f"two basis states: {sum(r['is_named'] == 'True' for r in two)}/{len(two)} named X, same qubits "
+                 f"{sum(rot(r['named_setting']) == rot(r['x_on_superposed']) for r in two)}/{len(two)}, at most one Y "
+                 f"{sum(r['named_setting'].count('Y') <= 1 for r in two)}/{len(two)}, multiplier pairs "
+                 f"{sum(r['program'] == 'rg_mult_12' for r in two)} with {sorted({len(rot(r['x_on_superposed'])) for r in two if r['program'] == 'rg_mult_12'})} qubits, "
+                 f"{sorted({int(r['settings_evaluated']) for r in rows(OB / 'X1_POSITION_SETTINGS.csv') if r['program'] == 'rg_mult_12'})} evaluated; "
+                 f"X on superposed separates {sep(tw2)}/{len(tw2)}: {' '.join(sorted({r['program'].split('_')[0] for r in more if r['program'] != 'simon_4'}))} {sep(r for r in more if r['program'] != 'simon_4')}/"
+                 f"{sum(r['program'] != 'simon_4' for r in more)}, Simon {sep(r for r in more if r['program'] == 'simon_4')}/{sum(r['program'] == 'simon_4' for r in tw2)} "
+                 f"(named rotate {sorted({len(rot(r['named_setting'])) for r in tw2 if r['program'] == 'simon_4'})} of "
+                 f"{sorted({len(rot(r['x_on_superposed'])) for r in tw2 if r['program'] == 'simon_4'})})")
+def _inverse_shots(F, runs=12):                        # fewest shots with probability >= 0.95 of a failed shot in every run
+    N = 1
+    while (1 - F ** N) ** runs < 0.95: N += 1
+    return N
+prim = rows(ROOT / "data/certification/outcomes/R2V_FINAL_PRIMARY.csv")
+inv = {c: [_inverse_shots((1 - float(r["margin_state"])) ** 2) for r in prim if r["v2_report"] == c] for c in ("CL3", "CL4")}
+got["R-X109"] = (" ".join(f"{c}:{len(v)} max {max(v)} median {sorted(v)[len(v) // 2]}" for c, v in inv.items()) +
+                 f"; contract equivalences with a different state {sum(float(r['margin_state']) > 1e-9 for r in prim if r['v2_report'] == 'CL1')}"
+                 f"/{sum(r['v2_report'] == 'CL1' for r in prim)}")
 py(OB / "x1_transition.py", "analyze")
 xt = json.load(open(OUT / "observation_change/X1_TRANSITION_SUMMARY.json"))
 got["R-X107"] = (f"{same_json(OUT / 'observation_change/X1_TRANSITION_SUMMARY.json', OB / 'X1_TRANSITION_SUMMARY.json')}/"
@@ -297,6 +322,9 @@ if a.analytic:
     nos = lambda P: [{k: v for k, v in x.items() if k != "search_seconds"} for x in P]
     got["R-A15"] = str(r.returncode == 0 and nos(rows(OUT / "analytic/observation_change/X1_TRANSITION_STAGE2.csv"))
                        == nos(x for x in rows(OB / "X1_TRANSITION_STAGE2.csv") if x["arm"] == "primary"))
+    r = subprocess.run([PY, "-I", "-B", str(OB / "x1_two_state.py")], capture_output=True, text=True, env=env)
+    got["R-A16"] = str(r.returncode == 0 and rows(OUT / "analytic/observation_change/X1_TWO_STATE.csv")
+                       == [x for x in rows(OB / "X1_TWO_STATE.csv") if x["population"] == "primary"])
     r = subprocess.run([PY, "-I", "-B", str(OB / "x1_qedc_setting.py")], capture_output=True, text=True, env=env)
     got["R-A14"] = " ".join(f"{l.split()[0]}:{l.split()[1]}/{l.split()[3]} {l.split()[4]}/{l.split()[5]}" for l in r.stdout.splitlines() if l[:1].isdigit())
 

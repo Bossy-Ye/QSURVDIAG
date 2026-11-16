@@ -21,7 +21,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments
 verify_integrity        0 problems; RFC 3161 Freeze A to D OK; Freeze A 69 of 70 matching, 1 redacted
 reproduce               399 checks   MATCH 297   PARTIAL 100   analytic tier 2
 conformance             3 of 3 pass
-reproduce_experiments    87 checks   MATCH 73    PARTIAL 6     analytic tier 8
+reproduce_experiments    90 checks   MATCH 74    PARTIAL 7     analytic tier 9
 ```
 
 MATCH: recomputed from per-case or per-run records. PARTIAL: equal to an archived aggregate, protocol record or git
@@ -43,7 +43,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments --analytic ../
 ```
 
 The QED-C reference file is checked by its SHA-256. All checks match; merged with the record tier, 407 checks: MATCH
-342, PARTIAL 65. With `--analytic`, the 87 experiment checks give MATCH 81, PARTIAL 6, including reruns of the
+342, PARTIAL 65. With `--analytic`, the 90 experiment checks give MATCH 83, PARTIAL 7, including reruns of the
 separating settings and the three re-analyses. A02 is one fresh trial of QUTest's gate-set check, compared on the
 programs whose flags the article treats as reliable. A06 compares `R2V_BOUND.json` without its unprinted
 witness-surface counts, which depend on the order of ties (`data/checks/tie_check.py`); A07 compares margins to 1e-12.
@@ -66,6 +66,7 @@ witness-surface counts, which depend on the order of ties (`data/checks/tie_chec
 | 5.5, Table 7 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
 | 5.6, Fig. 5, Table 3 | `R2V_FINAL_*.csv` with `data/certification/witness_order/`; `data/scalability/`, `data/external/defects/`, `data/inventory/out/`; `data/position/` (later positions) |
 | 6 | `data/reanalysis/` (mutation scores) |
+| 8 | `data/certification/outcomes/R2V_FINAL_PRIMARY.csv` (state margins of the inverse test) |
 | 7 | `docs/history.md`; `R2V_FINAL_*.csv` and `data/certification/witness_order/CHANGES.csv` (negative controls); `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/reanalysis/` (noise); `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
 
 ## Codes
