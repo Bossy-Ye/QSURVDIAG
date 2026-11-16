@@ -239,7 +239,7 @@ holds to that margin, and its record states the margin. The margins of every dec
   others execute QUTest.
 - **Embedded paths**: archived files name the study's working folders, for example `revision2/`, the folder of the
   analysis under `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. The package stores
-  these files under `data/`; `scripts/analytic/r2v_inputs.csv` rebuilds the folder layout that the archived producers
+  these files under `data/`; `scripts/analytic/input_tree.csv` rebuilds the folder layout that the archived producers
   read.
 - **Not redistributed**: QMutBench program files (GPL-3.0; their gate lists are in `R2V_NATIVE_JOBS_ARMS.jsonl`;
   per-case names and SHA-256 in `data/scalability/corpus/case_manifests/`; `data/inventory/fetch_corpus.sh` fetches

@@ -85,7 +85,7 @@ rt = OUT / "analytic/r2v_root"
 if rt.exists(): shutil.rmtree(rt)
 byhash = {}
 for m in csv.DictReader(open(ROOT / "provenance/source_manifest.csv")): byhash.setdefault(m["sha256"], ROOT / m["package_path"])
-for x in csv.DictReader(open(ROOT / "scripts/analytic/r2v_inputs.csv")):
+for x in csv.DictReader(open(ROOT / "scripts/analytic/input_tree.csv")):
     d = rt / x["path"]; d.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(byhash[x["sha256"]], d)
 H = rt / "artifact/outcomes"
 shutil.copy2(ROOT / "scripts/analytic/r2v_lib.py", H / "r2v_lib.py")
