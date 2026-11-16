@@ -284,6 +284,17 @@ X2_OPERATIONAL name sections of `data/developer_suites/OPERATIONAL.md`.
 | `X4_SUMMARY.json` | `data/position/summary.json` |
 | `x4_select.py` | `data/position/select_mutants.py` |
 
+Archived files cite the numbering of earlier manuscript versions. The table maps these numbers to the article.
+
+| Number in archived files | Article |
+|---|---|
+| Eq. (4), Eq. (5) (`eq:conc`, the sampling bound) | Eq. (4) |
+| Eq. (3) (`eq:substrate`) | Eq. (3) |
+| Table III (requirement matrix) | Table 1 |
+| Table X (matched changes) | Table 5 |
+| Fig. 6(b) (runtime per pair) | Fig. 5 |
+| Section III | Section 3 |
+
 ## 11. Rule changes and timestamps
 
 Section 7.1 of the article summarizes this section. A rule is fixed when it is recorded in a file.
