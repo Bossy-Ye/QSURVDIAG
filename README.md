@@ -75,6 +75,11 @@ compares `R2V_BOUND.json` without its unprinted witness-surface counts, which de
 | 7 | `docs/protocols.md`, section 11; `R2V_FINAL_*.csv` and `data/certification/witness_order/CHANGES.csv` (negative controls); `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/analyses/noise.json`; `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
 | 8 | `data/certification/outcomes/R2V_FINAL_PRIMARY.csv` (state margins of the inverse test) |
 
+The diagnosis code is archived with the records that use it: the driver in `data/implementation/qsurvdiag/`, the
+comparisons, candidate selection and evidence check in `data/prospective/mqt_bench/frozen_deps/` (`e1_relations.py`,
+`qsurvdiag_confirmatory.py`, `decision_bound.py`), and the tests in `data/implementation/tests/`. The package has no
+command that diagnoses a new pair; `scripts/` reruns the archived analyses.
+
 ## Codes
 
 The records and `expected/` use the study's codes.
