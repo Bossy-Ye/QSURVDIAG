@@ -1,4 +1,4 @@
-"""Inspect the circuits the pinned QED-C kernel actually constructs (v2.0.8) and check that the study's
+"""Inspect the circuits the pinned QED-C kernel constructs (v2.0.8) and check that the study's
 transcriptions equal them. Loads only the kernel file (imports qiskit, numpy, math) from the pinned checkout; no
 benchmark driver, analysis or execution code runs.
 Usage: python -I kernel_equivalence_check.py <kernel.py> <precalculated_data.json>"""

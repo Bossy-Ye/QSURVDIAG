@@ -61,7 +61,7 @@ for s, label in (("S_FAMILY", "adjacent-pair"), ("S_COVER", "all-qubit"), ("S_BO
 # output-condition suite (native, corrected suites where rerun)
 rec = {r["mutant_id"]: r for r in rd("data/primary/records/T1_4_SSPEC_599.csv")}
 by = collections.defaultdict(list)
-for r in rd("data/output_condition/OC_RUNS.csv"):
+for r in rd("data/output_condition/NATIVE_RUNS.csv"):
     if r["kind"] != "guard": by[r["case"]].append(r["verdict"])
 new = {m: ("KILLED" if v.count("KILLED") == len(v) else "OTHER") for m, v in by.items()}
 oc = lambda m: new.get(m, rec[m]["outcome"]) == "KILLED"

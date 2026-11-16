@@ -3,7 +3,7 @@ suite) on the pre-confirmation suite-omission candidates of the corpus and MQT B
 Design: data/combined_suite/PLAN.md (frozen before the native runs).
 
 Usage (analytic-tier environment):
-  python -I cmp_run.py <package root> <run tree> <out dir> [workers] [--semantic-only]
+  python -I run_comparison.py <package root> <run tree> <out dir> [workers] [--semantic-only]
 """
 import ast, csv, hashlib, json, os, sys, time, platform
 from concurrent.futures import ProcessPoolExecutor
@@ -120,7 +120,7 @@ def main():
         with ProcessPoolExecutor(WORKERS) as ex: res = list(ex.map(run_job, jobs))
     wall = time.time() - t0
     nat = dict(zip(keys, res))
-    with open(OUT / "CMP_NATIVE_RUNS.csv", "w", newline="") as f:
+    with open(OUT / "NATIVE_RUNS.csv", "w", newline="") as f:
         wr = csv.writer(f, lineterminator="\n"); wr.writerow(["key", "role", "seed", "verdict", "seconds"])
         for (k, role), out in nat.items():
             for s, v, sec in out: wr.writerow([json.dumps(k) if isinstance(k, tuple) else k, role, s, v, sec])
@@ -133,7 +133,7 @@ def main():
             row[f"{pol}_orig_fails"] = K(oo); row[f"{pol}_orig_unsupported"] = Uu(oo)
             row[f"{pol}_supported"] = K(mo) == R and K(oo) <= 1 and not Uu(mo) and not Uu(oo)
             row[f"{pol}_mut_seconds"] = round(sum(x[2] for x in mo), 2)
-    with open(OUT / "CMP_CASES.csv", "w", newline="") as f:
+    with open(OUT / "CASES.csv", "w", newline="") as f:
         wr = csv.DictWriter(f, fieldnames=list(rows[0]) + [k for k in (rows[-1] if not SEMANTIC_ONLY else {}) if k not in rows[0]], lineterminator="\n")
         wr.writeheader(); wr.writerows(rows)
     origrows = [{"original": k[0], "policy": k[1], "suite": k[2], "fails": K(nat[(k, f"{k[1]}_orig")]),
@@ -143,7 +143,7 @@ def main():
                "original_validations": origrows, "reference_generation_seconds": round(t_ref, 3),
                "diagnosis_seconds_total": round(sum(r["diag_seconds"] for r in rows), 3), "native_wall_seconds": round(wall, 1),
                "executions": sum(len(o) for o in res), "shots": N * sum(len(o) for o in res), "workers": WORKERS,
-               "machine": platform.platform()}, open(OUT / "CMP_SUMMARY.json", "w"), indent=1)
+               "machine": platform.platform()}, open(OUT / "SUMMARY.json", "w"), indent=1)
     print("cases", len(rows), "jobs", len(jobs), "wall", round(wall, 1))
 
 if __name__ == "__main__":

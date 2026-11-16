@@ -1,6 +1,6 @@
 # Output-condition suites: correction plan (frozen before the confirming run)
 
-This file, `oc_rerun.py` and `AFFECTED_PAIRS.csv` are committed
+This file, `run_suites.py` and `AFFECTED_PAIRS.csv` are committed
 before any native run of a corrected suite. Before the commit the following had been seen: the ideal (statevector)
 predictions of `data/checks/output_condition_suites.py` (65 of the 69 suite omissions would be killed), an
 original-only sampling calibration (`calibrate_original_only.out`, below) and an adapter probe that ran each

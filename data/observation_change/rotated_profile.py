@@ -159,14 +159,14 @@ elif __name__ == "__main__" and sys.argv[1] == "analyze":
     assert all(r["cli"] == r["inproc"] for r in runs) and not any(r["cli"] == "UNSUPPORTED" for r in runs)
     g = collections.defaultdict(list)
     for r in runs: g[(r["pair"], r["role"])].append(r)
-    old = collections.defaultdict(list)
+    sep_runs = collections.defaultdict(list)
     for f in ("native_runs.jsonl.gz", "later_positions_native_runs.jsonl.gz"):
         for l in gzip.open(DIR / f, "rt"):
-            x = json.loads(l); old[(x["pair"], x["role"], x["arm"])].append(x)
+            x = json.loads(l); sep_runs[(x["pair"], x["role"], x["arm"])].append(x)
     rows = []
     for s in st:
         p = s["pair"]; ms, gs = SEEDS[s["arm"]]
-        wm = old[(p, "mutant", "rotated")]; wo = old[(p, "original", "rotated")]
+        wm = sep_runs[(p, "mutant", "rotated")]; wo = sep_runs[(p, "original", "rotated")]
         assert sorted(int(x["seed"]) for x in wm) == ms and len(wo) == 12
         wk = sum(x["cli"] == "KILLED" for x in wm)
         wg = sum(x["cli"] == "KILLED" for x in wo if int(x["seed"]) in gs)
@@ -175,7 +175,7 @@ elif __name__ == "__main__" and sys.argv[1] == "analyze":
         assert sorted(x["seed"] for x in cm) == ms and sorted(x["seed"] for x in co) == gs
         ck = sum(x["cli"] == "KILLED" for x in cm); cg = sum(x["cli"] == "KILLED" for x in co)
         # the recorded unrotated witness, when it is the control, ran the same test at the same seeds
-        uw = old[(p, "mutant", "control")]
+        uw = sep_runs[(p, "mutant", "control")]
         same_inst = (s["control_kind"], s["control_key"]) == (s["witness_kind"], s["witness_key"])
         replay = ("" if not same_inst else
                   {x["seed"]: x["cli"] for x in cm} == {int(x["seed"]): x["cli"] for x in uw})

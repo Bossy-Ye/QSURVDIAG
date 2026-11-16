@@ -1,4 +1,4 @@
-"""Effect of the closed witness order (AMENDMENT.md) on every population, from the v2 final records and the v3
+"""Effect of the closed witness order (RULE.md) on every population, from the v2 final records and the v3
 native runs. Standard library only.
 Usage: python3 audit.py <package root> <out csv>     (archived output: IMPACT.csv)
 

@@ -1,7 +1,7 @@
 # Protocols and settings
 
-This document gives the settings and protocols behind Sections 4 and 5 of the article. Section, table and figure
-numbers refer to the article.
+This document gives the settings and protocols behind Sections 4 and 5 of the article and the rule changes and
+timestamps of Section 7.1 (section 11). Section, table and figure numbers refer to the article.
 
 ## 1. Execution settings of the experiments
 
@@ -47,18 +47,27 @@ sampling bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolera
 |---|---:|---:|---:|---|---|
 | Equivalent on all valid inputs | 4 | 0 | 4 | contract equivalence | contract equivalence |
 | Same final state on the executed input, distinct on some valid input | 95 | 81 | 176 | executed-input equality | contract equivalence for 89; executed-input equality for 87 |
-| Different final state on the executed input | 94 | 21 | 115 | later outcomes | later outcomes |
+| Different final state on the executed input | 94 | 21 | 115 | decided further in the order | decided further in the order |
 
 No recorded decision of the decision-diagram checker contradicts the simulator-based comparison.
 
-Output-register contracts (`data/reanalysis/register_contracts.py`) require equal reduced states on the declared
+Output-register contracts (`data/analyses/register_contracts.py`) require equal reduced states on the declared
 output register. They make 13 observation limitations (GHZ 7, Bernstein-Vazirani and Deutsch-Jozsa 6) and 59 suite
 omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent. The below-tolerance difference keeps its outcome.
 
 ## 4. Causes of survival (RQ3)
 
 - **Predictions about the five other circuits.** Twelve predictions were committed before the mutants of these
-  circuits were sampled. Five failed (`history.md`, section 4).
+  circuits were sampled, each with the result that would falsify it (`data/prospective/registration/`; check V11).
+  Five failed: contract equivalences were 33 of the 102 survivors (32.4 %), against a predicted 10-30 %; suite
+  omissions were 21 (20.6 %), against more than 26.6 %; the gate-set assertion separated none of the 33
+  contract-equivalent mutants, against more than 80 %, and depth 11, against fewer than the gate set; no observation
+  limitation occurred, against at least one. Five held: no unresolved outcome, no rule fixed in advance changed, the
+  method applied to the output-register QuCheck profile with no shared rule changed, below-tolerance differences under
+  5 % (none occurred), and the two tools needed the admissibility filter for different reasons. Of the prediction that
+  both profiles express the shared outcomes and only QUTest's the two equalities, 3 of the 6 outcomes occurred. The
+  prediction that QuCheck detects every observation limitation with an X or Y difference could not be evaluated, as
+  no such case occurred.
 - **Measurement settings.** Measuring the output register in the XYZ bases gives 60 observation limitations among
   the 193 pairs. XYZ on the output register and Z on every qubit are incomparable: each distinguishes pairs the
   other does not.
@@ -88,7 +97,7 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent. The below-tol
   itself at seeds 16542-16553. QuCheck 0.0.2's Holm correction does not stop at the first retained hypothesis. The
   step-down procedure, applied to the recorded p-values, rejects exactly when the smallest p-value is at most
   alpha/m (`compare_with_predictions.py`).
-- **Device noise** (`data/reanalysis/noise.py`). The median errors of the IBM Torino calibration in
+- **Device noise** (`data/analyses/noise.py`). The median errors of the IBM Torino calibration in
   qiskit-ibm-runtime 0.40.1 serve as depolarizing gate errors and a symmetric readout error. Each circuit is
   transpiled to a line of qubits and simulated as a density matrix. Suite-omission witnesses keep a median 0.90 of
   their difference.
@@ -98,6 +107,12 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent. The below-tol
 
 ## 5. Repairs (RQ4)
 
+- **Combined-suite comparison at N = 2,000** (`data/combined_suite/`). The same 210 candidates were compared with the
+  combined suite (a marginal on every qubit and the Z products of all neighboring qubits). The repairs reliably killed
+  174 candidates and the combined suite 133. Among the 173 candidates whose witness the combined suite contains, the 27
+  that only the repair reliably killed all failed for the combined suite on the original's guard runs; none failed on
+  detection. Of the 37 witnesses outside the combined suite, 24 are non-adjacent two-qubit Z products. At this budget a
+  union bound over a suite of this size is vacuous.
 - **All-pairs comparison by witness location.** The all-pairs suite contains the witness for 197 of the 210
   candidates. The 13 witnesses outside it are Z products of weight three (3), four (1) and nine (2), five entropies
   and two Hellinger distances. The repairs support two weight-three and one weight-nine Z product, two entropies and
@@ -117,10 +132,10 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent. The below-tol
   bound does not cover their kill. The bound covers the mutant's kill for 19 of the 23 candidates and the original's
   guard runs for none. For all seven observation limitations, the largest suite in the sequence that their original
   passes is the baseline suite.
-- **Evidence requirements as a classifier** (`data/reanalysis/requirements_scores_states.py`). Of the 165 issued
+- **Evidence requirements as a classifier** (`data/analyses/requirements_scores_states.py`). Of the 165 issued
   repairs, 164 are supported in the repair comparison. Of the 23 unsupported repairs, 22 were withheld.
 - **Transfer.** Every difference by which an admissible QuCheck assertion distinguishes a transferred pair exceeds
-  theta by at least 0.45. `history.md`, section 3, describes an earlier exercise with QuCheck-style tests.
+  theta by at least 0.45. Section 11 describes an experiment with QuCheck-style tests on the output register.
 
 ## 6. The QED-C case (RQ5)
 
@@ -138,12 +153,14 @@ At n = 2 the X statistic is the X expectation of qubit 0, the first X-basis inst
 theta. Every instance before it differs by at most 0.0473 (`data/certification/witness_order/`). At n = 6 to 8, which
 are not diagnosed, the entropy difference on the Z counts exceeds theta. P failed the supplementary statistics in none
 of its runs. On the 672 recorded histograms, the stored-reference acceptance rule and the diagnostic baseline
-referenced to P gave the same verdict on every one, with measured distances differing by at most 1.8e-4. At the
-benchmark's default of 100 shots, the benchmark's normalized Hellinger fidelity of either program ranges over about
-0.1 across 12 noiseless runs (`data/qedc/QEDC_METRICS.json`). The ideal fidelities of P and P_ship differ by at most
-3.6e-4 and their computational-basis probabilities by at most 7.1e-3. The acceptance rule passes a run when the
-Hellinger distance is at most theta, a Hellinger fidelity of at least (1 - theta^2)^2 = 0.99500625. Records:
-`data/qedc/`.
+referenced to P gave the same verdict on every one, with measured distances differing by at most 1.8e-4. The
+histograms were regenerated by rerunning QUTest at the recorded seeds, and the regenerated verdicts of the
+stored-reference rule equal all 672 recorded ones; the outputs under the stored-reference rule are kept
+(`data/qedc/PLAN.md`, section 7). At the benchmark's default of 100 shots, the benchmark's normalized Hellinger
+fidelity of either program ranges over about 0.1 across 12 noiseless runs (`data/qedc/QEDC_METRICS.json`). The ideal
+fidelities of P and P_ship differ by at most 3.6e-4 and their computational-basis probabilities by at most 7.1e-3. The
+acceptance rule passes a run when the Hellinger distance is at most theta, a Hellinger fidelity of at least (1 -
+theta^2)^2 = 0.99500625. Records: `data/qedc/`.
 
 ## 7. Other programs (RQ6)
 
@@ -173,10 +190,9 @@ Hellinger distance is at most theta, a Hellinger fidelity of at least (1 - theta
   replays it. `native_runs.csv` is its flat view. `OPERATIONAL.md`, section X2_RUNTIME_DECISION, records the runtime
   check of the plan.
 - **Width set.** The four unresolved cases are a split verdict, an undecided margin and two suite-omission candidates
-  that fail native confirmation. The runtimes of Fig. 5 were measured under the rules of the first analysis
-  (`history.md`, section 1). At fourteen qubits the median universe-evaluation time grows by a factor of 3.8 per added
-  qubit. The extrapolated limit of nineteen qubits is an upper bound, because it holds state acquisition at its
-  measured median.
+  that fail native confirmation. The runtimes of Fig. 5 were measured under rule set v1 (section 11). At fourteen
+  qubits the median universe-evaluation time grows by a factor of 3.8 per added qubit. The extrapolated limit of
+  nineteen qubits is an upper bound, because it holds state acquisition at its measured median.
 - **Corpus.** Of the 562 survivors, 158 are contract equivalences. The 98 unresolved cases are 51 split verdicts, 3
   undecided margins and 44 suite-omission candidates. All ten widths with at least ten of the 1,569 pairs contain
   observation-limited pairs, at 9.4 % for n <= 7 and 9.9 % for n >= 8 (semantic comparisons). The 151st pair found by
@@ -222,7 +238,7 @@ holds to that margin, and its record states the margin. The margins of every dec
   they import are archived with the records that use them. `scripts/run_conformance_tests.py` runs three tests; the
   others execute QUTest.
 - **Embedded paths**: archived files name the study's working folders, for example `revision2/`, the folder of the
-  revised analysis of `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. The package stores
+  analysis under `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. The package stores
   these files under `data/`; `scripts/analytic/r2v_inputs.csv` rebuilds the folder layout that the archived producers
   read.
 - **Not redistributed**: QMutBench program files (GPL-3.0; their gate lists are in `R2V_NATIVE_JOBS_ARMS.jsonl`;
@@ -242,7 +258,7 @@ The plans and operational records of the separating-setting, developer-suite and
 byte-identical, so they name the experiments and files as they were named when recorded. Section labels such as
 X2_OPERATIONAL name sections of `data/developer_suites/OPERATIONAL.md`.
 
-| Name in the plans | Current name |
+| Name in the plans | Name in this package |
 |---|---|
 | X1 | separating-setting experiment, `data/observation_change/` |
 | X2 | developer-suite experiment, `data/developer_suites/` |
@@ -267,3 +283,95 @@ X2_OPERATIONAL name sections of `data/developer_suites/OPERATIONAL.md`.
 | `X4_FINAL.csv` | `data/position/outcomes.csv` |
 | `X4_SUMMARY.json` | `data/position/summary.json` |
 | `x4_select.py` | `data/position/select_mutants.py` |
+
+## 11. Rule changes and timestamps
+
+Section 7.1 of the article summarizes this section. A rule is fixed when it is recorded in a file.
+
+### Rules changed after earlier outcomes
+
+Rules 1 to 5 form rule set v2 (`V2_SPECIFICATION.md`); rule 6 forms v3 (`data/certification/witness_order/RULE.md`).
+v1 is the rule set without these six rules.
+
+| Rule | Effect on outcomes |
+|---|---|
+| 1. Distribution distances at Hellinger and Kullback-Leibler as well as total variation, as QUTest 0.1.0 implements all three | three below-tolerance outcomes of two distinct corpus pairs (one also in the width set) become suite-omission candidates |
+| 2. Equality margins between 1e-10 and 1e-8 are undecided | four outcomes of three distinct pairs become unresolved |
+| 3. Assertion types that the declared profile leaves out are recorded apart from inadmissible types | none |
+| 4. One fixed order for every distinguishing assertion, with a negative control from the same order | none |
+| 5. Every requirement is evaluated on the case's own record, with native confirmation | 48 suite-omission candidates withdrawn: 45 corpus, 2 width set, 1 defect |
+| 6. Single-qubit Z products come last in the witness order, which then lists the whole universe (closed witness order) | two candidates that rule 5 withdraws, corpus `qra_cases_v1_1/QRA_360` and defect 26, are natively confirmed; the QED-C X-basis statistic is selected at n = 2 |
+
+The effects overlap and do not add. Rule 5 withdraws two of the three candidates of rule 1; the third is natively
+confirmed. Rule 6 restores two candidates that rule 5 withdraws. Counted per experiment, the six rules change 51
+outcomes (48 corpus, 3 width set) of 48 distinct pairs: 50 become unresolved and one becomes a natively confirmed
+suite omission. No outcome of the 20 circuits or of the Q# and QASMBench programs changes, and no observation
+limitation changes. Records: `data/certification/outcomes/R2V_RULE_CHANGES.csv` (rules 1 to 5) and
+`data/certification/witness_order/IMPACT.csv` (rule 6). The runtimes of Fig. 5 were measured under v1.
+
+### Rules and designs fixed before the outcomes they concern
+
+- the profiles, evidence requirements and reporting rules, before any outcome of the five other circuits, the width set
+  and the Q# and QASMBench programs, together with the mutant selections of the five other circuits and of the Q# and
+  QASMBench programs;
+- twelve predictions about the five other circuits, before their mutants were sampled (section 4);
+- the generic and output-condition suites, before any outcome, and the defect eligibility conditions, before any
+  defect ran;
+- rules 1 to 5, before the outcomes they change;
+- the MQT Bench protocol (Freeze A) and mutant population (Freeze B), before any mutant ran;
+- the designs of the separating-setting, developer-suite and later-position experiments (Freeze C), before any of
+  their runs, and the separating settings at the later positions (Freeze D), before they were computed;
+- in the developer-suite experiment, the comparison of final states on the executed contexts, before any of its
+  outcomes was reported (`data/developer_suites/OPERATIONAL.md`, section X2_STATE_RELATION).
+
+### Choices made after earlier outcomes
+
+- rule 6, after the outcomes under v2 and the QED-C runs;
+- ideal references and N = 8,000 in the suite experiment, after guard runs of originals failed suites with correlators
+  at sampled references and N = 2,000, and before any mutant ran at that budget;
+- the output-condition suites, corrected after their first outcomes; the correction and its plan were committed before
+  the corrected suites ran (`data/output_condition/PLAN.md`);
+- the all-pairs comparator, after the comparison with the combined suite (section 5), chosen from the composition of
+  its witnesses; its plan was committed before its runs (`data/all_pairs/PLAN.md`);
+- the QED-C diagnostic baseline referenced to P, after the runs under the stored-reference acceptance rule; the change
+  and its procedure were recorded before they were evaluated (`data/qedc/PLAN.md`, section 7; section 6);
+- the QuCheck profile on every qubit, after the output-register evaluation of transfer was known. An experiment with
+  2,000 shots on the output register detected 5 of the 21 transfer cases; it built contingency tables and Fisher tests
+  in QuCheck's pinned environment without calling QuCheck's analysis routine, so its detections are not native QuCheck
+  verdicts (`data/prospective/cross_tool/s3/S3_QUCHECK_RESULTS.csv`);
+- the width-set GHZ register, reduced to q0 after a run at eight to ten qubits, and the one-qubit GHZ output register
+  of the 20 circuits, kept after an analysis had shown that the GHZ circuits supply most suite omissions
+  (`data/interventions/width_register/DESIGN_FREEZE.md`, entry E13c);
+- the development circuits, chosen after a pilot had tested 33 of their 450 mutants; the pilot's runs are not among
+  the released records;
+- the execution adapter of the Q# and QASMBench programs, after the aggregate counts of a voided execution and before
+  any comparison or outcome;
+- the corpus eligibility conditions and stratification variable, after the semantic comparisons and before the native
+  corpus tests;
+- the separating-setting, developer-suite and later-position designs, after all outcomes of the other experiments and
+  after pilots on some of their pairs (section 0 of each `PLAN.md`);
+- the separating setting of the QED-C constructed pair, after the QED-C study
+  (`data/observation_change/QEDC_EXTENSION.md`), and the negative control of the developer-suite suite omission, after
+  that experiment's outcomes (`data/developer_suites/OPERATIONAL.md`, section X2_NEGATIVE_CONTROL).
+
+### Records that date each step
+
+| Step | Record | Check |
+|---|---|---|
+| Rules and predictions of the evaluation on the five other circuits, before their mutants were sampled | commits `e11027e` and `35f0d5c` of `CLAIM_DECISION_BASELINE.md` precede the cohort commit `a3d926a` (`provenance/git_commit_records.csv`) | V11 |
+| Allocation of the Q# programs | checksums, which fix its content; its date rests on recorded file times | |
+| Suite experiment at ideal references and N = 8,000 | `PLAN_B5.sha256`; in recorded file times, the guard runs and the guard-only extension precede the runner and the mutant run at N = 8,000 | V17 |
+| Protocol of the Q# and QASMBench programs, four versions | each JSON with its `.sha256`, in the order of their file times; the fourth records that no comparison had been computed when the adapter was introduced | V18 |
+| Rules 1 to 5 | `V2_SPECIFICATION.sha256`; the specification's file time precedes the first `R2V_*` output by 11 minutes. No commit or external timestamp dates it before those outcomes; an identical copy is part of Freeze A | |
+| MQT Bench protocol, subjects, code and frozen dependencies | Freeze A: `data/prospective/mqt_bench/freeze/FREEZE_A.sha256` (70 files), RFC 3161 receipt 05:33:09 UTC, 9 October 2026 | `verify_integrity.py --tsr` |
+| MQT Bench mutant population | Freeze B: `FREEZE_B.sha256` (245 files), RFC 3161 receipt 05:35:54 UTC, 9 October 2026, before any mutant ran | `verify_integrity.py --tsr` |
+| Designs of the separating-setting, developer-suite and later-position experiments | Freeze C: `provenance/FREEZE_C.sha256` over `X1_OBSERVATION_CHANGE.md`, `X2_DEVELOPER_SUITES.md` and `X4_POSITION.md` (the `PLAN.md` of `data/observation_change/`, `data/developer_suites/` and `data/position/`), RFC 3161 receipt 08:31:41 UTC, 20 October 2026 | `verify_integrity.py --tsr` |
+| Separating settings at the later positions | Freeze D: `provenance/FREEZE_D.sha256` over `X1_POSITION_EXTENSION.md` (`data/observation_change/POSITION_EXTENSION.md`), RFC 3161 receipt 18:42:20 UTC, 22 October 2026 | `verify_integrity.py --tsr` |
+| Plans of the output-condition correction, the combined-suite and all-pairs comparisons and the QED-C screening and design | committed before the first of their run records (`PLAN.md` and `SCREENING.md` in `data/output_condition/`, `data/combined_suite/`, `data/all_pairs/` and `data/qedc/`); the released files differ from the committed ones only in file paths and cross-references | |
+| Operational records of the later-position, QED-C and developer-suite experiments | recorded times in `data/position/OPERATIONAL.md`, `data/observation_change/QEDC_EXTENSION.md` and `data/developer_suites/OPERATIONAL.md` (per section) | |
+
+The runs of each design follow its receipt by the study's file times. No rule was deposited in a public registry. The
+`provenance` column of `provenance/source_manifest.csv` gives, per file: `git-committed` (the commit that holds this
+content; every commit of the file in `git_commit_records.csv`), `timestamp-certified` (listed in an RFC 3161
+manifest), `hash-recorded` (hash in the named checksum file, or in a study checksum file that is not released; no
+external time) or `file only` (modification time in `original_mtime_utc`).

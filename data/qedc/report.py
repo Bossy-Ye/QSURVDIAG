@@ -1,6 +1,6 @@
 """Reporting path with the original-validity precondition enforced in code.
 
-Reads CASE_RESULTS.json and NATIVE_RUNS.csv (the frozen run) and REANALYSIS_RUNS.csv (the same seeded
+Reads CASE_RESULTS.json and NATIVE_RUNS.csv (the frozen run) and BASELINE_COMPARISON_RUNS.csv (the same seeded
 histograms evaluated under T, the stored-E-referenced method-2 rule, and T', the admitted P-referenced Hellinger
 instance of U(P)). For every pair and width it reports, per evaluation stage, the original's validity and the
 counterpart's verdicts, and admits a diagnosis only when the executed baseline is an admitted instance (T') and the
@@ -21,7 +21,7 @@ case = {(c["pair"], c["n"]): c for c in json.load(open(D / "CASE_RESULTS.json"))
 runs = collections.defaultdict(list)
 for r in csv.DictReader(open(D / "NATIVE_RUNS.csv")): runs[(r["pair"], int(r["n"]), r["run"])].append(r["verdict"])
 re_ = collections.defaultdict(list); hval = collections.defaultdict(list)
-for r in csv.DictReader(open(D / "REANALYSIS_RUNS.csv")):
+for r in csv.DictReader(open(D / "BASELINE_COMPARISON_RUNS.csv")):
     re_[(r["pair"], int(r["n"]), r["run"], r["predicate"])].append(r["verdict"]); hval[(r["pair"], int(r["n"]), r["run"], r["predicate"])].append(float(r["hellinger"]))
 K = lambda v: sum(x == "KILLED" for x in v)
 

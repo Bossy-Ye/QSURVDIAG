@@ -1,5 +1,5 @@
 check_id,label,expected,printed_in_manuscript,evidence_level,location
-R-OC00,oc_analyze.py rerun equals the archived recorded reproduction / corrected results,True/True,n.a. (logical check),per-run records,Data Availability
+R-OC00,output_condition/analyze.py rerun equals the archived recorded reproduction / corrected results,True/True,n.a. (logical check),per-run records,Data Availability
 R-OC01,"Matched-changes output-condition row, corrected: newly killed / lost / effect pp / bootstrap CI / LOO range","65/0/27.2/[8.8, 46.2]/[22.0, 31.1]",partly (leave-one-out range not printed),per-run records,Table 5; 5.3.2
 R-OC02,Matched-changes output-condition row: pairs / circuits / exact McNemar p,239/8/5.4e-20,partly (pairs and circuits printed; McNemar p not printed),per-run records,Table 5
 R-OC03,Fig. 4(b): suite omissions killed / total; observation limitations killed / total,65/69; 0/27,yes,per-run records,5.3.2; Fig. 4(b)
@@ -8,21 +8,21 @@ R-OC06,Corrected-suite guard runs of the five changed subjects,"5 subjects, 0 fa
 R-OC07,Rerun size; native verdict recounted; native agrees with the ideal prediction,"149 pairs, 1788 mutant runs; native 149/149 recounted; agree 149/149",no,per-run records + archived ideal prediction,5.3.2
 R-OC08,The four Simon suite omissions the corrected suite does not kill,"simon_4#h02,simon_4#h03,simon_4#h06,simon_4#h07",yes,per-run records,5.3.2
 R-CL00,"circuit_level.py rerun equals circuit_level.out (pairs eligible to change, circuits contributing, sign tests over circuits)",True,yes,per-run records,4.4; 5.3.2; 5.3.3; Table 5; 7.4
-R-CM00,cmp_analyze.py rerun equals CMP_RESULTS.json,True,n.a. (logical check),per-case records,Data Availability
-R-CM01,Per-case comparison table recounted from per-run records,"210 cases; recounted from per-run records: mutant kills 420/420, original failures 420/420",n.a. (logical check),per-run records,docs/history.md section 6
-R-CM02,Candidate witness suite (D) / combined suite (S) meet the validation rule,174/133,yes,per-run records,5.4; docs/history.md section 6
-R-CM03,Both / only D / only S / neither,124/50/9/27,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/CMP_RESULTS.json
-R-CM04,Witness in S / outside S,173/37,no (package only),per-case records,docs/history.md section 6
-R-CM05,Witness in S: 12 of 12 kills D/S; original fails >1 D/S; supported D/S,153/165; 5/37; 151/133,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/CMP_RESULTS.json
-R-CM06,Witness outside S: 12 of 12 kills D/S; S never kills; original fails >1 D/S; supported D/S,26/1; S never 15; 4/14; 23/0,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/CMP_RESULTS.json
-R-CM07,Issued repairs meeting the rule / issued; withheld candidates meeting it / withheld,159/165; 15/45,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/CMP_RESULTS.json
-R-CM08,"Issued repairs not meeting the rule, by reason",5 fewer than 12 kills; 1 original fails >1,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/CMP_RESULTS.json
-R-CM09,Witness difference below theta + 0.01: cases / D supported / S supported,14/0/4,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/CMP_RESULTS.json
-R-CM10,Cases only S supports / all with witness within 0.05 of theta,9/True,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-case records,data/combined_suite/CMP_RESULTS.json
-R-CM11,Witnesses outside S: Z products / entropies / Hellinger distances,30/5/2,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-case records,data/combined_suite/CMP_RESULTS.json
-R-CM12,Original-validation suites D/S; assertions D/S; mutant runs D/S,117/63; 1764/2894; 2520/2520,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/CMP_RESULTS.json
-R-CM13,"Diagnosis time of D over 210 cases, s",10.4,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",archived summary (CMP_SUMMARY.json),data/combined_suite/CMP_RESULTS.json
-R-E200,Reanalysis: histograms; re-run stored-reference verdicts differing from the archived ones,672 histograms; re-run T verdicts differing from the archived: 0,partly (672 printed),per-run records,docs/protocols.md section 6; 7.1
+R-CM00,combined_suite/analyze.py rerun equals RESULTS.json,True,n.a. (logical check),per-case records,Data Availability
+R-CM01,Per-case comparison table recounted from per-run records,"210 cases; recounted from per-run records: mutant kills 420/420, original failures 420/420",n.a. (logical check),per-run records,docs/protocols.md section 5
+R-CM02,Candidate witness suite (D) / combined suite (S) meet the validation rule,174/133,yes,per-run records,5.4; docs/protocols.md section 5
+R-CM03,Both / only D / only S / neither,124/50/9/27,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
+R-CM04,Witness in S / outside S,173/37,no (package only),per-case records,docs/protocols.md section 5
+R-CM05,Witness in S: 12 of 12 kills D/S; original fails >1 D/S; supported D/S,153/165; 5/37; 151/133,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
+R-CM06,Witness outside S: 12 of 12 kills D/S; S never kills; original fails >1 D/S; supported D/S,26/1; S never 15; 4/14; 23/0,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
+R-CM07,Issued repairs meeting the rule / issued; withheld candidates meeting it / withheld,159/165; 15/45,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
+R-CM08,"Issued repairs not meeting the rule, by reason",5 fewer than 12 kills; 1 original fails >1,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
+R-CM09,Witness difference below theta + 0.01: cases / D supported / S supported,14/0/4,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
+R-CM10,Cases only S supports / all with witness within 0.05 of theta,9/True,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-case records,data/combined_suite/RESULTS.json
+R-CM11,Witnesses outside S: Z products / entropies / Hellinger distances,30/5/2,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-case records,data/combined_suite/RESULTS.json
+R-CM12,Original-validation suites D/S; assertions D/S; mutant runs D/S,117/63; 1764/2894; 2520/2520,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
+R-CM13,"Diagnosis time of D over 210 cases, s",10.4,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",archived summary (data/combined_suite/SUMMARY.json),data/combined_suite/RESULTS.json
+R-E200,Baseline comparison: histograms; re-run stored-reference verdicts differing from the archived ones,672 histograms; re-run T verdicts differing from the archived: 0,partly (672 printed),per-run records,docs/protocols.md section 6; 7.1
 R-E201,Stored-reference rule and diagnostic baseline agree; largest difference of the measured distances,672/672; max |dH| 1.8e-04,partly (672 printed),per-run records,7.1; docs/protocols.md section 6
 R-E202,"Diagnostic baseline: original fails, certification stream n=2..8 | validation stream",0 0 0 10 12 12 12 | 0 0 0 9 12 12 12,partly (the range 9 to 12 at n = 5 to 8 printed),per-run records,5.5; Table 7 note
 R-E203,Widths meeting the original-validity rule (at most 1 of 12),"2,3,4",yes,per-run records,5.5; Table 7; 7.3
@@ -78,9 +78,9 @@ R-X205,QuCheck case studies: executed-input equalities over both suites,14 execu
 R-X206,Native QuCheck on the 20 circuits: detections in 12 of 12 runs; controls with the shipped correction and with step-down Holm,only QuCheck 28/28 detected in 12 of 12 (Holm 28); only QUTest 0/25 (never 9); controls 175 and 2 with Holm of 816,yes (as 21% and 0.25%; never 9 not printed),per-run records,5.3.3
 R-X207,Native QuCheck on the transfer cases with and without a witness above theta,"transfer with witness 15/15; without 5 never, 1 split of 6",partly (15/15 and 6 printed),per-run records,5.4
 R-X208,QuCheck case studies: negative control of the suite omission,"B|grovers_algorithm|m11: control marginal:0@0, mutant kills 0, original failures 0",no,archived control runs,data/developer_suites/OPERATIONAL.md
-R-X500,"Evidence requirements as a classifier of reliable repairs: candidates, issued, precision, recall, withheld, unsupported withheld","210 candidates, 165 issued, precision 164/165, recall 164/187, withheld 45, unsupported withheld 22 of 23",yes,archived re-analysis output (rerun: R-A10),4.3; 5.4
-R-X501,Corpus mutation score raw / without contract equivalences / also without observation limitations; distinct final states / sites of OL and SO,corpus score 63.4 70.7 79.3; CL3:28/27 CL4:56/23,yes,archived re-analysis output (rerun: R-A10),5.3.1; 6
-R-X502,Output-register contract; IBM Torino median noise,"register contract: CL3 13/35, CL4 59/79; noise: SO witness above theta 79/79 (median ratio 0.90), OL below 34/35, largest OL difference 0.0508",partly (median ratio not printed; 0.051 printed),"archived re-analysis output (rerun: R-A11, R-A12)",5.2; 7.2; 7.3
+R-X500,"Evidence requirements as a classifier of reliable repairs: candidates, issued, precision, recall, withheld, unsupported withheld","210 candidates, 165 issued, precision 164/165, recall 164/187, withheld 45, unsupported withheld 22 of 23",yes,archived analysis output (rerun: R-A10),4.3; 5.4
+R-X501,Corpus mutation score raw / without contract equivalences / also without observation limitations; distinct final states / sites of OL and SO,corpus score 63.4 70.7 79.3; CL3:28/27 CL4:56/23,yes,archived analysis output (rerun: R-A10),5.3.1; 6
+R-X502,Output-register contract; IBM Torino median noise,"register contract: CL3 13/35, CL4 59/79; noise: SO witness above theta 79/79 (median ratio 0.90), OL below 34/35, largest OL difference 0.0508",partly (median ratio not printed; 0.051 printed),"archived analysis output (rerun: R-A11, R-A12)",5.2; 7.2; 7.3
 R-A10,requirements_scores_states.py rerun equals requirements_scores_states.json,True,n.a. (logical check),per-case records,Data Availability
 R-A11,register_contracts.py rerun equals register_contracts.json,True,n.a. (logical check),ideal states,Data Availability
 R-A12,noise.py rerun equals noise.json,True,n.a. (logical check),simulated noisy distributions,Data Availability

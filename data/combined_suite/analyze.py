@@ -1,9 +1,9 @@
 """Summaries of the matched repair comparison (plan: PLAN.md). Usage:
-  python3 -I cmp_analyze.py <CMP_CASES.csv> <CMP_SUMMARY.json> <out json>"""
+  python3 -I analyze.py <CASES.csv> <SUMMARY.json> <out json>"""
 import csv, json, sys, collections
 
 rows = list(csv.DictReader(open(sys.argv[1]))); summ = json.load(open(sys.argv[2]))
-from pathlib import Path                     # cases whose repairs the v3 amendment issues (data/certification/witness_order)
+from pathlib import Path                     # cases whose repairs the closed witness order (v3) issues (data/certification/witness_order)
 V3 = {(r["population"], k) for r in csv.DictReader(open(Path(sys.argv[1]).resolve().parents[1] / "certification/witness_order/IMPACT.csv")) for k in r["changed"].split(";") if k}
 for r in rows:
     if (r["arm"], r["case"]) in V3: r["certified_by_D"] = "True"

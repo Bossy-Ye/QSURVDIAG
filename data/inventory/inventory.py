@@ -3,7 +3,7 @@
 Usage:
   python3 -I inventory.py <package_root> <qmutbench_download_dir> <corpus_files.tsv> <out_dir>
 
-Reads only records of the package (never writes there; final records with the v3 amendment applied,
+Reads only records of the package (never writes there; final records under the closed witness order, v3,
 scripts/lib/witness_order.py) and the pinned QMutBench program
 files fetched by fetch_corpus.sh (verified here against the SHA-256 values in the package's corpus
 case manifests).  Writes:
@@ -101,7 +101,7 @@ def parse_loc(loc):
     return OPN[op], k, gate
 
 
-# ----------------------------------------------------------------------------------- QMutBench
+# QMutBench
 DIAG = {"z", "s", "sdg", "t", "tdg", "rz", "p", "u1", "cp", "cu1", "cz", "rzz", "id"}
 NONGATE = ("OPENQASM", "include", "qreg", "creg", "barrier", "measure")
 
@@ -207,7 +207,7 @@ def qmb_site(orig_text, mut_text, mut_file):
             "touches_diag": touches_diag, "terminal": anchor_max >= Go - (0 if op == "insert" else 1)}
 
 
-# ----------------------------------------------------------------------------------- loaders
+# Loaders
 def final_index(path, key):
     return {r[key]: r for r in rd(path)}
 
@@ -414,7 +414,7 @@ def load_width(root, sites, by_short):
     return rows, checks
 
 
-# ----------------------------------------------------------------------------------- analyses
+# Analyses
 def assertion_type(kind, key, n=None):
     if not kind:
         return ""
@@ -580,12 +580,12 @@ def main(root, dl, tsv, od):
     for name, rows in pops:
         pop_summary(name, rows, summary)
 
-    # ---- position x outcome per population
+    # Position x outcome per population
     summary["position_x_outcome"] = {}
     for name, rows in pops:
         summary["position_x_outcome"][name] = table("Position x outcome: " + name, rows, outcome_label, POSCOLS, pos_label)
 
-    # ---- operator / class x outcome for the causes
+    # Operator / class x outcome for the causes
     summary["operator_x_outcome"] = {}
     for name, rows in pops:
         summary["operator_x_outcome"][name] = table("Operator x outcome: " + name, rows, outcome_label,
@@ -598,14 +598,14 @@ def main(root, dl, tsv, od):
                                                ["local_basis_amplitude", "phase_parameterized", "entangling_controlled",
                                                 "multi-gate block", "identity"], lambda r: r["gate_class"])
 
-    # ---- family x cause
+    # Family x cause
     summary["family_x_outcome"] = {}
     for name, rows in [("external (270)", ext), ("MQT Bench (120)", mqt), ("width set (162 listed)", wid),
                        ("corpus <=14 qubits (1537)", corp), ("20 circuits (599)", prim)]:
         summary["family_x_outcome"][name] = table("Family x outcome: " + name, rows, lambda r: r["family"], OUTCOLS,
                                                   outcome_label)
 
-    # ---- causes beyond the first gate: list counts by population
+    # Causes beyond the first gate: list counts by population
     out("")
     out("### Causes at non-first-gate sites (reported outcomes)")
     beyond = {}
@@ -620,7 +620,7 @@ def main(root, dl, tsv, od):
                    len({r['program'] for r in nf})))
     summary["beyond_first_gate"] = {"%s|%s" % k: v for k, v in beyond.items()}
 
-    # ---- repair designs and assertion types
+    # Repair designs and assertion types
     out("")
     out("### Repair designs (distinct repaired suites) and distinguishing-assertion types")
     summary["designs"] = {}
@@ -651,7 +651,7 @@ def main(root, dl, tsv, od):
         out("    largest designs:", top, "| designs used by one pair only:", summary["designs"][name]["designs_with_1_pair"])
         out("    SO by family:", fam_so)
 
-    # ---- margins
+    # Margins
     out("")
     out("### Decisive difference margins d - theta (theta = 0.05)")
     summary["margins"] = {}
@@ -712,7 +712,7 @@ def main(root, dl, tsv, od):
                                                lambda r: assertion_type(r["w_kind"], r["w_key"]), MBINS,
                                                lambda r: list(margin_bins([float(r["w_d"])]).keys())[0])
 
-    # ---- certification and seeds
+    # Certification and seeds
     out("")
     out("### Certification and independently seeded execution")
     cert = {}
@@ -731,7 +731,7 @@ def main(root, dl, tsv, od):
     for k, v in cert.items():
         out("-", k, json.dumps(v))
 
-    # ---- combined suite versus single-witness repair on the 79 primary SO (records only)
+    # Combined suite versus single-witness repair on the 79 primary SO (records only)
     suite = rd(os.path.join(root, "data/primary/records/599_B5_A1G_POPULATION.csv"))
     guard = rd(os.path.join(root, "data/primary/suites/SUITE_GUARD_LEDGER.csv"))
     gl = {(r["subject"], r["suite"]): r for r in guard}
@@ -767,7 +767,7 @@ def main(root, dl, tsv, od):
         summary["witness_in_combined"][name] = dict(inside)
         out("  ", name, dict(inside))
 
-    # ---- 20 circuits: sufficient condition x position for CL3
+    # 20 circuits: sufficient condition x position for CL3
     ol = [r for r in prim if r["v2_report"] == "CL3"]
     summary["primary_ol_entailed_x_pos"] = table("20 circuits CL3 entailed x position", ol,
                                                  lambda r: "entailed (sufficient condition)" if r["entailed_diag"] else "contingent",
@@ -775,7 +775,7 @@ def main(root, dl, tsv, od):
     summary["primary_ol_terminal"] = dict(C("terminal" if r["terminal"] else "not terminal" for r in ol))
     out("20 circuits CL3 terminal-site:", summary["primary_ol_terminal"], "| entailed among all 599:",
         dict(C((r["entailed_diag"], r["v2_report"]) and "%s:%s" % (r["entailed_diag"], r["v2_report"]) for r in prim if r["entailed_diag"])))
-    # ---- corpus details
+    # Corpus details
     out("")
     out("### Corpus observation limitations: sufficient condition (all gates from first divergence diagonal in both) x position")
     ol = [r for r in corp if r["v2_report"] == "CL3"]
@@ -825,7 +825,7 @@ def main(root, dl, tsv, od):
     out("distinct (original sha, mutant sha) among corpus pairs:", len(pairs_), "| duplicated:", sum(1 for v in pairs_.values() if v > 1))
     summary["corpus_distinct_content_pairs"] = len(pairs_)
 
-    # ---- OB13 kill rate versus margin, every native confirmation run (R2V_NATIVE.csv + MQT C2_NATIVE.csv)
+    # OB13 kill rate versus margin, every native confirmation run (R2V_NATIVE.csv + MQT C2_NATIVE.csv)
     out("")
     out("### Native confirmation (witness alone, N=2000, seeds 42-53): kills of 12 by margin d - theta")
     runs = [(r["arm"], float(r["inst_d"]), int(r["kills"]), int(r["guard_fails"])) for r in
@@ -844,7 +844,7 @@ def main(root, dl, tsv, od):
         if kb[b]["runs"]:
             out("| %s | %d | %d | %d |" % (b, kb[b]["runs"], kb[b]["12/12"], kb[b]["<12"]))
     summary["ob13_by_margin"] = {b: dict(kb[b]) for b in MBINS if kb[b]["runs"]}
-    # ---- MQT per subject (paper table check)
+    # MQT per subject (paper table check)
     out("")
     out("### MQT Bench per subject: I/R/D, sites, first gate")
     for s in sorted({r["program"] for r in mqt}):
@@ -852,13 +852,13 @@ def main(root, dl, tsv, od):
         oc = C(r["operator"] for r in rr)
         out("  %s I/R/D %d/%d/%d sites %d first-gate %d" % (s, oc["insert"], oc["replace"], oc["delete"],
                                                             len({r["anchor"] for r in rr}), sum(r["first_gate"] for r in rr)))
-    # ---- corpus diagonal stratum among stable survivors (Section 5.6)
+    # Corpus diagonal stratum among stable survivors (Section 5.6)
     ss = [r for r in corp if r["native_verdict"] == "SURVIVED"]
     dg = C((r["diagonal_stratum"], r["v2_report"] == "CL3") for r in ss)
     out("corpus stable survivors by diagonal stratum (stratum, is CL3):", {str(k): v for k, v in dg.items()})
     summary["corpus_stable_by_stratum"] = {"%s|%s" % k: v for k, v in dg.items()}
 
-    # ---- Bugs4Q defects
+    # Bugs4Q defects
     dd = rd(os.path.join(root, "data/external/defects/B3_REAL_DEFECTS_FRESH.csv"))
     el = rd(os.path.join(root, "data/external/defects/B3_QUTEST_ELIGIBILITY_FRESH.csv"))
     fd = rd(os.path.join(root, "data/certification/outcomes/R2V_FINAL_DEFECT.csv"))
@@ -867,7 +867,7 @@ def main(root, dl, tsv, od):
                          "final": [(r["defect_id"], r["native_verdict"], r["v2_candidate"], r["v2_report"], r["unmet"], r["w_kind"]) for r in fd]}
     out("")
     out("### Bugs4Q:", json.dumps(summary["bugs4q"]))
-    # ---- write
+    # Write
     fields = []
     for rows in (prim, ext, mqt, wid, corp):
         for r in rows:

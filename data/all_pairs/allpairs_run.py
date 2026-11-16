@@ -37,10 +37,10 @@ for node in ast.parse(open(PKG / "scripts/analytic/r2v_lib.py").read()).body:
 marg, zexp, shannon, ordered_universe = _ns["marg"], _ns["zexp"], _ns["shannon_bits"], _ns["ordered_universe"]
 # cohort, simulator convention, assertion text and lowering: unchanged from the matched repair comparison
 _cmp = {}
-src = open(PKG / "data/combined_suite/cmp_run.py").read()
+src = open(PKG / "data/combined_suite/run_comparison.py").read()
 for node in ast.parse(src).body:
     if isinstance(node, ast.FunctionDef) and node.name in ("sv", "lowered", "cases", "pragma", "baseline", "adjacent"):
-        exec(compile(ast.Module([node], []), "cmp_run", "exec"), _cmp)
+        exec(compile(ast.Module([node], []), "run_comparison", "exec"), _cmp)
 _cmp.update({"np": np, "PKG": PKG, "json": json, "csv": csv, "hashlib": hashlib, "QuantumCircuit": QuantumCircuit, "Statevector": Statevector,
              "adapt": adapt, "emit_name": emit_name, "marg": marg, "zexp": zexp, "shannon": shannon, "THETA": THETA})
 sv, lowered, cases, pragma, baseline, adjacent = (_cmp[k] for k in ("sv", "lowered", "cases", "pragma", "baseline", "adjacent"))
@@ -77,7 +77,7 @@ def run_job(job):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    arch = {r["case"]: r for r in csv.DictReader(open(PKG / "data/combined_suite/CMP_CASES.csv"))}
+    arch = {r["case"]: r for r in csv.DictReader(open(PKG / "data/combined_suite/CASES.csv"))}
     Cs = cases(); rows, jobs, keys, ostate = [], [], [], {}
     t_ref = 0.0
     for c in Cs:

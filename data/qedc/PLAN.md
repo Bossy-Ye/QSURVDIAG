@@ -132,7 +132,7 @@ Statistic for C, fixed now:
   therefore not an instance of U(P), and the runner's R_T, computed on T, does not follow the method. T is kept as
   its own analysis (the external metric). The QSurvDiag analysis is reconciled with the admitted baseline T', the
   Hellinger instance of U(P) (reference P's ideal distribution, same comparator and threshold).
-- Reanalysis without new samples. `reanalysis.py` evaluates T and T' through QUTest at the
+- Reanalysis without new samples. `baseline_comparison.py` evaluates T and T' through QUTest at the
   recorded seeds of the A streams; it requires every re-run T verdict to equal the archived one, which shows that
   the same histograms are being evaluated, and stops otherwise.
 - Validity gate in code. `report.py` admits a diagnosis only when the original passes T' (false failures at

@@ -14,7 +14,7 @@ OUT = []
 def chk(cid, label, value, level):
     OUT.append({"check_id": cid, "label": label, "recomputed": value, "evidence_level": level})
 
-# V06 historical gate-list comparison and registered fixed-basis audit (archived structural records)
+# V06 untranspiled gate-list comparison and registered fixed-basis audit (archived structural records)
 SD = rd("data/structural/records/STRUCTURAL_DEFINITIONS.csv")
 cnt = lambda pop, key: sum(r[key] == "True" for r in SD if r["population"] == pop)
 chk("V06", "gate-list difference and fixed-basis gate-set difference: construction / prospective",
@@ -54,7 +54,7 @@ GC = list(csv.DictReader(open(ROOT / "provenance/git_commit_records.csv")))
 tb = max(r["committer_date"] for r in GC if r["package_path"] == "data/prospective/registration/CLAIM_DECISION_BASELINE.md")
 ts = min(r["committer_date"] for r in GC if r["package_path"] == "data/prospective/cross_tool/s2/S2_COHORT_HASH.txt")
 chk("V11", "registered predictions / last registry commit precedes cohort commit", f"{len(ids)}/{tb < ts}", "recorded git history")
-# V12 registered shares and counts (revised analysis, prospective set)
+# V12 registered shares and counts (v2 records, prospective set)
 FIN = rd("data/certification/outcomes/R2V_FINAL_PRIMARY.csv"); pro = collections.Counter(r["v2_report"] for r in FIN if r["population"] == "prospective")
 surv = sum(v for kk, v in pro.items() if kk != "NA_KILLED")
 chk("V12", "prospective survivors / CL1 / % / CL4 / % / Unresolved / below-tolerance / OL",

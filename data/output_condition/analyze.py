@@ -1,6 +1,6 @@
 """Matched analysis of the output-condition suites, recorded and corrected (plan: PLAN.md).
 
-Usage: python3 -I oc_analyze.py <package root> <OC_RUNS.csv or -> <out json>
+Usage: python3 -I analyze.py <package root> <NATIVE_RUNS.csv or -> <out json>
 With '-' only the recorded suites are analyzed (reproduces the archived matched-changes row).
 mcnemar(), boot() and loco() are copied verbatim from data/certification/outcomes/r2v_stats.py.
 """

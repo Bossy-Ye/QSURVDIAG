@@ -38,7 +38,7 @@ def eq_decision(m):
 
 def tri_s(v): return {T: "true", F: "false", U: "undecided"}[v]
 
-# ---------------------------------------------------------------- distributions
+# Distributions
 def marg(p, n, q):
     idx = np.arange(len(p)); return float(p[((idx >> q) & 1) == 1].sum())
 def zexp(p, n, mask):

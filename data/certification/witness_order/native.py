@@ -1,4 +1,4 @@
-"""Native evidence of the v3 amendment (AMENDMENT.md): the controls that the closed witness order forms where the v2 order formed
+"""Native evidence of rule set v3, the closed witness order (RULE.md): the controls that the closed witness order forms where the v2 order formed
 none, and the QED-C X-basis statistic it selects where the v2 order selected none.
 
 Usage (analytic-tier environment; run tree as assembled by scripts/reproduce_analytic.py):
@@ -21,7 +21,7 @@ from qiskit import QuantumCircuit                                            # n
 from qiskit.quantum_info import Statevector                                  # noqa: E402
 
 def closed_order(pp, pm, n):
-    """AMENDMENT.md: the v2 witness order followed by the single-qubit Z products, by qubit index."""
+    """RULE.md: the v2 witness order followed by the single-qubit Z products, by qubit index."""
     ordered, alld = V.ordered_universe(pp, pm, n)
     for q in range(n):
         m = 1 << q; a = V.zexp(pp, n, m)

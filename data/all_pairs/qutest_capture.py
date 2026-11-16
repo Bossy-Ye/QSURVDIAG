@@ -1,5 +1,5 @@
-"""Run one QUTest test file twice: through the pinned qutest CLI (the native verdict of record, as in every earlier
-experiment) and through QUTest's own discover_tests/run_test in this process, with the ideal backend's run() wrapped
+"""Run one QUTest test file twice: through the pinned qutest CLI (the native verdict of record, as in the other
+experiments) and through QUTest's own discover_tests/run_test in this process, with the ideal backend's run() wrapped
 so that the counts of that execution are kept. Nothing in QUTest's evaluation is replaced: the wrapper only records
 the counts object QUTest itself receives. Returns the CLI verdict, the in-process status, every assertion's status
 and measured value, and the histogram.

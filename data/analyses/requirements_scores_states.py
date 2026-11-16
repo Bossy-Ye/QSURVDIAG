@@ -1,4 +1,4 @@
-"""Re-analyses of existing records with witness order v3: the evidence requirements as a classifier of reliable
+"""Analyses of the archived records under witness order v3: the evidence requirements as a classifier of reliable
 repairs (key R1 of the output), adjusted mutation scores (R5), and the distinct final states and sites of each
 outcome (R6)."""
 import collections, csv, json, os, sys
@@ -8,7 +8,7 @@ import numpy as np
 import counts as C
 
 DIR = Path(__file__).resolve().parent
-OUT = Path(os.environ.get("QSD_OUT", DIR.parents[1] / "output")) / "reanalysis"; OUT.mkdir(parents=True, exist_ok=True)
+OUT = Path(os.environ.get("QSD_OUT", DIR.parents[1] / "output")) / "analyses"; OUT.mkdir(parents=True, exist_ok=True)
 D = C.PKG / "data"
 V3_MOVED = "qra_cases_v1_1/QRA_360"            # certification/witness_order/IMPACT.csv: withheld -> issued under v3
 res = {}

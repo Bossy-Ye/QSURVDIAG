@@ -47,7 +47,7 @@ def _share(n):
 chk("X06", "width set: universe share of the median total time at 14 qubits, % / share at 10 qubits below 0.2 %",
     f"{100 * _share(14):.1f}/{100 * _share(10) < 0.2}", "per-case records")
 
-# X07 corpus split verdicts (Section 7.1): from the per-case revised records and the native confirmation (OB13) jobs.
+# X07 corpus split verdicts (Section 7.1): from the per-case v2 records and the native confirmation (OB13) jobs.
 # Candidates are the corpus suite-omission candidates (v2_candidate CL4, OB03 satisfied); the withdrawal reason follows
 # the breakdown order of r2v_numbers.py. Margin = d_a - theta of the distinguishing assertion, theta = 0.05.
 THETA = 0.05

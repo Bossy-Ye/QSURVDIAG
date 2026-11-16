@@ -1,7 +1,7 @@
 """Analysis of the all-pairs comparison (plan: PLAN.md). Standard library only.
 Usage: python3 -I allpairs_analyze.py <allpairs dir> <out json>
-Reads ALLPAIRS_SEMANTIC.json, ALLPAIRS_NATIVE_RUNS.csv and ALLPAIRS_SUMMARY.json, and the cases whose repairs the v3
-amendment issues (../certification/witness_order/IMPACT.csv). Applies the support rule and the
+Reads ALLPAIRS_SEMANTIC.json, ALLPAIRS_NATIVE_RUNS.csv and ALLPAIRS_SUMMARY.json, and the cases whose repairs the closed
+witness order (v3) issues (../certification/witness_order/IMPACT.csv). Applies the support rule and the
 original-validity gate, checks execution consistency, histogram identity and containment, and derives the
 adjacent-pair suite's verdicts from the per-assertion results of the native A executions (labeled as derived).
 """

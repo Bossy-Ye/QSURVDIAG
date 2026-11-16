@@ -1,7 +1,7 @@
 """Case-by-case agreement between the ideal prediction and the native verdict of the corrected output-condition
 suites, and the four surviving Simon cases. No sampling.
 Run in artifact/outcomes of the input tree that scripts/reproduce_analytic.py assembles:
-  python -I oc_casewise.py <OC_RUNS.csv> <out csv>"""
+  python -I cases.py <NATIVE_RUNS.csv> <out csv>"""
 import csv, os, sys, collections
 import numpy as np
 sys.path.insert(0, os.getcwd())

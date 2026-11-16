@@ -3,7 +3,7 @@ import sys as _sys; _sys.dont_write_bytecode = True   # keep the package free of
 # Run by scripts/reproduce_analytic.py (requires Qiskit 2.5.0, Qiskit Aer 0.17.2 and QUTest 0.1.0).
 """The three gate-set procedures (and their depth counterparts) on the same contract-equivalent populations.
 Deterministic structural analysis over frozen gate lists. No circuit is simulated and no mutant is executed.
-  HIST  historical syntactic comparison: source gate list differs; source-circuit depth differs.
+  HIST  syntactic comparison of the untranspiled source: gate list differs; source-circuit depth differs.
   P5    registered audit engine: transpile to basis [rz,sx,x,cx], optimization_level=1, seed_transpiler=20260730;
         gate-name SETS differ; depth differs.
   QT    QUTest 0.1.0's own structural path (runner.run_test up to structural evaluation, no execution).

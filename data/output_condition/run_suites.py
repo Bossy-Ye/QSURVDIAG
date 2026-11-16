@@ -1,7 +1,7 @@
-"""Native rerun of the corrected output-condition suites (plan: data/output_condition/PLAN.md).
+"""Native runs of the corrected output-condition suites (plan: data/output_condition/PLAN.md).
 
 Usage (analytic-tier environment, QUTest 0.1.0 on PATH as the adapter expects):
-  python -I oc_rerun.py <package root> <run tree> <out dir> [workers]
+  python -I run_suites.py <package root> <run tree> <out dir> [workers]
 <run tree> is a copy of the input tree that scripts/reproduce_analytic.py assembles (<out>/analytic/r2v_root),
 with study/.venv-qutest-audit/bin/qutest pointing at the pinned QUTest 0.1.0 binary. The frozen study code is imported
 read-only from the package; nothing in the package is written.
@@ -68,7 +68,7 @@ def main():
     with ProcessPoolExecutor(WORKERS) as ex:
         res = list(ex.map(cell, jobs))
     wall = time.time() - t0
-    with open(OUT / "OC_RUNS.csv", "w", newline="") as f:
+    with open(OUT / "NATIVE_RUNS.csv", "w", newline="") as f:
         w = csv.writer(f, lineterminator="\n")
         w.writerow(["kind", "case", "subject", "n_assertions", "seed", "verdict", "seconds", "detail"])
         for kind, key, sub, na, out in res:
@@ -80,7 +80,7 @@ def main():
                "wall_seconds": round(wall, 1), "workers": WORKERS,
                "cpu_seconds_in_runs": round(sum(x[2] for *_, o in res for x in o), 1),
                "machine": platform.platform(), "python": platform.python_version()}
-    json.dump(summary, open(OUT / "OC_RUN_SUMMARY.json", "w"), indent=1)
+    json.dump(summary, open(OUT / "RUN_SUMMARY.json", "w"), indent=1)
     print(json.dumps({k: summary[k] for k in ("executions", "wall_seconds", "cpu_seconds_in_runs")}))
 
 if __name__ == "__main__":

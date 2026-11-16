@@ -6,7 +6,7 @@ ideal distribution. This script evaluates both predicates through QUTest on the 
 QUTest applies one reference per test, so T and T' run as two tests at the same seed. QUTest's ideal backend is
 seeded, so a test at a given seed sees the histogram the recorded run saw; the script checks that by requiring every
 re-run T verdict to equal the archived one, and stops otherwise. The measured Hellinger value of every run is kept.
-Usage: python -I reanalysis.py <package root> <run tree> <precalculated_data.json> <out dir> [workers]
+Usage: python -I baseline_comparison.py <package root> <run tree> <precalculated_data.json> <out dir> [workers]
 """
 import csv, json, re, subprocess, sys, tempfile, time
 from concurrent.futures import ProcessPoolExecutor
@@ -16,7 +16,7 @@ PKG, TREE, REFP, OUT = (Path(a).resolve() for a in sys.argv[1:5])
 WORKERS = int(sys.argv[5]) if len(sys.argv) > 5 else 4
 src = open(PKG / "data/qedc/case_run.py").read().split("# ------------------------------------------------------------------ native runner")[0]
 sys.argv = ["x", str(PKG), str(TREE), str(REFP), str(OUT)]
-g = {"__name__": "reanalysis"}; exec(src, g)
+g = {"__name__": "baseline_comparison"}; exec(src, g)
 QA, np = g["QA"], g["np"]
 VAL = re.compile(r"hellinger = ([0-9.eE+-]+)")
 
@@ -55,11 +55,11 @@ def main():
     with ProcessPoolExecutor(WORKERS) as ex: res = list(ex.map(run, jobs))
     wall = time.time() - t0
     mism = [(lab, n, run, sd, v, arch[(lab, n, run, sd)]) for (lab, n, run, pol, sd, v, h) in res if pol == "T" and arch[(lab, n, run, sd)] != v]
-    with open(OUT / "REANALYSIS_RUNS.csv", "w", newline="") as f:
+    with open(OUT / "BASELINE_COMPARISON_RUNS.csv", "w", newline="") as f:
         w = csv.writer(f, lineterminator="\n"); w.writerow(["pair", "n", "run", "predicate", "seed", "verdict", "hellinger"])
         for row in res: w.writerow(row)
     json.dump({"executions": len(res), "wall_seconds": round(wall, 1), "T_reproduction_mismatches": mism},
-              open(OUT / "REANALYSIS_SUMMARY.json", "w"), indent=1)
+              open(OUT / "BASELINE_COMPARISON_SUMMARY.json", "w"), indent=1)
     print("executions", len(res), "wall", round(wall, 1), "T mismatches", len(mism))
     if mism: sys.exit("re-run T verdicts differ from the archived ones: the histograms are not reproduced")
 

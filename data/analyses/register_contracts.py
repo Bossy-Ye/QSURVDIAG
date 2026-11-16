@@ -1,4 +1,4 @@
-"""Re-analysis under output-register contracts: the 115 survivors of the 20 circuits whose final state differs, under
+"""Analysis under output-register contracts: the 115 survivors of the 20 circuits whose final state differs, under
 a contract restricted to the declared output register (equal reduced states on the output qubits) instead of the
 full final state."""
 import collections, json, os, sys
@@ -8,7 +8,7 @@ import numpy as np
 import counts as C
 
 DIR = Path(__file__).resolve().parent
-OUT = Path(os.environ.get("QSD_OUT", DIR.parents[1] / "output")) / "reanalysis"; OUT.mkdir(parents=True, exist_ok=True)
+OUT = Path(os.environ.get("QSD_OUT", DIR.parents[1] / "output")) / "analyses"; OUT.mkdir(parents=True, exist_ok=True)
 EQ = 1e-9
 orig, nq, outreg, mut = C.load_population()
 fin = C.final_reports()

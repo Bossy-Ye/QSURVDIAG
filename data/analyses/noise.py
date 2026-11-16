@@ -1,4 +1,4 @@
-"""Re-analysis under device noise: the 115 survivors of the 20 circuits whose final state differs.
+"""Analysis under device noise: the 115 survivors of the 20 circuits whose final state differs.
 
 Noise: the median calibrated errors of the IBM Torino snapshot in qiskit-ibm-runtime 0.40.1 (FakeTorino):
 depolarizing error on sx and x, depolarizing error on cz, symmetric readout error; rz is virtual. Each circuit is
@@ -18,7 +18,7 @@ from qiskit_ibm_runtime.fake_provider import FakeTorino
 import counts as C
 
 DIR = Path(__file__).resolve().parent
-OUT = Path(os.environ.get("QSD_OUT", DIR.parents[1] / "output")) / "reanalysis"; OUT.mkdir(parents=True, exist_ok=True)
+OUT = Path(os.environ.get("QSD_OUT", DIR.parents[1] / "output")) / "analyses"; OUT.mkdir(parents=True, exist_ok=True)
 orig, nq, outreg, mut = C.load_population()
 fin = C.final_reports()
 

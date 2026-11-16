@@ -81,7 +81,7 @@ _REL_BY_CELL = defaultdict(set)          # Stage-2 relations per (pair, theta) a
 for _r in SH: _REL_BY_CELL[(_r["mutant_id"], _r["theta"])].add(tuple(_r[k] for k in ("R_C", "R_S", "R_O", "R_A", "R_T")))
 scc=Counter(("KILLED" if r["native_verdict"]=="KILLED" else r["report"]) for r in SC)
 
-# ---- corpus: stratified certification ------------------------------------------
+# Corpus: stratified certification
 _T2A = [json.loads(_l) for _l in open(resolve("data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl"))]
 _T2E = {(r["case_set"], r["pair_id"]): r
         for r in rows("data/scalability/corpus/T2A_ELIGIBILITY.csv")}
@@ -108,7 +108,7 @@ def _wilson(k, n, z=1.959963984540054):
 _T2A_SEP5 = [r["max_universe_separation"] for r in _T2A_OK if r["diagnostic_outcome"] == "CL5"]
 _T2A_SEP4 = [r["max_universe_separation"] for r in _T2A_OK if r["diagnostic_outcome"] == "CL4"]
 
-# ---- two-axis CL4 partition under both output-register readings (ideal references, N = 8000)
+# Two-axis CL4 partition under both output-register readings (ideal references, N = 8000)
 _a1g = defaultdict(dict)
 for _r in A1G: _a1g[_r["mutant_id"]][_r["suite"]] = _r
 _aud = {_r["mutant_id"]: _r for _r in A1K}
@@ -131,7 +131,7 @@ w7=sorted((int(k),v) for k,v in CO["by_width"].items())
 tot7=lambda p: sum(sum(v.values()) for k,v in w7 if p(k))
 c37 =lambda p: sum(v.get("CL3_SUBSTRATE",0) for k,v in w7 if p(k))
 
-# ---- analytic reruns (data/certification/outcomes): recomputed from the recorded final states and gate lists
+# Analytic reruns (data/certification/outcomes): recomputed from the recorded final states and gate lists
 import math as _math
 _R2 = _Dir("data/certification/outcomes")
 def rerun_csv(name): return _wo.final(name, list(csv.DictReader(open(_R2 / name))))
@@ -183,7 +183,7 @@ _djr = next(r for r in REF if r["mutant_id"] == "dj_3#e19")
 _q174 = next(r for r in _R2C if r["pair_id"] == "QRA_174")
 
 CHECKS = [
- # -------- the 20 circuits: baseline and suites
+ # The 20 circuits: baseline and suites
  ("M001", "primary pairs killed by the baseline suite",               302, len(_k("S_MIN"))),
  ("M002", "primary pairs entering diagnosis",             297, len(E1E)-len(_k("S_MIN"))),
  ("M003", "exact-reference killed",              302, sum(1 for r in E1E if r["exact_ref_native_verdict"]=="KILLED")),
@@ -199,7 +199,7 @@ CHECKS = [
  ("M015", "named repair transfers for 8 of 21",        8, sum(1 for r in _ev if r["qutest_witness_expressible"]=="True")),
  ("M016", "some QuCheck repair for 15 of 21",         15, sum(1 for r in _ev if r["outcome"]=="WITNESS_EXISTS")),
  ("M017", "no separating assertion for 6 of 21",       6, sum(1 for r in _ev if r["outcome"]=="NO_WITNESS_ABOVE_THETA")),
- # -------- populations and design
+ # Populations and design
  ("M018", "mutants allocated per circuit = 30",            30, len(POP)//20),
  ("M019", "generated cases = 600",                        600, 20*30),
  ("M020", "allocation ledger rows = 600",                 600, len(POP)),
@@ -208,7 +208,7 @@ CHECKS = [
  ("M023", "construction mutants excluded from the population = 53",      53, len(UNR)),
  ("M024", "prospective eligible = 149",                   149, sum(1 for r in PRO if r.get("eligible","true").lower() in ("true","1","yes"))),
  ("M025", "450 + 149 = 599",                              599, len(MEM)+149),
- # -------- reference condition
+ # Reference condition
  ("M026", "non-killed diagnostic cases",             297, len(NK)),
  ("M027", "construction cases",                      195, sum(dp("construction").values())),
  ("M028", "prospective cases = 102",                       102, sum(dp("prospective").values())),
@@ -219,7 +219,7 @@ CHECKS = [
  ("M033", "CL5 = 1",                                         1, d["CL5"]),
  ("M034", "Unresolved = 2",                                  2, d["Unresolved"]),
  ("M035", "certificate-bearing survivors",           295, len(CERT)),
- # -------- contract
+ # Contract
  ("M036", "semantic relations: equivalent on all legal inputs",       4, uni["CL1"]),
  ("M037", "semantic relations: same final state on the executed input",              176, uni["CL2"]),
  ("M038", "semantic relations: different final state on the executed input",           115, len(CERT)-uni["CL1"]-uni["CL2"]),
@@ -229,7 +229,7 @@ CHECKS = [
                                                               and r["report_uniform_arbitrary_unitary"]=="CL2")),
  ("M041", "declared share, %",                       "31.5", f"{100*dec['CL1']/len(CERT):.1f}"),
  ("M042", "uniform share, %",                          "1.4", f"{100*uni['CL1']/len(CERT):.1f}"),
- # -------- observation lattice
+ # Observation lattice
  ("M043", "Fig. 4(a) observation limitations at Z, output register",           90, sum(1 for r in OB if r["CL3_Z_output"]=="True")),
  ("M044", "Fig. 4(a) observation limitations at Z, all qubits",                35, sum(1 for r in OB if r["CL3_Z_all"]=="True")),
  ("M045", "Fig. 4(a) observation limitations at XYZ, output register",           60, sum(1 for r in OB if r["CL3_XYZ_output"]=="True")),
@@ -241,19 +241,19 @@ CHECKS = [
       (sum(1 for r in OB if r["CL3_Z_output"]=="True"),   sum(1 for r in OB if r["CL3_XYZ_output"]=="True")),
       (sum(1 for r in OB if r["CL3_Z_all"]=="True"),      sum(1 for r in OB if r["CL3_XYZ_all"]=="True")),
       (sum(1 for r in OB if r["CL3_XYZ_output"]=="True"), sum(1 for r in OB if r["CL3_XYZ_all"]=="True"))])),
- # -------- suites
+ # Suites
  ("M049", "S_FAMILY kills of CL3",                 "0/35", f"{sa['S_FAMILY']['CL3'][0]}/{sa['S_FAMILY']['CL3'][1]}"),
  ("M050", "S_FAMILY kills of CL4",               "12/79", f"{sa['S_FAMILY']['CL4'][0]}/{sa['S_FAMILY']['CL4'][1]}"),
  ("M051", "S_COVER kills of CL3",                  "0/35", f"{sa['S_COVER']['CL3'][0]}/{sa['S_COVER']['CL3'][1]}"),
  ("M052", "S_COVER kills of CL4",                "41/79", f"{sa['S_COVER']['CL4'][0]}/{sa['S_COVER']['CL4'][1]}"),
- # -------- two-axis CL4 partition under both output-register readings
+ # Two-axis CL4 partition under both output-register readings
  ("M053", "declared-register CL4 partition",  "41/12/26",
       f"{PART_DECL['coverage']}/{PART_DECL['family']}/{PART_DECL['both_jointly']}"),
  ("M054", "declared-register CL4 partition total",       79, sum(PART_DECL.values())),
  ("M055", "whole-string CL4 partition",            "9/34/4",
       f"{PART_CORR['coverage']}/{PART_CORR['family']}/{PART_CORR['both_jointly']}"),
  ("M056", "whole-string CL4 partition total",            47, sum(PART_CORR.values())),
- # -------- corpus: stratified certification
+ # Corpus: stratified certification
  ("M057", "frame executed = 1,537",                     1537, len(_T2A)),
  ("M058", "execution failures = 0",                        0, len(_T2A) - len(_T2A_OK)),
  ("M059", "registered corpus record: |U_v| matches the registered universe 2^(n+1)+n+1 (before the two added distances) on all",           True, all(r["U_v_agree"] for r in _T2A_OK)),
@@ -275,12 +275,12 @@ CHECKS = [
  ("M070", "diagonal CL3 = 92 of 719",                 "92/719", f"{_cl3(_T2A_D)}/{len(_T2A_D)}"),
  ("M071", "non-diagonal CL3 among survivors = 58 of 240", "58/240",
       f'{_cl3([r for r in _T2A_SUR if not r["diag"]])}/{sum(1 for r in _T2A_SUR if not r["diag"])}'),
- # -------- corpus: per-width observation limitation
+ # Corpus: per-width observation limitation
  ("M072", "per-width CL3 reproduces the per-width table",
       "17/8/13/15/16/9/24/24/20/1/0/1/2",
       "/".join(str(_T2A_W[w]) for w in range(2, 15))),
  ("M073", "150 in frame + 1 at n=19 = 151",       151, sum(_T2A_W.values()) + 1),
- # -------- corpus: below-tolerance differences
+ # Corpus: below-tolerance differences
  ("M074", "construction CL4/CL5 saturating = 57 of 64",  "57/64",
       f'{_T2A_M["construction_set"]["exactly_one"]}/{_T2A_M["construction_set"]["n"]}'),
  ("M075", "construction smallest separation = 0.0294", 0.0294, _T2A_M["construction_set"]["minimum"]),
@@ -288,14 +288,14 @@ CHECKS = [
  ("M077", "corpus CL4/CL5 saturating = 21 of 203",      "21/203",
       f'{_T2A_M["corpus_frame"]["exactly_one"]}/{_T2A_M["corpus_frame"]["n"]}'),
  ("M078", "corpus share at or below theta = 8.9%",     0.0887, _T2A_M["corpus_frame"]["share_at_or_below_theta"]),
- # -------- corpus: diagonal stratum
+ # Corpus: diagonal stratum
  ("M079", "diagonal stratum CL3 rate 12.8% (92 of 719)", "92/719",
       f'{_T2A_S["diagonal_stratum_cl3"]}/{_T2A_S["diagonal_stratum_size"]}'),
  ("M080", "diagonal-insertion CL3 rate = 26.0%",      0.2603,
       _T2A_S["cl3_rate_by_mutation_kind"]["insertion"]["rate"]),
  ("M081", "diagonal-stratum 'other' mutations CL3 = 0", 0,
       _T2A_S["cl3_rate_by_mutation_kind"]["other"]["cl3"]),
- # -------- corpus: intervals
+ # Corpus: intervals
  ("M082", "non-diagonal Wilson 95% = [5.5, 9.1]",   "(5.5, 9.1)",
       str(_wilson(_cl3(_T2A_ND), len(_T2A_ND)))),
  ("M083", "diagonal Wilson 95% = [10.6, 15.4]",    "(10.6, 15.4)",
@@ -308,14 +308,14 @@ CHECKS = [
                   sum(1 for r in _T2A_SUR if r["diag"])))),
  ("M086", "intervals do not overlap (9.1 < 10.6)",   True,
       _wilson(_cl3(_T2A_ND), len(_T2A_ND))[1] < _wilson(_cl3(_T2A_D), len(_T2A_D))[0]),
- # -------- output-condition counterfactual
+ # Output-condition counterfactual
  ("M087", "output-condition pool = 47",                     47, _OC["at_599"]["pool"]),
  ("M088", "output-condition movers = 8",                     8, _OC["at_599"]["movers"]),
  ("M089", "output-condition movers out = 0",                 0, _OC["at_599"]["out"]),
  ("M090", "output-condition CL3 movers = 4 of 35",       "4/35",
       f'{_OC["at_599"]["movers_by_report"]["CL3"]}/{_OC["at_599"]["total_cl3"]}'),
  ("M091", "output-condition predicate reproduces 546",    True, _OC["validation"]["reproduces_published"]),
- # -------- sufficient condition versus contingent observation limitations
+ # Sufficient condition versus contingent observation limitations
  ("M092", "corpus sufficient condition: entailed pairs = 54",                        54, _T31["entailed"]["n"]),
  ("M093", "corpus sufficient condition: R_O holds on all 54 entailed",           "54/54",
       f'{_T31["entailed"]["R_O_holds"]}/{_T31["entailed"]["n"]}'),
@@ -331,7 +331,7 @@ CHECKS = [
       _T31["stratum_vs_entailment"]["entailed_in_non_diagonal_stratum"]),
  ("M100", "corpus sufficient condition: proxy covers 54 entailed + 665 others",     665,
       _T31["stratum_vs_entailment"]["non_entailed_in_diagonal_stratum"]),
- # -------- width set: cost decomposition
+ # Width set: cost decomposition
  ("M101", "width set: native suite execution share = 98.4%",     0.984,
       round(_T2C["median_phase_seconds"]["A_evidence_acquisition"]/_T2C["median_total_seconds"],3)),
  ("M102", "width set: assertion-space share at n=14 = 12.5%",    0.125,
@@ -356,10 +356,10 @@ CHECKS = [
  ("M112", "GHZ CL4 cases needing both axes at the declared register", 22,
       sum(1 for m in _still if _aud[m]["subject"].startswith("ghz") and _pat(m)=="both_jointly")),
  ("M113", "S_BOTH kills of CL4",                 "79/79", f"{sa['S_BOTH']['CL4'][0]}/{sa['S_BOTH']['CL4'][1]}"),
- # -------- profiles: QuCheck X/Y/Z on every qubit (B5_A4_INTERFACE_CORRECTED)
+ # Profiles: QuCheck X/Y/Z on every qubit (B5_A4_INTERFACE_CORRECTED)
  ("M119", "register-restricted QuCheck: observation limitations persisting = 12", 12,
       sum(1 for r in IF4 if r['reference_report']=='CL3' and r['R_O_QuCheck_declared_register']=='true')),
- # -------- decision and evidence
+ # Decision and evidence
  ("M120", "natively executed decision cells",                    4869, len(SH)),
  ("M121", "N moves a Stage-2 relation in 0 cells",           0, sum(1 for v in _REL_BY_CELL.values() if len(v) > 1)),
  ("M122", "cells covered by the finite-shot bound",               "3648/4198", f"{len(gu)}/{len(stable)}"),
@@ -377,7 +377,7 @@ CHECKS = [
  ("M132", "tolerance cells",                      3594, len(TO)),
  ("M133", "candidate CL5 sweep 0,0,1,1,4,23",  "0,0,1,1,4,23", ",".join(str(tol(t,"analytic_candidate")) for t in THS)),
  ("M134", "supported CL5 sweep 0,0,1,1,2,2",    "0,0,1,1,2,2", ",".join(str(tol(t,"supported_report")) for t in THS)),
- # -------- scale
+ # Scale
  ("M135", "scale manifest pairs = 162",                    162, len(rows("data/scalability/E4_SCALE_MANIFEST.csv"))),
  ("M136", "executed scale pairs = 143",                    143, len(SC)),
  ("M137", "scale native kills = 96",                        96, scc["KILLED"]),
@@ -399,11 +399,11 @@ CHECKS = [
  ("M150", "largest resident set 0.092 GiB",             "0.092", f"{max(float(r['peak_rss_gib']) for r in SC):.3f}"),
  ("M151", "no resource censoring",                           0, sum(1 for r in SC if r.get("memory_censored")=="True"
                                                               or r.get("within_budget") is False)),
- # -------- corpus
+ # Corpus
  ("M152", "corpus distinct pairs = 1,569",                1569, CO["distinct_pairs"]),
  ("M153", "corpus CL3 substrate 9.4 % at n<=7",          "9.4", f"{100*c37(lambda k:k<=7)/tot7(lambda k:k<=7):.1f}"),
  ("M154", "corpus CL3 substrate 9.9 % at n>=8",          "9.9", f"{100*c37(lambda k:k>=8)/tot7(lambda k:k>=8):.1f}"),
- # -------- released defects
+ # Released defects
  ("M155", "released defects = 42",                          42, len(DF)),
  ("M156", "depth NOT_REPRODUCIBLE = 10",                    10, sum(1 for r in DF if r["evidence_depth"]=="NOT_REPRODUCIBLE")),
  ("M157", "depth NATIVE_REPRODUCTION_ONLY = 8",              8, sum(1 for r in DF if r["evidence_depth"]=="NATIVE_REPRODUCTION_ONLY")),
@@ -411,7 +411,7 @@ CHECKS = [
  ("M159", "depth RELATION_LEVEL = 12",                      12, sum(1 for r in DF if r["evidence_depth"]=="RELATION_LEVEL")),
  ("M160", "depth FULL_CERTIFICATION = 2",                    2, sum(1 for r in DF if r["evidence_depth"]=="FULL_CERTIFICATION")),
  ("M161", "closed-profile eligible = 4",                     4, sum(1 for r in EL if r["qutest_eligibility"]=="ELIGIBLE")),
- # -------- analytic reruns
+ # Analytic reruns
  ("M169", "QuCheck resolves 28 of the 599 pairs",           28, sum(1 for r in _T14 if r["R_O_QUTest"]=="True" and r["R_O_QuCheck"]=="False")),
  ("M170", "QuCheck loses 25 of the 599 pairs",              25, sum(1 for r in _T14 if r["R_O_QUTest"]=="False" and r["R_O_QuCheck"]=="True")),
  ("M171", "witness separates 5 of 35 primary CL3",      "5/35", f"{_wsep(_p3)}/{len(_p3)}"),
@@ -465,7 +465,7 @@ CHECKS = [
  ("M222", "dj_3#e19 no kill in 12 repetitions",       "0/12", f"{_djr['kills_recorded']}/{_djr['reps']}"),
 ]
 
-# ---- v2 records (data/certification/outcomes/R2V_*): every report recomputed with native evidence
+# v2 records (data/certification/outcomes/R2V_*): every report recomputed with native evidence
 import hashlib as _hl
 def _v2j(name): return json.load(open(_R2 / name))
 _VN, _VT, _VS = _v2j("R2V_NUMBERS.json"), _v2j("R2V_TABLE_X.json"), _v2j("R2V_STATISTICS.json")
@@ -493,7 +493,7 @@ _ctrl_only = sum(1 for r in _cguard if int(_VJ[f"corpus|{r['case_key']}|OB13"]["
                  and int(_VJ[f"corpus|{r['case_key']}|OB15"]["guard_fails"]) > 0)
 _skills = sorted(int(_VJ[f"corpus|{r['case_key']}|OB13"]["kills"]) for r in _csplit)
 _Vk = {r["case_key"]: r for r in _VC}
-_n3 = len(_wo.CHANGED["corpus"])                      # corpus cases the v3 amendment reports (low-order witnesses)
+_n3 = len(_wo.CHANGED["corpus"])                      # corpus cases reported under the closed witness order, v3 (low-order witnesses)
 _dc4 = lambda rep: sum(1 for r in _VD if r.get("v2_candidate") == "CL4" and r["v2_report"] == rep)
 _VRPf = [r for r in _VRP if r["case"] not in _wo.CHANGED.get(r["arm"], ())]   # v1 -> final: v3 cases return to v1
 _Wk = {r["case_key"]: r for r in _VW}
@@ -505,7 +505,7 @@ _band3 = [b for b in _VRC["decided_different_below_1e-6"]
           if not any(x["pair"] == b["pair"] and x["set"] == b["set"] for x in _VRC["band_pairs"])]
 _dt = _VDT["median_ms_by_width"]
 _VCHECKS = [
- # -------- v2: specification, native evidence, reprocessing table
+ # v2: specification, native evidence, reprocessing table
  ("M223", "v2 specification unchanged since its hash",  "6829f1ba", _hl.sha256(open(_orig("data/prospective/mqt_bench/frozen_deps/V2_SPECIFICATION.md"), "rb").read()).hexdigest()[:8]),
  ("M224", "v2 native checks 537 in 8,055 QUTest runs",  "537/8055", f"{_VN['native_jobs_total']}/{_VN['native_qutest_runs']}"),
  ("M225", "outcome records differing between the initial analysis and the final rules",           51, len(_VRPf)),
@@ -518,7 +518,7 @@ _VCHECKS = [
    "/".join(str(sum(_VN[f"{a}_cl4_breakdown"].get(k, 0) for a in ("primary", "width", "corpus", "external"))
                 + {"supported": _n3 + _dc4("CL4"), "no_control": _dc4("Unresolved") - _n3}.get(k, 0))
             for k in ("supported", "witness_split", "guard_false_failure", "no_control"))),
- # -------- v2: primary population
+ # v2: primary population
  ("M231", "v2 primary reference 93/87/35/79/1/2",  "93/87/35/79/1/2", _vd(_alive(_VP))),
  ("M232", "v2 construction 60/39/35/58/1/2",       "60/39/35/58/1/2", _vd([r for r in _alive(_VP) if r["population"] == "construction"])),
  ("M233", "v2 prospective 33/48/0/21/0/0",          "33/48/0/21/0/0", _vd([r for r in _alive(_VP) if r["population"] == "prospective"])),
@@ -530,7 +530,7 @@ _VCHECKS = [
  ("M239", "state groups 27/4/29/45/1/2, total 108", "27/4/29/45/1/2/108",
    "/".join(r["state"] for r in _VCMP if r["claim"] != "ALL") + "/" + next(r["state"] for r in _VCMP if r["claim"] == "ALL")),
  ("M240", "observation groups total 51",                51, int(next(r["obs"] for r in _VCMP if r["claim"] == "ALL"))),
- # -------- v2: matched changes
+ # v2: matched changes
  ("M241", "matched changes: Z output->all qubits", "55/0/28.5/[1.3, 48.1]/[21.7, 32.2]", _trow(_TXo["Z: output -> all qubits"])),
  ("M242", "matched changes: output Z->XYZ",        "30/0/15.5/[7.3, 23.0]/[13.2, 17.4]", _trow(_TXo["output: Z -> XYZ"])),
  ("M243", "matched changes: all qubits Z->XYZ",    "35/0/18.1/[10.6, 26.7]/[16.1, 19.9]", _trow(_TXo["all qubits: Z -> XYZ"])),
@@ -547,7 +547,7 @@ _VCHECKS = [
    f"{_VS['v2']['exact_mcnemar_p']:.1e}/{_ppi(_VS['v2']['cluster_ci95'])}/{_ppi(_VS['v2']['loco_range'])}"),
  ("M255", "matched changes: non-budget rows equal the v1 record",      True, all(s["matches_record"] for k in ("observation", "suite", "interface") for s in _VT[k])),
  ("M256", "matched changes: no lattice or interface margin in the band",  0, len(_VT["checks"]["observation_band_decisions"]) + len(_VT["checks"]["interface_band_decisions"])),
- # -------- v2: decision support, tolerance, ablation
+ # v2: decision support, tolerance, ablation
  ("M257", "decision grid killed 784/785/793",         "784/785/793", "/".join(str(_VN["decision_grid_by_N"][n]["killed"]) for n in ("500", "2000", "8000"))),
  ("M258", "decision-supported 480/623/704",           "480/623/704", "/".join(str(_VN["decision_grid_by_N"][n]["decision_supported"]) for n in ("500", "2000", "8000"))),
  ("M259", "Unresolved cells 359/215/126",             "359/215/126", "/".join(str(_VN["decision_grid_by_N"][n]["unresolved"]) for n in ("500", "2000", "8000"))),
@@ -565,7 +565,7 @@ _VCHECKS = [
  ("M269", "by-gate CL3 enrichment 10 of 33, 25 of 420", "10/33/25/420",
    f"{_VN['decision_grid_by_gate_8000']['phase']['reference_cl3']}/{_VN['decision_grid_by_gate_8000']['phase']['mutants']}/"
    f"{_VN['decision_grid_by_gate_8000']['other']['reference_cl3']}/{_VN['decision_grid_by_gate_8000']['other']['mutants']}"),
- # -------- v2: other programs
+ # v2: other programs
  ("M273", "external 28/94/30/5/0/2",                "28/94/30/5/0/2", _vd(_alive(_VE))),
  ("M274", "external CL4 confirmed 5 of 5",                    "5/5", f"{_VN['external_cl4_breakdown'].get('supported', 0)}/{_VN['external_cl4_candidates']}"),
  ("M275", "width set 19/0/17/6/1/4",                  "19/0/17/6/1/4", _vd(_alive(_VW))),
@@ -606,7 +606,7 @@ _VCHECKS = [
  ("M300", "defect CL4 candidate confirmed with its closed-order control", "CL4/",
    "/".join(next((r["v2_report"], r["unmet"]) for r in _VD if r.get("v2_candidate") == "CL4"))),
  ("M301", "defect CL2 over a 22-member universe",          "CL2/22", next(f"{r['v2_report']}/{r['universe_v2']}" for r in _VD if r["v2_report"] == "CL2")),
- # -------- v2: finite-shot coverage
+ # v2: finite-shot coverage
  ("M302", "kill decision: 4,198 stable, 71 outside, 0 inside", "4198/71/0",
    f"{_VB['kill_decision']['stable_cells']}/{_VB['kill_decision']['disagreements_outside_c1']}/{_VB['kill_decision']['disagreements_inside_c_ref']}"),
  ("M303", "kill decision 3,648 / 3,200 / 3,128; 79 gained, 7 lost", "3648/3200/3128/79/7",
@@ -616,14 +616,14 @@ _VCHECKS = [
    f"{_VB['witness_surface_v2']['covered_c1']}/{_VB['witness_surface_v2']['decisions']}/{_VB['witness_surface_v2']['reference_schedule_c1']}"),
  ("M305", "witness surface at c = 2: 7,451; 322",       "7451/322", f"{_VB['witness_surface_v2']['covered_c2']}/{_VB['witness_surface_v2']['reference_schedule_c2']}"),
  ("M306", "frozen bound reproduces recorded v1 statuses",      0, _VB["v1_universe_rows_reproduced_mismatches"]),
- # -------- v2: numerical equality (Threats)
+ # v2: numerical equality (Threats)
  ("M307", "corpus margins decided equal are below 7e-12 (1,569 pairs)", True, _VRC["max_margin_decided_equal"] < 7e-12),
  ("M308", "the three corpus pairs between 1e-8 and 1e-6: outcomes", "CL3/CL5/CL5",
    "/".join(sorted(_Vk[f"{b['set']}/{b['pair']}"]["v2_report"] for b in _band3))),
 ]
 CHECKS += _VCHECKS
 
-# ---- further values ---------------------------------------------------------------
+# Further values
 try:                      # QUTest 0.1.0 documentation (Apache-2.0); not redistributed, read from an installed copy if present
     import importlib.metadata as _im; _QT_META = _im.distribution("qutest").read_text("METADATA") or ""
 except Exception:

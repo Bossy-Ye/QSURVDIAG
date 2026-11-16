@@ -1,5 +1,5 @@
-"""Final per-case records: the v2 final records with the v3 amendment applied (data/certification/witness_order/AMENDMENT.md).
-A case that the amendment changes takes the control and OB15 result of its native run and is reported as its candidate."""
+"""Final per-case records: the v2 final records under rule set v3, the closed witness order (data/certification/witness_order/RULE.md).
+A case that v3 changes takes the control and OB15 result of its native run and is reported as its candidate."""
 import csv, os
 from pathlib import Path
 
@@ -10,7 +10,7 @@ _FILES = {"R2V_FINAL_CORPUS.csv": ("corpus", "case_key"), "R2V_FINAL_DEFECT.csv"
 
 
 def final(path, rows):
-    """rows of an archived file, with the v3 amendment applied if the file is a v2 final record it changes."""
+    """rows of an archived file, under v3 if the file is a v2 final record that v3 changes."""
     arm, key = _FILES.get(os.path.basename(str(path)), (None, None))
     if arm is None:
         return rows

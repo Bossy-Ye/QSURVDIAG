@@ -2,7 +2,7 @@
 on a backend). Requires environment/requirements-analytic.txt and QUTest 0.1.0 (see README).
 
 Usage:  python3 scripts/reproduce_analytic.py [--out DIR]
-A01  historical gate-list and registered fixed-basis comparisons, recomputed per case and compared with the archive
+A01  untranspiled gate-list and registered fixed-basis comparisons, recomputed per case and compared with the archive
 A02  one fresh trial of QUTest's own gate-set check, compared with the archived trial categories of the programs
      whose original keeps its transpiled gate set (the flags of the other six are not reliable; article Section 5.1)
 A03  output-condition counterfactual (8 of 47) recomputed from final states
@@ -32,19 +32,19 @@ res = {}
 r = subprocess.run([sys.executable, "-I", "-B", str(ROOT / "scripts/analytic/structural_definitions.py")], env=env, capture_output=True, text=True)
 (OUT / "analytic/structural_definitions.log").write_text(r.stdout + r.stderr)
 if r.returncode == 0:
-    new = {x["mutant_id"]: x for x in csv.DictReader(open(OUT / "analytic/STRUCTURAL_DEFINITIONS.csv"))}
-    old = {x["mutant_id"]: x for x in csv.DictReader(open(orig("data/structural/records/STRUCTURAL_DEFINITIONS.csv")))}
+    regen = {x["mutant_id"]: x for x in csv.DictReader(open(OUT / "analytic/STRUCTURAL_DEFINITIONS.csv"))}
+    arch = {x["mutant_id"]: x for x in csv.DictReader(open(orig("data/structural/records/STRUCTURAL_DEFINITIONS.csv")))}
     det = ("HIST_gatelist", "HIST_depth", "P5_gateset", "P5_depth")
-    same = new.keys() == old.keys() and all(new[k][c] == old[k][c] for k in new for c in det)
-    c = lambda pop, col: sum(x[col] == "True" for x in new.values() if x["population"] == pop)
+    same = regen.keys() == arch.keys() and all(regen[k][c] == arch[k][c] for k in regen for c in det)
+    c = lambda pop, col: sum(x[col] == "True" for x in regen.values() if x["population"] == pop)
     res["A01"] = f"{c('construction', 'HIST_gatelist')}/{c('construction', 'P5_gateset')}/{c('prospective', 'HIST_gatelist')}/{c('prospective', 'P5_gateset')}/{same}"
     V = {x["mutant_id"]: x for x in csv.DictReader(open(orig("data/structural/records/QUTEST_GATESET_VARIABILITY.csv")))}
     cat = lambda x: "a" if x["separated_trials"] == x["trials"] else ("n" if x["separated_trials"] == "0" else "s")
     gs = defaultdict(set)                     # programs whose original's transpiled gate set varies, or with a case flagged in some trials
-    for x in old.values(): gs[x["mutant_id"].split("#")[0]].add(x["QT_allowed"])
+    for x in arch.values(): gs[x["mutant_id"].split("#")[0]].add(x["QT_allowed"])
     unstable = {p for p, v in gs.items() if len(v) > 1} | {x["program"] for x in V.values() if cat(x) == "s"}
-    consistent = all(cat(V[k]) == "s" or (new[k]["QT_gateset_subset"] == "True") == (cat(V[k]) == "a")
-                     for k in new if V[k]["program"] not in unstable)
+    consistent = all(cat(V[k]) == "s" or (regen[k]["QT_gateset_subset"] == "True") == (cat(V[k]) == "a")
+                     for k in regen if V[k]["program"] not in unstable)
     res["A02"] = f"{c('prospective', 'QT_gateset_subset')}/{consistent}"
 else:
     res["A01"] = res["A02"] = "FAILED: see analytic/structural_definitions.log"
@@ -71,7 +71,7 @@ if r.returncode == 0:
 else:
     res["A03"] = "FAILED: see analytic/output_condition.log"
 
-# A04: QUTest documentation checks via the record-level engine, now with QUTest installed
+# A04: QUTest documentation checks via the record-level engine, with QUTest installed
 r = subprocess.run([sys.executable, "-I", "-B", str(ROOT / "scripts/checks/manuscript_checks.py")], env={**env, "QSD_OUT": str(OUT / "analytic")},
                    capture_output=True, text=True)
 if r.returncode == 0:
@@ -91,14 +91,14 @@ H = rt / "artifact/outcomes"
 shutil.copy2(ROOT / "scripts/analytic/r2v_lib.py", H / "r2v_lib.py")
 renv = {**env, "R2V_PA": str(rt / "artifact") + "/", "QSD_ROOT": str(rt / "study")}
 def compare(o):
-    new, old = H / o, orig(f"data/certification/outcomes/{o}")
-    if not new.is_file(): return "FAIL"
-    if new.read_bytes() == old.read_bytes(): return "PASS"
+    regen, arch = H / o, orig(f"data/certification/outcomes/{o}")
+    if not regen.is_file(): return "FAIL"
+    if regen.read_bytes() == arch.read_bytes(): return "PASS"
     if o == "R2V_BOUND.json":
-        a, b = json.load(open(new)), json.load(open(old)); a.pop("witness_surface_v2"); b.pop("witness_surface_v2")
+        a, b = json.load(open(regen)), json.load(open(arch)); a.pop("witness_surface_v2"); b.pop("witness_surface_v2")
         return "PASS" if a == b else "FAIL"
     if o == "R2V_TABLE_X_DECISIONS.csv":
-        a, b = list(csv.reader(open(new))), list(csv.reader(open(old)))
+        a, b = list(csv.reader(open(regen))), list(csv.reader(open(arch)))
         return "PASS" if len(a) == len(b) and a[0] == b[0] and all(x == y or (h.startswith("margin_") and abs(float(x) - float(y)) <= 1e-12)
                                                                    for p, q in zip(a[1:], b[1:]) for h, x, y in zip(a[0], p, q)) else "FAIL"
     return "FAIL"

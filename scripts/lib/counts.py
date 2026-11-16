@@ -1,5 +1,5 @@
 """Count-profile helpers shared by the separating-setting and later-position experiments and the analyses of
-data/reanalysis/.
+data/analyses/.
 
 Gate lists of the 20 circuits and their mutants, statevectors, measurement-basis rotations, the
 2^(n+1)+n+3 instances of the declared QUTest universe in the closed witness order, and QUTest test files run
@@ -116,7 +116,7 @@ def best_instance(pp, pm, n, kinds=None):
 def separates(d): return d > THETA + RES
 
 
-# ------------------------------------------------------------------ QUTest test files
+# QUTest test files
 def gate_line(g):
     a = ("(" + ",".join(f"{x}" for x in g.get("angles", [])) + ")") if g.get("angles") else ""
     return f"{g['gate']}{a} " + ", ".join(f"q[{i}]" for i in g["q"]) + ";"

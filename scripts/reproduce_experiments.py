@@ -5,7 +5,7 @@ execution.
 
 Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY R2V_TREE QEDC_REF]
 
---analytic also reruns data/qedc/report.py and x_selection_check.py, the three analyses of data/reanalysis/ and the
+--analytic also reruns data/qedc/report.py and x_selection_check.py, the three analyses of data/analyses/ and the
 separating-setting searches (find_settings.py, rotated_profile.py stage 2, qedc_setting.py, two_basis_states.py on the
 20 circuits) with the interpreter of environment/setup.sh.
 Exits non-zero on any mismatch.
@@ -30,11 +30,11 @@ def py(*args):
 def same_json(p, q): return json.load(open(p)) == json.load(open(q))
 fmt_row = lambda t: f"{t['newly_killed']}/{t['lost_kills']}/{t['effect_pp']}/{t['cluster_ci95_pp']}/{t['loco_range_pp']}"
 
-# ---------------------------------------------------------------- output-condition experiment
-py(OC / "oc_analyze.py", ROOT, "-", OUT / "oc_recorded.json")
-py(OC / "oc_analyze.py", ROOT, OC / "OC_RUNS.csv", OUT / "oc_corrected.json")
-got["R-OC00"] = f"{same_json(OUT / 'oc_recorded.json', OC / 'OC_RECORDED_REPRODUCTION.json')}/{same_json(OUT / 'oc_corrected.json', OC / 'OC_RESULTS.json')}"
-oc = json.load(open(OUT / "oc_corrected.json")); rec = json.load(open(OUT / "oc_recorded.json"))
+# Output-condition experiment
+py(OC / "analyze.py", ROOT, "-", OUT / "output_condition_recorded.json")
+py(OC / "analyze.py", ROOT, OC / "NATIVE_RUNS.csv", OUT / "output_condition_corrected.json")
+got["R-OC00"] = f"{same_json(OUT / 'output_condition_recorded.json', OC / 'RECORDED_REPRODUCTION.json')}/{same_json(OUT / 'output_condition_corrected.json', OC / 'RESULTS.json')}"
+oc = json.load(open(OUT / "output_condition_corrected.json")); rec = json.load(open(OUT / "output_condition_recorded.json"))
 c, r = oc["corrected"], rec["recorded"]
 got["R-OC01"] = fmt_row(c["table5_row"])
 got["R-OC02"] = f"{c['table5_row']['pairs']}/{c['table5_row']['clusters']}/{c['table5_row']['exact_mcnemar_p']:.1e}"
@@ -43,21 +43,21 @@ got["R-OC03"] = f"{t['suite_omissions_killed']}/{t['suite_omissions']}; {t['obse
 fc = c["figure_4b_cases"]
 got["R-OC04"] = "/".join(str(fc.get(f"CL4|{f}|KILLED", 0)) for f in ("ghz", "simon", "qft"))
 g = oc["guards"]; got["R-OC06"] = f"{len(g)} subjects, {sum(x['fails'] for x in g.values())} failures, {sum(x['unsupported'] for x in g.values())} errors in {sum(x['runs'] for x in g.values())} runs"
-run = rows(OC / "OC_RUNS.csv"); kills = collections.Counter(); nrun = collections.Counter()
+run = rows(OC / "NATIVE_RUNS.csv"); kills = collections.Counter(); nrun = collections.Counter()
 for x in run:
     if x["kind"] == "mutant": nrun[x["case"]] += 1; kills[x["case"]] += x["verdict"] == "KILLED"
 native = {k: "KILLED" if kills[k] == nrun[k] else ("SURVIVED" if kills[k] == 0 else "SPLIT") for k in nrun}
-cw = rows(OC / "OC_CASEWISE.csv")
+cw = rows(OC / "CASES.csv")
 got["R-OC07"] = f"{len(nrun)} pairs, {sum(nrun.values())} mutant runs; native {sum(native[x['mutant_id']] == x['native'] for x in cw)}/{len(cw)} recounted; agree {sum(x['agree'] == 'True' for x in cw)}/{len(cw)}"
 got["R-OC08"] = ",".join(sorted(x["mutant_id"] for x in cw if x["subject"] == "simon_4" and x["baseline_report"] == "CL4" and native[x["mutant_id"]] == "SURVIVED"))
 
-# ---------------------------------------------------------------- circuit-level view of the matched changes
+# Circuit-level view of the matched changes
 got["R-CL00"] = str(py(ROOT / "data/checks/circuit_level.py", ROOT) == (ROOT / "data/checks/circuit_level.out").read_text())
 
-# ---------------------------------------------------------------- repair comparison
-py(CMP / "cmp_analyze.py", CMP / "CMP_CASES.csv", CMP / "CMP_SUMMARY.json", OUT / "cmp_results.json")
-got["R-CM00"] = str(same_json(OUT / "cmp_results.json", CMP / "CMP_RESULTS.json"))
-cases = rows(CMP / "CMP_CASES.csv"); nr = rows(CMP / "CMP_NATIVE_RUNS.csv")
+# Repair comparison
+py(CMP / "analyze.py", CMP / "CASES.csv", CMP / "SUMMARY.json", OUT / "combined_results.json")
+got["R-CM00"] = str(same_json(OUT / "combined_results.json", CMP / "RESULTS.json"))
+cases = rows(CMP / "CASES.csv"); nr = rows(CMP / "NATIVE_RUNS.csv")
 mk, ok = collections.Counter(), collections.Counter()
 for x in nr:
     if x["role"] in ("D_mut", "S_mut"): mk[(x["key"], x["role"][0])] += x["verdict"] == "KILLED"
@@ -65,7 +65,7 @@ for x in nr:
 okey = lambda r, p: json.dumps([r["program"], p, r[f"{p}_suite_id"]])
 got["R-CM01"] = (f"{len(cases)} cases; recounted from per-run records: mutant kills {sum(int(r[f'{p}_mut_kills']) == mk[(r['case'], p)] for r in cases for p in 'DS')}/{2 * len(cases)}, "
                  f"original failures {sum(int(r[f'{p}_orig_fails']) == ok[(okey(r, p), p)] for r in cases for p in 'DS')}/{2 * len(cases)}")
-res = json.load(open(OUT / "cmp_results.json")); al = res["all"]
+res = json.load(open(OUT / "combined_results.json")); al = res["all"]
 got["R-CM02"] = f"{al['D_supported']}/{al['S_supported']}"
 got["R-CM03"] = f"{al['both_supported']}/{al['only_D_supported']}/{al['only_S_supported']}/{al['neither_supported']}"
 wi, wo = res["witness_in_S=True"], res["witness_in_S=False"]
@@ -86,12 +86,12 @@ ov = res["original_validations"]
 got["R-CM12"] = f"{ov['D']['suites']}/{ov['S']['suites']}; {al['D_assertions_total']}/{al['S_assertions_total']}; {sum(x['role'] == 'D_mut' for x in nr)}/{sum(x['role'] == 'S_mut' for x in nr)}"
 got["R-CM13"] = f"{res['cost']['diagnosis_seconds_total']:.1f}"
 
-# ---------------------------------------------------------------- QED-C workflow case
+# QED-C workflow case
 E = ROOT / "data/qedc"
 nat = {(x["pair"], x["n"], x["run"], x["seed"]): x["verdict"] for x in rows(E / "NATIVE_RUNS.csv")}
 xv3 = {(x["pair"], x["n"], x["run"], x["seed"]): x["verdict"] for x in rows(ROOT / "data/certification/witness_order/QEDC_X_RUNS.csv")}
 assert not set(xv3) & set(nat); nat.update(xv3)                     # the n = 2 statistic of the closed witness order
-ra = rows(E / "REANALYSIS_RUNS.csv")
+ra = rows(E / "BASELINE_COMPARISON_RUNS.csv")
 T = {(x["pair"], x["n"], x["run"], x["seed"]): x for x in ra if x["predicate"] == "T"}
 Tp = {(x["pair"], x["n"], x["run"], x["seed"]): x for x in ra if x["predicate"] == "Tprime"}
 got["R-E200"] = f"{len(T)} histograms; re-run T verdicts differing from the archived: {sum(nat[k] != v['verdict'] for k, v in T.items())}"
@@ -110,7 +110,7 @@ got["R-E208"] = " ".join(f"{x['pair'][0]}{x['n']}:{x['reported'].split(' (')[0]}
 got["R-E209"] = ",".join(str(n) for n in W if xs(n, "X_mut_val") == "12" and xs(n, "X_orig_val") in ("0", "1"))
 got["R-E210"] = " ".join(str(K("natural", n, "A_mut_cert", Tp)) for n in range(5, 9))
 
-# ---------------------------------------------------------------- all-pairs comparison
+# All-pairs comparison
 AP = ROOT / "data/all_pairs"
 py(AP / "allpairs_analyze.py", AP, OUT / "ALLPAIRS_RESULTS.json")
 got["R-AP00"] = str(same_json(OUT / "ALLPAIRS_RESULTS.json", AP / "ALLPAIRS_RESULTS.json"))
@@ -157,7 +157,7 @@ wits += [(r["witness_kind"], r["witness_key"])
 single = sum(1 for k, key in wits + reported("width") if k == "zmask" and bin(int(key.split()[-1])).count("1") == 1)
 got["R-WX01"] = f"{len(wits)}/{single}"
 
-# ---------------------------------------------------------------- closed witness order (v3)
+# Closed witness order (v3)
 WO = ROOT / "data/certification/witness_order"
 py(WO / "audit.py", ROOT, OUT / "IMPACT.csv")
 got["R-V301"] = str(filecmp.cmp(OUT / "IMPACT.csv", WO / "IMPACT.csv", shallow=False))
@@ -166,7 +166,7 @@ got["R-V302"] = " ".join(f"{x['job_id']}:{x['guard_fails']}/{x['kills']}/{x['sta
 got["R-V303"] = " ".join(f"{t}:{sum(v == 'KILLED' for k, v in xv3.items() if k[2] == t)}/{sum(1 for k in xv3 if k[2] == t)}"
                          for t in ("X_mut_cert", "X_orig_guard", "X_orig_val", "X_mut_val"))
 
-# ---------------------------------------------------------------- separating settings (observation change)
+# Separating settings (observation change)
 os.environ["QSD_OUT"] = str(OUT)
 OB = ROOT / "data/observation_change"
 py(OB / "analyze.py")
@@ -227,7 +227,7 @@ got["R-X107"] = (f"{same_json(OUT / 'observation_change/rotated_profile_summary.
                  f"certified {xt['certified']}/{xt['pairs']}")
 got["R-X104"] = " ".join(f"{n}:{v['mutant_kills']}/{v['original_failures']}/{v['control_kills']}" for n, v in sorted(qw.items(), key=lambda t: int(t[0])))
 
-# ---------------------------------------------------------------- later positions
+# Later positions
 PO = ROOT / "data/position"
 py(PO / "analyze.py")
 got["R-X400"] = f"{filecmp.cmp(OUT / 'position/outcomes.csv', PO / 'outcomes.csv', shallow=False)}/{filecmp.cmp(OUT / 'position/native_runs.csv', PO / 'native_runs.csv', shallow=False)}/{same_json(OUT / 'position/summary.json', PO / 'summary.json')}"
@@ -242,7 +242,7 @@ got["R-X403"] = f"external OL {cnt(ext, 'CL3')} in {len({r['subject'] for r in e
 gd = json.load(open(PO / "guard_runs.json"))
 got["R-X404"] = f"{len(gd)} programs; guards clean {sum(g['guard_ok'] for g in gd.values())}; original failures {sum(g['fails'] for g in gd.values())} in {sum(len(g['verdicts']) for g in gd.values())} runs"
 
-# ---------------------------------------------------------------- developer-written suites (QuCheck case studies)
+# Developer-written suites (QuCheck case studies)
 DS = ROOT / "data/developer_suites"
 py(DS / "analyze.py"); py(DS / "compare_with_predictions.py")
 got["R-X200"] = "/".join(str(filecmp.cmp(OUT / "developer_suites" / f, DS / f, shallow=False)) for f in ("diagnosis.csv", "native_runs.csv", "qucheck_on_20_circuits.csv")) + \
@@ -279,8 +279,8 @@ got["R-X208"] = " ".join(f"{k}: control {v['control']['kind']}:{v['control']['ke
                          f"original failures {v['original_failures']}" for k, v in sorted(xc.items()))
 got["R-X207"] = f"transfer with witness {tw['detected_12_of_12']}/{tw['pairs']}; without {tn['detected_0_of_12']} never, {tn['split']} split of {tn['pairs']}"
 
-# ---------------------------------------------------------------- analyses of data/reanalysis/ (archived outputs; rerun in the analytic tier)
-RA = ROOT / "data/reanalysis"
+# Analyses in data/analyses/ (archived outputs; rerun in the analytic tier)
+RA = ROOT / "data/analyses"
 req = json.load(open(RA / "requirements_scores_states.json")); r1, r5, r6 = req["R1"], req["R5"]["corpus"], req["R6"]
 got["R-X500"] = (f"{r1['candidates']} candidates, {r1['issued']} issued, precision {r1['precision']}, recall {r1['recall']}, withheld {r1['withheld']}, "
                  f"unsupported withheld {r1['candidates'] - r1['witness_suite_reliable'] - (r1['issued'] - r1['issued_and_reliable'])} of {r1['candidates'] - r1['witness_suite_reliable']}")
@@ -293,7 +293,7 @@ got["R-X502"] = (f"register contract: CL3 {r3['CL3']['equivalent_on_register']}/
                  f"OL below {r4['observation_limitations']['pairs'] - r4['observation_limitations']['separated_under_noise']}/{r4['observation_limitations']['pairs']}, "
                  f"largest OL difference {r4['observation_limitations']['largest_noisy_difference']:.4f}")
 
-# ---------------------------------------------------------------- negative controls of the reported suite omissions
+# Negative controls of the reported suite omissions
 CO = ROOT / "data/certification/outcomes"
 cd = [float(r["c_d"]) for p in ("PRIMARY", "EXTERNAL", "CORPUS", "WIDTH", "DEFECT")
       for r in rows(CO / f"R2V_FINAL_{p}.csv") if r["v2_report"] == "CL4"]
@@ -302,11 +302,11 @@ cd += [float(r["v3_d"]) for r in rows(ROOT / "data/certification/witness_order/C
 pos = [d for d in cd if d >= 1e-9]
 got["R-NC01"] = f"{len(cd) - len(pos)}/{len(cd)} controls with difference 0; {len(pos)} positive, largest {max(pos):.4f}"
 
-# ---------------------------------------------------------------- analytic tier (optional)
+# Analytic tier (optional)
 if a.analytic:
     PY, TREE, REFP = a.analytic
     tmp = OUT / "qedc_rerun"; tmp.mkdir(exist_ok=True)
-    for f in ("CASE_RESULTS.json", "NATIVE_RUNS.csv", "REANALYSIS_RUNS.csv"): shutil.copy(E / f, tmp / f)
+    for f in ("CASE_RESULTS.json", "NATIVE_RUNS.csv", "BASELINE_COMPARISON_RUNS.csv"): shutil.copy(E / f, tmp / f)
     r1 = subprocess.run([PY, "-I", "-B", str(E / "report.py"), str(ROOT), TREE, REFP, str(tmp)], capture_output=True, text=True)
     got["R-A01"] = str(r1.returncode == 0 and filecmp.cmp(tmp / "REPORT.csv", E / "REPORT.csv", shallow=False))
     r2 = subprocess.run([PY, "-I", "-B", str(E / "x_selection_check.py"), str(ROOT), TREE, REFP, str(tmp)], capture_output=True, text=True)
@@ -314,7 +314,7 @@ if a.analytic:
     env = {**os.environ, "QSD_OUT": str(OUT / "analytic")}
     for k, f, j in (("R-A10", "requirements_scores_states.py", "requirements_scores_states.json"), ("R-A11", "register_contracts.py", "register_contracts.json"), ("R-A12", "noise.py", "noise.json")):
         r = subprocess.run([PY, "-I", "-B", str(RA / f)], capture_output=True, text=True, env=env)
-        got[k] = str(r.returncode == 0 and same_json(OUT / "analytic/reanalysis" / j, RA / j))
+        got[k] = str(r.returncode == 0 and same_json(OUT / "analytic/analyses" / j, RA / j))
     OB = ROOT / "data/observation_change"
     r = subprocess.run([PY, "-I", "-B", str(OB / "find_settings.py")], capture_output=True, text=True, env=env)
     got["R-A13"] = str(r.returncode == 0 and filecmp.cmp(OUT / "analytic/observation_change/separating_settings.csv", OB / "separating_settings.csv", shallow=False))
@@ -328,7 +328,7 @@ if a.analytic:
     r = subprocess.run([PY, "-I", "-B", str(OB / "qedc_setting.py")], capture_output=True, text=True, env=env)
     got["R-A14"] = " ".join(f"{l.split()[0]}:{l.split()[1]}/{l.split()[3]} {l.split()[4]}/{l.split()[5]}" for l in r.stdout.splitlines() if l[:1].isdigit())
 
-# ---------------------------------------------------------------- compare
+# Compare
 out, cnt = [], collections.Counter()
 for e in rows(ROOT / "expected/experiments_expected.csv"):
     v = got.get(e["check_id"])

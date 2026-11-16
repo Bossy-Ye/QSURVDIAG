@@ -3,7 +3,7 @@ Design: data/qedc/PLAN.md (frozen before this script's native runs).
 
 Usage (analytic-tier environment):
   python -I case_run.py <package root> <run tree> <precalculated_data.json> <out dir> [workers]
-<run tree>: as for data/output_condition/oc_rerun.py (QUTest 0.1.0 reachable through the frozen adapter).
+<run tree>: as for data/output_condition/run_suites.py (QUTest 0.1.0 reachable through the frozen adapter).
 <precalculated_data.json>: QED-C v2.0.8 `qedcbench/hamiltonian_simulation/_common/precalculated_data.json`,
 sha256 88480e85ca8f90813cc5a799c075b96666502391d41b1b3b885eb7fcc45bcaec (checked).
 """
@@ -43,7 +43,7 @@ for node in ast.parse(open(PKG / "scripts/analytic/r2v_lib.py").read()).body:
         exec(compile(ast.Module([node], []), "r2v_lib", "exec"), _ns)
 ordered_universe, hellinger, zexp_p, marg = _ns["ordered_universe"], _ns["hellinger"], _ns["zexp"], _ns["marg"]
 
-# ------------------------------------------------------------------ programs (study gate format)
+# Programs (study gate format)
 def tfim_gates(n, zz_angle, terminal_z=None, xbasis=False):
     g = [{"gate": "h", "q": [0]}] + [{"gate": "cx", "q": [k - 1, k]} for k in range(1, n)]
     for _ in range(K):
@@ -76,7 +76,7 @@ def refvec(n):
     return v / v.sum()
 def eq(m): return T if m < LO else (F if m > HI else U)
 
-# ------------------------------------------------------------------ QED-C score (exact reimplementation)
+# QED-C score (exact reimplementation)
 def qedc_hf(p, q):          # qedclib/metrics.py hellinger_fidelity_with_expected, lines 710-750
     ps, qs = sum(p.values()), sum(q.values()); pn = {k: v / ps for k, v in p.items()}; qn = {k: v / qs for k, v in q.items()}
     tot = 0.0
@@ -88,7 +88,7 @@ def qedc_polarization(counts, ref, n):   # metrics.py polarization_fidelity, lin
     hf = qedc_hf(counts, ref); u = {format(i, f"0{n}b"): 1 / 2 ** n for i in range(2 ** n)}; f0 = qedc_hf(u, ref)
     return min(1.0, max(0.0, (hf - 1) / (1 - f0) + 1)), hf
 
-# ------------------------------------------------------------------ assertion text
+# Assertion text
 def inst_pragma(inst, n, ref_vals):
     k, key = inst["kind"], inst["key"]
     if k == "marginal": return [f"//% expect marginal m[{key}] p1 ~= {round(inst['ref'], 4)} atol={THETA}"]
@@ -107,7 +107,7 @@ def combined_suite(pp, n):  # Policy S: marginals on every qubit and adjacent tw
     A += [f'//% expect observable "Z{i} Z{i+1}" ~= {round(zexp_p(pp, n, (1 << i) | (1 << (i + 1))), 4)} atol={THETA}' for i in range(n - 1)]
     return A
 
-# ------------------------------------------------------------------ native runner
+# Native runner
 def run_job(job):
     gates, n, A, seeds = job
     out = []
