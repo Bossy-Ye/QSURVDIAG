@@ -49,7 +49,7 @@ bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolerance and b
 
 None of the decision-diagram checker's recorded decisions contradicted the simulator-based comparison.
 
-Output-register contracts (`data/reanalysis/r3_register_contract.py`) require equal reduced states on the declared
+Output-register contracts (`data/reanalysis/register_contracts.py`) require equal reduced states on the declared
 output register. They make 13 observation limitations (GHZ 7, Bernstein-Vazirani and Deutsch-Jozsa 6) and 59 suite
 omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tolerance difference stays.
 
@@ -66,23 +66,23 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
   its witness. Each pair ran the witness alone under its setting, 12 runs on the mutant (seeds 13042-13053) and 12
   on the original (14042-14053); the control is the same instance without the setting's gates. The QED-C
   constructed pair used seeds 19042-19053 and 20042-20053, and the 65 later-position observation limitations seeds
-  21042-21053 and 22042-22053, with final states from the executed inputs written by `x4_select.py`
-  (`x1_position.py`).
-- **Settings read off the original** (`data/observation_change/x1_two_state.py`). For each of the 100 observation
+  21042-21053 and 22042-22053, with final states from the executed inputs written by `select_mutants.py`
+  (`later_positions.py`).
+- **Settings read off the original** (`data/observation_change/two_basis_states.py`). For each of the 100 observation
   limitations, the number of basis states in the original's final state on the executed input and the setting with X
   on every qubit in superposition there, compared with the named setting and evaluated on the declared universe.
-- **Rotated profile** (`data/observation_change/x1_transition.py`). The XYZ setting on every qubit (3^n settings),
+- **Rotated profile** (`data/observation_change/rotated_profile.py`). The XYZ setting on every qubit (3^n settings),
   with the baseline suite in the all-Z setting; witness order all-Z, then the search order, v3 within each setting.
   Stage 2 takes R_C and R_S from the declared diagnosis and evaluates R_O, R_A and R_T over the rotated universe and
   the suite. Witness runs are those of the separating settings. The negative control, the first instance outside
   the suite decided below theta, ran alone at N = 8,000 on the mutant at the witness seeds and on the original at
   the first three original seeds. Stage 2 takes about 4 CPU hours, almost all for the twelve-qubit multipliers; the
   analytic tier reruns it on the 35 pairs of the 20 circuits.
-- **Native QuCheck** (`data/developer_suites/x2_qucheck20.py`). One property per pair asserts equal distributions of
+- **Native QuCheck** (`data/developer_suites/qucheck_on_20_circuits.py`). One property per pair asserts equal distributions of
   every qubit in the X, Y and Z bases; controls compare the original with itself (seeds 15542-15553 and
   16542-16553). QuCheck 0.0.2's Holm correction does not stop at the first retained hypothesis; the step-down
   procedure, applied to the recorded p-values, rejects exactly when the smallest p-value is at most alpha/m.
-- **Device noise** (`data/reanalysis/r4_noise.py`). Median errors of the IBM Torino calibration in
+- **Device noise** (`data/reanalysis/noise.py`). Median errors of the IBM Torino calibration in
   qiskit-ibm-runtime 0.40.1 as depolarizing gate errors and a symmetric readout error, each circuit transpiled to a
   line of qubits and simulated as a density matrix; suite-omission witnesses keep a median 0.90 of their difference.
 - **Tolerance and budget experiment.** The sampling bound covers decisions most often for Z products and marginals,
@@ -109,7 +109,7 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent; the below-tol
   deletions in the eight-qubit multiplier with difference 0.076, certified although the sampling bound does not cover
   their kill. The bound covers the mutant's kill for 19 of the 23 candidates and the original's guard runs for none. For
   all seven observation limitations, the largest suite in the sequence that their original passes is the baseline suite.
-- **Evidence requirements as a classifier** (`data/reanalysis/r156.py`). Of the 165 issued repairs, 164 are supported
+- **Evidence requirements as a classifier** (`data/reanalysis/requirements_scores_states.py`). Of the 165 issued repairs, 164 are supported
   in the repair comparison; of the 23 unsupported repairs, 22 were withheld.
 - **Transfer.** Every difference by which an admissible QuCheck assertion distinguishes a transferred pair exceeds
   theta by at least 0.45. An earlier exercise with QuCheck-style tests is described in `history.md`, section 3.
@@ -148,17 +148,17 @@ most theta, a Hellinger fidelity of at least (1 - theta^2)^2 = 0.99500625. Recor
   and observation limitation and 21 of the 22 suite omissions. The selection rule placed 68 of the 120 mutants at
   the first gate.
 - **Later positions** (`data/position/`). For each of the 18 programs, 10 mutations from the middle and 10 from the
-  last third of the gates, under the strata of the first sample. `x4_select.py` regenerates the selection from the
+  last third of the gates, under the strata of the first sample. `select_mutants.py` regenerates the selection from the
   pinned sources (Qolumbina archive, QASMBench commit `357b9423`) and writes the runner inputs, which hold
   third-party gate lists and are not archived; the selection and pool checks it writes equal the archived files.
-  `x4_replay_check.py` reruns Stage 2 of the run driver on the 419 archived first-sample pairs of the five other
-  circuits and the Q# and QASMBench programs; every relation and candidate agrees (`x4_replay_check.out`).
+  `replay_check.py` reruns Stage 2 of the run driver on the 419 archived first-sample pairs of the five other
+  circuits and the Q# and QASMBench programs; every relation and candidate agrees (`replay_check.out`).
 - **QuCheck case studies** (`data/developer_suites/`). QuCheck repository at commit `74c27570`; the harness needs
-  `X2_SRC` set to that checkout and the environment of `environment/records/QUCHECK_CASE_STUDIES_pip_freeze.txt`.
+  `QUCHECK_SRC` set to that checkout and the environment of `environment/records/QUCHECK_CASE_STUDIES_pip_freeze.txt`.
   Each run of the original and a mutant at one seed generates the same inputs; every circuit submitted to the
-  simulator is a context, paired in submission order. `X2_NATIVE_RUNS.jsonl.gz` keeps one record per suite, program,
+  simulator is a context, paired in submission order. `native_runs.jsonl.gz` keeps one record per suite, program,
   version and seed, with the arguments of every program call (the generated inputs) as the keys of `program_equal`;
-  the witness circuit is kept where native confirmation replays it. `X2_NATIVE_RUNS.csv` is its flat view. The runtime
+  the witness circuit is kept where native confirmation replays it. `native_runs.csv` is its flat view. The runtime
   check of the plan is recorded in `OPERATIONAL.md` (X2_RUNTIME_DECISION).
 - **Width set.** The four unresolved cases are a split verdict, an undecided margin and two suite-omission
   candidates that fail native confirmation. The runtimes of Fig. 5 were measured under the initial analysis. At

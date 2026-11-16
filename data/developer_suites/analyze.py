@@ -1,18 +1,19 @@
 """PLAN.md, sections 4 and 6: outcomes per suite, contract equivalence against the authors' labels, cross-suite survivors,
-and one row per run (X2_NATIVE_RUNS.csv).
+and one row per run (native_runs.csv).
 
-Reads the archived X2_NATIVE_RUNS.jsonl.gz, X2_CONFIRM.json, X2_CONTROL.json and X2_CONTEXT_STATES.json. Outcome rules: OPERATIONAL.md
-(X2_OPERATIONAL, X2_STATE_RELATION).
+Reads the archived native_runs.jsonl.gz, native_confirmation.json, negative_controls.json and context_states.json;
+writes diagnosis.csv, native_runs.csv and summary.json. Outcome rules: OPERATIONAL.md, sections X2_OPERATIONAL and
+X2_STATE_RELATION.
 """
 import collections, csv, gzip, json, os
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 OUT = Path(os.environ.get("QSD_OUT", HERE.parents[1] / "output")) / "developer_suites"; OUT.mkdir(parents=True, exist_ok=True)
-runs = [json.loads(l) for l in gzip.open(HERE / "X2_NATIVE_RUNS.jsonl.gz", "rt")]
-conf = json.load(open(HERE / "X2_CONFIRM.json"))
-ctrl = json.load(open(HERE / "X2_CONTROL.json"))
-cstates = json.load(open(HERE / "X2_CONTEXT_STATES.json"))
+runs = [json.loads(l) for l in gzip.open(HERE / "native_runs.jsonl.gz", "rt")]
+conf = json.load(open(HERE / "native_confirmation.json"))
+ctrl = json.load(open(HERE / "negative_controls.json"))
+cstates = json.load(open(HERE / "context_states.json"))
 guards = collections.defaultdict(list); pairs = collections.defaultdict(list)
 for r in runs:
     (guards[(r["suite"], r["program"])] if r["kind"] == "guard" else pairs[(r["suite"], r["program"], r["version"])]).append(r)
@@ -51,10 +52,10 @@ for (s, p, v), rs in sorted(pairs.items()):
                               "unresolved: confirmation" if c else "suite omission candidate")
     rows.append(row)
 fields = ["suite", "program", "mutant", "label", "kills", "outcome", "contract_equivalent_F", "inputs_F", "inputs_S", "witness", "witness_d"]
-with open(OUT / "X2_DIAGNOSIS.csv", "w", newline="") as f:
+with open(OUT / "diagnosis.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore"); w.writeheader(); w.writerows(rows)
 
-with open(OUT / "X2_NATIVE_RUNS.csv", "w", newline="") as f:                   # one row per run
+with open(OUT / "native_runs.csv", "w", newline="") as f:                   # one row per run
     w = csv.writer(f)
     w.writerow(["kind", "suite", "program", "version", "seed", "passed", "failed", "calls", "calls_equal", "contexts",
                 "aligned", "observation_equal", "max_context_diff", "witness", "witness_d"])
@@ -80,5 +81,5 @@ summ = {"guard_failures": {f"{s}:{p}": sum(not r["passed"] for r in rs) for (s, 
         "outcomes": {s: dict(collections.Counter(r["outcome"] for r in rows if r["suite"] == s)) for s in "AB"},
         "contract_equivalence_vs_labels": {f"{a}/{b}": n for (a, b), n in labels.items()},
         "survive_one_suite_killed_by_other": cross}
-json.dump(summ, open(OUT / "X2_SUMMARY.json", "w"), indent=1)
+json.dump(summ, open(OUT / "summary.json", "w"), indent=1)
 print(json.dumps(summ, indent=1))

@@ -1,4 +1,4 @@
-"""Separating setting (X1 rule) of the QED-C constructed pair (P, P_Z) at widths 2-8, from ideal states."""
+"""Separating setting (rule of find_settings.py) of the QED-C constructed pair (P, P_Z) at widths 2-8, from ideal states."""
 import itertools, sys
 from math import pi
 from pathlib import Path

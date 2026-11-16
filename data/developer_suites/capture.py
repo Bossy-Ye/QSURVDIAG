@@ -7,7 +7,7 @@ import copy, hashlib, os, pickle, sys
 from pathlib import Path
 from unittest.mock import patch
 import numpy as np
-import x2_harness as H
+import harness as H
 
 EPS = 1e-9
 from qiskit_aer.backends.aerbackend import AerBackend as _AB

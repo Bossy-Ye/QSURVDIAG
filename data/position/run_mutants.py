@@ -1,7 +1,9 @@
-"""X4, section 3 (OPERATIONAL.md): native baseline, v2 diagnosis with witness order v3, native confirmation and
-negative control, and the v2 report of every selected mutation, with the packaged implementation.
+"""Later-position experiment, PLAN.md section 3 and OPERATIONAL.md: native baseline, v2 diagnosis with witness order
+v3, native confirmation and negative control, and the v2 report of every selected mutation, with the packaged
+implementation. Reads programs.json and mutant_gates.json from select_mutants.py; writes guard_runs.json and
+native_runs.jsonl (parse.jsonl with --parse-only).
 
-Usage: <analytic python> -B x4_run.py [--parse-only]
+Usage: <analytic python> -B run_mutants.py [--parse-only]
 """
 import csv, json, multiprocessing as mp, os, sys, time, types
 from concurrent.futures import ProcessPoolExecutor
@@ -22,10 +24,10 @@ def setup():
     sys.path.insert(0, str(TREE / "artifact/outcomes"))
     import r2v_lib as V
     V.MUT_SEEDS, V.GUARD_SEEDS = MUT_SEEDS, GUARD3
-    if getattr(V, "_x4_v3", False):                   # patch once per process
+    if getattr(V, "_closed_order", False):            # patch once per process
         import r2v_arms as A, r2v_finalize as Fz, qutest_adapter as QA
         return V, A, Fz, QA
-    V._x4_v3 = True
+    V._closed_order = True
     _o = V.ordered_universe
     def closed_order(pp, pm, n):                     # data/certification/witness_order/native.py
         ordered, alld = _o(pp, pm, n)
@@ -104,17 +106,17 @@ def _pair_job(a):
 
 if __name__ == "__main__":
     parse_only = "--parse-only" in sys.argv
-    S = json.load(open(OUTD / "X4_SUBJECTS.json")); G = json.load(open(OUTD / "X4_MUTANT_GATES.json"))   # from x4_select.py
-    sel = list(csv.DictReader(open(HERE / "X4_SELECTION.csv")))
+    S = json.load(open(OUTD / "programs.json")); G = json.load(open(OUTD / "mutant_gates.json"))   # from select_mutants.py
+    sel = list(csv.DictReader(open(HERE / "selection.csv")))
     ctx = mp.get_context("spawn")
-    guards = json.load(open(HERE / "X4_GUARDS.json"))
+    guards = json.load(open(HERE / "guard_runs.json"))
     for g in guards.values(): g["refs"] = {int(q): v for q, v in g["refs"].items()}
     if not parse_only and not guards:
         with ProcessPoolExecutor(3, mp_context=ctx) as ex:
             for sid, g in ex.map(guard_job, [(sid, S[sid]) for sid in sorted({r["subject"] for r in sel})]):
                 guards[sid] = g
-            json.dump(guards, open(OUTD / "X4_GUARDS.json", "w"), indent=1)
-    out = OUTD / ("X4_PARSE.jsonl" if parse_only else "X4_NATIVE_RUNS.jsonl")
+            json.dump(guards, open(OUTD / "guard_runs.json", "w"), indent=1)
+    out = OUTD / ("parse.jsonl" if parse_only else "native_runs.jsonl")
     done = {json.loads(l)["mutant_id"] for l in open(out)} if out.exists() else set()
     jobs = [(r, S[r["subject"]], G[r["mutant_id"]], guards.get(r["subject"]), parse_only) for r in sel if r["mutant_id"] not in done]
     t0 = time.time()

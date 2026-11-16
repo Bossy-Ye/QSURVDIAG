@@ -1,14 +1,15 @@
-"""Fidelity check of the X4 driver: Stage 2 of the packaged diagnose on archived pairs of each population, compared
-with the archived records (relations and candidate). No native run."""
+"""Fidelity check of run_mutants.py: Stage 2 of the packaged diagnose on the archived first-sample pairs of the five
+other circuits and the Q# and QASMBench programs, compared with the archived records (relations and candidate).
+No native run. Output: replay_check.out."""
 import csv, json, sys
 from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import x4_run as X
-import x4_select as SEL
+import run_mutants as X
+import select_mutants as SEL
 V, A, Fz, QA = X.setup()
 D = X.PKG / "data"
-S = json.load(open(X.OUTD / "X4_SUBJECTS.json"))                  # from x4_select.py
+S = json.load(open(X.OUTD / "programs.json"))                  # from select_mutants.py
 cmp_ = {"R_C", "R_S", "R_O", "R_A", "R_T"}
 
 

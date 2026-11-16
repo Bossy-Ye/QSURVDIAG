@@ -1,5 +1,6 @@
-"""X4, section 4: outcomes of the later-position samples by population and position, next to the archived outcomes
-of the first-rule samples (which are not changed)."""
+"""Later-position experiment, PLAN.md section 4: outcomes of the later-position samples by population and position,
+next to the archived outcomes of the first-rule samples, which are not changed. Writes outcomes.csv, native_runs.csv
+(one row per pair) and summary.json."""
 import collections, csv, gzip, json, os
 from pathlib import Path
 HERE = Path(__file__).resolve().parent
@@ -8,8 +9,8 @@ OUT = Path(os.environ.get("QSD_OUT", PKG / "output")) / "position"; OUT.mkdir(pa
 NAMES = {"NA_KILLED": "killed", "CL1": "contract equivalence", "CL2": "executed-input equality", "CL3": "observation limitation",
          "CL4": "suite omission", "CL5": "below-tolerance difference", "Unresolved": "unresolved"}
 
-rows = [json.loads(l) for l in gzip.open(HERE / "X4_NATIVE_RUNS.jsonl.gz", "rt")]
-sel = {r["mutant_id"]: r for r in csv.DictReader(open(HERE / "X4_SELECTION.csv"))}
+rows = [json.loads(l) for l in gzip.open(HERE / "native_runs.jsonl.gz", "rt")]
+sel = {r["mutant_id"]: r for r in csv.DictReader(open(HERE / "selection.csv"))}
 out = []
 for r in rows:
     f = r.get("final", {}); d = r.get("diagnosis", {})
@@ -18,7 +19,7 @@ for r in rows:
                 "parse": r["parse"], "kills": d.get("kills", ""), "native_verdict": d.get("native_verdict", ""),
                 "candidate": d.get("v2_candidate", ""), "report": f.get("v2_report", "not executed"), "unmet": f.get("unmet", ""),
                 "w_kind": d.get("w_kind", ""), "w_key": d.get("w_key", ""), "w_d": d.get("w_d", "")})
-with open(OUT / "X4_FINAL.csv", "w", newline="") as fh:
+with open(OUT / "outcomes.csv", "w", newline="") as fh:
     w = csv.DictWriter(fh, fieldnames=list(out[0])); w.writeheader(); w.writerows(out)
 
 # archived first-rule outcomes
@@ -41,10 +42,10 @@ for pop in ("other", "external", "mqt"):
 P = [o for o in out if o["population"] == "external" and o["subject"] != "qft_n4"]       # PLAN.md, section 0
 summ["external_without_qft_n4"] = {t: {NAMES.get(k, k): v for k, v in sorted(collections.Counter(o["report"] for o in P if o["third"] == t).items())}
                                    for t in ("middle", "last")}
-with open(OUT / "X4_NATIVE_RUNS.csv", "w", newline="") as fh:                            # one row per pair
+with open(OUT / "native_runs.csv", "w", newline="") as fh:                            # one row per pair
     w = csv.writer(fh); w.writerow(["mutant_id", "subject", "population", "third", "location", "parse", "baseline_verdicts", "native_jobs (job:mutant kills/guard failures)"])
     for r in rows:
         w.writerow([r["mutant_id"], r["subject"], r["population"], r["third"], r["location"], r["parse"], r.get("baseline_verdicts", ""),
                     ";".join(f'{j["job_id"]}:{j["kills"]}/{j["guard_fails"]}' for j in r.get("native_jobs", []))])
-json.dump(summ, open(OUT / "X4_SUMMARY.json", "w"), indent=1)
+json.dump(summ, open(OUT / "summary.json", "w"), indent=1)
 print(json.dumps(summ, indent=1))

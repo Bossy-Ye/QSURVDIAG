@@ -6,15 +6,15 @@ runs alone at 2,000 shots on the mutant (seeds 15042-15053) and the original (gu
 original's ideal value rounded to 4 decimals as reference and tolerance 0.05. Supported: fewer than 12 mutant kills
 and no failure of the original.
 
-Usage: X2_SRC=<QuCheck checkout> <QuCheck environment python> -B x2_control.py   (after x2_run.py has cached the
-original's capture at seed 15042)
+Usage: QUCHECK_SRC=<QuCheck checkout> <QuCheck environment python> -B negative_controls.py
+(after run_suites.py has cached the original's capture at seed 15042)
 """
 import json, pickle, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import x2_capture as X
-from x2_confirm import HERE, OUT, N, THETA, MUT_SEEDS, ORIG_SEEDS, counts_dist, verdict
-from x2_run import RES, ordered_b, _qpy
+import capture as X
+from confirm import HERE, OUT, N, THETA, MUT_SEEDS, ORIG_SEEDS, counts_dist, verdict
+from run_suites import RES, ordered_b, _qpy
 
 SEED = 15042
 
@@ -42,7 +42,7 @@ def control(suite, program, version):
 
 
 if __name__ == "__main__":
-    conf = json.load(open(HERE / "X2_CONFIRM.json"))
+    conf = json.load(open(HERE / "native_confirmation.json"))
     res = {k: control(*k.split("|")) for k, v in conf.items() if v["supported"]}
-    json.dump(res, open(OUT / "X2_CONTROL.json", "w"), indent=1)
+    json.dump(res, open(OUT / "negative_controls.json", "w"), indent=1)
     print({k: {x: v[x] for x in ("control", "mutant_kills", "original_failures", "supported")} for k, v in res.items()})

@@ -1,5 +1,6 @@
-"""R3: the 115 survivors of the 20 circuits whose final state differs, under a contract restricted to the declared
-output register (equal reduced states on the output qubits) instead of the full final state."""
+"""Re-analysis under output-register contracts: the 115 survivors of the 20 circuits whose final state differs, under
+a contract restricted to the declared output register (equal reduced states on the output qubits) instead of the
+full final state."""
 import collections, json, os, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts/lib"))
@@ -36,5 +37,5 @@ summ = {"pairs": len(rows), "output_register_full": sum(len(outreg[x["program"]]
         "by_report": {o: {"equivalent_on_register": by[(o, True)], "different_on_register": by[(o, False)]} for o in ("CL3", "CL4", "CL5")},
         "equivalent_by_program": dict(collections.Counter(x["program"] for x in rows if x["register_contract_equivalent"])),
         "smallest_nonzero_diff": min((x["reduced_max_diff"] for x in rows if not x["register_contract_equivalent"]), default=None)}
-json.dump({"summary": summ, "pairs": rows}, open(OUT / "R3_REGISTER_CONTRACT.json", "w"), indent=1)
+json.dump({"summary": summ, "pairs": rows}, open(OUT / "register_contracts.json", "w"), indent=1)
 print(json.dumps(summ, indent=1))

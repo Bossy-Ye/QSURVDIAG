@@ -1,4 +1,4 @@
-"""Final states of the executed contexts for the observation-limitation candidates of X2.
+"""Final states of the executed contexts for the observation-limitation candidates of the developer-suite experiment.
 
 For each candidate (suite, program, mutant) and seed 15042, the mutant's run is captured again with its submitted
 circuits kept, and each context's final state (before its measurements) is compared with the original's at the same
@@ -8,7 +8,7 @@ import gzip, json, os, pickle, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import numpy as np
-import x2_capture as X
+import capture as X
 HERE = Path(__file__).resolve().parent
 OUT = Path(os.environ.get("QSD_OUT", HERE.parents[1] / "output")) / "developer_suites"; OUT.mkdir(parents=True, exist_ok=True)
 
@@ -54,7 +54,7 @@ def candidates():
     argument (OPERATIONAL.md, X2_STATE_RELATION)."""
     import collections
     runs = collections.defaultdict(list)
-    for l in gzip.open(HERE / "X2_NATIVE_RUNS.jsonl.gz", "rt"):
+    for l in gzip.open(HERE / "native_runs.jsonl.gz", "rt"):
         r = json.loads(l)
         if r["kind"] == "pair": runs[(r["suite"], r["program"], r["version"])].append(r)
     out = []
@@ -66,7 +66,7 @@ def candidates():
 
 
 if __name__ == "__main__":
-    f = OUT / "X2_CONTEXT_STATES.json"
+    f = OUT / "context_states.json"
     res = json.load(open(f)) if f.exists() else {}
     for s, p, v in candidates():
         key = f"{s}|{p}|{v}"

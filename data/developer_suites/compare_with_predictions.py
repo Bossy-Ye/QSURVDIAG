@@ -1,12 +1,14 @@
-"""PLAN.md, section 5 (Q3): native QuCheck detections on pairs of the 20 circuits against the predictions of the
-simulated profile comparison; control false detections; step-down Holm as a sensitivity analysis."""
+"""Developer-suite experiment, PLAN.md section 5: native QuCheck detections on pairs of the 20 circuits against the
+predictions of the simulated profile comparison, false detections in the controls, and the step-down Holm procedure
+as a sensitivity analysis. Reads qucheck_on_20_circuits_runs.json.gz; writes qucheck_on_20_circuits.csv and
+qucheck_vs_predictions.json."""
 import collections, csv, gzip, json, os
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 OUT = Path(os.environ.get("QSD_OUT", HERE.parents[1] / "output")) / "developer_suites"; OUT.mkdir(parents=True, exist_ok=True)
 ALPHA = 0.05
-d = json.load(gzip.open(HERE / "X2_QUCHECK_20_RUNS.json.gz", "rt"))
+d = json.load(gzip.open(HERE / "qucheck_on_20_circuits_runs.json.gz", "rt"))
 runs = collections.defaultdict(list)
 for r in d["runs"]:
     runs[(r["pair"], r["role"])].append(r)
@@ -25,7 +27,7 @@ for pair, labels in sorted(d["labels"].items()):
     rows.append({"pair": pair, "labels": ";".join(labels), "detected": sum(x["detected"] for x in m),
                  "detected_holm": sum(holm_step_down(x["p_values"]) for x in m),
                  "control_detected": sum(x["detected"] for x in c), "control_detected_holm": sum(holm_step_down(x["p_values"]) for x in c)})
-with open(OUT / "X2_QUCHECK_20.csv", "w", newline="") as f:
+with open(OUT / "qucheck_on_20_circuits.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
 
 summ = {}
@@ -41,5 +43,5 @@ summ["controls"] = {"runs": 12 * len(rows), "false_detections": ctrl, "false_det
 neg = [r for r in rows if any(l in ("only_qutest", "transfer_NO_WITNESS_ABOVE_THETA") for l in r["labels"].split(";"))]
 summ["not_distinguished_runs"] = {"pairs": len(neg), "runs": 12 * len(neg), "detections": sum(r["detected"] for r in neg),
                                   "detections_holm": sum(r["detected_holm"] for r in neg)}
-json.dump(summ, open(OUT / "X2_Q3_SUMMARY.json", "w"), indent=1)
+json.dump(summ, open(OUT / "qucheck_vs_predictions.json", "w"), indent=1)
 print(json.dumps(summ, indent=1))

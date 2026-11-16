@@ -1,4 +1,5 @@
-"""X2 harness: one execution of suite A (MITRE unit tests) or suite B (QuCheck properties) on one program version.
+"""Developer-suite experiment: one execution of suite A (MITRE unit tests) or suite B (QuCheck properties) on one
+program version.
 
 The source repository (QuCheck case studies, commit 74c27570) is put first on sys.path so that its own `qucheck`
 package and `case_studies` are used. A program version is the original function or a mutant file, substituted with
@@ -9,7 +10,7 @@ import importlib, importlib.util, io, os, random, sys, time, contextlib
 from pathlib import Path
 from unittest.mock import patch
 
-SRC = Path(os.environ["X2_SRC"])                # checkout of the QuCheck repository at commit 74c27570
+SRC = Path(os.environ["QUCHECK_SRC"])           # checkout of the QuCheck repository at commit 74c27570
 CS = SRC / "case_studies"
 MITRE = CS / "MITRE_unit_test_baseline"
 SUITE_A = {  # program folder -> (module, test class, test methods, takes the runner's shot value)

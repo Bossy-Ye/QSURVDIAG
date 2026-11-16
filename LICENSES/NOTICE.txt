@@ -70,7 +70,7 @@ study-authored material. Upstream licenses verified 2026-10-13 at the pinned ver
             SHA-256 of the omitted line, so the original can be checked against the pinned upstream file.
 
 8. QuCheck case studies -- MIT; MITRE unit tests -- Apache-2.0
-   Files    data/developer_suites/X2_NATIVE_RUNS.jsonl.gz, X2_CONTROL.json
+   Files    data/developer_suites/native_runs.jsonl.gz, negative_controls.json
    Source   github.com/GabrielPontolillo/qucheck @ 74c275709c59749870d885889bf9994cfdd46786
             Copyright (c) 2024 GabrielPontolillo and Marek Grzesiuk (mgrzesiuk); MIT, LICENSES/MIT-QuCheck.txt.
             case_studies/MITRE_unit_test_baseline: Copyright (C) 2019 The MITRE Corporation, modified by

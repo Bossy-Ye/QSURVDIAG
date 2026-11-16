@@ -5,8 +5,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent)); sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts/lib"))
 import numpy as np
 import counts as C
-from x1_qedc_setting import tfim_gates, TAU, J
-from x1_run import job, N
+from qedc_setting import tfim_gates, TAU, J
+from run_settings import job, N
 
 DIR = Path(__file__).resolve().parent
 OUT = Path(os.environ.get("QSD_OUT", DIR.parents[1] / "output")) / "observation_change"; OUT.mkdir(parents=True, exist_ok=True)
@@ -27,7 +27,7 @@ if __name__ == "__main__":
         jobs += [(pair, "mutant", "control", m, n, None, clines, s) for s in MUT_SEEDS]
     t0 = time.time()
     with ProcessPoolExecutor(2) as ex: res = list(ex.map(job, jobs, chunksize=4))
-    with gzip.open(OUT / "X1_QEDC_NATIVE_RUNS.jsonl.gz", "wt") as f:
+    with gzip.open(OUT / "qedc_native_runs.jsonl.gz", "wt") as f:
         for x in res: f.write(json.dumps(x, separators=(",", ":")) + "\n")
     summ = {}
     for n in range(2, 9):
@@ -37,5 +37,5 @@ if __name__ == "__main__":
                    "unsupported": sum(x["cli"] == "UNSUPPORTED" for x in R), "cli_equals_inproc": all(x["cli"] == x["inproc"] for x in R)}
         summ[n]["supported"] = summ[n]["mutant_kills"] == 12 and summ[n]["original_failures"] <= 1
     json.dump({"setting": "X on qubit 0, Z elsewhere", "witness": "marginal q0", "N": N, "by_width": summ,
-               "seconds": round(time.time() - t0, 1)}, open(OUT / "X1_QEDC_SUMMARY.json", "w"), indent=1)
+               "seconds": round(time.time() - t0, 1)}, open(OUT / "qedc_summary.json", "w"), indent=1)
     print(json.dumps(summ, indent=1))

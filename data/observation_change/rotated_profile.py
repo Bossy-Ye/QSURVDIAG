@@ -2,18 +2,20 @@
 
 Rotated profile: the declared QUTest types on the joint distribution of every qubit under each of the 3^n XYZ
 settings; the all-Z setting is the declared profile and holds the baseline suite (output-register marginals).
-Witness order: all-Z, then the settings in the X1 search order, the closed witness order (v3) within each.
+Witness order: all-Z, then the settings in the search order of find_settings.py, the closed witness order (v3)
+within each.
 
 stage2:  candidate (packaged rule; R_C, R_S as recorded, R_O, R_A, R_T over the rotated universe and the suite), first
          witness outside the suite, undecided instances up to it, and the negative control (first instance outside
-         the suite decided below theta); writes X1_TRANSITION_STAGE2.csv. "stage2 primary": the 35 pairs of the 20
-         circuits only, which need no x4_select.py inputs.
+         the suite decided below theta); writes rotated_profile_stage2.csv. "stage2 primary": the 35 pairs of the 20
+         circuits only, which need no select_mutants.py inputs.
 run:     the control alone at N = 8,000 on the mutant at the witness seeds (13042-13053; later positions
-         21042-21053) and on the original at 14042-14044 (22042-22044); writes X1_TRANSITION_RUNS.jsonl.gz.
-analyze: Stage 3 from the archived stage2 and run records and the recorded witness runs; writes X1_TRANSITION.csv
-         and X1_TRANSITION_SUMMARY.json. Standard library only.
+         21042-21053) and on the original at 14042-14044 (22042-22044); writes rotated_profile_runs.jsonl.gz.
+analyze: Stage 3 from the archived stage2 and run records and the recorded witness runs; writes rotated_profile.csv
+         and rotated_profile_summary.json. Standard library only.
 
-Usage: QSD_OUT=<dir with position/ from x4_select.py> <analytic python> -B x1_transition.py stage2 [primary]|run|analyze
+Usage: QSD_OUT=<dir with position/ from select_mutants.py> <analytic python> -B rotated_profile.py \
+       stage2 [primary]|run|analyze
 """
 import os, csv, gzip, json, collections, sys, time
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -28,7 +30,7 @@ if sys.argv[1:2] != ["analyze"]:
     sys.path[:0] = [str(DIR), str(DIR.parents[1] / "scripts/lib")]
     import numpy as np
     import counts as C
-    import x1_position as XP
+    import later_positions as XP
     undecided = lambda d: abs(d - C.THETA) <= C.RES
     below = lambda d: d < C.THETA - C.RES
 
@@ -37,7 +39,7 @@ def population(primary_only=False):
     orig, nq, outreg, mut = C.load_population()
     R = {r["mutant_id"]: r for r in csv.DictReader(open(C.OUTC / "R2V_FINAL_PRIMARY.csv"))}
     out = []
-    for r in csv.DictReader(open(DIR / "X1_SETTINGS.csv")):
+    for r in csv.DictReader(open(DIR / "separating_settings.csv")):
         p, n = r["program"], int(r["n"]); x = R[r["pair"]]
         assert x["v2_report"] == "CL3"
         out.append({"pair": r["pair"], "arm": "primary", "population": "20 circuits", "program": p, "n": n,
@@ -45,12 +47,12 @@ def population(primary_only=False):
                     "R_C": x["R_C"], "R_S": x["R_S"], "R_T": x["R_T"], "rec": r})
     if primary_only:
         return out
-    S = json.load(open(XP.ROOT / "position/X4_SUBJECTS.json"))
+    S = json.load(open(XP.ROOT / "position/programs.json"))
     D = {}
-    for l in gzip.open(DIR.parent / "position/X4_NATIVE_RUNS.jsonl.gz", "rt"):
+    for l in gzip.open(DIR.parent / "position/native_runs.jsonl.gz", "rt"):
         x = json.loads(l)
         if x.get("final"): D[x["mutant_id"]] = x["diagnosis"]
-    rec = {r["pair"]: r for r in csv.DictReader(open(DIR / "X1_POSITION_SETTINGS.csv"))}
+    rec = {r["pair"]: r for r in csv.DictReader(open(DIR / "later_positions_settings.csv"))}
     for pair, pop, subj, n, og, mg in XP.population():
         d = D[pair]; assert d["v2_candidate"] == "CL3"
         out.append({"pair": pair, "arm": "position", "population": pop, "program": subj, "n": n, "og": og, "mg": mg,
@@ -131,9 +133,9 @@ def resumable(name, jobs, fn, key):
 
 if __name__ == "__main__" and sys.argv[1] == "stage2":
     pop = population(sys.argv[2:3] == ["primary"])
-    done = resumable("X1_TRANSITION_STAGE2", pop, stage2, lambda x: x["pair"])
+    done = resumable("rotated_profile_stage2", pop, stage2, lambda x: x["pair"])
     rows = [done[a["pair"]] for a in pop]
-    with open(OUT / "X1_TRANSITION_STAGE2.csv", "w", newline="") as f:
+    with open(OUT / "rotated_profile_stage2.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
 
 elif __name__ == "__main__" and sys.argv[1] == "run":
@@ -146,19 +148,19 @@ elif __name__ == "__main__" and sys.argv[1] == "run":
         jobs += [(a["pair"], "original", a["og"], n, lines, sd) for sd in gs]
         jobs += [(a["pair"], "mutant", a["mg"], n, lines, sd) for sd in ms]
     key = lambda x: (x[0], x[1], x[5]) if isinstance(x, tuple) else (x["pair"], x["role"], x["seed"])
-    t0 = time.time(); done = resumable("X1_TRANSITION_RUNS", jobs, run_job, key)
-    with gzip.open(OUT / "X1_TRANSITION_RUNS.jsonl.gz", "wt") as f:
+    t0 = time.time(); done = resumable("rotated_profile_runs", jobs, run_job, key)
+    with gzip.open(OUT / "rotated_profile_runs.jsonl.gz", "wt") as f:
         for j in jobs: f.write(json.dumps(done[key(j)], separators=(",", ":")) + "\n")
     print("executions", len(jobs), "seconds", round(time.time() - t0, 1))
 
 elif __name__ == "__main__" and sys.argv[1] == "analyze":
-    st = list(csv.DictReader(open(DIR / "X1_TRANSITION_STAGE2.csv")))
-    runs = [json.loads(l) for l in gzip.open(DIR / "X1_TRANSITION_RUNS.jsonl.gz", "rt")]
+    st = list(csv.DictReader(open(DIR / "rotated_profile_stage2.csv")))
+    runs = [json.loads(l) for l in gzip.open(DIR / "rotated_profile_runs.jsonl.gz", "rt")]
     assert all(r["cli"] == r["inproc"] for r in runs) and not any(r["cli"] == "UNSUPPORTED" for r in runs)
     g = collections.defaultdict(list)
     for r in runs: g[(r["pair"], r["role"])].append(r)
     old = collections.defaultdict(list)
-    for f in ("X1_NATIVE_RUNS.jsonl.gz", "X1_POSITION_NATIVE_RUNS.jsonl.gz"):
+    for f in ("native_runs.jsonl.gz", "later_positions_native_runs.jsonl.gz"):
         for l in gzip.open(DIR / f, "rt"):
             x = json.loads(l); old[(x["pair"], x["role"], x["arm"])].append(x)
     rows = []
@@ -185,7 +187,7 @@ elif __name__ == "__main__" and sys.argv[1] == "analyze":
                     | {"witness_kills": wk, "witness_guard_failures": wg, "witness_original_failures_of_12": wo12,
                        "control_kills": ck, "control_guard_failures": cg, "control_replays_recorded": replay,
                        "certified": cert})
-    with open(OUT / "X1_TRANSITION.csv", "w", newline="") as f:
+    with open(OUT / "rotated_profile.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
     cnt = lambda f: sum(1 for x in rows if f(x))
     summ = {"pairs": len(rows),
@@ -204,5 +206,5 @@ elif __name__ == "__main__" and sys.argv[1] == "analyze":
             "certified_by_population": {p: f"{cnt(lambda x: x['population'] == p and x['certified'])}/{cnt(lambda x: x['population'] == p)}"
                                         for p in sorted({x["population"] for x in rows})},
             "executions": len(runs)}
-    json.dump(summ, open(OUT / "X1_TRANSITION_SUMMARY.json", "w"), indent=1)
+    json.dump(summ, open(OUT / "rotated_profile_summary.json", "w"), indent=1)
     print(json.dumps(summ, indent=1))

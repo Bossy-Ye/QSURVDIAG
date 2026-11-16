@@ -1,4 +1,5 @@
-"""Assemble the run tree of the packaged v2 implementation (as scripts/reproduce_analytic.py does), for X4."""
+"""Assemble the run tree of the packaged v2 implementation, as scripts/reproduce_analytic.py does, for the
+later-position experiment (run_mutants.py)."""
 import csv, shutil, sys
 from pathlib import Path
 PKG = Path(sys.argv[1]); RT = Path(sys.argv[2])

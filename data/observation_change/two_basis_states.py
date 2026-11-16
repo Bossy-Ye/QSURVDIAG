@@ -4,10 +4,10 @@ the setting with X on every qubit in superposition in that state, whether it is 
 whether an instance of the declared universe separates the pair under it.
 
 The 35 pairs of the 20 circuits come from the frozen population; the 65 later-position pairs need the programs and
-gates that data/position/x4_select.py writes to $QSD_OUT/position, and are skipped when these files are absent.
-Writes X1_TWO_STATE.csv.
+gates that data/position/select_mutants.py writes to $QSD_OUT/position, and are skipped when these files are absent.
+Writes two_basis_states.csv.
 
-Usage: <analytic python> -B x1_two_state.py
+Usage: <analytic python> -B two_basis_states.py
 """
 import os, csv, json, sys
 from pathlib import Path
@@ -35,14 +35,14 @@ def row(pair, pop, prog, n, og, mg, named):
 
 orig, nq, outreg, mut = C.load_population()
 rows = [row(x["pair"], "primary", x["program"], int(x["n"]), orig[x["program"]], mut[x["pair"]]["gates"], x["setting_q0_first"])
-        for x in csv.DictReader(open(DIR / "X1_SETTINGS.csv"))]
-sp, gp = ROOT / "position/X4_SUBJECTS.json", ROOT / "position/X4_MUTANT_GATES.json"
+        for x in csv.DictReader(open(DIR / "separating_settings.csv"))]
+sp, gp = ROOT / "position/programs.json", ROOT / "position/mutant_gates.json"
 if sp.exists() and gp.exists():
     S, G = json.load(open(sp)), json.load(open(gp))
-    for x in csv.DictReader(open(DIR / "X1_POSITION_SETTINGS.csv")):
+    for x in csv.DictReader(open(DIR / "later_positions_settings.csv")):
         s = S[x["program"]]
         rows.append(row(x["pair"], x["population"], x["program"], s["n"], s["prep"] + s["gates"], s["prep"] + G[x["pair"]],
                         x["setting_q0_first"]))
-with open(OUT / "X1_TWO_STATE.csv", "w", newline="") as f:
+with open(OUT / "two_basis_states.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
 print(len(rows), "pairs")

@@ -105,5 +105,5 @@ if __name__ == "__main__":
     with ProcessPoolExecutor(2, mp_context=mp.get_context("spawn")) as ex:
         res = list(ex.map(run_one, jobs, chunksize=6))
     json.dump({"labels": labels, "runs": res, "wall_seconds": round(time.time() - t0, 1)},
-              open(OUT / "X2_QUCHECK_20_RUNS.json", "w"))
+              open(OUT / "qucheck_on_20_circuits_runs.json", "w"))
     print("pairs", len(labels), "executions", len(res), "seconds", round(time.time() - t0, 1))

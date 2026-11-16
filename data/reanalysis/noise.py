@@ -1,4 +1,4 @@
-"""R4: the 115 survivors of the 20 circuits whose final state differs, compared under device noise.
+"""Re-analysis under device noise: the 115 survivors of the 20 circuits whose final state differs.
 
 Noise: the median calibrated errors of the IBM Torino snapshot in qiskit-ibm-runtime 0.40.1 (FakeTorino):
 depolarizing error on sx and x, depolarizing error on cz, symmetric readout error; rz is virtual. Each circuit is
@@ -79,5 +79,5 @@ summ = {"noise": {"backend": be.name, "sx_x_error": E1, "cz_error": E2, "readout
                             "some_instance_above_theta": sum(x["noisy_first_witness"] is not None for x in g("CL4")),
                             "witness_ratio_median": float(np.median([x["witness_noisy_d"] / x["ideal_witness"][2] for x in g("CL4")]))},
         "below_tolerance": {"pairs": len(g("CL5")), "separated_under_noise": sum(x["noisy_first_witness"] is not None for x in g("CL5"))}}
-json.dump({"summary": summ, "pairs": rows}, open(OUT / "R4_NOISE.json", "w"), indent=1, default=lambda o: o.item())
+json.dump({"summary": summ, "pairs": rows}, open(OUT / "noise.json", "w"), indent=1, default=lambda o: o.item())
 print(json.dumps(summ, indent=1, default=lambda o: o.item()))

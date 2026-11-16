@@ -1,12 +1,11 @@
-"""X4, section 2: rebuild the 18 programs, regenerate their pools, and select 10 middle-third and 10 last-third
-mutations per program (PLAN.md). No execution. Writes X4_SELECTION.csv, X4_POOL_CHECKS.json and the runner inputs
-X4_SUBJECTS.json (sha256 ac1dc89e...) and X4_MUTANT_GATES.json (sha256 7753081c...), which hold third-party gate lists
+"""Later-position experiment, PLAN.md section 2: rebuild the 18 programs, regenerate their pools, and select 10
+middle-third and 10 last-third mutations per program. No execution. Writes selection.csv, pool_checks.json and the runner inputs
+programs.json (sha256 ac1dc89e...) and mutant_gates.json (sha256 7753081c...), which hold third-party gate lists
 and are not archived.
 
 Programs: the five other circuits (S1_SUBJECTS.json), the four MQT Bench programs (SUBJECTS.json, prep kept apart),
 the seven Qolumbina programs (circuit hashes of data/external/protocol/EXTERNAL_COHORT_FREEZE.json, which also records
-the archive MD5) and two QASMBench circuits (pinned commit,
-LF line endings). Original gate lists follow the populations' rule: transpile to the enumerator basis at level 0.
+the archive MD5) and two QASMBench circuits (pinned commit, LF line endings). Original gate lists follow the populations' rule: transpile to the enumerator basis at level 0.
 """
 import ast, collections, csv, hashlib, importlib, json, os, sys
 from pathlib import Path
@@ -140,10 +139,10 @@ if __name__ == "__main__":
                              "stratum": f"{kk[0]}/{kk[1]}", "location": m["spec"], "anchor_index": m["anchor_index"],
                              "cell_size": len(L), "cell_index": i, "mutated_hash": m["mutated_hash"], "definition_sha256": _sha(m)})
                 store[mid] = m["mutated_gates"]
-    with open(OUT / "X4_SELECTION.csv", "w", newline="") as f:
+    with open(OUT / "selection.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
-    json.dump({sid: {k: v for k, v in s.items()} for sid, s in S.items()}, open(OUT / "X4_SUBJECTS.json", "w"))
-    json.dump(store, open(OUT / "X4_MUTANT_GATES.json", "w"))
-    json.dump(checks, open(OUT / "X4_POOL_CHECKS.json", "w"), indent=1)
+    json.dump({sid: {k: v for k, v in s.items()} for sid, s in S.items()}, open(OUT / "programs.json", "w"))
+    json.dump(store, open(OUT / "mutant_gates.json", "w"))
+    json.dump(checks, open(OUT / "pool_checks.json", "w"), indent=1)
     print(json.dumps(checks, indent=1))
     print("selected", len(rows), dict(collections.Counter(r["population"] for r in rows)))

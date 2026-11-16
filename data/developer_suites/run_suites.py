@@ -6,7 +6,7 @@ used), then on the mutant at that seed with capture (native verdict of record). 
 equality on every distinct argument tuple, context alignment, observation equality and the first witness.
 Original guard runs use seeds 16042-16053.
 
-Usage: X2_SRC=<QuCheck checkout> <QuCheck environment python> -B x2_run.py <inputs for suite B> [workers]
+Usage: QUCHECK_SRC=<QuCheck checkout> <QuCheck environment python> -B run_suites.py <inputs for suite B> [workers]
 """
 import base64, io, json, os, subprocess, sys, time
 from concurrent.futures import ThreadPoolExecutor
@@ -72,7 +72,7 @@ def _key(suite, program, seed): return CACHE / f"{suite}_{program}_{seed}.pkl"
 
 def orig_job(a):
     """Capture of the original at one seed, shared by every mutant run at that seed."""
-    import pickle, x2_capture as X
+    import pickle, capture as X
     from qiskit_aer.backends.aerbackend import AerBackend as AerSimulator
     suite, program, seed, ninp = a
     held = []
@@ -103,7 +103,7 @@ def _equal_cached(X, program, version, fp, fm, sig, aa, kk):
 
 
 def job(a):
-    import pickle, x2_capture as X, x2_harness as H
+    import pickle, capture as X, harness as H
     from qiskit_aer.backends.aerbackend import AerBackend as AerSimulator
     kind, suite, program, version, seed, ninp = a
     t0 = time.time()
@@ -158,17 +158,17 @@ def _fresh(fn, a):                                   # one interpreter per job (
 if __name__ == "__main__" and sys.argv[1] == "--one":
     print("\n" + json.dumps({"orig_job": orig_job, "job": job}[sys.argv[2]](tuple(json.loads(sys.argv[3])))))
 elif __name__ == "__main__":
-    import x2_harness as H
+    import harness as H
     ninp = int(sys.argv[1]); workers = int(sys.argv[2]) if len(sys.argv) > 2 else 4
     plan = [(s_, p) for p in H.PROGRAMS for s_ in "AB" if not (s_ == "A" and p not in H.SUITE_A)]
     done = set()
-    path = OUT / "X2_NATIVE_RUNS.jsonl"
+    path = OUT / "native_runs.jsonl"
     if path.exists():
         for l in open(path):
             r = json.loads(l); done.add((r["kind"], r["suite"], r["program"], r.get("version", ""), r["seed"]))
     caps = [(s_, p, sd, ninp) for s_, p in plan for sd in MUT_SEEDS if not _key(s_, p, sd).exists()]
     t0 = time.time()
-    with ThreadPoolExecutor(workers) as ex, open(OUT / "X2_ORIGINAL_CAPTURES.jsonl", "a") as f:
+    with ThreadPoolExecutor(workers) as ex, open(OUT / "original_captures.jsonl", "a") as f:
         for r in ex.map(lambda a: _fresh("orig_job", a), caps): f.write(json.dumps(r) + "\n"); f.flush()
     jobs = []
     for s_, p in plan:

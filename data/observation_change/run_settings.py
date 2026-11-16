@@ -1,4 +1,5 @@
-"""X1, sections 3-4: native QUTest runs of the separating settings (X1_SETTINGS.csv).
+"""Separating-setting experiment, PLAN.md section 3: native QUTest runs of the separating settings
+(separating_settings.csv). Writes native_runs.jsonl.gz.
 
 Per pair: the rotated test (setting gates, measurement of every qubit, the witness with the original's ideal
 reference rounded to 4 decimals, tolerance 0.05) on the original (seeds 14042-14053) and on the mutant (seeds
@@ -40,7 +41,7 @@ def job(a):
 
 if __name__ == "__main__":
     orig, nq, outreg, mut = C.load_population()
-    rows = list(csv.DictReader(open(DIR / "X1_SETTINGS.csv")))
+    rows = list(csv.DictReader(open(DIR / "separating_settings.csv")))
     jobs = []
     for r in rows:
         p = r["program"]; n = int(r["n"]); po = C.sv(orig[p], n)
@@ -54,6 +55,6 @@ if __name__ == "__main__":
         for sd in MUT_SEEDS: jobs.append((r["pair"], "mutant", "control", mut[r["pair"]]["gates"], n, None, clines, sd))
     t0 = time.time()
     with ProcessPoolExecutor(4) as ex: res = list(ex.map(job, jobs, chunksize=4))
-    with gzip.open(OUT / "X1_NATIVE_RUNS.jsonl.gz", "wt") as f:
+    with gzip.open(OUT / "native_runs.jsonl.gz", "wt") as f:
         for x in res: f.write(json.dumps(x, separators=(",", ":")) + "\n")
     print("executions", len(res), "seconds", round(time.time() - t0, 1))

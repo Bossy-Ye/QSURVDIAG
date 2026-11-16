@@ -9,7 +9,7 @@ import base64, collections, gzip, io, json, os, sys
 from pathlib import Path
 import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from x2_run import _walsh
+from run_suites import _walsh
 
 HERE = Path(__file__).resolve().parent
 OUT = Path(os.environ.get("QSD_OUT", HERE.parents[1] / "output")) / "developer_suites"; OUT.mkdir(parents=True, exist_ok=True)
@@ -56,7 +56,7 @@ def verdict(w, dist, n):
 
 
 if __name__ == "__main__":
-    runs = [json.loads(l) for l in gzip.open(HERE / "X2_NATIVE_RUNS.jsonl.gz", "rt")]
+    runs = [json.loads(l) for l in gzip.open(HERE / "native_runs.jsonl.gz", "rt")]
     g = collections.defaultdict(list)
     for r in runs:
         if r["kind"] == "pair": g[(r["suite"], r["program"], r["version"])].append(r)
@@ -72,5 +72,5 @@ if __name__ == "__main__":
         res[f"{s}|{p}|{v}"] = {"witness": {k: w[k] for k in ("context", "kind", "key", "d", "ref")},
                                "mutant_kills": mk.count("KILLED"), "original_failures": of.count("KILLED"),
                                "supported": mk.count("KILLED") == 12 and of.count("KILLED") <= 1}
-    json.dump(res, open(OUT / "X2_CONFIRM.json", "w"), indent=1)
+    json.dump(res, open(OUT / "native_confirmation.json", "w"), indent=1)
     print(len(res), "candidates;", sum(x["supported"] for x in res.values()), "supported")
