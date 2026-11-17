@@ -27,15 +27,15 @@ sampling bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolera
 ## 2. Testing tools (RQ1)
 
 - **Structural-assertion trials.** Of the 546 mutants executed before the R_xx and R_zz rewriting, 85 are
-  contract-equivalent to their original: 52 of development circuits and 33 of the other circuits. QUTest's gate-set
-  check, with the original's gate names as the allowed set, flags 19 of the 33 and 19 of the 52 in every recorded
-  trial. These flags come from five programs whose original always passes. In six other development circuits the
-  transpilation varies and the original sometimes fails the check, so their 23 flags are unreliable (optimization
+  contract-equivalent to their original: 52 of development circuits and 33 of the five other circuits. QUTest's
+  gate-set check, with the original's gate names as the allowed set, flags 19 of the 33 and 19 of the 52 in every
+  recorded trial. These flags come from five programs whose original always passes. In six other development circuits
+  the transpilation varies and the original sometimes fails the check, so their 23 flags are unreliable (optimization
   level: section 9). A recorded prediction stated that the gate-set assertion would separate more than 80 % of the
   contract-equivalent mutants of the five other circuits, and the depth assertion fewer. The prediction failed: with
-  both programs transpiled to the same basis-gate set, the audit separated none of the 33 by gate set and 11 by depth.
-  A check of whether two programs transpile to the same circuit identifies 1 to 3 of the 85 contract-equivalent pairs
-  across 36 transpiler configurations.
+  both programs transpiled to the same basis-gate set, the comparison separated none of the 33 by gate set and 11 by
+  depth. A check of whether two programs transpile to the same circuit identifies 1 to 3 of the 85 contract-equivalent
+  pairs across 36 transpiler configurations.
 - **Developer-written tests.** In Qibo, Mitiq and Qualtran, tests run through pytest and can read the full state
   vector (Qibo, Mitiq) or the full unitary (Qualtran). Of 51 assertion occurrences, 30 check circuit structure,
   resources or set-up, 16 compare full state vectors or unitaries, and five read only computational-basis
@@ -234,9 +234,10 @@ holds to that margin, and its record states the margin. The margins of every dec
 - **Gate-set trials**: Qiskit took optimization level 3 from the user configuration of the recording machine;
   `environment/qiskit_settings.conf` sets it for the analytic tier. QUTest's transpilation varied between repeated
   runs at levels 2 and 3.
-- **Implementation** (`data/implementation/`): diagnosis driver, decision-resolution surface and tests. The modules
-  they import are archived with the records that use them. `scripts/run_conformance_tests.py` runs three tests; the
-  others execute QUTest.
+- **Implementation** (`data/implementation/`): diagnosis driver, the analysis of the tolerance and budget experiment
+  (outcome of each pair at six tolerances, sampling bound at three shot budgets) and tests. The modules they import
+  are archived with the records that use them. `scripts/run_conformance_tests.py` runs three tests; the others execute
+  QUTest.
 - **Embedded paths and working labels**: archived files name the study's working folders, for example `revision2/`, the
   folder of the analysis under `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. Archived
   file names, headers and comments also carry the study's working labels: stage codes such as `B1` to `B5`, `R2V`, `X1`

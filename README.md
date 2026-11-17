@@ -60,8 +60,8 @@ reproduce_experiments   with --analytic: 90 checks   MATCH 83    PARTIAL 7
 The scripts check the QED-C reference file by its SHA-256. All analytic checks match. With `--analytic`, the
 experiment checks also rerun the separating-setting searches and the three analyses of `data/analyses/`. A02 is one
 fresh trial of QUTest's gate-set check, compared on the programs whose flags the article treats as reliable. A06
-compares `R2V_BOUND.json` without its unprinted witness-surface counts, which depend on the order of ties
-(`data/checks/tie_check.py`). A07 compares margins to 1e-12.
+compares `R2V_BOUND.json` except its witness counts, which the article does not print and which depend on the order of
+ties (`data/checks/tie_check.py`). A07 compares margins to 1e-12.
 
 ## Article to records
 
