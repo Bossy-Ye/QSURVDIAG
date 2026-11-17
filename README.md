@@ -8,7 +8,9 @@ Version 1.3.1.
 
 ## Verify
 
-The record tier needs Python 3.9 or later and the standard library; the RFC 3161 receipts also need `openssl`.
+The package has two tiers of checks. The record tier recomputes every checked value from the archived records. It
+needs Python 3.9 or later and the standard library, `openssl` for the RFC 3161 receipts, and a few seconds. The
+analytic tier (next section) also reruns transpilation and simulation.
 
 ```sh
 python3 scripts/verify.py --out ../out
@@ -52,16 +54,19 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments --analytic ../
   ../out/analytic/r2v_root ../qedc/qedcbench/hamiltonian_simulation/_common/precalculated_data.json
 ```
 
+The three arguments of `--analytic` are the Python of the analytic environment, the input tree that
+`reproduce_analytic.py` writes, and the QED-C reference file.
+
 ```text
 reproduce_analytic      merged with the record tier: 407 checks   MATCH 342   PARTIAL 65
 reproduce_experiments   with --analytic: 90 checks   MATCH 83    PARTIAL 7
 ```
 
-The scripts check the QED-C reference file by its SHA-256. All analytic checks match. With `--analytic`, the
-experiment checks also rerun the separating-setting searches and the three analyses of `data/analyses/`. A02 is one
-fresh trial of QUTest's gate-set check, compared on the programs whose flags the article treats as reliable. A06
-compares `R2V_BOUND.json` except its witness counts, which the article does not print and which depend on the order of
-ties (`data/checks/tie_check.py`). A07 compares margins to 1e-12.
+The scripts check the QED-C reference file by its SHA-256. In the study environment, every analytic check matches.
+With `--analytic`, the experiment checks also rerun the separating-setting searches and the three analyses of
+`data/analyses/`. A02 is one fresh trial of QUTest's gate-set check, compared on the programs whose flags the article
+treats as reliable. A06 compares `R2V_BOUND.json` except its witness counts, which the article does not print and
+which depend on the order of ties (`data/checks/tie_check.py`). A07 compares margins to 1e-12.
 
 ## Article to records
 
