@@ -237,10 +237,12 @@ holds to that margin, and its record states the margin. The margins of every dec
 - **Implementation** (`data/implementation/`): diagnosis driver, decision-resolution surface and tests. The modules
   they import are archived with the records that use them. `scripts/run_conformance_tests.py` runs three tests; the
   others execute QUTest.
-- **Embedded paths**: archived files name the study's working folders, for example `revision2/`, the folder of the
-  analysis under `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. The package stores
-  these files under `data/`; `scripts/analytic/input_tree.csv` rebuilds the folder layout that the archived producers
-  read.
+- **Embedded paths and working labels**: archived files name the study's working folders, for example `revision2/`, the
+  folder of the analysis under `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. Archived
+  file names, headers and comments also carry the study's working labels: stage codes such as `B1` to `B5`, `R2V`, `X1`
+  and "Pass 3B", and status words such as `FRESH`, `RERUN` and `FINAL`. The labels identify the stage that produced a
+  file; `README.md` lists the codes that the records use. The package stores these files under `data/`;
+  `scripts/analytic/input_tree.csv` rebuilds the folder layout that the archived producers read.
 - **Not redistributed**: QMutBench program files (GPL-3.0; their gate lists are in `R2V_NATIVE_JOBS_ARMS.jsonl`;
   per-case names and SHA-256 in `data/scalability/corpus/case_manifests/`; `data/inventory/fetch_corpus.sh` fetches
   them from the URLs, pinned to commit `01f5e770`, in `data/inventory/out/corpus_files.tsv`, and `inventory.py` checks
