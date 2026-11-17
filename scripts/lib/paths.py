@@ -1,4 +1,5 @@
 """Archived files are addressed by package path and checked against provenance/source_manifest.csv."""
+
 import csv, os
 from pathlib import Path
 
@@ -19,6 +20,7 @@ def orig(path):
 
 class Dir:
     """Package directory whose archived files are resolved through the manifest: Dir('data/certification/outcomes') / name."""
+
     def __init__(self, prefix):
         self.prefix = str(prefix).rstrip("/")
 
