@@ -240,9 +240,10 @@ holds to that margin, and its record states the margin. The margins of every dec
   QUTest.
 - **Embedded paths and working labels**: archived files name the study's working folders, for example `revision2/`, the
   folder of the analysis under `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. Archived
-  file names, headers and comments also carry the study's working labels: stage codes such as `B1` to `B5`, `R2V`, `X1`
-  and "Pass 3B", and status words such as `FRESH`, `RERUN` and `FINAL`. The labels identify the stage that produced a
-  file; `README.md` lists the codes that the records use. The package stores these files under `data/`;
+  file names, headers and comments also carry the study's working labels: stage codes such as `B1` to `B5`, `E1` to
+  `E15`, `S1` to `S4`, `R2V`, `X1`, "Phase 5A", "Round 0.5" and "Pass 3B", and status words such as `FRESH`, `RERUN`,
+  `RECOVERED`, `CORRECTED` and `FINAL`. The labels identify the stage that produced a file. `README.md` explains the
+  codes that the checks and the cited records use. The package stores these files under `data/`;
   `scripts/analytic/input_tree.csv` rebuilds the folder layout that the archived producers read.
 - **Not redistributed**:
   - QMutBench program files (GPL-3.0; their gate lists are in `R2V_NATIVE_JOBS_ARMS.jsonl`; per-case names and
