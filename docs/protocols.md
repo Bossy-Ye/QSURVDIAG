@@ -256,48 +256,24 @@ holds to that margin, and its record states the margin. The margins of every dec
 
 ## 10. File names used in the plans
 
-The plans and operational records of the experiments are kept as recorded, so they name the experiments and files as
-they were named when recorded. Section labels such as X2_OPERATIONAL name sections of
-`data/developer_suites/OPERATIONAL.md`.
+Plans and operational records name the experiments and files as they were named when recorded. The plans bound by
+Freezes C and D are byte-identical to the timestamped files. The plans of the output-condition, combined-suite and
+all-pairs experiments and the QED-C plan and screening protocol are as released in version 1.0.0; they differ from the
+committed files only in file paths and cross-references. Section labels such as X2_OPERATIONAL name sections of
+`data/developer_suites/OPERATIONAL.md`. `provenance/RENAMES.csv` maps every earlier file name to its name in this
+package; the table below lists the names that have no file of their own.
 
 | Name in the plans | Name in this package |
 |---|---|
 | X1 | separating-setting experiment, `data/observation_change/` |
 | X2 | developer-suite experiment, `data/developer_suites/` |
 | X4 | later-position experiment, `data/position/` |
-| `X1_OBSERVATION_CHANGE.md` | `data/observation_change/PLAN.md` |
-| `X1_POSITION_EXTENSION.md` | `data/observation_change/POSITION_EXTENSION.md` |
-| `X2_DEVELOPER_SUITES.md` | `data/developer_suites/PLAN.md` |
-| `X4_POSITION.md` | `data/position/PLAN.md` |
-| `X1_SETTINGS.csv` | `data/observation_change/separating_settings.csv` |
-| `X1_NATIVE_RUNS.csv` | `data/observation_change/native_runs.csv` |
-| `X1_SUMMARY.json` | `data/observation_change/summary.json` |
-| `X2_DIAGNOSIS.csv` | `data/developer_suites/diagnosis.csv` |
-| `X2_NATIVE_RUNS.csv` | `data/developer_suites/native_runs.csv` |
-| `X2_QUCHECK_20.csv` | `data/developer_suites/qucheck_on_20_circuits.csv` |
-| `X2_SUMMARY.json` | `data/developer_suites/summary.json` |
-| `X2_CONTROL.json` | `data/developer_suites/negative_controls.json` |
-| `x2_control.py` | `data/developer_suites/negative_controls.py` |
 | `X2_INPUTS.jsonl` | no separate file; the generated inputs are the keys of `program_equal` in `data/developer_suites/native_runs.jsonl.gz` |
 | `X2_RUNTIME_CHECK.json` | no separate file; `data/developer_suites/OPERATIONAL.md`, section X2_RUNTIME_DECISION, records the check |
-| `X4_SELECTION.csv` | `data/position/selection.csv` |
-| `X4_NATIVE_RUNS.csv` | `data/position/native_runs.csv` |
-| `X4_FINAL.csv` | `data/position/outcomes.csv` |
-| `X4_SUMMARY.json` | `data/position/summary.json` |
-| `x4_select.py` | `data/position/select_mutants.py` |
-| `cmp_run.py` | `data/combined_suite/run_comparison.py` |
-| `CMP_CASES.csv` | `data/combined_suite/CASES.csv` |
-| `CMP_NATIVE_RUNS.csv` | `data/combined_suite/NATIVE_RUNS.csv` |
-| `CMP_SUMMARY.json` | `data/combined_suite/SUMMARY.json` |
-| `oc_rerun.py` | `data/output_condition/run_suites.py` |
-| `reanalysis.py` | `data/qedc/baseline_comparison.py` |
-| `witness_order/AMENDMENT.md` | `data/certification/witness_order/RULE.md` |
 
-The package renamed 48 records under `data/` without changing their content. The study-authored scripts under
-`data/` that were renamed or reworded differ from their recorded versions in file references, docstrings and comments,
-and in module names that follow the renames; `rotated_profile.py` also renames a local variable and
-`run_mutants.py` a once-per-process flag. A comparison of syntax trees confirms that no other code changed. The
-plans, the operational records and the recorded output logs are as recorded.
+`provenance/RENAMES.csv` lists every file whose name changed since version 1.3.0, with the hash of its earlier and
+present content and the kind of change. Records, plans and output logs changed in name only. The study-authored
+scripts under `data/` changed in file references, docstrings and comments, and in the two places that the table names.
 
 Archived files cite the numbering of earlier manuscript versions. The table maps these numbers to the article.
 
