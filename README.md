@@ -126,15 +126,17 @@ The records and `expected/` use the study's codes.
 | `provenance/` | checksums, source manifest, commit records, redactions, license map |
 | `environment/` | pinned environment of the analytic tier; records of the study environments |
 
-Files listed in `provenance/source_manifest.csv` are byte-identical to their sources. The exceptions are four redacted
-files (`provenance/REDACTIONS.csv`) and one file whose quotations are replaced (`provenance/DERIVED_FILES.csv`). The
-package does not redistribute the QMutBench and external program files, whose gate lists are in
-`R2V_NATIVE_JOBS_ARMS.jsonl`, the gate lists of the later-position programs, or the tool sources (`docs/protocols.md`,
-sections 7 and 9).
+Files listed in `provenance/source_manifest.csv` are byte-identical to their sources, except four redacted files
+(`provenance/REDACTIONS.csv`) and one file whose quotations are replaced (`provenance/DERIVED_FILES.csv`). The
+package does not redistribute the QMutBench, Q# and QASMBench program files or the tool sources.
+`R2V_NATIVE_JOBS_ARMS.jsonl` holds the gate lists of the QMutBench and Q# programs in the native confirmations and
+negative controls of suite-omission candidates; the gate lists of the later-position programs are regenerated.
+`docs/protocols.md`, sections 7 and 9, gives the retrieval of each source.
 
 ## License
 
-Mixed; `provenance/LICENSE_MAP.csv` assigns each file. Code MIT (`LICENSE`), records CC BY 4.0 (`LICENSE-DATA`), one
-QMutBench gate-list file GPL-3.0-only, MQT Bench circuits MIT, quoted Qibo and Qualtran test lines Apache-2.0, QuCheck
-case-study call arguments MIT and Apache-2.0, Free TSA certificates and receipts as issued. Notices:
-`LICENSES/NOTICE.txt`.
+The package is under several licenses, and `provenance/LICENSE_MAP.csv` assigns one to each file. Study-authored code
+is under MIT (`LICENSE`) and study-authored records are under CC BY 4.0 (`LICENSE-DATA`). One file with QMutBench gate
+lists is under GPL-3.0-only. MQT Bench circuits are under MIT, the quoted Qibo and Qualtran test lines under
+Apache-2.0, and the call arguments of the QuCheck case studies under MIT and Apache-2.0. Free TSA certificates and
+receipts are included as issued. `LICENSES/NOTICE.txt` gives the notices.
