@@ -20,7 +20,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 if ROOT / "data" in OUT.parents or OUT == ROOT / "data":
     sys.exit("refusing to write inside data/")
 env = {**os.environ, "QSD_OUT": str(OUT)}
-ENGINES = ["manuscript_checks", "ledger_checks", "protocol_checks", "extra_checks", "records_checks"]
+ENGINES = ["article_checks", "ledger_checks", "protocol_checks", "extra_checks", "records_checks"]
 for e in ENGINES:
     r = subprocess.run(
         [sys.executable, "-I", "-B", str(ROOT / "scripts/checks" / f"{e}.py")],
@@ -34,7 +34,7 @@ for e in ENGINES:
         sys.exit(f"{e} failed; see {OUT / (e + '.log')}")
 
 got = {}
-for r in csv.DictReader(open(OUT / "manuscript_checks.csv")):
+for r in csv.DictReader(open(OUT / "article_checks.csv")):
     got[r["check_id"]] = r["recomputed"]
 for r in csv.DictReader(open(OUT / "ledger_checks.csv")):
     got["L-" + r["id"]] = r["recomputed_value"]
@@ -72,7 +72,7 @@ for e in csv.DictReader(open(ROOT / "expected/expected_results.csv")):
             "check_id": cid,
             "engine": e["engine"],
             "label": e["label"],
-            "printed_in_manuscript": e["printed_in_manuscript"],
+            "printed_in_article": e["printed_in_article"],
             "evidence_level": e["evidence_level"],
             "inputs": e["inputs"],
             "command": "python3 scripts/reproduce.py",
@@ -85,7 +85,7 @@ with open(OUT / "results_verification.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0]))
     w.writeheader()
     w.writerows(rows)
-printed = Counter(r["status"] for r in rows if r["printed_in_manuscript"] == "yes")
+printed = Counter(r["status"] for r in rows if r["printed_in_article"] == "yes")
 print(f"\nchecks: {len(rows)}  " + "  ".join(f"{k}: {v}" for k, v in sorted(cnt.items())))
 print("values printed in the article: " + "  ".join(f"{k}: {v}" for k, v in sorted(printed.items())))
 print(

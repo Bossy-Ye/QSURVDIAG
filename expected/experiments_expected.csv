@@ -1,4 +1,4 @@
-check_id,label,expected,printed_in_manuscript,evidence_level,location
+check_id,label,expected,printed_in_article,evidence_level,location
 R-OC00,output_condition/analyze.py rerun equals the archived recorded reproduction / corrected results,True/True,n.a. (logical check),per-run records,Data Availability
 R-OC01,"Matched-changes output-condition row, corrected: newly killed / lost / effect pp / bootstrap CI / LOO range","65/0/27.2/[8.8, 46.2]/[22.0, 31.1]",partly (leave-one-out range not printed),per-run records,Table 5; 5.3.2
 R-OC02,Matched-changes output-condition row: pairs / circuits / exact McNemar p,239/8/5.4e-20,partly (pairs and circuits printed; McNemar p not printed),per-run records,Table 5

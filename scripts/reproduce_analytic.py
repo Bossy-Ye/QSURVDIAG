@@ -6,7 +6,7 @@ A01  untranspiled gate-list and registered fixed-basis comparisons, recomputed p
 A02  one fresh trial of QUTest's own gate-set check, compared with the archived trial categories of the programs
      whose original keeps its transpiled gate set (the flags of the other six are not reliable; article Section 5.1)
 A03  output-condition counterfactual (8 of 47) recomputed from final states
-A04  QUTest 0.1.0 documentation checks (two manuscript checks skipped by the record-level tier)
+A04  QUTest 0.1.0 documentation checks (two checks of article_checks.py skipped by the record-level tier)
 A05-A08  reruns of the archived producers r2v_stats.py, r2v_bound.py, r2v_table_x.py and r2v_numbers.py on package
      inputs; each regenerated file is compared with the archived one (PASS or FAIL): byte for byte, except
      R2V_BOUND.json without its unprinted witness_surface_v2 counts, which depend on the order of ties
@@ -112,14 +112,14 @@ else:
 
 # A04: QUTest documentation checks via the record-level engine, with QUTest installed
 r = subprocess.run(
-    [sys.executable, "-I", "-B", str(ROOT / "scripts/checks/manuscript_checks.py")],
+    [sys.executable, "-I", "-B", str(ROOT / "scripts/checks/article_checks.py")],
     env={**env, "QSD_OUT": str(OUT / "analytic")},
     capture_output=True,
     text=True,
 )
 if r.returncode == 0:
     rows = {
-        x["check_id"]: x["recomputed"] for x in csv.DictReader(open(OUT / "analytic/manuscript_checks.csv"))
+        x["check_id"]: x["recomputed"] for x in csv.DictReader(open(OUT / "analytic/article_checks.csv"))
     }
     res["A04"] = f"{rows['M309']}/{rows['M310']}"
 else:
@@ -224,7 +224,7 @@ if (OUT / "results_verification.csv").is_file():
                 "check_id": x["check_id"],
                 "engine": "reproduce_analytic",
                 "label": "",
-                "printed_in_manuscript": exp[x["check_id"]]["printed_in_manuscript"],
+                "printed_in_article": exp[x["check_id"]]["printed_in_article"],
                 "evidence_level": x["evidence_level"],
                 "inputs": "",
                 "command": x["command"],
@@ -247,7 +247,7 @@ if (OUT / "results_verification.csv").is_file():
         + "  ".join(
             f"{a}: {b}"
             for a, b in sorted(
-                Counter(k(r["status"]) for r in rows if r["printed_in_manuscript"] == "yes").items()
+                Counter(k(r["status"]) for r in rows if r["printed_in_article"] == "yes").items()
             )
         )
     )

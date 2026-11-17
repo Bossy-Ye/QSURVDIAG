@@ -1,7 +1,7 @@
 import sys as _sys
 
 _sys.dont_write_bytecode = True  # keep the package free of interpreter caches
-# Recompute the values of engine manuscript_checks in expected/expected_results.csv from the archived records.
+# Recompute the values of engine article_checks in expected/expected_results.csv from the archived records.
 import csv, json, os, re, statistics as st, sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -1613,7 +1613,7 @@ print(
     f"\n{len(CHECKS) - len(bad) - len(skipped)} of {len(CHECKS) - len(skipped)} checks recomputed from the packaged records; "
     f"{len(skipped)} left to the analytic tier"
 )
-with open(_out_dir() / "manuscript_checks.csv", "w", newline="") as _f:
+with open(_out_dir() / "article_checks.csv", "w", newline="") as _f:
     _w = csv.writer(_f)
     _w.writerow(["check_id", "label", "expected", "recomputed", "match"])
     for _c, _n, _e, _g in CHECKS:
