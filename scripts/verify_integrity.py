@@ -1,5 +1,5 @@
-"""Verify the package against provenance/checksums.sha256, the archived content against source_manifest.csv, and
-that provenance/LICENSE_MAP.csv covers every file.
+"""Verify the package against provenance/checksums.sha256, the archived content against source_manifest.csv, the
+renamed files against provenance/RENAMES.csv, and that provenance/LICENSE_MAP.csv covers every file.
 
 Usage:  python3 scripts/verify_integrity.py [--tsr]
 With --tsr (needs OpenSSL), also verifies the RFC 3161 receipts of Freezes A to D: the MQT Bench freeze (A, B), the
@@ -74,6 +74,20 @@ bad += [f"no license-map row: {k}" for k in sorted(present - lic - {"provenance/
 bad += [f"license-map row without a file: {k}" for k in sorted(lic - present)]
 bad += [f"redaction record without a source-manifest row: {k}" for k in RED if k not in archived]
 bad += [f"derived-file record without a source-manifest row: {k}" for k in DER if k not in archived]
+# provenance/RENAMES.csv: every file whose name changed since version 1.3.0. The change is "none" exactly when the
+# earlier and present hashes are equal; a file added after version 1.3.0 states so before the kind of change.
+renamed = {"unchanged": 0, "edited": 0}
+for r in csv.DictReader(open(ROOT / "provenance/RENAMES.csv")):
+    p = ROOT / r["package_path"]
+    kind = r["change"].split("added after version 1.3.0; ", 1)[-1]
+    if not p.is_file():
+        bad.append(f"renamed file missing: {r['package_path']}")
+    elif sha(p) != r["sha256"]:
+        bad.append(f"renamed file differs from its RENAMES.csv hash: {r['package_path']}")
+    elif not kind or (kind == "none") != (r["earlier_sha256"] == r["sha256"]):
+        bad.append(f"RENAMES.csv change does not agree with the two hashes: {r['package_path']}")
+    else:
+        renamed["unchanged" if kind == "none" else "edited"] += 1
 print(
     f"checksums: {len(listed)} files listed (every file except provenance/checksums.sha256 itself), {len(bad)} problems, {len(extra)} unlisted files"
 )
@@ -86,6 +100,7 @@ print(
     )
 )
 print(f"license map: {len(lic)} files")
+print(f"renamed files: {renamed['unchanged']} unchanged, {renamed['edited']} edited (provenance/RENAMES.csv)")
 if DER:
     print(
         f"derived files: {len(derived)} with third-party quotations replaced (original SHA-256 and the hash of each omitted text in provenance/DERIVED_FILES.csv)"

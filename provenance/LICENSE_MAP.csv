@@ -737,6 +737,7 @@ provenance/FREEZE_D.sha256,CC-BY-4.0,study-authored record or documentation (LIC
 provenance/FREEZE_D.tsr,LicenseRef-FreeTSA,issued or published by Free TSA (freetsa.org); included unchanged for verification
 provenance/LICENSE_MAP.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
 provenance/REDACTIONS.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
+provenance/RENAMES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
 provenance/checksums.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
 provenance/git_commit_records.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
 provenance/source_manifest.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
