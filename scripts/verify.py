@@ -52,7 +52,6 @@ def counts(out, head):
     if not m:
         return "not available"
     c = dict(x.rsplit(": ", 1) for x in m.group(2).split("  ") if x)
-    c = {("ANALYTIC TIER" if "analytic tier" in k else k): v for k, v in c.items()}
     keys = [k for k in ORDER if k in c] + sorted(k for k in c if k not in ORDER)
     return f"{m.group(1)} checks: " + ", ".join(f"{k} {c[k]}" for k in keys)
 

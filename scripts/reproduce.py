@@ -57,9 +57,9 @@ for e in csv.DictReader(open(ROOT / "expected/expected_results.csv")):
         continue  # reported by scripts/reproduce_analytic.py
     g = got.get(cid)
     if g is None:
-        status = "NOT REPRODUCIBLE"
+        status = "NO VALUE"
     elif str(g).startswith("SKIPPED"):
-        status = "NOT REPRODUCED HERE (analytic tier)"
+        status = "ANALYTIC TIER"
     elif str(g) != e["expected"]:
         status = "MISMATCH"
     elif any(e["evidence_level"].startswith(x) for x in AGG_LEVELS) or "aggregate" in e["evidence_level"]:
@@ -92,4 +92,4 @@ print(
     "MATCH = recomputed from per-case records or logs; PARTIAL = equal, but verified against an archived aggregate,"
 )
 print("protocol record or recorded git history. Full table: " + str(OUT / "results_verification.csv"))
-sys.exit(1 if cnt["MISMATCH"] or cnt["NOT REPRODUCIBLE"] else 0)
+sys.exit(1 if cnt["MISMATCH"] or cnt["NO VALUE"] else 0)

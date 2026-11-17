@@ -641,9 +641,9 @@ for e in rows(ROOT / "expected/experiments_expected.csv"):
     v = got.get(e["check_id"])
     st = (
         (
-            "NOT RUN (analytic tier)"
+            "ANALYTIC TIER"
             if e["check_id"].startswith("R-A") and not a.analytic
-            else "NOT REPRODUCIBLE"
+            else "NO VALUE"
         )
         if v is None
         else (
@@ -659,8 +659,8 @@ with open(OUT / "experiments_verification.csv", "w", newline="") as f:
     w.writeheader()
     w.writerows(out)
 for o in out:
-    if o["status"] in ("MISMATCH", "NOT REPRODUCIBLE"):
+    if o["status"] in ("MISMATCH", "NO VALUE"):
         print(f"{o['check_id']}: expected {o['expected']!r}, got {o['reproduced']!r}")
 print(f"experiment checks: {len(out)}  " + "  ".join(f"{k}: {v}" for k, v in sorted(cnt.items())))
 print("Full table: " + str(OUT / "experiments_verification.csv"))
-sys.exit(1 if cnt["MISMATCH"] or cnt["NOT REPRODUCIBLE"] else 0)
+sys.exit(1 if cnt["MISMATCH"] or cnt["NO VALUE"] else 0)
