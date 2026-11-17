@@ -1,4 +1,4 @@
-check_id,engine,label,expected,printed_in_article,evidence_level,inputs
+check_id,module,label,expected,printed_in_article,evidence_level,inputs
 M001,article_checks,primary pairs killed by the baseline suite,302,no,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
 M002,article_checks,primary pairs entering diagnosis,297,yes,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/primary/records/599_B5_A1G_POPULATION.csv
 M003,article_checks,exact-reference killed,302,no,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv

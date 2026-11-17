@@ -1,7 +1,7 @@
 import sys as _sys
 
 _sys.dont_write_bytecode = True  # keep the package free of interpreter caches
-# Recompute the values of engine article_checks in expected/expected_results.csv from the archived records.
+# Recompute the values of check module article_checks in expected/expected_results.csv from the archived records.
 import csv, json, os, re, statistics as st, sys
 from collections import Counter, defaultdict
 from pathlib import Path

@@ -110,7 +110,7 @@ if r.returncode == 0:
 else:
     res["A03"] = "FAILED: see analytic/output_condition.log"
 
-# A04: QUTest documentation checks via the record-level engine, with QUTest installed
+# A04: QUTest documentation checks via the record-level check module, with QUTest installed
 r = subprocess.run(
     [sys.executable, "-I", "-B", str(ROOT / "scripts/checks/article_checks.py")],
     env={**env, "QSD_OUT": str(OUT / "analytic")},
@@ -181,7 +181,7 @@ for cid, script, outputs in (
 exp = {
     e["check_id"]: e
     for e in csv.DictReader(open(ROOT / "expected/expected_results.csv"))
-    if e["engine"] == "reproduce_analytic"
+    if e["module"] == "reproduce_analytic"
 }
 out = []
 for cid, e in exp.items():
@@ -222,7 +222,7 @@ if (OUT / "results_verification.csv").is_file():
         rows.append(
             {
                 "check_id": x["check_id"],
-                "engine": "reproduce_analytic",
+                "module": "reproduce_analytic",
                 "label": "",
                 "printed_in_article": exp[x["check_id"]]["printed_in_article"],
                 "evidence_level": x["evidence_level"],
