@@ -624,7 +624,7 @@ add(
     f"{spl}/{sum(1 for r in un if r['unmet'].startswith('relation R_') and 'inconsistent' not in r['unmet'])}/{sum(1 for r in un if r['v2_candidate']=='CL4' and r['native_verdict']!='SPLIT')}",
     "data/certification/outcomes/R2V_FINAL_CORPUS.csv",
     "native_verdict / unmet / candidate",
-    "split also includes candidate splits; see note in ledger discussion",
+    "split also includes candidate splits",
 )
 add(
     "K04",
