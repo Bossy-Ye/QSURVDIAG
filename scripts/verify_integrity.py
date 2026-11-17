@@ -16,6 +16,8 @@ import csv, hashlib, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+# Top-level names that serve the repository only; the release archive leaves them out (.gitattributes, export-ignore).
+REPOSITORY_ONLY = (".github", ".gitignore", ".gitattributes")
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 RED = {}
 if (ROOT / "provenance/REDACTIONS.csv").is_file():
@@ -38,7 +40,9 @@ for line in (ROOT / "provenance/checksums.sha256").read_text().splitlines():
 present = {
     str(p.relative_to(ROOT))
     for p in ROOT.rglob("*")
-    if p.is_file() and p.relative_to(ROOT).parts[0] not in ("output", ".git") and "__pycache__" not in p.parts
+    if p.is_file()
+    and p.relative_to(ROOT).parts[0] not in ("output", ".git", *REPOSITORY_ONLY)
+    and "__pycache__" not in p.parts
 }
 extra = sorted(present - listed - {"provenance/checksums.sha256"})
 archived, redacted, derived = set(), [], []

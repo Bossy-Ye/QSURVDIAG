@@ -1,7 +1,4 @@
 package_path,license,basis
-.gitattributes,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
-.github/workflows/verify.yml,MIT,study-authored code (LICENSE)
-.gitignore,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
 CITATION.cff,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA)
 LICENSE,license or notice text,license text or third-party notice
 LICENSE-DATA,license or notice text,license text or third-party notice

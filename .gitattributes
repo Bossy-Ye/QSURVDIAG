@@ -1,2 +1,6 @@
 # Keep every file byte-identical on checkout so that the SHA-256 verification holds on all platforms.
 * -text
+# Files that serve the repository only are left out of the release archive.
+/.github export-ignore
+/.gitignore export-ignore
+/.gitattributes export-ignore
