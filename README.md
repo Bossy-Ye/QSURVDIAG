@@ -1,16 +1,16 @@
 # QSurvDiag replication package
 
 This package holds the records and verification scripts of *Measure Differently or Assert More? Diagnosing Surviving
-Quantum Mutants*. The native QUTest and QuCheck executions are archived and are not rerun. The scripts recompute every
-checked value from the archived records.
+Quantum Mutants*. The native QUTest and QuCheck executions are archived and are not rerun. The scripts check every
+listed value against the archived records.
 
 Version 1.3.1.
 
 ## Verify
 
-The package has two tiers of checks. The record tier recomputes every checked value from the archived records. It
-needs Python 3.9 or later and the standard library, `openssl` for the RFC 3161 receipts, and a few seconds. The
-analytic tier (next section) also reruns transpilation and simulation.
+The package has two tiers of checks. The record tier checks every listed value against the archived records. It needs
+Python 3.9 or later and the standard library, `openssl` for the RFC 3161 receipts, and a few seconds. The analytic tier
+(next section) also reruns transpilation and simulation.
 
 ```sh
 python3 scripts/verify.py --out ../out
@@ -34,6 +34,9 @@ values        399 checks: MATCH 297, PARTIAL 100, ANALYTIC TIER 2
 conformance   3 of 3 tests pass
 experiments   90 checks: MATCH 74, PARTIAL 7, ANALYTIC TIER 9
 ```
+
+ANALYTIC TIER marks a value that only the analytic tier recomputes. The file count excludes
+`provenance/checksums.sha256`, which lists the other files.
 
 MATCH means the value is recomputed from per-case or per-run records. PARTIAL means it equals an archived aggregate,
 protocol record or git record. Any mismatch gives a non-zero exit status. `expected/` lists every checked value with
@@ -121,7 +124,7 @@ the table below explains them.
 | Prefix | Checks | Expected values | Computed by |
 |---|---|---|---|
 | `M` | values behind the article | `expected/expected_results.csv` | `scripts/checks/article_checks.py` |
-| `L-` | ledger values by population and record | `expected/expected_results.csv` | `scripts/checks/ledger_checks.py` |
+| `L-` | counts by population and record | `expected/expected_results.csv` | `scripts/checks/ledger_checks.py` |
 | `V` | registered predictions, structural trials, protocol records, commits and file times | `expected/expected_results.csv` | `scripts/checks/protocol_checks.py` |
 | `N` | decision-diagram equivalence check, developer tests, released defects, Listing 1, QuCheck, environment freezes | `expected/expected_results.csv` | `scripts/checks/records_checks.py` |
 | `X` | width set, corpus, output-condition pool, transpiler sweep, MQT Bench rerun, concentration of causes | `expected/expected_results.csv` | `scripts/checks/records_checks.py` |
@@ -145,7 +148,7 @@ the table below explains them.
 | `expected/` | expected value of every check; `analytic_coverage.csv` lists the checks that the record tier leaves to an analytic check |
 | `scripts/` | verification |
 | `docs/` | `protocols.md`: settings and protocols of each experiment, limits of the records, earlier file names, rule changes and the records that date them |
-| `provenance/` | checksums, source manifest, commit records, redactions, license map |
+| `provenance/` | checksums, source manifest, commit records, redactions, renamed files, license and role of each file |
 | `environment/` | pinned environment of the analytic tier; records of the study environments |
 
 Files listed in `provenance/source_manifest.csv` are byte-identical to their sources, except four redacted files
