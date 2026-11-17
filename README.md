@@ -115,6 +115,27 @@ The records and `expected/` use the study's codes.
 | T, T' | QED-C records: the stored-reference rule and the diagnostic baseline |
 | upstream score | QED-C records: the benchmark's normalized Hellinger fidelity |
 
+## Check IDs
+
+| Prefix | Checks | Expected values | Computed by |
+|---|---|---|---|
+| `M` | values behind the article | `expected/expected_results.csv` | `scripts/checks/article_checks.py` |
+| `L-` | ledger values by population and record | `expected/expected_results.csv` | `scripts/checks/ledger_checks.py` |
+| `V` | registered predictions, structural trials, protocol records, commits and file times | `expected/expected_results.csv` | `scripts/checks/protocol_checks.py` |
+| `N` | decision-diagram equivalence check, developer tests, released defects, Listing 1, QuCheck, environment freezes | `expected/expected_results.csv` | `scripts/checks/records_checks.py` |
+| `X` | width set, corpus, output-condition pool, transpiler sweep, MQT Bench rerun, concentration of causes | `expected/expected_results.csv` | `scripts/checks/records_checks.py` |
+| `A` | analytic tier | `expected/expected_results.csv` | `scripts/reproduce_analytic.py` |
+| `R-OC` | output-condition suites | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-CL` | circuit-level view of the matched changes | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-CM` | combined-suite comparison | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-AP` | all-pairs comparison | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-E` | QED-C case | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-V` | rule set v3 (closed witness order) | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-X` | separating settings and rotated profile (`R-X1`), developer suites (`R-X2`), later positions (`R-X4`), analyses of `data/analyses/` (`R-X5`) | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-WX` | witnesses of the reported suite omissions | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-NC` | negative controls of the reported suite omissions | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+| `R-A` | reruns with `--analytic` | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+
 ## Layout
 
 | Path | Contents |
