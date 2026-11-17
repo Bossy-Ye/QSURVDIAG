@@ -282,9 +282,12 @@ package; the table below lists the names that have no file of their own.
 | `X2_INPUTS.jsonl` | no separate file; the generated inputs are the keys of `program_equal` in `data/developer_suites/native_runs.jsonl.gz` |
 | `X2_RUNTIME_CHECK.json` | no separate file; `data/developer_suites/OPERATIONAL.md`, section X2_RUNTIME_DECISION, records the check |
 
-`provenance/RENAMES.csv` lists every file whose name changed since version 1.3.0, with the hash of its earlier and
-present content and the kind of change. Records, plans and output logs changed in name only. The study-authored
-scripts under `data/` changed in file references, docstrings and comments, and in the two places that the table names.
+`provenance/RENAMES.csv` lists every file whose name or wording changed since version 1.3.0, with the hash of its
+content in version 1.3.0 and now, and the kind of change. Records, plans and output logs changed in name only. The
+study-authored scripts changed in file references, docstrings, comments and printed text, and in the names of one
+environment variable, one local variable and one flag; `scripts/checks/article_checks.py` also changed in line layout
+and two check labels. `two_basis_states.py` and `two_basis_states.csv` were added after version 1.3.0; their rows give
+the content of their first commit.
 
 Archived files cite the numbering of earlier manuscript versions. The table maps these numbers to the article.
 

@@ -77,7 +77,7 @@ bad += [f"no license-map row: {k}" for k in sorted(present - lic - {"provenance/
 bad += [f"license-map row without a file: {k}" for k in sorted(lic - present)]
 bad += [f"redaction record without a source-manifest row: {k}" for k in RED if k not in archived]
 bad += [f"derived-file record without a source-manifest row: {k}" for k in DER if k not in archived]
-# provenance/RENAMES.csv: every file whose name changed since version 1.3.0. The change is "none" exactly when the
+# provenance/RENAMES.csv: every file whose name or wording changed since version 1.3.0. The change is "none" exactly when the
 # earlier and present hashes are equal; a file added after version 1.3.0 states so before the kind of change.
 renamed = {"unchanged": 0, "edited": 0}
 for r in csv.DictReader(open(ROOT / "provenance/RENAMES.csv")):
