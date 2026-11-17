@@ -31,7 +31,7 @@ sampling bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolera
   gate-set check, with the original's gate names as the allowed set, flags 19 of the 33 and 19 of the 52 in every
   recorded trial. These flags come from five programs whose original always passes. In six other development circuits
   the transpilation varies and the original sometimes fails the check, so their 23 flags are unreliable (optimization
-  level: section 9). A recorded prediction stated that the gate-set assertion would separate more than 80 % of the
+  level: section 9). A recorded prediction stated that the gate-set assertion would separate more than 80% of the
   contract-equivalent mutants of the five other circuits, and the depth assertion fewer. The prediction failed: with
   both programs transpiled to the same basis-gate set, the comparison separated none of the 33 by gate set and 11 by
   depth. A check of whether two programs transpile to the same circuit identifies 1 to 3 of the 85 contract-equivalent
@@ -59,12 +59,12 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent. The below-tol
 
 - **Predictions about the five other circuits.** Twelve predictions were committed before the mutants of these
   circuits were sampled, each with the result that would falsify it (`data/prospective/registration/`; check V11).
-  Five failed: contract equivalences were 33 of the 102 survivors (32.4 %), against a predicted 10-30 %; suite
-  omissions were 21 (20.6 %), against more than 26.6 %; the gate-set assertion separated none of the 33
-  contract-equivalent mutants, against more than 80 %, and depth 11, against fewer than the gate set; no observation
+  Five failed: contract equivalences were 33 of the 102 survivors (32.4%), against a predicted 10-30%; suite
+  omissions were 21 (20.6%), against more than 26.6%; the gate-set assertion separated none of the 33
+  contract-equivalent mutants, against more than 80%, and depth 11, against fewer than the gate set; no observation
   limitation occurred, against at least one. Five held: no unresolved outcome, no rule fixed in advance changed, the
   method applied to the output-register QuCheck profile with no shared rule changed, below-tolerance differences under
-  5 % (none occurred), and the two tools needed the admissibility filter for different reasons. Of the prediction that
+  5% (none occurred), and the two tools needed the admissibility filter for different reasons. Of the prediction that
   both profiles express the shared outcomes and only QUTest's the two equalities, 3 of the 6 outcomes occurred. The
   prediction that QuCheck detects every observation limitation with an X or Y difference could not be evaluated, as
   no such case occurred.
@@ -195,7 +195,7 @@ theta^2)^2 = 0.99500625. Records: `data/qedc/`.
   nineteen qubits is an upper bound, because it holds state acquisition at its measured median.
 - **Corpus.** Of the 562 survivors, 158 are contract equivalences. The 98 unresolved cases are 51 split verdicts, 3
   undecided margins and 44 suite-omission candidates. All ten widths with at least ten of the 1,569 pairs contain
-  observation-limited pairs, at 9.4 % for n <= 7 and 9.9 % for n >= 8 (semantic comparisons). The 151st pair found by
+  observation-limited pairs, at 9.4% for n <= 7 and 9.9% for n >= 8 (semantic comparisons). The 151st pair found by
   the comparisons has nineteen qubits and was not tested natively.
 - **Released defects.** Each Bugs4Q defect was reproduced in three locked Qiskit versions (0.45.3, 1.1.1, 2.5.0) and
   assigned the deepest of five evidence levels: 10 not reproducible, 8 reproduced in the tool, 10 with the testing

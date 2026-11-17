@@ -67,7 +67,7 @@ M067,article_checks,substrate and certificate coincide at 150,150/150,yes,per-ca
 M068,article_checks,strata sizes 818 non-diagonal / 719 diagonal,818/719,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M069,article_checks,non-diagonal CL3 = 58 of 818,58/818,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M070,article_checks,diagonal CL3 = 92 of 719,92/719,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
-M071,article_checks,non-diagonal CL3 among survivors = 58 of 240,58/240,partly (240 and the 24.2 % share printed),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M071,article_checks,non-diagonal CL3 among survivors = 58 of 240,58/240,partly (240 and the 24.2% share printed),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M072,article_checks,per-width CL3 reproduces the per-width table,17/8/13/15/16/9/24/24/20/1/0/1/2,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M073,article_checks,150 in frame + 1 at n=19 = 151,151,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M074,article_checks,construction CL4/CL5 saturating = 57 of 64,57/64,no,archived aggregate record,data/scalability/corpus/T2A_CL5_MECHANISM.json
@@ -106,7 +106,7 @@ M106,article_checks,width set: 600 s budget exhausted near n=19,True,n.a. (logic
 M107,article_checks,largest CL5 separation = 0.0496,0.0496,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M108,article_checks,smallest CL4 separation = 0.0504,0.0504,no,per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M109,article_checks,no case between them,True,n.a. (logical check),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
-M110,article_checks,diagonal CL3 among survivors = 92 of 271,92/271,partly (271 and the 33.9 % share printed),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
+M110,article_checks,diagonal CL3 among survivors = 92 of 271,92/271,partly (271 and the 33.9% share printed),per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M111,article_checks,GHZ CL4 cases remaining under the whole-string reading,22,no,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
 M112,article_checks,GHZ CL4 cases needing both axes at the declared register,22,no,per-case records,data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv; data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
 M113,article_checks,S_BOTH kills of CL4,79/79,yes,per-case records,
@@ -144,8 +144,8 @@ M149,article_checks,largest total 59.3 s,59.3,yes,per-case records,data/scalabil
 M150,article_checks,largest resident set 0.092 GiB,0.092,yes,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
 M151,article_checks,no resource censoring,0,no,per-case records,data/scalability/B2_SCALE_CELLS_FRESH.jsonl
 M152,article_checks,"corpus distinct pairs = 1,569",1569,yes,archived aggregate record,data/scalability/B2_CORPUS_FRESH.json
-M153,article_checks,corpus CL3 substrate 9.4 % at n<=7,9.4,no (package only),archived aggregate record,data/scalability/B2_CORPUS_FRESH.json
-M154,article_checks,corpus CL3 substrate 9.9 % at n>=8,9.9,no (package only),archived aggregate record,data/scalability/B2_CORPUS_FRESH.json
+M153,article_checks,corpus CL3 substrate 9.4% at n<=7,9.4,no (package only),archived aggregate record,data/scalability/B2_CORPUS_FRESH.json
+M154,article_checks,corpus CL3 substrate 9.9% at n>=8,9.9,no (package only),archived aggregate record,data/scalability/B2_CORPUS_FRESH.json
 M155,article_checks,released defects = 42,42,yes,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
 M156,article_checks,depth NOT_REPRODUCIBLE = 10,10,no,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
 M157,article_checks,depth NATIVE_REPRODUCTION_ONLY = 8,8,no,per-case records,data/external/defects/B3_REAL_DEFECTS_FRESH.csv
@@ -290,8 +290,8 @@ M312,article_checks,"one prospective exclusion: W-state cx -> rxx, preflight",ws
 M313,article_checks,three locked Qiskit releases,0.45.3/1.1.1/2.5.0,no,archived aggregate record,data/profiles/E5_ENVIRONMENT_LOCK.json
 M314,article_checks,"Qiskit 16164 state margin 0.061, observation 5.6e-17",0.061/5.6,yes,archived aggregate record,data/certification/outcomes/R2V_RELEASED_CL3.json
 M315,article_checks,corpus 511 stable survivors of 562 diagnosed,511/562,partly (562 printed),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
-M316,article_checks,non-diagonal 58 of 818 and 58 of 240,58/818/58/240,partly (240 and the 24.2 % share printed),archived aggregate record,data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json
-M317,article_checks,diagonal 92 of 719 (12.8) and 92 of 271 (33.9),92/719/12.8/92/271/33.9,partly (271 and the 33.9 % share printed),archived aggregate record,data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json
+M316,article_checks,non-diagonal 58 of 818 and 58 of 240,58/818/58/240,partly (240 and the 24.2% share printed),archived aggregate record,data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json
+M317,article_checks,diagonal 92 of 719 (12.8) and 92 of 271 (33.9),92/719/12.8/92/271/33.9,partly (271 and the 33.9% share printed),archived aggregate record,data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json
 M318,article_checks,"strata partition the 1,537 pairs 818/719 and the 511 stable survivors 240/271",1537=818+719/511=240+271,"partly (1,537, 240 and 271 printed)",per-case records,data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl
 M319,article_checks,transpiler agreement identifies 1 to 3 of 85 across 36 configurations,1/3/85/36,no,archived aggregate record,data/primary/decision/B5_A3_SUMMARY.json
 M320,article_checks,"smallest primary distinguishing assertion 0.148, a Z product",0.148/zmask,no,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
@@ -384,7 +384,7 @@ X02,records_checks,"universe evaluation time growth from 8 to 14 qubits, ratio o
 X03,records_checks,"Simon and BV survivors (pool, per case) / contract-equivalent under output conditions (archived aggregate)",47/8,yes,pool per-case; movers archived aggregate (recomputed in analytic tier A03),
 X04,records_checks,MQT Bench: frozen analyze.py and case_table.py rerun on stage records reproduce ANALYSIS.json / PASS3C_CASES.csv,True/True,n.a. (logical check),rerun of frozen analysis code on stage records,
 X05,records_checks,transpiler agreement: min / max certified pairs / pairs / configurations,1/3/85/36,no,per-case records,
-X06,records_checks,"width set: universe share of the median total time at 14 qubits, % / share at 10 qubits below 0.2 %",10.2/True,no,per-case records,
+X06,records_checks,"width set: universe share of the median total time at 14 qubits, % / share at 10 qubits below 0.2%",10.2/True,no,per-case records,
 X07,records_checks,corpus: split witness verdicts / candidates withdrawn for a split verdict / their largest |d_a - theta| / split witness with |d_a - theta| >= 0.05 (withdrawal reason) / witnesses within 0.05 of theta killing 12 of 12,29/26/0.0483/QRA_474:0.0575:guard failure/16,partly (26 printed),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/outcomes/R2V_NATIVE.csv
 X08,records_checks,corpus suite omissions: pairs / distinct suites / sites / families; inventory outcomes equal the final records,143/80/128/13/True,partly (143 printed),per-case records,data/inventory/out/cases_all.csv; data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/certification/witness_order/IMPACT.csv
 X09,records_checks,repairs of the five other circuits / their sites; MQT Bench repairs / distinct suites; Q# and QASMBench observation limitations / at the first gate,21/2; 22/4; 30/30,yes,per-case records,data/inventory/out/cases_all.csv

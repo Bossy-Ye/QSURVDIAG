@@ -727,13 +727,13 @@ CHECKS = [
     ("M152", "corpus distinct pairs = 1,569", 1569, CO["distinct_pairs"]),
     (
         "M153",
-        "corpus CL3 substrate 9.4 % at n<=7",
+        "corpus CL3 substrate 9.4% at n<=7",
         "9.4",
         f"{100*c37(lambda k:k<=7)/tot7(lambda k:k<=7):.1f}",
     ),
     (
         "M154",
-        "corpus CL3 substrate 9.9 % at n>=8",
+        "corpus CL3 substrate 9.9% at n>=8",
         "9.9",
         f"{100*c37(lambda k:k>=8)/tot7(lambda k:k>=8):.1f}",
     ),
