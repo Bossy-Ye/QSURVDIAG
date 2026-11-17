@@ -13,7 +13,7 @@ release hash is checked against that record, and they are never counted as match
 the timestamped freeze manifest.
 """
 
-import csv, hashlib, subprocess, sys
+import csv, fnmatch, hashlib, re, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -91,6 +91,48 @@ for r in csv.DictReader(open(ROOT / "provenance/RENAMES.csv")):
         bad.append(f"RENAMES.csv change does not agree with the two hashes: {r['package_path']}")
     else:
         renamed["unchanged" if kind == "none" else "edited"] += 1
+# Paths named in README.md and docs/protocols.md. A name in single backticks is a path when it holds a "/" or ends in a
+# file extension; it must equal a package file or folder, end one, or match one as a pattern. Exceptions: the earlier
+# paths of provenance/RENAMES.csv, the plan names that the Freeze C and D manifests timestamp, the study files that
+# docs/protocols.md (section 9) names as not released, and NOT_IN_PACKAGE.
+NOT_RELEASED = (
+    "E13_CERTIFICATES.json",
+    "E13_CERTIFICATES_PREAMENDMENT.json",
+    "E13_SUBJECTS.json",
+    "claim_decision.py",
+    "ASSERTION_INSTANCE_CLOSURE_AUDIT.md",
+    "CROSS_TOOL_MAPPING.yaml",
+    "PHASE5A_1_AMENDMENT.md",
+    "PILOT_CANDIDATE_REPORT.md",
+    "select_units.py",
+    "select_units_v11.py",
+)
+NOT_IN_PACKAGE = (
+    "programs.json",  # runner inputs that data/position/select_mutants.py writes (docs/protocols.md, section 7)
+    "mutant_gates.json",
+    "X2_INPUTS.jsonl",  # plan names without a file of their own (docs/protocols.md, section 10)
+    "X2_RUNTIME_CHECK.json",
+    "revision2/",  # a working folder of the study (docs/protocols.md, section 9)
+    "qra_cases_v1_1/QRA_360",  # a corpus case key (docs/protocols.md, section 11)
+)
+earlier = [r["earlier_path"] for r in csv.DictReader(open(ROOT / "provenance/RENAMES.csv"))]
+frozen = [
+    l.split("  ", 1)[1]
+    for f in ("FREEZE_C.sha256", "FREEZE_D.sha256")
+    for l in (ROOT / "provenance" / f).read_text().splitlines()
+    if l.strip()
+]
+folders = {str(q) + "/" for k in present for q in Path(k).parents if str(q) != "."}
+named = 0
+for doc in ("README.md", "docs/protocols.md"):
+    text = re.sub(r"```.*?```", "", (ROOT / doc).read_text(), flags=re.S)
+    for t in re.findall(r"`([^`\n]+)`", text):
+        if " " in t or not ("/" in t or re.search(r"[\w*-]\.[A-Za-z0-9*]{1,8}$", t)):
+            continue
+        named += 1
+        hit = lambda names: any(fnmatch.fnmatchcase(k, t) or fnmatch.fnmatchcase(k, "*/" + t) for k in names)
+        if not (hit(present) or hit(folders) or hit(earlier) or t in frozen or t in NOT_RELEASED + NOT_IN_PACKAGE):
+            bad.append(f"{doc} names a path that is not in the package: {t}")
 print(
     f"checksums: {len(listed)} files listed (every file except provenance/checksums.sha256 itself), {len(bad)} problems, {len(extra)} unlisted files"
 )
@@ -104,6 +146,7 @@ print(
 )
 print(f"license map: {len(lic)} files")
 print(f"renamed files: {renamed['unchanged']} unchanged, {renamed['edited']} edited (provenance/RENAMES.csv)")
+print(f"paths named in README.md and docs/protocols.md: {named}")
 if DER:
     print(
         f"derived files: {len(derived)} with third-party quotations replaced (original SHA-256 and the hash of each omitted text in provenance/DERIVED_FILES.csv)"
