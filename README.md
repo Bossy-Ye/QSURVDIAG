@@ -96,7 +96,8 @@ command that diagnoses a new pair; `scripts/` reruns the archived analyses.
 
 ## Codes
 
-The records and `expected/` use the study's codes.
+The records and `expected/` use the study's codes. The check labels in `expected/` use the study's working terms, and
+the table below explains them.
 
 | Code | Meaning |
 |---|---|
