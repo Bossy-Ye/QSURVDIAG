@@ -1,11 +1,13 @@
-import sys as _sys
-
-_sys.dont_write_bytecode = True  # keep the package free of interpreter caches
-"""Recompute the ledger values (check module ledger_checks in expected/expected_results.csv) from the archived records.
+"""Recompute the ledger values (check module ledger_checks in expected/expected_results.csv) from the archived
+records.
 
 Writes ledger_checks.csv to QSD_OUT: id, area, quantity, unit, recomputed_value, source, method.
 scripts/reproduce.py compares recomputed_value with expected/expected_results.csv.
 """
+
+import sys as _sys
+
+_sys.dont_write_bytecode = True  # keep the package free of interpreter caches
 import csv, collections, json, os, re, sys
 
 import builtins as _bi
