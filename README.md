@@ -108,7 +108,8 @@ The records and `expected/` use the study's codes.
 | X1, X2, X4 | the separating-setting, developer-suite and later-position experiments in their plans and operational records (arm `x4` in the later-position records); `docs/protocols.md`, section 10, maps the file names the plans use |
 | suite A, suite B, `em` | in the developer-suite experiment: the unit tests, the property tests, and the mutants their authors label semantics-preserving |
 | R1, R5, R6 | keys of `data/analyses/requirements_scores_states.json`: evidence requirements as a classifier, adjusted mutation scores, distinct final states and sites |
-| D, S, A | in `expected/`: the witness suite (the article's repair), the combined suite and the all-pairs suite; a certificate is a reported outcome |
+| D, S, A | in `expected/`: the witness suite (the article's repair), the combined suite and the all-pairs suite |
+| certificate, certified | a reported outcome; reported |
 | M, C | QED-C records: P_ship (the article's P_bench) and P_Z |
 | natural pair | QED-C records: the article's benchmark-coupling pair |
 | T, T' | QED-C records: the stored-reference rule and the diagnostic baseline |
@@ -119,9 +120,11 @@ The records and `expected/` use the study's codes.
 | Path | Contents |
 |---|---|
 | `data/` | records, plans, runners and analysis code of each experiment |
-| `expected/` | expected value of every check |
+| `expected/` | expected value of every check; `analytic_coverage.csv` lists the checks that the record tier leaves to
+an analytic check |
 | `scripts/` | verification |
-| `docs/` | `protocols.md`: settings, protocols, record limits, the file names used in the plans, and the rule changes and the records that date each rule |
+| `docs/` | `protocols.md`: settings and protocols of each experiment, limits of the records, earlier file names, rule
+changes and the records that date them |
 | `provenance/` | checksums, source manifest, commit records, redactions, license map |
 | `environment/` | pinned environment of the analytic tier; records of the study environments |
 
