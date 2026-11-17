@@ -3,8 +3,8 @@ MIT License
 Copyright (c) 2026 Boshuai Ye, Peng Liang and Arif Ali Khan
 
 Scope: this license applies to the files that provenance/LICENSE_MAP.csv assigns to "MIT" (study-authored
-source code: the Python and shell files under scripts/ and data/, environment/setup.sh and
-.github/workflows/verify.yml). It does not apply to third-party material; see LICENSES/NOTICE.txt.
+source code: the Python and shell files under scripts/ and data/, and environment/setup.sh). It does not apply
+to third-party material; see LICENSES/NOTICE.txt.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
