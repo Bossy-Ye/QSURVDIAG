@@ -16,7 +16,7 @@ study-authored material. Upstream licenses verified 2026-10-13 at the pinned ver
             dropped; qasm_gates in data/prospective/mqt_bench/frozen_deps/r2v_arms.py), combined with study fields.
             Content date: 2026-09-28.
    License  the file as a whole: GPL-3.0-only, without warranty (GPL v3 sections 15-16).
-            The file is data. The rest of the repository is an aggregate
+            The file is data. The rest of the package is an aggregate
             (GPL v3 section 5) and keeps the licenses in provenance/LICENSE_MAP.csv.
 
 2. Infrastructure of Qolumbina -- CC BY 4.0
