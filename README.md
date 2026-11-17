@@ -120,11 +120,9 @@ The records and `expected/` use the study's codes.
 | Path | Contents |
 |---|---|
 | `data/` | records, plans, runners and analysis code of each experiment |
-| `expected/` | expected value of every check; `analytic_coverage.csv` lists the checks that the record tier leaves to
-an analytic check |
+| `expected/` | expected value of every check; `analytic_coverage.csv` lists the checks that the record tier leaves to an analytic check |
 | `scripts/` | verification |
-| `docs/` | `protocols.md`: settings and protocols of each experiment, limits of the records, earlier file names, rule
-changes and the records that date them |
+| `docs/` | `protocols.md`: settings and protocols of each experiment, limits of the records, earlier file names, rule changes and the records that date them |
 | `provenance/` | checksums, source manifest, commit records, redactions, license map |
 | `environment/` | pinned environment of the analytic tier; records of the study environments |
 
