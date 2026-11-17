@@ -10,7 +10,7 @@ few relative to insertion sites in the later thirds; this follows from the froze
 
 Diagnosis implementation. The packaged v2 implementation (`frozen_deps`: `r2v_arms.diagnose`, `r2v_lib.native_check`,
 `r2v_finalize.finalize_row`, `qsurvdiag_confirmatory.certify`) is run on a tree assembled from package files by hash
-(as `scripts/reproduce_analytic.py` does), with the closed witness order v3 (`witness_order/RULE.md`) patched into
+(as `scripts/reproduce_analytic.py` does), with the closed witness order v3 (`witness_order/AMENDMENT.md`) patched into
 `ordered_universe` as in `witness_order/native.py`. QUTest 0.1.0, `environment/qiskit_settings.conf`.
 
 Per population, as in its recorded protocol:

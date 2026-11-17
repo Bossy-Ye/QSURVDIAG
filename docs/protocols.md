@@ -256,9 +256,9 @@ holds to that margin, and its record states the margin. The margins of every dec
 
 ## 10. File names used in the plans
 
-The plans and operational records of the separating-setting, developer-suite and later-position experiments are kept
-byte-identical, so they name the experiments and files as they were named when recorded. Section labels such as
-X2_OPERATIONAL name sections of `data/developer_suites/OPERATIONAL.md`.
+The plans and operational records of the experiments are kept as recorded, so they name the experiments and files as
+they were named when recorded. Section labels such as X2_OPERATIONAL name sections of
+`data/developer_suites/OPERATIONAL.md`.
 
 | Name in the plans | Name in this package |
 |---|---|
@@ -285,6 +285,19 @@ X2_OPERATIONAL name sections of `data/developer_suites/OPERATIONAL.md`.
 | `X4_FINAL.csv` | `data/position/outcomes.csv` |
 | `X4_SUMMARY.json` | `data/position/summary.json` |
 | `x4_select.py` | `data/position/select_mutants.py` |
+| `cmp_run.py` | `data/combined_suite/run_comparison.py` |
+| `CMP_CASES.csv` | `data/combined_suite/CASES.csv` |
+| `CMP_NATIVE_RUNS.csv` | `data/combined_suite/NATIVE_RUNS.csv` |
+| `CMP_SUMMARY.json` | `data/combined_suite/SUMMARY.json` |
+| `oc_rerun.py` | `data/output_condition/run_suites.py` |
+| `reanalysis.py` | `data/qedc/baseline_comparison.py` |
+| `witness_order/AMENDMENT.md` | `data/certification/witness_order/RULE.md` |
+
+The package renamed 48 records under `data/` without changing their content. The study-authored scripts under
+`data/` that were renamed or reworded differ from their recorded versions in file references, docstrings and comments,
+and in module names that follow the renames; `rotated_profile.py` also renames a local variable and
+`run_mutants.py` a once-per-process flag. A comparison of syntax trees confirms that no other code changed. The
+plans, the operational records and the recorded output logs are as recorded.
 
 Archived files cite the numbering of earlier manuscript versions. The table maps these numbers to the article.
 

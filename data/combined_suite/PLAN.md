@@ -1,6 +1,6 @@
 # Matched repair comparison: plan (frozen before its native runs)
 
-Runner: `run_comparison.py`. Outputs: `CASES.csv`, `NATIVE_RUNS.csv`, `SUMMARY.json`. Before this commit
+Runner: `cmp_run.py`. Outputs: `CMP_CASES.csv`, `CMP_NATIVE_RUNS.csv`, `CMP_SUMMARY.json`. Before this commit
 only the records listed below and the evidence inventory (`data/inventory/`) had been read; neither policy had been run on these cases at
 the settings below.
 

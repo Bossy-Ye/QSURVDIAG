@@ -32,7 +32,7 @@ distinct D suite designs (117) are reported separately; pairs are not independen
 | A: all-pairs suite | the baseline marginals plus Z_i Z_j for every unordered pair i < j | program width; references computed from the original |
 
 - Both: the same executed input (all-zero) and output register (every qubit), the computational-basis observation
-  profile, original-centred analytic references rounded to 4 decimals (the `pragma` serialization of `run_comparison.py`,
+  profile, original-centred analytic references rounded to 4 decimals (the `pragma` serialization of `cmp_run.py`,
   reused unchanged), two-sided `~=` at theta = 0.05, the validated execution adapter (`qutest_execution_adapter`,
   `serialization_adapter`) and QUTest 0.1.0.
 - D's witness is the archived one; the runner recomputes it and stops if it differs. No witness is reselected.
