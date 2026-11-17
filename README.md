@@ -8,7 +8,13 @@ Version 1.3.1.
 
 ## Verify
 
-The record tier needs Python 3.9 or later and the standard library; `--tsr` also needs `openssl`.
+The record tier needs Python 3.9 or later and the standard library; the RFC 3161 receipts also need `openssl`.
+
+```sh
+python3 scripts/verify.py --out ../out
+```
+
+`verify.py` runs the four scripts below in order and then repeats the integrity check. Each script also runs alone.
 
 ```sh
 python3 scripts/verify_integrity.py --tsr
