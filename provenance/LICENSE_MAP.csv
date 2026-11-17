@@ -747,7 +747,6 @@ scripts/analytic/output_condition.py,MIT,study-authored code (LICENSE),verificat
 scripts/analytic/r2v_lib.py,MIT,study-authored code (LICENSE),verification script
 scripts/analytic/structural_definitions.py,MIT,study-authored code (LICENSE),verification script
 scripts/checks/article_checks.py,MIT,study-authored code (LICENSE),verification script
-scripts/checks/extra_checks.py,MIT,study-authored code (LICENSE),verification script
 scripts/checks/ledger_checks.py,MIT,study-authored code (LICENSE),verification script
 scripts/checks/protocol_checks.py,MIT,study-authored code (LICENSE),verification script
 scripts/checks/records_checks.py,MIT,study-authored code (LICENSE),verification script

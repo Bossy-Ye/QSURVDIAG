@@ -27,7 +27,7 @@ python3 scripts/reproduce_experiments.py --out ../out/experiments
 non-zero exit status.
 
 ```text
-integrity     760 files, 0 problems; 549 archived files identical, 4 redacted; Freezes A to D verified
+integrity     759 files, 0 problems; 549 archived files identical, 4 redacted; Freezes A to D verified
 values        399 checks: MATCH 297, PARTIAL 100, ANALYTIC TIER 2
 conformance   3 of 3 tests pass
 experiments   90 checks: MATCH 74, PARTIAL 7, ANALYTIC TIER 9

@@ -1,7 +1,7 @@
 """Recompute the article's values from the archived records and compare them with expected/expected_results.csv.
 
 Usage:  python3 scripts/reproduce.py [--out DIR]
-Runs the five record-level check modules (Python standard library only), writes their outputs and
+Runs the four record-level check modules (Python standard library only), writes their outputs and
 results_verification.csv to DIR (default: ./output), and exits non-zero if any value differs.
 """
 
@@ -20,7 +20,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 if ROOT / "data" in OUT.parents or OUT == ROOT / "data":
     sys.exit("refusing to write inside data/")
 env = {**os.environ, "QSD_OUT": str(OUT)}
-MODULES = ["article_checks", "ledger_checks", "protocol_checks", "extra_checks", "records_checks"]
+MODULES = ["article_checks", "ledger_checks", "protocol_checks", "records_checks"]
 for e in MODULES:
     r = subprocess.run(
         [sys.executable, "-I", "-B", str(ROOT / "scripts/checks" / f"{e}.py")],
@@ -38,7 +38,7 @@ for r in csv.DictReader(open(OUT / "article_checks.csv")):
     got[r["check_id"]] = r["recomputed"]
 for r in csv.DictReader(open(OUT / "ledger_checks.csv")):
     got["L-" + r["id"]] = r["recomputed_value"]
-for f in ("protocol_checks.csv", "extra_checks.csv", "records_checks.csv"):
+for f in ("protocol_checks.csv", "records_checks.csv"):
     for r in csv.DictReader(open(OUT / f)):
         got[r["check_id"]] = r["recomputed"]
 
