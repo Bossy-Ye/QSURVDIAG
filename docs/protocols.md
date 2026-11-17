@@ -258,10 +258,11 @@ holds to that margin, and its record states the margin. The margins of every dec
   - tool source of QMutPy (qmutpy-experiments `06cc1b29`, mutpy branch `all_gates` `13ab3845`).
 
   `DEPENDENCY_MANIFEST.txt` names its directory `env/`; it is `environment/records/`.
-- **Files named but not released**: archived documents cite study files that this package does not hold:
+- **Files named but not released**: archived documents cite study files that this package does not hold, for example
   `E13_CERTIFICATES.json`, `E13_CERTIFICATES_PREAMENDMENT.json`, `E13_SUBJECTS.json`, `claim_decision.py`,
   `ASSERTION_INSTANCE_CLOSURE_AUDIT.md`, `CROSS_TOOL_MAPPING.yaml`, `PHASE5A_1_AMENDMENT.md`,
-  `PILOT_CANDIDATE_REPORT.md`, `select_units.py` and `select_units_v11.py`. No checked value depends on them.
+  `PILOT_CANDIDATE_REPORT.md`, `select_units.py`, `select_units_v11.py` and `PASS3A2_SCIENTIFIC_DECISION.md`. No
+  checked value depends on a file that is not released.
 - Values that `expected/` does not list are not checked.
 
 ## 10. File names used in the plans

@@ -106,6 +106,7 @@ NOT_RELEASED = (
     "PILOT_CANDIDATE_REPORT.md",
     "select_units.py",
     "select_units_v11.py",
+    "PASS3A2_SCIENTIFIC_DECISION.md",
 )
 NOT_IN_PACKAGE = (
     "programs.json",  # runner inputs that data/position/select_mutants.py writes (docs/protocols.md, section 7)
