@@ -139,15 +139,15 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent. The below-tol
 
 ## 6. The QED-C case (RQ5)
 
-| n | Fidelity of P to the exact evolution | of P_bench | Largest Z difference (benchmark-coupling pair) | X statistic | Kills of P_bench (cert., valid.) | P fails baseline (cert., valid.) | Diagnosed | Benchmark-coupling pair | Constructed pair | Parity kills of P_Z |
+| n | Fidelity of P to the exact evolution | Fidelity of P_bench | Largest Z difference (benchmark-coupling pair) | X statistic | Kills of P_bench (certification, validation) | P fails baseline (certification, validation) | Diagnosed | Benchmark-coupling pair | Constructed pair | Parity kills of P_Z |
 |---:|---:|---:|---:|---:|---|---|---|---|---|---:|
 | 2 | 0.9998 | 0.9958 | 0.0071 | 0.0945 | 12, 12 | 0, 0 | yes | below tolerance | observation limitation | 12 |
 | 3 | 0.9997 | 0.9936 | 0.0095 | 0.0835 | 11, 12 | 0, 0 | yes | below tolerance | observation limitation | 12 |
 | 4 | 0.9995 | 0.9895 | 0.0316 | 0.0725 | 11, 11 | 0, 0 | yes | below tolerance | observation limitation | 12 |
-| 5 | 0.9993 | 0.9856 | 0.0444 | 0.0722 | 10, 11 | 10, 9 | no | — | — | 12 |
-| 6 | 0.9991 | 0.9816 | 0.0579 | 0.0722 | 10, 11 | 12, 12 | no | — | — | 12 |
-| 7 | 0.9989 | 0.9776 | 0.0708 | 0.0722 | 10, 11 | 12, 12 | no | — | — | 12 |
-| 8 | 0.9987 | 0.9736 | 0.0837 | 0.0722 | 10, 11 | 12, 12 | no | — | — | 12 |
+| 5 | 0.9993 | 0.9856 | 0.0444 | 0.0722 | 10, 11 | 10, 9 | no | n/a | n/a | 12 |
+| 6 | 0.9991 | 0.9816 | 0.0579 | 0.0722 | 10, 11 | 12, 12 | no | n/a | n/a | 12 |
+| 7 | 0.9989 | 0.9776 | 0.0708 | 0.0722 | 10, 11 | 12, 12 | no | n/a | n/a | 12 |
+| 8 | 0.9987 | 0.9736 | 0.0837 | 0.0722 | 10, 11 | 12, 12 | no | n/a | n/a | 12 |
 
 At n = 2 the X statistic is the X expectation of qubit 0, the first X-basis instance of the closed witness order above
 theta. Every instance before it differs by at most 0.0473 (`data/certification/witness_order/`). At n = 6 to 8, which
