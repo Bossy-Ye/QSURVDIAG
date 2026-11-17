@@ -133,6 +133,8 @@ for doc in ("README.md", "docs/protocols.md"):
         hit = lambda names: any(fnmatch.fnmatchcase(k, t) or fnmatch.fnmatchcase(k, "*/" + t) for k in names)
         if not (hit(present) or hit(folders) or hit(earlier) or t in frozen or t in NOT_RELEASED + NOT_IN_PACKAGE):
             bad.append(f"{doc} names a path that is not in the package: {t}")
+if (ROOT / "expected/verify_summary.txt").read_text() not in (ROOT / "README.md").read_text():
+    bad.append("README.md does not show expected/verify_summary.txt verbatim")
 print(
     f"checksums: {len(listed)} files listed (every file except provenance/checksums.sha256 itself), {len(bad)} problems, {len(extra)} unlisted files"
 )

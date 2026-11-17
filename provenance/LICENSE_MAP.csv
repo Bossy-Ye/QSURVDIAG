@@ -730,6 +730,7 @@ environment/setup.sh,MIT,study-authored code (LICENSE),environment
 expected/analytic_coverage.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
 expected/expected_results.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
 expected/experiments_expected.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
+expected/verify_summary.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
 provenance/DERIVED_FILES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),provenance record
 provenance/FREEZE_C.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),provenance record
 provenance/FREEZE_C.tsr,LicenseRef-FreeTSA,issued or published by Free TSA (freetsa.org); included unchanged for verification,provenance record

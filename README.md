@@ -23,11 +23,14 @@ python3 scripts/run_conformance_tests.py --out ../out
 python3 scripts/reproduce_experiments.py --out ../out/experiments
 ```
 
+`verify.py` ends with the summary below, which `expected/verify_summary.txt` holds; a different summary gives a
+non-zero exit status.
+
 ```text
-verify_integrity        0 problems; RFC 3161 Freeze A to D OK; Freeze A 69 of 70 matching, 1 redacted
-reproduce               399 checks   MATCH 297   PARTIAL 100   analytic tier 2
-conformance             3 of 3 pass
-reproduce_experiments    90 checks   MATCH 74    PARTIAL 7     analytic tier 9
+integrity     760 files, 0 problems; 549 archived files identical, 4 redacted; Freezes A to D verified
+values        399 checks: MATCH 297, PARTIAL 100, ANALYTIC TIER 2
+conformance   3 of 3 tests pass
+experiments   90 checks: MATCH 74, PARTIAL 7, ANALYTIC TIER 9
 ```
 
 MATCH means the value is recomputed from per-case or per-run records. PARTIAL means it equals an archived aggregate,
