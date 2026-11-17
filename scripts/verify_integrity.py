@@ -1,5 +1,6 @@
 """Verify the package against provenance/checksums.sha256, the archived content against source_manifest.csv, the
-renamed files against provenance/RENAMES.csv, and that provenance/LICENSE_MAP.csv covers every file.
+renamed files against provenance/RENAMES.csv, and that provenance/LICENSE_MAP.csv gives a license and a role for every
+file.
 
 Usage:  python3 scripts/verify_integrity.py [--tsr]
 With --tsr (needs OpenSSL), also verifies the RFC 3161 receipts of Freezes A to D: the MQT Bench freeze (A, B), the
@@ -69,7 +70,9 @@ for r in csv.DictReader(open(ROOT / "provenance/source_manifest.csv")):
         continue
     if not p.is_file() or sha(p) != r["sha256"]:
         bad.append(f"archived file differs from its source hash: {r['package_path']}")
-lic = {r["package_path"] for r in csv.DictReader(open(ROOT / "provenance/LICENSE_MAP.csv"))}
+LIC = list(csv.DictReader(open(ROOT / "provenance/LICENSE_MAP.csv")))
+lic = {r["package_path"] for r in LIC}
+bad += [f"license-map row without a role: {r['package_path']}" for r in LIC if not (r.get("role") or "").strip()]
 bad += [f"no license-map row: {k}" for k in sorted(present - lic - {"provenance/checksums.sha256"})]
 bad += [f"license-map row without a file: {k}" for k in sorted(lic - present)]
 bad += [f"redaction record without a source-manifest row: {k}" for k in RED if k not in archived]
