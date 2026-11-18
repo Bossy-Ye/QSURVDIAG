@@ -108,7 +108,7 @@ the table below explains them.
 | S_MIN, S_FAMILY, S_COVER, S_BOTH, S_SPEC | suites: baseline, adjacent-pair, all-qubit, combined (a marginal on every qubit and the Z products of all neighboring qubits), output-condition |
 | construction, prospective | populations: the 15 development circuits and the five other circuits |
 | OB01 to OB19 | evidence requirements (Table 1) |
-| v1, v2, v3 | rule sets: v1 lacks rules 1 to 6 of `docs/protocols.md`, section 11; v2 adds rules 1 to 5 (`V2_SPECIFICATION.md`); v3 adds rule 6, the closed witness order (`data/certification/witness_order/RULE.md`) |
+| v1, v2, v3 | rule sets: v1 lacks rules 1 to 6 of `docs/protocols.md`, section 11; v2 adds rules 1 to 5 (`V2_SPECIFICATION.md`); v3 adds rule 6, the closed witness order (`data/certification/witness_order/RULE.md`). The files `R2V_FINAL_*.csv` hold v2 outcomes; `data/certification/witness_order/IMPACT.csv` lists the two records that v3 changes |
 | X1, X2, X4 | the separating-setting, developer-suite and later-position experiments in their plans and operational records (arm `x4` in the later-position records); `docs/protocols.md`, section 10, maps the file names the plans use |
 | suite A, suite B, `em` | in the developer-suite experiment: the unit tests, the property tests, and the mutants their authors label semantics-preserving |
 | R1, R5, R6 | keys of `data/analyses/requirements_scores_states.json`: evidence requirements as a classifier, adjusted mutation scores, distinct final states and sites |

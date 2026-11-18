@@ -10,7 +10,7 @@ R-OC08,The four Simon suite omissions the corrected suite does not kill,"simon_4
 R-CL00,"circuit_level.py rerun equals circuit_level.out (pairs eligible to change, circuits contributing, sign tests over circuits)",True,yes,per-run records,4.4; 5.3.2; 5.3.3; Table 5; 7.4
 R-CM00,combined_suite/analyze.py rerun equals RESULTS.json,True,n.a. (logical check),per-case records,Data Availability
 R-CM01,Per-case comparison table recounted from per-run records,"210 cases; recounted from per-run records: mutant kills 420/420, original failures 420/420",n.a. (logical check),per-run records,docs/protocols.md section 5
-R-CM02,Candidate witness suite (D) / combined suite (S) meet the validation rule,174/133,yes,per-run records,5.4; docs/protocols.md section 5
+R-CM02,Candidate witness suite (D) / combined suite (S) meet the validation rule,174/133,yes,per-run records,7.1; docs/protocols.md section 5
 R-CM03,Both / only D / only S / neither,124/50/9/27,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
 R-CM04,Witness in S / outside S,173/37,no (package only),per-case records,docs/protocols.md section 5
 R-CM05,Witness in S: 12 of 12 kills D/S; original fails >1 D/S; supported D/S,153/165; 5/37; 151/133,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",per-run records,data/combined_suite/RESULTS.json
@@ -46,11 +46,11 @@ R-AP07,Mutant 12 of 12 D/A; original fails >1 D/A; tool errors,189/192; original
 R-AP08,Witness difference below theta + 0.01: cases / D / A supported,14/2/6,yes,per-run records,5.4
 R-AP09,Adjacent-pair suite derived from A's per-assertion results: supported,165,no (package only),per-run records,docs/protocols.md section 5
 R-AP10,Corpus D/A of 187; MQT Bench D/A of 23,165/170 of 187; 22/22 of 23,no,per-run records,data/all_pairs/ALLPAIRS_RESULTS.json
-R-AP11,Assertions in D / A over 210 cases; largest A suite,1762/7174; max 91,yes,per-case records,4.3; 6; docs/protocols.md section 5
+R-AP11,Assertions in D / A over 210 cases; largest A suite,1762/7174; max 91,yes,per-case records,4.3; 5.4; docs/protocols.md section 5
 R-AP12,Histograms needed (mutant + original); native executions D/A; assertion evaluation D/A,2520+756; executions 3924/3276; eval 4/33 s,no (package only),per-run records,docs/protocols.md section 5
 R-AP13,"Histogram archive: referenced ids missing; histograms not of 8,000 shots; archived",0 missing; 0 not 8000 shots; 2859 archived,n.a. (logical check),per-run records,Data Availability
 R-AP14,Originals with an issued repair / originals whose issued repairs are all supported,51/50,yes,per-case records,5.4
-R-WX01,Reported suite omissions under the declared QUTest profile / those whose witness is a single-qubit expectation (width-set records included),275/0,yes (275 printed),per-case records,3.2
+R-WX01,Reported suite omissions under the declared QUTest profile / those whose witness is a single-qubit expectation (width-set records checked but not counted),275/0,yes (275 printed),per-case records,3.2; 7.2
 R-V301,audit.py rerun equals IMPACT.csv (witnesses and controls per population),True,n.a. (logical check),per-case records,3.2; 5.6; 7.1
 R-V302,v3 native checks: guard fails / kills / status (OB13 repeats the recorded witness check),corpus|qra_cases_v1_1/QRA_360|OB13:0/12/satisfied corpus|qra_cases_v1_1/QRA_360|OB15:0/0/satisfied defect|26|OB13:0/12/satisfied defect|26|OB15:0/2/satisfied,no,per-run records,5.6; 7.1
 R-V303,"Benchmark-coupling pair at n=2, X expectation of qubit 0: kills / runs per stream",X_mut_cert:12/12 X_orig_guard:0/3 X_orig_val:0/12 X_mut_val:12/12,partly (reliable kill at n = 2 printed),per-run records,5.5; Table 7
@@ -72,8 +72,8 @@ R-X404,Later positions: original guards,18 programs; guards clean 18; original f
 R-X200,developer_suites/analyze.py and compare_with_predictions.py rerun equal the archived diagnosis / per-run table / QuCheck table / summaries,True/True/True/True/True,n.a. (logical check),per-run records,Data Availability
 R-X201,"QuCheck case studies, unit tests: mutants, survivors; outcomes; programs with observation limitations","120 mutants, 65 survivors; CE 30, EIE 8, OL 6, SO 0, unresolved 21; OL in quantum_teleportation",yes,per-run records,Table 3; 5.6
 R-X202,"QuCheck case studies, property tests: mutants, survivors; outcomes","180 mutants, 77 survivors; CE 31, EIE 6, OL 0, SO 1, unresolved 39",yes,per-run records,Table 3; 5.6
-R-X203,"QuCheck case studies: unresolved, split, semantics-preserving; suites with such splits and with guard failures","unresolved 60, split 59, em 40; suites with em splits 4, of which failing the original in guard runs 3",partly (60 not printed),per-run records,5.6
-R-X204,QuCheck case studies: property tests on the unit-test observation limitations; contract equivalence against the authors' labels,property tests kill 4 of 6 observation limitations; labels agree 179/180; exception superdense_coding:m6,yes,per-run records,Abstract; 5.6; 9
+R-X203,"QuCheck case studies: unresolved, split, semantics-preserving; suites with such splits and with guard failures","unresolved 60, split 59, em 40; suites with em splits 4, of which failing the original in guard runs 3",yes,per-run records,5.6
+R-X204,QuCheck case studies: property tests on the unit-test observation limitations; contract equivalence against the authors' labels,property tests kill 4 of 6 observation limitations; labels agree 179/180; exception superdense_coding:m6,yes,per-run records,5.6; 9
 R-X205,QuCheck case studies: executed-input equalities over both suites,14 executed-input equalities,yes,per-run records,5.6
 R-X206,Native QuCheck on the 20 circuits: detections in 12 of 12 runs; controls with the shipped correction and with step-down Holm,only QuCheck 28/28 detected in 12 of 12 (Holm 28); only QUTest 0/25 (never 9); controls 175 and 2 with Holm of 816,yes (as 21% and 0.25%; never 9 not printed),per-run records,5.3.3
 R-X207,Native QuCheck on the transfer cases with and without a witness above theta,"transfer with witness 15/15; without 5 never, 1 split of 6",partly (15/15 and 6 printed),per-run records,5.4

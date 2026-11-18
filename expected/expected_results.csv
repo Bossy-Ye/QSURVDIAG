@@ -8,7 +8,7 @@ M006,article_checks,S_FAMILY added kills = 14,14,no,per-case records,data/primar
 M007,article_checks,all-qubit suite kills of the 79 suite omissions,41,yes,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
 M008,article_checks,S_BOTH added kills,81,no,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
 M009,article_checks,full-string GHZ register: GHZ suite omissions killed,32,yes,per-case records,data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
-M010,article_checks,suite omissions under the full-string GHZ register,47,no,per-case records,data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
+M010,article_checks,suite omissions under the full-string GHZ register,47,yes,per-case records,data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
 M011,article_checks,observation limitations unchanged by the GHZ register,35,yes,per-case records,data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv
 M014,article_checks,CL3 persisting under QuCheck = 7,7,no,per-case records,data/primary/decision/B5_A4_INTERFACE_CORRECTED.csv
 M015,article_checks,named repair transfers for 8 of 21,8,yes,per-case records,data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv
@@ -371,7 +371,7 @@ V07,protocol_checks,registered audit: CE controls / gate set / depth / other mut
 V08,protocol_checks,QUTest check flags: prospective every/some trials; construction every/none/some; categories equal at 20 and 40 trials,19/0/28/10/14/True,partly (only the sum 38 of 85 printed),per-case records,
 V09,protocol_checks,consistently guard-valid construction flags / stable programs / unstable always / unstable some / unstable programs / prospective self-failing originals,19/5/9/14/6/0,partly (5 and 6 printed; 19 only within 38),per-case records,
 V10,protocol_checks,contract-equivalent among the 546: construction + prospective,52+33=85,partly (85 printed),per-case records,
-V11,protocol_checks,registered predictions / last registry commit precedes cohort commit,12/True,yes,recorded git history,
+V11,protocol_checks,registered predictions / last registry commit precedes cohort commit,12/True,partly (the five failed predictions printed),recorded git history,
 V12,protocol_checks,prospective survivors / CL1 / % / CL4 / % / Unresolved / below-tolerance / OL,102/33/32.4/21/20.6/0/0/0,"partly (102, 33, 21 and the 0 observation limitations printed)",per-case records,
 V13,protocol_checks,frozen statuses of V08 (P10) and V07 (P8),CONTRADICTED/UNEVALUABLE,n.a. (logical check),frozen decision record,
 V14,protocol_checks,P7: survivors whose permitted report differs / survivors,16/102,no,per-case records,

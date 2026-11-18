@@ -29,13 +29,14 @@ sampling bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolera
 - **Structural-assertion trials.** Of the 546 mutants executed before the R_xx and R_zz rewriting, 85 are
   contract-equivalent to their original: 52 of development circuits and 33 of the five other circuits. QUTest's
   gate-set check, with the original's gate names as the allowed set, flags 19 of the 33 and 19 of the 52 in every
-  recorded trial. These flags come from five programs whose original always passes. In six other development circuits
-  the transpilation varies and the original sometimes fails the check, so their 23 flags are unreliable (optimization
-  level: section 9). A recorded prediction stated that the gate-set assertion would separate more than 80% of the
-  contract-equivalent mutants of the five other circuits, and the depth assertion fewer. The prediction failed: with
-  both programs transpiled to the same basis-gate set, the comparison separated none of the 33 by gate set and 11 by
-  depth. A check of whether two programs transpile to the same circuit identifies 1 to 3 of the 85 contract-equivalent
-  pairs across 36 transpiler configurations.
+  recorded trial. These flags come from seven programs whose original always passes: five development circuits
+  and two of the five other circuits. In six other development circuits the transpilation varies and the original
+  sometimes fails the check, so their 23 flags are unreliable (optimization level: section 9). A recorded
+  prediction stated that the gate-set assertion would separate more than 80% of the contract-equivalent mutants
+  of the five other circuits, and the depth assertion fewer. The prediction failed: with both programs transpiled
+  to the same basis-gate set, the comparison separated none of the 33 by gate set and 11 by depth. A check of
+  whether two programs transpile to the same circuit identifies 1 to 3 of the 85 contract-equivalent pairs across
+  36 transpiler configurations.
 - **Developer-written tests.** In Qibo, Mitiq and Qualtran, tests run through pytest and can read the full state
   vector (Qibo, Mitiq) or the full unitary (Qualtran). Of 51 assertion occurrences, 30 check circuit structure,
   resources or set-up, 16 compare full state vectors or unitaries, and five read only computational-basis
