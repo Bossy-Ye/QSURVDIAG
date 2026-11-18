@@ -689,8 +689,8 @@ data/qedc/tfim_pair_universe.out,CC-BY-4.0,study-authored record or documentatio
 data/qedc/tfim_pair_universe.py,MIT,study-authored code (LICENSE),analysis script
 data/qedc/x_selection_check.out,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),output log
 data/qedc/x_selection_check.py,MIT,study-authored code (LICENSE),analysis script
-data/scalability/B2_CORPUS_FRESH.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),registered scale run
-data/scalability/B2_SCALE_CELLS_FRESH.jsonl,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),registered scale run
+data/scalability/B2_CORPUS_FRESH.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),recorded scalability run
+data/scalability/B2_SCALE_CELLS_FRESH.jsonl,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),recorded scalability run
 data/scalability/E4_SCALE_MANIFEST.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),width-set listing (162 pairs)
 data/scalability/corpus/T2A_CL5_MECHANISM.json,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),QMutBench corpus records
 data/scalability/corpus/T2A_ELIGIBILITY.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),QMutBench corpus records
@@ -728,8 +728,8 @@ environment/records/QUTEST_SOURCE_MANIFEST.json,CC-BY-4.0,study-authored record 
 environment/requirements-analytic.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),environment
 environment/setup.sh,MIT,study-authored code (LICENSE),environment
 expected/analytic_coverage.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
-expected/expected_results.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
-expected/experiments_expected.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
+expected/experiments.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
+expected/values.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
 expected/verify_summary.txt,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),expected values
 provenance/DERIVED_FILES.csv,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),provenance record
 provenance/FREEZE_C.sha256,CC-BY-4.0,study-authored record or documentation (LICENSE-DATA),provenance record

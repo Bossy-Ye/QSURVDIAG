@@ -20,7 +20,7 @@ study-authored material. Upstream licenses verified 2026-10-13 at the pinned ver
             (GPL v3 section 5) and keeps the licenses in provenance/LICENSE_MAP.csv.
 
 2. Infrastructure of Qolumbina -- CC BY 4.0
-   Files    data/certification/outcomes/R2V_NATIVE_JOBS_ARMS.jsonl (10 jobs, 5 external programs)
+   Files    data/certification/outcomes/R2V_NATIVE_JOBS_ARMS.jsonl (10 jobs, 5 mutants of the Q# program LessThanPhase)
    Source   "Infrastructure of Qolumbina", Anonymous Authors, Zenodo 10.5281/zenodo.20987327 (CC BY 4.0).
             The Q# originals (github.com/MgcosA/Code_of_Testing_Oracle_Quantum_Program_Article @ 2bf129cd)
             carry no license file and are not redistributed.
@@ -42,7 +42,7 @@ study-authored material. Upstream licenses verified 2026-10-13 at the pinned ver
 
 5. Not redistributed (retrieval and hashes: environment/records/ and docs/protocols.md section 9)
    QUTest 0.1.0 (Apache-2.0) | QuCheck 0.0.2 (MIT) | Muskit 0.0.3 (AGPL-3.0) | QMutPy/MutPy (Apache-2.0) |
-   pytest 9.1.1 (MIT) | QMutBench program files (GPL-3.0) | QASMBench (BSD) | external-cohort program files |
+   pytest 9.1.1 (MIT) | QMutBench program files (GPL-3.0) | QASMBench (BSD) | Q# program files |
    QuCheck repository @ 74c275709c59749870d885889bf9994cfdd46786 (case studies; see 8) |
    QED-C Application-Oriented Benchmarks v2.0.8 (Apache-2.0; reference file of the analytic tier) |
    Qiskit, Qiskit Aer, NumPy, SciPy, rustworkx, openqasm3 (pinned versions only).

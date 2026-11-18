@@ -8,8 +8,8 @@ Version 1.3.1.
 
 ## Verify
 
-The package has two tiers of checks. The record tier checks every listed value against the archived records. It needs
-Python 3.9 or later and the standard library, `openssl` for the RFC 3161 receipts, and a few seconds. The analytic tier
+The package has two tiers of checks. The record tier needs Python 3.9 or later and the standard library, `openssl` for
+the RFC 3161 receipts, and a few seconds. The analytic tier
 (next section) also reruns transpilation and simulation.
 
 ```sh
@@ -83,7 +83,7 @@ which depend on the order of ties (`data/checks/tie_check.py`). A07 compares mar
 | 4.3 | `docs/protocols.md`; the `PLAN.md` of each experiment |
 | 5.2 | `data/certification/equivalence/`; `data/output_condition/simon_movers.out`; `data/analyses/register_contracts.json` |
 | 5.3, Figs. 3 and 4, Table 5 | `data/certification/outcomes/` (`R2V_FINAL_*.csv`, `R2V_TABLE_X.json`, `R2V_DECISION_GRID.csv`, `r2v_stats.py`), `data/output_condition/`, `data/checks/circuit_level.py`; `data/analyses/requirements_scores_states.json` (distinct states and sites) |
-| 5.3.2, 5.5, 7.2: separating settings, rotated profile | `data/observation_change/` (`separating_settings.csv`, `later_positions_settings.csv`, `two_basis_states.csv`, `rotated_profile.csv`) |
+| 5.3.2, 5.5, 7.2: separating settings, refinement check | `data/observation_change/` (`separating_settings.csv`, `later_positions_settings.csv`, `two_basis_states.csv`, `rotated_profile.csv`) |
 | 5.3.3, 5.4, 5.6, Table 3: native QuCheck and the QuCheck case studies | `data/developer_suites/` |
 | 5.4, Table 6 | `data/all_pairs/`; `data/combined_suite/`; `data/prospective/mqt_bench/`; `data/interventions/transfer/`; `data/analyses/requirements_scores_states.json` (evidence requirements) |
 | 5.5, Table 7 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
@@ -99,16 +99,18 @@ command that diagnoses a new pair; `scripts/` reruns the archived analyses.
 
 ## Codes
 
-The records and `expected/` use the study's codes. The check labels in `expected/` use the study's working terms, and
-the table below explains them.
+The records use the study's codes. The check labels in `expected/` use the article's abbreviations of the outcomes (CE,
+EIE, OL, BTD, SO) and some of the study's working terms. The table below explains both.
 
 | Code | Meaning |
 |---|---|
 | CL1 to CL5 | outcomes: contract equivalence, executed-input equality, observation limitation, suite omission, below-tolerance difference; NA_KILLED is a killed mutant |
 | S_MIN, S_FAMILY, S_COVER, S_BOTH, S_SPEC | suites: baseline, adjacent-pair, all-qubit, combined (a marginal on every qubit and the Z products of all neighboring qubits), output-condition |
 | construction, prospective | populations: the 15 development circuits and the five other circuits |
+| primary, external, scale | populations: the 20 circuits (599 pairs), the Q# and QASMBench programs, the width set |
+| interface | the comparison of the declared QUTest and QuCheck profiles |
 | OB01 to OB19 | evidence requirements (Table 1) |
-| v1, v2, v3 | rule sets: v1 lacks rules 1 to 6 of `docs/protocols.md`, section 11; v2 adds rules 1 to 5 (`V2_SPECIFICATION.md`); v3 adds rule 6, the closed witness order (`data/certification/witness_order/RULE.md`). The files `R2V_FINAL_*.csv` hold v2 outcomes; `data/certification/witness_order/IMPACT.csv` lists the two records that v3 changes |
+| v1, v2, v3 | rule sets: v1 lacks rules 1 to 6 of `docs/protocols.md`, section 11; v2 adds rules 1 to 5 (`V2_SPECIFICATION.md`); v3 adds rule 6, the closed witness order (`data/certification/witness_order/RULE.md`). The files `R2V_FINAL_*.csv` hold v2 outcomes; `data/certification/witness_order/IMPACT.csv` lists the two records that v3 changes; `data/all_pairs/ALLPAIRS_CASES.csv` also holds v2 values (164 issued repairs, 165 after the v3 change) |
 | X1, X2, X4 | the separating-setting, developer-suite and later-position experiments in their plans and operational records (arm `x4` in the later-position records); `docs/protocols.md`, section 10, maps the file names the plans use |
 | suite A, suite B, `em` | in the developer-suite experiment: the unit tests, the property tests, and the mutants their authors label semantics-preserving |
 | R1, R5, R6 | keys of `data/analyses/requirements_scores_states.json`: evidence requirements as a classifier, adjusted mutation scores, distinct final states and sites |
@@ -116,29 +118,32 @@ the table below explains them.
 | certificate, certified | a reported outcome; reported |
 | M, C | QED-C records: P_ship (the article's P_bench) and P_Z |
 | natural pair | QED-C records: the article's benchmark-coupling pair |
-| T, T' | QED-C records: the stored-reference rule and the diagnostic baseline |
+| T, T' | QED-C records: the stored-reference rule and the Hellinger baseline |
 | upstream score | QED-C records: the benchmark's normalized Hellinger fidelity |
 
 ## Check IDs
 
-| Prefix | Checks | Expected values | Computed by |
-|---|---|---|---|
-| `M` | values behind the article | `expected/expected_results.csv` | `scripts/checks/article_checks.py` |
-| `L-` | counts by population and record | `expected/expected_results.csv` | `scripts/checks/ledger_checks.py` |
-| `V` | registered predictions, structural trials, protocol records, commits and file times | `expected/expected_results.csv` | `scripts/checks/protocol_checks.py` |
-| `N` | decision-diagram equivalence check, developer tests, released defects, Listing 1, QuCheck, environment freezes | `expected/expected_results.csv` | `scripts/checks/records_checks.py` |
-| `X` | width set, corpus, output-condition pool, transpiler sweep, MQT Bench rerun, concentration of causes | `expected/expected_results.csv` | `scripts/checks/records_checks.py` |
-| `A` | analytic tier | `expected/expected_results.csv` | `scripts/reproduce_analytic.py` |
-| `R-OC` | output-condition suites | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-CL` | circuit-level view of the matched changes | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-CM` | combined-suite comparison | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-AP` | all-pairs comparison | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-E` | QED-C case | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-V` | rule set v3 (closed witness order) | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-X` | separating settings and rotated profile (`R-X1`), developer suites (`R-X2`), later positions (`R-X4`), analyses of `data/analyses/` (`R-X5`) | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-WX` | witnesses of the reported suite omissions | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-NC` | negative controls of the reported suite omissions | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
-| `R-A` | reruns with `--analytic` | `expected/experiments_expected.csv` | `scripts/reproduce_experiments.py` |
+The checks with prefixes `M`, `L-`, `V`, `N`, `X` and `A` are listed in `expected/values.csv`; those with prefix `R-` are
+listed in `expected/experiments.csv` and computed by `scripts/reproduce_experiments.py`.
+
+| Prefix | Checks | Computed by |
+|---|---|---|
+| `M` | values behind the article | `scripts/checks/article_checks.py` |
+| `L-` | counts by population and record | `scripts/checks/ledger_checks.py` |
+| `V` | registered predictions, gate-set and depth trials, protocol records, commits and file times | `scripts/checks/protocol_checks.py` |
+| `N` | decision-diagram equivalence check, developer tests, released defects, Listing 1, QuCheck, environment freezes | `scripts/checks/records_checks.py` |
+| `X` | width set, corpus, output-condition pool, transpiler sweep, MQT Bench rerun, concentration of causes | `scripts/checks/records_checks.py` |
+| `A` | analytic tier | `scripts/reproduce_analytic.py` |
+| `R-OC` | output-condition suites | |
+| `R-CL` | circuit-level view of the matched changes | |
+| `R-CM` | combined-suite comparison | |
+| `R-AP` | all-pairs comparison | |
+| `R-E` | QED-C workflow | |
+| `R-V` | rule set v3 (closed witness order) | |
+| `R-X` | separating settings and refinement check (`R-X1`), developer suites (`R-X2`), later positions (`R-X4`), analyses of `data/analyses/` (`R-X5`) | |
+| `R-WX` | witnesses of the reported suite omissions | |
+| `R-NC` | negative controls of the reported suite omissions | |
+| `R-A` | reruns with `--analytic` | |
 
 ## Layout
 

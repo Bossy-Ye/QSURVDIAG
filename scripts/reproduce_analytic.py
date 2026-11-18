@@ -180,7 +180,7 @@ for cid, script, outputs in (
 
 exp = {
     e["check_id"]: e
-    for e in csv.DictReader(open(ROOT / "expected/expected_results.csv"))
+    for e in csv.DictReader(open(ROOT / "expected/values.csv"))
     if e["module"] == "reproduce_analytic"
 }
 out = []

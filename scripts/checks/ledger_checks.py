@@ -1,8 +1,8 @@
-"""Recompute the ledger values (check module ledger_checks in expected/expected_results.csv) from the archived
+"""Recompute the ledger values (check module ledger_checks in expected/values.csv) from the archived
 records.
 
 Writes ledger_checks.csv to QSD_OUT: id, area, quantity, unit, recomputed_value, source, method.
-scripts/reproduce.py compares recomputed_value with expected/expected_results.csv.
+scripts/reproduce.py compares recomputed_value with expected/values.csv.
 """
 
 import sys as _sys
@@ -34,7 +34,7 @@ def rd(p):
 
 
 def add(i, area, qty, unit, ms, rc, src, method, note="", status=None):
-    """expected/expected_results.csv"""
+    """expected/values.csv"""
     rows.append(
         dict(id=i, area=area, quantity=qty, unit=unit, recomputed_value=rc, source=src, method=method)
     )

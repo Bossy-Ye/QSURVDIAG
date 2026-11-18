@@ -111,7 +111,7 @@ pro = collections.Counter(r["v2_report"] for r in FIN if r["population"] == "pro
 surv = sum(v for kk, v in pro.items() if kk != "NA_KILLED")
 chk(
     "V12",
-    "prospective survivors / CL1 / % / CL4 / % / Unresolved / below-tolerance / OL",
+    "prospective survivors / CE / % / SO / % / unresolved / below-tolerance / OL",
     f"{surv}/{pro['CL1']}/{100 * pro['CL1'] / surv:.1f}/{pro['CL4']}/{100 * pro['CL4'] / surv:.1f}/{pro['Unresolved']}/{pro['CL5']}/{pro['CL3']}",
     "per-case records",
 )

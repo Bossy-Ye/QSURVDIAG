@@ -29,3 +29,16 @@ authors:
     given-names: "Arif Ali"
     affiliation: "Software Engineering and Information Systems (SEIS), Faculty of Information Technology and Electrical Engineering, University of Oulu"
     email: "arif.khan@oulu.fi"
+preferred-citation:
+  type: article
+  title: "Measure Differently or Assert More? Diagnosing Surviving Quantum Mutants"
+  authors:
+    - family-names: "Ye"
+      given-names: "Boshuai"
+    - family-names: "Liang"
+      given-names: "Peng"
+    - family-names: "Khan"
+      given-names: "Arif Ali"
+  journal: "IEEE Transactions on Software Engineering"
+  status: submitted
+  year: 2026

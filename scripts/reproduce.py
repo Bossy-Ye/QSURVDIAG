@@ -1,4 +1,4 @@
-"""Recompute the article's values from the archived records and compare them with expected/expected_results.csv.
+"""Recompute the article's values from the archived records and compare them with expected/values.csv.
 
 Usage:  python3 scripts/reproduce.py [--out DIR]
 Runs the four record-level check modules (Python standard library only), writes their outputs and
@@ -51,7 +51,7 @@ AGG_LEVELS = (
     "archived structural records",
 )
 rows, cnt = [], Counter()
-for e in csv.DictReader(open(ROOT / "expected/expected_results.csv")):
+for e in csv.DictReader(open(ROOT / "expected/values.csv")):
     cid = e["check_id"]
     if e["module"] == "reproduce_analytic":
         continue  # reported by scripts/reproduce_analytic.py

@@ -1,9 +1,9 @@
 """Recompute the results of the output-condition, combined-suite, all-pairs, QED-C, separating-setting, later-position
 and developer-suite experiments, the circuit-level view of the matched changes and the negative controls of the
-reported suite omissions from their per-run records, and compare them with expected/experiments_expected.csv. No native
+reported suite omissions from their per-run records, and compare them with expected/experiments.csv. No native
 execution.
 
-Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY R2V_TREE QEDC_REF]
+Usage: python3 -I scripts/reproduce_experiments.py [--out DIR] [--analytic PY INPUT_TREE QEDC_REF]
 
 --analytic also reruns data/qedc/report.py and x_selection_check.py, the three analyses of data/analyses/ and the
 separating-setting searches (find_settings.py, rotated_profile.py stage 2, qedc_setting.py, two_basis_states.py on the
@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OC, CMP = ROOT / "data/output_condition", ROOT / "data/combined_suite"
 ap = argparse.ArgumentParser()
 ap.add_argument("--out", default=str(ROOT / "output" / "experiments"))
-ap.add_argument("--analytic", nargs=3, metavar=("PY", "R2V_TREE", "QEDC_REF"))
+ap.add_argument("--analytic", nargs=3, metavar=("PY", "INPUT_TREE", "QEDC_REF"))
 a = ap.parse_args()
 OUT = Path(a.out).resolve()
 OUT.mkdir(parents=True, exist_ok=True)
@@ -637,7 +637,7 @@ if a.analytic:
 
 # Compare
 out, cnt = [], collections.Counter()
-for e in rows(ROOT / "expected/experiments_expected.csv"):
+for e in rows(ROOT / "expected/experiments.csv"):
     v = got.get(e["check_id"])
     st = (
         (

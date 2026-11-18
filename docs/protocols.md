@@ -11,7 +11,7 @@ timestamps of Section 7.1 (section 11). Section, table and figure numbers refer 
 | Suite experiments | 8,000 | ideal | passes all 12 guard runs |
 | Tolerance and budget experiment | 500, 2,000, 8,000 | sampled at 2,000 | as the baseline |
 | MQT Bench validation | 2,000 | ideal | fails at most 1 of 12 runs |
-| Repair comparison | 8,000 | ideal | fails at most 1 of 12 runs |
+| Repair comparison | 8,000 | ideal, rounded to 4 decimals | fails at most 1 of 12 runs |
 | QED-C workflow | 2,000 | P's ideal distribution | fails at most 1 of 12 runs |
 | Separating settings | 8,000 | ideal, rounded to 4 decimals | fails at most 1 of 12 runs |
 | Later positions | 2,000 | as the first sample of each population | as the first sample (`data/position/OPERATIONAL.md`) |
@@ -26,21 +26,21 @@ sampling bound (Section 3.4) is 1.25, 2 and 5 at the three budgets of the tolera
 
 ## 2. Testing tools (RQ1)
 
-- **Structural-assertion trials.** Of the 546 mutants executed before the R_xx and R_zz rewriting, 85 are
-  contract-equivalent to their original: 52 of development circuits and 33 of the five other circuits. QUTest's
-  gate-set check, with the original's gate names as the allowed set, flags 19 of the 33 and 19 of the 52 in every
-  recorded trial. These flags come from seven programs whose original always passes: five development circuits
-  and two of the five other circuits. In six other development circuits the transpilation varies and the original
-  sometimes fails the check, so their 23 flags are unreliable (optimization level: section 9). A recorded
-  prediction stated that the gate-set assertion would separate more than 80% of the contract-equivalent mutants
-  of the five other circuits, and the depth assertion fewer. The prediction failed: with both programs transpiled
-  to the same basis-gate set, the comparison separated none of the 33 by gate set and 11 by depth. A check of
-  whether two programs transpile to the same circuit identifies 1 to 3 of the 85 contract-equivalent pairs across
-  36 transpiler configurations.
-- **Developer-written tests.** In Qibo, Mitiq and Qualtran, tests run through pytest and can read the full state
-  vector (Qibo, Mitiq) or the full unitary (Qualtran). Of 51 assertion occurrences, 30 check circuit structure,
-  resources or set-up, 16 compare full state vectors or unitaries, and five read only computational-basis
-  quantities. The check runs no mutants and estimates no prevalence (`data/external/developer_tests/`).
+*Gate-set and depth trials.* Of the 546 mutants executed before the R_xx and R_zz rewriting, 85 are
+contract-equivalent to their original: 52 of development circuits and 33 of the five other circuits. QUTest's gate-set
+check, with the original's gate names as the allowed set, flags 19 of the 33 and 19 of the 52 in every recorded trial.
+These flags come from seven programs whose original always passes: five development circuits and two of the five other
+circuits. In six other development circuits the transpilation varies and the original sometimes fails the check, so
+their 23 flags are unreliable (optimization level: section 9). A recorded prediction stated that the gate-set assertion
+would separate more than 80% of the contract-equivalent mutants of the five other circuits, and the depth assertion
+fewer. The prediction failed: with both programs transpiled to the same basis-gate set, the comparison separated none
+of the 33 by gate set and 11 by depth. A check of whether two programs transpile to the same circuit identifies 1 to 3
+of the 85 contract-equivalent pairs across 36 transpiler configurations.
+
+*Developer-written tests.* In Qibo, Mitiq and Qualtran, tests run through pytest and can read the full state vector
+(Qibo, Mitiq) or the full unitary (Qualtran). Of 51 assertion occurrences, 30 check circuit structure, resources or
+set-up, 16 compare full state vectors or unitaries, and five read only computational-basis quantities. The check runs
+no mutants and estimates no prevalence (`data/external/developer_tests/`).
 
 ## 3. Semantic contracts (RQ2)
 
@@ -58,87 +58,98 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent. The below-tol
 
 ## 4. Causes of survival (RQ3)
 
-- **Predictions about the five other circuits.** Twelve predictions were committed before the mutants of these
-  circuits were sampled, each with the result that would falsify it (`data/prospective/registration/`; check V11).
-  Five failed: contract equivalences were 33 of the 102 survivors (32.4%), against a predicted 10-30%; suite
-  omissions were 21 (20.6%), against more than 26.6%; the gate-set assertion separated none of the 33
-  contract-equivalent mutants, against more than 80%, and depth 11, against fewer than the gate set; no observation
-  limitation occurred, against at least one. Five held: no unresolved outcome, no rule fixed in advance changed, the
-  method applied to the output-register QuCheck profile with no shared rule changed, below-tolerance differences under
-  5% (none occurred), and the two tools needed the admissibility filter for different reasons. Of the prediction that
-  both profiles express the shared outcomes and only QUTest's the two equalities, 3 of the 6 outcomes occurred. The
-  prediction that QuCheck detects every observation limitation with an X or Y difference could not be evaluated, as
-  no such case occurred.
-- **Measurement settings.** Measuring the output register in the XYZ bases gives 60 observation limitations among
-  the 193 pairs. XYZ on the output register and Z on every qubit are incomparable: each distinguishes pairs the
-  other does not.
-- **Output-condition suite by family.** Of its 65 suite-omission kills, 54 are GHZ, 9 Simon and 2 QFT.
-- **Separating settings** (`data/observation_change/`). `find_settings.py` enumerates settings by the number of
-  qubits outside Z, then by qubit subset, then with X before Y. The first setting with an instance above theta gives
-  the setting and its witness (`separating_settings.csv`). `run_settings.py` runs the witness of each pair alone
-  under its setting: 12 runs on the mutant (seeds 13042-13053) and 12 on the original (seeds 14042-14053). The
-  control is the same instance without the setting's gates. The QED-C constructed pair used seeds 19042-19053 and
-  20042-20053 (`qedc_setting.py`, `qedc_run.py`). The 65 later-position observation limitations used seeds
-  21042-21053 and 22042-22053 (`later_positions.py`); their final states come from the executed inputs that
-  `data/position/select_mutants.py` writes. `analyze.py` derives the decisions and summaries from the per-run records.
-- **Settings read off the original** (`data/observation_change/two_basis_states.py`). For each of the 100 observation
-  limitations, the script counts the basis states in the original's final state on the executed input. It forms the
-  setting with X on every qubit in superposition in that state, compares it with the named setting and evaluates the
-  declared universe under it.
-- **Rotated profile** (`data/observation_change/rotated_profile.py`). The rotated profile evaluates every qubit
-  under each of the 3^n XYZ settings; the baseline suite stays in the all-Z setting. The witness order is all-Z
-  first, then the settings in search order, with the closed witness order within each setting. Stage 2 takes R_C
-  and R_S from the declared diagnosis and evaluates R_O, R_A and R_T over the rotated universe and the suite. The
-  witness runs are those of the separating settings. The negative control is the first instance outside the suite
-  decided below theta. It ran alone at N = 8,000 on the mutant at the witness seeds and on the original at the first
-  three original seeds. Stage 2 takes about 4 CPU hours, almost all of it for the twelve-qubit multipliers. The
-  analytic tier reruns it on the 35 pairs of the 20 circuits.
-- **Native QuCheck** (`data/developer_suites/qucheck_on_20_circuits.py`). One property per pair asserts equal
-  distributions of every qubit in the X, Y and Z bases, at seeds 15542-15553. The controls compare the original with
-  itself at seeds 16542-16553. QuCheck 0.0.2's Holm correction does not stop at the first retained hypothesis. The
-  step-down procedure, applied to the recorded p-values, rejects exactly when the smallest p-value is at most
-  alpha/m (`compare_with_predictions.py`).
-- **Device noise** (`data/analyses/noise.py`). The median errors of the IBM Torino calibration in
-  qiskit-ibm-runtime 0.40.1 serve as depolarizing gate errors and a symmetric readout error. Each circuit is
-  transpiled to a line of qubits and simulated as a density matrix. Suite-omission witnesses keep a median 0.90 of
-  their difference.
-- **Tolerance and budget experiment.** The sampling bound covers decisions most often for Z products and marginals,
-  least often for the entropy and the total-variation distance, and never for the Hellinger and Kullback-Leibler
-  distances (`data/certification/outcomes/R2V_BOUND.json`).
+*Predictions about the five other circuits.* Twelve predictions were committed before the mutants of these circuits
+were sampled, each with the result that would falsify it (`data/prospective/registration/`; check V11). Five failed:
+contract equivalences were 33 of the 102 survivors (32.4%), against a predicted 10-30%; suite omissions were 21
+(20.6%), against more than 26.6%; the gate-set assertion separated none of the 33 contract-equivalent mutants, against
+more than 80%, and depth 11, against fewer than the gate set; no observation limitation occurred, against at least one.
+Five held: no unresolved outcome, no rule fixed in advance changed, the method applied to the output-register QuCheck
+profile with no shared rule changed, below-tolerance differences under 5% (none occurred), and the two tools needed the
+admissibility filter for different reasons. Of the prediction that both profiles express the shared outcomes and only
+QUTest's the two equalities, 3 of the 6 outcomes occurred. The prediction that QuCheck detects every observation
+limitation with an X or Y difference could not be evaluated, as no such case occurred.
+
+*Measurement settings.* Measuring the output register in the XYZ bases gives 60 observation limitations among the 193
+pairs. XYZ on the output register and Z on every qubit are incomparable: each distinguishes pairs the other does not.
+
+*Output-condition suite by family.* Of its 65 suite-omission kills, 54 are GHZ, 9 Simon and 2 QFT.
+
+*Separating settings* (`data/observation_change/`). `find_settings.py` enumerates settings by the number of qubits
+outside Z, then by qubit subset, then with X before Y. The first setting with an instance above theta gives the setting
+and its witness (`separating_settings.csv`). `run_settings.py` runs the witness of each pair alone under its setting:
+12 runs on the mutant (seeds 13042-13053) and 12 on the original (seeds 14042-14053). The control is the same instance
+without the setting's gates. The QED-C constructed pair used seeds 19042-19053 and 20042-20053 (`qedc_setting.py`,
+`qedc_run.py`). The 65 later-position observation limitations used seeds 21042-21053 and 22042-22053
+(`later_positions.py`); their final states come from the executed inputs that `data/position/select_mutants.py` writes.
+`analyze.py` derives the decisions and summaries from the per-run records.
+
+*Settings read off the original* (`data/observation_change/two_basis_states.py`). For each of the 100 observation
+limitations, the script counts the basis states in the original's final state on the executed input. It forms the
+setting with X on every qubit in superposition in that state, compares it with the named setting and evaluates the
+declared universe under it.
+
+*Refinement check* (`data/observation_change/rotated_profile.py`). The check evaluates every qubit under each of the
+3^n XYZ settings; the baseline suite stays in the all-Z setting. The witness order is all-Z first, then the settings in
+search order, with the closed witness order within each setting. Stage 2 takes R_C and R_S from the declared diagnosis
+and evaluates R_O, R_A and R_T over the rotated universe and the suite. The witness runs are those of the separating
+settings. The negative control is the first instance outside the suite decided below theta. It ran alone at N = 8,000
+on the mutant at the witness seeds and on the original at the first three original seeds. Stage 2 takes about 4 CPU
+hours, almost all of it for the twelve-qubit multipliers. The analytic tier reruns it on the 35 pairs of the 20
+circuits.
+
+*Native QuCheck* (`data/developer_suites/qucheck_on_20_circuits.py`). One property per pair asserts equal distributions
+of every qubit in the X, Y and Z bases, at seeds 15542-15553. The controls compare the original with itself at seeds
+16542-16553. QuCheck 0.0.2's Holm correction does not stop at the first retained hypothesis. The step-down procedure,
+applied to the recorded p-values, rejects exactly when the smallest p-value is at most alpha/m
+(`compare_with_predictions.py`).
+
+*Device noise* (`data/analyses/noise.py`). The median errors of the IBM Torino calibration in qiskit-ibm-runtime 0.40.1
+serve as depolarizing gate errors and a symmetric readout error. Each circuit is transpiled to a line of qubits and
+simulated as a density matrix. Suite-omission witnesses keep a median 0.90 of their difference.
+
+*Tolerance and budget experiment.* The sampling bound covers decisions most often for Z products and marginals, least
+often for the entropy and the total-variation distance, and never for the Hellinger and Kullback-Leibler distances
+(`data/certification/outcomes/R2V_BOUND.json`).
 
 ## 5. Repairs (RQ4)
 
-- **Combined-suite comparison at N = 2,000** (`data/combined_suite/`). The same 210 candidates were compared with the
-  combined suite (a marginal on every qubit and the Z products of all neighboring qubits). The repairs reliably killed
-  174 candidates and the combined suite 133. Among the 173 candidates whose witness the combined suite contains, the 27
-  that only the repair reliably killed all failed for the combined suite on the original's guard runs; none failed on
-  detection. Of the 37 witnesses outside the combined suite, 24 are non-adjacent two-qubit Z products. At this budget a
-  union bound over a suite of this size is vacuous.
-- **All-pairs comparison by witness location.** The all-pairs suite contains the witness for 197 of the 210
-  candidates. The 13 witnesses outside it are Z products of weight three (3), four (1) and nine (2), five entropies
-  and two Hellinger distances. The repairs support two weight-three and one weight-nine Z product, two entropies and
-  one Hellinger distance. Where the all-pairs suite contains the witness, every run in which the repair killed the
-  mutant was also an all-pairs kill on the same histogram.
-- **Derived adjacent-pair suite.** Read from the all-pairs runs, the marginals and adjacent pairs alone reliably kill
-  165 candidates, so the non-adjacent pairs add 27.
-- **Execution accounting.** Both suites need the same 3,276 histograms of 8,000 shots (2,520 mutant, 756 original).
-  The implementation ran 3,924 command-line executions for the repairs and 3,276 for the all-pairs suites, 7,200
-  executions and 57.6 million shots. An in-process verification added 7,200 executions and 57.6 million simulator
-  shots. The repairs hold 1,762 assertions and the all-pairs suites 7,174. Assertion evaluation took 4 s and 33 s,
-  and diagnosis 10 s for the 210 candidates.
-- **MQT Bench validation.** The withheld candidate is a walk mutant whose witness killed it in 9 of 12 confirmation
-  runs and 11 of 12 validation runs. In 18 of the 22 certified cases the mutation replaces the first gate of a
-  multiplier, a Hadamard gate, or inserts a gate before it, and the two-qubit Z product differs by 1. One group lies
-  near theta: three deletions in the eight-qubit multiplier with difference 0.076, certified although the sampling
-  bound does not cover their kill. The bound covers the mutant's kill for 19 of the 23 candidates and the original's
-  guard runs for none. For all seven observation limitations, the largest suite in the sequence that their original
-  passes is the baseline suite.
-- **Evidence requirements as a classifier** (`data/analyses/requirements_scores_states.py`). Of the 165 issued
-  repairs, 164 are supported in the repair comparison. Of the 23 unsupported repairs, 22 were withheld.
-- **Transfer.** Every difference by which an admissible QuCheck assertion distinguishes a transferred pair exceeds
-  theta by at least 0.45. Section 11 describes an experiment with QuCheck-style tests on the output register.
+*Combined-suite comparison at N = 2,000* (`data/combined_suite/`). The same 210 candidates were compared with the
+combined suite (a marginal on every qubit and the Z products of all neighboring qubits). The repairs reliably killed
+174 candidates and the combined suite 133. Among the 173 candidates whose witness the combined suite contains, the 27
+that only the repair reliably killed all failed for the combined suite on the original's guard runs; none failed on
+detection. Of the 37 witnesses outside the combined suite, 24 are non-adjacent two-qubit Z products. At this budget a
+union bound over a suite of this size is vacuous.
 
-## 6. The QED-C case (RQ5)
+*All-pairs comparison by witness location.* The all-pairs suite contains the witness for 197 of the 210 candidates. The
+13 witnesses outside it are Z products of weight three (3), four (1) and nine (2), five entropies and two Hellinger
+distances. The repairs support two weight-three and one weight-nine Z product, two entropies and one Hellinger
+distance. Where the all-pairs suite contains the witness, every run in which the repair killed the mutant was also an
+all-pairs kill on the same histogram.
+
+*Derived adjacent-pair suite.* Read from the all-pairs runs, the marginals and adjacent pairs alone reliably kill 165
+candidates, so the non-adjacent pairs add 27.
+
+*Execution accounting.* Both suites need the same 3,276 histograms of 8,000 shots (2,520 mutant, 756 original). The
+implementation ran 3,924 command-line executions for the repairs and 3,276 for the all-pairs suites, 7,200 executions
+and 57.6 million shots. An in-process verification added 7,200 executions and 57.6 million simulator shots. The repairs
+hold 1,762 assertions and the all-pairs suites 7,174 (the column `D_assertions` of `data/all_pairs/ALLPAIRS_CASES.csv`
+sums to 1,764, because the two Hellinger witnesses add a reference line). Assertion evaluation took 4 s and 33 s, and
+diagnosis 10 s for the 210 candidates.
+
+*MQT Bench validation.* The withheld candidate is a walk mutant whose witness killed it in 9 of 12 confirmation runs
+and 11 of 12 validation runs. In 18 of the 22 issued repairs the mutation replaces the first gate of a multiplier, a
+Hadamard gate, or inserts a gate before it, and the two-qubit Z product differs by 1. One group lies near theta: three
+deletions in the eight-qubit multiplier with difference 0.076, reported although the sampling bound does not cover
+their kill. The bound covers the mutant's kill for 19 of the 23 candidates and the original's guard runs for none. For
+all seven observation limitations, the largest suite in the sequence that their original passes is the baseline suite.
+
+*Evidence requirements as a classifier* (`data/analyses/requirements_scores_states.py`). Of the 165 issued repairs, 164
+are supported in the repair comparison. Of the 23 unsupported repairs, 22 were withheld.
+
+*Transfer.* Every difference by which an admissible QuCheck assertion distinguishes a transferred pair exceeds theta by
+at least 0.45. Section 11 describes an experiment with QuCheck-style tests on the output register.
+
+## 6. The QED-C workflow (RQ5)
 
 | n | Fidelity of P to the exact evolution | Fidelity of P_bench | Largest Z difference (benchmark-coupling pair) | X statistic | Kills of P_bench (certification, validation) | P fails baseline (certification, validation) | Diagnosed | Benchmark-coupling pair | Constructed pair | Parity kills of P_Z |
 |---:|---:|---:|---:|---:|---|---|---|---|---|---:|
@@ -153,7 +164,7 @@ omissions (GHZ 46, Toffoli 8, Simon 4, QPE 1) contract-equivalent. The below-tol
 At n = 2 the X statistic is the X expectation of qubit 0, the first X-basis instance of the closed witness order above
 theta. Every instance before it differs by at most 0.0473 (`data/certification/witness_order/`). At n = 6 to 8, which
 are not diagnosed, the entropy difference on the Z counts exceeds theta. P failed the supplementary statistics in none
-of its runs. On the 672 recorded histograms, the stored-reference acceptance rule and the diagnostic baseline
+of its runs. On the 672 recorded histograms, the stored-reference acceptance rule and the Hellinger baseline
 referenced to P gave the same verdict on every one, with measured distances differing by at most 1.8e-4. The
 histograms were regenerated by rerunning QUTest at the recorded seeds, and the regenerated verdicts of the
 stored-reference rule equal all 672 recorded ones; the outputs under the stored-reference rule are kept
@@ -165,50 +176,56 @@ theta^2)^2 = 0.99500625. Records: `data/qedc/`.
 
 ## 7. Other programs (RQ6)
 
-- **Q# and QASMBench programs.** Of 270 mutants, 111 are killed. The 159 survivors receive 28 contract
-  equivalences, 94 executed-input equalities, 30 observation limitations (27 in the seven Q# operations, 3 in the two
-  QASMBench circuits), 5 suite omissions, no below-tolerance difference and 2 unresolved outcomes. The selection rule
-  placed 244 of the 270 mutants at the first gate.
-- **MQT Bench programs.** Of 120 mutants, 64 are killed. The 56 survivors receive 14 contract equivalences, 10
-  executed-input equalities, 7 observation limitations, 22 suite omissions and 3 unresolved outcomes. The walks give
-  every contract equivalence and every unresolved case; the multipliers give every executed-input equality and
-  observation limitation and 21 of the 22 suite omissions. The selection rule placed 68 of the 120 mutants at the
-  first gate.
-- **Later positions** (`data/position/`). For each of the 18 programs, the sample takes 10 mutations from the middle
-  and 10 from the last third of the gates, under the strata of the first sample. `select_mutants.py` regenerates the
-  selection from the pinned sources (Qolumbina archive, QASMBench commit `357b9423`) and writes the runner inputs
-  `programs.json` and `mutant_gates.json`. These hold third-party gate lists and are not archived. The selection and
-  pool checks it writes equal the archived `selection.csv` and `pool_checks.json`. `run_mutants.py` runs the
-  baseline, diagnosis, native confirmation and negative control, and `analyze.py` writes `outcomes.csv`.
-  `replay_check.py` reruns Stage 2 of the run driver on the 419 archived first-sample pairs of the five other circuits
-  and the Q# and QASMBench programs; every relation and candidate agrees (`replay_check.out`).
-- **QuCheck case studies** (`data/developer_suites/`). The QuCheck repository is pinned at commit `74c27570`. The
-  harness (`harness.py`) needs `QUCHECK_SRC` set to that checkout and the environment of
-  `environment/records/QUCHECK_CASE_STUDIES_pip_freeze.txt`. Each run of the original and a mutant at one seed
-  generates the same inputs. Every circuit submitted to the simulator is a context, paired in submission order.
-  `native_runs.jsonl.gz` keeps one record per suite, program, version and seed, with the arguments of every program
-  call (the generated inputs) as the keys of `program_equal`. It keeps the witness circuit where native confirmation
-  replays it. `native_runs.csv` is its flat view. `OPERATIONAL.md`, section X2_RUNTIME_DECISION, records the runtime
-  check of the plan.
-- **Width set.** The four unresolved cases are a split verdict, an undecided margin and two suite-omission candidates
-  that fail native confirmation. The runtimes of Fig. 5 were measured under rule set v1 (section 11). At fourteen
-  qubits the median universe-evaluation time grows by a factor of 3.8 per added qubit. The extrapolated limit of
-  nineteen qubits is an upper bound, because it holds state acquisition at its measured median.
-- **Corpus.** Of the 562 survivors, 158 are contract equivalences. The 98 unresolved cases are 51 split verdicts, 3
-  undecided margins and 44 suite-omission candidates. All ten widths with at least ten of the 1,569 pairs contain
-  observation-limited pairs, at 9.4% for n <= 7 and 9.9% for n >= 8 (semantic comparisons). The 151st pair found by
-  the comparisons has nineteen qubits and was not tested natively.
-- **Released defects.** Each Bugs4Q defect was reproduced in three locked Qiskit versions (0.45.3, 1.1.1, 2.5.0) and
-  assigned the deepest of five evidence levels: 10 not reproducible, 8 reproduced in the tool, 10 with the testing
-  profile also known, 12 with semantic comparisons computed and 2 with full evaluation completed. Thirty-two defects
-  reproduce in at least one version. The software-output comparison is decided for 12 defects. Under the declared
-  QUTest profile the suite kills two of the four eligible defects. One survivor is an executed-input equality that
-  differs only in the classical output mapping. The other is a suite omission, natively confirmed with the negative
-  control of the closed witness order (`data/certification/witness_order/`). The six eligibility conditions are a run
-  that reaches a final state, a contract with a recorded source, a declared output register, a supported circuit
-  representation, a translation that preserves the final state, and an original that passes the suite. Qiskit issue
-  16164, found by the screening of external workflows (`data/qedc/SCREENING.md`), is compared on the uniform
-  superposition of its recorded reproduction (`R2V_RELEASED_CL3.json`); it has no suite and no native runs.
+*Q# and QASMBench programs.* Of 270 mutants, 111 are killed. The 159 survivors receive 28 contract equivalences, 94
+executed-input equalities, 30 observation limitations (27 in the seven Q# operations, 3 in the two QASMBench circuits),
+5 suite omissions, no below-tolerance difference and 2 unresolved outcomes. The selection rule placed 244 of the 270
+mutants at the first gate.
+
+*MQT Bench programs.* Of 120 mutants, 64 are killed. The 56 survivors receive 14 contract equivalences, 10
+executed-input equalities, 7 observation limitations, 22 suite omissions and 3 unresolved outcomes. The walks give
+every contract equivalence and every unresolved case; the multipliers give every executed-input equality and
+observation limitation and 21 of the 22 suite omissions. The selection rule placed 68 of the 120 mutants at the first
+gate.
+
+*Later positions* (`data/position/`). For each of the 18 programs, the sample takes 10 mutations from the middle and 10
+from the last third of the gates, under the strata of the first sample. `select_mutants.py` regenerates the selection
+from the pinned sources (Qolumbina archive, QASMBench commit `357b9423`) and writes the runner inputs `programs.json`
+and `mutant_gates.json`. These hold third-party gate lists and are not archived. The selection and pool checks it
+writes equal the archived `selection.csv` and `pool_checks.json`. `run_mutants.py` runs the baseline, diagnosis, native
+confirmation and negative control, and `analyze.py` writes `outcomes.csv`. `replay_check.py` reruns Stage 2 of the run
+driver on the 419 archived first-sample pairs of the five other circuits and the Q# and QASMBench programs; every
+relation and candidate agrees (`replay_check.out`).
+
+*QuCheck case studies* (`data/developer_suites/`). The QuCheck repository is pinned at commit `74c27570`. The harness
+(`harness.py`) needs `QUCHECK_SRC` set to that checkout and the environment of
+`environment/records/QUCHECK_CASE_STUDIES_pip_freeze.txt`. Each run of the original and a mutant at one seed generates
+the same inputs. Every circuit submitted to the simulator is a context, paired in submission order.
+`native_runs.jsonl.gz` keeps one record per suite, program, version and seed, with the arguments of every program call
+(the generated inputs) as the keys of `program_equal`. It keeps the witness circuit where native confirmation replays
+it. `native_runs.csv` is its flat view. `OPERATIONAL.md`, section X2_RUNTIME_DECISION, records the runtime check of the
+plan.
+
+*Width set.* The four unresolved cases are a split verdict, an undecided margin and two suite-omission candidates that
+fail native confirmation. The runtimes of Fig. 5 were measured under rule set v1 (section 11). At fourteen qubits the
+median universe-evaluation time grows by a factor of 3.8 per added qubit. The extrapolated limit of nineteen qubits is
+an upper bound, because it holds state acquisition at its measured median.
+
+*Corpus.* Of the 562 survivors, 158 are contract equivalences. The 98 unresolved cases are 51 split verdicts, 3
+undecided margins and 44 suite-omission candidates. All ten widths with at least ten of the 1,569 pairs contain
+observation-limited pairs, at 9.4% for n <= 7 and 9.9% for n >= 8 (semantic comparisons). The 151st pair found by the
+comparisons has nineteen qubits and was not tested natively.
+
+*Released defects.* Each Bugs4Q defect was reproduced in three locked Qiskit versions (0.45.3, 1.1.1, 2.5.0) and
+assigned the deepest of five evidence levels: 10 not reproducible, 8 reproduced in the tool, 10 with the testing
+profile also known, 12 with semantic comparisons computed and 2 with full evaluation completed. Thirty-two defects
+reproduce in at least one version. The software-output comparison is decided for 12 defects. Under the declared QUTest
+profile the suite kills two of the four eligible defects. One survivor is an executed-input equality that differs only
+in the classical output mapping. The other is a suite omission, natively confirmed with the negative control of the
+closed witness order (`data/certification/witness_order/`). The six eligibility conditions are a run that reaches a
+final state, a contract with a recorded source, a declared output register, a supported circuit representation, a
+translation that preserves the final state, and an original that passes the suite. Qiskit issue 16164, found by the
+screening of external workflows (`data/qedc/SCREENING.md`), is compared on the uniform superposition of its recorded
+reproduction (`R2V_RELEASED_CL3.json`); it has no suite and no native runs.
 
 ## 8. Numerical policy
 
@@ -223,30 +240,35 @@ holds to that margin, and its record states the margin. The margins of every dec
 
 ## 9. Records, limits and material not redistributed
 
-- **Decision-diagram check** (`data/certification/equivalence/`): one pinned run (mqt-qcec 3.9.0, mqt-core 3.9.2)
-  over the 295 reported survivors of the 20 circuits; N01-N03 recount its ledger. The producing script and its
-  exported inputs are not in the study records.
-- **Developer-written tests** (`data/external/developer_tests/`): two raters labeled the 12 assertion families
-  independently and agreed on all 12. Each occurrence is pinned by repository, commit, file and line. The 13 Mitiq
-  quotations are replaced by descriptions (`provenance/DERIVED_FILES.csv`). The classification script needs the
-  pinned checkouts.
-- **Listing 1** (`R2V_WRAPPED_DEMO.csv`, `R2V_WRAPPED_DEMO_test.qasm`): the recorded run of 28 September 2026, at
-  seeds 42-53 (N07, N08).
-- **Gate-set trials**: Qiskit took optimization level 3 from the user configuration of the recording machine;
-  `environment/qiskit_settings.conf` sets it for the analytic tier. QUTest's transpilation varied between repeated
-  runs at levels 2 and 3.
-- **Implementation** (`data/implementation/`): diagnosis driver, the analysis of the tolerance and budget experiment
-  (outcome of each pair at six tolerances, sampling bound at three shot budgets) and tests. The modules they import
-  are archived with the records that use them. `scripts/run_conformance_tests.py` runs three tests; the others execute
-  QUTest.
-- **Embedded paths and working labels**: archived files name the study's working folders, for example `revision2/`, the
-  folder of the analysis under `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. Archived
-  file names, headers and comments also carry the study's working labels: stage codes such as `B1` to `B5`, `E1` to
-  `E15`, `S1` to `S4`, `R2V`, `X1`, "Phase 5A", "Round 0.5" and "Pass 3B", and status words such as `FRESH`, `RERUN`,
-  `RECOVERED`, `CORRECTED` and `FINAL`. The labels identify the stage that produced a file. `README.md` explains the
-  codes that the checks and the cited records use. The package stores these files under `data/`;
-  `scripts/analytic/input_tree.csv` rebuilds the folder layout that the archived producers read.
-- **Not redistributed**:
+*Decision-diagram check* (`data/certification/equivalence/`): one pinned run (mqt-qcec 3.9.0, mqt-core 3.9.2) over the
+295 reported survivors of the 20 circuits; N01-N03 recount its ledger. The producing script and its exported inputs are
+not in the study records.
+
+*Developer-written tests* (`data/external/developer_tests/`): two raters labeled the 12 assertion families
+independently and agreed on all 12. Each occurrence is pinned by repository, commit, file and line. The 13 Mitiq
+quotations are replaced by descriptions (`provenance/DERIVED_FILES.csv`). The classification script needs the pinned
+checkouts.
+
+*Listing 1* (`R2V_WRAPPED_DEMO.csv`, `R2V_WRAPPED_DEMO_test.qasm`): the recorded run of 28 September 2026, at seeds
+42-53 (N07, N08).
+
+*Gate-set trials*: Qiskit took optimization level 3 from the user configuration of the recording machine;
+`environment/qiskit_settings.conf` sets it for the analytic tier. QUTest's transpilation varied between repeated runs
+at levels 2 and 3.
+
+*Implementation* (`data/implementation/`): diagnosis driver, the analysis of the tolerance and budget experiment
+(outcome of each pair at six tolerances, sampling bound at three shot budgets) and tests. The modules they import are
+archived with the records that use them. `scripts/run_conformance_tests.py` runs three tests; the others execute
+QUTest.
+
+*Embedded paths and working labels*: archived files name the study's working folders, for example `revision2/`, the
+folder of the analysis under `V2_SPECIFICATION.md`. Some hold the study's absolute paths as recorded text. Archived
+file names, headers and comments also carry the study's working labels, stage codes and status words, which identify
+the stage that produced a file. `README.md` explains the codes that the checks and the cited records use. The package
+stores these files under `data/`; `scripts/analytic/input_tree.csv` rebuilds the folder layout that the archived
+producers read.
+
+- *Not redistributed*:
   - QMutBench program files (GPL-3.0; their gate lists are in `R2V_NATIVE_JOBS_ARMS.jsonl`; per-case names and
     SHA-256 in `data/scalability/corpus/case_manifests/`; `data/inventory/fetch_corpus.sh` fetches them from the URLs,
     pinned to commit `01f5e770`, in `data/inventory/out/corpus_files.tsv`, and `inventory.py` checks every hash);
@@ -259,11 +281,13 @@ holds to that margin, and its record states the margin. The margins of every dec
   - tool source of QMutPy (qmutpy-experiments `06cc1b29`, mutpy branch `all_gates` `13ab3845`).
 
   `DEPENDENCY_MANIFEST.txt` names its directory `env/`; it is `environment/records/`.
-- **Files named but not released**: archived documents cite study files that this package does not hold, for example
-  `E13_CERTIFICATES.json`, `E13_CERTIFICATES_PREAMENDMENT.json`, `E13_SUBJECTS.json`, `claim_decision.py`,
-  `ASSERTION_INSTANCE_CLOSURE_AUDIT.md`, `CROSS_TOOL_MAPPING.yaml`, `PHASE5A_1_AMENDMENT.md`,
-  `PILOT_CANDIDATE_REPORT.md`, `select_units.py`, `select_units_v11.py` and `PASS3A2_SCIENTIFIC_DECISION.md`. No
-  checked value depends on a file that is not released.
+
+*Files named but not released*: archived documents cite study files that this package does not hold, for example
+`E13_CERTIFICATES.json`, `E13_CERTIFICATES_PREAMENDMENT.json`, `E13_SUBJECTS.json`, `claim_decision.py`,
+`ASSERTION_INSTANCE_CLOSURE_AUDIT.md`, `CROSS_TOOL_MAPPING.yaml`, `PHASE5A_1_AMENDMENT.md`,
+`PILOT_CANDIDATE_REPORT.md`, `select_units.py`, `select_units_v11.py` and `PASS3A2_SCIENTIFIC_DECISION.md`. No checked
+value depends on a file that is not released.
+
 - Values that `expected/` does not list are not checked.
 
 ## 10. File names used in the plans
@@ -283,12 +307,9 @@ package; the table below lists the names that have no file of their own.
 | `X2_INPUTS.jsonl` | no separate file; the generated inputs are the keys of `program_equal` in `data/developer_suites/native_runs.jsonl.gz` |
 | `X2_RUNTIME_CHECK.json` | no separate file; `data/developer_suites/OPERATIONAL.md`, section X2_RUNTIME_DECISION, records the check |
 
-`provenance/RENAMES.csv` lists every file whose name or wording changed since version 1.3.0, with the hash of its
-content in version 1.3.0 and now, and the kind of change. Records, plans and output logs changed in name only. The
-study-authored scripts changed in file references, docstrings, comments and printed text, and in the names of one
-environment variable, one local variable and one flag; `scripts/checks/article_checks.py` also changed in line layout
-and two check labels. `two_basis_states.py` and `two_basis_states.csv` were added after version 1.3.0; their rows give
-the content of their first commit.
+`provenance/RENAMES.csv` lists every file whose name or wording changed since version 1.3.0, with both hashes and the
+kind of change. `two_basis_states.py` and `two_basis_states.csv` were added after version 1.3.0; their rows give the
+content of their first commit.
 
 Archived files cite the numbering of earlier manuscript versions. The table maps these numbers to the article.
 
@@ -350,7 +371,7 @@ limitation changes. Records: `data/certification/outcomes/R2V_RULE_CHANGES.csv` 
   the corrected suites ran (`data/output_condition/PLAN.md`);
 - the all-pairs comparator, after the comparison with the combined suite (section 5), chosen from the composition of
   its witnesses; its plan was committed before its runs (`data/all_pairs/PLAN.md`);
-- the QED-C diagnostic baseline referenced to P, after the runs under the stored-reference acceptance rule; the change
+- the QED-C Hellinger baseline referenced to P, after the runs under the stored-reference acceptance rule; the change
   and its procedure were recorded before they were evaluated (`data/qedc/PLAN.md`, section 7; section 6);
 - the QuCheck profile on every qubit, after the output-register evaluation of transfer was known. An experiment with
   2,000 shots on the output register detected 5 of the 21 transfer cases; it built contingency tables and Fisher tests
