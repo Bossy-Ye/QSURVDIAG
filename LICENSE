@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Boshuai Ye, Peng Liang and Arif Ali Khan
+Copyright (c) 2026 Boshuai Ye, Ejaz Ahmed, Peng Liang and Arif Ali Khan
 
 Scope: this license applies to the files that provenance/LICENSE_MAP.csv assigns to "MIT" (study-authored
 source code: the Python and shell files under scripts/ and data/, and environment/setup.sh). It does not apply

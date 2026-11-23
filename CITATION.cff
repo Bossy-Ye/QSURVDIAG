@@ -21,6 +21,9 @@ authors:
     given-names: "Boshuai"
     affiliation: "Software Engineering and Information Systems (SEIS), Faculty of Information Technology and Electrical Engineering, University of Oulu"
     email: "boshuai.ye@oulu.fi"
+  - family-names: "Ahmed"
+    given-names: "Ejaz"
+    affiliation: "Software Engineering and Information Systems (SEIS), Faculty of Information Technology and Electrical Engineering, University of Oulu"
   - family-names: "Liang"
     given-names: "Peng"
     affiliation: "School of Computer Science, Wuhan University"
@@ -35,6 +38,8 @@ preferred-citation:
   authors:
     - family-names: "Ye"
       given-names: "Boshuai"
+    - family-names: "Ahmed"
+      given-names: "Ejaz"
     - family-names: "Liang"
       given-names: "Peng"
     - family-names: "Khan"
