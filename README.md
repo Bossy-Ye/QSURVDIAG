@@ -86,7 +86,7 @@ which depend on the order of ties (`data/checks/tie_check.py`). A07 compares mar
 | 5.3.2, 5.5, 7.2: separating settings, refinement check | `data/observation_change/` (`separating_settings.csv`, `later_positions_settings.csv`, `two_basis_states.csv`, `rotated_profile.csv`) |
 | 5.3.3, 5.4, 5.6, Table 3: native QuCheck and the QuCheck case studies | `data/developer_suites/` |
 | 5.4, Table 6 | `data/all_pairs/`; `data/combined_suite/`; `data/prospective/mqt_bench/`; `data/interventions/transfer/`; `data/analyses/requirements_scores_states.json` (evidence requirements) |
-| 5.5, Table 7 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
+| 5.5 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
 | 5.6, Fig. 5, Table 3 | `R2V_FINAL_*.csv` with `data/certification/witness_order/`; `data/scalability/`, `data/external/defects/`, `data/inventory/out/`; `data/position/` (later positions) |
 | 6 | `data/analyses/requirements_scores_states.json` (mutation scores) |
 | 7 | `docs/protocols.md`, section 11; `R2V_FINAL_*.csv` and `data/certification/witness_order/CHANGES.csv` (negative controls); `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/analyses/noise.json`; `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
