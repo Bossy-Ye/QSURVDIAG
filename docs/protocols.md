@@ -318,7 +318,7 @@ Archived files cite the numbering of earlier manuscript versions. The table maps
 | Eq. (4), Eq. (5) (`eq:conc`, the sampling bound) | Eq. (4) |
 | Eq. (3) (`eq:substrate`) | Eq. (3) |
 | Table III (requirement matrix) | Table 1 |
-| Table X (matched changes) | Table 5 |
+| Table X (matched changes) | Table 7 |
 | Fig. 6(b) (runtime per pair) | Fig. 5 |
 | Section III | Section 3 |
 

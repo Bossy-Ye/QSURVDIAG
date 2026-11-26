@@ -1,13 +1,13 @@
 check_id,label,expected,printed_in_article,evidence_level,location
 R-OC00,output_condition/analyze.py rerun equals the archived recorded reproduction / corrected results,True/True,n.a. (logical check),per-run records,Data Availability
-R-OC01,"Matched-changes output-condition row, corrected: newly killed / lost / effect pp / bootstrap CI / LOO range","65/0/27.2/[8.8, 46.2]/[22.0, 31.1]",partly (leave-one-out range not printed),per-run records,Table 5; 5.3.2
-R-OC02,Matched-changes output-condition row: pairs / circuits / exact McNemar p,239/8/5.4e-20,partly (pairs and circuits printed; McNemar p not printed),per-run records,Table 5
+R-OC01,"Matched-changes output-condition row, corrected: newly killed / lost / effect pp / bootstrap CI / LOO range","65/0/27.2/[8.8, 46.2]/[22.0, 31.1]",partly (leave-one-out range not printed),per-run records,Table 7; 5.3.2
+R-OC02,Matched-changes output-condition row: pairs / circuits / exact McNemar p,239/8/5.4e-20,partly (pairs and circuits printed; McNemar p not printed),per-run records,Table 7
 R-OC03,Fig. 4(b): suite omissions killed / total; observation limitations killed / total,65/69; 0/27,yes,per-run records,5.3.2; Fig. 4(b)
 R-OC04,Suite omissions killed by family: GHZ / Simon / QFT,54/9/2,partly (54 printed; 9 and 2 in the package),per-run records,5.3.2; docs/protocols.md section 4
 R-OC06,Guard runs of the five corrected output-condition suites,"5 subjects, 0 failures, 0 errors in 60 runs",partly (implied by 88 of 88; 5 subjects and 60 runs not printed),per-run records,5.3.2
 R-OC07,Rerun size; native verdict recounted; native agrees with the ideal prediction,"149 pairs, 1788 mutant runs; native 149/149 recounted; agree 149/149",no,per-run records + archived ideal prediction,5.3.2
 R-OC08,The four Simon suite omissions the corrected suite does not kill,"simon_4#h02,simon_4#h03,simon_4#h06,simon_4#h07",yes,per-run records,5.3.2
-R-CL00,"circuit_level.py rerun equals circuit_level.out (pairs eligible to change, circuits contributing, sign tests over circuits)",True,yes,per-run records,4.4; 5.3.2; 5.3.3; Table 5; 7.4
+R-CL00,"circuit_level.py rerun equals circuit_level.out (pairs eligible to change, circuits contributing, sign tests over circuits)",True,yes,per-run records,4.4; 5.3.2; 5.3.3; Table 7; 7.4
 R-CM00,combined_suite/analyze.py rerun equals RESULTS.json,True,n.a. (logical check),per-case records,Data Availability
 R-CM01,Per-case comparison table recounted from per-run records,"210 cases; recounted from per-run records: mutant kills 420/420, original failures 420/420",n.a. (logical check),per-run records,docs/protocols.md section 5
 R-CM02,Repair (D) / combined suite (S) reliably kill,174/133,yes,per-run records,7.1; docs/protocols.md section 5
@@ -24,7 +24,7 @@ R-CM12,"Original-validation suites D/S; suite lines D/S (D: 1,762 assertions and
 R-CM13,"Diagnosis time of D over 210 cases, s",10.4,"no (2,000-shot comparison; the principal comparison is data/all_pairs)",archived summary (data/combined_suite/SUMMARY.json),data/combined_suite/RESULTS.json
 R-E200,Baseline comparison: histograms; re-run stored-reference verdicts differing from the archived ones,672 histograms; re-run T verdicts differing from the archived: 0,partly (672 printed),per-run records,docs/protocols.md section 6; 7.1
 R-E201,Stored-reference rule and Hellinger baseline agree; largest difference of the measured distances,672/672; max |dH| 1.8e-04,partly (672 printed),per-run records,7.1; docs/protocols.md section 6
-R-E202,"Hellinger baseline: original fails, certification stream n=2..8 | validation stream",0 0 0 10 12 12 12 | 0 0 0 9 12 12 12,partly (the range 9 to 12 at n = 5 to 8 printed),per-run records,5.5; Table 7 note
+R-E202,"Hellinger baseline: original fails, certification stream n=2..8 | validation stream",0 0 0 10 12 12 12 | 0 0 0 9 12 12 12,partly (the range 9 to 12 at n = 5 to 8 printed),per-run records,5.5
 R-E203,Widths meeting the original-validity rule (at most 1 of 12),"2,3,4",yes,per-run records,5.5
 R-E204,"Constructed pair, X parity validation: kills of C / failures of P, n=2..8",12/0 12/0 12/0 12/0 12/0 12/0 12/0,yes,per-run records,5.5
 R-E205,"Counterpart under the diagnostic baseline, certification/validation, constructed then benchmark-coupling, n=2..4",0/0 0/0 0/0 0/0 0/0 0/0,yes,per-run records,5.5
@@ -38,11 +38,11 @@ R-A02,"x_selection_check.py rerun equals x_selection_check.out (v2 order; n=2: n
 R-AP00,allpairs_analyze.py rerun equals ALLPAIRS_RESULTS.json,True,n.a. (logical check),per-run records,Data Availability
 R-AP01,Executions; CLI = in-process; per-assertion CLI = in-process = rescored; values agree; histogram identity violations,7200/7200/7200/7200/0,n.a. (logical check),per-run records,4.4; docs/protocols.md section 5
 R-AP02,Paired runs on one histogram; witness status equal where A contains it; D kill without A kill,2520/2520; 2364/2364; D kill without A kill 0,partly (the pairing printed; counts not printed),per-run records,4.3
-R-AP03,"Supported actions at N = 8,000: D / A",187/192,yes,per-run records,5.4; Table 6
-R-AP04,Both / only D / only A / neither,181/6/11/12,yes,per-run records,5.4; Table 6
+R-AP03,"Supported actions at N = 8,000: D / A",187/192,yes,per-run records,5.4; Table 8
+R-AP04,Both / only D / only A / neither,181/6/11/12,yes,per-run records,5.4; Table 8
 R-AP05,Witness in A / outside; supported D/A in each; A never kills outside,"197/13; in A 181/192; outside 6/0, A never kills 7","partly (6, 181 and 192 printed)",per-run records,5.4; docs/protocols.md section 5
-R-AP06,Issued repairs D/A of 165; withheld D/A of 45,164/158 of 165; 23/34 of 45,yes,per-run records,Table 6
-R-AP07,Mutant 12 of 12 D/A; original fails >1 D/A; tool errors,189/192; original fails >1 2/0; tool errors 0,partly (192 and the two original failures printed),per-run records,5.4; Table 6
+R-AP06,Issued repairs D/A of 165; withheld D/A of 45,164/158 of 165; 23/34 of 45,yes,per-run records,Table 8
+R-AP07,Mutant 12 of 12 D/A; original fails >1 D/A; tool errors,189/192; original fails >1 2/0; tool errors 0,partly (192 and the two original failures printed),per-run records,5.4; Table 8
 R-AP08,Witness difference below theta + 0.01: cases / D / A supported,14/2/6,yes,per-run records,5.4
 R-AP09,Adjacent-pair suite derived from A's per-assertion results: supported,165,no (package only),per-run records,docs/protocols.md section 5
 R-AP10,Corpus D/A of 187; MQT Bench D/A of 23,165/170 of 187; 22/22 of 23,no,per-run records,data/all_pairs/ALLPAIRS_RESULTS.json
@@ -65,15 +65,15 @@ R-X107,"Refinement check, 100 observation limitations: rerun equals the archived
 R-X108,"Observation limitations of the 20 circuits and later positions whose original ends in two basis states: named setting is X on the qubits whose outcome is not fixed; named setting rotates exactly these qubits; with at most one Y; twelve-qubit multiplier pairs, their qubits whose outcome is not fixed and settings evaluated; X on every qubit whose outcome is not fixed separates: all 100, QFT/Grover/W-state, Simon (qubits rotated by the named settings, of qubits not fixed)","two basis states: 43/44 named X, same qubits 44/44, at most one Y 44/44, multiplier pairs 8 with [6] qubits, [69361] evaluated; X on superposed separates 89/100: grover qft wstate 46/46, Simon 0/10 (named rotate [2] of [4])","yes (44, 43, 89, 100, ten, two and four printed)",archived ideal states for the 65 later-position rows (rerun needs select_mutants.py outputs); per-case records,5.3.2
 R-X109,"Inverse test on the 20 circuits (ideal model): shots per run for probability at least 0.95 of failing all 12 runs, observation limitations and suite omissions; contract equivalences with a different final state",CL3:35 max 35 median 8 CL4:79 max 11 median 4; contract equivalences with a different state 0/93,partly (35 and 93 printed),per-case records,8
 R-X400,position/analyze.py rerun equals the archived final table / per-pair runs / summary,True/True/True,n.a. (logical check),per-run records,Data Availability
-R-X401,"Later positions: pairs, survivors; observation limitations, suite omissions, unresolved; sites","360 pairs, 188 survivors; OL 65, SO 25, unresolved 11; OL sites 50, SO sites 21",yes,per-run records,Table 3; 5.3.2; 7.3
+R-X401,"Later positions: pairs, survivors; observation limitations, suite omissions, unresolved; sites","360 pairs, 188 survivors; OL 65, SO 25, unresolved 11; OL sites 50, SO sites 21",yes,per-run records,Table 5; 5.3.2; 7.3
 R-X402,"Later positions, five other circuits: observation limitations by program and third; suite omissions and sites","OL 17 in simon_4,wstate_4 (6 middle, 11 last); SO 15 at 11 sites",yes,per-run records,5.3.1; 5.6
 R-X403,"Later positions, Q# and QASMBench and MQT Bench: observation limitations","external OL 38 in 8 programs, qft_n4 17; MQT OL 10 in rg_mult_12,rg_mult_8",yes,per-run records,5.6
 R-X404,Later positions: original guards,18 programs; guards clean 18; original failures 0 in 216 runs,no,per-run records,Data Availability
 R-X200,developer_suites/analyze.py and compare_with_predictions.py rerun equal the archived diagnosis / per-run table / QuCheck table / summaries,True/True/True/True/True,n.a. (logical check),per-run records,Data Availability
-R-X201,"QuCheck case studies, unit tests: mutants, survivors; outcomes; programs with observation limitations","120 mutants, 65 survivors; CE 30, EIE 8, OL 6, SO 0, unresolved 21; OL in quantum_teleportation",yes,per-run records,Table 3; 5.6
-R-X202,"QuCheck case studies, property tests: mutants, survivors; outcomes","180 mutants, 77 survivors; CE 31, EIE 6, OL 0, SO 1, unresolved 39",yes,per-run records,Table 3; 5.6
+R-X201,"QuCheck case studies, unit tests: mutants, survivors; outcomes; programs with observation limitations","120 mutants, 65 survivors; CE 30, EIE 8, OL 6, SO 0, unresolved 21; OL in quantum_teleportation",yes,per-run records,Table 5; 5.6
+R-X202,"QuCheck case studies, property tests: mutants, survivors; outcomes","180 mutants, 77 survivors; CE 31, EIE 6, OL 0, SO 1, unresolved 39",yes,per-run records,Table 5; 5.6
 R-X203,"QuCheck case studies: unresolved, split, semantics-preserving; suites with such splits and with guard failures","unresolved 60, split 59, em 40; suites with em splits 4, of which failing the original in guard runs 3",yes,per-run records,5.6
-R-X204,QuCheck case studies: property tests on the unit-test observation limitations; contract equivalence against the authors' labels,property tests kill 4 of 6 observation limitations; labels agree 179/180; exception superdense_coding:m6,yes,per-run records,Table 3; 5.6
+R-X204,QuCheck case studies: property tests on the unit-test observation limitations; contract equivalence against the authors' labels,property tests kill 4 of 6 observation limitations; labels agree 179/180; exception superdense_coding:m6,yes,per-run records,Table 5; 5.6
 R-X205,QuCheck case studies: executed-input equalities over both suites,14 executed-input equalities,yes,per-run records,5.6
 R-X206,Native QuCheck on the 20 circuits: detections in 12 of 12 runs; controls with the shipped correction and with step-down Holm,only QuCheck 28/28 detected in 12 of 12 (Holm 28); only QUTest 0/25 (never 9); controls 175 and 2 with Holm of 816,yes (as 21% and 0.25%; never 9 not printed),per-run records,5.3.3
 R-X207,Native QuCheck on the transfer cases with and without a witness above theta,"transfer with witness 15/15; without 5 never, 1 split of 6",partly (15/15 and 6 printed),per-run records,5.4

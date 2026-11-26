@@ -76,18 +76,18 @@ which depend on the order of ties (`data/checks/tie_check.py`). A07 compares mar
 | Article | Records |
 |---|---|
 | Table 1 | `data/prospective/mqt_bench/frozen_deps/V2_SPECIFICATION.md` (section 6), `data/prospective/registration/EVIDENCE_OBLIGATION_REGISTRY.yaml` |
-| 3.1, Table 4, 5.1 | `data/profiles/`, `data/structural/`, `data/external/developer_tests/`; `data/checks/parameter_and_distance.py`, `observation_limited_universe.py` |
+| 3.1, Table 6, 5.1 | `data/profiles/`, `data/structural/`, `data/external/developer_tests/`; `data/checks/parameter_and_distance.py`, `observation_limited_universe.py` |
 | 3.2 | `data/certification/witness_order/`; `data/certification/outcomes/R2V_FINAL_PRIMARY.csv`, `R2_MARGINS*.csv` |
 | 3.4 | `data/certification/outcomes/R2V_BOUND.json`, `r2v_bound.py`; `data/implementation/tests/` |
-| 4.2, Table 2; Table 3 | `data/primary/`, `data/external/`, `data/prospective/`, `data/scalability/`, `data/inventory/out/`; outcomes: `data/certification/outcomes/R2V_FINAL_*.csv`, `data/position/outcomes.csv`, `data/developer_suites/diagnosis.csv` |
+| 4.2, Tables 2 and 3; Table 5 | `data/primary/`, `data/external/`, `data/prospective/`, `data/scalability/`, `data/inventory/out/`; outcomes: `data/certification/outcomes/R2V_FINAL_*.csv`, `data/position/outcomes.csv`, `data/developer_suites/diagnosis.csv` |
 | 4.3 | `docs/protocols.md`; the `PLAN.md` of each experiment |
 | 5.2 | `data/certification/equivalence/`; `data/output_condition/simon_movers.out`; `data/analyses/register_contracts.json` |
-| 5.3, Figs. 3 and 4, Table 5 | `data/certification/outcomes/` (`R2V_FINAL_*.csv`, `R2V_TABLE_X.json`, `R2V_DECISION_GRID.csv`, `r2v_stats.py`), `data/output_condition/`, `data/checks/circuit_level.py`; `data/analyses/requirements_scores_states.json` (distinct states and sites) |
+| 5.3, Figs. 3 and 4, Table 7 | `data/certification/outcomes/` (`R2V_FINAL_*.csv`, `R2V_TABLE_X.json`, `R2V_DECISION_GRID.csv`, `r2v_stats.py`), `data/output_condition/`, `data/checks/circuit_level.py`; `data/analyses/requirements_scores_states.json` (distinct states and sites) |
 | 5.3.2, 5.5, 7.2: separating settings, refinement check | `data/observation_change/` (`separating_settings.csv`, `later_positions_settings.csv`, `two_basis_states.csv`, `rotated_profile.csv`) |
-| 5.3.3, 5.4, 5.6, Table 3: native QuCheck and the QuCheck case studies | `data/developer_suites/` |
-| 5.4, Table 6 | `data/all_pairs/`; `data/combined_suite/`; `data/prospective/mqt_bench/`; `data/interventions/transfer/`; `data/analyses/requirements_scores_states.json` (evidence requirements) |
+| 5.3.3, 5.4, 5.6, Table 5: native QuCheck and the QuCheck case studies | `data/developer_suites/` |
+| 5.4, Table 8 | `data/all_pairs/`; `data/combined_suite/`; `data/prospective/mqt_bench/`; `data/interventions/transfer/`; `data/analyses/requirements_scores_states.json` (evidence requirements) |
 | 5.5 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
-| 5.6, Fig. 5, Table 3 | `R2V_FINAL_*.csv` with `data/certification/witness_order/`; `data/scalability/`, `data/external/defects/`, `data/inventory/out/`; `data/position/` (later positions) |
+| 5.6, Fig. 5, Table 5 | `R2V_FINAL_*.csv` with `data/certification/witness_order/`; `data/scalability/`, `data/external/defects/`, `data/inventory/out/`; `data/position/` (later positions) |
 | 6 | `data/analyses/requirements_scores_states.json` (mutation scores) |
 | 7 | `docs/protocols.md`, section 11; `R2V_FINAL_*.csv` and `data/certification/witness_order/CHANGES.csv` (negative controls); `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/analyses/noise.json`; `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
 | 8 | `data/certification/outcomes/R2V_FINAL_PRIMARY.csv` (state margins of the inverse test) |
