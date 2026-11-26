@@ -77,7 +77,7 @@ which depend on the order of ties (`data/checks/tie_check.py`). A07 compares mar
 |---|---|
 | Table 1 | `data/prospective/mqt_bench/frozen_deps/V2_SPECIFICATION.md` (section 6), `data/prospective/registration/EVIDENCE_OBLIGATION_REGISTRY.yaml` |
 | 3.1, Table 6, 5.1 | `data/profiles/`, `data/structural/`, `data/external/developer_tests/`; `data/checks/parameter_and_distance.py`, `observation_limited_universe.py` |
-| 3.2 | `data/certification/witness_order/`; `data/certification/outcomes/R2V_FINAL_PRIMARY.csv`, `R2_MARGINS*.csv` |
+| 3.2, 3.3 | `data/certification/witness_order/`; `data/certification/outcomes/R2V_FINAL_PRIMARY.csv`, `R2_MARGINS*.csv` |
 | 3.4 | `data/certification/outcomes/R2V_BOUND.json`, `r2v_bound.py`; `data/implementation/tests/` |
 | 4.2, Tables 2 and 3; Table 5 | `data/primary/`, `data/external/`, `data/prospective/`, `data/scalability/`, `data/inventory/out/`; outcomes: `data/certification/outcomes/R2V_FINAL_*.csv`, `data/position/outcomes.csv`, `data/developer_suites/diagnosis.csv` |
 | 4.3 | `docs/protocols.md`; the `PLAN.md` of each experiment |
@@ -88,9 +88,8 @@ which depend on the order of ties (`data/checks/tie_check.py`). A07 compares mar
 | 5.4, Table 8 | `data/all_pairs/`; `data/combined_suite/`; `data/prospective/mqt_bench/`; `data/interventions/transfer/`; `data/analyses/requirements_scores_states.json` (evidence requirements) |
 | 5.5 | `data/qedc/`; `data/certification/witness_order/QEDC_X_RUNS.csv` |
 | 5.6, Fig. 5, Table 5 | `R2V_FINAL_*.csv` with `data/certification/witness_order/`; `data/scalability/`, `data/external/defects/`, `data/inventory/out/`; `data/position/` (later positions) |
-| 6 | `data/analyses/requirements_scores_states.json` (mutation scores) |
+| 6 | `data/analyses/requirements_scores_states.json` (mutation scores); `data/certification/outcomes/R2V_FINAL_PRIMARY.csv` (state margins of the inverse test) |
 | 7 | `docs/protocols.md`, section 11; `R2V_FINAL_*.csv` and `data/certification/witness_order/CHANGES.csv` (negative controls); `provenance/FREEZE_C.*`, `FREEZE_D.*`; `data/profiles/FINAL_PROFILE_RECONSTRUCTION_DIFF.csv`; `data/position/`; `data/analyses/noise.json`; `data/certification/outcomes/R2V_RULE_CHANGES.csv`; `data/combined_suite/`; `data/checks/circuit_level.py`; `data/inventory/out/concentration.json`, `data/inventory/POSITION_CROSSTAB.txt` |
-| 8 | `data/certification/outcomes/R2V_FINAL_PRIMARY.csv` (state margins of the inverse test) |
 
 The diagnosis code is archived with the records that use it: the driver in `data/implementation/qsurvdiag/`, the
 comparisons, candidate selection and evidence check in `data/prospective/mqt_bench/frozen_deps/` (`e1_relations.py`,

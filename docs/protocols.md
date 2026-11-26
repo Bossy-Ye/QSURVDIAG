@@ -174,7 +174,7 @@ fidelities of P and P_bench differ by at most 3.6e-4 and their computational-bas
 acceptance rule passes a run when the Hellinger distance is at most theta, a Hellinger fidelity of at least (1 -
 theta^2)^2 = 0.99500625. Records: `data/qedc/`.
 
-## 7. Other programs (RQ6)
+## 7. Programs beyond the 20 circuits (RQ6)
 
 *Q# and QASMBench programs.* Of 270 mutants, 111 are killed. The 159 survivors receive 28 contract equivalences, 94
 executed-input equalities, 30 observation limitations (27 in the seven Q# operations, 3 in the two QASMBench circuits),
