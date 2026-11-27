@@ -8,7 +8,7 @@ import csv, json, os, sys, time
 from itertools import combinations
 from multiprocessing import Pool
 import numpy as np
-ROOT = "/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot"
+ROOT = "<study-root>/qsurvcert_pilot"
 sys.path.insert(0, ROOT); sys.path.insert(0, f"{ROOT}/cross_tool_stage/qutest")
 sys.path.insert(0, f"{ROOT}/confirmatory")
 from qiskit import QuantumCircuit, qasm2

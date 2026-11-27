@@ -20,7 +20,7 @@ from qutest_execution_adapter import adapt
 from qiskit import qasm2
 from qiskit.qasm3 import loads as q3loads
 
-PA = "/Users/mac/Desktop/ZX-STUDY/paper-artifact"
+PA = "<study-root>/paper-artifact"
 def h(gl): return hashlib.sha256(canon_json(gl).encode()).hexdigest()
 def gates_of_qc(qc):
     return [{"gate": i.operation.name, "q": [qc.find_bit(b).index for b in i.qubits],

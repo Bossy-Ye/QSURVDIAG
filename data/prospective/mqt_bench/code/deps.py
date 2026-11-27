@@ -6,8 +6,8 @@ Every runner calls verify() first and refuses to run if any live file differs fr
 """
 import hashlib, os, json, sys
 
-PILOT = "/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot"
-PA = "/Users/mac/Desktop/ZX-STUDY/paper-artifact"
+PILOT = "<study-root>/qsurvcert_pilot"
+PA = "<study-root>/paper-artifact"
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 

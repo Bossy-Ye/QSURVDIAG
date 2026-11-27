@@ -31,8 +31,8 @@ _ns={"QuantumCircuit":QuantumCircuit,"Operator":__import__("qiskit.quantum_info"
 exec(compile(_a.Module(body=_k,type_ignores=[]),"e1_07_diagnose.py","exec"),_ns)
 UNITARY_CONTRACTS=_ns["UNITARY_CONTRACTS"]; _unitary=_ns["_unitary"]; _uc=_ns["_uc"]; evidence_for=_ns["evidence_for"]
 
-EXT="/Users/mac/Desktop/ZX-STUDY/paper-artifact/manuscript/tse/external_cohort"
-PRO="/Users/mac/Desktop/ZX-STUDY/paper-artifact/manuscript/tse/protocol"
+EXT="<study-root>/paper-artifact/manuscript/tse/external_cohort"
+PRO="<study-root>/paper-artifact/manuscript/tse/protocol"
 OUT=EXT+"/RUN_002"; os.makedirs(OUT,exist_ok=True)
 V3=json.load(open(PRO+"/EXTERNAL_COHORT_FREEZE_v3.json"))
 OUTREG={"ParityPhase":list(range(6)),"Is2PowerPhase":list(range(6)),"LessThanPhase":list(range(5)),

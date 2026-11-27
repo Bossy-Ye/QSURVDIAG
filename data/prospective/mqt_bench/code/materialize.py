@@ -29,7 +29,7 @@ PER_SUBJECT = 30
 OPS = ("gate_deletion", "gate_insertion", "gate_replacement")
 CLS = ("local_basis_amplitude", "phase_parameterized", "entangling_controlled")
 STRATA = [(o, c) for o in OPS for c in CLS]
-EXT_RECORD = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/manuscript/tse/external_cohort/MATERIALIZATION_RECORD.json"
+EXT_RECORD = "<study-root>/paper-artifact/manuscript/tse/external_cohort/MATERIALIZATION_RECORD.json"
 
 # ---- frozen apportionment, extracted from the frozen copy of s2_cohort.py
 S2 = os.path.join(ROOT, "frozen_deps", "s2_cohort.py")

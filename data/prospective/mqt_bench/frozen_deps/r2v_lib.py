@@ -7,8 +7,8 @@ import hashlib, json, os, sys
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PA = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/"
-QSD = os.environ.get("QSD_ROOT", "/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot")
+PA = "<study-root>/paper-artifact/"
+QSD = os.environ.get("QSD_ROOT", "<study-root>/qsurvcert_pilot")
 sys.path.insert(0, PA + "github/code/qsurvdiag")
 sys.path.insert(0, PA + "manuscript/tse/protocol/impl")
 # the pilot's copy of the frozen adapter (byte-identical body) resolves the QUTest binary of

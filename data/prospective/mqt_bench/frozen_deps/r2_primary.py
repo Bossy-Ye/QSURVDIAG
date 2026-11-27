@@ -19,12 +19,12 @@ For every CL3 pair it also evaluates the tool's entanglement witness over every 
 """
 import csv, json, os, sys, time, itertools
 import numpy as np
-sys.path.insert(0, "/Users/mac/Desktop/ZX-STUDY/paper-artifact/github/code/qsurvdiag")
+sys.path.insert(0, "<study-root>/paper-artifact/github/code/qsurvdiag")
 import e1_lib as L, e1_relations as REL
 from qsurvdiag_confirmatory import exists_above, T, F, U
 def tri(v): return "true" if v is T else ("false" if v is F else "undecided")
 
-R = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/github/results/recovered/"
+R = "<study-root>/paper-artifact/github/results/recovered/"
 OUT = os.path.dirname(os.path.abspath(__file__))
 THETAS = [0.01, 0.025, 0.05, 0.10, 0.25, 0.50]
 

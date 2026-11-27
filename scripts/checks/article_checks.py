@@ -1,1624 +1,897 @@
-"""Recompute the values of check module article_checks in expected/values.csv from the archived
+"""Values behind the article (checks M001 to M322 of expected/values.csv), recomputed from the archived
 records."""
 
-import sys as _sys
-
-_sys.dont_write_bytecode = True  # keep the package free of interpreter caches
-import csv, json, os, re, statistics as st, sys
+import csv, hashlib, json, math, re, sys
 from collections import Counter, defaultdict
+from importlib import metadata
 from pathlib import Path
+from statistics import median
 
-# Archived records are addressed by package path and checked against provenance/source_manifest.csv.
+sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "lib"))
-from paths import orig as _orig, Dir as _Dir, out_dir as _out_dir
-
-resolve = _orig
-import witness_order as _wo
+import witness_order
+from paths import CATALOGUE, ROOT, archived, out_dir
 
 
-def rows(p):
-    return list(csv.DictReader(open(resolve(p))))
+def rows(path):
+    with open(archived(path)) as f:
+        return witness_order.final(path, list(csv.DictReader(f)))
 
 
-def jsn(p):
-    return json.load(open(resolve(p)))
+def load(path):
+    with open(archived(path)) as f:
+        return json.load(f)
 
 
-REF = rows("data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv")
-# Baseline: S_MIN with ideal references at N = 2000, theta = 0.05, R = 12 (B5_A1E_REFERENCE_EXACT);
-# B1_REFERENCE_RERUN_FRESH holds the sampled-reference contrast.
-_EXACT = {r["mutant_id"]: r for r in rows("data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv")}
+def records(path):
+    with open(archived(path)) as f:
+        return [json.loads(line) for line in f]
 
 
-def _exact_report(r):
-    """Report at the declared baseline: the published report, except where the exact
-    reference moves the native verdict.  A split native verdict routes to Unresolved."""
-    e = _EXACT[r["mutant_id"]]
+allocation = rows("data/primary/manifests/B1_PRIMARY_POPULATION.csv")
+excluded = rows("data/primary/manifests/B1_UNRECOVERED_CONSTRUCTION_EXCLUSIONS.csv")
+eligible_other = rows("data/primary/manifests/B1_PROSPECTIVE_ELIGIBLE.csv")
+development = rows("data/primary/records/599_B1_FROZEN_CONSTRUCTION_MEMBERSHIP.csv")
+sampled_ref = rows("data/primary/records/599_B1_REFERENCE_RERUN_FRESH.csv")
+exact = rows("data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv")
+contract = rows("data/primary/records/599_B1_CONTRACT_RERUN.csv")
+lattice = rows("data/primary/records/599_B1_OBSERVATION_RERUN.csv")
+shot_cells = rows("data/primary/records/599_B2_SHOT_FRESH.csv")
+tolerance_cells = rows("data/primary/records/599_B2_TOLERANCE_FRESH.csv")
+bound_cells = rows("data/primary/records/599_B2_BOUND_FRESH.csv")
+ablations = rows("data/primary/records/599_B2_EVIDENCE_ABLATION_FRESH.csv")
+suite_runs = rows("data/primary/records/599_B5_A1G_POPULATION.csv")
+suite_guards = rows("data/primary/decision/B5_A1G_GUARD.csv")
+ghz_register = rows("data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv")
+qucheck_profile = rows("data/primary/decision/B5_A4_INTERFACE_CORRECTED.csv")
+profiles = rows("data/primary/records/T1_4_INTERFACE_599.csv")
+output_condition = load("data/primary/records/599_OUTPUT_CONDITION.json")
+transpiler = load("data/primary/decision/B5_A3_SUMMARY.json")
+state_groups = rows("data/primary/figures/EFFECT_CLASS_COMPRESSION.csv")
+transfer = rows("data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv")
+width_manifest = rows("data/scalability/E4_SCALE_MANIFEST.csv")
+width_cells = records("data/scalability/B2_SCALE_CELLS_FRESH.jsonl")
+corpus_relations = load("data/scalability/B2_CORPUS_FRESH.json")
+corpus_all = records("data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl")
+corpus_eligibility = rows("data/scalability/corpus/T2A_ELIGIBILITY.csv")
+strata = load("data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json")
+stratum = load("data/scalability/corpus/T2A_STRATUM_MECHANISM.json")
+btd_mechanism = load("data/scalability/corpus/T2A_CL5_MECHANISM.json")
+timing = load("data/scalability/corpus/T2C_TIMING_SUMMARY.json")
+entailment = load("data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json")
+defects = rows("data/external/defects/B3_REAL_DEFECTS_FRESH.csv")
+defect_eligibility = rows("data/external/defects/B3_QUTEST_ELIGIBILITY_FRESH.csv")
+exclusions = rows("data/prospective/cross_tool/cohort/S2_ELIGIBILITY_EXCLUSIONS.csv")
+specification = archived("data/prospective/mqt_bench/frozen_deps/V2_SPECIFICATION.md").read_bytes()
+environments = load("data/profiles/E5_ENVIRONMENT_LOCK.json")["reproduction_environments"]
+muskit = load("data/profiles/E3_PROFILE_MATRIX.json")["interfaces"]["Muskit"]
+rerun_primary = rows("data/certification/outcomes/R2_PRIMARY_PAIRS.csv")
+rerun_corpus_width = rows("data/certification/outcomes/R2_CORPUS_WIDTH_PAIRS.csv")
+rerun_external_ol = rows("data/certification/outcomes/R2_EXTERNAL_CL3.csv")
+low_order = rows("data/certification/outcomes/R2_CHEAP_BASELINE.csv")
+margins = rows("data/certification/outcomes/R2_MARGINS.csv")
+margins_ext = rows("data/certification/outcomes/R2_MARGINS_EXT.csv")
+excluded_kinds = rows("data/certification/outcomes/R2_CONDITIONAL_SEPARATIONS.csv")
+numbers = load("data/certification/outcomes/R2V_NUMBERS.json")
+matched = load("data/certification/outcomes/R2V_TABLE_X.json")
+statistics = load("data/certification/outcomes/R2V_STATISTICS.json")
+bound = load("data/certification/outcomes/R2V_BOUND.json")
+relation_corpus = load("data/certification/outcomes/R2V_RELATION_CORPUS.json")
+distance_ms = load("data/certification/outcomes/R2V_DISTANCE_TIMING.json")["median_ms_by_width"]
+qiskit_16164 = load("data/certification/outcomes/R2V_RELEASED_CL3.json")
+final_primary = rows("data/certification/outcomes/R2V_FINAL_PRIMARY.csv")
+final_width = rows("data/certification/outcomes/R2V_FINAL_WIDTH.csv")
+final_corpus = rows("data/certification/outcomes/R2V_FINAL_CORPUS.csv")
+final_external = rows("data/certification/outcomes/R2V_FINAL_EXTERNAL.csv")
+final_defect = rows("data/certification/outcomes/R2V_FINAL_DEFECT.csv")
+rule_changes = rows("data/certification/outcomes/R2V_RULE_CHANGES.csv")
+native = rows("data/certification/outcomes/R2V_NATIVE.csv") + rows(
+    "data/certification/outcomes/R2V_NATIVE_DEFECTS.csv"
+)
+with open(ROOT / "data/certification/witness_order/IMPACT.csv") as f:
+    impact = list(csv.DictReader(f))
+
+OUTCOMES = ("CL1", "CL2", "CL3", "CL4", "CL5", "Unresolved")
+THETAS = ("0.01", "0.025", "0.05", "0.1", "0.25", "0.5")
+BAND_LO, BAND_HI, EQUAL_BELOW = 1e-10, 1e-8, 1e-9
+
+# The baseline is the minimal suite with exact references. A survivor keeps the outcome of its
+# sampled-reference record, unless the exact reference splits its native verdict: then it is unresolved.
+exact_by_id = {r["mutant_id"]: r for r in exact}
+
+
+def baseline_outcome(r):
+    e = exact_by_id[r["mutant_id"]]
     if e["verdict_changed"] == "True" and e["exact_ref_native_verdict"] == "SPLIT":
         return "Unresolved"
     return r["diagnostic_outcome"]
 
 
-NK = [
-    dict(r, diagnostic_outcome=_exact_report(r))
-    for r in REF
-    if _EXACT[r["mutant_id"]]["exact_ref_native_verdict"] != "KILLED"
+survivors = [
+    dict(r, diagnostic_outcome=baseline_outcome(r))
+    for r in sampled_ref
+    if exact_by_id[r["mutant_id"]]["exact_ref_native_verdict"] != "KILLED"
 ]
-CERT = {r["mutant_id"] for r in NK if r["diagnostic_outcome"] != "Unresolved"}
-CON = rows("data/primary/records/599_B1_CONTRACT_RERUN.csv")
-OB = rows("data/primary/records/599_B1_OBSERVATION_RERUN.csv")
-SU = rows("data/primary/records/599_B1_SUITE_RERUN.csv")
-IF = rows("data/primary/records/B1_INTERFACE_RERUN.csv")
-POP = rows("data/primary/manifests/B1_PRIMARY_POPULATION.csv")
-UNR = rows("data/primary/manifests/B1_UNRECOVERED_CONSTRUCTION_EXCLUSIONS.csv")
-PRO = rows("data/primary/manifests/B1_PROSPECTIVE_ELIGIBLE.csv")
-MEM = rows("data/primary/records/599_B1_FROZEN_CONSTRUCTION_MEMBERSHIP.csv")
-SH = rows("data/primary/records/599_B2_SHOT_FRESH.csv")
-TO = rows("data/primary/records/599_B2_TOLERANCE_FRESH.csv")
-BD = rows("data/primary/records/599_B2_BOUND_FRESH.csv")
-AB = rows("data/primary/records/599_B2_EVIDENCE_ABLATION_FRESH.csv")
-A1G = rows("data/primary/records/599_B5_A1G_POPULATION.csv")
-A1GG = rows("data/primary/decision/B5_A1G_GUARD.csv")
-A1K = rows("data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv")
-IF4 = rows("data/primary/decision/B5_A4_INTERFACE_CORRECTED.csv")
-T4B = rows("data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv")
-E1E = rows("data/primary/records/599_B5_A1E_REFERENCE_EXACT.csv")
-_k = lambda s_: {r["mutant_id"] for r in A1G if r["suite"] == s_ and r["outcome"] == "KILLED"}
-_ev = [r for r in T4B if r["outcome"] != "NOT_EVALUABLE"]
-SC = [json.loads(l) for l in open(resolve("data/scalability/B2_SCALE_CELLS_FRESH.jsonl"))]
-CO = jsn("data/scalability/B2_CORPUS_FRESH.json")
-DF = rows("data/external/defects/B3_REAL_DEFECTS_FRESH.csv")
-EL = rows("data/external/defects/B3_QUTEST_ELIGIBILITY_FRESH.csv")
-RT = rows("data/external/defects/B3_RELATION_TABLE_FRESH.csv")
-STA = rows("data/primary/decision/B2_STATISTICS_FRESH.csv")
-SGL = rows("data/primary/suites/SUITE_GUARD_LEDGER.csv")
-COMM = rows("data/primary/records/599_B1_SUITE_COMMON_EVALUABLE.csv")
+reported = {r["mutant_id"] for r in survivors if r["diagnostic_outcome"] != "Unresolved"}
+outcome = Counter(r["diagnostic_outcome"] for r in survivors)
+outcome_in = lambda p: Counter(r["diagnostic_outcome"] for r in survivors if r["population"] == p)
+uniform = Counter(r["report_uniform_arbitrary_unitary"] for r in contract if r["mutant_id"] in reported)
+declared = Counter(r["report_declared"] for r in contract if r["mutant_id"] in reported)
 
-d = Counter(r["diagnostic_outcome"] for r in NK)
-dp = lambda p: Counter(r["diagnostic_outcome"] for r in NK if r["population"] == p)
-uni = Counter(r["report_uniform_arbitrary_unitary"] for r in CON if r["mutant_id"] in CERT)
-dec = Counter(r["report_declared"] for r in CON if r["mutant_id"] in CERT)
-cl3 = [r for r in IF if r["reference_report"] == "CL3"]
-stable = [r for r in SH if r["native_verdict"] in ("KILLED", "SURVIVED")]
-gu = [r for r in stable if r["guaranteed"] == "True"]
-UNIV = [r for r in BD if r["role"] == "universe_decisive"]
-refc = [r for r in UNIV if r["theta"] == "0.05" and r["N"] == "2000"]
-sup = lambda g: sum(1 for r in g if r["bound_status"] == "SUPPORTED")
-# Suite kills: B5_A1G_POPULATION (ideal references, N = 8000, all 88 subject x suite cells clean).
-_REPMAP = {r["mutant_id"]: r["published_report"] for r in E1E}
-sa = defaultdict(lambda: defaultdict(lambda: [0, 0]))
-for r in A1G:
-    _rep = _REPMAP.get(r["mutant_id"])
-    if r["suite"] == "S_MIN" or _rep not in ("CL3", "CL4"):
-        continue
-    c = sa[r["suite"]][_rep]
-    c[1] += 1
-    c[0] += r["outcome"] == "KILLED"
-scw = {}
-for n in sorted({int(r["n"]) for r in SC}):
-    g = [r for r in SC if int(r["n"]) == n]
-    scw[n] = g
-asw = lambda r: r["timings"]["B_universe"] + r["timings"]["C_relations"]
-_REL_BY_CELL = defaultdict(set)  # Stage-2 relations per (pair, theta) across the shot budgets
-for _r in SH:
-    _REL_BY_CELL[(_r["mutant_id"], _r["theta"])].add(
-        tuple(_r[k] for k in ("R_C", "R_S", "R_O", "R_A", "R_T"))
-    )
-scc = Counter(("KILLED" if r["native_verdict"] == "KILLED" else r["report"]) for r in SC)
-
-# Corpus: stratified certification
-_T2A = [json.loads(_l) for _l in open(resolve("data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl"))]
-_T2E = {(r["case_set"], r["pair_id"]): r for r in rows("data/scalability/corpus/T2A_ELIGIBILITY.csv")}
-for _r in _T2A:
-    _r["diag"] = _T2E[(_r["case_set"], _r["pair_id"])]["diagonal_stratum"] == "True"
-_T2A_OK = [r for r in _T2A if r["status"] == "OK"]
-_T2A_ND = [r for r in _T2A_OK if not r["diag"]]
-_T2A_D = [r for r in _T2A_OK if r["diag"]]
-_T2A_SUR = [r for r in _T2A_OK if r["native_verdict"] == "SURVIVED"]
-_cl3 = lambda g: sum(1 for r in g if r["diagnostic_outcome"] == "CL3")
-_T2A_SUB = [r for r in _T2A_OK if (not r["R_S"]) and r["R_O"]]
-_T2A_W = {
-    w: sum(1 for r in _T2A_OK if r["n"] == w and r["diagnostic_outcome"] == "CL3") for w in range(2, 15)
+killed_by = lambda suite: {
+    r["mutant_id"] for r in suite_runs if r["suite"] == suite and r["outcome"] == "KILLED"
 }
-_T2A_M = jsn("data/scalability/corpus/T2A_CL5_MECHANISM.json")
-_T2C = jsn("data/scalability/corpus/T2C_TIMING_SUMMARY.json")
-_T31 = jsn("data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json")
-_OC = jsn("data/primary/records/599_OUTPUT_CONDITION.json")
-_T2A_S = jsn("data/scalability/corpus/T2A_STRATUM_MECHANISM.json")
+published = {r["mutant_id"]: r["published_report"] for r in exact}
+suite_kills = defaultdict(lambda: defaultdict(lambda: [0, 0]))
+for r in suite_runs:
+    if r["suite"] != "S_MIN" and published.get(r["mutant_id"]) in ("CL3", "CL4"):
+        cell = suite_kills[r["suite"]][published[r["mutant_id"]]]
+        cell[0] += r["outcome"] == "KILLED"
+        cell[1] += 1
+suite_run = defaultdict(dict)
+for r in suite_runs:
+    suite_run[r["mutant_id"]][r["suite"]] = r
+kills = lambda m, suite: suite_run[m][suite]["outcome"] == "KILLED"
 
 
-def _wilson(k, n, z=1.959963984540054):
-    p_ = k / n
-    d = 1 + z * z / n
-    c = (p_ + z * z / (2 * n)) / d
-    h = z / d * ((p_ * (1 - p_) / n + z * z / (4 * n * n)) ** 0.5)
-    return round(max(0.0, c - h) * 100, 1), round(min(1.0, c + h) * 100, 1)
+def axis(m):
+    cover, family, both = kills(m, "S_COVER"), kills(m, "S_FAMILY"), kills(m, "S_BOTH")
+    if cover != family:
+        return "coverage" if cover else "family"
+    return "both_axes" if cover else "both_jointly" if both else "neither"
 
 
-_T2A_SEP5 = [r["max_universe_separation"] for r in _T2A_OK if r["diagnostic_outcome"] == "CL5"]
-_T2A_SEP4 = [r["max_universe_separation"] for r in _T2A_OK if r["diagnostic_outcome"] == "CL4"]
-
-# Two-axis CL4 partition under both output-register readings (ideal references, N = 8000)
-_a1g = defaultdict(dict)
-for _r in A1G:
-    _a1g[_r["mutant_id"]][_r["suite"]] = _r
-_aud = {_r["mutant_id"]: _r for _r in A1K}
-_cl4 = [_r["mutant_id"] for _r in E1E if _r["published_report"] == "CL4"]
-_K = lambda m, su: _a1g[m][su]["outcome"] == "KILLED"
-
-
-def _pat(m):
-    c, f, b = _K(m, "S_COVER"), _K(m, "S_FAMILY"), _K(m, "S_BOTH")
-    return (
-        "coverage"
-        if (c and not f)
-        else "family" if (f and not c) else "both_axes" if (c and f) else "both_jointly" if b else "neither"
-    )
-
-
-PART_DECL = Counter(_pat(m) for m in _cl4)
-_still = [m for m in _cl4 if _aud[m]["corrected_report"] == "CL4"]
-PART_CORR = Counter()
-for _m in _still:
-    PART_CORR["family" if _K(_m, "S_BOTH") else "both_jointly"] += (
-        1 if _aud[_m]["subject"].startswith("ghz") else 0
-    )
-    if not _aud[_m]["subject"].startswith("ghz"):
-        PART_CORR[_pat(_m)] += 1
-tol = lambda th, k: sum(1 for r in TO if float(r["theta"]) == th and r[k] == "CL5")
-THS = sorted({float(r["theta"]) for r in TO})
-w7 = sorted((int(k), v) for k, v in CO["by_width"].items())
-tot7 = lambda p: sum(sum(v.values()) for k, v in w7 if p(k))
-c37 = lambda p: sum(v.get("CL3_SUBSTRATE", 0) for k, v in w7 if p(k))
-
-# Analytic reruns (data/certification/outcomes): recomputed from the recorded final states and gate lists
-import math as _math
-
-_R2 = _Dir("data/certification/outcomes")
-
-
-def rerun_csv(name):
-    return _wo.final(name, list(csv.DictReader(open(_R2 / name))))
-
-
-_R2P = rerun_csv("R2_PRIMARY_PAIRS.csv")
-_R2CW = rerun_csv("R2_CORPUS_WIDTH_PAIRS.csv")
-_R2X = rerun_csv("R2_EXTERNAL_CL3.csv")
-_R2CB = rerun_csv("R2_CHEAP_BASELINE.csv")
-_R2M = rerun_csv("R2_MARGINS.csv")
-_R2MX = rerun_csv("R2_MARGINS_EXT.csv")
-_R2C = rerun_csv("R2_CONDITIONAL_SEPARATIONS.csv")
-_T14 = rows("data/primary/records/T1_4_INTERFACE_599.csv")
-_TH6 = ("0.01", "0.025", "0.05", "0.1", "0.25", "0.5")
-_wsep = lambda g: sum(1 for r in g if int(r["witness_separating_cuts"] or 0) > 0)
-_p3 = [r for r in _R2P if r["report"] == "CL3"]
-_c3 = [r for r in _R2CW if r["arm"] == "corpus" and r["report"] == "CL3"]
-_w3 = [r for r in _R2CW if r["arm"] == "width" and r["report"] == "CL3"]
-_cl5s = lambda th, sc: sum(1 for r in _R2P if r[f"base_{th}"] == "True" and r[f"{sc}_{th}"] == "false")
-_und = lambda th, sc: sum(1 for r in _R2P if r[f"base_{th}"] == "True" and r[f"{sc}_{th}"] == "undecided")
-_P2 = {r["mutant_id"]: r for r in _R2P}
-_TOK = {"0.01": "0.01", "0.025": "0.025", "0.05": "0.05", "0.1": "0.1", "0.25": "0.25", "0.5": "0.5"}
-_LO, _HI, _TOL = 1e-10, 1e-8, 1e-9
-_cbp = [r for r in _R2CB if r["arm"] == "primary"]
-_cbw = [r for r in _R2CB if r["arm"] == "width" and r.get("t_full_s")]
-_cbc = [r for r in _R2CB if r["arm"] == "corpus"]
-_ms = lambda g, k: st.median([float(r[k]) for r in g if r.get(k)])
-_mk = {(r["arm"], r["pair"]): r for r in _R2M if r["arm"] != "corpus"}
-_T2Aall = [json.loads(_l) for _l in open(resolve("data/scalability/corpus/T2A_STRATIFIED_RAW.jsonl"))]
-_mc = [(m, t) for m, t in zip([r for r in _R2M if r["arm"] == "corpus"], _T2Aall)]
-_inb = lambda m: any(_LO <= float(m[k]) <= _HI for k in ("state_margin", "obs_margin"))
-_near = lambda m: any(1e-12 <= float(m[k]) <= 1e-6 for k in ("state_margin", "obs_margin"))
-_band_c = sorted(t["pair_id"] for m, t in _mc if _inb(m))
-_near_c = sorted(t["pair_id"] for m, t in _mc if _near(m) and not _inb(m))
-_cw5 = lambda arm: [r for r in _R2CW if r["arm"] == arm and r["report"] == "CL5"]
-_bandkey = {t["pair_id"] for m, t in _mc if _inb(m)} | {
-    r["pair"] for r in _R2M if r["arm"] == "width" and _inb(r)
-}
-_eqv, _nev = [], []
-for _mrow in _R2M:
-    for _mcol in ("state_margin", "obs_margin"):
-        (_eqv if float(_mrow[_mcol]) < _TOL else _nev).append((_mrow["arm"], float(_mrow[_mcol])))
-for _mrow in _R2MX:
-    for _mcol in ("unitary_margin", "qucheck_all_margin", "state_margin", "obs_margin"):
-        if _mrow.get(_mcol):
-            (_eqv if float(_mrow[_mcol]) < _TOL else _nev).append((_mrow["arm"], float(_mrow[_mcol])))
-_ne_pie = min(v for a, v in _nev if a in ("primary", "external"))
-_ne_cw = min(v for a, v in _nev if a in ("corpus", "width"))
-_dj = next(r for r in _R2M if r["arm"] == "primary" and r["pair"] == "dj_3#e19")
-_djb = next(
-    r
-    for r in BD
-    if r["mutant_id"] == "dj_3#e19"
-    and r["N"] == "2000"
-    and r["theta"] == "0.05"
-    and r["role"] == "suite_decisive"
-)
-_djr = next(r for r in REF if r["mutant_id"] == "dj_3#e19")
-_q174 = next(r for r in _R2C if r["pair_id"] == "QRA_174")
-
-CHECKS = [
-    # The 20 circuits: baseline and suites
-    ("M001", "primary pairs killed by the baseline suite", 302, len(_k("S_MIN"))),
-    ("M002", "primary pairs entering diagnosis", 297, len(E1E) - len(_k("S_MIN"))),
-    ("M003", "exact-reference killed", 302, sum(1 for r in E1E if r["exact_ref_native_verdict"] == "KILLED")),
-    ("M004", "suite guard cells clean = 88 of 88", 88, sum(1 for r in A1GG if r["cell"] == "CLEAN")),
-    ("M005", "suite revived kills", 0, len(_k("S_MIN") - _k("S_BOTH"))),
-    ("M006", "adjacent-pair suite added kills", 14, len(_k("S_FAMILY") - _k("S_MIN"))),
-    ("M007", "all-qubit suite kills of the 79 suite omissions", 41, len(_k("S_COVER") - _k("S_MIN"))),
-    ("M008", "combined suite added kills", 81, len(_k("S_BOTH") - _k("S_MIN"))),
-    (
-        "M009",
-        "full-string GHZ register: GHZ suite omissions killed",
-        32,
-        sum(1 for r in A1K if r["moved"] == "True"),
-    ),
-    (
-        "M010",
-        "suite omissions under the full-string GHZ register",
-        47,
-        sum(1 for r in A1K if r["corrected_report"] == "CL4"),
-    ),
-    (
-        "M011",
-        "observation limitations unchanged by the GHZ register",
-        35,
-        sum(1 for r in A1K if r["corrected_report"] == "CL3"),
-    ),
-    (
-        "M014",
-        "OL persisting under QuCheck",
-        7,
-        sum(1 for r in IF4 if r["reference_report"] == "CL3" and r["R_O_QuCheck_all_qubits"] == "true"),
-    ),
-    (
-        "M015",
-        "named repair transfers for 8 of 21",
-        8,
-        sum(1 for r in _ev if r["qutest_witness_expressible"] == "True"),
-    ),
-    ("M016", "some QuCheck repair for 15 of 21", 15, sum(1 for r in _ev if r["outcome"] == "WITNESS_EXISTS")),
-    (
-        "M017",
-        "no separating assertion for 6 of 21",
-        6,
-        sum(1 for r in _ev if r["outcome"] == "NO_WITNESS_ABOVE_THETA"),
-    ),
-    # Populations and design
-    ("M018", "mutants allocated per circuit", 30, len(POP) // 20),
-    ("M019", "generated cases", 600, 20 * 30),
-    ("M020", "allocation ledger rows", 600, len(POP)),
-    ("M021", "executable primary mutants", 599, len(MEM) + 149),
-    ("M022", "development-circuit mutants", 450, len(MEM)),
-    ("M023", "construction mutants excluded from the population", 53, len(UNR)),
-    (
-        "M024",
-        "prospective eligible",
-        149,
-        sum(1 for r in PRO if r.get("eligible", "true").lower() in ("true", "1", "yes")),
-    ),
-    ("M025", "mutants of the development and the five other circuits (450 + 149)", 599, len(MEM) + 149),
-    # Reference condition
-    ("M026", "non-killed diagnostic cases", 297, len(NK)),
-    ("M027", "construction cases", 195, sum(dp("construction").values())),
-    ("M028", "prospective cases", 102, sum(dp("prospective").values())),
-    ("M029", "contract equivalences", 93, d["CL1"]),
-    ("M030", "executed-input equalities", 87, d["CL2"]),
-    ("M031", "observation limitations", 35, d["CL3"]),
-    ("M032", "suite omissions", 79, d["CL4"]),
-    ("M033", "below-tolerance differences", 1, d["CL5"]),
-    ("M034", "unresolved", 2, d["Unresolved"]),
-    ("M035", "survivors with a reported outcome", 295, len(CERT)),
-    # Contract
-    ("M036", "semantic relations: equivalent on all legal inputs", 4, uni["CL1"]),
-    ("M037", "semantic relations: same final state on the executed input", 176, uni["CL2"]),
-    (
-        "M038",
-        "semantic relations: different final state on the executed input",
-        115,
-        len(CERT) - uni["CL1"] - uni["CL2"],
-    ),
-    ("M039", "semantic relations: contract equivalences under the declared contracts", 93, dec["CL1"]),
-    (
-        "M040",
-        "fixed-input contract equivalences that differ on another input",
-        89,
-        sum(
-            1
-            for r in CON
-            if r["mutant_id"] in CERT
-            and r["report_declared"] == "CL1"
-            and r["report_uniform_arbitrary_unitary"] == "CL2"
-        ),
-    ),
-    ("M041", "declared share, %", "31.5", f"{100*dec['CL1']/len(CERT):.1f}"),
-    ("M042", "uniform share, %", "1.4", f"{100*uni['CL1']/len(CERT):.1f}"),
-    # Observation lattice
-    (
-        "M043",
-        "Fig. 4(a) observation limitations at Z, output register",
-        90,
-        sum(1 for r in OB if r["CL3_Z_output"] == "True"),
-    ),
-    (
-        "M044",
-        "Fig. 4(a) observation limitations at Z, all qubits",
-        35,
-        sum(1 for r in OB if r["CL3_Z_all"] == "True"),
-    ),
-    (
-        "M045",
-        "Fig. 4(a) observation limitations at XYZ, output register",
-        60,
-        sum(1 for r in OB if r["CL3_XYZ_output"] == "True"),
-    ),
-    (
-        "M046",
-        "Fig. 4(a) observation limitations at XYZ, all qubits",
-        0,
-        sum(1 for r in OB if r["CL3_XYZ_all"] == "True"),
-    ),
-    ("M047", "lattice denominator = 193 construction pairs", 193, len(OB)),
-    (
-        "M048",
-        "matched changes: four observation refinements, pairs leaving observation limitation",
-        "55/30/35/60",
-        "/".join(
-            str(a - b)
-            for a, b in [
-                (
-                    sum(1 for r in OB if r["CL3_Z_output"] == "True"),
-                    sum(1 for r in OB if r["CL3_Z_all"] == "True"),
-                ),
-                (
-                    sum(1 for r in OB if r["CL3_Z_output"] == "True"),
-                    sum(1 for r in OB if r["CL3_XYZ_output"] == "True"),
-                ),
-                (
-                    sum(1 for r in OB if r["CL3_Z_all"] == "True"),
-                    sum(1 for r in OB if r["CL3_XYZ_all"] == "True"),
-                ),
-                (
-                    sum(1 for r in OB if r["CL3_XYZ_output"] == "True"),
-                    sum(1 for r in OB if r["CL3_XYZ_all"] == "True"),
-                ),
-            ]
-        ),
-    ),
-    # Suites
-    ("M049", "adjacent-pair suite kills of OL", "0/35", f"{sa['S_FAMILY']['CL3'][0]}/{sa['S_FAMILY']['CL3'][1]}"),
-    ("M050", "adjacent-pair suite kills of SO", "12/79", f"{sa['S_FAMILY']['CL4'][0]}/{sa['S_FAMILY']['CL4'][1]}"),
-    ("M051", "all-qubit suite kills of OL", "0/35", f"{sa['S_COVER']['CL3'][0]}/{sa['S_COVER']['CL3'][1]}"),
-    ("M052", "all-qubit suite kills of SO", "41/79", f"{sa['S_COVER']['CL4'][0]}/{sa['S_COVER']['CL4'][1]}"),
-    # Two-axis CL4 partition under both output-register readings
-    (
-        "M053",
-        "declared-register SO partition",
-        "41/12/26",
-        f"{PART_DECL['coverage']}/{PART_DECL['family']}/{PART_DECL['both_jointly']}",
-    ),
-    ("M054", "declared-register SO partition total", 79, sum(PART_DECL.values())),
-    (
-        "M055",
-        "whole-string SO partition",
-        "9/34/4",
-        f"{PART_CORR['coverage']}/{PART_CORR['family']}/{PART_CORR['both_jointly']}",
-    ),
-    ("M056", "whole-string SO partition total", 47, sum(PART_CORR.values())),
-    # Corpus: stratified certification
-    ("M057", "frame executed = 1,537", 1537, len(_T2A)),
-    ("M058", "execution failures", 0, len(_T2A) - len(_T2A_OK)),
-    (
-        "M059",
-        "registered corpus record: |U_v| matches the registered universe 2^(n+1)+n+1 (before the two added distances) on all",
-        True,
-        all(r["U_v_agree"] for r in _T2A_OK),
-    ),
-    ("M060", "guard 0 false-fails on all", True, all(r["guard_false_fails"] == 0 for r in _T2A_OK)),
-    ("M061", "reference condition exact analytic", "exact_analytic", _T2A_OK[0]["reference_condition"]),
-    ("M062", "killed by baseline suite", 975, sum(1 for r in _T2A_OK if r["native_verdict"] == "KILLED")),
-    ("M063", "survivors under baseline suite", 511, len(_T2A_SUR)),
-    (
-        "M064",
-        "split verdicts = 51 and all unresolved",
-        "51/51",
-        f'{sum(1 for r in _T2A_OK if r["native_verdict"]=="SPLIT")}/'
-        f'{sum(1 for r in _T2A_OK if r["native_verdict"]=="SPLIT" and r["diagnostic_outcome"]=="Unresolved")}',
-    ),
-    (
-        "M065",
-        "initial analysis: reports 158 CE / 150 OL / 185 SO / 18 BTD",
-        "158/150/185/18",
-        "/".join(
-            str(sum(1 for r in _T2A_OK if r["diagnostic_outcome"] == c)) for c in ("CL1", "CL3", "CL4", "CL5")
-        ),
-    ),
-    (
-        "M066",
-        "EIE empty under a fixed-input contract",
-        0,
-        sum(1 for r in _T2A_OK if r["diagnostic_outcome"] == "CL2"),
-    ),
-    ("M067", "substrate and certificate coincide at 150", "150/150", f"{len(_T2A_SUB)}/{_cl3(_T2A_OK)}"),
-    ("M068", "strata sizes 818 non-diagonal / 719 diagonal", "818/719", f"{len(_T2A_ND)}/{len(_T2A_D)}"),
-    ("M069", "non-diagonal OL = 58 of 818", "58/818", f"{_cl3(_T2A_ND)}/{len(_T2A_ND)}"),
-    ("M070", "diagonal OL = 92 of 719", "92/719", f"{_cl3(_T2A_D)}/{len(_T2A_D)}"),
-    (
-        "M071",
-        "non-diagonal OL among survivors = 58 of 240",
-        "58/240",
-        f'{_cl3([r for r in _T2A_SUR if not r["diag"]])}/{sum(1 for r in _T2A_SUR if not r["diag"])}',
-    ),
-    # Corpus: per-width observation limitation
-    (
-        "M072",
-        "per-width OL reproduces the per-width table",
-        "17/8/13/15/16/9/24/24/20/1/0/1/2",
-        "/".join(str(_T2A_W[w]) for w in range(2, 15)),
-    ),
-    ("M073", "150 in frame + 1 at n=19 = 151", 151, sum(_T2A_W.values()) + 1),
-    # Corpus: below-tolerance differences
-    (
-        "M074",
-        "construction SO/BTD saturating = 57 of 64",
-        "57/64",
-        f'{_T2A_M["construction_set"]["exactly_one"]}/{_T2A_M["construction_set"]["n"]}',
-    ),
-    ("M075", "construction smallest separation", 0.0294, _T2A_M["construction_set"]["minimum"]),
-    (
-        "M076",
-        "construction share at or below theta = 1.6%",
-        0.0156,
-        _T2A_M["construction_set"]["share_at_or_below_theta"],
-    ),
-    (
-        "M077",
-        "corpus SO/BTD saturating = 21 of 203",
-        "21/203",
-        f'{_T2A_M["corpus_frame"]["exactly_one"]}/{_T2A_M["corpus_frame"]["n"]}',
-    ),
-    (
-        "M078",
-        "corpus share at or below theta = 8.9%",
-        0.0887,
-        _T2A_M["corpus_frame"]["share_at_or_below_theta"],
-    ),
-    # Corpus: diagonal stratum
-    (
-        "M079",
-        "diagonal stratum OL rate 12.8% (92 of 719)",
-        "92/719",
-        f'{_T2A_S["diagonal_stratum_cl3"]}/{_T2A_S["diagonal_stratum_size"]}',
-    ),
-    (
-        "M080",
-        "diagonal-insertion OL rate = 26.0%",
-        0.2603,
-        _T2A_S["cl3_rate_by_mutation_kind"]["insertion"]["rate"],
-    ),
-    (
-        "M081",
-        "diagonal-stratum 'other' mutations OL",
-        0,
-        _T2A_S["cl3_rate_by_mutation_kind"]["other"]["cl3"],
-    ),
-    # Corpus: intervals
-    ("M082", "non-diagonal Wilson 95% = [5.5, 9.1]", "(5.5, 9.1)", str(_wilson(_cl3(_T2A_ND), len(_T2A_ND)))),
-    ("M083", "diagonal Wilson 95% = [10.6, 15.4]", "(10.6, 15.4)", str(_wilson(_cl3(_T2A_D), len(_T2A_D)))),
-    (
-        "M084",
-        "survivor non-diagonal Wilson = [19.2, 30.0]",
-        "(19.2, 30.0)",
-        str(_wilson(_cl3([r for r in _T2A_SUR if not r["diag"]]), sum(1 for r in _T2A_SUR if not r["diag"]))),
-    ),
-    (
-        "M085",
-        "survivor diagonal Wilson = [28.6, 39.8]",
-        "(28.6, 39.8)",
-        str(_wilson(_cl3([r for r in _T2A_SUR if r["diag"]]), sum(1 for r in _T2A_SUR if r["diag"]))),
-    ),
-    (
-        "M086",
-        "intervals do not overlap (9.1 < 10.6)",
-        True,
-        _wilson(_cl3(_T2A_ND), len(_T2A_ND))[1] < _wilson(_cl3(_T2A_D), len(_T2A_D))[0],
-    ),
-    # Output-condition counterfactual
-    ("M087", "output-condition pool", 47, _OC["at_599"]["pool"]),
-    ("M088", "output-condition movers", 8, _OC["at_599"]["movers"]),
-    ("M089", "output-condition movers out", 0, _OC["at_599"]["out"]),
-    (
-        "M090",
-        "output-condition OL movers = 4 of 35",
-        "4/35",
-        f'{_OC["at_599"]["movers_by_report"]["CL3"]}/{_OC["at_599"]["total_cl3"]}',
-    ),
-    ("M091", "output-condition predicate reproduces 546", True, _OC["validation"]["reproduces_published"]),
-    # Sufficient condition versus contingent observation limitations
-    ("M092", "corpus sufficient condition: entailed pairs", 54, _T31["entailed"]["n"]),
-    (
-        "M093",
-        "corpus sufficient condition: R_O holds on all 54 entailed",
-        "54/54",
-        f'{_T31["entailed"]["R_O_holds"]}/{_T31["entailed"]["n"]}',
-    ),
-    (
-        "M094",
-        "corpus sufficient condition: all 54 entailed certify OL",
-        "54/54",
-        f'{_T31["entailed"]["cl3"]}/{_T31["entailed"]["n"]}',
-    ),
-    ("M095", "corpus sufficient condition: contingent OL", 96, _T31["not_entailed"]["cl3"]),
-    (
-        "M096",
-        "corpus sufficient condition: 54 entailed + 96 contingent",
-        150,
-        _T31["entailed"]["cl3"] + _T31["not_entailed"]["cl3"],
-    ),
-    (
-        "M097",
-        "corpus sufficient condition: all entailed lie in the diagonal stratum",
-        54,
-        _T31["stratum_vs_entailment"]["entailed_in_diagonal_stratum"],
-    ),
-    (
-        "M098",
-        "corpus sufficient condition: diagonal stratum holds 38 contingent OL",
-        38,
-        _T31["stratum_vs_entailment"]["contingent_cl3_in_diagonal_stratum"],
-    ),
-    (
-        "M099",
-        "corpus sufficient condition: no entailed pair in the non-diagonal stratum",
-        0,
-        _T31["stratum_vs_entailment"]["entailed_in_non_diagonal_stratum"],
-    ),
-    (
-        "M100",
-        "corpus sufficient condition: proxy covers 54 entailed + 665 others",
-        665,
-        _T31["stratum_vs_entailment"]["non_entailed_in_diagonal_stratum"],
-    ),
-    # Width set: cost decomposition
-    (
-        "M101",
-        "width set: native suite execution share = 98.4%",
-        0.984,
-        round(_T2C["median_phase_seconds"]["A_evidence_acquisition"] / _T2C["median_total_seconds"], 3),
-    ),
-    (
-        "M102",
-        "width set: assertion-space share at n=14 = 12.5%",
-        0.125,
-        round(_T2C["by_width"]["14"]["median_B"] / _T2C["by_width"]["14"]["median_total_seconds"], 3),
-    ),
-    (
-        "M103",
-        "width set: assertion-space share at n=10 < 0.2%",
-        True,
-        _T2C["by_width"]["10"]["median_B"] / _T2C["by_width"]["10"]["median_total_seconds"] < 0.002,
-    ),
-    (
-        "M104",
-        "width set: growth per added qubit at n=14 = 3.8x",
-        3.81,
-        round(_T2C["by_width"]["14"]["median_B"] / _T2C["by_width"]["13"]["median_B"], 2),
-    ),
-    (
-        "M105",
-        "width set: crossover near n=16",
-        15.8,
-        _T2C["extrapolation"]["crossover_n_where_enumeration_overtakes_suite_execution"],
-    ),
-    (
-        "M106",
-        "width set: 600 s budget exhausted near n=19",
-        True,
-        _T2C["extrapolation"]["projected_total_seconds_holding_A_at_its_median"]["18"]
-        < 600
-        < _T2C["extrapolation"]["projected_total_seconds_holding_A_at_its_median"]["19"],
-    ),
-    ("M107", "largest BTD separation", 0.0496, round(max(_T2A_SEP5), 4)),
-    ("M108", "smallest SO separation", 0.0504, round(min(_T2A_SEP4), 4)),
-    ("M109", "no case between them", True, max(_T2A_SEP5) < 0.05 < min(_T2A_SEP4)),
-    (
-        "M110",
-        "diagonal OL among survivors = 92 of 271",
-        "92/271",
-        f'{_cl3([r for r in _T2A_SUR if r["diag"]])}/{sum(1 for r in _T2A_SUR if r["diag"])}',
-    ),
-    (
-        "M111",
-        "GHZ SO cases remaining under the whole-string reading",
-        22,
-        sum(1 for m in _still if _aud[m]["subject"].startswith("ghz")),
-    ),
-    (
-        "M112",
-        "GHZ SO cases needing both axes at the declared register",
-        22,
-        sum(1 for m in _still if _aud[m]["subject"].startswith("ghz") and _pat(m) == "both_jointly"),
-    ),
-    ("M113", "combined suite kills of SO", "79/79", f"{sa['S_BOTH']['CL4'][0]}/{sa['S_BOTH']['CL4'][1]}"),
-    # Profiles: QuCheck X/Y/Z on every qubit (B5_A4_INTERFACE_CORRECTED)
-    (
-        "M119",
-        "register-restricted QuCheck: observation limitations persisting",
-        12,
-        sum(
-            1 for r in IF4 if r["reference_report"] == "CL3" and r["R_O_QuCheck_declared_register"] == "true"
-        ),
-    ),
-    # Decision and evidence
-    ("M120", "natively executed decision cells", 4869, len(SH)),
-    ("M121", "N moves a Stage-2 relation in 0 cells", 0, sum(1 for v in _REL_BY_CELL.values() if len(v) > 1)),
-    ("M122", "cells covered by the finite-shot bound", "3648/4198", f"{len(gu)}/{len(stable)}"),
-    ("M123", "no disagreement in covered cells", 0, sum(1 for r in gu if r["agree"] == "False")),
-    (
-        "M124",
-        "disagreements among the cells outside the bound",
-        "71/550",
-        f"{sum(1 for r in stable if r['guaranteed']=='False' and r['agree']=='False')}/{len(stable)-len(gu)}",
-    ),
-    ("M125", "witness coverage over pairs", "541/599", f"{sup(refc)}/{len(refc)}"),
-    ("M126", "witness coverage over cells", "7992/10782", f"{sup(UNIV)}/{len(UNIV)}"),
-    ("M127", "witness coverage, %", "74.1", f"{100*sup(UNIV)/len(UNIV):.1f}"),
-    ("M128", "ablations", 21040, len(AB)),
-    ("M129", "supported certificates", 1178, len({(r["mutant_id"], r["suite"], r["report"]) for r in AB})),
-    ("M130", "requirement items, half the ablations", 10520, len(AB) // 2),
-    (
-        "M131",
-        "mean requirements per certificate",
-        "8.93",
-        f"{len(AB)/2/len({(r['mutant_id'],r['suite'],r['report']) for r in AB}):.2f}",
-    ),
-    ("M132", "tolerance cells", 3594, len(TO)),
-    (
-        "M133",
-        "candidate BTD sweep 0,0,1,1,4,23",
-        "0,0,1,1,4,23",
-        ",".join(str(tol(t, "analytic_candidate")) for t in THS),
-    ),
-    (
-        "M134",
-        "supported BTD sweep 0,0,1,1,2,2",
-        "0,0,1,1,2,2",
-        ",".join(str(tol(t, "supported_report")) for t in THS),
-    ),
-    # Scale
-    ("M135", "scale manifest pairs", 162, len(rows("data/scalability/E4_SCALE_MANIFEST.csv"))),
-    ("M136", "executed scale pairs", 143, len(SC)),
-    ("M137", "scale native kills", 96, scc["KILLED"]),
-    ("M138", "scale CE", 19, scc["CL1"]),
-    ("M139", "scale OL", 17, scc["CL3"]),
-    ("M140", "scale SO", 7, scc["CL4"]),
-    ("M141", "scale BTD", 3, scc["CL5"]),
-    ("M142", "scale unresolved", 1, scc["Unresolved"]),
-    ("M143", "universe 521 at n=8", 521, int(scw[8][0]["U_v_implementation"])),
-    ("M144", "universe 32,783 at n=14", 32783, int(scw[14][0]["U_v_implementation"])),
-    (
-        "M145",
-        "assertion-space factor 715",
-        715,
-        round(st.median([asw(r) for r in scw[14]]) / st.median([asw(r) for r in scw[8]])),
-    ),
-    (
-        "M146",
-        "assertion-space median 5.8 ms at n=8",
-        "5.8",
-        f"{st.median([asw(r) for r in scw[8]])*1000:.1f}",
-    ),
-    ("M147", "assertion-space median 4.15 s at n=14", "4.15", f"{st.median([asw(r) for r in scw[14]]):.2f}"),
-    (
-        "M148",
-        "total-per-case medians 37.7 to 43.7 s",
-        "37.7/43.7",
-        f"{min(st.median([float(x['total_seconds']) for x in g]) for g in scw.values()):.1f}/"
-        f"{max(st.median([float(x['total_seconds']) for x in g]) for g in scw.values()):.1f}",
-    ),
-    ("M149", "largest total 59.3 s", "59.3", f"{max(float(r['total_seconds']) for r in SC):.1f}"),
-    ("M150", "largest resident set 0.092 GiB", "0.092", f"{max(float(r['peak_rss_gib']) for r in SC):.3f}"),
-    (
-        "M151",
-        "no resource censoring",
-        0,
-        sum(1 for r in SC if r.get("memory_censored") == "True" or r.get("within_budget") is False),
-    ),
-    # Corpus
-    ("M152", "corpus distinct pairs = 1,569", 1569, CO["distinct_pairs"]),
-    (
-        "M153",
-        "corpus OL substrate 9.4% at n<=7",
-        "9.4",
-        f"{100*c37(lambda k:k<=7)/tot7(lambda k:k<=7):.1f}",
-    ),
-    (
-        "M154",
-        "corpus OL substrate 9.9% at n>=8",
-        "9.9",
-        f"{100*c37(lambda k:k>=8)/tot7(lambda k:k>=8):.1f}",
-    ),
-    # Released defects
-    ("M155", "released defects", 42, len(DF)),
-    (
-        "M156",
-        "depth NOT_REPRODUCIBLE",
-        10,
-        sum(1 for r in DF if r["evidence_depth"] == "NOT_REPRODUCIBLE"),
-    ),
-    (
-        "M157",
-        "depth NATIVE_REPRODUCTION_ONLY",
-        8,
-        sum(1 for r in DF if r["evidence_depth"] == "NATIVE_REPRODUCTION_ONLY"),
-    ),
-    ("M158", "depth PROFILE_ONLY", 10, sum(1 for r in DF if r["evidence_depth"] == "PROFILE_ONLY")),
-    ("M159", "depth RELATION_LEVEL", 12, sum(1 for r in DF if r["evidence_depth"] == "RELATION_LEVEL")),
-    (
-        "M160",
-        "depth FULL_CERTIFICATION",
-        2,
-        sum(1 for r in DF if r["evidence_depth"] == "FULL_CERTIFICATION"),
-    ),
-    ("M161", "closed-profile eligible", 4, sum(1 for r in EL if r["qutest_eligibility"] == "ELIGIBLE")),
-    # Analytic reruns
-    (
-        "M169",
-        "QuCheck resolves 28 of the 599 pairs",
-        28,
-        sum(1 for r in _T14 if r["R_O_QUTest"] == "True" and r["R_O_QuCheck"] == "False"),
-    ),
-    (
-        "M170",
-        "QuCheck loses 25 of the 599 pairs",
-        25,
-        sum(1 for r in _T14 if r["R_O_QUTest"] == "False" and r["R_O_QuCheck"] == "True"),
-    ),
-    ("M171", "witness separates 5 of 35 primary OL", "5/35", f"{_wsep(_p3)}/{len(_p3)}"),
-    (
-        "M172",
-        "witness-separated primary OL all QFT",
-        5,
-        sum(1 for r in _p3 if int(r["witness_separating_cuts"] or 0) > 0 and r["subject"].startswith("qft")),
-    ),
-    ("M173", "witness separates 4 of 150 corpus OL", "4/150", f"{_wsep(_c3)}/{len(_c3)}"),
-    ("M174", "witness separates 0 of 17 width-set OL", "0/17", f"{_wsep(_w3)}/{len(_w3)}"),
-    ("M175", "witness separates 0 of 30 external OL", "0/30", f"{_wsep(_R2X)}/{len(_R2X)}"),
-    (
-        "M176",
-        "external rebuild reproduces R_O, 30 of 30",
-        "30/30",
-        f"{sum(1 for r in _R2X if r['R_O_recomputed'].lower() in r['R_O_frozen'].lower())}/{len(_R2X)}",
-    ),
-    (
-        "M177",
-        "low-order witness for 79 of 79 SO",
-        "79/79",
-        f"{sum(1 for r in _cbp if r['report']=='CL4' and r['cheap_witness']=='True')}/{sum(1 for r in _cbp if r['report']=='CL4')}",
-    ),
-    (
-        "M178",
-        "low-order baseline escalates 1 primary case",
-        1,
-        sum(1 for r in _cbp if float(r["full_max"]) > _TOL and r["cheap_witness"] != "True"),
-    ),
-    (
-        "M179",
-        "corpus SO with only higher-order witnesses",
-        11,
-        sum(1 for r in _cbc if r["report"] == "CL4" and r["cheap_witness"] != "True"),
-    ),
-    ("M180", "corpus SO total", 185, sum(1 for r in _cbc if r["report"] == "CL4")),
-    ("M181", "low-order median 0.15 ms", "0.15", f"{_ms(_cbp,'t_cheap_s')*1000:.2f}"),
-    ("M182", "full-universe median 0.51 ms", "0.51", f"{_ms(_cbp,'t_full_s')*1000:.2f}"),
-    ("M183", "width low-order median 1.2 ms", "1.2", f"{_ms(_cbw,'t_cheap_s')*1000:.1f}"),
-    ("M184", "width full-universe median 79 ms", "79", f"{_ms(_cbw,'t_full_s')*1000:.0f}"),
-    (
-        "M185",
-        "rerun BTD sweep over the six tolerances",
-        "0,0,1,1,4,18",
-        ",".join(str(_cl5s(t, "RAcert")) for t in _TH6),
-    ),
-    ("M186", "rerun BTD at theta 0.50", 18, _cl5s("0.5", "RAcert")),
-    (
-        "M187",
-        "recorded BTD at theta 0.50",
-        23,
-        sum(1 for r in TO if r["theta"] == "0.5" and r["analytic_candidate"] == "CL5"),
-    ),
-    (
-        "M188",
-        "recorded sweep reproduced from rerun U5",
-        "0,0,1,1,4,23",
-        ",".join(str(_cl5s(t, "RA5")) for t in _TH6),
-    ),
-    (
-        "M189",
-        "KL separates five recorded BTD at 0.50",
-        5,
-        sum(
-            1
-            for r in _R2P
-            if r["base_0.5"] == "True" and r["RA5_0.5"] == "false" and r["RAcert_0.5"] == "true"
-        ),
-    ),
-    (
-        "M190",
-        "full family settles two undecided at 0.50",
-        2,
-        sum(
-            1
-            for r in _R2P
-            if r["base_0.5"] == "True" and r["RA5_0.5"] == "undecided" and r["RAcert_0.5"] == "true"
-        ),
-    ),
-    ("M191", "rerun resolution-limited at 0.50", 3, _und("0.5", "RAcert")),
-    ("M192", "recorded resolution-limited at 0.50", 5, _und("0.5", "RA5")),
-    ("M193", "excluded kinds lower theta 0.50 count to 16", 16, _cl5s("0.5", "RAcond")),
-    (
-        "M194",
-        "excluded kinds leave smaller sweep unchanged",
-        "0,0,1,1,4",
-        ",".join(str(_cl5s(t, "RAcond")) for t in _TH6[:5]),
-    ),
-    (
-        "M195",
-        "supported BTD unchanged under full family",
-        "0,0,1,1,2,2",
-        ",".join(
-            str(
-                sum(
-                    1
-                    for r in TO
-                    if r["theta"] == _TOK[t]
-                    and r["supported_report"] == "CL5"
-                    and _P2[r["mutant_id"]][f"RAcert_{t}"] == "false"
-                )
-            )
-            for t in _TH6
-        ),
-    ),
-    ("M196", "reference BTD stays BTD under every universe", 1, _cl5s("0.05", "RAcond")),
-    (
-        "M202",
-        "width rerun withdraws two of three BTD",
-        2,
-        sum(1 for r in _cw5("width") if r["RAcert"] == "true" or r["pair_id"] in _bandkey),
-    ),
-    (
-        "M203",
-        "SBS_055 observation margin 5.1e-9",
-        "5.1",
-        f"{float(_mk[('width','SBS_055')]['obs_margin'])*1e9:.1f}",
-    ),
-    (
-        "M204",
-        "corpus rerun withdraws five of 18 BTD",
-        "5/18",
-        f"{sum(1 for r in _cw5('corpus') if r['RAcert']=='true' or r['pair_id'] in _bandkey)}/{len(_cw5('corpus'))}",
-    ),
-    (
-        "M205",
-        "corpus BTD in the rerun",
-        13,
-        sum(1 for r in _cw5("corpus") if r["RAcert"] == "false" and r["pair_id"] not in _bandkey),
-    ),
-    (
-        "M206",
-        "full family separates QRA_513 and SBS_081",
-        2,
-        sum(1 for r in _cw5("corpus") if r["RAcert"] == "true" and r["pair_id"] in ("QRA_513", "SBS_081")),
-    ),
-    ("M207", "three corpus BTD inside the guard band", 3, len(_band_c)),
-    (
-        "M208",
-        "excluded kinds separate 9 of 16 corpus BTD",
-        "9/16",
-        f"{sum(1 for r in _R2C if r['arm']=='corpus' and r['separated_by_excluded_kinds']=='True')}/{sum(1 for r in _R2C if r['arm']=='corpus')}",
-    ),
-    (
-        "M209",
-        "five only through rare-bit correlations",
-        5,
-        sum(1 for r in _R2C if r["arm"] == "corpus" and r["only_rare_bit_separations"] == "True"),
-    ),
-    (
-        "M210",
-        "two through a changed most-frequent outcome",
-        2,
-        sum(1 for r in _R2C if r["arm"] == "corpus" and r["most_frequent_separates"] == "True"),
-    ),
-    (
-        "M211",
-        "QRA_174 rare bit set with probability 5.6e-8",
-        "5.6",
-        f"{float(_q174['max_corr_bit_p1_original'].split(';')[0])*1e8:.1f}",
-    ),
-    ("M212", "QRA_174 correlation moves by 0.39", "0.39", f"{float(_q174['max_corr_change']):.2f}"),
-    ("M213", "QRA_174 largest admitted difference 2.0e-7", "2.0", f"{float(_q174['max_U5'])*1e7:.1f}"),
-    ("M214", "every margin decided equal is below 7e-12", 7, _math.ceil(max(v for a, v in _eqv) * 1e12)),
-    (
-        "M215",
-        "primary, interface and external margins decided different are above 4e-3",
-        4,
-        _math.floor(_ne_pie * 1e3),
-    ),
-    ("M216", "corpus and width-set differences reach down to 4.8e-9", "4.8", f"{_ne_cw*1e9:.1f}"),
-    ("M217", "three more corpus pairs lie between 1e-8 and 1e-6", 3, len(_near_c)),
-    ("M218", "dj_3#e19 state margin 0.293", "0.293", f"{float(_dj['state_margin']):.3f}"),
-    ("M219", "dj_3#e19 observation margin 0", 0, int(float(_dj["obs_margin"]) * 1e12)),
-    (
-        "M220",
-        "dj_3#e19 per-assertion bound 9.1e-5",
-        "9.1",
-        f"{float(_djb['single_repetition_bound'])*1e5:.1f}",
-    ),
-    ("M221", "dj_3#e19 unanimity bound 1.1e-3", "1.1", f"{float(_djb['unanimity_failure_bound'])*1e3:.1f}"),
-    ("M222", "dj_3#e19 no kill in 12 repetitions", "0/12", f"{_djr['kills_recorded']}/{_djr['reps']}"),
-]
-
-# v2 records (data/certification/outcomes/R2V_*): every report recomputed with native evidence
-import hashlib as _hl
-
-
-def _v2j(name):
-    return json.load(open(_R2 / name))
-
-
-_VN, _VT, _VS = _v2j("R2V_NUMBERS.json"), _v2j("R2V_TABLE_X.json"), _v2j("R2V_STATISTICS.json")
-_VB, _VRC, _VDT = _v2j("R2V_BOUND.json"), _v2j("R2V_RELATION_CORPUS.json"), _v2j("R2V_DISTANCE_TIMING.json")
-_VP, _VW, _VC = (
-    rerun_csv("R2V_FINAL_PRIMARY.csv"),
-    rerun_csv("R2V_FINAL_WIDTH.csv"),
-    rerun_csv("R2V_FINAL_CORPUS.csv"),
-)
-_VE, _VD = rerun_csv("R2V_FINAL_EXTERNAL.csv"), rerun_csv("R2V_FINAL_DEFECT.csv")
-_VRP, _VNAT = rerun_csv("R2V_RULE_CHANGES.csv"), rerun_csv("R2V_NATIVE.csv")
-_VNATD = rerun_csv("R2V_NATIVE_DEFECTS.csv")
-_VJ = {r["job_id"]: r for r in _VNAT + _VNATD}
-_VCMP = list(csv.DictReader(open(_orig("data/primary/figures/R_fig2b_compression.csv"))))
-_C6 = ("CL1", "CL2", "CL3", "CL4", "CL5", "Unresolved")
-_vd = lambda rows: "/".join(str(sum(1 for r in rows if r["v2_report"] == c)) for c in _C6)
-_alive = lambda rows: [r for r in rows if r["v2_report"] != "NA_KILLED"]
-_pp = lambda x: f"{100 * x:.1f}"
-_ppi = lambda a: f"[{100 * a[0]:.1f}, {100 * a[1]:.1f}]"
-_trow = (
-    lambda s: f"{s['pos']}/{s['neg']}/{_pp(s['effect'])}/{_ppi(s['cluster_ci95'])}/{_ppi(s['loco_range'])}"
-)
-_TXo = {s["edge"]: s for s in _VT["observation"]}
-_TXs = {s["contrast"]: s for s in _VT["suite"]}
-_TXi = {s["contrast"]: s for s in _VT["interface"]}
-_cand4 = lambda rows: [r for r in rows if r.get("v2_candidate") == "CL4" and r.get("OB03") == "satisfied"]
-_cc4 = _cand4(_VC)
-_csplit = [
-    r
-    for r in _cc4
-    if r["v2_report"] != "CL4" and r["c_kind"] and r["final_OB02"] != "failed" and r["final_OB13"] == "failed"
-]
-_cguard = [r for r in _cc4 if r["v2_report"] != "CL4" and r["c_kind"] and r["final_OB02"] == "failed"]
-_ctrl_only = sum(
-    1
-    for r in _cguard
-    if int(_VJ[f"corpus|{r['case_key']}|OB13"]["guard_fails"]) == 0
-    and int(_VJ[f"corpus|{r['case_key']}|OB15"]["guard_fails"]) > 0
-)
-_skills = sorted(int(_VJ[f"corpus|{r['case_key']}|OB13"]["kills"]) for r in _csplit)
-_Vk = {r["case_key"]: r for r in _VC}
-_n3 = len(
-    _wo.CHANGED["corpus"]
-)  # corpus cases reported under the closed witness order, v3 (low-order witnesses)
-_dc4 = lambda rep: sum(1 for r in _VD if r.get("v2_candidate") == "CL4" and r["v2_report"] == rep)
-_VRPf = [
-    r for r in _VRP if r["case"] not in _wo.CHANGED.get(r["arm"], ())
-]  # v1 -> final: v3 cases return to v1
-_Wk = {r["case_key"]: r for r in _VW}
-_Pk = {r["mutant_id"]: r for r in _VP}
-_p4d = sorted(float(r["w_d"]) for r in _VP if r["v2_report"] == "CL4")
-_nat_all = _VNAT + _VNATD
-_cands_all = sum(len(_cand4(x)) for x in (_VP, _VW, _VC, _VE)) + sum(
-    1 for r in _VD if r.get("v2_candidate") == "CL4"
-)
-_band3 = [
-    b
-    for b in _VRC["decided_different_below_1e-6"]
-    if not any(x["pair"] == b["pair"] and x["set"] == b["set"] for x in _VRC["band_pairs"])
-]
-_dt = _VDT["median_ms_by_width"]
-_VCHECKS = [
-    # v2: specification, native evidence, reprocessing table
-    (
-        "M223",
-        "v2 specification unchanged since its hash",
-        "6829f1ba",
-        _hl.sha256(
-            open(_orig("data/prospective/mqt_bench/frozen_deps/V2_SPECIFICATION.md"), "rb").read()
-        ).hexdigest()[:8],
-    ),
-    (
-        "M224",
-        "v2 native checks 537 in 8,055 QUTest runs",
-        "537/8055",
-        f"{_VN['native_jobs_total']}/{_VN['native_qutest_runs']}",
-    ),
-    ("M225", "outcome records that differ between rule sets v1 and v3", 51, len(_VRPf)),
-    ("M226", "50 of the 51 become unresolved", 50, sum(1 for r in _VRPf if r["v2_report"] == "Unresolved")),
-    (
-        "M227",
-        "no primary or external report changes",
-        0,
-        sum(1 for r in _VRP if r["arm"] in ("primary", "external")),
-    ),
-    ("M228", "no OL report changes", 0, sum(1 for r in _VRP if "CL3" in (r["v1_report"], r["v2_report"]))),
-    (
-        "M229",
-        "native table 280/21/259/278",
-        "280/21/259/278",
-        f"{_cands_all}/{_VN['primary_ob13_recorded_reuse']}/{sum(1 for r in _nat_all if r['purpose']=='OB13')}/{sum(1 for r in _nat_all if r['purpose']=='OB15')}",
-    ),
-    (
-        "M230",
-        "native outcomes 234 confirmed, 27 split, 19 guard, 0 no control",
-        "234/27/19/0",
-        "/".join(
-            str(
-                sum(_VN[f"{a}_cl4_breakdown"].get(k, 0) for a in ("primary", "width", "corpus", "external"))
-                + {"supported": _n3 + _dc4("CL4"), "no_control": _dc4("Unresolved") - _n3}.get(k, 0)
-            )
-            for k in ("supported", "witness_split", "guard_false_failure", "no_control")
-        ),
-    ),
-    # v2: primary population
-    ("M231", "v2 primary reference 93/87/35/79/1/2", "93/87/35/79/1/2", _vd(_alive(_VP))),
-    (
-        "M232",
-        "v2 construction 60/39/35/58/1/2",
-        "60/39/35/58/1/2",
-        _vd([r for r in _alive(_VP) if r["population"] == "construction"]),
-    ),
-    (
-        "M233",
-        "v2 prospective 33/48/0/21/0/0",
-        "33/48/0/21/0/0",
-        _vd([r for r in _alive(_VP) if r["population"] == "prospective"]),
-    ),
-    (
-        "M234",
-        "primary SO natively confirmed 79 of 79",
-        "79/79",
-        f"{_VN['primary_cl4_breakdown'].get('supported', 0)}/{_VN['primary_cl4_candidates']}",
-    ),
-    ("M235", "primary witnesses reused from 21 recorded repairs", 21, _VN["primary_ob13_recorded_reuse"]),
-    (
-        "M236",
-        "OL endpoint states 29 of 35",
-        "29/35",
-        f"{_VN['effects_cl3']['groups']}/{_VN['effects_cl3']['cases']}",
-    ),
-    (
-        "M237",
-        "construction EIE collapse onto 4 of 39",
-        "4/39",
-        f"{_VN['effects_cl2_construction']['groups']}/{_VN['effects_cl2_construction']['cases']}",
-    ),
-    (
-        "M238",
-        "smallest primary witness 0.148, next at least 0.500",
-        "0.148/0.500",
-        f"{_p4d[0]:.3f}/{_p4d[1]:.3f}",
-    ),
-    (
-        "M239",
-        "state groups 27/4/29/45/1/2, total 108",
-        "27/4/29/45/1/2/108",
-        "/".join(r["state"] for r in _VCMP if r["claim"] != "ALL")
-        + "/"
-        + next(r["state"] for r in _VCMP if r["claim"] == "ALL"),
-    ),
-    ("M240", "observation groups total 51", 51, int(next(r["obs"] for r in _VCMP if r["claim"] == "ALL"))),
-    # v2: matched changes
-    (
-        "M241",
-        "matched changes: Z output->all qubits",
-        "55/0/28.5/[1.3, 48.1]/[21.7, 32.2]",
-        _trow(_TXo["Z: output -> all qubits"]),
-    ),
-    (
-        "M242",
-        "matched changes: output Z->XYZ",
-        "30/0/15.5/[7.3, 23.0]/[13.2, 17.4]",
-        _trow(_TXo["output: Z -> XYZ"]),
-    ),
-    (
-        "M243",
-        "matched changes: all qubits Z->XYZ",
-        "35/0/18.1/[10.6, 26.7]/[16.1, 19.9]",
-        _trow(_TXo["all qubits: Z -> XYZ"]),
-    ),
-    (
-        "M244",
-        "matched changes: XYZ output->all",
-        "60/0/31.1/[7.8, 50.2]/[24.6, 35.1]",
-        _trow(_TXo["XYZ: output -> all qubits"]),
-    ),
-    (
-        "M245",
-        "matched changes: baseline->adjacent-pair suite",
-        "14/0/2.3/[0.2, 5.7]/[0.9, 2.5]",
-        _trow(_TXs["S_MIN -> S_FAMILY"]),
-    ),
-    (
-        "M246",
-        "matched changes: baseline->all-qubit suite",
-        "41/0/6.8/[1.5, 13.2]/[4.9, 7.2]",
-        _trow(_TXs["S_MIN -> S_COVER"]),
-    ),
-    (
-        "M247",
-        "matched changes: baseline->combined suite",
-        "81/0/13.5/[4.5, 23.7]/[10.9, 14.2]",
-        _trow(_TXs["S_MIN -> S_BOTH"]),
-    ),
-    (
-        "M250",
-        "matched changes: QUTest->QuCheck",
-        "28/25/0.5/[-5.3, 6.2]/[-0.7, 1.9]",
-        _trow(_TXi["QUTest -> QuCheck"]),
-    ),
-    (
-        "M251",
-        "matched changes: QuCheck p 0.784",
-        "0.784",
-        f"{_TXi['QUTest -> QuCheck']['exact_mcnemar_p']:.3f}",
-    ),
-    (
-        "M252",
-        "matched changes: QUTest->pytest",
-        "35/0/5.8/[2.7, 9.5]/[4.9, 6.2]",
-        _trow(_TXi["QUTest -> pytest"]),
-    ),
-    (
-        "M253",
-        "matched changes: budget 236 resolved, 3 created, +14.4",
-        "236/3/14.4",
-        f"{_VS['v2']['resolved']}/{_VS['v2']['created']}/{_pp(_VS['v2']['effect'])}",
-    ),
-    (
-        "M254",
-        "matched changes: budget p 5.2e-66, CI, LOO",
-        "5.2e-66/[6.2, 24.6]/[12.0, 15.4]",
-        f"{_VS['v2']['exact_mcnemar_p']:.1e}/{_ppi(_VS['v2']['cluster_ci95'])}/{_ppi(_VS['v2']['loco_range'])}",
-    ),
-    (
-        "M255",
-        "matched changes: non-budget rows equal the v1 record",
-        True,
-        all(s["matches_record"] for k in ("observation", "suite", "interface") for s in _VT[k]),
-    ),
-    (
-        "M256",
-        "matched changes: no lattice or interface margin in the band",
-        0,
-        len(_VT["checks"]["observation_band_decisions"]) + len(_VT["checks"]["interface_band_decisions"]),
-    ),
-    # v2: decision support, tolerance, ablation
-    (
-        "M257",
-        "decision grid killed 784/785/793",
-        "784/785/793",
-        "/".join(str(_VN["decision_grid_by_N"][n]["killed"]) for n in ("500", "2000", "8000")),
-    ),
-    (
-        "M258",
-        "decision-supported 480/623/704",
-        "480/623/704",
-        "/".join(str(_VN["decision_grid_by_N"][n]["decision_supported"]) for n in ("500", "2000", "8000")),
-    ),
-    (
-        "M259",
-        "unresolved cells 359/215/126",
-        "359/215/126",
-        "/".join(str(_VN["decision_grid_by_N"][n]["unresolved"]) for n in ("500", "2000", "8000")),
-    ),
-    ("M260", "N moves no Stage-2 relation under v2", True, _VN["decision_grid_R_T_unchanged"]),
-    (
-        "M261",
-        "tolerance BTD candidates 0,0,1,1,4,18",
-        "0,0,1,1,4,18",
-        ",".join(map(str, _VN["tolerance_cl5_candidates"])),
-    ),
-    (
-        "M262",
-        "decision-supported BTD 0,0,1,1,2,2",
-        "0,0,1,1,2,2",
-        ",".join(map(str, _VN["tolerance_cl5_decision_supported"])),
-    ),
-    ("M263", "resolution-limited at theta 0.50", 3, _VN["tolerance_cl5_resolution_limited"][-1]),
-    (
-        "M264",
-        "theta-invariant relations 93/180/215",
-        "93/180/215",
-        "/".join(
-            str(_VN["tolerance_theta_invariant_relations"][k]) for k in ("R_C_true", "R_S_true", "R_O_true")
-        ),
-    ),
-    (
-        "M265",
-        "ablation 959 certificates, 18,882 ablations",
-        "959/18882",
-        f"{_VN['ablation']['certificates']}/{_VN['ablation']['ablations']}",
-    ),
-    (
-        "M266",
-        "mean 9.84 requirements per certificate",
-        "9.84",
-        f"{_VN['ablation']['ablations'] / 2 / _VN['ablation']['certificates']:.2f}",
-    ),
-    (
-        "M267",
-        "every ablation withdraws, names, keeps candidate",
-        True,
-        _VN["ablation"]["all_withdrawn"]
-        and _VN["ablation"]["all_named"]
-        and _VN["ablation"]["all_candidate_unchanged"],
-    ),
-    (
-        "M268",
-        "by gate 16 of 90 against 110 of 740",
-        "16/90/110/740",
-        f"{_VN['decision_grid_by_gate_8000']['phase']['unresolved']}/{_VN['decision_grid_by_gate_8000']['phase']['not_killed']}/"
-        f"{_VN['decision_grid_by_gate_8000']['other']['unresolved']}/{_VN['decision_grid_by_gate_8000']['other']['not_killed']}",
-    ),
-    (
-        "M269",
-        "by-gate OL enrichment 10 of 33, 25 of 420",
-        "10/33/25/420",
-        f"{_VN['decision_grid_by_gate_8000']['phase']['reference_cl3']}/{_VN['decision_grid_by_gate_8000']['phase']['mutants']}/"
-        f"{_VN['decision_grid_by_gate_8000']['other']['reference_cl3']}/{_VN['decision_grid_by_gate_8000']['other']['mutants']}",
-    ),
-    # v2: other programs
-    ("M273", "external 28/94/30/5/0/2", "28/94/30/5/0/2", _vd(_alive(_VE))),
-    (
-        "M274",
-        "external SO confirmed 5 of 5",
-        "5/5",
-        f"{_VN['external_cl4_breakdown'].get('supported', 0)}/{_VN['external_cl4_candidates']}",
-    ),
-    ("M275", "width set 19/0/17/6/1/4", "19/0/17/6/1/4", _vd(_alive(_VW))),
-    (
-        "M276",
-        "width universe 523 to 32,785",
-        "523/32785",
-        f"{min(int(r['universe_size']) for r in _VW)}/{max(int(r['universe_size']) for r in _VW)}",
-    ),
-    (
-        "M277",
-        "width and corpus universe sizes equal 2^(n+1)+n+3",
-        True,
-        all(int(r["universe_size"]) == 2 ** (int(r["n"]) + 1) + int(r["n"]) + 3 for r in _VW + _VC),
-    ),
-    (
-        "M278",
-        "SBS_061 witness 0.008 above theta, kills 6 of 12",
-        "0.008/6",
-        f"{float(_Wk['SBS_061']['w_d']) - 0.05:.3f}/{_VJ['width|SBS_061|OB13']['kills']}",
-    ),
-    (
-        "M279",
-        "SBS_081 original fails its witness in 3 of 3 guard runs",
-        "3/3",
-        f"{_VJ['width|SBS_081|OB13']['guard_fails']}/{len(_VJ['width|SBS_081|OB13']['guard_verdicts'].split(';'))}",
-    ),
-    (
-        "M280",
-        "SBS_055 observation margin 5.1e-9 in the band",
-        "5.1/R_O",
-        f"{float(_Wk['SBS_055']['margin_obs']) * 1e9:.1f}/{_Wk['SBS_055']['undecided_relation']}",
-    ),
-    (
-        "M281",
-        "added distances 0.008 ms at 8, 0.11 ms at 14",
-        "0.008/0.11",
-        f"{_dt['8']['hellinger'] + _dt['8']['kl']:.3f}/{_dt['14']['hellinger'] + _dt['14']['kl']:.2f}",
-    ),
-    ("M282", "corpus 158/0/150/143/13/98", "158/0/150/143/13/98", _vd(_alive(_VC))),
-    ("M283", "corpus SO candidates 187", 187, len(_cc4)),
-    (
-        "M284",
-        "corpus 26 splits, 18 guard failures, 0 without control",
-        "26/18/0",
-        f"{_VN['corpus_cl4_breakdown']['witness_split']}/{_VN['corpus_cl4_breakdown']['guard_false_failure']}/{sum(1 for r in _cc4 if r['v2_report'] != 'CL4' and not r['c_kind'])}",
-    ),
-    (
-        "M285",
-        "corpus split witnesses within 0.05 of theta",
-        "26/26",
-        f"{sum(1 for r in _csplit if float(r['w_d']) - 0.05 < 0.05)}/{len(_csplit)}",
-    ),
-    ("M286", "corpus split witnesses kill 5 to 11 of 12", "5/11", f"{_skills[0]}/{_skills[-1]}"),
-    ("M287", "corpus guard failures on the control alone 11", 11, _ctrl_only),
-    (
-        "M288",
-        "QRA_360 control from the closed witness order",
-        "2/control",
-        f"{_Vk['qra_cases_v1_1/QRA_360']['n']}/{'no_control' if not _Vk['qra_cases_v1_1/QRA_360']['c_kind'] else 'control'}",
-    ),
-    (
-        "M289",
-        "v1 reported 43 of the 44 failures as SO",
-        "43/44",
-        f"{sum(1 for r in _cc4 if r['v2_report'] != 'CL4' and r['v1_report'] == 'CL4')}/{sum(1 for r in _cc4 if r['v2_report'] != 'CL4')}",
-    ),
-    (
-        "M290",
-        "QRA_513 confirmed SO, SBS_081 unresolved",
-        "CL4/Unresolved",
-        f"{_Vk['qra_cases/QRA_513']['v2_report']}/{_Vk['sbs_cases/SBS_081']['v2_report']}",
-    ),
-    (
-        "M291",
-        "largest difference >= 1: 76 of 80, 52 of 155",
-        "76/80/52/155",
-        f"{_VN['sep_primary']['at_least_one']}/{_VN['sep_primary']['cases']}/{_VN['sep_corpus']['at_least_one']}/{_VN['sep_corpus']['cases']}",
-    ),
-    ("M292", "corpus separations down to 1.3e-7", "1.3", f"{_VN['sep_corpus']['min'] * 1e7:.1f}"),
-    (
-        "M293",
-        "largest BTD 0.0324, QRA_513 0.0487",
-        "0.0324/0.0487",
-        f"{_VN['sep_corpus']['largest_cl5_u5']:.4f}/{_VN['sep_corpus']['smallest_cl4_u5']:.4f}",
-    ),
-    (
-        "M294",
-        "excluded kinds 7 of 13, 3 rare-bit, 2 most-frequent",
-        "7/13/3/2",
-        f"{_VN['corpus_v2_cl5_excluded_separate']}/{_VN['corpus_v2_cl5']}/{_VN['corpus_v2_cl5_rare_bit_only']}/{_VN['corpus_v2_cl5_most_frequent']}",
-    ),
-    (
-        "M295",
-        "QRA_174 observation margin 9.9e-9, undecided",
-        "9.9/Unresolved",
-        f"{float(_Vk['qra_cases/QRA_174']['margin_obs']) * 1e9:.1f}/{_Vk['qra_cases/QRA_174']['v2_report']}",
-    ),
-    (
-        "M296",
-        "corpus SO without low-order witness 7 of 143",
-        "7/143",
-        f"{_VN['corpus_v2_cl4_higher_order']}/{_VN['corpus_v2_cl4_low_order'] + _VN['corpus_v2_cl4_higher_order'] + _n3}",
-    ),
-    ("M297", "relation-level OL substrate 151 under v2", 151, _VRC["cl3_substrate"]["v2"]),
-    (
-        "M298",
-        "relation shares 78/829 and 73/740",
-        "78/829/73/740",
-        f"{_VRC['shares_v2']['n<=7'][0]}/{_VRC['shares_v2']['n<=7'][1]}/{_VRC['shares_v2']['n>=8'][0]}/{_VRC['shares_v2']['n>=8'][1]}",
-    ),
-    ("M299", "relation-level undecided pairs 3", 3, _VRC["undecided_v2"]),
-    (
-        "M300",
-        "defect SO candidate confirmed with its closed-order control",
-        "CL4/",
-        "/".join(next((r["v2_report"], r["unmet"]) for r in _VD if r.get("v2_candidate") == "CL4")),
-    ),
-    (
-        "M301",
-        "defect EIE over a 22-member universe",
-        "CL2/22",
-        next(f"{r['v2_report']}/{r['universe_v2']}" for r in _VD if r["v2_report"] == "CL2"),
-    ),
-    # v2: finite-shot coverage
-    (
-        "M302",
-        "kill decision: 4,198 stable, 71 outside, 0 inside",
-        "4198/71/0",
-        f"{_VB['kill_decision']['stable_cells']}/{_VB['kill_decision']['disagreements_outside_c1']}/{_VB['kill_decision']['disagreements_inside_c_ref']}",
-    ),
-    (
-        "M303",
-        "kill decision 3,648 / 3,200 / 3,128; 79 gained, 7 lost",
-        "3648/3200/3128/79/7",
-        f"{_VB['kill_decision']['covered_c1']}/{_VB['kill_decision']['covered_c_ref']}/{_VB['kill_decision']['covered_c2']}/"
-        f"{_VB['kill_decision']['gained_at_500_c_ref_vs_c2']}/{_VB['kill_decision']['lost_at_8000_c_ref_vs_c2']}",
-    ),
-    (
-        "M304",
-        "witness surface 8,211 of 10,782; 503 at reference",
-        "8211/10782/503",
-        f"{_VB['witness_surface_v2']['covered_c1']}/{_VB['witness_surface_v2']['decisions']}/{_VB['witness_surface_v2']['reference_schedule_c1']}",
-    ),
-    (
-        "M305",
-        "witness surface at c = 2: 7,451; 322",
-        "7451/322",
-        f"{_VB['witness_surface_v2']['covered_c2']}/{_VB['witness_surface_v2']['reference_schedule_c2']}",
-    ),
-    (
-        "M306",
-        "frozen bound reproduces recorded v1 statuses",
-        0,
-        _VB["v1_universe_rows_reproduced_mismatches"],
-    ),
-    # v2: numerical equality (Threats)
-    (
-        "M307",
-        "corpus margins decided equal are below 7e-12 (1,569 pairs)",
-        True,
-        _VRC["max_margin_decided_equal"] < 7e-12,
-    ),
-    (
-        "M308",
-        "the three corpus pairs between 1e-8 and 1e-6: outcomes",
-        "CL3/CL5/CL5",
-        "/".join(sorted(_Vk[f"{b['set']}/{b['pair']}"]["v2_report"] for b in _band3)),
-    ),
-]
-CHECKS += _VCHECKS
-
-# Further values
-try:  # QUTest 0.1.0 documentation (Apache-2.0); not redistributed, read from an installed copy if present
-    import importlib.metadata as _im
-
-    _QT_META = _im.distribution("qutest").read_text("METADATA") or ""
-except Exception:
-    _QT_META = None
-
-
-def _qt_examples(meta):
-    out = []
-    for blk in re.findall(r"```qasm\n(.*?)```", meta, re.S):
-        for m in re.finditer(r"def (test\w*)\(\)\s*\{(.*?)\n\}", blk, re.S):
-            body = [l.strip() for l in m.group(2).split("\n") if l.strip() and not l.strip().startswith("//")]
-            if not body:
-                continue
-            mi = [i for i, l in enumerate(body) if "measure" in l]
-            out.append((m.group(1), body, mi))
-    return out
-
-
-_QTX = _qt_examples(_QT_META) if _QT_META is not None else None
-
-
-def _measures_directly(body, mi):
-    # where the test calls the program as a helper, the next statement is the measurement; where it writes the
-    # circuit inline, the circuit is the program. Either way no gate stands between program and measurement.
-    if not mi:
-        return False
-    stm = [t.strip() for l in body for t in l.split(";") if t.strip()]
-    calls = [i for i, t in enumerate(stm) if re.match(r"^\w+\(q\)$", t)]
-    return all(i + 1 < len(stm) and "measure" in stm[i + 1] for i in calls)
-
-
-_RQ = json.load(open(_R2 / "R2V_RELEASED_CL3.json"))
-_ST = json.load(open(resolve("data/scalability/corpus/T2A_STRATIFIED_SUMMARY.json")))
-_TS = json.load(open(resolve("data/primary/decision/B5_A3_SUMMARY.json")))
-_EL = json.load(open(resolve("data/profiles/E5_ENVIRONMENT_LOCK.json")))["reproduction_environments"]
-_EX = rows("data/prospective/cross_tool/s2/S2_ELIGIBILITY_EXCLUSIONS.csv")
-_VCd = [r for r in _VC if r["v2_report"] != "NA_KILLED"]
-_R4CHECKS = [
-    (
-        "M309",
-        "QUTest 0.1.0 documentation: 15 complete example tests",
-        15,
-        len(_QTX) if _QTX is not None else "SKIPPED: qutest 0.1.0 not installed",
-    ),
-    (
-        "M310",
-        "every example measures directly after the program",
-        True,
-        (
-            all(_measures_directly(b, mi) for _, b, mi in _QTX)
-            if _QTX is not None
-            else "SKIPPED: qutest 0.1.0 not installed"
-        ),
-    ),
-    (
-        "M311",
-        "Muskit records counts of every qubit (profile record)",
-        True,
-        "appends .measure(q[i], c[i]) for every qubit"
-        in json.load(open(resolve("data/profiles/E3_PROFILE_MATRIX.json")))["interfaces"]["Muskit"][
-            "alpha_v"
-        ],
-    ),
-    (
-        "M312",
-        "one prospective exclusion: W-state cx -> rxx, preflight",
-        "wstate_4#h29/rep@10:cx->rxx/UNSUPPORTED_INGESTION",
-        (
-            "/".join((_EX[0]["mutant_id"], _EX[0]["location"], _EX[0]["exclusion_class"]))
-            if len(_EX) == 1
-            else len(_EX)
-        ),
-    ),
-    (
-        "M313",
-        "three locked Qiskit releases",
-        "0.45.3/1.1.1/2.5.0",
-        "/".join(_EL[k]["qiskit"] for k in ("Q045", "Q11", "Q25")),
-    ),
-    (
-        "M314",
-        "Qiskit 16164 state margin 0.061, observation 5.6e-17",
-        "0.061/5.6",
-        f"{_RQ['state_margin']:.3f}/{_RQ['obs_margin'] * 1e17:.1f}",
-    ),
-    (
-        "M315",
-        "corpus 511 stable survivors of 562 diagnosed",
-        "511/562",
-        f"{sum(1 for r in _VCd if r['native_verdict'] != 'SPLIT')}/{len(_VCd)}",
-    ),
-    (
-        "M316",
-        "non-diagonal 58 of 818 and 58 of 240",
-        "58/818/58/240",
-        f"{_ST['eligible']['non_diagonal']['cl3']}/{_ST['eligible']['non_diagonal']['n']}/{_ST['entering_diagnosis']['non_diagonal']['cl3']}/{_ST['entering_diagnosis']['non_diagonal']['n']}",
-    ),
-    (
-        "M317",
-        "diagonal 92 of 719 (12.8) and 92 of 271 (33.9)",
-        "92/719/12.8/92/271/33.9",
-        f"{_ST['eligible']['diagonal']['cl3']}/{_ST['eligible']['diagonal']['n']}/{100*_ST['eligible']['diagonal']['rate']:.1f}/"
-        f"{_ST['entering_diagnosis']['diagonal']['cl3']}/{_ST['entering_diagnosis']['diagonal']['n']}/{100*_ST['entering_diagnosis']['diagonal']['rate']:.1f}",
-    ),
-    (
-        "M318",
-        "strata partition the 1,537 pairs 818/719 and the 511 stable survivors 240/271",
-        "1537=818+719/511=240+271",
-        f"{len(_T2A_OK)}={len(_T2A_ND)}+{len(_T2A_D)}/{len(_T2A_SUR)}="
-        f"{sum(1 for r in _T2A_SUR if not r['diag'])}+{sum(1 for r in _T2A_SUR if r['diag'])}",
-    ),
-    (
-        "M319",
-        "transpiler agreement identifies 1 to 3 of 85 across 36 configurations",
-        "1/3/85/36",
-        f"{_TS['certified_min']}/{_TS['certified_max']}/{_TS['pairs']}/{_TS['configurations']}",
-    ),
-    (
-        "M320",
-        "smallest primary distinguishing assertion 0.148, a Z product",
-        "0.148/zmask",
-        (lambda m: f"{float(m['w_d']):.3f}/{m['w_kind']}")(
-            min((r for r in _VP if r["v2_report"] == "CL4"), key=lambda r: float(r["w_d"]))
-        ),
-    ),
-    (
-        "M321",
-        "revised outcomes: 51 records of 48 distinct pairs, 48 corpus and 3 width-set records",
-        "51/48/48/3",
-        (
-            lambda rs: f"{len(rs)}/{len({r['case'] if r['arm'] == 'corpus' else 'sbs_cases/' + r['case'] for r in rs})}/"
-            f"{sum(r['arm'] == 'corpus' for r in rs)}/{sum(r['arm'] == 'width' for r in rs)}"
-        )(_VRPf),
-    ),
-    (
-        "M322",
-        "closed witness order: witnesses and controls of every candidate, v3 controls formed",
-        "330/330/2",
-        (
-            lambda I: f"{sum(int(r['candidates']) for r in I)}/{sum(int(r['v2_controls']) + int(r['v3_controls_formed']) for r in I)}/"
-            f"{sum(int(r['v3_controls_formed']) for r in I)}"
-        )(list(csv.DictReader(open(_wo.WO / "IMPACT.csv")))),
-    ),
-]
-CHECKS += _R4CHECKS
-
-bad, skipped = [], []
-for _cid, name, exp, got in CHECKS:
-    if str(got).startswith("SKIPPED"):
-        skipped.append(_cid)
-        tag = "SKIP"
+ghz = {r["mutant_id"]: r for r in ghz_register}
+so_ids = [r["mutant_id"] for r in exact if r["published_report"] == "CL4"]
+partition_declared = Counter(axis(m) for m in so_ids)
+so_whole_string = [m for m in so_ids if ghz[m]["corrected_report"] == "CL4"]
+partition_whole_string = Counter()
+for m in so_whole_string:
+    if ghz[m]["subject"].startswith("ghz"):
+        partition_whole_string["family" if kills(m, "S_BOTH") else "both_jointly"] += 1
     else:
-        tag = "OK  " if str(exp) == str(got) else "FAIL"
-        if tag == "FAIL":
-            bad.append((name, exp, got))
-    print(f"  {tag}  {name:<48} expected {exp!s:<14} recomputed {got}")
-print(
-    f"\n{len(CHECKS) - len(bad) - len(skipped)} of {len(CHECKS) - len(skipped)} checks recomputed from the packaged records; "
-    f"{len(skipped)} left to the analytic tier"
+        partition_whole_string[axis(m)] += 1
+transfer_evaluable = [r for r in transfer if r["outcome"] != "NOT_EVALUABLE"]
+
+stable_cells = [r for r in shot_cells if r["native_verdict"] in ("KILLED", "SURVIVED")]
+covered_cells = [r for r in stable_cells if r["guaranteed"] == "True"]
+relations_by_cell = defaultdict(set)
+for r in shot_cells:
+    relations = tuple(r[k] for k in ("R_C", "R_S", "R_O", "R_A", "R_T"))
+    relations_by_cell[(r["mutant_id"], r["theta"])].add(relations)
+universe_bound = [r for r in bound_cells if r["role"] == "universe_decisive"]
+universe_bound_ref = [r for r in universe_bound if r["theta"] == "0.05" and r["N"] == "2000"]
+supported = lambda g: sum(1 for r in g if r["bound_status"] == "SUPPORTED")
+btd_at = lambda theta, k: sum(1 for r in tolerance_cells if float(r["theta"]) == theta and r[k] == "CL5")
+thetas = sorted({float(r["theta"]) for r in tolerance_cells})
+
+width_cells_at = {
+    n: [r for r in width_cells if int(r["n"]) == n] for n in sorted({int(r["n"]) for r in width_cells})
+}
+universe_seconds = lambda r: r["timings"]["B_universe"] + r["timings"]["C_relations"]
+median_universe_seconds = lambda n: median(map(universe_seconds, width_cells_at[n]))
+width_outcome = Counter("KILLED" if r["native_verdict"] == "KILLED" else r["report"] for r in width_cells)
+relations_at = sorted((int(k), v) for k, v in corpus_relations["by_width"].items())
+pairs_where = lambda p: sum(sum(v.values()) for k, v in relations_at if p(k))
+ol_relations_where = lambda p: sum(v.get("CL3_SUBSTRATE", 0) for k, v in relations_at if p(k))
+
+diagonal = {(r["case_set"], r["pair_id"]): r["diagonal_stratum"] == "True" for r in corpus_eligibility}
+for r in corpus_all:
+    r["diag"] = diagonal[(r["case_set"], r["pair_id"])]
+corpus = [r for r in corpus_all if r["status"] == "OK"]
+corpus_nondiagonal = [r for r in corpus if not r["diag"]]
+corpus_diagonal = [r for r in corpus if r["diag"]]
+corpus_survivors = [r for r in corpus if r["native_verdict"] == "SURVIVED"]
+survivors_nondiagonal = [r for r in corpus_survivors if not r["diag"]]
+survivors_diagonal = [r for r in corpus_survivors if r["diag"]]
+count_ol = lambda g: sum(1 for r in g if r["diagnostic_outcome"] == "CL3")
+corpus_ol_relations = [r for r in corpus if not r["R_S"] and r["R_O"]]
+corpus_ol_at = {
+    w: sum(1 for r in corpus if r["n"] == w and r["diagnostic_outcome"] == "CL3") for w in range(2, 15)
+}
+btd_separations = [r["max_universe_separation"] for r in corpus if r["diagnostic_outcome"] == "CL5"]
+so_separations = [r["max_universe_separation"] for r in corpus if r["diagnostic_outcome"] == "CL4"]
+
+
+def wilson(k, n, z=1.959963984540054):
+    p = k / n
+    scale = 1 + z * z / n
+    centre = (p + z * z / (2 * n)) / scale
+    half = z / scale * (p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5
+    return round(max(0.0, centre - half) * 100, 1), round(min(1.0, centre + half) * 100, 1)
+
+
+witness_separated = lambda g: sum(1 for r in g if int(r["witness_separating_cuts"] or 0) > 0)
+ol_primary = [r for r in rerun_primary if r["report"] == "CL3"]
+ol_corpus = [r for r in rerun_corpus_width if r["arm"] == "corpus" and r["report"] == "CL3"]
+ol_width = [r for r in rerun_corpus_width if r["arm"] == "width" and r["report"] == "CL3"]
+rerun_primary_by_id = {r["mutant_id"]: r for r in rerun_primary}
+under = lambda theta, universe, decision: sum(
+    1 for r in rerun_primary if r[f"base_{theta}"] == "True" and r[f"{universe}_{theta}"] == decision
 )
-with open(_out_dir() / "article_checks.csv", "w", newline="") as _f:
-    _w = csv.writer(_f)
-    _w.writerow(["check_id", "label", "expected", "recomputed", "match"])
-    for _c, _n, _e, _g in CHECKS:
-        _w.writerow([_c, _n, _e, _g, "skipped" if str(_g).startswith("SKIPPED") else str(_e) == str(_g)])
-for n, e, g in bad:
-    print(f"   MISMATCH  {n}: expected {e}  recomputed {g}")
+btd_under = lambda theta, universe: under(theta, universe, "false")
+undecided_under = lambda theta, universe: under(theta, universe, "undecided")
+rerun_btd = lambda arm: [r for r in rerun_corpus_width if r["arm"] == arm and r["report"] == "CL5"]
+low_order_primary = [r for r in low_order if r["arm"] == "primary"]
+low_order_width = [r for r in low_order if r["arm"] == "width" and r.get("t_full_s")]
+low_order_corpus = [r for r in low_order if r["arm"] == "corpus"]
+median_of = lambda g, k: median([float(r[k]) for r in g if r.get(k)])
+
+margin_of = {(r["arm"], r["pair"]): r for r in margins if r["arm"] != "corpus"}
+corpus_margins = list(zip((r for r in margins if r["arm"] == "corpus"), corpus_all))
+in_band = lambda m: any(BAND_LO <= float(m[k]) <= BAND_HI for k in ("state_margin", "obs_margin"))
+near_band = lambda m: any(1e-12 <= float(m[k]) <= 1e-6 for k in ("state_margin", "obs_margin"))
+corpus_in_band = sorted(t["pair_id"] for m, t in corpus_margins if in_band(m))
+corpus_near_band = sorted(t["pair_id"] for m, t in corpus_margins if near_band(m) and not in_band(m))
+band_pairs = set(corpus_in_band) | {r["pair"] for r in margins if r["arm"] == "width" and in_band(r)}
+equal_margins, different_margins = [], []
+for table, columns in (
+    (margins, ("state_margin", "obs_margin")),
+    (margins_ext, ("unitary_margin", "qucheck_all_margin", "state_margin", "obs_margin")),
+):
+    for r in table:
+        for k in columns:
+            if r.get(k):
+                decided = equal_margins if float(r[k]) < EQUAL_BELOW else different_margins
+                decided.append((r["arm"], float(r[k])))
+smallest_difference_small = min(v for a, v in different_margins if a in ("primary", "external"))
+smallest_difference_large = min(v for a, v in different_margins if a in ("corpus", "width"))
+dj_margin = next(r for r in margins if r["arm"] == "primary" and r["pair"] == "dj_3#e19")
+dj_bound = next(
+    r
+    for r in bound_cells
+    if (r["mutant_id"], r["N"], r["theta"], r["role"]) == ("dj_3#e19", "2000", "0.05", "suite_decisive")
+)
+dj_reference = next(r for r in sampled_ref if r["mutant_id"] == "dj_3#e19")
+qra_174 = next(r for r in excluded_kinds if r["pair_id"] == "QRA_174")
+
+native_job = {r["job_id"]: r for r in native}
+outcome_counts = lambda rs: "/".join(str(sum(1 for r in rs if r["v2_report"] == c)) for c in OUTCOMES)
+diagnosed = lambda rs: [r for r in rs if r["v2_report"] != "NA_KILLED"]
+pct = lambda x: f"{100 * x:.1f}"
+pct_interval = lambda a: f"[{100 * a[0]:.1f}, {100 * a[1]:.1f}]"
+matched_row = (
+    lambda s: (
+        f"{s['pos']}/{s['neg']}/{pct(s['effect'])}/{pct_interval(s['cluster_ci95'])}/"
+        f"{pct_interval(s['loco_range'])}"
+    )
+)
+by_observation = {s["edge"]: s for s in matched["observation"]}
+by_suite = {s["contrast"]: s for s in matched["suite"]}
+by_profile = {s["contrast"]: s for s in matched["interface"]}
+so_candidates = lambda rs: [r for r in rs if r.get("v2_candidate") == "CL4" and r.get("OB03") == "satisfied"]
+corpus_candidates = so_candidates(final_corpus)
+corpus_withdrawn = [r for r in corpus_candidates if r["v2_report"] != "CL4" and r["c_kind"]]
+corpus_split = [r for r in corpus_withdrawn if r["final_OB02"] != "failed" and r["final_OB13"] == "failed"]
+corpus_guard_failed = [r for r in corpus_withdrawn if r["final_OB02"] == "failed"]
+guard_fails = lambda r, requirement: int(native_job[f"corpus|{r['case_key']}|{requirement}"]["guard_fails"])
+control_only_failures = sum(
+    1 for r in corpus_guard_failed if guard_fails(r, "OB13") == 0 and guard_fails(r, "OB15") > 0
+)
+split_kills = sorted(int(native_job[f"corpus|{r['case_key']}|OB13"]["kills"]) for r in corpus_split)
+corpus_case = {r["case_key"]: r for r in final_corpus}
+corpus_diagnosed = diagnosed(final_corpus)
+width_case = {r["case_key"]: r for r in final_width}
+closed_order_corpus = len(witness_order.CHANGED["corpus"])
+defect_candidates = lambda report: sum(
+    1 for r in final_defect if r.get("v2_candidate") == "CL4" and r["v2_report"] == report
+)
+revised = [r for r in rule_changes if r["case"] not in witness_order.CHANGED.get(r["arm"], ())]
+primary_witness_d = sorted(float(r["w_d"]) for r in final_primary if r["v2_report"] == "CL4")
+smallest_witness = min((r for r in final_primary if r["v2_report"] == "CL4"), key=lambda r: float(r["w_d"]))
+candidates_total = sum(
+    len(so_candidates(rs)) for rs in (final_primary, final_width, final_corpus, final_external)
+) + sum(1 for r in final_defect if r.get("v2_candidate") == "CL4")
+near_band_outcomes = [
+    b
+    for b in relation_corpus["decided_different_below_1e-6"]
+    if not any(x["pair"] == b["pair"] and x["set"] == b["set"] for x in relation_corpus["band_pairs"])
+]
+
+# QUTest is not redistributed: its documentation is read from an installed copy, as in the analytic tier.
+try:
+    qutest_readme = metadata.distribution("qutest").read_text("METADATA") or ""
+except metadata.PackageNotFoundError:
+    qutest_readme = None
+NOT_INSTALLED = "SKIPPED: qutest 0.1.0 not installed"
+
+
+def example_tests(readme):
+    tests = []
+    for block in re.findall(r"```qasm\n(.*?)```", readme, re.S):
+        for m in re.finditer(r"def (test\w*)\(\)\s*\{(.*?)\n\}", block, re.S):
+            body = [l.strip() for l in m.group(2).split("\n") if l.strip() and not l.strip().startswith("//")]
+            if body:
+                tests.append(body)
+    return tests
+
+
+def measures_directly(body):
+    # A test calls the program as a helper or writes the circuit inline; in both, no gate may stand between
+    # the program and the measurement.
+    if not any("measure" in l for l in body):
+        return False
+    statements = [t.strip() for l in body for t in l.split(";") if t.strip()]
+    calls = [i for i, t in enumerate(statements) if re.match(r"^\w+\(q\)$", t)]
+    return all(i + 1 < len(statements) and "measure" in statements[i + 1] for i in calls)
+
+
+examples = None if qutest_readme is None else example_tests(qutest_readme)
+
+VALUES = {
+    "M001": len(killed_by("S_MIN")),
+    "M002": len(exact) - len(killed_by("S_MIN")),
+    "M003": sum(1 for r in exact if r["exact_ref_native_verdict"] == "KILLED"),
+    "M004": sum(1 for r in suite_guards if r["cell"] == "CLEAN"),
+    "M005": len(killed_by("S_MIN") - killed_by("S_BOTH")),
+    "M006": len(killed_by("S_FAMILY") - killed_by("S_MIN")),
+    "M007": len(killed_by("S_COVER") - killed_by("S_MIN")),
+    "M008": len(killed_by("S_BOTH") - killed_by("S_MIN")),
+    "M009": sum(1 for r in ghz_register if r["moved"] == "True"),
+    "M010": sum(1 for r in ghz_register if r["corrected_report"] == "CL4"),
+    "M011": sum(1 for r in ghz_register if r["corrected_report"] == "CL3"),
+    "M014": (
+        sum(
+            1
+            for r in qucheck_profile
+            if r["reference_report"] == "CL3" and r["R_O_QuCheck_all_qubits"] == "true"
+        )
+    ),
+    "M015": sum(1 for r in transfer_evaluable if r["qutest_witness_expressible"] == "True"),
+    "M016": sum(1 for r in transfer_evaluable if r["outcome"] == "WITNESS_EXISTS"),
+    "M017": sum(1 for r in transfer_evaluable if r["outcome"] == "NO_WITNESS_ABOVE_THETA"),
+    "M018": len(allocation) // 20,
+    "M019": 20 * 30,
+    "M020": len(allocation),
+    "M021": len(development) + 149,
+    "M022": len(development),
+    "M023": len(excluded),
+    "M024": sum(1 for r in eligible_other if r.get("eligible", "true").lower() in ("true", "1", "yes")),
+    "M025": len(development) + 149,
+    "M026": len(survivors),
+    "M027": sum(outcome_in("construction").values()),
+    "M028": sum(outcome_in("prospective").values()),
+    "M029": outcome["CL1"],
+    "M030": outcome["CL2"],
+    "M031": outcome["CL3"],
+    "M032": outcome["CL4"],
+    "M033": outcome["CL5"],
+    "M034": outcome["Unresolved"],
+    "M035": len(reported),
+    "M036": uniform["CL1"],
+    "M037": uniform["CL2"],
+    "M038": len(reported) - uniform["CL1"] - uniform["CL2"],
+    "M039": declared["CL1"],
+    "M040": sum(
+        1
+        for r in contract
+        if r["mutant_id"] in reported
+        and r["report_declared"] == "CL1"
+        and r["report_uniform_arbitrary_unitary"] == "CL2"
+    ),
+    "M041": f"{100*declared['CL1']/len(reported):.1f}",
+    "M042": f"{100*uniform['CL1']/len(reported):.1f}",
+    "M043": sum(1 for r in lattice if r["CL3_Z_output"] == "True"),
+    "M044": sum(1 for r in lattice if r["CL3_Z_all"] == "True"),
+    "M045": sum(1 for r in lattice if r["CL3_XYZ_output"] == "True"),
+    "M046": sum(1 for r in lattice if r["CL3_XYZ_all"] == "True"),
+    "M047": len(lattice),
+    "M048": "/".join(
+        str(a - b)
+        for a, b in [
+            (
+                sum(1 for r in lattice if r["CL3_Z_output"] == "True"),
+                sum(1 for r in lattice if r["CL3_Z_all"] == "True"),
+            ),
+            (
+                sum(1 for r in lattice if r["CL3_Z_output"] == "True"),
+                sum(1 for r in lattice if r["CL3_XYZ_output"] == "True"),
+            ),
+            (
+                sum(1 for r in lattice if r["CL3_Z_all"] == "True"),
+                sum(1 for r in lattice if r["CL3_XYZ_all"] == "True"),
+            ),
+            (
+                sum(1 for r in lattice if r["CL3_XYZ_output"] == "True"),
+                sum(1 for r in lattice if r["CL3_XYZ_all"] == "True"),
+            ),
+        ]
+    ),
+    "M049": f"{suite_kills['S_FAMILY']['CL3'][0]}/{suite_kills['S_FAMILY']['CL3'][1]}",
+    "M050": f"{suite_kills['S_FAMILY']['CL4'][0]}/{suite_kills['S_FAMILY']['CL4'][1]}",
+    "M051": f"{suite_kills['S_COVER']['CL3'][0]}/{suite_kills['S_COVER']['CL3'][1]}",
+    "M052": f"{suite_kills['S_COVER']['CL4'][0]}/{suite_kills['S_COVER']['CL4'][1]}",
+    "M053": (
+        f"{partition_declared['coverage']}/{partition_declared['family']}/"
+        f"{partition_declared['both_jointly']}"
+    ),
+    "M054": sum(partition_declared.values()),
+    "M055": (
+        f"{partition_whole_string['coverage']}/{partition_whole_string['family']}/"
+        f"{partition_whole_string['both_jointly']}"
+    ),
+    "M056": sum(partition_whole_string.values()),
+    "M057": len(corpus_all),
+    "M058": len(corpus_all) - len(corpus),
+    "M059": all(r["U_v_agree"] for r in corpus),
+    "M060": all(r["guard_false_fails"] == 0 for r in corpus),
+    "M061": corpus[0]["reference_condition"],
+    "M062": sum(1 for r in corpus if r["native_verdict"] == "KILLED"),
+    "M063": len(corpus_survivors),
+    "M064": (
+        f'{sum(1 for r in corpus if r["native_verdict"]=="SPLIT")}/'
+        f'{sum(1 for r in corpus if r["native_verdict"]=="SPLIT" and r["diagnostic_outcome"]=="Unresolved")}'
+    ),
+    "M065": "/".join(
+        str(sum(1 for r in corpus if r["diagnostic_outcome"] == c)) for c in ("CL1", "CL3", "CL4", "CL5")
+    ),
+    "M066": sum(1 for r in corpus if r["diagnostic_outcome"] == "CL2"),
+    "M067": f"{len(corpus_ol_relations)}/{count_ol(corpus)}",
+    "M068": f"{len(corpus_nondiagonal)}/{len(corpus_diagonal)}",
+    "M069": f"{count_ol(corpus_nondiagonal)}/{len(corpus_nondiagonal)}",
+    "M070": f"{count_ol(corpus_diagonal)}/{len(corpus_diagonal)}",
+    "M071": (
+        f'{count_ol([r for r in corpus_survivors if not r["diag"]])}/'
+        f'{sum(1 for r in corpus_survivors if not r["diag"])}'
+    ),
+    "M072": "/".join(str(corpus_ol_at[w]) for w in range(2, 15)),
+    "M073": sum(corpus_ol_at.values()) + 1,
+    "M074": f'{btd_mechanism["construction_set"]["exactly_one"]}/{btd_mechanism["construction_set"]["n"]}',
+    "M075": btd_mechanism["construction_set"]["minimum"],
+    "M076": btd_mechanism["construction_set"]["share_at_or_below_theta"],
+    "M077": f'{btd_mechanism["corpus_frame"]["exactly_one"]}/{btd_mechanism["corpus_frame"]["n"]}',
+    "M078": btd_mechanism["corpus_frame"]["share_at_or_below_theta"],
+    "M079": f'{stratum["diagonal_stratum_cl3"]}/{stratum["diagonal_stratum_size"]}',
+    "M080": stratum["cl3_rate_by_mutation_kind"]["insertion"]["rate"],
+    "M081": stratum["cl3_rate_by_mutation_kind"]["other"]["cl3"],
+    "M082": str(wilson(count_ol(corpus_nondiagonal), len(corpus_nondiagonal))),
+    "M083": str(wilson(count_ol(corpus_diagonal), len(corpus_diagonal))),
+    "M084": (
+        str(wilson(count_ol(survivors_nondiagonal), len(survivors_nondiagonal)))
+    ),
+    "M085": (
+        str(wilson(count_ol(survivors_diagonal), len(survivors_diagonal)))
+    ),
+    "M086": (
+        wilson(count_ol(corpus_nondiagonal), len(corpus_nondiagonal))[1]
+        < wilson(count_ol(corpus_diagonal), len(corpus_diagonal))[0]
+    ),
+    "M087": output_condition["at_599"]["pool"],
+    "M088": output_condition["at_599"]["movers"],
+    "M089": output_condition["at_599"]["out"],
+    "M090": (
+        f'{output_condition["at_599"]["movers_by_report"]["CL3"]}/{output_condition["at_599"]["total_cl3"]}'
+    ),
+    "M091": output_condition["validation"]["reproduces_published"],
+    "M092": entailment["entailed"]["n"],
+    "M093": f'{entailment["entailed"]["R_O_holds"]}/{entailment["entailed"]["n"]}',
+    "M094": f'{entailment["entailed"]["cl3"]}/{entailment["entailed"]["n"]}',
+    "M095": entailment["not_entailed"]["cl3"],
+    "M096": entailment["entailed"]["cl3"] + entailment["not_entailed"]["cl3"],
+    "M097": entailment["stratum_vs_entailment"]["entailed_in_diagonal_stratum"],
+    "M098": entailment["stratum_vs_entailment"]["contingent_cl3_in_diagonal_stratum"],
+    "M099": entailment["stratum_vs_entailment"]["entailed_in_non_diagonal_stratum"],
+    "M100": entailment["stratum_vs_entailment"]["non_entailed_in_diagonal_stratum"],
+    "M101": (
+        round(timing["median_phase_seconds"]["A_evidence_acquisition"] / timing["median_total_seconds"], 3)
+    ),
+    "M102": round(timing["by_width"]["14"]["median_B"] / timing["by_width"]["14"]["median_total_seconds"], 3),
+    "M103": timing["by_width"]["10"]["median_B"] / timing["by_width"]["10"]["median_total_seconds"] < 0.002,
+    "M104": round(timing["by_width"]["14"]["median_B"] / timing["by_width"]["13"]["median_B"], 2),
+    "M105": timing["extrapolation"]["crossover_n_where_enumeration_overtakes_suite_execution"],
+    "M106": (
+        timing["extrapolation"]["projected_total_seconds_holding_A_at_its_median"]["18"]
+        < 600
+        < timing["extrapolation"]["projected_total_seconds_holding_A_at_its_median"]["19"]
+    ),
+    "M107": round(max(btd_separations), 4),
+    "M108": round(min(so_separations), 4),
+    "M109": max(btd_separations) < 0.05 < min(so_separations),
+    "M110": (
+        f'{count_ol([r for r in corpus_survivors if r["diag"]])}/'
+        f'{sum(1 for r in corpus_survivors if r["diag"])}'
+    ),
+    "M111": sum(1 for m in so_whole_string if ghz[m]["subject"].startswith("ghz")),
+    "M112": (
+        sum(1 for m in so_whole_string if ghz[m]["subject"].startswith("ghz") and axis(m) == "both_jointly")
+    ),
+    "M113": f"{suite_kills['S_BOTH']['CL4'][0]}/{suite_kills['S_BOTH']['CL4'][1]}",
+    "M119": sum(
+        1
+        for r in qucheck_profile
+        if r["reference_report"] == "CL3" and r["R_O_QuCheck_declared_register"] == "true"
+    ),
+    "M120": len(shot_cells),
+    "M121": sum(1 for v in relations_by_cell.values() if len(v) > 1),
+    "M122": f"{len(covered_cells)}/{len(stable_cells)}",
+    "M123": sum(1 for r in covered_cells if r["agree"] == "False"),
+    "M124": (
+        f"{sum(1 for r in stable_cells if r['guaranteed']=='False' and r['agree']=='False')}/"
+        f"{len(stable_cells)-len(covered_cells)}"
+    ),
+    "M125": f"{supported(universe_bound_ref)}/{len(universe_bound_ref)}",
+    "M126": f"{supported(universe_bound)}/{len(universe_bound)}",
+    "M127": f"{100*supported(universe_bound)/len(universe_bound):.1f}",
+    "M128": len(ablations),
+    "M129": len({(r["mutant_id"], r["suite"], r["report"]) for r in ablations}),
+    "M130": len(ablations) // 2,
+    "M131": f"{len(ablations)/2/len({(r['mutant_id'],r['suite'],r['report']) for r in ablations}):.2f}",
+    "M132": len(tolerance_cells),
+    "M133": ",".join(str(btd_at(t, "analytic_candidate")) for t in thetas),
+    "M134": ",".join(str(btd_at(t, "supported_report")) for t in thetas),
+    "M135": len(width_manifest),
+    "M136": len(width_cells),
+    "M137": width_outcome["KILLED"],
+    "M138": width_outcome["CL1"],
+    "M139": width_outcome["CL3"],
+    "M140": width_outcome["CL4"],
+    "M141": width_outcome["CL5"],
+    "M142": width_outcome["Unresolved"],
+    "M143": int(width_cells_at[8][0]["U_v_implementation"]),
+    "M144": int(width_cells_at[14][0]["U_v_implementation"]),
+    "M145": (
+        round(median_universe_seconds(14) / median_universe_seconds(8))
+    ),
+    "M146": f"{median_universe_seconds(8) * 1000:.1f}",
+    "M147": f"{median_universe_seconds(14):.2f}",
+    "M148": (
+        f"{min(median([float(x['total_seconds']) for x in g]) for g in width_cells_at.values()):.1f}/"
+        f"{max(median([float(x['total_seconds']) for x in g]) for g in width_cells_at.values()):.1f}"
+    ),
+    "M149": f"{max(float(r['total_seconds']) for r in width_cells):.1f}",
+    "M150": f"{max(float(r['peak_rss_gib']) for r in width_cells):.3f}",
+    "M151": (
+        sum(1 for r in width_cells if r.get("memory_censored") == "True" or r.get("within_budget") is False)
+    ),
+    "M152": corpus_relations["distinct_pairs"],
+    "M153": f"{100*ol_relations_where(lambda k:k<=7)/pairs_where(lambda k:k<=7):.1f}",
+    "M154": f"{100*ol_relations_where(lambda k:k>=8)/pairs_where(lambda k:k>=8):.1f}",
+    "M155": len(defects),
+    "M156": sum(1 for r in defects if r["evidence_depth"] == "NOT_REPRODUCIBLE"),
+    "M157": sum(1 for r in defects if r["evidence_depth"] == "NATIVE_REPRODUCTION_ONLY"),
+    "M158": sum(1 for r in defects if r["evidence_depth"] == "PROFILE_ONLY"),
+    "M159": sum(1 for r in defects if r["evidence_depth"] == "RELATION_LEVEL"),
+    "M160": sum(1 for r in defects if r["evidence_depth"] == "FULL_CERTIFICATION"),
+    "M161": sum(1 for r in defect_eligibility if r["qutest_eligibility"] == "ELIGIBLE"),
+    "M169": sum(1 for r in profiles if r["R_O_QUTest"] == "True" and r["R_O_QuCheck"] == "False"),
+    "M170": sum(1 for r in profiles if r["R_O_QUTest"] == "False" and r["R_O_QuCheck"] == "True"),
+    "M171": f"{witness_separated(ol_primary)}/{len(ol_primary)}",
+    "M172": (
+        sum(
+            1
+            for r in ol_primary
+            if int(r["witness_separating_cuts"] or 0) > 0 and r["subject"].startswith("qft")
+        )
+    ),
+    "M173": f"{witness_separated(ol_corpus)}/{len(ol_corpus)}",
+    "M174": f"{witness_separated(ol_width)}/{len(ol_width)}",
+    "M175": f"{witness_separated(rerun_external_ol)}/{len(rerun_external_ol)}",
+    "M176": (
+        f"{sum(1 for r in rerun_external_ol if r['R_O_recomputed'].lower() in r['R_O_frozen'].lower())}/"
+        f"{len(rerun_external_ol)}"
+    ),
+    "M177": (
+        f"{sum(1 for r in low_order_primary if r['report']=='CL4' and r['cheap_witness']=='True')}/"
+        f"{sum(1 for r in low_order_primary if r['report']=='CL4')}"
+    ),
+    "M178": (
+        sum(
+            1
+            for r in low_order_primary
+            if float(r["full_max"]) > EQUAL_BELOW and r["cheap_witness"] != "True"
+        )
+    ),
+    "M179": sum(1 for r in low_order_corpus if r["report"] == "CL4" and r["cheap_witness"] != "True"),
+    "M180": sum(1 for r in low_order_corpus if r["report"] == "CL4"),
+    "M181": f"{median_of(low_order_primary,'t_cheap_s')*1000:.2f}",
+    "M182": f"{median_of(low_order_primary,'t_full_s')*1000:.2f}",
+    "M183": f"{median_of(low_order_width,'t_cheap_s')*1000:.1f}",
+    "M184": f"{median_of(low_order_width,'t_full_s')*1000:.0f}",
+    "M185": ",".join(str(btd_under(t, "RAcert")) for t in THETAS),
+    "M186": btd_under("0.5", "RAcert"),
+    "M187": sum(1 for r in tolerance_cells if r["theta"] == "0.5" and r["analytic_candidate"] == "CL5"),
+    "M188": ",".join(str(btd_under(t, "RA5")) for t in THETAS),
+    "M189": sum(
+        1
+        for r in rerun_primary
+        if r["base_0.5"] == "True" and r["RA5_0.5"] == "false" and r["RAcert_0.5"] == "true"
+    ),
+    "M190": sum(
+        1
+        for r in rerun_primary
+        if r["base_0.5"] == "True" and r["RA5_0.5"] == "undecided" and r["RAcert_0.5"] == "true"
+    ),
+    "M191": undecided_under("0.5", "RAcert"),
+    "M192": undecided_under("0.5", "RA5"),
+    "M193": btd_under("0.5", "RAcond"),
+    "M194": ",".join(str(btd_under(t, "RAcond")) for t in THETAS[:5]),
+    "M195": ",".join(
+        str(
+            sum(
+                1
+                for r in tolerance_cells
+                if r["theta"] == t
+                and r["supported_report"] == "CL5"
+                and rerun_primary_by_id[r["mutant_id"]][f"RAcert_{t}"] == "false"
+            )
+        )
+        for t in THETAS
+    ),
+    "M196": btd_under("0.05", "RAcond"),
+    "M202": sum(1 for r in rerun_btd("width") if r["RAcert"] == "true" or r["pair_id"] in band_pairs),
+    "M203": f"{float(margin_of[('width','SBS_055')]['obs_margin'])*1e9:.1f}",
+    "M204": (
+        f"{sum(1 for r in rerun_btd('corpus') if r['RAcert']=='true' or r['pair_id'] in band_pairs)}/"
+        f"{len(rerun_btd('corpus'))}"
+    ),
+    "M205": sum(1 for r in rerun_btd("corpus") if r["RAcert"] == "false" and r["pair_id"] not in band_pairs),
+    "M206": (
+        sum(
+            1 for r in rerun_btd("corpus") if r["RAcert"] == "true" and r["pair_id"] in ("QRA_513", "SBS_081")
+        )
+    ),
+    "M207": len(corpus_in_band),
+    "M208": (
+        f"{sum(1 for r in excluded_kinds if r['arm']=='corpus' and r['separated_by_excluded_kinds']=='True')}/{sum(1 for r in excluded_kinds if r['arm']=='corpus')}"
+    ),
+    "M209": (
+        sum(1 for r in excluded_kinds if r["arm"] == "corpus" and r["only_rare_bit_separations"] == "True")
+    ),
+    "M210": sum(1 for r in excluded_kinds if r["arm"] == "corpus" and r["most_frequent_separates"] == "True"),
+    "M211": f"{float(qra_174['max_corr_bit_p1_original'].split(';')[0])*1e8:.1f}",
+    "M212": f"{float(qra_174['max_corr_change']):.2f}",
+    "M213": f"{float(qra_174['max_U5'])*1e7:.1f}",
+    "M214": math.ceil(max(v for a, v in equal_margins) * 1e12),
+    "M215": math.floor(smallest_difference_small * 1e3),
+    "M216": f"{smallest_difference_large*1e9:.1f}",
+    "M217": len(corpus_near_band),
+    "M218": f"{float(dj_margin['state_margin']):.3f}",
+    "M219": int(float(dj_margin["obs_margin"]) * 1e12),
+    "M220": f"{float(dj_bound['single_repetition_bound'])*1e5:.1f}",
+    "M221": f"{float(dj_bound['unanimity_failure_bound'])*1e3:.1f}",
+    "M222": f"{dj_reference['kills_recorded']}/{dj_reference['reps']}",
+    "M223": hashlib.sha256(specification).hexdigest()[:8],
+    "M224": f"{numbers['native_jobs_total']}/{numbers['native_qutest_runs']}",
+    "M225": len(revised),
+    "M226": sum(1 for r in revised if r["v2_report"] == "Unresolved"),
+    "M227": sum(1 for r in rule_changes if r["arm"] in ("primary", "external")),
+    "M228": sum(1 for r in rule_changes if "CL3" in (r["v1_report"], r["v2_report"])),
+    "M229": (
+        f"{candidates_total}/{numbers['primary_ob13_recorded_reuse']}/"
+        f"{sum(1 for r in native if r['purpose']=='OB13')}/{sum(1 for r in native if r['purpose']=='OB15')}"
+    ),
+    "M230": "/".join(
+        str(
+            sum(numbers[f"{a}_cl4_breakdown"].get(k, 0) for a in ("primary", "width", "corpus", "external"))
+            + {
+                "supported": closed_order_corpus + defect_candidates("CL4"),
+                "no_control": defect_candidates("Unresolved") - closed_order_corpus,
+            }.get(k, 0)
+        )
+        for k in ("supported", "witness_split", "guard_false_failure", "no_control")
+    ),
+    "M231": outcome_counts(diagnosed(final_primary)),
+    "M232": outcome_counts([r for r in diagnosed(final_primary) if r["population"] == "construction"]),
+    "M233": outcome_counts([r for r in diagnosed(final_primary) if r["population"] == "prospective"]),
+    "M234": f"{numbers['primary_cl4_breakdown'].get('supported', 0)}/{numbers['primary_cl4_candidates']}",
+    "M235": numbers["primary_ob13_recorded_reuse"],
+    "M236": f"{numbers['effects_cl3']['groups']}/{numbers['effects_cl3']['cases']}",
+    "M237": f"{numbers['effects_cl2_construction']['groups']}/{numbers['effects_cl2_construction']['cases']}",
+    "M238": f"{primary_witness_d[0]:.3f}/{primary_witness_d[1]:.3f}",
+    "M239": (
+        "/".join(r["state"] for r in state_groups if r["claim"] != "ALL")
+        + "/"
+        + next(r["state"] for r in state_groups if r["claim"] == "ALL")
+    ),
+    "M240": int(next(r["obs"] for r in state_groups if r["claim"] == "ALL")),
+    "M241": matched_row(by_observation["Z: output -> all qubits"]),
+    "M242": matched_row(by_observation["output: Z -> XYZ"]),
+    "M243": matched_row(by_observation["all qubits: Z -> XYZ"]),
+    "M244": matched_row(by_observation["XYZ: output -> all qubits"]),
+    "M245": matched_row(by_suite["S_MIN -> S_FAMILY"]),
+    "M246": matched_row(by_suite["S_MIN -> S_COVER"]),
+    "M247": matched_row(by_suite["S_MIN -> S_BOTH"]),
+    "M250": matched_row(by_profile["QUTest -> QuCheck"]),
+    "M251": f"{by_profile['QUTest -> QuCheck']['exact_mcnemar_p']:.3f}",
+    "M252": matched_row(by_profile["QUTest -> pytest"]),
+    "M253": f"{statistics['v2']['resolved']}/{statistics['v2']['created']}/{pct(statistics['v2']['effect'])}",
+    "M254": (
+        f"{statistics['v2']['exact_mcnemar_p']:.1e}/{pct_interval(statistics['v2']['cluster_ci95'])}/"
+        f"{pct_interval(statistics['v2']['loco_range'])}"
+    ),
+    "M255": all(s["matches_record"] for k in ("observation", "suite", "interface") for s in matched[k]),
+    "M256": (
+        len(matched["checks"]["observation_band_decisions"])
+        + len(matched["checks"]["interface_band_decisions"])
+    ),
+    "M257": "/".join(str(numbers["decision_grid_by_N"][n]["killed"]) for n in ("500", "2000", "8000")),
+    "M258": (
+        "/".join(str(numbers["decision_grid_by_N"][n]["decision_supported"]) for n in ("500", "2000", "8000"))
+    ),
+    "M259": "/".join(str(numbers["decision_grid_by_N"][n]["unresolved"]) for n in ("500", "2000", "8000")),
+    "M260": numbers["decision_grid_R_T_unchanged"],
+    "M261": ",".join(map(str, numbers["tolerance_cl5_candidates"])),
+    "M262": ",".join(map(str, numbers["tolerance_cl5_decision_supported"])),
+    "M263": numbers["tolerance_cl5_resolution_limited"][-1],
+    "M264": "/".join(
+        str(numbers["tolerance_theta_invariant_relations"][k]) for k in ("R_C_true", "R_S_true", "R_O_true")
+    ),
+    "M265": f"{numbers['ablation']['certificates']}/{numbers['ablation']['ablations']}",
+    "M266": f"{numbers['ablation']['ablations'] / 2 / numbers['ablation']['certificates']:.2f}",
+    "M267": (
+        numbers["ablation"]["all_withdrawn"]
+        and numbers["ablation"]["all_named"]
+        and numbers["ablation"]["all_candidate_unchanged"]
+    ),
+    "M268": (
+        f"{numbers['decision_grid_by_gate_8000']['phase']['unresolved']}/"
+        f"{numbers['decision_grid_by_gate_8000']['phase']['not_killed']}/"
+        f"{numbers['decision_grid_by_gate_8000']['other']['unresolved']}/"
+        f"{numbers['decision_grid_by_gate_8000']['other']['not_killed']}"
+    ),
+    "M269": (
+        f"{numbers['decision_grid_by_gate_8000']['phase']['reference_cl3']}/"
+        f"{numbers['decision_grid_by_gate_8000']['phase']['mutants']}/"
+        f"{numbers['decision_grid_by_gate_8000']['other']['reference_cl3']}/"
+        f"{numbers['decision_grid_by_gate_8000']['other']['mutants']}"
+    ),
+    "M273": outcome_counts(diagnosed(final_external)),
+    "M274": f"{numbers['external_cl4_breakdown'].get('supported', 0)}/{numbers['external_cl4_candidates']}",
+    "M275": outcome_counts(diagnosed(final_width)),
+    "M276": (
+        f"{min(int(r['universe_size']) for r in final_width)}/"
+        f"{max(int(r['universe_size']) for r in final_width)}"
+    ),
+    "M277": (
+        all(
+            int(r["universe_size"]) == 2 ** (int(r["n"]) + 1) + int(r["n"]) + 3
+            for r in final_width + final_corpus
+        )
+    ),
+    "M278": f"{float(width_case['SBS_061']['w_d']) - 0.05:.3f}/{native_job['width|SBS_061|OB13']['kills']}",
+    "M279": (
+        f"{native_job['width|SBS_081|OB13']['guard_fails']}/"
+        f"{len(native_job['width|SBS_081|OB13']['guard_verdicts'].split(';'))}"
+    ),
+    "M280": (
+        f"{float(width_case['SBS_055']['margin_obs']) * 1e9:.1f}/"
+        f"{width_case['SBS_055']['undecided_relation']}"
+    ),
+    "M281": (
+        f"{distance_ms['8']['hellinger'] + distance_ms['8']['kl']:.3f}/"
+        f"{distance_ms['14']['hellinger'] + distance_ms['14']['kl']:.2f}"
+    ),
+    "M282": outcome_counts(diagnosed(final_corpus)),
+    "M283": len(corpus_candidates),
+    "M284": (
+        f"{numbers['corpus_cl4_breakdown']['witness_split']}/"
+        f"{numbers['corpus_cl4_breakdown']['guard_false_failure']}/"
+        f"{sum(1 for r in corpus_candidates if r['v2_report'] != 'CL4' and not r['c_kind'])}"
+    ),
+    "M285": f"{sum(1 for r in corpus_split if float(r['w_d']) - 0.05 < 0.05)}/{len(corpus_split)}",
+    "M286": f"{split_kills[0]}/{split_kills[-1]}",
+    "M287": control_only_failures,
+    "M288": (
+        f"{corpus_case['qra_cases_v1_1/QRA_360']['n']}/"
+        f"{'no_control' if not corpus_case['qra_cases_v1_1/QRA_360']['c_kind'] else 'control'}"
+    ),
+    "M289": (
+        f"{sum(1 for r in corpus_candidates if r['v2_report'] != 'CL4' and r['v1_report'] == 'CL4')}/"
+        f"{sum(1 for r in corpus_candidates if r['v2_report'] != 'CL4')}"
+    ),
+    "M290": (
+        f"{corpus_case['qra_cases/QRA_513']['v2_report']}/{corpus_case['sbs_cases/SBS_081']['v2_report']}"
+    ),
+    "M291": (
+        f"{numbers['sep_primary']['at_least_one']}/{numbers['sep_primary']['cases']}/"
+        f"{numbers['sep_corpus']['at_least_one']}/{numbers['sep_corpus']['cases']}"
+    ),
+    "M292": f"{numbers['sep_corpus']['min'] * 1e7:.1f}",
+    "M293": f"{numbers['sep_corpus']['largest_cl5_u5']:.4f}/{numbers['sep_corpus']['smallest_cl4_u5']:.4f}",
+    "M294": (
+        f"{numbers['corpus_v2_cl5_excluded_separate']}/{numbers['corpus_v2_cl5']}/"
+        f"{numbers['corpus_v2_cl5_rare_bit_only']}/{numbers['corpus_v2_cl5_most_frequent']}"
+    ),
+    "M295": (
+        f"{float(corpus_case['qra_cases/QRA_174']['margin_obs']) * 1e9:.1f}/"
+        f"{corpus_case['qra_cases/QRA_174']['v2_report']}"
+    ),
+    "M296": (
+        f"{numbers['corpus_v2_cl4_higher_order']}/"
+        f"{numbers['corpus_v2_cl4_low_order'] + numbers['corpus_v2_cl4_higher_order'] + closed_order_corpus}"
+    ),
+    "M297": relation_corpus["cl3_substrate"]["v2"],
+    "M298": (
+        f"{relation_corpus['shares_v2']['n<=7'][0]}/{relation_corpus['shares_v2']['n<=7'][1]}/"
+        f"{relation_corpus['shares_v2']['n>=8'][0]}/{relation_corpus['shares_v2']['n>=8'][1]}"
+    ),
+    "M299": relation_corpus["undecided_v2"],
+    "M300": (
+        "/".join(next((r["v2_report"], r["unmet"]) for r in final_defect if r.get("v2_candidate") == "CL4"))
+    ),
+    "M301": next(f"{r['v2_report']}/{r['universe_v2']}" for r in final_defect if r["v2_report"] == "CL2"),
+    "M302": (
+        f"{bound['kill_decision']['stable_cells']}/{bound['kill_decision']['disagreements_outside_c1']}/"
+        f"{bound['kill_decision']['disagreements_inside_c_ref']}"
+    ),
+    "M303": (
+        f"{bound['kill_decision']['covered_c1']}/{bound['kill_decision']['covered_c_ref']}/"
+        f"{bound['kill_decision']['covered_c2']}/"
+        f"{bound['kill_decision']['gained_at_500_c_ref_vs_c2']}/"
+        f"{bound['kill_decision']['lost_at_8000_c_ref_vs_c2']}"
+    ),
+    "M304": (
+        f"{bound['witness_surface_v2']['covered_c1']}/{bound['witness_surface_v2']['decisions']}/"
+        f"{bound['witness_surface_v2']['reference_schedule_c1']}"
+    ),
+    "M305": (
+        f"{bound['witness_surface_v2']['covered_c2']}/{bound['witness_surface_v2']['reference_schedule_c2']}"
+    ),
+    "M306": bound["v1_universe_rows_reproduced_mismatches"],
+    "M307": relation_corpus["max_margin_decided_equal"] < 7e-12,
+    "M308": "/".join(sorted(corpus_case[f"{b['set']}/{b['pair']}"]["v2_report"] for b in near_band_outcomes)),
+    "M309": NOT_INSTALLED if examples is None else len(examples),
+    "M310": NOT_INSTALLED if examples is None else all(measures_directly(body) for body in examples),
+    "M311": "appends .measure(q[i], c[i]) for every qubit" in muskit["alpha_v"],
+    "M312": (
+        "/".join(exclusions[0][k] for k in ("mutant_id", "location", "exclusion_class"))
+        if len(exclusions) == 1
+        else len(exclusions)
+    ),
+    "M313": "/".join(environments[k]["qiskit"] for k in ("Q045", "Q11", "Q25")),
+    "M314": f"{qiskit_16164['state_margin']:.3f}/{qiskit_16164['obs_margin'] * 1e17:.1f}",
+    "M315": f"{sum(1 for r in corpus_diagnosed if r['native_verdict'] != 'SPLIT')}/{len(corpus_diagnosed)}",
+    "M316": (
+        f"{strata['eligible']['non_diagonal']['cl3']}/{strata['eligible']['non_diagonal']['n']}/"
+        f"{strata['entering_diagnosis']['non_diagonal']['cl3']}/"
+        f"{strata['entering_diagnosis']['non_diagonal']['n']}"
+    ),
+    "M317": (
+        f"{strata['eligible']['diagonal']['cl3']}/{strata['eligible']['diagonal']['n']}/"
+        f"{100*strata['eligible']['diagonal']['rate']:.1f}/"
+        f"{strata['entering_diagnosis']['diagonal']['cl3']}/{strata['entering_diagnosis']['diagonal']['n']}/"
+        f"{100*strata['entering_diagnosis']['diagonal']['rate']:.1f}"
+    ),
+    "M318": (
+        f"{len(corpus)}={len(corpus_nondiagonal)}+{len(corpus_diagonal)}/{len(corpus_survivors)}="
+        f"{sum(1 for r in corpus_survivors if not r['diag'])}+{sum(1 for r in corpus_survivors if r['diag'])}"
+    ),
+    "M319": (
+        f"{transpiler['certified_min']}/{transpiler['certified_max']}/{transpiler['pairs']}/"
+        f"{transpiler['configurations']}"
+    ),
+    "M320": f"{float(smallest_witness['w_d']):.3f}/{smallest_witness['w_kind']}",
+    "M321": (
+        f"{len(revised)}/"
+        f"{len({r['case'] if r['arm'] == 'corpus' else 'sbs_cases/' + r['case'] for r in revised})}/"
+        f"{sum(r['arm'] == 'corpus' for r in revised)}/{sum(r['arm'] == 'width' for r in revised)}"
+    ),
+    "M322": (
+        f"{sum(int(r['candidates']) for r in impact)}/"
+        f"{sum(int(r['v2_controls']) + int(r['v3_controls_formed']) for r in impact)}/"
+        f"{sum(int(r['v3_controls_formed']) for r in impact)}"
+    ),
+}
+
+skipped = [k for k, v in VALUES.items() if str(v).startswith("SKIPPED")]
+mismatches = []
+for cid, value in VALUES.items():
+    label, expected = CATALOGUE[cid]["label"], CATALOGUE[cid]["expected"]
+    tag = "SKIP" if cid in skipped else "OK  " if str(value) == expected else "FAIL"
+    if tag == "FAIL":
+        mismatches.append(f"   MISMATCH  {label}: expected {expected}  recomputed {value}")
+    print(f"  {tag}  {label:<48} expected {expected:<14} recomputed {value}")
+print(
+    f"\n{len(VALUES) - len(mismatches) - len(skipped)} of {len(VALUES) - len(skipped)} checks recomputed "
+    f"from the "
+    f"packaged records; {len(skipped)} left to the analytic tier"
+)
+for line in mismatches:
+    print(line)
+with open(out_dir() / "article_checks.csv", "w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["check_id", "label", "expected", "recomputed", "match"])
+    for cid, value in VALUES.items():
+        expected = CATALOGUE[cid]["expected"]
+        match = "skipped" if cid in skipped else str(value) == expected
+        w.writerow([cid, CATALOGUE[cid]["label"], expected, value, match])

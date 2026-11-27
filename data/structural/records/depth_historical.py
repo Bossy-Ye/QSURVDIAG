@@ -1,7 +1,7 @@
 """Pass 56E: characterise the historical depth count (13/52) on untranspiled source circuits. Read-only; prints only."""
 import csv, json
 from qiskit import QuantumCircuit
-Q = "/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot"; rd = lambda p: list(csv.DictReader(open(p)))
+Q = "<study-root>/qsurvcert_pilot"; rd = lambda p: list(csv.DictReader(open(p)))
 def src(g, n):
     c = QuantumCircuit(n)
     for x in g: getattr(c, x["gate"])(*x.get("angles", []), *x["q"])

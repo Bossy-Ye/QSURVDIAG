@@ -22,7 +22,7 @@ from e1_lib import MUT, orig, nq, outreg
 import e1_relations as REL
 EPS = 1e-9
 POP = os.environ.get("POP","599")
-M="/Users/mac/Desktop/ZX-STUDY/paper-artifact"
+M="<study-root>/paper-artifact"
 REFP={"546":f"{M}/github/results/decision/B5_A1E_REFERENCE_EXACT.csv",
       "599":f"{M}/manuscript/tse/batch1/T1_3_REFERENCE_599.csv"}[POP]
 COL ={"546":"published_report","599":"report"}[POP]

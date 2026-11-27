@@ -1,6 +1,6 @@
 """Pass 56E: is the variability caused by the unseeded transpile in qutest.runner.run_test? Read-only; prints only."""
 import csv, json, sys, collections
-Q = "/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot"; sys.path.insert(0, f"{Q}/cross_tool_stage/qutest")
+Q = "<study-root>/qsurvcert_pilot"; sys.path.insert(0, f"{Q}/cross_tool_stage/qutest")
 from qutest_adapter import make_test
 from qutest.parser.qasm_parser import parse_test_source
 from qutest.backends import resolve_backend

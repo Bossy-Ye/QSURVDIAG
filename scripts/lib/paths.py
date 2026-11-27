@@ -1,35 +1,30 @@
-"""Archived files are addressed by package path and checked against provenance/source_manifest.csv."""
+"""Package paths. archived() accepts only files listed in provenance/source_manifest.csv."""
 
-import csv, os
+import csv, os, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-with open(ROOT / "provenance" / "source_manifest.csv", newline="") as _f:
-    _LISTED = {_r["package_path"] for _r in csv.DictReader(_f)}
+with open(ROOT / "provenance/source_manifest.csv", newline="") as f:
+    MANIFEST = {r["package_path"] for r in csv.DictReader(f)}
+with open(ROOT / "expected/values.csv", newline="") as f:
+    CATALOGUE = {r["check_id"]: r for r in csv.DictReader(f)}
 
 
-def orig(path):
-    """Absolute path of an archived file, given its package path."""
-    key = str(path)
-    while key.startswith("./"):
-        key = key[2:]
-    if key in _LISTED:
-        return ROOT / key
-    raise FileNotFoundError(f"{key} is not an archived file (see provenance/source_manifest.csv)")
+def archived(path):
+    if str(path) not in MANIFEST:
+        raise FileNotFoundError(f"{path} is not listed in provenance/source_manifest.csv")
+    return ROOT / path
 
 
-class Dir:
-    """Package directory whose archived files are resolved through the manifest: Dir('data/certification/outcomes') / name."""
-
-    def __init__(self, prefix):
-        self.prefix = str(prefix).rstrip("/")
-
-    def __truediv__(self, name):
-        return orig(f"{self.prefix}/{name}")
+def output(path):
+    """Directory given as --out: created if absent, never inside data/."""
+    out = Path(path).resolve()
+    if ROOT / "data" in (out, *out.parents):
+        sys.exit("refusing to write inside data/")
+    out.mkdir(parents=True, exist_ok=True)
+    return out
 
 
 def out_dir(sub=""):
-    """Output directory for regenerated values: $QSD_OUT, else <package>/output. Never inside data/."""
-    d = Path(os.environ.get("QSD_OUT", ROOT / "output")) / sub
-    d.mkdir(parents=True, exist_ok=True)
-    return d
+    """Subdirectory of $QSD_OUT, the output directory that an entry script hands to the modules it runs."""
+    return output(Path(os.environ.get("QSD_OUT", ROOT / "output")) / sub)

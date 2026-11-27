@@ -65,7 +65,7 @@ for mid, b in D.items():
     for th in THETAS:
         # CORRECTION 9: three-valued, over unrounded stored values, applied to the
         # universe-decisive comparison, the suite-decisive comparison and the
-        # recorded entropy companion alike.
+        # recorded entropy companion as well.
         R_A = exists_above([x[2] for x in U_all], th)
         R_T = compare_threshold(s_d, th)
         R_ent = compare_threshold(ent[2], th)

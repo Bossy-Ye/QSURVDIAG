@@ -10,13 +10,13 @@ import csv, json, os, sys, glob, time
 import numpy as np
 from qiskit import qasm2
 from qiskit.quantum_info import Statevector
-sys.path.insert(0, "/Users/mac/Desktop/ZX-STUDY/paper-artifact/github/code/qsurvdiag")
+sys.path.insert(0, "<study-root>/paper-artifact/github/code/qsurvdiag")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import e1_relations as REL
 from qsurvdiag_confirmatory import exists_above, T, F, U
 from r2_primary import hellinger, kl, pearson_all, most_frequent_sep, witness_separation, tri
 
-PA = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/"
+PA = "<study-root>/paper-artifact/"
 PROG = PA + "zenodo/inputs/programs/"
 OUT = os.path.dirname(os.path.abspath(__file__))
 THETA = 0.05

@@ -11,14 +11,14 @@ New code here only executes the frozen steps for this cohort:
   C3  v2 report (finalize_row) and the B/B' comparison inputs.
 Outputs go to records/stage_c/ and are hashed; Stage D must not start before they are committed.
 --dry-run: runs every step on (original, original) self-pairs only; touches no mutant.
-Environment: .venv-qutest-audit; env QSD_ROOT=/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot.
+Environment: .venv-qutest-audit; env QSD_ROOT=<study-root>/qsurvcert_pilot.
 """
 import csv, hashlib, json, os, sys, time
 from multiprocessing import Pool
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "code"))
 import deps; deps.verify()
-REV2 = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/revision2"
+REV2 = "<study-root>/paper-artifact/revision2"
 os.chdir(REV2)                      # the revised-analysis modules are run from revision2/ (e1_lib reads SSPEC_PROVENANCE.json)
 sys.path.insert(0, REV2)
 import r2v_lib as V

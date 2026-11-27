@@ -14,14 +14,14 @@ is used.
 """
 import csv, json, os, sys
 import numpy as np
-sys.path.insert(0, "/Users/mac/Desktop/ZX-STUDY/paper-artifact/github/code/qsurvdiag")
+sys.path.insert(0, "<study-root>/paper-artifact/github/code/qsurvdiag")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from e1_lib import MUT, orig, nq, outreg
 import e1_relations as REL
 from e1_07_diagnose import _unitary
 import r2_external as X
 
-PA = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/"
+PA = "<study-root>/paper-artifact/"
 OUT = os.path.dirname(os.path.abspath(__file__))
 TOL = 1e-9
 

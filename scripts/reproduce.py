@@ -1,95 +1,82 @@
-"""Recompute the article's values from the archived records and compare them with expected/values.csv.
+"""Recompute the values of expected/values.csv from the archived records (standard library only).
 
-Usage:  python3 scripts/reproduce.py [--out DIR]
-Runs the four record-level check modules (Python standard library only), writes their outputs and
-results_verification.csv to DIR (default: ./output), and exits non-zero if any value differs.
-"""
+Writes the output of each check module and results_verification.csv. A differing or missing value gives a
+non-zero exit status."""
 
 import argparse, csv, os, subprocess, sys
-
-sys.dont_write_bytecode = True
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-ap = argparse.ArgumentParser()
-ap.add_argument("--out", default=str(ROOT / "output"))
-a = ap.parse_args()
-OUT = Path(a.out).resolve()
-OUT.mkdir(parents=True, exist_ok=True)
-if ROOT / "data" in OUT.parents or OUT == ROOT / "data":
-    sys.exit("refusing to write inside data/")
-env = {**os.environ, "QSD_OUT": str(OUT)}
-MODULES = ["article_checks", "ledger_checks", "protocol_checks", "records_checks"]
-for e in MODULES:
-    r = subprocess.run(
-        [sys.executable, "-I", "-B", str(ROOT / "scripts/checks" / f"{e}.py")],
-        env=env,
-        capture_output=True,
-        text=True,
-    )
-    (OUT / f"{e}.log").write_text(r.stdout + r.stderr)
-    print(f"{e:<18} exit {r.returncode}")
-    if r.returncode:
-        sys.exit(f"{e} failed; see {OUT / (e + '.log')}")
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from paths import CATALOGUE, ROOT, output
 
-got = {}
-for r in csv.DictReader(open(OUT / "article_checks.csv")):
-    got[r["check_id"]] = r["recomputed"]
-for r in csv.DictReader(open(OUT / "ledger_checks.csv")):
-    got["L-" + r["id"]] = r["recomputed_value"]
-for f in ("protocol_checks.csv", "records_checks.csv"):
-    for r in csv.DictReader(open(OUT / f)):
-        got[r["check_id"]] = r["recomputed"]
+ap = argparse.ArgumentParser(description=__doc__)
+ap.add_argument("--out", default=ROOT / "output", help="output directory (default: output/ in the package)")
+OUT = output(ap.parse_args().out)
 
-AGG_LEVELS = (
+MODULES = {  # module: prefix of its check ids, id column and value column of its CSV
+    "article_checks": ("", "check_id", "recomputed"),
+    "ledger_checks": ("L-", "id", "recomputed_value"),
+    "protocol_checks": ("", "check_id", "recomputed"),
+    "records_checks": ("", "check_id", "recomputed"),
+}
+PARTIAL = (
     "archived aggregate",
-    "literal",
     "frozen decision record",
     "protocol record",
     "recorded git history",
     "archived structural records",
 )
-rows, cnt = [], Counter()
-for e in csv.DictReader(open(ROOT / "expected/values.csv")):
-    cid = e["check_id"]
-    if e["module"] == "reproduce_analytic":
-        continue  # reported by scripts/reproduce_analytic.py
-    g = got.get(cid)
-    if g is None:
-        status = "NO VALUE"
-    elif str(g).startswith("SKIPPED"):
-        status = "ANALYTIC TIER"
-    elif str(g) != e["expected"]:
-        status = "MISMATCH"
-    elif any(e["evidence_level"].startswith(x) for x in AGG_LEVELS) or "aggregate" in e["evidence_level"]:
-        status = "PARTIAL"
-    else:
-        status = "MATCH"
-    cnt[status] += 1
-    rows.append(
-        {
-            "check_id": cid,
-            "module": e["module"],
-            "label": e["label"],
-            "printed_in_article": e["printed_in_article"],
-            "evidence_level": e["evidence_level"],
-            "inputs": e["inputs"],
-            "command": "python3 scripts/reproduce.py",
-            "expected": e["expected"],
-            "reproduced": g,
-            "status": status,
-        }
+got = {}
+for module, (prefix, key, value) in MODULES.items():
+    r = subprocess.run(
+        [sys.executable, "-I", "-B", str(ROOT / f"scripts/checks/{module}.py")],
+        env={**os.environ, "QSD_OUT": str(OUT)},
+        capture_output=True,
+        text=True,
     )
+    (OUT / f"{module}.log").write_text(r.stdout + r.stderr)
+    print(f"{module:<18} exit {r.returncode}")
+    if r.returncode:
+        sys.exit(f"{module} failed; see {OUT / (module + '.log')}")
+    with open(OUT / f"{module}.csv") as f:
+        got.update((prefix + x[key], x[value]) for x in csv.DictReader(f))
+
+
+def status(check, value):
+    level = check["evidence_level"]
+    if value is None:
+        return "NO VALUE"
+    if value.startswith("SKIPPED"):
+        return "ANALYTIC TIER"
+    if value != check["expected"]:
+        return "MISMATCH"
+    return "PARTIAL" if level.startswith(PARTIAL) or "aggregate" in level else "MATCH"
+
+
+DESCRIPTION = ("check_id", "module", "label", "printed_in_article", "evidence_level", "inputs")
+rows = [
+    {
+        **{k: c[k] for k in DESCRIPTION},
+        "command": "python3 scripts/reproduce.py",
+        "expected": c["expected"],
+        "reproduced": got.get(cid),
+        "status": status(c, got.get(cid)),
+    }
+    for cid, c in CATALOGUE.items()
+    if c["module"] != "reproduce_analytic"
+]
 with open(OUT / "results_verification.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0]))
     w.writeheader()
     w.writerows(rows)
-printed = Counter(r["status"] for r in rows if r["printed_in_article"] == "yes")
-print(f"\nchecks: {len(rows)}  " + "  ".join(f"{k}: {v}" for k, v in sorted(cnt.items())))
-print("values printed in the article: " + "  ".join(f"{k}: {v}" for k, v in sorted(printed.items())))
+tally = lambda rs: "  ".join(f"{k}: {n}" for k, n in sorted(Counter(r["status"] for r in rs).items()))
+print(f"\nchecks: {len(rows)}  {tally(rows)}")
+print("values printed in the article: " + tally([r for r in rows if r["printed_in_article"] == "yes"]))
 print(
-    "MATCH = recomputed from per-case records or logs; PARTIAL = equal, but verified against an archived aggregate,"
+    "MATCH = recomputed from per-case records or logs; "
+    "PARTIAL = equal, but verified against an archived aggregate,"
 )
-print("protocol record or recorded git history. Full table: " + str(OUT / "results_verification.csv"))
-sys.exit(1 if cnt["MISMATCH"] or cnt["NO VALUE"] else 0)
+print(f"protocol record or recorded git history. Full table: {OUT / 'results_verification.csv'}")
+sys.exit(any(r["status"] in ("MISMATCH", "NO VALUE") for r in rows))

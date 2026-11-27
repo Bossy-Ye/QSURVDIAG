@@ -1,890 +1,558 @@
-"""Recompute the ledger values (check module ledger_checks in expected/values.csv) from the archived
-records.
-
-Writes ledger_checks.csv to QSD_OUT: id, area, quantity, unit, recomputed_value, source, method.
-scripts/reproduce.py compares recomputed_value with expected/values.csv.
+"""Counts by population and record (checks L-* of expected/values.csv), recomputed from the archived records.
 """
 
-import sys as _sys
+import csv, json, re, sys
+from collections import Counter
+from pathlib import Path
 
-_sys.dont_write_bytecode = True  # keep the package free of interpreter caches
-import csv, collections, json, os, re, sys
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "lib"))
+import witness_order
+from paths import CATALOGUE, archived, out_dir
 
-import builtins as _bi
-from pathlib import Path as _Path
+OUTCOMES = "data/certification/outcomes/"
+PRIMARY = OUTCOMES + "R2V_FINAL_PRIMARY.csv"
+WIDTH = OUTCOMES + "R2V_FINAL_WIDTH.csv"
+CORPUS = OUTCOMES + "R2V_FINAL_CORPUS.csv"
+EXTERNAL = OUTCOMES + "R2V_FINAL_EXTERNAL.csv"
+DEFECT = OUTCOMES + "R2V_FINAL_DEFECT.csv"
+MARGINS = OUTCOMES + "R2_MARGINS_EXT.csv"
+MATCHED = OUTCOMES + "R2V_TABLE_X.json"
+MATCHED_DECISIONS = OUTCOMES + "R2V_TABLE_X_DECISIONS.csv"
+GRID = OUTCOMES + "R2V_DECISION_GRID.csv"
+ABLATION = OUTCOMES + "R2V_ABLATION.csv"
+RULE_CHANGES = OUTCOMES + "R2V_RULE_CHANGES.csv"
+NATIVE = OUTCOMES + "R2V_NATIVE.csv"
+NATIVE_DEFECTS = OUTCOMES + "R2V_NATIVE_DEFECTS.csv"
+RELATION_CORPUS = OUTCOMES + "R2V_RELATION_CORPUS.json"
+IMPACT = "data/certification/witness_order/IMPACT.csv"
+CLOSED_ORDER_RUNS = "data/certification/witness_order/NATIVE_RUNS.csv"
+PROFILES = "data/primary/records/T1_4_INTERFACE_599.csv"
+CONTRACT_MOVERS = "data/primary/records/T1_4_RQ2.json"
+SUITE_RUNS = "data/primary/records/599_B5_A1G_POPULATION.csv"
+SHOT_CELLS = "data/primary/records/599_B2_SHOT_FRESH.csv"
+GHZ_REGISTER = "data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv"
+SUITE_GUARDS = "data/primary/suite_guards/B5_A1B_GUARD_EXACT.csv"
+TRANSFER = "data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv"
+TRANSFER_REGISTER = "data/interventions/transfer/B5_A2_QUCHECK_REPAIR.csv"
+QUCHECK_RUNS = "data/prospective/cross_tool/results/S3_QUCHECK_RESULTS.csv"
+ALLOCATION = "data/external/cohort/EXTERNAL_ALLOCATION.csv"
+DEFECTS = "data/external/defects/B3_REAL_DEFECTS_FRESH.csv"
+ELIGIBILITY = "data/scalability/corpus/T2A_ELIGIBILITY.csv"
+ENTAILMENT = "data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json"
+OTHER_MUTANTS = "data/prospective/mqt_bench/frozen_deps/S2_GENERATED_MUTANTS.csv"
+DEVELOPMENT_MUTANTS = "data/prospective/mqt_bench/frozen_deps/MUTANT_POPULATION.csv"
+MQT_MUTANTS = "data/prospective/mqt_bench/population/MUTANT_MANIFEST.csv"
+MQT_CASES = "data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv"
+MQT_REPAIR = "data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv"
+MQT_OBSERVATION = "data/prospective/mqt_bench/records/stage_d/D2_OBSERVATION.csv"
 
-sys.path.insert(0, str(_Path(__file__).resolve().parents[1] / "lib"))
-from paths import orig as _orig, out_dir as _out_dir
-import witness_order as _wo
+REPORTED = ("CL1", "CL2", "CL3", "CL4", "CL5")
+POPULATIONS = (PRIMARY, WIDTH, CORPUS, EXTERNAL, DEFECT)
+ledger = []
 
 
-def open(p, mode="r", *a, **k):
-    """Archived inputs are named by package path and checked against the manifest."""
-    if "r" in mode and not any(c in mode for c in "wax+") and str(p).startswith("data/"):
-        p = _orig(p)
-    return _bi.open(p, mode, *a, **k)
+def rows(path):
+    with open(archived(path)) as f:
+        return witness_order.final(path, list(csv.DictReader(f)))
 
 
-OUT = str(_out_dir()) + "/"
-rows = []
+def load(path):
+    with open(archived(path)) as f:
+        return json.load(f)
 
 
-def rd(p):
-    return _wo.final(p, list(csv.DictReader(open(p))))
-
-
-def add(i, area, qty, unit, ms, rc, src, method, note="", status=None):
-    """expected/values.csv"""
-    rows.append(
-        dict(id=i, area=area, quantity=qty, unit=unit, recomputed_value=rc, source=src, method=method)
+def add(cid, unit, value, source, method):
+    area, quantity = CATALOGUE["L-" + cid]["label"].split(": ", 1)
+    ledger.append(
+        {
+            "id": cid,
+            "area": area,
+            "quantity": quantity,
+            "unit": unit,
+            "recomputed_value": value,
+            "source": source,
+            "method": method,
+        }
     )
 
 
-C = collections.Counter
+def counts(rs, column="v2_report"):
+    return Counter(r[column] for r in rs)
 
-# Primary
-P = rd("data/certification/outcomes/R2V_FINAL_PRIMARY.csv")
-pc = C(r["v2_report"] for r in P)
-pop = C(r["population"] for r in P)
-add(
-    "P01",
-    "primary",
-    "executable primary pairs",
-    "mutant (program pair)",
-    599,
-    len(P),
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "row count",
-)
-add(
-    "P02",
-    "primary",
-    "construction / prospective split",
-    "mutant",
-    "450/149",
-    f"{pop['construction']}/{pop['prospective']}",
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "population column",
-)
-add(
-    "P03",
-    "primary",
-    "killed at baseline",
-    "mutant",
-    302,
-    pc["NA_KILLED"],
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "v2_report==NA_KILLED",
-)
-diag = [r for r in P if r["v2_report"] != "NA_KILLED"]
-dpop = C(r["population"] for r in diag)
+
+def spread(rs, keys=REPORTED + ("Unresolved",)):
+    c = counts(rs)
+    return "/".join(str(c[k]) for k in keys)
+
+
+def stable(rs):
+    return [r for r in rs if r["native_verdict"] in ("KILLED", "SURVIVED")]
+
+
+def predicted(rs):
+    return sum(1 for r in stable(rs) if (r["R_T"] == "true") == (r["native_verdict"] == "KILLED"))
+
+
+def sites(rs, program="subject"):
+    return len({(r[program], int(r["anchor_index"])) for r in rs})
+
+
+def first_gate(rs):
+    return sum(int(r["anchor_index"]) == 0 for r in rs)
+
+
+def qutest_runs(rs):
+    return sum(len(r["verdicts"].split(";")) + len(r["guard_verdicts"].split(";")) for r in rs)
+
+
+primary = rows(PRIMARY)
+outcome = counts(primary)
+population = counts(primary, "population")
+diagnosed = [r for r in primary if r["v2_report"] != "NA_KILLED"]
+diagnosed_in = counts(diagnosed, "population")
+development = [r for r in primary if r["population"] == "construction"]
+subjects = lambda rs, report: {r["subject"] for r in rs if r["v2_report"] == report}
+add("P01", "mutant (program pair)", len(primary), PRIMARY, "row count")
+add("P02", "mutant", f"{population['construction']}/{population['prospective']}", PRIMARY, "population column")
+add("P03", "mutant", outcome["NA_KILLED"], PRIMARY, "v2_report==NA_KILLED")
 add(
     "P04",
-    "primary",
-    "entering diagnosis (construction+prospective)",
     "mutant",
-    "297 (195+102)",
-    f"{len(diag)} ({dpop['construction']}+{dpop['prospective']})",
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
+    f"{len(diagnosed)} ({diagnosed_in['construction']}+{diagnosed_in['prospective']})",
+    PRIMARY,
     "v2_report!=NA_KILLED",
 )
-add(
-    "P05",
-    "primary",
-    "CE/EIE/OL/SO/BTD/Unresolved",
-    "mutant",
-    "93/87/35/79/1/2",
-    "/".join(str(pc[k]) for k in ("CL1", "CL2", "CL3", "CL4", "CL5", "Unresolved")),
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "v2_report counts",
-)
-add(
-    "P06",
-    "primary",
-    "issued outcomes",
-    "mutant",
-    295,
-    sum(pc[k] for k in ("CL1", "CL2", "CL3", "CL4", "CL5")),
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "CL1..CL5",
-)
-nv = C(r["native_verdict"] for r in P)
-add(
-    "P07",
-    "primary",
-    "split native verdicts",
-    "mutant",
-    2,
-    nv["SPLIT"],
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "native_verdict==SPLIT",
-)
-stable = [r for r in P if r["native_verdict"] in ("KILLED", "SURVIVED")]
-agree = sum(1 for r in stable if (r["R_T"] == "true") == (r["native_verdict"] == "KILLED"))
-add(
-    "P08",
-    "primary",
-    "analytic prediction agrees with native verdict (stable pairs)",
-    "mutant",
-    "597 of 597",
-    f"{agree} of {len(stable)}",
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "R_T==true iff KILLED",
-)
-cp = C(r["v2_report"] for r in P if r["population"] == "prospective")
+add("P05", "mutant", spread(primary), PRIMARY, "v2_report counts")
+add("P06", "mutant", sum(outcome[k] for k in REPORTED), PRIMARY, "CL1..CL5")
+add("P07", "mutant", counts(primary, "native_verdict")["SPLIT"], PRIMARY, "native_verdict==SPLIT")
+add("P08", "mutant", f"{predicted(primary)} of {len(stable(primary))}", PRIMARY, "R_T==true iff KILLED")
 add(
     "P09",
-    "primary",
-    "prospective set has no observation limitation",
     "mutant",
-    0,
-    cp["CL3"],
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
+    counts(r for r in primary if r["population"] == "prospective")["CL3"],
+    PRIMARY,
     "prospective CL3 count",
 )
-cs = len({r["subject"] for r in P if r["population"] == "construction" and r["v2_report"] == "CL3"})
 add(
     "P10",
-    "primary",
-    "construction subjects with an observation limitation",
     "program",
-    "10 of 15",
-    f"{cs} of {len({r['subject'] for r in P if r['population']=='construction'})}",
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
+    f"{len(subjects(development, 'CL3'))} of {len({r['subject'] for r in development})}",
+    PRIMARY,
     "distinct subjects",
 )
-ss = len({r["subject"] for r in P if r["population"] == "construction" and r["v2_report"] == "CL4"})
-add(
-    "P11",
-    "primary",
-    "construction subjects with a suite omission",
-    "program",
-    7,
-    ss,
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "distinct subjects",
-)
-ghz = sum(1 for r in P if r["v2_report"] == "CL4" and r["subject"].startswith("ghz"))
+add("P11", "program", len(subjects(development, "CL4")), PRIMARY, "distinct subjects")
 add(
     "P12",
-    "primary",
-    "suite omissions that are GHZ mutants",
     "mutant",
-    54,
-    ghz,
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
+    sum(1 for r in primary if r["v2_report"] == "CL4" and r["subject"].startswith("ghz")),
+    PRIMARY,
     "subject prefix ghz",
 )
 
-# Contract (RQ2)
-X = {r["pair"]: r for r in rd("data/certification/outcomes/R2_MARGINS_EXT.csv") if r["arm"] == "primary"}
-LO = 1e-10
-issued = [r for r in P if r["v2_report"] in ("CL1", "CL2", "CL3", "CL4", "CL5")]
-uni_ce = sum(1 for r in issued if float(X[r["mutant_id"]]["unitary_margin"]) < LO)
+unitary_margin = {r["pair"]: float(r["unitary_margin"]) for r in rows(MARGINS) if r["arm"] == "primary"}
+reported = [r for r in primary if r["v2_report"] in REPORTED]
 add(
     "C01",
-    "contract",
-    "contract-equivalent under declared vs unitary contract",
     "mutant",
-    "93 vs 4",
-    f"{pc['CL1']} vs {uni_ce}",
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv; data/certification/outcomes/R2_MARGINS_EXT.csv",
+    f"{outcome['CL1']} vs {sum(1 for r in reported if unitary_margin[r['mutant_id']] < 1e-10)}",
+    f"{PRIMARY}; {MARGINS}",
     "unitary_margin < 1e-10 among issued",
 )
-dep = sum(1 for r in issued if r["v2_report"] == "CL1" and float(X[r["mutant_id"]]["unitary_margin"]) >= LO)
 add(
     "C02",
-    "contract",
-    "contract-dependent survivors (same executed-input state, different unitary)",
     "mutant",
-    89,
-    dep,
+    sum(1 for r in reported if r["v2_report"] == "CL1" and unitary_margin[r["mutant_id"]] >= 1e-10),
     "same",
     "CL1 under declared with unitary margin >= 1e-10",
 )
-rs = sum(1 for r in diag if r["R_S"] == "true")
-add(
-    "C03",
-    "contract",
-    "R_S true among diagnosed (CE+EIE)",
-    "mutant",
-    180,
-    rs,
-    "data/certification/outcomes/R2V_FINAL_PRIMARY.csv",
-    "R_S==true",
-)
+add("C03", "mutant", sum(1 for r in diagnosed if r["R_S"] == "true"), PRIMARY, "R_S==true")
 
-# Interface / suites / observation (RQ3)
-IF = {r["mutant_id"]: r for r in rd("data/primary/records/T1_4_INTERFACE_599.csv")}
-cl3 = [r["mutant_id"] for r in P if r["v2_report"] == "CL3"]
-cl4 = [r["mutant_id"] for r in P if r["v2_report"] == "CL4"]
-gain = sum(1 for m in cl3 if IF[m]["R_O_QuCheck"] == "False")
-lose = sum(1 for m in cl4 if IF[m]["R_O_QuCheck"] == "True")
+profile = {r["mutant_id"]: r for r in rows(PROFILES)}
+ol = [r["mutant_id"] for r in primary if r["v2_report"] == "CL3"]
+so = [r["mutant_id"] for r in primary if r["v2_report"] == "CL4"]
 add(
     "I01",
-    "interface",
-    "QuCheck gains / loses vs QUTest",
     "mutant",
-    "28/25",
-    f"{gain}/{lose}",
-    "data/primary/records/T1_4_INTERFACE_599.csv",
+    f"{sum(1 for m in ol if profile[m]['R_O_QuCheck'] == 'False')}/"
+    f"{sum(1 for m in so if profile[m]['R_O_QuCheck'] == 'True')}",
+    PROFILES,
     "R_O_QuCheck over v2 CL3 / CL4",
 )
 add(
     "I02",
-    "interface",
-    "Muskit keeps all OL; pytest admits none",
     "mutant",
-    "35/0",
-    f"{sum(1 for m in cl3 if IF[m]['R_O_QUTest']=='True')}/{sum(1 for m in cl3 if IF[m]['R_O_pytest']=='True')}",
-    "data/primary/records/T1_4_INTERFACE_599.csv",
+    f"{sum(1 for m in ol if profile[m]['R_O_QUTest'] == 'True')}/"
+    f"{sum(1 for m in ol if profile[m]['R_O_pytest'] == 'True')}",
+    PROFILES,
     "R_O_QUTest / R_O_pytest on CL3 (Muskit shares QUTest's joint-Z observation)",
 )
-A1G = rd("data/primary/records/599_B5_A1G_POPULATION.csv")
-k = lambda su, S_: sum(
-    1 for r in A1G if r["suite"] == su and r["mutant_id"] in S_ and r["outcome"] == "KILLED"
+suite_runs = rows(SUITE_RUNS)
+killed = lambda suite, ids: sum(
+    1 for r in suite_runs if r["suite"] == suite and r["mutant_id"] in ids and r["outcome"] == "KILLED"
 )
+SUITES = ("S_FAMILY", "S_COVER", "S_BOTH")
 add(
     "S01",
-    "suite",
-    "SO killed by correlator / all-qubit / combined suites",
     "mutant",
-    "12/41/79",
-    f"{k('S_FAMILY', set(cl4))}/{k('S_COVER', set(cl4))}/{k('S_BOTH', set(cl4))}",
-    "data/primary/records/599_B5_A1G_POPULATION.csv",
+    "/".join(str(killed(s, set(so))) for s in SUITES),
+    SUITE_RUNS,
     "native suite outcomes over v2 CL4",
 )
-add(
-    "S02",
-    "suite",
-    "OL killed by any systematic suite",
-    "mutant",
-    0,
-    k("S_FAMILY", set(cl3)) + k("S_COVER", set(cl3)) + k("S_BOTH", set(cl3)),
-    "same",
-    "sum over three suites",
-)
-TX = json.load(open("data/certification/outcomes/R2V_TABLE_X.json"))
-obs = {e["edge"]: e for e in TX["observation"]}
+add("S02", "mutant", sum(killed(s, set(ol)) for s in SUITES), "same", "sum over three suites")
+matched = load(MATCHED)
+z_refinement = next(e for e in matched["observation"] if e["edge"] == "Z: output -> all qubits")
 add(
     "O01",
-    "observation",
-    "OL under Z-output -> Z-all",
     "mutant (193 stable construction)",
-    "90 -> 35",
-    f"{obs['Z: output -> all qubits']['cl3_from']} -> {obs['Z: output -> all qubits']['cl3_to']}",
-    "data/certification/outcomes/R2V_TABLE_X.json",
+    f"{z_refinement['cl3_from']} -> {z_refinement['cl3_to']}",
+    MATCHED,
     "derived record",
-    status="VERIFIED_DERIVED",
 )
-TXD = rd("data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv")
-con = [r for r in TXD if r.get("part") in ("construction", "observation") or True]
-
-
-def olcount(col):
-    return sum(1 for r in TXD if r[col] == "true" and r["R_S_v2"] == "false")
-
-
+decisions = rows(MATCHED_DECISIONS)
 add(
     "O02",
-    "observation",
-    "OL count Z-output / Z-all / XYZ-output / XYZ-all (rows of R2V_TABLE_X_DECISIONS)",
     "mutant",
-    "90/35/60/0",
     "/".join(
-        str(olcount(c)) for c in ("R_O_v2_Z_output", "R_O_v2_Z_all", "R_O_v2_XYZ_output", "R_O_v2_XYZ_all")
+        str(sum(1 for r in decisions if r[f"R_O_v2_{c}"] == "true" and r["R_S_v2"] == "false"))
+        for c in ("Z_output", "Z_all", "XYZ_output", "XYZ_all")
     ),
-    "data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv",
+    MATCHED_DECISIONS,
     "R_O true and R_S false per observation column",
-    f"rows={len(TXD)}",
 )
-entered = sum(1 for r in TXD if r["R_O_v2_Z_all"] == "true" and r["R_O_v2_Z_output"] == "false")
 add(
     "O03",
-    "observation",
-    "pairs entering OL along a refinement (Z-output -> Z-all)",
     "mutant",
-    0,
-    entered,
-    "data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv",
+    sum(1 for r in decisions if r["R_O_v2_Z_all"] == "true" and r["R_O_v2_Z_output"] == "false"),
+    MATCHED_DECISIONS,
     "R_O true at finer, false at coarser",
 )
 
-# Decision grid (RQ3 budget)
-GR = rd("data/certification/outcomes/R2V_DECISION_GRID.csv")
-add(
-    "D01",
-    "decision",
-    "decision cells",
-    "pair x (theta,N)",
-    "4,869",
-    f"{len(GR):,}",
-    "data/certification/outcomes/R2V_DECISION_GRID.csv",
-    "row count",
-)
-st = [r for r in GR if r["native_verdict"] in ("KILLED", "SURVIVED")]
-add(
-    "D02",
-    "decision",
-    "executed cells with a stable native verdict",
-    "cell",
-    "4,198",
-    f"{len(st):,}",
-    "same",
-    "KILLED+SURVIVED",
-)
-SH = rd("data/primary/records/599_B2_SHOT_FRESH.csv")
-sh_st = [r for r in SH if r["native_verdict"] in ("KILLED", "SURVIVED")]
-dis = [r for r in sh_st if r["agree"] == "False"]
-dis_g = [r for r in dis if r["guaranteed"] == "True"]
+grid = rows(GRID)
+add("D01", "pair x (theta,N)", f"{len(grid):,}", GRID, "row count")
+add("D02", "cell", f"{len(stable(grid)):,}", "same", "KILLED+SURVIVED")
+disagree = [r for r in stable(rows(SHOT_CELLS)) if r["agree"] == "False"]
 add(
     "D03",
-    "decision",
-    "stable cells disagreeing with the ideal prediction / of which covered by the bound",
     "cell",
-    "71 / 0",
-    f"{len(dis)} / {len(dis_g)}",
-    "data/primary/records/599_B2_SHOT_FRESH.csv",
+    f"{len(disagree)} / {sum(1 for r in disagree if r['guaranteed'] == 'True')}",
+    SHOT_CELLS,
     "agree==False; guaranteed==True",
-    f"stable cells in this file={len(sh_st)}",
 )
-byN = collections.defaultdict(C)
-for r in GR:
-    byN[r["N"]][r["v2_status"]] += 1
-ur = {n: sum(v for kk, v in byN[n].items() if kk.startswith("unresolved")) for n in byN}
+unresolved = Counter(r["N"] for r in grid if r["v2_status"].startswith("unresolved"))
 add(
     "D04",
-    "decision",
-    "Unresolved cells fall as N grows (500/2000/8000)",
     "cell",
-    "359/215/126 (falls)",
-    f"{ur['500']}/{ur['2000']}/{ur['8000']} (falls)",
-    "data/certification/outcomes/R2V_DECISION_GRID.csv",
+    f"{unresolved['500']}/{unresolved['2000']}/{unresolved['8000']} (falls)",
+    GRID,
     "unresolved_* by N",
 )
-TB = TX["budget"]["v2"]
-add(
-    "D05",
-    "decision",
-    "N 500->8000 resolved / created",
-    "cell",
-    "236 / 3",
-    f"{TB['resolved']} / {TB['created']}",
-    "data/certification/outcomes/R2V_TABLE_X.json",
-    "derived record",
-    status="VERIFIED_DERIVED",
-)
-AB = rd("data/certification/outcomes/R2V_ABLATION.csv")
+budget = matched["budget"]["v2"]
+add("D05", "cell", f"{budget['resolved']} / {budget['created']}", MATCHED, "derived record")
+ablation = rows(ABLATION)
 add(
     "D06",
-    "decision",
-    "ablations withdraw outcome, name item, keep candidate",
     "ablation",
-    "18882 of 18882",
-    f"{sum(r['withdrawn']=='True' and r['named']=='True' and r['candidate_unchanged']=='True' for r in AB)} of {len(AB)}",
-    "data/certification/outcomes/R2V_ABLATION.csv",
+    f"{sum(all(r[k] == 'True' for k in ('withdrawn', 'named', 'candidate_unchanged')) for r in ablation)}"
+    f" of {len(ablation)}",
+    ABLATION,
     "all three flags True",
 )
 
-# RQ4 transfer
-TR = rd("data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv")
-t = C((r["subject"], r["outcome"], r["qutest_witness_expressible"]) for r in TR)
+transfer = Counter((r["subject"], r["outcome"], r["qutest_witness_expressible"]) for r in rows(TRANSFER))
 add(
-    "H07",
-    "rq4",
-    "QuCheck transfer same / another / none (analytic)",
+    "R01",
     "case",
-    "8/7/6",
-    f"{t[('toffoli_barenco_5','WITNESS_EXISTS','True')]}/{t[('simon_4','WITNESS_EXISTS','False')]}/{t[('simon_4','NO_WITNESS_ABOVE_THETA','False')]}",
-    "data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv",
+    f"{transfer[('toffoli_barenco_5', 'WITNESS_EXISTS', 'True')]}/"
+    f"{transfer[('simon_4', 'WITNESS_EXISTS', 'False')]}/"
+    f"{transfer[('simon_4', 'NO_WITNESS_ABOVE_THETA', 'False')]}",
+    TRANSFER,
     "outcome x expressible",
-    "all 8 Toffoli; 7 and 6 Simon",
 )
-SQ = {r["mutant_id"]: r for r in rd("data/prospective/cross_tool/s3/S3_QUCHECK_RESULTS.csv")}
-ids21 = [r["mutant_id"] for r in P if r["population"] == "prospective" and r["v2_report"] == "CL4"]
+qucheck = {r["mutant_id"]: r for r in rows(QUCHECK_RUNS)}
+so_other = [r["mutant_id"] for r in primary if r["population"] == "prospective" and r["v2_report"] == "CL4"]
 add(
-    "H08",
-    "rq4",
-    "finite-shot QuCheck equality check (output register, 30 July) detected",
+    "R02",
     "case",
-    "5 of 21",
-    f"{sum(SQ[i]['verdict_primary']=='DETECTED' for i in ids21)} of {len(ids21)}",
-    "data/prospective/cross_tool/s3/S3_QUCHECK_RESULTS.csv",
+    f"{sum(qucheck[m]['verdict_primary'] == 'DETECTED' for m in so_other)} of {len(so_other)}",
+    QUCHECK_RUNS,
     "verdict_primary over the 21 prospective SO",
 )
-A2 = rd("data/interventions/transfer/B5_A2_QUCHECK_REPAIR.csv")
+transfer_register = rows(TRANSFER_REGISTER)
 add(
-    "H09",
-    "rq4",
-    "analytic transfer over output register only (2 Sept): witness exists",
+    "R03",
     "case",
-    "5 of 21",
-    f"{sum(r['outcome']=='WITNESS_EXISTS' for r in A2)} of {sum(not r['outcome'].startswith('NOT_EVALUABLE') for r in A2)}",
-    "data/interventions/transfer/B5_A2_QUCHECK_REPAIR.csv",
+    f"{sum(r['outcome'] == 'WITNESS_EXISTS' for r in transfer_register)} of "
+    f"{sum(not r['outcome'].startswith('NOT_EVALUABLE') for r in transfer_register)}",
+    TRANSFER_REGISTER,
     "outcome",
 )
 
-# Native evidence and v1 -> final (v2 records under the closed witness order, v3)
-FIN = {
-    a: rd(f"data/certification/outcomes/R2V_FINAL_{a}.csv")
-    for a in ("PRIMARY", "WIDTH", "CORPUS", "EXTERNAL")
+final = {p: rows(p) for p in POPULATIONS}
+candidates = {
+    p: [r for r in rs if r.get("v2_candidate") == "CL4" and r.get("OB03") == "satisfied"]
+    for p, rs in final.items()
 }
-FIN["DEFECT"] = rd("data/certification/outcomes/R2V_FINAL_DEFECT.csv")
-cand = {
-    a: [r for r in v if r.get("v2_candidate") == "CL4" and r.get("OB03") == "satisfied"]
-    for a, v in FIN.items()
-}
-conf = {a: sum(1 for r in v if r["v2_report"] == "CL4") for a, v in cand.items()}
+confirmed = {p: sum(1 for r in rs if r["v2_report"] == "CL4") for p, rs in candidates.items()}
 add(
     "N01",
-    "certification",
-    "SO candidates primary/width/corpus/external/defect",
     "case",
-    "79/8/187/5/1",
-    "/".join(str(len(cand[a])) for a in ("PRIMARY", "WIDTH", "CORPUS", "EXTERNAL", "DEFECT")),
-    "data/certification/outcomes/R2V_FINAL_*.csv",
+    "/".join(str(len(candidates[p])) for p in POPULATIONS),
+    OUTCOMES + "R2V_FINAL_*.csv",
     "v2_candidate==CL4 and OB03 satisfied (stable survival)",
 )
-add(
-    "N02",
-    "certification",
-    "confirmed (issued CL4)",
-    "case",
-    "79/6/143/5/1",
-    "/".join(str(conf[a]) for a in ("PRIMARY", "WIDTH", "CORPUS", "EXTERNAL", "DEFECT")),
-    "same",
-    "v2_report==CL4",
-)
-tc = sum(len(v) for v in cand.values())
-tf = sum(conf.values())
-add(
-    "N03",
-    "certification",
-    "total candidates / withdrawn",
-    "case",
-    "280 / 46",
-    f"{tc} / {tc - tf}",
-    "same",
-    "candidates minus confirmed",
-)
-RP = [
-    r
-    for r in rd("data/certification/outcomes/R2V_RULE_CHANGES.csv")
-    if r["case"] not in _wo.CHANGED.get(r["arm"], ())
-]
+add("N02", "case", "/".join(str(confirmed[p]) for p in POPULATIONS), "same", "v2_report==CL4")
+total = sum(map(len, candidates.values()))
+add("N03", "case", f"{total} / {total - sum(confirmed.values())}", "same", "candidates minus confirmed")
+revised = [r for r in rows(RULE_CHANGES) if r["case"] not in witness_order.CHANGED.get(r["arm"], ())]
 add(
     "N04",
-    "certification",
-    "pair outcomes differing v1->final / to Unresolved / to CL4",
     "pair",
-    "51 / 50 / 1",
-    f"{len(RP)} / {sum(r['v2_report']=='Unresolved' for r in RP)} / {sum(r['v2_report']=='CL4' for r in RP)}",
-    "data/certification/outcomes/R2V_RULE_CHANGES.csv; data/certification/witness_order/IMPACT.csv",
+    f"{len(revised)} / {sum(r['v2_report'] == 'Unresolved' for r in revised)} / "
+    f"{sum(r['v2_report'] == 'CL4' for r in revised)}",
+    f"{RULE_CHANGES}; {IMPACT}",
     "row counts, less the v3 cases that return to their v1 outcome",
 )
-NAT = rd("data/certification/outcomes/R2V_NATIVE.csv") + rd(
-    "data/certification/outcomes/R2V_NATIVE_DEFECTS.csv"
-)
-add(
-    "N05",
-    "certification",
-    "native confirmation + control checks",
-    "check",
-    537,
-    len(NAT),
-    "data/certification/outcomes/R2V_NATIVE.csv; data/certification/outcomes/R2V_NATIVE_DEFECTS.csv",
-    "row count",
-)
-runs = sum(len(r["verdicts"].split(";")) + len(r["guard_verdicts"].split(";")) for r in NAT)
-add(
-    "N06",
-    "certification",
-    "QUTest runs in native evidence",
-    "run",
-    "8,055",
-    f"{runs:,}",
-    "data/certification/outcomes/R2V_NATIVE.csv",
-    "len(verdicts)+len(guard_verdicts)",
-)
-N3 = list(_wo.NATIVE.values())
+native = rows(NATIVE) + rows(NATIVE_DEFECTS)
+add("N05", "check", len(native), f"{NATIVE}; {NATIVE_DEFECTS}", "row count")
+add("N06", "run", f"{qutest_runs(native):,}", NATIVE, "len(verdicts)+len(guard_verdicts)")
+closed_order = list(witness_order.NATIVE.values())
 add(
     "N07",
-    "certification",
-    "v3 native checks / QUTest runs / controls satisfied",
     "check",
-    "4 / 60 / 2",
-    f"{len(N3)} / {sum(len(r['verdicts'].split(';')) + len(r['guard_verdicts'].split(';')) for r in N3)} / {sum(r['purpose'] == 'OB15' and r['status'] == 'satisfied' for r in N3)}",
-    "data/certification/witness_order/NATIVE_RUNS.csv",
+    f"{len(closed_order)} / {qutest_runs(closed_order)} / "
+    f"{sum(r['purpose'] == 'OB15' and r['status'] == 'satisfied' for r in closed_order)}",
+    CLOSED_ORDER_RUNS,
     "row count; len(verdicts)+len(guard_verdicts); OB15 status",
 )
 
-# External
-E = FIN["EXTERNAL"]
-ec = C(r["v2_report"] for r in E)
+external = final[EXTERNAL]
+killed_external = counts(external)["NA_KILLED"]
 add(
     "E01",
-    "external",
-    "mutants / killed / diagnosed",
     "mutant",
-    "270/111/159",
-    f"{len(E)}/{ec['NA_KILLED']}/{len(E)-ec['NA_KILLED']}",
-    "data/certification/outcomes/R2V_FINAL_EXTERNAL.csv",
+    f"{len(external)}/{killed_external}/{len(external) - killed_external}",
+    EXTERNAL,
     "counts",
 )
-add(
-    "E02",
-    "external",
-    "CE/EIE/OL/SO/BTD/Unresolved",
-    "mutant",
-    "28/94/30/5/0/2",
-    "/".join(str(ec[k]) for k in ("CL1", "CL2", "CL3", "CL4", "CL5", "Unresolved")),
-    "same",
-    "v2_report",
-)
-est = [r for r in E if r["native_verdict"] in ("KILLED", "SURVIVED")]
-add(
-    "E03",
-    "external",
-    "analytic and executed verdict agree (stable)",
-    "mutant",
-    268,
-    sum(1 for r in est if (r["R_T"] == "true") == (r["native_verdict"] == "KILLED")),
-    "same",
-    "R_T vs native",
-    f"stable={len(est)}",
-)
-AL = {r["mutant_id"]: r for r in rd("data/external/cohort/EXTERNAL_ALLOCATION.csv")}
+add("E02", "mutant", spread(external), "same", "v2_report")
+add("E03", "mutant", predicted(external), "same", "R_T vs native")
+allocation = {r["mutant_id"]: r for r in rows(ALLOCATION)}
 add(
     "E04",
-    "external",
-    "first-gate mutants / distinct (program, site)",
     "mutant / site",
-    "244 / 16",
-    f"{sum(int(r['anchor_index'])==0 for r in AL.values())} / {len({(r['subject'],int(r['anchor_index'])) for r in AL.values()})}",
-    "data/external/cohort/EXTERNAL_ALLOCATION.csv",
+    f"{first_gate(allocation.values())} / {sites(allocation.values())}",
+    ALLOCATION,
     "anchor_index==0",
 )
+ol_external = [allocation[r["case"]] for r in external if r["v2_report"] == "CL3"]
 add(
     "E05",
-    "external",
-    "OL at the first gate / programs with OL",
     "mutant / program",
-    "30 / 9",
-    f"{sum(1 for r in E if r['v2_report']=='CL3' and int(AL[r['case']]['anchor_index'])==0)} / {len({AL[r['case']]['subject'] for r in E if r['v2_report']=='CL3'})}",
-    "data/external/cohort/EXTERNAL_ALLOCATION.csv; data/certification/outcomes/R2V_FINAL_EXTERNAL.csv",
+    f"{first_gate(ol_external)} / {len({r['subject'] for r in ol_external})}",
+    f"{ALLOCATION}; {EXTERNAL}",
     "join",
 )
 
-# Width set
-Wd = FIN["WIDTH"]
-wc = C(r["v2_report"] for r in Wd)
+width = final[WIDTH]
+width_outcome = counts(width)
+width_diagnosed = len(width) - width_outcome["NA_KILLED"]
 add(
     "W01",
-    "width",
-    "executed / diagnosed / issued / Unresolved",
     "pair",
-    "143/47/43/4",
-    f"{len(Wd)}/{len(Wd)-wc['NA_KILLED']}/{len(Wd)-wc['NA_KILLED']-wc['Unresolved']}/{wc['Unresolved']}",
-    "data/certification/outcomes/R2V_FINAL_WIDTH.csv",
+    f"{len(width)}/{width_diagnosed}/{width_diagnosed - width_outcome['Unresolved']}/"
+    f"{width_outcome['Unresolved']}",
+    WIDTH,
     "counts",
-    "listed 162 not in this file",
 )
 
-# Corpus
-Co = FIN["CORPUS"]
-cc = C(r["v2_report"] for r in Co)
+corpus = final[CORPUS]
+corpus_outcome = counts(corpus)
 add(
     "K01",
-    "corpus",
-    "pairs <=14 qubits / killed / diagnosed",
     "pair",
-    "1,537/975/562",
-    f"{len(Co):,}/{cc['NA_KILLED']}/{len(Co)-cc['NA_KILLED']}",
-    "data/certification/outcomes/R2V_FINAL_CORPUS.csv",
+    f"{len(corpus):,}/{corpus_outcome['NA_KILLED']}/{len(corpus) - corpus_outcome['NA_KILLED']}",
+    CORPUS,
     "counts",
 )
-add(
-    "K02",
-    "corpus",
-    "CE/OL/SO/BTD/Unresolved",
-    "pair",
-    "158/150/143/13/98",
-    "/".join(str(cc[k]) for k in ("CL1", "CL3", "CL4", "CL5", "Unresolved")),
-    "same",
-    "v2_report",
-)
-un = [r for r in Co if r["v2_report"] == "Unresolved"]
-spl = sum(1 for r in un if r["native_verdict"] == "SPLIT")
+add("K02", "pair", spread(corpus, ("CL1", "CL3", "CL4", "CL5", "Unresolved")), "same", "v2_report")
+corpus_unresolved = [r for r in corpus if r["v2_report"] == "Unresolved"]
 add(
     "K03",
-    "corpus",
-    "Unresolved: split / undecided margin / failed SO candidates",
     "pair",
-    "51/3/44",
-    f"{spl}/{sum(1 for r in un if r['unmet'].startswith('relation R_') and 'inconsistent' not in r['unmet'])}/{sum(1 for r in un if r['v2_candidate']=='CL4' and r['native_verdict']!='SPLIT')}",
-    "data/certification/outcomes/R2V_FINAL_CORPUS.csv",
+    f"{sum(1 for r in corpus_unresolved if r['native_verdict'] == 'SPLIT')}/"
+    f"{sum(1 for r in corpus_unresolved if r['unmet'].startswith('relation R_') and 'inconsistent' not in r['unmet'])}/"
+    f"{sum(1 for r in corpus_unresolved if r['v2_candidate'] == 'CL4' and r['native_verdict'] != 'SPLIT')}",
+    CORPUS,
     "native_verdict / unmet / candidate",
-    "split also includes candidate splits",
 )
 add(
     "K04",
-    "corpus",
-    "certified OL share",
     "pair",
-    "150/1,537 = 9.8%",
-    f"{cc['CL3']}/{len(Co):,} = {100*cc['CL3']/len(Co):.1f}%",
+    f"{corpus_outcome['CL3']}/{len(corpus):,} = {100 * corpus_outcome['CL3'] / len(corpus):.1f}%",
     "same",
     "ratio",
 )
 
-# Defects
-D = FIN["DEFECT"]
+defect = final[DEFECT]
 add(
     "F01",
-    "defects",
-    "eligible for the QUTest profile / killed / CE-EIE / SO / Unresolved",
     "defect",
-    "4/2/1/1/0",
-    f"{len(D)}/{sum(r['v2_report']=='NA_KILLED' for r in D)}/{sum(r['v2_report']=='CL2' for r in D)}/{sum(r['v2_report']=='CL4' for r in D)}/{sum(r['v2_report']=='Unresolved' for r in D)}",
-    "data/certification/outcomes/R2V_FINAL_DEFECT.csv",
+    f"{len(defect)}/" + spread(defect, ("NA_KILLED", "CL2", "CL4", "Unresolved")),
+    DEFECT,
     "rows",
 )
-
-GA = rd("data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv")
 add(
     "P13",
-    "primary",
-    "GHZ SO killed under full-string register (79 -> 47)",
     "mutant",
-    32,
-    sum(r["moved"] == "True" and r["declared_report"] == "CL4" for r in GA),
-    "data/primary/records/599_B5_A1K_GHZ_CONTRACT_AUDIT.csv",
+    sum(r["moved"] == "True" and r["declared_report"] == "CL4" for r in rows(GHZ_REGISTER)),
+    GHZ_REGISTER,
     "moved CL4 -> NA_KILLED",
 )
-EL = {r["case_set"] + "/" + r["pair_id"]: r for r in rd("data/scalability/corpus/T2A_ELIGIBILITY.csv")}
-sv = [r for r in Co if r["native_verdict"] == "SURVIVED"]
-nd = [r for r in sv if EL[r["case"]]["diagonal_stratum"] == "False"]
-dg = [r for r in sv if EL[r["case"]]["diagonal_stratum"] == "True"]
+diagonal = {f"{r['case_set']}/{r['pair_id']}": r["diagonal_stratum"] for r in rows(ELIGIBILITY)}
+corpus_survivors = [r for r in corpus if r["native_verdict"] == "SURVIVED"]
+ol_share = lambda rs: f"{sum(r['v2_report'] == 'CL3' for r in rs)}/{len(rs)}"
 add(
     "K05",
-    "corpus",
-    "OL among stable survivors: non-diagonal / diagonal stratum",
     "pair",
-    "58/240 ; 92/271",
-    f"{sum(r['v2_report']=='CL3' for r in nd)}/{len(nd)} ; {sum(r['v2_report']=='CL3' for r in dg)}/{len(dg)}",
-    "data/certification/outcomes/R2V_FINAL_CORPUS.csv; data/scalability/corpus/T2A_ELIGIBILITY.csv",
+    " ; ".join(
+        ol_share([r for r in corpus_survivors if diagonal[r["case"]] == d]) for d in ("False", "True")
+    ),
+    f"{CORPUS}; {ELIGIBILITY}",
     "diagonal_stratum join",
 )
-EN = json.load(open("data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json"))
+entailment = load(ENTAILMENT)
 add(
     "K06",
-    "corpus",
-    "OL meeting the diagonal sufficient condition / not",
     "pair",
-    "54 / 96",
-    f"{EN['entailed']['cl3']} / {EN['not_entailed']['cl3']}",
-    "data/scalability/corpus/T3_1_ENTAILED_VS_CONTINGENT.json",
+    f"{entailment['entailed']['cl3']} / {entailment['not_entailed']['cl3']}",
+    ENTAILMENT,
     "derived record",
-    status="VERIFIED_DERIVED",
 )
-RC = json.load(open("data/certification/outcomes/R2V_RELATION_CORPUS.json"))
-sh = RC["shares_v2"]
+shares = load(RELATION_CORPUS)["shares_v2"]
 add(
     "K07",
-    "corpus",
-    "relation-level OL share n<=7 / n>=8",
     "pair",
-    "9.4% / 9.9%",
-    f"{100*sh['n<=7'][0]/sh['n<=7'][1]:.1f}% / {100*sh['n>=8'][0]/sh['n>=8'][1]:.1f}%",
-    "data/certification/outcomes/R2V_RELATION_CORPUS.json",
+    " / ".join(f"{100 * shares[k][0] / shares[k][1]:.1f}%" for k in ("n<=7", "n>=8")),
+    RELATION_CORPUS,
     "derived record",
-    status="VERIFIED_DERIVED",
 )
-DF = rd("data/external/defects/B3_REAL_DEFECTS_FRESH.csv")
-dd = C(r["evidence_depth"] for r in DF)
+defects = rows(DEFECTS)
+depth = counts(defects, "evidence_depth")
 add(
     "F02",
-    "defects",
-    "defects / reproduced in a locked release",
     "defect",
-    "42 / 32",
-    f"{len(DF)} / {sum(r['reproduction']=='REPRODUCED' for r in DF)}",
-    "data/external/defects/B3_REAL_DEFECTS_FRESH.csv",
+    f"{len(defects)} / {sum(r['reproduction'] == 'REPRODUCED' for r in defects)}",
+    DEFECTS,
     "rows",
+)
+DEPTHS = (
+    "NOT_REPRODUCIBLE",
+    "NATIVE_REPRODUCTION_ONLY",
+    "PROFILE_ONLY",
+    "RELATION_LEVEL",
+    "FULL_CERTIFICATION",
 )
 add(
     "F03",
-    "defects",
-    "evidence depth: not repr. / tool / profile / relation / issued",
     "defect",
-    "10/8/10/12/2",
-    f"{dd['NOT_REPRODUCIBLE']}/{dd['NATIVE_REPRODUCTION_ONLY']}/{dd['PROFILE_ONLY']}/{dd['RELATION_LEVEL']}/{dd['FULL_CERTIFICATION']}",
+    "/".join(str(depth[k]) for k in DEPTHS),
     "same",
     "evidence_depth",
 )
-RQ2 = json.load(open("data/primary/records/T1_4_RQ2.json"))
-add(
-    "C04",
-    "contract",
-    "movers between declared and unitary contract (cross-check)",
-    "mutant",
-    89,
-    RQ2["movers"],
-    "data/primary/records/T1_4_RQ2.json",
-    "derived record",
-    status="VERIFIED_DERIVED",
-)
+add("C04", "mutant", load(CONTRACT_MOVERS)["movers"], CONTRACT_MOVERS, "derived record")
 
-# Sites
-S2 = rd("data/prospective/mqt_bench/frozen_deps/S2_GENERATED_MUTANTS.csv")
+other_mutants = rows(OTHER_MUTANTS)
 add(
     "Z01",
-    "sites",
-    "S2 prospective first-gate / mutants / distinct sites",
     "mutant / site",
-    "140/150/9",
-    f"{sum(int(r['anchor_index'])==0 for r in S2)}/{len(S2)}/{len({(r['subject'],int(r['anchor_index'])) for r in S2})}",
-    "data/prospective/mqt_bench/frozen_deps/S2_GENERATED_MUTANTS.csv",
+    f"{first_gate(other_mutants)}/{len(other_mutants)}/{sites(other_mutants)}",
+    OTHER_MUTANTS,
     "anchor_index",
 )
-CON = rd("data/prospective/mqt_bench/frozen_deps/MUTANT_POPULATION.csv")
+position = lambda r: int(re.search(r"@(\d+)", r["location"]).group(1))
 add(
     "Z02",
-    "sites",
-    "construction distinct (program, site)",
     "site",
-    214,
-    len({(r["program"], int(re.search(r"@(\d+)", r["location"]).group(1))) for r in CON}),
-    "data/prospective/mqt_bench/frozen_deps/MUTANT_POPULATION.csv",
+    len({(r["program"], position(r)) for r in rows(DEVELOPMENT_MUTANTS)}),
+    DEVELOPMENT_MUTANTS,
     "location index",
 )
-MM = rd("data/prospective/mqt_bench/population/MUTANT_MANIFEST.csv")
-add(
-    "Z03",
-    "sites",
-    "MQT first-gate / distinct sites",
-    "mutant / site",
-    "68/22",
-    f"{sum(int(r['anchor_index'])==0 for r in MM)}/{len({(r['subject'],int(r['anchor_index'])) for r in MM})}",
-    "data/prospective/mqt_bench/population/MUTANT_MANIFEST.csv",
-    "anchor_index",
-)
+mqt_mutants = rows(MQT_MUTANTS)
+add("Z03", "mutant / site", f"{first_gate(mqt_mutants)}/{sites(mqt_mutants)}", MQT_MUTANTS, "anchor_index")
 
-# MQT prospective
-MC = rd("data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv")
-mc = C(r["v2_report"] for r in MC)
-add(
-    "M01",
-    "mqt",
-    "mutants / killed / diagnosed",
-    "mutant",
-    "120/64/56",
-    f"{len(MC)}/{mc['NA_KILLED']}/{len(MC)-mc['NA_KILLED']}",
-    "data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv",
-    "counts",
-)
-add(
-    "M02",
-    "mqt",
-    "CE/EIE/OL/SO/BTD/Unresolved",
-    "mutant",
-    "14/10/7/22/0/3",
-    "/".join(str(mc[k]) for k in ("CL1", "CL2", "CL3", "CL4", "CL5", "Unresolved")),
-    "same",
-    "v2_report",
-)
-mcand = [r for r in MC if r["v2_candidate"] == "CL4"]
+mqt = rows(MQT_CASES)
+mqt_outcome = counts(mqt)
+add("M01", "mutant", f"{len(mqt)}/{mqt_outcome['NA_KILLED']}/{len(mqt) - mqt_outcome['NA_KILLED']}", MQT_CASES, "counts")
+add("M02", "mutant", spread(mqt), "same", "v2_report")
+mqt_candidates = [r for r in mqt if r["v2_candidate"] == "CL4"]
+mqt_reported = [r for r in mqt_candidates if r["v2_report"] == "CL4"]
+mqt_withheld = next(r for r in mqt_candidates if r["v2_report"] != "CL4")
 add(
     "M03",
-    "mqt",
-    "SO candidates / certified / withheld",
     "mutant",
-    "23/22/1",
-    f"{len(mcand)}/{sum(r['v2_report']=='CL4' for r in mcand)}/{sum(r['v2_report']!='CL4' for r in mcand)}",
+    f"{len(mqt_candidates)}/{len(mqt_reported)}/{len(mqt_candidates) - len(mqt_reported)}",
     "same",
     "candidate CL4",
 )
-cert = [r for r in mcand if r["v2_report"] == "CL4"]
 add(
     "M04",
-    "mqt",
-    "certified repairs killing 12/12 at fresh seeds",
     "mutant",
-    22,
-    sum(r["d1_mutant_kills_of_12"] == "12" for r in cert),
-    "data/prospective/mqt_bench/records/stage_d/D1_REPAIR.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv",
+    sum(r["d1_mutant_kills_of_12"] == "12" for r in mqt_reported),
+    f"{MQT_REPAIR}; {MQT_CASES}",
     "d1 kills",
 )
 add(
     "M05",
-    "mqt",
-    "distinct repaired suites among certified",
     "repaired suite",
-    4,
-    len({(r["subject"], r["witness_key"]) for r in cert}),
+    len({(r["subject"], r["witness_key"]) for r in mqt_reported}),
     "same",
     "(subject, witness)",
 )
 add(
     "M06",
-    "mqt",
-    "original false failures across D1 (sum)",
     "run",
-    1,
-    sum(int(r["d1_original_false_failures_of_12"]) for r in mcand),
+    sum(int(r["d1_original_false_failures_of_12"]) for r in mqt_candidates),
     "same",
     "sum over candidates",
 )
-wh = [r for r in mcand if r["v2_report"] != "CL4"][0]
 add(
     "M07",
-    "mqt",
-    "withheld: confirmation / control / validation kills",
     "run",
-    "9/4/11",
-    f"{wh['ob13_kills_of_12']}/{wh['ob15_kills_of_12']}/{wh['d1_mutant_kills_of_12']}",
+    "/".join(mqt_withheld[k] for k in ("ob13_kills_of_12", "ob15_kills_of_12", "d1_mutant_kills_of_12")),
     "same",
     "withheld row",
 )
 add(
     "M08",
-    "mqt",
-    "OL rerun consistent",
     "mutant",
-    "7/7",
-    f"{sum(r['d2_outcome']=='consistent' for r in MC)}/{mc['CL3']}",
-    "data/prospective/mqt_bench/records/stage_d/D2_OBSERVATION.csv; data/prospective/mqt_bench/records/analysis/PASS3C_CASES.csv",
+    f"{sum(r['d2_outcome'] == 'consistent' for r in mqt)}/{mqt_outcome['CL3']}",
+    f"{MQT_OBSERVATION}; {MQT_CASES}",
     "d2_outcome",
 )
 add(
     "M09",
-    "mqt",
-    "bound covers SO kill / guard",
     "mutant",
-    "19/0",
-    f"{sum(r['bound_b13']=='True' for r in mcand)}/{sum(r['bound_guard']=='True' for r in mcand)}",
+    f"{sum(r['bound_b13'] == 'True' for r in mqt_candidates)}/"
+    f"{sum(r['bound_guard'] == 'True' for r in mqt_candidates)}",
     "same",
     "b13 / bgw",
 )
 
-
-# Guards
-GE = rd("data/primary/suite_guards/B5_A1B_GUARD_EXACT.csv")
+guards = rows(SUITE_GUARDS)
+fails = lambda column, more_than: sum(int(r[column]) > more_than for r in guards)
 add(
     "G01",
-    "guards",
-    "suite cells failing the guard: sampled ref (any fail / >1 of 12) ; exact ref (any fail / >1 of 12)",
     "subject x suite cell",
-    "10/7 ; 9/0",
-    f"{sum(int(r['sampled_ref_false_fails'])>0 for r in GE)}/{sum(int(r['sampled_ref_false_fails'])>1 for r in GE)} ; {sum(int(r['exact_ref_false_fails'])>0 for r in GE)}/{sum(int(r['exact_ref_false_fails'])>1 for r in GE)}",
-    "data/primary/suite_guards/B5_A1B_GUARD_EXACT.csv",
+    f"{fails('sampled_ref_false_fails', 0)}/{fails('sampled_ref_false_fails', 1)} ; "
+    f"{fails('exact_ref_false_fails', 0)}/{fails('exact_ref_false_fails', 1)}",
+    SUITE_GUARDS,
     "false-fail counts",
 )
 
-# Write
-with open(OUT + "ledger_checks.csv", "w", newline="") as f:
-    w = csv.DictWriter(f, fieldnames=list(rows[0]))
+with open(out_dir() / "ledger_checks.csv", "w", newline="") as f:
+    w = csv.DictWriter(f, fieldnames=list(ledger[0]))
     w.writeheader()
-    w.writerows(rows)
-for r in rows:
+    w.writerows(ledger)
+for r in ledger:
     print(f"{r['id']:4s} {r['recomputed_value']!s:28s} {r['quantity']}")

@@ -1,6 +1,6 @@
 QSurvDiag replication package -- third-party notices
 
-Per-file licenses: provenance/LICENSE_MAP.csv. LICENSE (MIT) and LICENSE-DATA (CC BY 4.0) cover only
+Per-file licenses: provenance/license_map.csv. LICENSE (MIT) and LICENSE-DATA (CC BY 4.0) cover only
 study-authored material. Upstream licenses verified 2026-10-13 at the pinned versions.
 
 1. QMutBench -- GPL-3.0-only
@@ -17,7 +17,7 @@ study-authored material. Upstream licenses verified 2026-10-13 at the pinned ver
             Content date: 2026-09-28.
    License  the file as a whole: GPL-3.0-only, without warranty (GPL v3 sections 15-16).
             The file is data. The rest of the package is an aggregate
-            (GPL v3 section 5) and keeps the licenses in provenance/LICENSE_MAP.csv.
+            (GPL v3 section 5) and keeps the licenses in provenance/license_map.csv.
 
 2. Infrastructure of Qolumbina -- CC BY 4.0
    Files    data/certification/outcomes/R2V_NATIVE_JOBS_ARMS.jsonl (10 jobs, 5 mutants of the Q# program LessThanPhase)
@@ -66,7 +66,7 @@ study-authored material. Upstream licenses verified 2026-10-13 at the pinned ver
             gives the file and line of its excerpt. No test file is redistributed.
    Mitiq    the 13 occurrences from unitaryfoundation/mitiq @ 1a892a9783ddfe8c39d3d035613d6f3d168df9af (GPL-3.0)
             are not quoted. In this release their `code` field holds a description written for this package and
-            a link to the pinned source line; provenance/DERIVED_FILES.csv records each replaced field with the
+            a link to the pinned source line; provenance/derived_files.csv records each replaced field with the
             SHA-256 of the omitted line, so the original can be checked against the pinned upstream file.
 
 8. QuCheck case studies -- MIT; MITRE unit tests -- Apache-2.0

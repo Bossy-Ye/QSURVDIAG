@@ -1,7 +1,7 @@
 """Original-program-only QUTest parse/guard/timing check (Stage A). No mutants."""
 import json, sys, time
-sys.path.insert(0,"/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot/cross_tool_stage/qutest")
-sys.path.insert(0,"/Users/mac/Desktop/ZX-STUDY/paper-artifact/manuscript/tse/protocol/impl")
+sys.path.insert(0,"<study-root>/qsurvcert_pilot/cross_tool_stage/qutest")
+sys.path.insert(0,"<study-root>/paper-artifact/manuscript/tse/protocol/impl")
 import qutest_adapter as QA
 from qutest_execution_adapter import adapt
 S=json.load(open(sys.argv[1])); out={}

@@ -45,7 +45,7 @@ import numpy as np
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "code"))
 import deps; deps.verify()
-REV2 = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/revision2"
+REV2 = "<study-root>/paper-artifact/revision2"
 os.chdir(REV2)                      # the revised-analysis modules are run from revision2/ (e1_lib reads SSPEC_PROVENANCE.json)
 sys.path.insert(0, REV2)
 import r2v_lib as V

@@ -1,101 +1,32 @@
-"""Verify the package against provenance/checksums.sha256, the archived content against source_manifest.csv, the
-renamed files against provenance/RENAMES.csv, and that provenance/LICENSE_MAP.csv gives a license and a role for every
-file.
+"""Check the package against its provenance tables: checksums.sha256, source_manifest.csv, redactions.csv,
+derived_files.csv, license_map.csv and renames.csv, and the paths named in README.md and docs/protocols.md.
 
-Usage:  python3 scripts/verify_integrity.py [--tsr]
-With --tsr (needs OpenSSL), also verifies the RFC 3161 receipts of Freezes A to D: the MQT Bench freeze (A, B), the
-designs of the separating-setting, developer-suite and later-position experiments (C) and the extension of separating
-settings to the later positions (D).
+A redacted or derived file is checked against the release hash of its record and is not counted as identical
+to its source."""
 
-Archived files that this release redacts are listed in provenance/REDACTIONS.csv, and the archived file whose
-third-party quotations it replaces is listed in provenance/DERIVED_FILES.csv. They are reported separately: their
-release hash is checked against that record, and they are never counted as matching their original source hash or
-the timestamped freeze manifest.
-"""
-
-import csv, fnmatch, hashlib, re, subprocess, sys
+import argparse, csv, fnmatch, functools, hashlib, re, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-# Top-level names that serve the repository only; the release archive leaves them out (.gitattributes, export-ignore).
-REPOSITORY_ONLY = (".github", ".gitignore", ".gitattributes")
-sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-RED = {}
-if (ROOT / "provenance/REDACTIONS.csv").is_file():
-    RED = {r["package_path"]: r for r in csv.DictReader(open(ROOT / "provenance/REDACTIONS.csv"))}
-DER = {}
-if (ROOT / "provenance/DERIVED_FILES.csv").is_file():
-    DER = {r["package_path"]: r for r in csv.DictReader(open(ROOT / "provenance/DERIVED_FILES.csv"))}
-bad = []
-listed = set()
-for line in (ROOT / "provenance/checksums.sha256").read_text().splitlines():
-    if not line.strip() or line.startswith("#"):
-        continue
-    h, rel = line.split("  ", 1)
-    listed.add(rel)
-    p = ROOT / rel
-    if not p.is_file():
-        bad.append(f"missing: {rel}")
-    elif sha(p) != h:
-        bad.append(f"changed: {rel}")
-present = {
-    str(p.relative_to(ROOT))
-    for p in ROOT.rglob("*")
-    if p.is_file()
-    and p.relative_to(ROOT).parts[0] not in ("output", ".git", *REPOSITORY_ONLY)
-    and "__pycache__" not in p.parts
+PROVENANCE = ROOT / "provenance"
+CHECKSUMS = "provenance/checksums.sha256"
+MQT_FREEZE = ROOT / "data/prospective/mqt_bench/freeze"
+TSA = ("-CAfile", MQT_FREEZE / "tsa/freetsa_cacert.pem", "-untrusted", MQT_FREEZE / "tsa/freetsa_tsa.crt")
+# Freezes C and D time-stamp the plans under their names in the study. The package holds them at these paths.
+PLANS = {
+    "X1_OBSERVATION_CHANGE.md": "data/observation_change/PLAN.md",
+    "X2_DEVELOPER_SUITES.md": "data/developer_suites/PLAN.md",
+    "X4_POSITION.md": "data/position/PLAN.md",
+    "X1_POSITION_EXTENSION.md": "data/observation_change/POSITION_EXTENSION.md",
 }
-extra = sorted(present - listed - {"provenance/checksums.sha256"})
-archived, redacted, derived = set(), [], []
-for r in csv.DictReader(open(ROOT / "provenance/source_manifest.csv")):
-    p = ROOT / r["package_path"]
-    archived.add(r["package_path"])
-    x = RED.get(r["package_path"])
-    if x is not None:
-        if x["original_sha256"] != r["sha256"]:
-            bad.append(f"redaction record disagrees with the source hash: {r['package_path']}")
-        elif not p.is_file() or sha(p) != x["release_sha256"]:
-            bad.append(f"redacted file differs from its redaction record: {r['package_path']}")
-        elif r["package_path"] not in redacted:
-            redacted.append(r["package_path"])
-        continue
-    x = DER.get(r["package_path"])
-    if x is not None:
-        if x["original_sha256"] != r["sha256"]:
-            bad.append(f"derived-file record disagrees with the source hash: {r['package_path']}")
-        elif not p.is_file() or sha(p) != x["release_sha256"]:
-            bad.append(f"derived file differs from its record: {r['package_path']}")
-        elif r["package_path"] not in derived:
-            derived.append(r["package_path"])
-        continue
-    if not p.is_file() or sha(p) != r["sha256"]:
-        bad.append(f"archived file differs from its source hash: {r['package_path']}")
-LIC = list(csv.DictReader(open(ROOT / "provenance/LICENSE_MAP.csv")))
-lic = {r["package_path"] for r in LIC}
-bad += [f"license-map row without a role: {r['package_path']}" for r in LIC if not (r.get("role") or "").strip()]
-bad += [f"no license-map row: {k}" for k in sorted(present - lic - {"provenance/checksums.sha256"})]
-bad += [f"license-map row without a file: {k}" for k in sorted(lic - present)]
-bad += [f"redaction record without a source-manifest row: {k}" for k in RED if k not in archived]
-bad += [f"derived-file record without a source-manifest row: {k}" for k in DER if k not in archived]
-# provenance/RENAMES.csv: every file whose name or wording changed since version 1.3.0. The change is "none" exactly when the
-# earlier and present hashes are equal; a file added after version 1.3.0 states so before the kind of change.
-renamed = {"unchanged": 0, "edited": 0}
-for r in csv.DictReader(open(ROOT / "provenance/RENAMES.csv")):
-    p = ROOT / r["package_path"]
-    kind = r["change"].split("added after version 1.3.0; ", 1)[-1]
-    if not p.is_file():
-        bad.append(f"renamed file missing: {r['package_path']}")
-    elif sha(p) != r["sha256"]:
-        bad.append(f"renamed file differs from its RENAMES.csv hash: {r['package_path']}")
-    elif not kind or (kind == "none") != (r["earlier_sha256"] == r["sha256"]):
-        bad.append(f"RENAMES.csv change does not agree with the two hashes: {r['package_path']}")
-    else:
-        renamed["unchanged" if kind == "none" else "edited"] += 1
-# Paths named in README.md and docs/protocols.md. A name in single backticks is a path when it holds a "/" or ends in a
-# file extension; it must equal a package file or folder, end one, or match one as a pattern. Exceptions: the earlier
-# paths of provenance/RENAMES.csv, the plan names that the Freeze C and D manifests timestamp, the study files that
-# docs/protocols.md (section 9) names as not released, and NOT_IN_PACKAGE.
-NOT_RELEASED = (
+# Not part of the package: the output folder, version control, files that .gitattributes keeps out of the
+# release archive, and files that an interpreter or a file manager leaves behind.
+OUTSIDE = ("output", ".git", ".github", ".gitignore", ".gitattributes")
+LITTER = ("__pycache__", ".DS_Store")
+# Names that README.md and docs/protocols.md mention and the package does not hold: study files that
+# docs/protocols.md lists as not released, files that archived runners write, plan names without a file of
+# their own, a working folder and a corpus case key.
+NOT_IN_PACKAGE = (
     "E13_CERTIFICATES.json",
     "E13_CERTIFICATES_PREAMENDMENT.json",
     "E13_SUBJECTS.json",
@@ -107,171 +38,189 @@ NOT_RELEASED = (
     "select_units.py",
     "select_units_v11.py",
     "PASS3A2_SCIENTIFIC_DECISION.md",
-)
-NOT_IN_PACKAGE = (
-    "programs.json",  # runner inputs that data/position/select_mutants.py writes (docs/protocols.md, section 7)
+    "programs.json",
     "mutant_gates.json",
-    "X2_INPUTS.jsonl",  # plan names without a file of their own (docs/protocols.md, section 10)
+    "X2_INPUTS.jsonl",
     "X2_RUNTIME_CHECK.json",
-    "revision2/",  # a working folder of the study (docs/protocols.md, section 9)
-    "qra_cases_v1_1/QRA_360",  # a corpus case key (docs/protocols.md, section 11)
+    "revision2/",
+    "qra_cases_v1_1/QRA_360",
 )
-earlier = [r["earlier_path"] for r in csv.DictReader(open(ROOT / "provenance/RENAMES.csv"))]
-frozen = [
-    l.split("  ", 1)[1]
-    for f in ("FREEZE_C.sha256", "FREEZE_D.sha256")
-    for l in (ROOT / "provenance" / f).read_text().splitlines()
-    if l.strip()
-]
-folders = {str(q) + "/" for k in present for q in Path(k).parents if str(q) != "."}
+
+ap = argparse.ArgumentParser(description=__doc__)
+ap.add_argument("--tsr", action="store_true", help="also verify the RFC 3161 receipts (needs OpenSSL)")
+args = ap.parse_args()
+
+
+@functools.lru_cache(maxsize=None)
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def differs(rel, digest):
+    return not (ROOT / rel).is_file() or sha(ROOT / rel) != digest
+
+
+def table(name):
+    with open(PROVENANCE / name) as f:
+        return list(csv.DictReader(f))
+
+
+def hash_list(path):
+    lines = path.read_text().splitlines()
+    return [line.split("  ", 1) for line in lines if line.strip() and not line.startswith("#")]
+
+
+def exceptions(name):
+    return {r["package_path"]: r for r in table(name)} if (PROVENANCE / name).is_file() else {}
+
+
+bad = []
+checksums = hash_list(ROOT / CHECKSUMS)
+listed = {rel for _, rel in checksums}
+for digest, rel in checksums:
+    if not (ROOT / rel).is_file():
+        bad.append(f"missing: {rel}")
+    elif sha(ROOT / rel) != digest:
+        bad.append(f"changed: {rel}")
+present = {
+    p.relative_to(ROOT).as_posix()
+    for p in ROOT.rglob("*")
+    if p.is_file() and p.relative_to(ROOT).parts[0] not in OUTSIDE and not set(p.parts) & set(LITTER)
+}
+unlisted = sorted(present - listed - {CHECKSUMS})
+
+redactions, derivations = exceptions("redactions.csv"), exceptions("derived_files.csv")
+archived, redacted, derived = set(), set(), set()
+for r in table("source_manifest.csv"):
+    rel = r["package_path"]
+    archived.add(rel)
+    for records, found, record, file in (
+        (redactions, redacted, "redaction record", "redacted file differs from its redaction record"),
+        (derivations, derived, "derived-file record", "derived file differs from its record"),
+    ):
+        if rel in records:
+            if records[rel]["original_sha256"] != r["sha256"]:
+                bad.append(f"{record} disagrees with the source hash: {rel}")
+            elif differs(rel, records[rel]["release_sha256"]):
+                bad.append(f"{file}: {rel}")
+            else:
+                found.add(rel)
+            break
+    else:
+        if differs(rel, r["sha256"]):
+            bad.append(f"archived file differs from its source hash: {rel}")
+
+licenses = table("license_map.csv")
+licensed = {r["package_path"] for r in licenses}
+bad += [f"license-map row without a role: {r['package_path']}" for r in licenses if not (r.get("role") or "").strip()]
+bad += [f"no license-map row: {k}" for k in sorted(present - licensed - {CHECKSUMS})]
+bad += [f"license-map row without a file: {k}" for k in sorted(licensed - present)]
+bad += [f"redaction record without a source-manifest row: {k}" for k in redactions if k not in archived]
+bad += [f"derived-file record without a source-manifest row: {k}" for k in derivations if k not in archived]
+
+# renames.csv: the change is "none" exactly when the earlier and the present hash are equal.
+renames = table("renames.csv")
+renamed = {"unchanged": 0, "edited": 0}
+for r in renames:
+    rel = r["package_path"]
+    change = r["change"].split("added after version 1.3.0; ", 1)[-1]
+    if not (ROOT / rel).is_file():
+        bad.append(f"renamed file missing: {rel}")
+    elif sha(ROOT / rel) != r["sha256"]:
+        bad.append(f"renamed file differs from its renames.csv hash: {rel}")
+    elif not change or (change == "none") != (r["earlier_sha256"] == r["sha256"]):
+        bad.append(f"renames.csv change does not agree with the two hashes: {rel}")
+    else:
+        renamed["unchanged" if change == "none" else "edited"] += 1
+
+# A name in single backticks is a path when it holds a "/" or ends in a file extension. It must equal a
+# package file or folder, end one, or match one as a pattern, unless it is an earlier path of renames.csv, a
+# time-stamped plan name or listed in NOT_IN_PACKAGE.
+freezes = {k: hash_list(PROVENANCE / f"FREEZE_{k}.sha256") for k in "CD"}
+stamped = {name for manifest in freezes.values() for _, name in manifest}
+folders = {q.as_posix() + "/" for k in present for q in Path(k).parents if q.as_posix() != "."}
+known = [present, folders, [r["earlier_path"] for r in renames]]
 named = 0
 for doc in ("README.md", "docs/protocols.md"):
-    text = re.sub(r"```.*?```", "", (ROOT / doc).read_text(), flags=re.S)
-    for t in re.findall(r"`([^`\n]+)`", text):
-        if " " in t or not ("/" in t or re.search(r"[\w*-]\.[A-Za-z0-9*]{1,8}$", t)):
+    prose = re.sub(r"```.*?```", "", (ROOT / doc).read_text(), flags=re.S)
+    for name in re.findall(r"`([^`\n]+)`", prose):
+        if " " in name or not ("/" in name or re.search(r"[\w*-]\.[A-Za-z0-9*]{1,8}$", name)):
             continue
         named += 1
-        hit = lambda names: any(fnmatch.fnmatchcase(k, t) or fnmatch.fnmatchcase(k, "*/" + t) for k in names)
-        if not (hit(present) or hit(folders) or hit(earlier) or t in frozen or t in NOT_RELEASED + NOT_IN_PACKAGE):
-            bad.append(f"{doc} names a path that is not in the package: {t}")
+        if name in stamped or name in NOT_IN_PACKAGE:
+            continue
+        matches = lambda k: fnmatch.fnmatchcase(k, name) or fnmatch.fnmatchcase(k, "*/" + name)
+        if not any(matches(k) for ks in known for k in ks):
+            bad.append(f"{doc} names a path that is not in the package: {name}")
 if (ROOT / "expected/verify_summary.txt").read_text() not in (ROOT / "README.md").read_text():
     bad.append("README.md does not show expected/verify_summary.txt verbatim")
+
 print(
-    f"checksums: {len(listed)} files listed (every file except provenance/checksums.sha256 itself), {len(bad)} problems, {len(extra)} unlisted files"
+    f"checksums: {len(listed)} files listed (every file except provenance/checksums.sha256 itself), "
+    f"{len(bad)} problems, {len(unlisted)} unlisted files"
 )
+note = " (original SHA-256 and the hash of each removed text in provenance/redactions.csv)"
 print(
-    f"archived files: {len(archived) - len(redacted) - len(derived)} identical to their source hash, {len(redacted)} redacted"
-    + (
-        " (original SHA-256 and the hash of each removed text in provenance/REDACTIONS.csv)"
-        if redacted
-        else ""
-    )
+    f"archived files: {len(archived) - len(redacted) - len(derived)} identical to their source hash, "
+    f"{len(redacted)} redacted" + (note if redacted else "")
 )
-print(f"license map: {len(lic)} files")
-print(f"renamed files: {renamed['unchanged']} unchanged, {renamed['edited']} edited (provenance/RENAMES.csv)")
+print(f"license map: {len(licensed)} files")
+print(f"renamed files: {renamed['unchanged']} unchanged, {renamed['edited']} edited (provenance/renames.csv)")
 print(f"paths named in README.md and docs/protocols.md: {named}")
-if DER:
+if derivations:
     print(
-        f"derived files: {len(derived)} with third-party quotations replaced (original SHA-256 and the hash of each omitted text in provenance/DERIVED_FILES.csv)"
+        f"derived files: {len(derived)} with third-party quotations replaced "
+        "(original SHA-256 and the hash of each omitted text in provenance/derived_files.csv)"
     )
-for b in bad[:20]:
-    print("  ", b)
-for x in extra[:20]:
-    print("   unlisted:", x)
-if "--tsr" in sys.argv:
-    fz = ROOT / "data/prospective/mqt_bench/freeze"
-    for k in ("A", "B"):
-        r = subprocess.run(
-            [
-                "openssl",
-                "ts",
-                "-verify",
-                "-in",
-                f"FREEZE_{k}.tsr",
-                "-queryfile",
-                f"FREEZE_{k}.tsq",
-                "-CAfile",
-                "tsa/freetsa_cacert.pem",
-                "-untrusted",
-                "tsa/freetsa_tsa.crt",
-            ],
-            cwd=fz,
-            capture_output=True,
-            text=True,
-        )
-        verdict = [l for l in (r.stdout + r.stderr).splitlines() if l.startswith("Verification")]
-        print(f"RFC 3161 Freeze {k}: {verdict[0] if verdict else (r.stdout + r.stderr).strip()[-200:]}")
-        if verdict != ["Verification: OK"]:
-            bad.append(f"RFC 3161 receipt of Freeze {k} does not verify")
-    for k in ("A", "B"):
-        lines = [
-            l.split("  ", 1)
-            for l in (fz / f"FREEZE_{k}.sha256").read_text().splitlines()
-            if l.strip() and not l.startswith("#")
-        ]
-        match, red, miss = 0, [], []
-        for h, rel in lines:
-            p = fz.parent / rel
-            pkg = "data/prospective/mqt_bench/" + (rel[2:] if rel.startswith("./") else rel)
-            if p.is_file() and sha(p) == h:
-                match += 1
-            elif (
-                pkg in RED
-                and RED[pkg]["original_sha256"] == h
-                and p.is_file()
-                and sha(p) == RED[pkg]["release_sha256"]
-            ):
-                red.append(pkg)
+for problem in bad[:20]:
+    print("  ", problem)
+for rel in unlisted[:20]:
+    print("   unlisted:", rel)
+
+
+def receipt(freeze, *arguments, cwd=None):
+    command = ["openssl", "ts", "-verify", *map(str, arguments), *map(str, TSA)]
+    r = subprocess.run(command, cwd=cwd, capture_output=True, text=True)
+    answer = r.stdout + r.stderr
+    verdict = [line for line in answer.splitlines() if line.startswith("Verification")]
+    print(f"RFC 3161 Freeze {freeze}: {verdict[0] if verdict else answer.strip()[-200:]}")
+    if verdict != ["Verification: OK"]:
+        bad.append(f"RFC 3161 receipt of Freeze {freeze} does not verify")
+
+
+if args.tsr:
+    for k in "AB":
+        receipt(k, "-in", f"FREEZE_{k}.tsr", "-queryfile", f"FREEZE_{k}.tsq", cwd=MQT_FREEZE)
+    note = " (original SHA-256 in provenance/redactions.csv equals the timestamped hash)"
+    for k in "AB":
+        manifest = hash_list(MQT_FREEZE / f"FREEZE_{k}.sha256")
+        matching, as_redacted, other = 0, 0, 0
+        for digest, rel in manifest:
+            rel = "data/prospective/mqt_bench/" + rel.removeprefix("./")
+            record = redactions.get(rel, {})
+            if not differs(rel, digest):
+                matching += 1
+            elif record.get("original_sha256") == digest and not differs(rel, record["release_sha256"]):
+                as_redacted += 1
             else:
-                miss.append(rel)
+                other += 1
         print(
-            f"MQT Bench Freeze {k} manifest: {len(lines)} entries, {match} matching, {len(red)} redacted"
-            + (" (original SHA-256 in provenance/REDACTIONS.csv equals the timestamped hash)" if red else "")
-            + f", {len(miss)} other"
+            f"MQT Bench Freeze {k} manifest: {len(manifest)} entries, {matching} matching, {as_redacted} "
+            f"redacted"
+            + (note if as_redacted else "")
+            + f", {other} other"
         )
-        if miss:
-            bad.append(
-                f"MQT Bench Freeze {k} manifest: {len(miss)} entries match neither the file nor a redaction record"
-            )
-    pv = ROOT / "provenance"
-    fz = ROOT / "data/prospective/mqt_bench/freeze"
-    r = subprocess.run(
-        [
-            "openssl",
-            "ts",
-            "-verify",
-            "-in",
-            str(pv / "FREEZE_C.tsr"),
-            "-data",
-            str(pv / "FREEZE_C.sha256"),
-            "-CAfile",
-            str(fz / "tsa/freetsa_cacert.pem"),
-            "-untrusted",
-            str(fz / "tsa/freetsa_tsa.crt"),
-        ],
-        capture_output=True,
-        text=True,
-    )
-    verdict = [l for l in (r.stdout + r.stderr).splitlines() if l.startswith("Verification")]
-    print(f"RFC 3161 Freeze C: {verdict[0] if verdict else (r.stdout + r.stderr).strip()[-200:]}")
-    if verdict != ["Verification: OK"]:
-        bad.append("RFC 3161 receipt of Freeze C does not verify")
-    PLAN = {
-        "X1_OBSERVATION_CHANGE.md": "data/observation_change/PLAN.md",
-        "X2_DEVELOPER_SUITES.md": "data/developer_suites/PLAN.md",
-        "X4_POSITION.md": "data/position/PLAN.md",
-    }
-    lines = [l.split("  ", 1) for l in (pv / "FREEZE_C.sha256").read_text().splitlines() if l.strip()]
-    match = sum(sha(ROOT / PLAN[n]) == h for h, n in lines)
-    print(
-        f"Freeze C manifest: {len(lines)} entries, {match} matching " + ", ".join(PLAN[n] for _, n in lines)
-    )
-    if match != len(lines):
-        bad.append("Freeze C manifest does not match the plans")
-    r = subprocess.run(
-        [
-            "openssl",
-            "ts",
-            "-verify",
-            "-in",
-            str(pv / "FREEZE_D.tsr"),
-            "-data",
-            str(pv / "FREEZE_D.sha256"),
-            "-CAfile",
-            str(fz / "tsa/freetsa_cacert.pem"),
-            "-untrusted",
-            str(fz / "tsa/freetsa_tsa.crt"),
-        ],
-        capture_output=True,
-        text=True,
-    )
-    verdict = [l for l in (r.stdout + r.stderr).splitlines() if l.startswith("Verification")]
-    print(f"RFC 3161 Freeze D: {verdict[0] if verdict else (r.stdout + r.stderr).strip()[-200:]}")
-    if verdict != ["Verification: OK"]:
-        bad.append("RFC 3161 receipt of Freeze D does not verify")
-    ((h, n),) = [l.split("  ", 1) for l in (pv / "FREEZE_D.sha256").read_text().splitlines() if l.strip()]
-    ok = n == "X1_POSITION_EXTENSION.md" and sha(ROOT / "data/observation_change/POSITION_EXTENSION.md") == h
-    print(f"Freeze D manifest: 1 entry, {int(ok)} matching data/observation_change/POSITION_EXTENSION.md")
-    if not ok:
-        bad.append("Freeze D manifest does not match the plan")
-sys.exit(1 if bad or extra else 0)
+        if other:
+            bad.append(f"MQT Bench Freeze {k} manifest: {other} entries match neither the file nor a redaction record")
+    for k in "CD":
+        receipt(k, "-in", PROVENANCE / f"FREEZE_{k}.tsr", "-data", PROVENANCE / f"FREEZE_{k}.sha256")
+        manifest = freezes[k]
+        matching = sum(name in PLANS and not differs(PLANS[name], digest) for digest, name in manifest)
+        print(
+            f"Freeze {k} manifest: {len(manifest)} {'entry' if len(manifest) == 1 else 'entries'}, "
+            f"{matching} matching "
+            + ", ".join(PLANS.get(name, name) for _, name in manifest)
+        )
+        if matching != len(manifest):
+            bad.append(f"Freeze {k} manifest does not match the {'plan' if len(manifest) == 1 else 'plans'}")
+sys.exit(1 if bad or unlisted else 0)

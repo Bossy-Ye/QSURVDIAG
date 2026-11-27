@@ -1,159 +1,164 @@
-"""Optional analytic tier: recompute the transpilation- and statevector-based values (no circuit is sampled or run
-on a backend). Requires environment/requirements-analytic.txt and QUTest 0.1.0 (see README).
+"""Analytic tier: recompute the values that need transpilation or a statevector (checks A01 to A08 of
+expected/values.csv). No circuit is sampled or run on a backend. Needs the environment of
+environment/setup.sh.
 
-Usage:  python3 scripts/reproduce_analytic.py [--out DIR]
-A01  untranspiled gate-list and registered fixed-basis comparisons, recomputed per case and compared with the archive
-A02  one fresh trial of QUTest's own gate-set check, compared with the archived trial categories of the programs
-     whose original keeps its transpiled gate set (the flags of the other six are not reliable; article Section 5.1)
-A03  output-condition counterfactual (8 of 47) recomputed from final states
-A04  QUTest 0.1.0 documentation checks (two checks of article_checks.py skipped by the record-level tier)
-A05-A08  reruns of the archived producers r2v_stats.py, r2v_bound.py, r2v_table_x.py and r2v_numbers.py on package
-     inputs; each regenerated file is compared with the archived one (PASS or FAIL): byte for byte, except
-     R2V_BOUND.json without its unprinted witness_surface_v2 counts, which depend on the order of ties
-     (data/checks/tie_check.py), and the margins of R2V_TABLE_X_DECISIONS.csv, compared to 1e-12
-If the record tier has written results_verification.csv to the same --out directory, both tiers are merged into
-results_verification_merged.csv, using expected/analytic_coverage.csv.
-"""
+A01, A02  gate-list and gate-set comparisons per case; one trial of QUTest's own gate-set check
+A03       output-condition counterfactual from final states
+A04       the two QUTest documentation checks that the record tier leaves out
+A05-A08   archived producers r2v_stats.py, r2v_bound.py, r2v_table_x.py and r2v_numbers.py, each rerun and
+          compared with its archived output
+With results_verification.csv of the record tier in the same --out, also writes
+results_verification_merged.csv."""
 
 import argparse, csv, json, os, shutil, subprocess, sys
-
-sys.dont_write_bytecode = True
 from collections import Counter, defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts/lib"))
-from paths import orig
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from paths import CATALOGUE, ROOT, archived, output
 
-ap = argparse.ArgumentParser()
-ap.add_argument("--out", default=str(ROOT / "output"))
-a = ap.parse_args()
-OUT = Path(a.out).resolve()
-(OUT / "analytic").mkdir(parents=True, exist_ok=True)
-# Qiskit reads ~/.qiskit/settings.conf unless QISKIT_SETTINGS names another file; use the configuration in effect when the archive was produced
-env = {**os.environ, "QSD_OUT": str(OUT), "QISKIT_SETTINGS": str(ROOT / "environment/qiskit_settings.conf")}
-res = {}
-
-# A01, A02: adapted structural script (writes analytic/STRUCTURAL_DEFINITIONS.csv)
-r = subprocess.run(
-    [sys.executable, "-I", "-B", str(ROOT / "scripts/analytic/structural_definitions.py")],
-    env=env,
-    capture_output=True,
-    text=True,
-)
-(OUT / "analytic/structural_definitions.log").write_text(r.stdout + r.stderr)
-if r.returncode == 0:
-    regen = {x["mutant_id"]: x for x in csv.DictReader(open(OUT / "analytic/STRUCTURAL_DEFINITIONS.csv"))}
-    arch = {
-        x["mutant_id"]: x
-        for x in csv.DictReader(open(orig("data/structural/records/STRUCTURAL_DEFINITIONS.csv")))
-    }
-    det = ("HIST_gatelist", "HIST_depth", "P5_gateset", "P5_depth")
-    same = regen.keys() == arch.keys() and all(regen[k][c] == arch[k][c] for k in regen for c in det)
-    c = lambda pop, col: sum(x[col] == "True" for x in regen.values() if x["population"] == pop)
-    res["A01"] = (
-        f"{c('construction', 'HIST_gatelist')}/{c('construction', 'P5_gateset')}/{c('prospective', 'HIST_gatelist')}/{c('prospective', 'P5_gateset')}/{same}"
-    )
-    V = {
-        x["mutant_id"]: x
-        for x in csv.DictReader(open(orig("data/structural/records/QUTEST_GATESET_VARIABILITY.csv")))
-    }
-    cat = lambda x: (
-        "a" if x["separated_trials"] == x["trials"] else ("n" if x["separated_trials"] == "0" else "s")
-    )
-    gs = defaultdict(
-        set
-    )  # programs whose original's transpiled gate set varies, or with a case flagged in some trials
-    for x in arch.values():
-        gs[x["mutant_id"].split("#")[0]].add(x["QT_allowed"])
-    unstable = {p for p, v in gs.items() if len(v) > 1} | {x["program"] for x in V.values() if cat(x) == "s"}
-    consistent = all(
-        cat(V[k]) == "s" or (regen[k]["QT_gateset_subset"] == "True") == (cat(V[k]) == "a")
-        for k in regen
-        if V[k]["program"] not in unstable
-    )
-    res["A02"] = f"{c('prospective', 'QT_gateset_subset')}/{consistent}"
-else:
-    res["A01"] = res["A02"] = "FAILED: see analytic/structural_definitions.log"
-
-# A03: output-condition counterfactual on a temporary root assembled from package files
-qr = OUT / "analytic/qsd_root"
-if qr.exists():
-    shutil.rmtree(qr)
-F = "data/prospective/mqt_bench/frozen_deps/"
-place = {
-    "final_empirical_study/PROGRAM_MANIFEST.csv": "data/prospective/mqt_bench/frozen_deps/PROGRAM_MANIFEST.csv",
-    "final_empirical_study/MUTANT_POPULATION.csv": "data/prospective/mqt_bench/frozen_deps/MUTANT_POPULATION.csv",
-    "research_repair/phase5_validation/s1_materialization/S1_SUBJECTS.json": "data/prospective/mqt_bench/frozen_deps/S1_SUBJECTS.json",
-    "research_repair/phase5_validation/s2_cohort/S2_GENERATED_MUTANTS.csv": "data/prospective/mqt_bench/frozen_deps/S2_GENERATED_MUTANTS.csv",
-    "cross_tool_stage/qutest/qutest_adapter.py": F + "qutest_adapter.py",
-    "confirmatory/e1_lib.py": F + "e1_lib.py",
-    "confirmatory/e1_relations.py": F + "e1_relations.py",
-    "confirmatory/qsurvdiag_confirmatory.py": F + "qsurvdiag_confirmatory.py",
-    "confirmatory/SSPEC_PROVENANCE.json": F + "SSPEC_PROVENANCE.json",
+FROZEN = "data/prospective/mqt_bench/frozen_deps/"
+VALIDATION = "research_repair/phase5_validation/"
+OUTCOMES = "data/certification/outcomes/"
+STRUCTURAL = "data/structural/records/"
+# The archived study code reads its inputs under these paths, relative to $QSD_ROOT.
+STUDY_TREE = {
+    "final_empirical_study/PROGRAM_MANIFEST.csv": FROZEN + "PROGRAM_MANIFEST.csv",
+    "final_empirical_study/MUTANT_POPULATION.csv": FROZEN + "MUTANT_POPULATION.csv",
+    VALIDATION + "s1_materialization/S1_SUBJECTS.json": FROZEN + "S1_SUBJECTS.json",
+    VALIDATION + "s2_cohort/S2_GENERATED_MUTANTS.csv": FROZEN + "S2_GENERATED_MUTANTS.csv",
+    "cross_tool_stage/qutest/qutest_adapter.py": FROZEN + "qutest_adapter.py",
+    "confirmatory/e1_lib.py": FROZEN + "e1_lib.py",
+    "confirmatory/e1_relations.py": FROZEN + "e1_relations.py",
+    "confirmatory/qsurvdiag_confirmatory.py": FROZEN + "qsurvdiag_confirmatory.py",
+    "confirmatory/SSPEC_PROVENANCE.json": FROZEN + "SSPEC_PROVENANCE.json",
     "confirmatory/e1_seed_schedule.py": "data/primary/implementation/e1_seed_schedule.py",
 }
-for dst, src in place.items():
-    (qr / dst).parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(orig(src), qr / dst)
-r = subprocess.run(
-    [sys.executable, "-I", "-B", str(ROOT / "scripts/analytic/output_condition.py")],
-    cwd=qr / "confirmatory",
-    env={**env, "QSD_ROOT": str(qr), "POP": "599"},
-    capture_output=True,
-    text=True,
-)
-(OUT / "analytic/output_condition.log").write_text(r.stdout + r.stderr)
-if r.returncode == 0:
-    j = json.load(open(OUT / "analytic/outcond_599.json"))
-    res["A03"] = f"{j['pool']}/{j['movers']}/{j['out']}"
-else:
-    res["A03"] = "FAILED: see analytic/output_condition.log"
+PRODUCERS = {
+    "A05": ("r2v_stats.py", ["R2V_STATISTICS.json"]),
+    "A06": ("r2v_bound.py", ["R2V_BOUND.json"]),
+    "A07": ("r2v_table_x.py", ["R2V_TABLE_X.json", "R2V_TABLE_X_DECISIONS.csv"]),
+    "A08": ("r2v_numbers.py", ["R2V_NUMBERS.json"]),
+}
+COMMAND = "python3 scripts/reproduce_analytic.py"
 
-# A04: QUTest documentation checks via the record-level check module, with QUTest installed
-r = subprocess.run(
-    [sys.executable, "-I", "-B", str(ROOT / "scripts/checks/article_checks.py")],
-    env={**env, "QSD_OUT": str(OUT / "analytic")},
-    capture_output=True,
-    text=True,
-)
-if r.returncode == 0:
-    rows = {
-        x["check_id"]: x["recomputed"] for x in csv.DictReader(open(OUT / "analytic/article_checks.csv"))
+ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+ap.add_argument("--out", default=ROOT / "output", help="output directory (default: output/ in the package)")
+OUT = output(ap.parse_args().out)
+ANALYTIC = OUT / "analytic"
+ANALYTIC.mkdir(exist_ok=True)
+# Without QISKIT_SETTINGS, Qiskit reads ~/.qiskit/settings.conf. The records were produced under this file.
+env = {**os.environ, "QSD_OUT": str(OUT), "QISKIT_SETTINGS": str(ROOT / "environment/qiskit_settings.conf")}
+got = {}
+
+
+def run(script, log=None, **options):
+    r = subprocess.run([sys.executable, "-I", "-B", str(script)], capture_output=True, text=True, **options)
+    if log:
+        (ANALYTIC / log).write_text(r.stdout + r.stderr)
+    return r.returncode == 0
+
+
+def rows(path):
+    with open(path) as f:
+        return list(csv.DictReader(f))
+
+
+def category(r):
+    if r["separated_trials"] == r["trials"]:
+        return "all"
+    return "none" if r["separated_trials"] == "0" else "some"
+
+
+if run(ROOT / "scripts/analytic/structural_definitions.py", "structural_definitions.log", env=env):
+    by_id = lambda rs: {r["mutant_id"]: r for r in rs}
+    recomputed = by_id(rows(ANALYTIC / "STRUCTURAL_DEFINITIONS.csv"))
+    recorded = by_id(rows(archived(STRUCTURAL + "STRUCTURAL_DEFINITIONS.csv")))
+    trials = by_id(rows(archived(STRUCTURAL + "QUTEST_GATESET_VARIABILITY.csv")))
+    same = recomputed.keys() == recorded.keys() and all(
+        recomputed[k][c] == recorded[k][c]
+        for k in recomputed
+        for c in ("HIST_gatelist", "HIST_depth", "P5_gateset", "P5_depth")
+    )
+    flagged = lambda population, column: sum(
+        r[column] == "True" for r in recomputed.values() if r["population"] == population
+    )
+    got["A01"] = (
+        f"{flagged('construction', 'HIST_gatelist')}/{flagged('construction', 'P5_gateset')}/"
+        f"{flagged('prospective', 'HIST_gatelist')}/{flagged('prospective', 'P5_gateset')}/{same}"
+    )
+    # A program is unstable when the transpiled gate set of its original varies or some trials flag a case.
+    gate_sets = defaultdict(set)
+    for r in recorded.values():
+        gate_sets[r["mutant_id"].split("#")[0]].add(r["QT_allowed"])
+    unstable = {p for p, sets in gate_sets.items() if len(sets) > 1} | {
+        r["program"] for r in trials.values() if category(r) == "some"
     }
-    res["A04"] = f"{rows['M309']}/{rows['M310']}"
+    consistent = all(
+        category(trials[k]) == "some"
+        or (recomputed[k]["QT_gateset_subset"] == "True") == (category(trials[k]) == "all")
+        for k in recomputed
+        if trials[k]["program"] not in unstable
+    )
+    got["A02"] = f"{flagged('prospective', 'QT_gateset_subset')}/{consistent}"
 else:
-    res["A04"] = "FAILED"
+    got["A01"] = got["A02"] = "FAILED: see analytic/structural_definitions.log"
 
-# A05-A08: archived producers rerun on an input tree assembled from package files (looked up by SHA-256)
-rt = OUT / "analytic/r2v_root"
-if rt.exists():
-    shutil.rmtree(rt)
-byhash = {}
-for m in csv.DictReader(open(ROOT / "provenance/source_manifest.csv")):
-    byhash.setdefault(m["sha256"], ROOT / m["package_path"])
-for x in csv.DictReader(open(ROOT / "scripts/analytic/input_tree.csv")):
-    d = rt / x["path"]
-    d.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(byhash[x["sha256"]], d)
-H = rt / "artifact/outcomes"
-shutil.copy2(ROOT / "scripts/analytic/r2v_lib.py", H / "r2v_lib.py")
-renv = {**env, "R2V_PA": str(rt / "artifact") + "/", "QSD_ROOT": str(rt / "study")}
+study = ANALYTIC / "qsd_root"
+if study.exists():
+    shutil.rmtree(study)
+for target, source in STUDY_TREE.items():
+    (study / target).parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(archived(source), study / target)
+if run(
+    ROOT / "scripts/analytic/output_condition.py",
+    "output_condition.log",
+    cwd=study / "confirmatory",
+    env={**env, "QSD_ROOT": str(study)},
+):
+    with open(ANALYTIC / "outcond_599.json") as f:
+        movers = json.load(f)
+    got["A03"] = f"{movers['pool']}/{movers['movers']}/{movers['out']}"
+else:
+    got["A03"] = "FAILED: see analytic/output_condition.log"
+
+if run(ROOT / "scripts/checks/article_checks.py", env={**env, "QSD_OUT": str(ANALYTIC)}):
+    documentation = {r["check_id"]: r["recomputed"] for r in rows(ANALYTIC / "article_checks.csv")}
+    got["A04"] = f"{documentation['M309']}/{documentation['M310']}"
+else:
+    got["A04"] = "FAILED"
+
+# The archived producers run in the folder layout of the study; input_tree.csv rebuilds it from package files.
+tree = ANALYTIC / "r2v_root"
+if tree.exists():
+    shutil.rmtree(tree)
+by_hash = {}
+for r in rows(ROOT / "provenance/source_manifest.csv"):
+    by_hash.setdefault(r["sha256"], ROOT / r["package_path"])
+for r in rows(ROOT / "scripts/analytic/input_tree.csv"):
+    (tree / r["path"]).parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(by_hash[r["sha256"]], tree / r["path"])
+workdir = tree / "artifact/outcomes"
+shutil.copy2(ROOT / "scripts/analytic/r2v_lib.py", workdir / "r2v_lib.py")
+producer_env = {**env, "R2V_PA": str(tree / "artifact") + "/", "QSD_ROOT": str(tree / "study")}
 
 
-def compare(o):
-    regen, arch = H / o, orig(f"data/certification/outcomes/{o}")
-    if not regen.is_file():
+def compare(name):
+    """PASS for equal bytes, and for R2V_BOUND.json equal outside witness_surface_v2, whose counts depend on
+    the order of ties, and R2V_TABLE_X_DECISIONS.csv with margins within 1e-12."""
+    new, old = workdir / name, archived(OUTCOMES + name)
+    if not new.is_file():
         return "FAIL"
-    if regen.read_bytes() == arch.read_bytes():
+    if new.read_bytes() == old.read_bytes():
         return "PASS"
-    if o == "R2V_BOUND.json":
-        a, b = json.load(open(regen)), json.load(open(arch))
+    if name == "R2V_BOUND.json":
+        a, b = json.load(open(new)), json.load(open(old))
         a.pop("witness_surface_v2")
         b.pop("witness_surface_v2")
         return "PASS" if a == b else "FAIL"
-    if o == "R2V_TABLE_X_DECISIONS.csv":
-        a, b = list(csv.reader(open(regen))), list(csv.reader(open(arch)))
+    if name == "R2V_TABLE_X_DECISIONS.csv":
+        a, b = list(csv.reader(open(new))), list(csv.reader(open(old)))
         return (
             "PASS"
             if len(a) == len(b)
@@ -168,87 +173,69 @@ def compare(o):
     return "FAIL"
 
 
-for cid, script, outputs in (
-    ("A05", "r2v_stats.py", ["R2V_STATISTICS.json"]),
-    ("A06", "r2v_bound.py", ["R2V_BOUND.json"]),
-    ("A07", "r2v_table_x.py", ["R2V_TABLE_X.json", "R2V_TABLE_X_DECISIONS.csv"]),
-    ("A08", "r2v_numbers.py", ["R2V_NUMBERS.json"]),
-):
-    r = subprocess.run([sys.executable, "-I", "-B", script], cwd=H, env=renv, capture_output=True, text=True)
-    (OUT / f"analytic/{script[:-3]}.log").write_text(r.stdout + r.stderr)
-    res[cid] = "/".join(compare(o) if r.returncode == 0 else "FAIL" for o in outputs)
+for cid, (script, outputs) in PRODUCERS.items():
+    ran = run(script, f"{script[:-3]}.log", cwd=workdir, env=producer_env)
+    got[cid] = "/".join(compare(name) if ran else "FAIL" for name in outputs)
 
-exp = {
-    e["check_id"]: e
-    for e in csv.DictReader(open(ROOT / "expected/values.csv"))
-    if e["module"] == "reproduce_analytic"
-}
-out = []
-for cid, e in exp.items():
-    g = res.get(cid, "NOT RUN")
-    out.append(
+expected = {cid: c for cid, c in CATALOGUE.items() if c["module"] == "reproduce_analytic"}
+table = []
+for cid, c in expected.items():
+    value = got.get(cid, "NOT RUN")
+    table.append(
         {
             "check_id": cid,
-            "evidence_level": e["evidence_level"],
-            "command": "python3 scripts/reproduce_analytic.py",
-            "expected": e["expected"],
-            "reproduced": g,
-            "status": "MATCH" if g == e["expected"] else "MISMATCH",
+            "evidence_level": c["evidence_level"],
+            "command": COMMAND,
+            "expected": c["expected"],
+            "reproduced": value,
+            "status": "MATCH" if value == c["expected"] else "MISMATCH",
         }
     )
-    print(f"{cid}  expected {e['expected']:<16} reproduced {g:<16} {out[-1]['status']}")
-with open(OUT / "results_verification_analytic.csv", "w", newline="") as f:
-    w = csv.DictWriter(f, fieldnames=list(out[0]))
-    w.writeheader()
-    w.writerows(out)
+    print(f"{cid}  expected {c['expected']:<16} reproduced {value:<16} {table[-1]['status']}")
 
-# merge with the record tier: a record-tier row becomes MATCH only if the analytic check covering it matched
-if (OUT / "results_verification.csv").is_file():
-    st = {x["check_id"]: x for x in out}
-    cov = {
-        c["check_id"]: c["covered_by"] for c in csv.DictReader(open(ROOT / "expected/analytic_coverage.csv"))
-    }
-    a04 = res.get("A04", "").split("/")
-    rows = list(csv.DictReader(open(OUT / "results_verification.csv")))
-    for r in rows:
-        k = cov.get(r["check_id"])
-        if k is None or st[k]["status"] != "MATCH":
-            continue
-        v = {"M309": a04[0], "M310": a04[-1]}.get(r["check_id"], r["reproduced"])
-        r["command"] = "python3 scripts/reproduce_analytic.py"
-        r["reproduced"] = f"{v} ({k})"
-        r["status"] = f"MATCH (analytic tier {k})" if v == r["expected"] else "MISMATCH"
-    for x in out:
-        rows.append(
-            {
-                "check_id": x["check_id"],
-                "module": "reproduce_analytic",
-                "label": "",
-                "printed_in_article": exp[x["check_id"]]["printed_in_article"],
-                "evidence_level": x["evidence_level"],
-                "inputs": "",
-                "command": x["command"],
-                "expected": x["expected"],
-                "reproduced": x["reproduced"],
-                "status": x["status"],
-            }
-        )
-    with open(OUT / "results_verification_merged.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+
+def write(name, rs):
+    with open(OUT / name, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rs[0]))
         w.writeheader()
-        w.writerows(rows)
-    k = lambda s: "MATCH" if s.startswith("MATCH") else s
-    print(
-        f"\nmerged with the record tier: {len(rows)} checks  "
-        + "  ".join(f"{a}: {b}" for a, b in sorted(Counter(k(r["status"]) for r in rows).items()))
-    )
-    print(
-        "values printed in the article: "
-        + "  ".join(
-            f"{a}: {b}"
-            for a, b in sorted(
-                Counter(k(r["status"]) for r in rows if r["printed_in_article"] == "yes").items()
-            )
-        )
-    )
-sys.exit(0 if all(x["status"] == "MATCH" for x in out) else 1)
+        w.writerows(rs)
+
+
+write("results_verification_analytic.csv", table)
+
+# A record-tier row that an analytic check covers becomes MATCH only if that check matched.
+if (OUT / "results_verification.csv").is_file():
+    status = {r["check_id"]: r["status"] for r in table}
+    covered_by = {r["check_id"]: r["covered_by"] for r in rows(ROOT / "expected/analytic_coverage.csv")}
+    a04 = got.get("A04", "").split("/")
+    documentation = {"M309": a04[0], "M310": a04[-1]}
+    merged = rows(OUT / "results_verification.csv")
+    for r in merged:
+        check = covered_by.get(r["check_id"])
+        if check is None or status[check] != "MATCH":
+            continue
+        value = documentation.get(r["check_id"], r["reproduced"])
+        r["command"] = COMMAND
+        r["reproduced"] = f"{value} ({check})"
+        r["status"] = f"MATCH (analytic tier {check})" if value == r["expected"] else "MISMATCH"
+    merged += [
+        {
+            "check_id": r["check_id"],
+            "module": "reproduce_analytic",
+            "label": "",
+            "printed_in_article": expected[r["check_id"]]["printed_in_article"],
+            "evidence_level": r["evidence_level"],
+            "inputs": "",
+            "command": r["command"],
+            "expected": r["expected"],
+            "reproduced": r["reproduced"],
+            "status": r["status"],
+        }
+        for r in table
+    ]
+    write("results_verification_merged.csv", merged)
+    kind = lambda status: "MATCH" if status.startswith("MATCH") else status
+    tally = lambda rs: "  ".join(f"{k}: {n}" for k, n in sorted(Counter(kind(r["status"]) for r in rs).items()))
+    print(f"\nmerged with the record tier: {len(merged)} checks  {tally(merged)}")
+    print("values printed in the article: " + tally([r for r in merged if r["printed_in_article"] == "yes"]))
+sys.exit(0 if all(r["status"] == "MATCH" for r in table) else 1)

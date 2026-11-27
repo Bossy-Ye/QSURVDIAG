@@ -13,7 +13,7 @@ Populations: 52 EQUIVALENT of paper_freeze/CANONICAL_RESULT_LEDGER.csv (construc
 and the 33 contract-equivalent prospective controls of S3_QUTEST_ADMISSIBILITY.csv.
 Writes only to paper-artifact/audit_pass56E/outputs/."""
 import csv, json, sys, collections
-Q = "/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot"; OUT = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/audit_pass56E/outputs"
+Q = "<study-root>/qsurvcert_pilot"; OUT = "<study-root>/paper-artifact/audit_pass56E/outputs"
 sys.path.insert(0, f"{Q}/cross_tool_stage/qutest")
 from qutest_adapter import make_test
 from qutest.parser.qasm_parser import parse_test_source

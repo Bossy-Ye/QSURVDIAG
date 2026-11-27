@@ -14,11 +14,11 @@ assertion of a suite on the same N-shot execution per repetition (qutest_adapter
 """
 import csv, json, os, sys, time, itertools
 import numpy as np
-sys.path.insert(0, "/Users/mac/Desktop/ZX-STUDY/paper-artifact/github/code/qsurvdiag")
+sys.path.insert(0, "<study-root>/paper-artifact/github/code/qsurvdiag")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import e1_lib as L, e1_relations as REL
 from r2_corpus_width import state, PROG
-PA = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/"
+PA = "<study-root>/paper-artifact/"
 OUT = os.path.dirname(os.path.abspath(__file__))
 THETA = 0.05
 

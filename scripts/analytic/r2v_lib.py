@@ -1,25 +1,19 @@
-import sys as _sys
+"""Rules of V2_SPECIFICATION.md, shared by the archived producers r2v_stats.py, r2v_bound.py, r2v_table_x.py
+and r2v_numbers.py. Each docstring names the clause of the specification that its function implements.
 
-_sys.dont_write_bytecode = True  # keep the package free of interpreter caches
-# Copy of data/prospective/mqt_bench/frozen_deps/r2v_lib.py; only path handling differs.
-# Copied by scripts/reproduce_analytic.py next to the archived producers r2v_stats.py, r2v_bound.py, r2v_table_x.py, r2v_numbers.py.
-"""Shared implementation of V2_SPECIFICATION.md (frozen; hash in V2_SPECIFICATION.sha256).
+Adapted from data/prospective/mqt_bench/frozen_deps/r2v_lib.py: the two roots come from the environment.
+scripts/reproduce_analytic.py copies this file next to the producers, in the input tree of input_tree.csv."""
 
-Every function below implements one numbered clause of the specification; the clause is
-named in the docstring. Frozen study code is imported read-only.
-"""
 import hashlib, json, os, sys
+
+sys.dont_write_bytecode = True
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PA = os.environ[
-    "R2V_PA"
-]  # root of the input tree that scripts/reproduce_analytic.py assembles from package files
+PA = os.environ["R2V_PA"]
 QSD = os.environ["QSD_ROOT"]
 sys.path.insert(0, PA + "github/code/qsurvdiag")
 sys.path.insert(0, PA + "manuscript/tse/protocol/impl")
-# the study's copy of the frozen adapter (byte-identical body) resolves the QUTest binary of
-# the pinned .venv-qutest-audit environment, as every recorded arm did
 sys.path.insert(0, QSD + "/cross_tool_stage/qutest")
 from qsurvdiag_confirmatory import compare_threshold, exists_above, certify, T, F, U, THRESHOLD_RESOLUTION
 from qutest_execution_adapter import adapt
@@ -49,7 +43,6 @@ def tri_s(v):
     return {T: "true", F: "false", U: "undecided"}[v]
 
 
-# Distributions
 def marg(p, n, q):
     idx = np.arange(len(p))
     return float(p[((idx >> q) & 1) == 1].sum())
@@ -84,9 +77,9 @@ def kl(pm, pp):
 
 
 def ordered_universe(pp, pm, n):
-    """Spec 2.5 and 5. Returns (ordered, all_diffs).
-    ordered: the witness-order instances as dicts (kind, key, d, ref), in spec-5 order.
-    all_diffs: every one of the 2^{n+1}+n+3 instances of U(P) (weight-1 Z products included)."""
+    """Spec 2.5 and 5. Returns (ordered, all_diffs). ordered: the witness-order instances as dicts (kind, key,
+    d, ref), in spec-5 order. all_diffs: every one of the 2^{n+1}+n+3 instances of U(P) (weight-1 Z products
+    included)."""
     ordered, alld = [], []
     for q in range(n):
         a, b = marg(pp, n, q), marg(pm, n, q)
@@ -136,8 +129,8 @@ def suite_keys_marginals(qs):
 
 
 def select(ordered, suite_keys, want):
-    """Spec 5: first instance in order, absent from the realized suite, whose
-    compare_threshold(d, theta) is `want` (T for the witness w*, F for the control c*)."""
+    """Spec 5: first instance in order, absent from the realized suite, whose compare_threshold(d, theta) is
+    `want` (T for the witness w*, F for the control c*)."""
     for inst in ordered:
         if (inst["kind"], inst["key"]) in suite_keys:
             continue
@@ -147,8 +140,8 @@ def select(ordered, suite_keys, want):
 
 
 def pragmas(inst, n, pp):
-    """Spec 9: QUTest 0.1.0 pragma lines for one instance, analytic reference from the
-    original, rounded as the adapter rounds (4 decimals)."""
+    """Spec 9: QUTest 0.1.0 pragma lines for one instance, analytic reference from the original, rounded as
+    the adapter rounds (4 decimals)."""
     k, key = inst["kind"], inst["key"]
     if k == "marginal":
         return [QA.marginal_assertion(key, round(inst["ref"], 4))]
@@ -175,8 +168,8 @@ def to_text(gates):
 
 
 def native_check(mut_gates, orig_gates, n, lines):
-    """Spec 6 (OB13, OB15) and 9: the assertion alone, guard on the original (3 seeds)
-    then the mutant (12 seeds). Returns kills, guard fails and unsupported counts."""
+    """Spec 6 (OB13, OB15) and 9: the assertion alone, guard on the original (3 seeds) then the mutant (12
+    seeds). Returns kills, guard fails and unsupported counts."""
     g = [QA.run_qutest(QA.make_test(to_text(orig_gates), n, lines, N_SHOTS, s))[0] for s in GUARD_SEEDS]
     m = [QA.run_qutest(QA.make_test(to_text(mut_gates), n, lines, N_SHOTS, s))[0] for s in MUT_SEEDS]
     return {

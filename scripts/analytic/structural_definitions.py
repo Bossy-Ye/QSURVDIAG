@@ -1,39 +1,35 @@
-import sys as _sys
+"""Three gate-set procedures, and their depth counterparts, on the contract-equivalent mutants of the 20
+circuits. Nothing is simulated or executed.
 
-_sys.dont_write_bytecode = True  # keep the package free of interpreter caches
-# Copy of data/structural/records/structural_definitions.py; only path handling, output location and this docstring differ.
-# Run by scripts/reproduce_analytic.py (requires Qiskit 2.5.0, Qiskit Aer 0.17.2 and QUTest 0.1.0).
-"""The three gate-set procedures (and their depth counterparts) on the same contract-equivalent populations.
-Deterministic structural analysis over frozen gate lists. No circuit is simulated and no mutant is executed.
-  HIST  syntactic comparison of the untranspiled source: gate list differs; source-circuit depth differs.
-  P5    registered audit engine: transpile to basis [rz,sx,x,cx], optimization_level=1, seed_transpiler=20260730;
-        gate-name SETS differ; depth differs.
-  QT    QUTest 0.1.0's own structural path (runner.run_test up to structural evaluation, no execution).
-Populations: the 52 contract-equivalent construction mutants and the 33 contract-equivalent prospective controls.
-Writes STRUCTURAL_DEFINITIONS.csv and its summary to <out>/analytic/."""
-import csv, json, sys, collections
-import builtins as _bi
-from pathlib import Path as _Path
+  HIST  the untranspiled gate lists differ; the depths of the source circuits differ
+  P5    after transpilation to [rz, sx, x, cx] at optimization level 1, seed 20260730: the sets of gate names
+        differ; the depths differ
+  QT    QUTest 0.1.0's own structural assertions, evaluated without execution
 
-sys.path.insert(0, str(_Path(__file__).resolve().parents[1] / "lib"))
-from paths import orig as _porig, out_dir as _out_dir
+Adapted from data/structural/records/structural_definitions.py. Run by scripts/reproduce_analytic.py; writes
+STRUCTURAL_DEFINITIONS.csv and its summary to <out>/analytic/."""
 
+import csv, json, sys
+from pathlib import Path
 
-def open(p, mode="r", *a, **k):
-    if "r" in mode and not any(c in mode for c in "wax+") and str(p).startswith("data/"):
-        p = _porig(p)
-    return _bi.open(p, mode, *a, **k)
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "lib"))
+from paths import archived, out_dir
 
-
-OUT = str(_out_dir("analytic"))
-sys.path.insert(0, str(_porig("data/prospective/mqt_bench/frozen_deps/qutest_adapter.py").parent))
+OUT = out_dir("analytic")
+FROZEN = "data/prospective/mqt_bench/frozen_deps/"
+sys.path.insert(0, str(archived(FROZEN + "qutest_adapter.py").parent))
 from qutest_adapter import make_test
 from qutest.parser.qasm_parser import parse_test_source
 from qutest.backends import resolve_backend
 from qutest.assertions.structural import evaluate_gateset, evaluate_depth
+import qiskit
 from qiskit import QuantumCircuit, qasm3, transpile
 
-rd = lambda p: list(csv.DictReader(open(p)))
+
+def rd(path):
+    with open(archived(path)) as f:
+        return list(csv.DictReader(f))
 
 
 def qt_transpiled(gates, n, extra=()):
@@ -46,18 +42,17 @@ def names(c):
     return sorted({i.operation.name for i in c.data} - {"measure", "barrier"})
 
 
-def p5(gates, n):
-    c = QuantumCircuit(n)
-    for x in gates:
-        getattr(c, x["gate"])(*x.get("angles", []), *x["q"])
-    return transpile(c, basis_gates=["rz", "sx", "x", "cx"], optimization_level=1, seed_transpiler=20260730)
-
-
 def src(gates, n):
     c = QuantumCircuit(n)
     for x in gates:
         getattr(c, x["gate"])(*x.get("angles", []), *x["q"])
     return c
+
+
+def p5(gates, n):
+    return transpile(
+        src(gates, n), basis_gates=["rz", "sx", "x", "cx"], optimization_level=1, seed_transpiler=20260730
+    )
 
 
 L = lambda gs: [(g["gate"], tuple(g["q"]), tuple(g.get("angles", []))) for g in gs]
@@ -100,8 +95,8 @@ rows = []
 led = [
     r for r in rd("data/structural/CANONICAL_RESULT_LEDGER.csv") if r["final_semantic_status"] == "EQUIVALENT"
 ]
-MP = {r["mutant_id"]: r for r in rd("data/prospective/mqt_bench/frozen_deps/MUTANT_POPULATION.csv")}
-PM = {r["program"]: r for r in rd("data/prospective/mqt_bench/frozen_deps/PROGRAM_MANIFEST.csv")}
+MP = {r["mutant_id"]: r for r in rd(FROZEN + "MUTANT_POPULATION.csv")}
+PM = {r["program"]: r for r in rd(FROZEN + "PROGRAM_MANIFEST.csv")}
 for r in led:
     m = MP[r["mutant_id"]]
     p = PM[m["program"]]
@@ -114,9 +109,10 @@ for r in led:
             int(p["n"]),
         )
     )
-S1 = {s["subject"]: s for s in json.load(open("data/prospective/mqt_bench/frozen_deps/S1_SUBJECTS.json"))}
-S2 = {r["mutant_id"]: r for r in rd("data/prospective/mqt_bench/frozen_deps/S2_GENERATED_MUTANTS.csv")}
-ADM = {r["mutant_id"]: r for r in rd("data/prospective/cross_tool/s3/S3_QUTEST_ADMISSIBILITY.csv")}
+with open(archived(FROZEN + "S1_SUBJECTS.json")) as f:
+    S1 = {s["subject"]: s for s in json.load(f)}
+S2 = {r["mutant_id"]: r for r in rd(FROZEN + "S2_GENERATED_MUTANTS.csv")}
+ADM = {r["mutant_id"]: r for r in rd("data/prospective/cross_tool/results/S3_QUTEST_ADMISSIBILITY.csv")}
 for mid, a in ADM.items():
     if a["contract_equivalent"] != "True":
         continue
@@ -136,7 +132,7 @@ keys = [
     "QT_depth_le",
     "QT_depth_eq",
 ]
-with open(f"{OUT}/STRUCTURAL_DEFINITIONS.csv", "w", newline="") as f:
+with open(OUT / "STRUCTURAL_DEFINITIONS.csv", "w", newline="") as f:
     w = csv.DictWriter(
         f,
         fieldnames=list(rows[0].keys()) + ["recorded_gateset", "recorded_depth"],
@@ -154,8 +150,7 @@ S["prospective"]["P5_matches_recorded_gateset_per_case"] = all(
     r["P5_gateset"] == r["recorded_gateset"] for r in P
 )
 S["prospective"]["P5_matches_recorded_depth_per_case"] = all(r["P5_depth"] == r["recorded_depth"] for r in P)
-import qiskit
-
 S["versions"] = {"qiskit": qiskit.__version__, "qutest": "0.1.0", "python": sys.version.split()[0]}
-json.dump(S, open(f"{OUT}/STRUCTURAL_DEFINITIONS_SUMMARY.json", "w"), indent=1)
+with open(OUT / "STRUCTURAL_DEFINITIONS_SUMMARY.json", "w") as f:
+    json.dump(S, f, indent=1)
 print(json.dumps(S, indent=1))

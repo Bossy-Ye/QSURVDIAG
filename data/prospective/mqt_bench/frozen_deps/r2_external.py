@@ -5,7 +5,7 @@ each subject's original is reconstructed from its frozen insertion mutants: an i
 `ins@k:g[q]` is undone by removing gate k. Every insertion mutant of a subject must yield
 the same original; the reconstruction is used only if they all agree. The harness-side
 preparation (|x_a> + |x_b>)/sqrt(2) of the frozen FREEZE_v3 record is prepended to original
-and mutant alike, exactly as in the definitive run. Observation equality is recomputed and
+and mutant in the same way, exactly as in the definitive run. Observation equality is recomputed and
 checked against the frozen stage-2 ledger before any witness is evaluated.
 """
 import csv, json, os, sys, hashlib
@@ -16,8 +16,8 @@ from qiskit.quantum_info import Statevector
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from r2_primary import witness_separation
 
-EXT = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/manuscript/tse/external_cohort"
-PRO = "/Users/mac/Desktop/ZX-STUDY/paper-artifact/manuscript/tse/protocol"
+EXT = "<study-root>/paper-artifact/manuscript/tse/external_cohort"
+PRO = "<study-root>/paper-artifact/manuscript/tse/protocol"
 OUT = os.path.dirname(os.path.abspath(__file__))
 V3 = json.load(open(PRO + "/EXTERNAL_COHORT_FREEZE_v3.json"))
 PAIRS = {r["subject"]: (r["x_a"], r["x_b"]) for r in V3["realized_inputs"]}

@@ -3,6 +3,8 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   tree:
     runs-on: ubuntu-24.04  # Python 3.9 builds exist for 22.04 and 24.04 only

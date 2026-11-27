@@ -10,7 +10,7 @@ the read-only study tree.
 """
 import ast, collections, csv, hashlib, importlib, json, os, sys, time
 
-STUDY = "/Users/mac/Desktop/ZX-STUDY/qsurvcert_pilot"
+STUDY = "<study-root>/qsurvcert_pilot"
 SCR   = os.environ["SCR"]
 OUT   = os.environ["OUT"]
 sys.path.insert(0, STUDY)
@@ -38,8 +38,8 @@ PACKAGED_FN_SHA = hashlib.sha256(ast.get_source_segment(_src, _fn).encode()).hex
 
 BASIS = list(MUT.ARITY)          # exactly the enumerator's own vocabulary
 PER_SUBJECT = 30
-FREEZE = json.load(open("/Users/mac/Desktop/ZX-STUDY/paper-artifact/manuscript/tse/protocol/EXTERNAL_COHORT_FREEZE_v2.json"))
-V1 = json.load(open("/Users/mac/Desktop/ZX-STUDY/paper-artifact/manuscript/tse/protocol/EXTERNAL_COHORT_FREEZE.json"))
+FREEZE = json.load(open("<study-root>/paper-artifact/manuscript/tse/protocol/EXTERNAL_COHORT_FREEZE_v2.json"))
+V1 = json.load(open("<study-root>/paper-artifact/manuscript/tse/protocol/EXTERNAL_COHORT_FREEZE.json"))
 
 def to_gatelist(qc):
     t = transpile(qc, basis_gates=BASIS, optimization_level=0)

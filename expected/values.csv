@@ -218,8 +218,8 @@ M235,article_checks,primary witnesses reused from 21 recorded repairs,21,no,arch
 M236,article_checks,OL endpoint states 29 of 35,29/35,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
 M237,article_checks,construction EIE collapse onto 4 of 39,4/39,no,archived aggregate record,data/certification/outcomes/R2V_NUMBERS.json
 M238,article_checks,"smallest primary witness 0.148, next at least 0.500",0.148/0.500,no,per-case records,data/certification/outcomes/R2V_FINAL_PRIMARY.csv
-M239,article_checks,"state groups 27/4/29/45/1/2, total 108",27/4/29/45/1/2/108,no,per-case records,data/primary/figures/R_fig2b_compression.csv
-M240,article_checks,observation groups total 51,51,no,per-case records,data/primary/figures/R_fig2b_compression.csv
+M239,article_checks,"state groups 27/4/29/45/1/2, total 108",27/4/29/45/1/2/108,no,per-case records,data/primary/figures/EFFECT_CLASS_COMPRESSION.csv
+M240,article_checks,observation groups total 51,51,no,per-case records,data/primary/figures/EFFECT_CLASS_COMPRESSION.csv
 M241,article_checks,matched changes: Z output->all qubits,"55/0/28.5/[1.3, 48.1]/[21.7, 32.2]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
 M242,article_checks,matched changes: output Z->XYZ,"30/0/15.5/[7.3, 23.0]/[13.2, 17.4]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
 M243,article_checks,matched changes: all qubits Z->XYZ,"35/0/18.1/[10.6, 26.7]/[16.1, 19.9]","partly (pairs that change printed; effect, interval and leave-one-out range not printed)",archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
@@ -286,7 +286,7 @@ M308,article_checks,the three corpus pairs between 1e-8 and 1e-6: outcomes,CL3/C
 M309,article_checks,QUTest 0.1.0 documentation: 15 complete example tests,15,yes,per-case records,
 M310,article_checks,every example measures directly after the program,True,n.a. (logical check),per-case records,
 M311,article_checks,Muskit records counts of every qubit (profile record),True,n.a. (logical check),archived aggregate record,data/profiles/E3_PROFILE_MATRIX.json
-M312,article_checks,"one prospective exclusion: W-state cx -> rxx, preflight",wstate_4#h29/rep@10:cx->rxx/UNSUPPORTED_INGESTION,yes,per-case records,data/prospective/cross_tool/s2/S2_ELIGIBILITY_EXCLUSIONS.csv
+M312,article_checks,"one prospective exclusion: W-state cx -> rxx, preflight",wstate_4#h29/rep@10:cx->rxx/UNSUPPORTED_INGESTION,yes,per-case records,data/prospective/cross_tool/cohort/S2_ELIGIBILITY_EXCLUSIONS.csv
 M313,article_checks,three locked Qiskit releases,0.45.3/1.1.1/2.5.0,no,archived aggregate record,data/profiles/E5_ENVIRONMENT_LOCK.json
 M314,article_checks,"Qiskit 16164 state margin 0.061, observation 5.6e-17",0.061/5.6,yes,archived aggregate record,data/certification/outcomes/R2V_RELEASED_CL3.json
 M315,article_checks,corpus 511 stable survivors of 562 diagnosed,511/562,partly (562 printed),per-case records,data/certification/outcomes/R2V_FINAL_CORPUS.csv
@@ -317,7 +317,7 @@ L-I02,ledger_checks,interface: Muskit keeps all OL; pytest admits none,35/0,yes,
 L-S01,ledger_checks,suite: SO killed by correlator / all-qubit / combined suites,12/41/79,yes,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
 L-S02,ledger_checks,suite: OL killed by any systematic suite,0,yes,per-case records,data/primary/records/599_B5_A1G_POPULATION.csv
 L-O01,ledger_checks,observation: OL under Z-output -> Z-all,90 -> 35,yes,archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
-L-O02,ledger_checks,observation: OL count Z-output / Z-all / XYZ-output / XYZ-all (rows of R2V_TABLE_X_DECISIONS),90/35/60/0,yes,per-case records,data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv
+L-O02,ledger_checks,observation: OL count Z-output / Z-all / XYZ-output / XYZ-all,90/35/60/0,yes,per-case records,data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv
 L-O03,ledger_checks,observation: pairs entering OL along a refinement (Z-output -> Z-all),0,yes,per-case records,data/certification/outcomes/R2V_TABLE_X_DECISIONS.csv
 L-D01,ledger_checks,decision: decision cells,"4,869",no,per-case records,data/certification/outcomes/R2V_DECISION_GRID.csv
 L-D02,ledger_checks,decision: executed cells with a stable native verdict,"4,198",yes,per-case records,data/certification/outcomes/R2V_DECISION_GRID.csv
@@ -325,9 +325,9 @@ L-D03,ledger_checks,tolerance and budget: stable cells disagreeing with the idea
 L-D04,ledger_checks,decision: unresolved cells fall as N grows (500/2000/8000),359/215/126 (falls),no,per-case records,data/certification/outcomes/R2V_DECISION_GRID.csv
 L-D05,ledger_checks,decision: N 500->8000 resolved / created,236 / 3,yes,archived aggregate record,data/certification/outcomes/R2V_TABLE_X.json
 L-D06,ledger_checks,"decision: ablations withdraw outcome, name item, keep candidate",18882 of 18882,no,per-case records,data/certification/outcomes/R2V_ABLATION.csv
-L-H07,ledger_checks,rq4: QuCheck transfer same / another / none (analytic),8/7/6,yes,per-case records,data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv
-L-H08,ledger_checks,"rq4: finite-shot QuCheck equality check (output register, 30 July) detected",5 of 21,no,per-case records,data/prospective/cross_tool/s3/S3_QUCHECK_RESULTS.csv
-L-H09,ledger_checks,rq4: analytic transfer over output register only (2 Sept): witness exists,5 of 21,no,per-case records,data/interventions/transfer/B5_A2_QUCHECK_REPAIR.csv
+L-R01,ledger_checks,rq4: QuCheck transfer same / another / none (analytic),8/7/6,yes,per-case records,data/interventions/transfer/B5_A4B_REPAIR_TRANSFER.csv
+L-R02,ledger_checks,rq4: finite-shot QuCheck equality check on the output register: detected,5 of 21,no,per-case records,data/prospective/cross_tool/results/S3_QUCHECK_RESULTS.csv
+L-R03,ledger_checks,rq4: analytic transfer over the output register only: witness exists,5 of 21,no,per-case records,data/interventions/transfer/B5_A2_QUCHECK_REPAIR.csv
 L-N01,ledger_checks,certification: SO candidates primary/width/corpus/external/defect,79/8/187/5/1,partly (width-set count not printed),per-case records,data/certification/outcomes/R2V_FINAL_*.csv
 L-N02,ledger_checks,certification: confirmed (issued SO),79/6/143/5/1,partly (width-set count not printed),per-case records,data/certification/outcomes/R2V_FINAL_*.csv; data/certification/witness_order/NATIVE_RUNS.csv
 L-N03,ledger_checks,certification: total candidates / withdrawn,280 / 46,no,per-case records,data/certification/outcomes/R2V_FINAL_*.csv; data/certification/witness_order/NATIVE_RUNS.csv
@@ -373,8 +373,8 @@ V09,protocol_checks,consistently guard-valid construction flags / stable program
 V10,protocol_checks,contract-equivalent among the 546: construction + prospective,52+33=85,partly (85 printed),per-case records,
 V11,protocol_checks,registered predictions / last registry commit precedes cohort commit,12/True,partly (the five failed predictions printed),recorded git history,
 V12,protocol_checks,prospective survivors / CE / % / SO / % / unresolved / below-tolerance / OL,102/33/32.4/21/20.6/0/0/0,"partly (102, 33, 21 and the 0 observation limitations printed)",per-case records,
-V13,protocol_checks,frozen statuses of V08 (P10) and V07 (P8),CONTRADICTED/UNEVALUABLE,n.a. (logical check),frozen decision record,
-V14,protocol_checks,P7: survivors whose permitted report differs / survivors,16/102,no,per-case records,
+V13,protocol_checks,recorded statuses of the registered predictions P10 and P8,CONTRADICTED/UNEVALUABLE,n.a. (logical check),frozen decision record,
+V14,protocol_checks,registered prediction P7: survivors whose permitted report differs / survivors,16/102,no,per-case records,
 V15,protocol_checks,SO candidates / withdrawn / corpus candidates / corpus withdrawn,280/46/187/44,partly (corpus candidates and withdrawn printed),per-case records,data/certification/outcomes/R2V_FINAL_*.csv; data/certification/witness_order/NATIVE_RUNS.csv
 V16,protocol_checks,suite-cell guards: sampled any / sampled >1 of 12 / analytic any / max analytic failures,10/7/9/1,no,per-case records,
 V17,protocol_checks,registered N / guard-only extension before mutant run (recorded file times) / mutant-run N,2000/True/8000,"partly (2,000 and 8,000 printed)",protocol record + recorded file times,
@@ -396,13 +396,13 @@ A05,reproduce_analytic,analytic tier: rerun of archived producer r2v_stats.py on
 A06,reproduce_analytic,"analytic tier: rerun of archived producer r2v_bound.py on package inputs, equal outside the unprinted witness-surface counts",PASS,n.a. (comparison with the archived file),"rerun of archived producer r2v_bound.py (R2V_BOUND.json without witness_surface_v2, whose counts depend on the order of ties; data/checks/tie_check.py)",
 A07,reproduce_analytic,"analytic tier: rerun of archived producer r2v_table_x.py on package inputs, decisions equal and margins within 1e-12",PASS/PASS,n.a. (comparison with the archived files),rerun of archived producer r2v_table_x.py (R2V_TABLE_X.json / R2V_TABLE_X_DECISIONS.csv),
 A08,reproduce_analytic,analytic tier: rerun of archived producer r2v_numbers.py on package inputs,PASS,n.a. (byte comparison),rerun of archived producer r2v_numbers.py (R2V_NUMBERS.json),
-N01,records_checks,decision-diagram check: cases / decided / no information / all-input equivalences,295/292/3/4,yes,per-case records,data/certification/equivalence/T2B_QCEC_LEDGER_599.csv
-N02,records_checks,decision-diagram ledger: unique ids / equal to the issued primary outcomes / 16-hex input-hash prefix present for every case,295/True/True,n.a. (logical check),per-case records,data/certification/equivalence/T2B_QCEC_LEDGER_599.csv; data/primary/records/T1_4_INTERFACE_599.csv
-N03,records_checks,"decision-diagram check: pinned versions mqt-qcec / mqt-core, single run",3.9.0/3.9.2/True,no,frozen run record,data/certification/equivalence/T2B_QCEC_REGISTRY_599.json
+N01,records_checks,decision-diagram check: cases / decided / no information / all-input equivalences,295/292/3/4,yes,per-case records,data/certification/equivalence/QCEC_LEDGER.csv
+N02,records_checks,decision-diagram ledger: unique ids / equal to the issued primary outcomes / 16-hex input-hash prefix present for every case,295/True/True,n.a. (logical check),per-case records,data/certification/equivalence/QCEC_LEDGER.csv; data/primary/records/T1_4_INTERFACE_599.csv
+N03,records_checks,"decision-diagram check: pinned versions mqt-qcec / mqt-core, single run",3.9.0/3.9.2/True,no,frozen run record,data/certification/equivalence/QCEC_REGISTRY.json
 N04,records_checks,"developer tests: occurrences / structure, resources or set-up / full state or unitary / computational basis",51/30/16/5,partly (51 and 5 printed),per-occurrence records,data/external/developer_tests/occurrence_classification.csv
 N05,records_checks,developer tests: repositories / pinned commits / every occurrence located by file and line,3/3/True,n.a. (logical check),per-occurrence records,data/external/developer_tests/occurrence_classification.csv
 N06,records_checks,"released defects: manifest rows / depth-record ids matched / every row identified by repository, issue and hash",42/42/True,n.a. (logical check),per-defect records,data/external/defects/E5_DEFECT_MANIFEST.csv; data/external/defects/B3_REAL_DEFECTS_FRESH.csv
 N07,records_checks,Listing 1 run: basis-change test kills original / mutant / repetitions; baseline suite kills original / mutant,0/12/12/0/0,yes,per-run record,data/certification/outcomes/R2V_WRAPPED_DEMO.csv
 N08,records_checks,"Listing 1: repetition seeds (r2v_lib) / file shows seed 42, the Hadamard on q2 and the mutation",42-53/True,partly (Listing 1 content printed; seeds not printed),archived code and test file,data/prospective/mqt_bench/frozen_deps/r2v_lib.py; data/certification/outcomes/R2V_WRAPPED_DEMO_test.qasm
 N09,records_checks,QUTest observation limitations / still observation-limited under the declared QuCheck profile,35/7,partly (35 printed),per-case records,data/primary/records/T1_4_INTERFACE_599.csv
-N10,records_checks,"released-defect environments: pip freezes equal to their locked hashes (Q045, Q11, Q25)",3/3,n.a. (logical check),file hashes,data/profiles/E5_ENVIRONMENT_LOCK.json; environment/records/Q*_pip_freeze.txt
+N10,records_checks,"released-defect environments: pip freezes equal to their locked hashes (Qiskit 0.45.3, 1.1.1 and 2.5.0)",3/3,n.a. (logical check),file hashes,data/profiles/E5_ENVIRONMENT_LOCK.json; environment/records/pip_freeze_qiskit_*.txt

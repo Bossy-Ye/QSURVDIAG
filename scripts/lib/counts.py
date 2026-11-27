@@ -1,16 +1,12 @@
-"""Count-profile helpers shared by the separating-setting and later-position experiments and the analyses of
-data/analyses/.
+"""Count profiles for the archived runners and analyses of data/observation_change/ and data/analyses/: gate
+lists of the 20 circuits and their mutants, final states, basis rotations, the 2^(n+1)+n+3 instances of the
+declared QUTest universe in the closed witness order, and QUTest test files. Needs the environment of
+environment/setup.sh; $QUTEST overrides the path of the qutest command."""
 
-Gate lists of the 20 circuits and their mutants, statevectors, measurement-basis rotations, the
-2^(n+1)+n+3 instances of the declared QUTest universe in the closed witness order, and QUTest test files run
-through the qutest CLI (analytic environment of environment/setup.sh; override with $QUTEST).
-"""
-
-import sys as _s
-
-_s.dont_write_bytecode = True
-import ast, csv, itertools, json, os, subprocess, sys, tempfile, time
+import ast, csv, json, os, sys
 from pathlib import Path
+
+sys.dont_write_bytecode = True
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -22,10 +18,10 @@ THETA, RES = 0.05, 5e-9
 os.environ.setdefault("QISKIT_SETTINGS", str(ROOT / "environment/qiskit_settings.conf"))
 
 sys.path.insert(0, str(FROZEN))
-from qutest_execution_adapter import adapt  # noqa: E402  (rzz/rxx lowering of the study)
-from serialization_adapter import emit_name  # noqa: E402  (u -> u3)
-from qiskit import QuantumCircuit  # noqa: E402
-from qiskit.quantum_info import Statevector  # noqa: E402
+from qutest_execution_adapter import adapt
+from serialization_adapter import emit_name
+from qiskit import QuantumCircuit
+from qiskit.quantum_info import Statevector
 
 
 def _gl(s):
@@ -82,13 +78,13 @@ def sv(gates, n):
 
 H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
 SDG = np.diag([1, -1j])
-ROT = {"Z": np.eye(2), "X": H, "Y": H @ SDG}  # Y basis: sdg then h
+ROT = {"Z": np.eye(2), "X": H, "Y": H @ SDG}
 ROT_GATES = {"Z": [], "X": ["h"], "Y": ["sdg", "h"]}
 
 
 def rotate(psi, n, setting):
-    """setting[q] in 'XYZ' for qubit q (little-endian, as Qiskit)."""
-    t = psi.reshape((2,) * n)  # axis k = qubit n-1-k
+    """setting[q] in 'XYZ' is the basis of qubit q, little-endian as in Qiskit."""
+    t = psi.reshape((2,) * n)  # axis k holds qubit n-1-k
     for q, b in enumerate(setting):
         if b == "Z":
             continue
@@ -138,16 +134,10 @@ def universe(pp, pm, n):
     return out
 
 
-def best_instance(pp, pm, n, kinds=None):
-    u = [x for x in universe(pp, pm, n) if kinds is None or x[0] in kinds]
-    return max(u, key=lambda x: x[2])
-
-
 def separates(d):
     return d > THETA + RES
 
 
-# QUTest test files
 def gate_line(g):
     a = ("(" + ",".join(f"{x}" for x in g.get("angles", [])) + ")") if g.get("angles") else ""
     return f"{g['gate']}{a} " + ", ".join(f"q[{i}]" for i in g["q"]) + ";"
@@ -211,31 +201,10 @@ def wrapped_test(prog_gates, n, assertions, shots, seed, setting=None, name="tes
     )
 
 
-def run_qutest(text, keep=None):
-    with tempfile.NamedTemporaryFile("w", suffix=".qasm", delete=False) as f:
-        f.write(text)
-        p = f.name
-    try:
-        t0 = time.perf_counter()
-        r = subprocess.run([QUTEST, "run", "-v", p], capture_output=True, text=True, timeout=900)
-        dt = time.perf_counter() - t0
-        out = (r.stdout + r.stderr).strip()
-        summ = out.splitlines()[-1] if out else ""
-        v = (
-            "UNSUPPORTED"
-            if "error" in summ
-            else ("KILLED" if "failed" in summ else ("SURVIVED" if "passed" in summ else "UNSUPPORTED"))
-        )
-        if keep:
-            Path(keep).write_text(text)
-        return v, dt, out
-    finally:
-        Path(p).unlink(missing_ok=True)
-
-
 def ordered(pp, pm, n):
-    """Universe in the study's closed witness order (v3): marginals, adjacent-first pairs, weight>=3 products,
-    basis-state probabilities, entropy, TVD, Hellinger, KL, then single-qubit Z products."""
+    """Universe in the closed witness order: marginals, Z products of two qubits by distance, Z products of
+    three or more qubits, basis-state probabilities, entropy, TVD, Hellinger, KL, then single-qubit Z
+    products."""
     u = universe(pp, pm, n)
     by = {(k, key): (k, key, d, r) for k, key, d, r in u}
     o = [by[("marginal", q)] for q in range(n)]

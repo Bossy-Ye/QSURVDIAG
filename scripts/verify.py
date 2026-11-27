@@ -1,96 +1,84 @@
-"""Run every record-level verification of the package in one command.
+"""Run every record-tier check: integrity, values, conformance tests, experiments, then integrity again.
 
-Usage:  python3 scripts/verify.py [--out DIR] [--no-tsr]
-Runs, in order: the integrity check, the value checks (reproduce.py), the conformance tests
-(run_conformance_tests.py), the experiment checks (reproduce_experiments.py) and the integrity check again.
-The integrity check verifies the RFC 3161 receipts when OpenSSL is installed, unless --no-tsr is given.
-Outputs go to DIR (default: ./output). Each step's output is printed; a summary of the counts follows and is
-compared with expected/verify_summary.txt (without the Freeze clause when the receipts are not verified).
-The exit status is non-zero if any step fails or the summary differs.
-"""
+The summary printed at the end must equal expected/verify_summary.txt. A failed step or a different summary
+gives a non-zero exit status."""
 
 import argparse, re, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ap = argparse.ArgumentParser()
-ap.add_argument("--out", default=str(ROOT / "output"))
-ap.add_argument("--no-tsr", action="store_true")
-a = ap.parse_args()
-OUT = Path(a.out).resolve()
-tsr = [] if a.no_tsr or shutil.which("openssl") is None else ["--tsr"]
-if not tsr and not a.no_tsr:
+ap = argparse.ArgumentParser(description=__doc__)
+ap.add_argument("--out", default=ROOT / "output", help="output directory (default: output/ in the package)")
+ap.add_argument("--no-tsr", action="store_true", help="skip the RFC 3161 receipts, which need OpenSSL")
+args = ap.parse_args()
+out = str(Path(args.out).resolve())
+tsr = not args.no_tsr and shutil.which("openssl") is not None
+if not tsr and not args.no_tsr:
     print("OpenSSL not found: the RFC 3161 receipts are not verified")
 
-STEPS = [
-    ("integrity", ["verify_integrity.py", *tsr]),
-    ("values", ["reproduce.py", "--out", str(OUT)]),
-    ("conformance tests", ["run_conformance_tests.py", "--out", str(OUT)]),
-    ("experiments", ["reproduce_experiments.py", "--out", str(OUT / "experiments")]),
-    ("integrity after the runs", ["verify_integrity.py"]),
-]
+STEPS = {
+    "integrity": ["verify_integrity.py"] + ["--tsr"] * tsr,
+    "values": ["reproduce.py", "--out", out],
+    "conformance tests": ["run_conformance_tests.py", "--out", out],
+    "experiments": ["reproduce_experiments.py", "--out", out],
+    "integrity after the runs": ["verify_integrity.py"],
+}
 failed, text = [], {}
-for name, cmd in STEPS:
-    print(f"== {name}: python3 scripts/{' '.join(cmd)}", flush=True)
+for step, (script, *arguments) in STEPS.items():
+    print(f"== {step}: python3 scripts/{' '.join([script, *arguments])}", flush=True)
     r = subprocess.run(
-        [sys.executable, "-I", "-B", str(ROOT / "scripts" / cmd[0]), *cmd[1:]],
+        [sys.executable, "-I", "-B", str(ROOT / "scripts" / script), *arguments],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
     )
     print(r.stdout, end="", flush=True)
-    text.setdefault(name, r.stdout)
+    text[step] = r.stdout
     if r.returncode:
-        failed.append(name)
-
-ORDER = ("MATCH", "PARTIAL", "ANALYTIC TIER")
+        failed.append(step)
 
 
-def counts(out, head):
-    """'<head>: N  STATUS: n  ...' -> 'N checks: MATCH n, PARTIAL n, ANALYTIC TIER n'."""
-    m = re.search(rf"^{head}: (\d+)  (.*)$", out, re.M)
+def tally(output, head, order=("MATCH", "PARTIAL", "ANALYTIC TIER")):
+    """'<head>: N  STATUS: n  ...' as 'N checks: MATCH n, PARTIAL n, ANALYTIC TIER n'."""
+    m = re.search(rf"^{head}: (\d+)  (.*)$", output, re.M)
     if not m:
         return "not available"
-    c = dict(x.rsplit(": ", 1) for x in m.group(2).split("  ") if x)
-    keys = [k for k in ORDER if k in c] + sorted(k for k in c if k not in ORDER)
-    return f"{m.group(1)} checks: " + ", ".join(f"{k} {c[k]}" for k in keys)
+    n = dict(x.rsplit(": ", 1) for x in m[2].split("  ") if x)
+    return f"{m[1]} checks: " + ", ".join(f"{k} {n[k]}" for k in [*order, *sorted(set(n) - set(order))] if k in n)
 
 
-t = text.get("integrity", "")
-m = [
-    re.search(p, t, re.M)
-    for p in (
-        r"^checksums: (\d+) files listed.*?, (\d+) problems",
-        r"^archived files: (\d+) identical.*?, (\d+) redacted",
+def integrity(output):
+    files = re.search(r"^checksums: (\d+) files listed.*?, (\d+) problems", output, re.M)
+    archived = re.search(r"^archived files: (\d+) identical.*?, (\d+) redacted", output, re.M)
+    if not (files and archived):
+        return "not available"
+    # A freeze is verified when its receipt verifies and each manifest entry matches a file or a redaction.
+    manifests = re.findall(
+        r"Freeze ([ABCD]) manifest: (\d+) entr\w+, (\d+) matching(?:, (\d+) redacted.*?, 0 other)?", output
     )
-]
-# Freezes A to D: four receipts verify, and every manifest entry matches its file or a redaction record
-mf = re.findall(
-    r"Freeze ([ABCD]) manifest: (\d+) entr\w+, (\d+) matching(?:, (\d+) redacted.*?, 0 other)?",
-    t,
-)
-freeze = all(f"RFC 3161 Freeze {k}: Verification: OK" in t for k in "ABCD") and sorted(
-    k for k, n, a, r in mf if int(n) == int(a) + int(r or 0)
-) == list("ABCD")
-integrity = (
-    f"{m[0].group(1)} files, {m[0].group(2)} problems; "
-    + f"{m[1].group(1)} archived files identical, {m[1].group(2)} redacted"
-    + ("; Freezes A to D verified" if freeze else "; Freezes A to D not verified")
-    if all(m)
-    else "not available"
-)
-conf = re.findall(r"^\S+\.py\s+(PASS|FAIL)\b", text.get("conformance tests", ""), re.M)
+    whole = lambda entries, matching, redacted: int(entries) == int(matching) + int(redacted or 0)
+    verified = all(f"RFC 3161 Freeze {k}: Verification: OK" in output for k in "ABCD") and sorted(
+        k for k, *counts in manifests if whole(*counts)
+    ) == list("ABCD")
+    return (
+        f"{files[1]} files, {files[2]} problems; {archived[1]} archived files identical, {archived[2]} "
+        f"redacted; "
+        f"Freezes A to D {'verified' if verified else 'not verified'}"
+    )
+
+
+tests = re.findall(r"^\S+\.py\s+(PASS|FAIL)\b", text["conformance tests"], re.M)
 summary = [
-    f"{'integrity':<14}{integrity}",
-    f"{'values':<14}{counts(text.get('values', ''), 'checks')}",
-    f"{'conformance':<14}{conf.count('PASS')} of {len(conf)} tests pass",
-    f"{'experiments':<14}{counts(text.get('experiments', ''), 'experiment checks')}",
+    f"{'integrity':<14}{integrity(text['integrity'])}",
+    f"{'values':<14}{tally(text['values'], 'checks')}",
+    f"{'conformance':<14}{tests.count('PASS')} of {len(tests)} tests pass",
+    f"{'experiments':<14}{tally(text['experiments'], 'experiment checks')}",
 ]
 print("\n" + "\n".join(summary))
 expected = (ROOT / "expected/verify_summary.txt").read_text().splitlines()
 if not tsr:
-    clause = lambda l: l.split("; Freezes A to D", 1)[0]
-    summary, expected = [clause(l) for l in summary], [clause(l) for l in expected]
+    without_freezes = lambda lines: [line.split("; Freezes A to D", 1)[0] for line in lines]
+    summary, expected = without_freezes(summary), without_freezes(expected)
     print("The RFC 3161 receipts were not verified: the summary is compared without the Freeze clause.")
 if summary == expected:
     print("The summary equals expected/verify_summary.txt.")
